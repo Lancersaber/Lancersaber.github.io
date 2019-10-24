@@ -50,15 +50,17 @@
   };
 </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="categories">
-<meta property="og:url" content="https:&#x2F;&#x2F;lancersaber.github.io&#x2F;categories&#x2F;index.html">
+  <meta name="description" content="在Html中使用JavaScript script元素向html页面中插入Javascript的主要方法，就是使用script元素。这个元素包括以下5个属性：  charset: 可选 defer: 可选 language: 已废弃 scr: 可选。表示包含要执行代码的外部文件 type:必须。表示编写代码使用的脚本语言的内容类型。目前type属性的值依旧是text&#x2F;JavaScript使用scr">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在Html中使用JavaScript">
+<meta property="og:url" content="https:&#x2F;&#x2F;lancersaber.github.io&#x2F;2019&#x2F;10&#x2F;23&#x2F;JavaScript&#x2F;%E5%9C%A8Html%E4%B8%AD%E4%BD%BF%E7%94%A8js&#x2F;index.html">
 <meta property="og:site_name" content="Lancersaber">
+<meta property="og:description" content="在Html中使用JavaScript script元素向html页面中插入Javascript的主要方法，就是使用script元素。这个元素包括以下5个属性：  charset: 可选 defer: 可选 language: 已废弃 scr: 可选。表示包含要执行代码的外部文件 type:必须。表示编写代码使用的脚本语言的内容类型。目前type属性的值依旧是text&#x2F;JavaScript使用scr">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-10-23T07:45:03.269Z">
+<meta property="og:updated_time" content="2019-10-23T15:57:00.003Z">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://lancersaber.github.io/categories/">
+<link rel="canonical" href="https://lancersaber.github.io/2019/10/23/JavaScript/%E5%9C%A8Html%E4%B8%AD%E4%BD%BF%E7%94%A8js/">
 
 
 <script id="page-configurations">
@@ -66,14 +68,13 @@
   CONFIG.page = {
     sidebar: "",
     isHome: false,
-    isPost: false,
-    isPage: true,
+    isPost: true,
+    isPage: false,
     isArchive: false
   };
 </script>
 
-  <title>categories | Lancersaber
-  </title>
+  <title>在Html中使用JavaScript | Lancersaber</title>
   
 
 
@@ -165,52 +166,107 @@
       <div class="main-inner">
         <div class="content-wrap">
           
-  
-  
 
           <div class="content">
             
 
   <div class="posts-expand">
-    
-    
-    
-    <div class="post-block" lang="en">
-      <header class="post-header">
-
-<h1 class="post-title" itemprop="name headline">categories
-</h1>
-
-<div class="post-meta">
+      
   
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/10/23/JavaScript/%E5%9C%A8Html%E4%B8%AD%E4%BD%BF%E7%94%A8js/">
 
-</div>
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
 
-</header>
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          在Html中使用JavaScript
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2019-10-23 23:33:01 / Modified: 23:57:00" itemprop="dateCreated datePublished" datetime="2019-10-23T23:33:01+08:00">2019-10-23</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-      
-      
-      <div class="post-body">
-          <div class="category-all-page">
-            <div class="category-all-title">
-              4 categories in total
+        <h1 id="在Html中使用JavaScript"><a href="#在Html中使用JavaScript" class="headerlink" title="在Html中使用JavaScript"></a>在Html中使用JavaScript</h1><hr>
+<h2 id="script元素"><a href="#script元素" class="headerlink" title="script元素"></a>script元素</h2><p>向html页面中插入Javascript的主要方法，就是使用script元素。这个元素包括以下5个属性：</p>
+<ul>
+<li>charset: 可选</li>
+<li>defer: 可选</li>
+<li>language: 已废弃</li>
+<li>scr: 可选。表示包含要执行代码的外部文件</li>
+<li>type:必须。表示编写代码使用的脚本语言的内容类型。目前type属性的值依旧是text/JavaScript<br>使用script元素的方式有两种：直接在页面中嵌入Javascript代码和包含外部JavaScript文件<br>在使用 script 元素嵌入JavaScript代码时，只须为 script 指定type属性，然后，将JavaScript代码直接放入在元素内部即可。<br>如果要通过 script 元素来包含外部Javascript文件，那么src属性就是必须的。这个属性的值是一个指向外部Javascript文件的链接。</li>
+</ul>
+<h2 id="标签的位置"><a href="#标签的位置" class="headerlink" title="标签的位置"></a>标签的位置</h2><p>现在的web程序一般都把全部Javascript引用放在 body元素中，放在页面的内容后面。这样，在解析包含的Javascript代码之前，页面的内容将完全呈现在浏览器中。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2019/10/23/Git/git%E4%B8%AD%E5%87%A0%E4%B8%AA%E7%9B%B8%E4%BC%BC%E6%8C%87%E4%BB%A4%E7%9A%84%E5%8C%BA%E5%88%AB/" rel="next" title="git clone,git pull,git fetch的区别">
+                  <i class="fa fa-chevron-left"></i> git clone,git pull,git fetch的区别
+                </a>
             </div>
-            <div class="category-all">
-              <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/spring/">spring</a><span class="category-list-count">1</span></li></ul>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+                <a href="/2019/10/24/Spring/springboot%E4%B8%AD%E5%90%84%E4%B8%AA%E5%B1%82%E7%9A%84%E4%BD%9C%E7%94%A8/" rel="prev" title="springboot中各个层的作用">
+                  springboot中各个层的作用 <i class="fa fa-chevron-right"></i>
+                </a>
             </div>
           </div>
-        
-      </div>
-      
-      
-      
-    </div>
+      </footer>
     
+  </article>
+  
+  
+  
 
-    
-    
-    
   </div>
 
 
@@ -240,6 +296,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#在Html中使用JavaScript"><span class="nav-number">1.</span> <span class="nav-text">在Html中使用JavaScript</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#script元素"><span class="nav-number">1.1.</span> <span class="nav-text">script元素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#标签的位置"><span class="nav-number">1.2.</span> <span class="nav-text">标签的位置</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
