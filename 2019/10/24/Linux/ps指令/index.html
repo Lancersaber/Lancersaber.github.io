@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.2">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.2">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.2">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.2" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.2">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.4.2',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="每天一个Linux指令-ps ps指令是用于查阅系统上面正在运行的进程(ps是截取一个时间点的进程状态，而后面介绍的top可以持续侦测进程运作的状态)。用法 1ps [options] 选项与参数  -A：所有的process均显示出来，与-e具有同样的效用 -a：不与terminal有关的所有process -u：有效使用者和相关的process x ：通常与a这个参数一起使用，可列出教完整的信">
+<meta name="keywords" content="Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="每天一个Linux指令-ps">
+<meta property="og:url" content="https:&#x2F;&#x2F;lancersaber.github.io&#x2F;2019&#x2F;10&#x2F;24&#x2F;Linux&#x2F;ps%E6%8C%87%E4%BB%A4&#x2F;index.html">
+<meta property="og:site_name" content="Lancersaber">
+<meta property="og:description" content="每天一个Linux指令-ps ps指令是用于查阅系统上面正在运行的进程(ps是截取一个时间点的进程状态，而后面介绍的top可以持续侦测进程运作的状态)。用法 1ps [options] 选项与参数  -A：所有的process均显示出来，与-e具有同样的效用 -a：不与terminal有关的所有process -u：有效使用者和相关的process x ：通常与a这个参数一起使用，可列出教完整的信">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;10&#x2F;26&#x2F;cC4X1lVZorFujxB.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;10&#x2F;26&#x2F;4oWKpXvA63rGwRV.png">
+<meta property="og:updated_time" content="2019-10-26T08:14:41.346Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;10&#x2F;26&#x2F;cC4X1lVZorFujxB.png">
+
+<link rel="canonical" href="https://lancersaber.github.io/2019/10/24/Linux/ps%E6%8C%87%E4%BB%A4/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>每天一个Linux指令-ps | Lancersaber</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lancersaber</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/10/24/Linux/ps%E6%8C%87%E4%BB%A4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          每天一个Linux指令-ps
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-10-24 23:15:15" itemprop="dateCreated datePublished" datetime="2019-10-24T23:15:15+08:00">2019-10-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-10-26 16:14:41" itemprop="dateModified" datetime="2019-10-26T16:14:41+08:00">2019-10-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="每天一个Linux指令-ps"><a href="#每天一个Linux指令-ps" class="headerlink" title="每天一个Linux指令-ps"></a>每天一个Linux指令-ps</h1><hr>
+<p>ps指令是用于查阅系统上面正在运行的进程(ps是截取一个时间点的进程状态，而后面介绍的top可以持续侦测进程运作的状态)。用法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps [options]</span><br></pre></td></tr></table></figure>
+<p>选项与参数</p>
+<ul>
+<li>-A：所有的process均显示出来，与-e具有同样的效用</li>
+<li>-a：不与terminal有关的所有process</li>
+<li>-u：有效使用者和相关的process</li>
+<li>x ：通常与a这个参数一起使用，可列出教完整的信息<br>输出格式规划</li>
+<li>l ：较长、较详细地将该PID的信息列出</li>
+<li>j ：工作的格式(jobs format)</li>
+<li>-f :做一个更为完整的输出</li>
+</ul>
+<h2 id="仅观察自己的bash相关进程"><a href="#仅观察自己的bash相关进程" class="headerlink" title="仅观察自己的bash相关进程"></a>仅观察自己的bash相关进程</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -l</span><br></pre></td></tr></table></figure>
+<p><img src="https://i.loli.net/2019/10/26/cC4X1lVZorFujxB.png" alt=""><br>系统整体的进程运作是非常多的，但如果使用ps -l则仅列出你的操作环境(bash)有关的进程而已，亦即最上层的父进程会是你自己的bash而没有沿伸到systemd这支进程。ps -l显示出来的资料包含以下内容：</p>
+<ul>
+<li><p>F:代表这个进程旗标(process flags),说明这个进程的总结权限，常见号码有</p>
+<ul>
+<li>若为4表示此进程的权限为root</li>
+<li>若为1则表示此进程仅复制(fork)而没有实际执行(exec)</li>
+</ul>
+</li>
+<li><p>S:代表这个进程的状态(STAT),主要的状态有</p>
+<ul>
+<li>R(Running): 该程序正在运作中</li>
+<li>S(Sleep)  : 该程序目前正在睡眠状态(idle)，但可以被唤醒(signal)</li>
+<li>D:        : 不可被唤醒的睡眠状态，通常这只程序可能正在等待I/O的情况</li>
+<li>T:        ：停止状态(stop),可能是在工作控制(背景暂停)或除错状态</li>
+<li>Z:        ：僵尸状态，进程已经终止但却无法被移除到内存外</li>
+</ul>
+</li>
+<li><p>UID/PID/PPID：代表【此进程被UID所拥有/进程的PID号码/此进程的父进程PID号码】</p>
+</li>
+<li><p>C：代表CPU的使用率，单位为百分比</p>
+</li>
+<li><p>PRI/NI：Priority/Nice的缩写，代表此进程被CPU所执行的优先级，数值越小代表该进程越快被CPU执行。</p>
+</li>
+<li><p>ADDR/SZ/WCHAN：都与内存有关</p>
+</li>
+<li><p>TTY：登入者的终端机位置，若为远程登录则使用动态终端接口(pts/n)</p>
+</li>
+<li><p>Time:使用掉的CPU时间</p>
+</li>
+<li><p>CMD：就是command的缩写，造成此进程的触发程序指令为何</p>
+</li>
+</ul>
+<h2 id="观察系统所有进程-ps-aux"><a href="#观察系统所有进程-ps-aux" class="headerlink" title="观察系统所有进程 ps aux"></a>观察系统所有进程 ps aux</h2><p><img src="https://i.loli.net/2019/10/26/4oWKpXvA63rGwRV.png" alt="捕获13.PNG"><br>在ps aux显示的项目中，各字段的意义为：</p>
+<ul>
+<li>User:该process属于哪个使用者账号的</li>
+<li>PID：该process的进程标识符</li>
+<li>%CPU：该process使用掉的CPU资源百分比</li>
+<li>%MEM：该process所占用的物理内存百分比</li>
+<li>VSZ：该process使用掉的虚拟内存量(Kbytes)</li>
+<li>RSS:该process占用的固定的内存量(Kbytes)</li>
+<li>TTY:该process是在哪个终端机上面运作，若与终端机无关则显示？，另外，tty1-tty6是本机上面的登入者进程，若为pts/0等等的，则表示为由网络连接进主机的进程</li>
+<li>STAT：该进程目前的状态，状态显示与ps -l 的S 旗标相同</li>
+<li>START：该process被触发启动的时间</li>
+<li>TIME：该process 实际使用CPU运作的时间</li>
+<li>COMMAND：该进程的实际指令为何？</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Linux/" rel="tag"># Linux</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2019/10/24/Linux/Linux%E5%B8%B8%E7%94%A8%E7%BD%91%E7%BB%9C%E6%8C%87%E4%BB%A4/" rel="next" title="Linux常用网络指令介绍">
+                  <i class="fa fa-chevron-left"></i> Linux常用网络指令介绍
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+                <a href="/2019/10/24/Java%E5%9F%BA%E7%A1%80/Java%E4%B8%AD%E7%9A%84%E6%B3%A8%E8%A7%A3/" rel="prev" title="Java中的注解">
+                  Java中的注解 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#每天一个Linux指令-ps"><span class="nav-number">1.</span> <span class="nav-text">每天一个Linux指令-ps</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#仅观察自己的bash相关进程"><span class="nav-number">1.1.</span> <span class="nav-text">仅观察自己的bash相关进程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#观察系统所有进程-ps-aux"><span class="nav-number">1.2.</span> <span class="nav-text">观察系统所有进程 ps aux</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="site-author-image" itemprop="image" alt="Lancersaber"
+    src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Lancersaber</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">36</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lancersaber</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.4.2
+  </div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.2"></script><script src="/js/motion.js?v=7.4.2"></script>
+<script src="/js/schemes/muse.js?v=7.4.2"></script>
+<script src="/js/next-boot.js?v=7.4.2"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
