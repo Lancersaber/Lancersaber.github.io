@@ -172,7 +172,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/10/24/Canvas/BasicKnowledge/">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/10/31/Spring/Springboot%E4%B8%AD%E7%9A%84json%E6%8A%80%E6%9C%AF/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -186,7 +186,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/10/24/Canvas/BasicKnowledge/" class="post-title-link" itemprop="url">基本知识</a>
+            <a href="/2019/10/31/Spring/Springboot%E4%B8%AD%E7%9A%84json%E6%8A%80%E6%9C%AF/" class="post-title-link" itemprop="url">Springboot中的json技术</a>
         </h1>
 
         <div class="post-meta">
@@ -197,7 +197,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2019-10-24 23:15:15 / Modified: 23:35:04" itemprop="dateCreated datePublished" datetime="2019-10-24T23:15:15+08:00">2019-10-24</time>
+              <time title="Created: 2019-10-31 14:27:58 / Modified: 15:51:35" itemprop="dateCreated datePublished" datetime="2019-10-31T14:27:58+08:00">2019-10-31</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -205,8 +205,8 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/canvas/" itemprop="url" rel="index">
-                    <span itemprop="name">canvas</span>
+                  <a href="/categories/spring/" itemprop="url" rel="index">
+                    <span itemprop="name">spring</span>
                   </a>
                 </span>
             </span>
@@ -222,174 +222,92 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Canvas的基本知识"><a href="#Canvas的基本知识" class="headerlink" title="Canvas的基本知识"></a>Canvas的基本知识</h1><hr>
-<h2 id="canvas元素"><a href="#canvas元素" class="headerlink" title="canvas元素"></a>canvas元素</h2><p>定义：是HTML5提供的一种新标签, ie9才开始支持的，Canvas是一个矩形区域的画布，可以用JS控制每一个像素在上面绘画。canvas 标签使用 JavaScript 在网页上绘制图像，本身不具备绘图功能。canvas 拥有多种绘制路径、矩形、圆形、字符以及添加图像的方法。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;title&gt;Title&lt;/title&gt;</span><br><span class="line"></span><br><span class="line">    &lt;style&gt;</span><br><span class="line">        body&#123;</span><br><span class="line">            background: #dddddd;</span><br><span class="line">        &#125;</span><br><span class="line">        #canvas&#123;</span><br><span class="line">            margin: 10px;</span><br><span class="line">            padding: 10px;</span><br><span class="line">            background: #ffffff;</span><br><span class="line">            border: thin inset #aaaaaa;</span><br><span class="line">        &#125;</span><br><span class="line">    &lt;/style&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;canvas id=&quot;canvas&quot; width=&quot;600&quot; height=&quot;300&quot;&gt;</span><br><span class="line"></span><br><span class="line">&lt;/canvas&gt;</span><br><span class="line">&lt;script  src=&quot;example.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
-      
-    </div>
+          <h1 id="Springboot中的json技术"><a href="#Springboot中的json技术" class="headerlink" title="Springboot中的json技术"></a>Springboot中的json技术</h1><hr>
+<p>平日里在项目中处理JSON一般用的都是阿里巴巴的Fastjson，后来发现使用Spring Boot内置的Jackson来完成JSON的序列化和反序列化操作也挺方便。Jackson不但可以完成简单的序列化和反序列化操作，也能实现复杂的个性化的序列化和反序列化操作。</p>
+<h2 id="自定义ObjectMapper"><a href="#自定义ObjectMapper" class="headerlink" title="自定义ObjectMapper"></a>自定义ObjectMapper</h2><p>我们都知道，在Spring中使用@ResponseBody注解可以将方法返回的对象序列化成JSON，比如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@RequestMapping(&quot;getuser&quot;)</span><br><span class="line">@ResponseBody</span><br><span class="line">public User getUser() &#123;</span><br><span class="line">    User user = new User();</span><br><span class="line">    user.setUserName(&quot;mrbird&quot;);</span><br><span class="line">    user.setBirthday(new Date());</span><br><span class="line">    return user;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
+<p>User类：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public class User implements Serializable &#123;</span><br><span class="line">    private static final long serialVersionUID = 6222176558369919436L;</span><br><span class="line">    </span><br><span class="line">    private String userName;</span><br><span class="line">    private int age;</span><br><span class="line">    private String password;</span><br><span class="line">    private Date birthday;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>访问getuser页面输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&quot;userName&quot;:&quot;mrbird&quot;,&quot;age&quot;:0,&quot;password&quot;:null,&quot;birthday&quot;:1522634892365&#125;</span><br></pre></td></tr></table></figure>
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/10/24/Docker/Docker%E5%AE%89%E8%A3%85/">
+<p>可看到时间默认以时间戳的形式输出，如果想要改变这个默认行为，我们可以自定义一个ObjectMapper来替代：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">import java.text.SimpleDateFormat;</span><br><span class="line"></span><br><span class="line">import org.springframework.context.annotation.Bean;</span><br><span class="line">import org.springframework.context.annotation.Configuration;</span><br><span class="line"></span><br><span class="line">import com.fasterxml.jackson.databind.ObjectMapper;</span><br><span class="line"></span><br><span class="line">@Configuration</span><br><span class="line">public class JacksonConfig &#123;</span><br><span class="line">    @Bean</span><br><span class="line">    public ObjectMapper getObjectMapper()&#123;</span><br><span class="line">        ObjectMapper mapper = new ObjectMapper();</span><br><span class="line">        mapper.setDateFormat(new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss&quot;));</span><br><span class="line">        return mapper;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面配置获取了ObjectMapper对象，并且设置了时间格式。再次访问getuser，页面输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&quot;userName&quot;:&quot;mrbird&quot;,&quot;age&quot;:0,&quot;password&quot;:null,&quot;birthday&quot;:&quot;2018-04-02 10:14:24&quot;&#125;</span><br></pre></td></tr></table></figure>
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lancersaber">
-      <meta itemprop="description" content="">
-    </span>
+<h2 id="序列化"><a href="#序列化" class="headerlink" title="序列化"></a>序列化</h2><p>Jackson通过使用mapper的writeValueAsString方法将Java对象序列化为JSON格式字符串：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">@Autowired</span><br><span class="line">ObjectMapper mapper;</span><br><span class="line"></span><br><span class="line">@RequestMapping(&quot;serialization&quot;)</span><br><span class="line">@ResponseBody</span><br><span class="line">public String serialization() &#123;</span><br><span class="line">    try &#123;</span><br><span class="line">        User user = new User();</span><br><span class="line">        user.setUserName(&quot;mrbird&quot;);</span><br><span class="line">        user.setBirthday(new Date());</span><br><span class="line">        String str = mapper.writeValueAsString(user);</span><br><span class="line">        return str;</span><br><span class="line">    &#125; catch (Exception e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">    return null;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lancersaber">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/10/24/Docker/Docker%E5%AE%89%E8%A3%85/" class="post-title-link" itemprop="url">Docker安装</a>
-        </h1>
+<h2 id="反序列化"><a href="#反序列化" class="headerlink" title="反序列化"></a>反序列化</h2><p>使用@ResponseBody注解可以使对象序列化为JSON格式字符串，除此之外，Jackson也提供了反序列化方法。</p>
+<h3 id="树遍历"><a href="#树遍历" class="headerlink" title="树遍历"></a>树遍历</h3><p>当采用树遍历的方式时，JSON被读入到JsonNode对象中，可以像操作XML DOM那样读取JSON。比如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">@Autowired</span><br><span class="line">ObjectMapper mapper;</span><br><span class="line"></span><br><span class="line">@RequestMapping(&quot;readjsonstring&quot;)</span><br><span class="line">@ResponseBody</span><br><span class="line">public String readJsonString() &#123;</span><br><span class="line">    try &#123;</span><br><span class="line">        String json = &quot;&#123;\&quot;name\&quot;:\&quot;mrbird\&quot;,\&quot;age\&quot;:26&#125;&quot;;</span><br><span class="line">        JsonNode node = this.mapper.readTree(json);</span><br><span class="line">        String name = node.get(&quot;name&quot;).asText();</span><br><span class="line">        int age = node.get(&quot;age&quot;).asInt();</span><br><span class="line">        return name + &quot; &quot; + age;</span><br><span class="line">    &#125; catch (Exception e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">    return null;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>readTree方法可以接受一个字符串或者字节数组、文件、InputStream等， 返回JsonNode作为根节点，你可以像操作XML DOM那样操作遍历JsonNode以获取数据。</p>
+<p>解析多级JSON例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">String json = &quot;&#123;\&quot;name\&quot;:\&quot;mrbird\&quot;,\&quot;hobby\&quot;:&#123;\&quot;first\&quot;:\&quot;sleep\&quot;,\&quot;second\&quot;:\&quot;eat\&quot;&#125;&#125;&quot;;;</span><br><span class="line">JsonNode node = this.mapper.readTree(json);</span><br><span class="line">JsonNode hobby = node.get(&quot;hobby&quot;);</span><br><span class="line">String first = hobby.get(&quot;first&quot;).asText();</span><br></pre></td></tr></table></figure>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
+<h3 id="绑定对象"><a href="#绑定对象" class="headerlink" title="绑定对象"></a>绑定对象</h3><p>我们也可以将Java对象和JSON数据进行绑定，如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">@Autowired</span><br><span class="line">ObjectMapper mapper;</span><br><span class="line"></span><br><span class="line">@RequestMapping(&quot;readjsonasobject&quot;)</span><br><span class="line">@ResponseBody</span><br><span class="line">public String readJsonAsObject() &#123;</span><br><span class="line">    try &#123;</span><br><span class="line">        String json = &quot;&#123;\&quot;name\&quot;:\&quot;mrbird\&quot;,\&quot;age\&quot;:26&#125;&quot;;</span><br><span class="line">        User user = mapper.readValue(json, User.class);</span><br><span class="line">        String name = user.getUserName();</span><br><span class="line">        int age = user.getAge();</span><br><span class="line">        return name + &quot; &quot; + age;</span><br><span class="line">    &#125; catch (Exception e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">    return null;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-              <time title="Created: 2019-10-24 23:15:15" itemprop="dateCreated datePublished" datetime="2019-10-24T23:15:15+08:00">2019-10-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-26 16:28:22" itemprop="dateModified" datetime="2019-10-26T16:28:22+08:00">2019-10-26</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/docker/" itemprop="url" rel="index">
-                    <span itemprop="name">docker</span>
-                  </a>
-                </span>
-            </span>
+<h2 id="Jackson注解"><a href="#Jackson注解" class="headerlink" title="Jackson注解"></a>Jackson注解</h2><p>Jackson包含了一些实用的注解：</p>
+<h3 id="JsonProperty"><a href="#JsonProperty" class="headerlink" title="@JsonProperty"></a>@JsonProperty</h3><p>@JsonProperty，作用在属性上，用来为JSON Key指定一个别名。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@JsonProperty(&quot;bth&quot;)</span><br><span class="line">private Date birthday;</span><br></pre></td></tr></table></figure>
+<p>再次访问getuser页面输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&quot;userName&quot;:&quot;mrbird&quot;,&quot;age&quot;:0,&quot;password&quot;:null,&quot;bth&quot;:&quot;2018-04-02 10:38:37&quot;&#125;</span><br></pre></td></tr></table></figure>
+<p>key birthday已经被替换为了bth。</p>
+<h3 id="Jsonlgnore"><a href="#Jsonlgnore" class="headerlink" title="@Jsonlgnore"></a>@Jsonlgnore</h3><p>@Jsonlgnore，作用在属性上，用来忽略此属性。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@JsonIgnore</span><br><span class="line">private String password;</span><br></pre></td></tr></table></figure>
 
-          
+<p>再次访问getuser页面输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&quot;userName&quot;:&quot;mrbird&quot;,&quot;age&quot;:0,&quot;bth&quot;:&quot;2018-04-02 10:40:45&quot;&#125;</span><br></pre></td></tr></table></figure>
+<p>password属性已被忽略。</p>
+<h3 id="JsonIgnoreProperties"><a href="#JsonIgnoreProperties" class="headerlink" title="@JsonIgnoreProperties"></a>@JsonIgnoreProperties</h3><p>@JsonIgnoreProperties，忽略一组属性，作用于类上，比如JsonIgnoreProperties({ “password”, “age” })。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@JsonIgnoreProperties(&#123; &quot;password&quot;, &quot;age&quot; &#125;)</span><br><span class="line">public class User implements Serializable &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-        </div>
-      </header>
+<p>再次访问getuser页面输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&quot;userName&quot;:&quot;mrbird&quot;,&quot;bth&quot;:&quot;2018-04-02 10:45:34&quot;&#125;</span><br></pre></td></tr></table></figure>
 
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
+<h3 id="JsonFormat"><a href="#JsonFormat" class="headerlink" title="@JsonFormat"></a>@JsonFormat</h3><p>@JsonFormat，用于日期格式化，如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@JsonFormat(pattern = &quot;yyyy-MM-dd HH:mm:ss&quot;)</span><br><span class="line">private Date birthday;</span><br></pre></td></tr></table></figure>
 
-      
-          <h1 id="Docker安装"><a href="#Docker安装" class="headerlink" title="Docker安装"></a>Docker安装</h1><hr>
-<p>##Docker的组成</p>
-<h3 id="镜像"><a href="#镜像" class="headerlink" title="镜像"></a>镜像</h3><p>Docker镜像(Image)就是一个只读的模板，镜像可以用来创建Docker容器，一个镜像可以创建多个容器。可以把Docker中的镜像类比为Java中的类。</p>
-<h3 id="容器"><a href="#容器" class="headerlink" title="容器"></a>容器</h3><p>Docker 利用容器(Container)独立运行的一个或一组应用。容器是用镜像创建的运行实例。它可以被启动、开始、停止、删除。每个容器都是相互隔离的、保证安全的平台。可以把容器看作一个简易版的Linux环境和运行在其中的应用程序。容器的定义和镜像几乎一模一样，也是一堆层的统一视角，唯一的区别在于容器的最上面的那一层是可读可写的。</p>
-<h3 id="仓库"><a href="#仓库" class="headerlink" title="仓库"></a>仓库</h3><p>仓库(Repository)是集中存放镜像的地方。<br>仓库和仓库注册服务器(Registry)。仓库注册服务器上往往存放着多个仓库，每个仓库又包含了多个镜像，每个镜像有不同的标签(tag)。<br>仓库分为公开仓库和私有仓库。</p>
-<h3 id="Docker的运行流程"><a href="#Docker的运行流程" class="headerlink" title="Docker的运行流程"></a>Docker的运行流程</h3><p>Docker本身是一个容器运行载体或称之为管理引擎。我们把应用程序和配置依赖打包形成的一个可交付的运行环境，这个打包好的运行环境就是image镜像文件。只有通过这个镜像文件才能生成Docker容器。image文件可以看做是容器的模板。Docker根据image文件生成容器的实例。</p>
-<h3 id="安装指令"><a href="#安装指令" class="headerlink" title="安装指令"></a>安装指令</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum update</span><br><span class="line">yum install docker</span><br></pre></td></tr></table></figure>
+<h3 id="JsonNaming"><a href="#JsonNaming" class="headerlink" title="@JsonNaming"></a>@JsonNaming</h3><p>@JsonNaming，用于指定一个命名策略，作用于类或者属性上。Jackson自带了多种命名策略，你可以实现自己的命名策略，比如输出的key 由Java命名方式转为下面线命名方法 —— userName转化为user-name。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@JsonNaming(PropertyNamingStrategy.LowerCaseWithUnderscoresStrategy.class)</span><br><span class="line">public class User implements Serializable &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>再次访问getuser页面输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&quot;user_name&quot;:&quot;mrbird&quot;,&quot;bth&quot;:&quot;2018-04-02 10:52:12&quot;&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="阿里云镜像加速"><a href="#阿里云镜像加速" class="headerlink" title="阿里云镜像加速"></a>阿里云镜像加速</h3><p>1、登陆<a href="https://cr.console.aliyun.com/cn-hangzhou/instances/repositories" target="_blank" rel="noopener">https://cr.console.aliyun.com/cn-hangzhou/instances/repositories</a><br>2、注册一个账号后进入控制台，然后搜索镜像容器服务，找到镜像加速器<br>3、根据自己的系统找到对应的文件，将文件中的内容修改即可。<br>配置完成后，还需重启应用</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl daemon-reload</span><br><span class="line">sudo systemctl restart docker</span><br></pre></td></tr></table></figure>
+<h3 id="JsonSerialize"><a href="#JsonSerialize" class="headerlink" title="@JsonSerialize"></a>@JsonSerialize</h3><p>@JsonSerialize，指定一个实现类来自定义序列化。类必须实现JsonSerializer接口，代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">import java.io.IOException;</span><br><span class="line"></span><br><span class="line">import com.example.pojo.User;</span><br><span class="line">import com.fasterxml.jackson.core.JsonGenerator;</span><br><span class="line">import com.fasterxml.jackson.core.JsonProcessingException;</span><br><span class="line">import com.fasterxml.jackson.databind.JsonSerializer;</span><br><span class="line">import com.fasterxml.jackson.databind.SerializerProvider;</span><br><span class="line"></span><br><span class="line">public class UserSerializer extends JsonSerializer&lt;User&gt; &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void serialize(User user, JsonGenerator generator, SerializerProvider provider)</span><br><span class="line">            throws IOException, JsonProcessingException &#123;</span><br><span class="line">        generator.writeStartObject();</span><br><span class="line">        generator.writeStringField(&quot;user-name&quot;, user.getUserName());</span><br><span class="line">        generator.writeEndObject();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="利用docker-run-hello-world-指令进行测试"><a href="#利用docker-run-hello-world-指令进行测试" class="headerlink" title="利用docker run hello-world 指令进行测试"></a>利用docker run hello-world 指令进行测试</h3><p>docker run 镜像名：这个指令先从远程仓库中拉取镜像，然后运行这个镜像的一个实例。</p>
+<p>上面的代码中我们仅仅序列化userName属性，且输出的key是user-name。 使用注解@JsonSerialize来指定User对象的序列化方式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@JsonSerialize(using = UserSerializer.class)</span><br><span class="line">public class User implements Serializable &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-      
-    </div>
+<p>再次访问getuser页面输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&quot;user-name&quot;:&quot;mrbird&quot;&#125;</span><br></pre></td></tr></table></figure>
 
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
+<h3 id="JsonDeserialize"><a href="#JsonDeserialize" class="headerlink" title="@JsonDeserialize"></a>@JsonDeserialize</h3><p>@JsonDeserialize，用户自定义反序列化，同@JsonSerialize ，类需要实现JsonDeserializer接口。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">import java.io.IOException;</span><br><span class="line"></span><br><span class="line">import com.example.pojo.User;</span><br><span class="line">import com.fasterxml.jackson.core.JsonParser;</span><br><span class="line">import com.fasterxml.jackson.core.JsonProcessingException;</span><br><span class="line">import com.fasterxml.jackson.databind.DeserializationContext;</span><br><span class="line">import com.fasterxml.jackson.databind.JsonDeserializer;</span><br><span class="line">import com.fasterxml.jackson.databind.JsonNode;</span><br><span class="line"></span><br><span class="line">public class UserDeserializer extends JsonDeserializer&lt;User&gt; &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public User deserialize(JsonParser parser, DeserializationContext context)</span><br><span class="line">            throws IOException, JsonProcessingException &#123;</span><br><span class="line">        JsonNode node = parser.getCodec().readTree(parser);</span><br><span class="line">        String userName = node.get(&quot;user-name&quot;).asText();</span><br><span class="line">        User user = new User();</span><br><span class="line">        user.setUserName(userName);</span><br><span class="line">        return user;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/10/24/Docker/Docker%E6%A6%82%E5%BF%B5%E6%80%A7%E7%9F%A5%E8%AF%86/">
+<p>使用注解@JsonDeserialize来指定User对象的反序列化方式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@JsonDeserialize (using = UserDeserializer.class)</span><br><span class="line">public class User implements Serializable &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>测试</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">@Autowired</span><br><span class="line">ObjectMapper mapper;</span><br><span class="line"></span><br><span class="line">@RequestMapping(&quot;readjsonasobject&quot;)</span><br><span class="line">@ResponseBody</span><br><span class="line">public String readJsonAsObject() &#123;</span><br><span class="line">    try &#123;</span><br><span class="line">        String json = &quot;&#123;\&quot;user-name\&quot;:\&quot;mrbird\&quot;&#125;&quot;;</span><br><span class="line">        User user = mapper.readValue(json, User.class);</span><br><span class="line">        String name = user.getUserName();</span><br><span class="line">        return name;</span><br><span class="line">    &#125; catch (Exception e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">    return null;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lancersaber">
-      <meta itemprop="description" content="">
-    </span>
+<p>访问readjsonasobject，页面输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mrbird</span><br></pre></td></tr></table></figure>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lancersaber">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/10/24/Docker/Docker%E6%A6%82%E5%BF%B5%E6%80%A7%E7%9F%A5%E8%AF%86/" class="post-title-link" itemprop="url">Docker的前序</a>
-        </h1>
+<h3 id="JsonView"><a href="#JsonView" class="headerlink" title="@JsonView"></a>@JsonView</h3><p>@JsonView，作用在类或者属性上，用来定义一个序列化组。 比如对于User对象，某些情况下只返回userName属性就行，而某些情况下需要返回全部属性。 因此User对象可以定义成如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">public class User implements Serializable &#123;</span><br><span class="line">    private static final long serialVersionUID = 6222176558369919436L;</span><br><span class="line">    </span><br><span class="line">    public interface UserNameView &#123;&#125;;</span><br><span class="line">    public interface AllUserFieldView extends UserNameView &#123;&#125;;</span><br><span class="line">    </span><br><span class="line">    @JsonView(UserNameView.class)</span><br><span class="line">    private String userName;</span><br><span class="line">    </span><br><span class="line">    @JsonView(AllUserFieldView.class)</span><br><span class="line">    private int age;</span><br><span class="line">    </span><br><span class="line">    @JsonView(AllUserFieldView.class)</span><br><span class="line">    private String password;</span><br><span class="line">    </span><br><span class="line">    @JsonView(AllUserFieldView.class)</span><br><span class="line">    private Date birthday;</span><br><span class="line">    ...	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>User定义了两个接口类，一个为userNameView，另外一个为AllUserFieldView继承了userNameView接口。这两个接口代表了两个序列化组的名称。属性userName使用了@JsonView(UserNameView.class)，而剩下属性使用了@JsonView(AllUserFieldView.class)。</p>
+<p>Spring中Controller方法允许使用@JsonView指定一个组名，被序列化的对象只有在这个组的属性才会被序列化，代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@JsonView(User.UserNameView.class)</span><br><span class="line">@RequestMapping(&quot;getuser&quot;)</span><br><span class="line">@ResponseBody</span><br><span class="line">public User getUser() &#123;</span><br><span class="line">    User user = new User();</span><br><span class="line">    user.setUserName(&quot;mrbird&quot;);</span><br><span class="line">    user.setAge(26);</span><br><span class="line">    user.setPassword(&quot;123456&quot;);</span><br><span class="line">    user.setBirthday(new Date());</span><br><span class="line">    return user;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>访问getuser页面输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&quot;userName&quot;:&quot;mrbird&quot;&#125;</span><br></pre></td></tr></table></figure>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
+<p>如果将@JsonView(User.UserNameView.class)替换为@JsonView(User.AllUserFieldView.class)，输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&quot;userName&quot;:&quot;mrbird&quot;,&quot;age&quot;:26,&quot;password&quot;:&quot;123456&quot;,&quot;birthday&quot;:&quot;2018-04-02 11:24:00&quot;&#125;</span><br></pre></td></tr></table></figure>
 
-              <time title="Created: 2019-10-24 23:15:15" itemprop="dateCreated datePublished" datetime="2019-10-24T23:15:15+08:00">2019-10-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-26 16:28:27" itemprop="dateModified" datetime="2019-10-26T16:28:27+08:00">2019-10-26</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/docker/" itemprop="url" rel="index">
-                    <span itemprop="name">docker</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Docker的一些概念"><a href="#Docker的一些概念" class="headerlink" title="Docker的一些概念"></a>Docker的一些概念</h1><hr>
-<h2 id="为什么会出现Docker？"><a href="#为什么会出现Docker？" class="headerlink" title="为什么会出现Docker？"></a>为什么会出现Docker？</h2><p>&emsp;&emsp;一款产品从开发到上线，从操作系统，到运行环境，再到应用配置。作为开发+运维之间的协作我们需要关心很多东西，这也是很多互联网公司都不得不面对的问题，特别是各种版本的迭代之后，不同版本环境的兼容，对运维人员是考验。<br>&emsp;&emsp;Docekr之所以发展迅速，是因为它为此给出了一个标准化的解决方案。<br>&emsp;&emsp;环境配置如此麻烦，换一台机器，就要重来一次，费时费力。能不能从根本上解决问题，软件可以带环境安装？也就是说，安装的时候，把原始环境一模一样地复制过来。开发人员利用Docker可以消除协作编码时”在我的机器上可正常工作”的问题。</p>
-<h2 id="Docker的目标"><a href="#Docker的目标" class="headerlink" title="Docker的目标"></a>Docker的目标</h2><p>&emsp;&emsp;通过对应用组件的封装、分发、部署、运行等生命周期的管理，使用户的app及其运行环境能够做到一次封装，处处运行。</p>
-<p>总结起来：Docker解决了运行环境和配置问题软件容器，方便做持续集成并有助于整体发布的容器虚拟化技术</p>
+<p>因为接口AllUserFieldView继承了接口UserNameView所以userName也会被输出。</p>
 
       
     </div>
@@ -409,7 +327,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/10/24/Docker/Docker%E9%95%9C%E5%83%8F%E5%8E%9F%E7%90%86/">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/10/31/Refactor/%E9%87%8D%E6%9E%84%E5%8E%9F%E5%88%99/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -423,7 +341,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/10/24/Docker/Docker%E9%95%9C%E5%83%8F%E5%8E%9F%E7%90%86/" class="post-title-link" itemprop="url">Docker镜像原理</a>
+            <a href="/2019/10/31/Refactor/%E9%87%8D%E6%9E%84%E5%8E%9F%E5%88%99/" class="post-title-link" itemprop="url">重构原则</a>
         </h1>
 
         <div class="post-meta">
@@ -432,24 +350,18 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
+              
 
-              <time title="Created: 2019-10-24 23:15:15" itemprop="dateCreated datePublished" datetime="2019-10-24T23:15:15+08:00">2019-10-24</time>
+              <time title="Created: 2019-10-31 13:18:35 / Modified: 15:51:35" itemprop="dateCreated datePublished" datetime="2019-10-31T13:18:35+08:00">2019-10-31</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-26 18:40:46" itemprop="dateModified" datetime="2019-10-26T18:40:46+08:00">2019-10-26</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/docker/" itemprop="url" rel="index">
-                    <span itemprop="name">docker</span>
+                  <a href="/categories/%E9%87%8D%E6%9E%84/" itemprop="url" rel="index">
+                    <span itemprop="name">重构</span>
                   </a>
                 </span>
             </span>
@@ -465,11 +377,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Docker镜像原理"><a href="#Docker镜像原理" class="headerlink" title="Docker镜像原理"></a>Docker镜像原理</h1><hr>
-<h2 id="Docker镜像是什么？"><a href="#Docker镜像是什么？" class="headerlink" title="Docker镜像是什么？"></a>Docker镜像是什么？</h2><p>镜像是一种轻量级的、可执行的独立软件包，用来打包软件运行环境和基于环境开发的软件，它包含运行某个软件所需的所有内容，包阔代码、运行时、库、环境变量等等配置文件</p>
-<h2 id="UnionFS-联合文件系统"><a href="#UnionFS-联合文件系统" class="headerlink" title="UnionFS(联合文件系统)"></a>UnionFS(联合文件系统)</h2><p>UnionFS是一种分层、轻量级并且高性能的文件系统，它支持对文件系统的修改作为一次提交来一层层的叠加，同时可以将不同目录挂载到同一个虚拟文件系统下。Union文件系统是Docker镜像的基础。<em>镜像可以通过分层来进行继承，基于基础镜像，可以制作各种具体的应用镜像</em></p>
-<h2 id="Dockers镜像加载原理"><a href="#Dockers镜像加载原理" class="headerlink" title="Dockers镜像加载原理"></a>Dockers镜像加载原理</h2><h2 id="分层的镜像"><a href="#分层的镜像" class="headerlink" title="分层的镜像"></a>分层的镜像</h2><p>##为什么Docker镜像要采用这种分层结构？<br>最大的好处是-共享资源。<br>比如：有多个镜像都从相同的base镜像构建而来，那么宿主主机只需在磁盘上保留一份base镜像，同时内存中也只需加载一份base镜像，就可以为所有容器服务了。而且镜像的每一层都可以共享。</p>
-
+          <h1 id="重构原则"><a href="#重构原则" class="headerlink" title="重构原则"></a>重构原则</h1><hr>
+<h2 id="何谓重构？"><a href="#何谓重构？" class="headerlink" title="何谓重构？"></a>何谓重构？</h2><p>第一类定义名词形式的定义：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">重构(名词)：对软件内部结构的一种调整，目的是在不改变软件可观察行为的前提下，提高其可理解性，降低其修改成本。</span><br></pre></td></tr></table></figure>
+<p>一般而言，重构都是对软件的小改动。<br>重构的另一个用法是动词形式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">重构(动词)：使用一系列重构手法，在不改变软件可观察行为的前提下。调整其结构。</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -488,7 +400,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/10/24/Docker/Docker%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/10/31/ElasticSearch/ElasticSearch%E6%90%9C%E7%B4%A2%E6%B7%B1%E5%85%A5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -502,7 +414,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/10/24/Docker/Docker%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="post-title-link" itemprop="url">Docker常用命令</a>
+            <a href="/2019/10/31/ElasticSearch/ElasticSearch%E6%90%9C%E7%B4%A2%E6%B7%B1%E5%85%A5/" class="post-title-link" itemprop="url">ElasticSearch搜索深入</a>
         </h1>
 
         <div class="post-meta">
@@ -511,24 +423,18 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
+              
 
-              <time title="Created: 2019-10-24 23:15:15" itemprop="dateCreated datePublished" datetime="2019-10-24T23:15:15+08:00">2019-10-24</time>
+              <time title="Created: 2019-10-31 11:11:44 / Modified: 15:51:35" itemprop="dateCreated datePublished" datetime="2019-10-31T11:11:44+08:00">2019-10-31</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-26 16:28:19" itemprop="dateModified" datetime="2019-10-26T16:28:19+08:00">2019-10-26</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/docker/" itemprop="url" rel="index">
-                    <span itemprop="name">docker</span>
+                  <a href="/categories/ElasticSearch/" itemprop="url" rel="index">
+                    <span itemprop="name">ElasticSearch</span>
                   </a>
                 </span>
             </span>
@@ -544,276 +450,12 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Docker常用命令"><a href="#Docker常用命令" class="headerlink" title="Docker常用命令"></a>Docker常用命令</h1><hr>
-<p>##Docker帮助命令</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker version</span><br><span class="line">docker info</span><br><span class="line">docker --help：docker帮助手册，列出docker的一些常用指令</span><br></pre></td></tr></table></figure>
-
-<p>##镜像命令</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker images:列出本地镜像</span><br><span class="line">docker search 镜像名:列出仓库中所有可用的镜像</span><br><span class="line">docker pull 镜像名[:tag]：下载镜像,如果不带版本号，默认下载的是latest</span><br><span class="line">docker rmi [-f 强制删除] 唯一镜像名or镜像id:删除目标镜像</span><br></pre></td></tr></table></figure>
-
-<h2 id="容器命令"><a href="#容器命令" class="headerlink" title="容器命令"></a>容器命令</h2><p>启动容器</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">docker run [options] image [command] [arg..]</span><br><span class="line">--name:&quot;容器的新名字&quot;，为容器指定一个名字</span><br><span class="line">-d: 后台运行容器，并返回容器ID，也即启动守护式容器</span><br><span class="line">-i: 以交互模式运行容器，通常与-t同时使用</span><br><span class="line">-t: 为容器重新分配一个伪终端，</span><br><span class="line">-P(大P): 随机端口映射</span><br><span class="line">-p:	指定端口映射，有以下四种格式</span><br><span class="line">	ip：hostPort:containerPort</span><br><span class="line">	ip::containerPort</span><br><span class="line">	hostPort:containerPort(常用)</span><br><span class="line">	containerPort</span><br></pre></td></tr></table></figure>
-
-<p>列出当前所有正在运行的容器</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">docker ps [options]</span><br><span class="line">-a:列出当前正在运行的容器+历史上运行过的</span><br><span class="line">-l:显示最近创建的容器</span><br><span class="line">-n：显示最近n个创建的容器</span><br><span class="line">-q：静默模式，只显示容器编号</span><br></pre></td></tr></table></figure>
-
-<p>启动容器</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker start 容器ID或者容器名</span><br></pre></td></tr></table></figure>
-
-<p>停止容器</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker stop 容器ID或者容器名</span><br></pre></td></tr></table></figure>
-
-<p>强制关闭</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker kill 容器ID或者容器名</span><br></pre></td></tr></table></figure>
-
-<p>删除已停止的容器</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rm 容器ID</span><br></pre></td></tr></table></figure>
-
-<p>查看容器日志</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker logs -f -t --tail 容器ID</span><br><span class="line">-t: 加入时间戳</span><br><span class="line">-f：跟随最新的日志打印</span><br><span class="line">--tail：数字 显示最后多少条</span><br></pre></td></tr></table></figure>
-
-<p>查看容器内运行的进程</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker top 容器ID</span><br></pre></td></tr></table></figure>
-
-<p>查看容器内部细节</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker inspect 容器ID</span><br></pre></td></tr></table></figure>
-
-<p>进入正在运行的容器并以命令行交互</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it 容器ID bashShell</span><br><span class="line">重新进入docker attach 容器ID</span><br></pre></td></tr></table></figure>
-<p>这两种方式的区别</p>
+          <h1 id="ElasticSearch搜索深入"><a href="#ElasticSearch搜索深入" class="headerlink" title="ElasticSearch搜索深入"></a>ElasticSearch搜索深入</h1><h2 id="搜索——基本的工具"><a href="#搜索——基本的工具" class="headerlink" title="搜索——基本的工具"></a>搜索——基本的工具</h2><p>到目前为止，我们已经学会了如何使用elasticsearch作为一个简单的NoSQL风格的分布式文件存储器——我们可以将一个JSON文档扔给Elasticsearch，也可以根据ID检索它们。但Elasticsearch真正强大之处在于可以从混乱的数据中找出有意义的信息——从大数据到全面的信息。</p>
+<p>这也是为什么我们使用结构化的JSON文档，而不是无结构的二进制数据。Elasticsearch不只会存储(store)文档，也会索引(indexes)文档内容来使之可以被搜索。<br>每个文档里的字段都会被索引并被查询。而且不仅如此。在简单查询时，Elasticsearch可以使用所有的索引，以非常快的速度返回结果。这让你永远不必考虑传统数据库的一些东西。<br>A search can be: 搜索(search)可以：</p>
 <ul>
-<li>attach: 直接进入容器启动命令的终端，不会启动新的进程</li>
-<li>exec：是在容器中打开新的终端，并且可以启动新的进程</li>
-</ul>
-<p>从容器中拷贝文件到主机上</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker cp 容器ID:容器内路径 目的主机路径</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/10/24/Java%E5%9F%BA%E7%A1%80/Java%E4%B8%AD%E7%9A%84%E6%B3%A8%E8%A7%A3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lancersaber">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lancersaber">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/10/24/Java%E5%9F%BA%E7%A1%80/Java%E4%B8%AD%E7%9A%84%E6%B3%A8%E8%A7%A3/" class="post-title-link" itemprop="url">Java中的注解</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-10-24 23:15:15" itemprop="dateCreated datePublished" datetime="2019-10-24T23:15:15+08:00">2019-10-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-28 07:50:31" itemprop="dateModified" datetime="2019-10-28T07:50:31+08:00">2019-10-28</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index">
-                    <span itemprop="name">Java基础</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Java中的基本注解"><a href="#Java中的基本注解" class="headerlink" title="Java中的基本注解"></a>Java中的基本注解</h1><hr>
-<p>&emsp;&emsp;注解(也称为元数据)为我们在代码中添加信息提供了一种形式化的方法，使我们可以在稍后某个时刻非常方便地使用这些数据。</p>
-<h2 id="Rentention注解类"><a href="#Rentention注解类" class="headerlink" title="Rentention注解类"></a>Rentention注解类</h2><p>注解的生命周期：Java源文件—》class文件—》内存中的字节码。编译或者运行时，都有可能会取消注解。Rentention的3种取值意味让注解保留到哪个阶段，RententionPolicy.SOURCE、RententionPolicy.CLASS(默认值)、RententionPolicy.RUNTIME。Rentention的值是枚举RententionPolicy的值，只有3个：SOURCE、CLASS、RUNTIME。</p>
-<ul>
-<li>source：源代码中，注解将被编译器丢弃</li>
-<li>class：类文件中，注解在class文件中可用</li>
-<li>runtime:运行时，VM将在运行期也保留注解，因此可以通过反射机制读取注解的信息</li>
-</ul>
-<h2 id="Target注解类"><a href="#Target注解类" class="headerlink" title="Target注解类"></a>Target注解类</h2><p>性质和Rentention一样，都是注解类的属性，表示注解类应该在什么位置，对那一块的数据有效。例如，@Target(ElementType.METHOD)<br>Target内部的值使用枚举ElementType表示，表示的主要位置有：注解、构造方法、属性、局部变量、函数、包、参数和类(默认值)。多个位置使用数组，例如，@Target({ElementType.METHOD,ElementType.TYPE})。</p>
-<h2 id="使用注解的例子"><a href="#使用注解的例子" class="headerlink" title="使用注解的例子"></a>使用注解的例子</h2><p>下面是一个简单的注解，我们可以用它来跟踪一个项目中的用例。如果一个方法或一组方法实现了某个用例的需求，那么程序员可以为此方法加上该注解。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@Target(ElementType.METHOD)</span><br><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">public @interface UseCase &#123;</span><br><span class="line">    public int id();</span><br><span class="line">    public String description() default &quot;no description&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>注意：id和description类似方法定义。编译器会对id和description进行类型检查。description元素有一个default值，如果在注解某个方法时没有给出description的值，则此注解的处理器就会使用元素的默认值。</p>
-<p>使用注解的类</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">public class PasswordUtils &#123;</span><br><span class="line">    </span><br><span class="line">    @UseCase(id=47,description = &quot;Passwords must contain ar least one numeric&quot;)</span><br><span class="line">    public boolean validatePassword(String password)&#123;</span><br><span class="line">        return (password.matches(&quot;\\w*\\d\\w*&quot;));</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    @UseCase(id=48)</span><br><span class="line">    public String encryptPassword(String password)&#123;</span><br><span class="line">        return new StringBuilder(password).reverse().toString();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    @UseCase(id=49,description = &quot;New passwords can&apos;t equal previously used ones&quot;)</span><br><span class="line">    public boolean checkForNewPassword(List&lt;String&gt; prevPasswords,String password)&#123;</span><br><span class="line">        return !prevPasswords.contains(password);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="编写注解处理器"><a href="#编写注解处理器" class="headerlink" title="编写注解处理器"></a>编写注解处理器</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">public class UseCaseTracker &#123;</span><br><span class="line"></span><br><span class="line">    public static void trackUseCases(List&lt;Integer&gt; useCases,Class&lt;?&gt; cl)&#123;</span><br><span class="line">        for (Method m: cl.getDeclaredMethods())&#123;</span><br><span class="line">            UseCase annotation = m.getAnnotation(UseCase.class);</span><br><span class="line"></span><br><span class="line">            if (annotation!=null)&#123;</span><br><span class="line">                System.out.println(&quot;Found Use Case:&quot;+annotation.id()+&quot; &quot;+annotation.description());</span><br><span class="line"></span><br><span class="line">                useCases.remove(new Integer(annotation.id()));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        for (int i:useCases)&#123;</span><br><span class="line">            System.out.println(&quot;Warning: Missing use case-&quot;+i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args)&#123;</span><br><span class="line">        List&lt;Integer&gt; useCases=new ArrayList&lt;&gt;();</span><br><span class="line">        Collections.addAll(useCases,47,48,49,50);</span><br><span class="line">        trackUseCases(useCases,PasswordUtils.class);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这里用到了两个反射的方法：getDeclaredMethods()和getAnnotation(),它们都属于AnnotatedElement接口(class,Method与Field等类都实现了该接口)。getAnnoation()方法返回指定类型的注解对象，在这里就是UseCase。如果被注解的方法上没有该类型的注解，则返回null值。</p>
-<h3 id="默认值限制"><a href="#默认值限制" class="headerlink" title="默认值限制"></a>默认值限制</h3><p>&emsp;&emsp;编译器对元素的默认值有些过分挑剔。首先，元素不能有不确定的值。也就是说，元素必须具有默认值，要么在使用注解时提供元素的值。<br>&emsp;&emsp;其次，对于非基本类型的元素，无论是在源代码中声明时，或是在注解接口定义默认值时，都不能以null为其值。为了绕开这个约束，我们可以定义一些特殊的值，例如空字符串或负数，以此表示某个元素不存在。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@Target(ElementType.METHOD)</span><br><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">public @interface SimulatingNull &#123;</span><br><span class="line">    public int id() default -1;</span><br><span class="line">    public String descption() default &quot;&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/10/24/Linux/ps%E6%8C%87%E4%BB%A4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lancersaber">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lancersaber">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/10/24/Linux/ps%E6%8C%87%E4%BB%A4/" class="post-title-link" itemprop="url">每天一个Linux指令-ps</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-10-24 23:15:15" itemprop="dateCreated datePublished" datetime="2019-10-24T23:15:15+08:00">2019-10-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-26 16:14:41" itemprop="dateModified" datetime="2019-10-26T16:14:41+08:00">2019-10-26</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="每天一个Linux指令-ps"><a href="#每天一个Linux指令-ps" class="headerlink" title="每天一个Linux指令-ps"></a>每天一个Linux指令-ps</h1><hr>
-<p>ps指令是用于查阅系统上面正在运行的进程(ps是截取一个时间点的进程状态，而后面介绍的top可以持续侦测进程运作的状态)。用法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps [options]</span><br></pre></td></tr></table></figure>
-<p>选项与参数</p>
-<ul>
-<li>-A：所有的process均显示出来，与-e具有同样的效用</li>
-<li>-a：不与terminal有关的所有process</li>
-<li>-u：有效使用者和相关的process</li>
-<li>x ：通常与a这个参数一起使用，可列出教完整的信息<br>输出格式规划</li>
-<li>l ：较长、较详细地将该PID的信息列出</li>
-<li>j ：工作的格式(jobs format)</li>
-<li>-f :做一个更为完整的输出</li>
-</ul>
-<h2 id="仅观察自己的bash相关进程"><a href="#仅观察自己的bash相关进程" class="headerlink" title="仅观察自己的bash相关进程"></a>仅观察自己的bash相关进程</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -l</span><br></pre></td></tr></table></figure>
-<p><img src="https://i.loli.net/2019/10/26/cC4X1lVZorFujxB.png" alt=""><br>系统整体的进程运作是非常多的，但如果使用ps -l则仅列出你的操作环境(bash)有关的进程而已，亦即最上层的父进程会是你自己的bash而没有沿伸到systemd这支进程。ps -l显示出来的资料包含以下内容：</p>
-<ul>
-<li><p>F:代表这个进程旗标(process flags),说明这个进程的总结权限，常见号码有</p>
-<ul>
-<li>若为4表示此进程的权限为root</li>
-<li>若为1则表示此进程仅复制(fork)而没有实际执行(exec)</li>
-</ul>
-</li>
-<li><p>S:代表这个进程的状态(STAT),主要的状态有</p>
-<ul>
-<li>R(Running): 该程序正在运作中</li>
-<li>S(Sleep)  : 该程序目前正在睡眠状态(idle)，但可以被唤醒(signal)</li>
-<li>D:        : 不可被唤醒的睡眠状态，通常这只程序可能正在等待I/O的情况</li>
-<li>T:        ：停止状态(stop),可能是在工作控制(背景暂停)或除错状态</li>
-<li>Z:        ：僵尸状态，进程已经终止但却无法被移除到内存外</li>
-</ul>
-</li>
-<li><p>UID/PID/PPID：代表【此进程被UID所拥有/进程的PID号码/此进程的父进程PID号码】</p>
-</li>
-<li><p>C：代表CPU的使用率，单位为百分比</p>
-</li>
-<li><p>PRI/NI：Priority/Nice的缩写，代表此进程被CPU所执行的优先级，数值越小代表该进程越快被CPU执行。</p>
-</li>
-<li><p>ADDR/SZ/WCHAN：都与内存有关</p>
-</li>
-<li><p>TTY：登入者的终端机位置，若为远程登录则使用动态终端接口(pts/n)</p>
-</li>
-<li><p>Time:使用掉的CPU时间</p>
-</li>
-<li><p>CMD：就是command的缩写，造成此进程的触发程序指令为何</p>
-</li>
-</ul>
-<h2 id="观察系统所有进程-ps-aux"><a href="#观察系统所有进程-ps-aux" class="headerlink" title="观察系统所有进程 ps aux"></a>观察系统所有进程 ps aux</h2><p><img src="https://i.loli.net/2019/10/26/4oWKpXvA63rGwRV.png" alt="捕获13.PNG"><br>在ps aux显示的项目中，各字段的意义为：</p>
-<ul>
-<li>User:该process属于哪个使用者账号的</li>
-<li>PID：该process的进程标识符</li>
-<li>%CPU：该process使用掉的CPU资源百分比</li>
-<li>%MEM：该process所占用的物理内存百分比</li>
-<li>VSZ：该process使用掉的虚拟内存量(Kbytes)</li>
-<li>RSS:该process占用的固定的内存量(Kbytes)</li>
-<li>TTY:该process是在哪个终端机上面运作，若与终端机无关则显示？，另外，tty1-tty6是本机上面的登入者进程，若为pts/0等等的，则表示为由网络连接进主机的进程</li>
-<li>STAT：该进程目前的状态，状态显示与ps -l 的S 旗标相同</li>
-<li>START：该process被触发启动的时间</li>
-<li>TIME：该process 实际使用CPU运作的时间</li>
-<li>COMMAND：该进程的实际指令为何？</li>
+<li>在类似于gender或者age这样的字段上使用结构化查询，join_date这样的字段上使用排序，就像SQL的结构化查询一样。</li>
+<li>全文检索，可以使用所有字段来匹配关键字，然后按照关联性(relevance)排序返回结果。</li>
+<li>或者结合以上两条。<br>很多搜索都是开箱即用的，为了充分挖掘Elasticsearch的潜力，你需要理解以下三个概念：</li>
 </ul>
 
       
@@ -834,7 +476,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/10/24/Linux/Linux%E5%B8%B8%E7%94%A8%E7%BD%91%E7%BB%9C%E6%8C%87%E4%BB%A4/">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/10/30/Mybatis/Mybatis%E4%B8%AD%E7%9A%84%E4%B8%80%E4%BA%9B%E7%BB%86%E8%8A%82/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -848,7 +490,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/10/24/Linux/Linux%E5%B8%B8%E7%94%A8%E7%BD%91%E7%BB%9C%E6%8C%87%E4%BB%A4/" class="post-title-link" itemprop="url">Linux常用网络指令介绍</a>
+            <a href="/2019/10/30/Mybatis/Mybatis%E4%B8%AD%E7%9A%84%E4%B8%80%E4%BA%9B%E7%BB%86%E8%8A%82/" class="post-title-link" itemprop="url">Mybatis/Mybatis中的一些细节</a>
         </h1>
 
         <div class="post-meta">
@@ -858,14 +500,71 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2019-10-24 23:15:15" itemprop="dateCreated datePublished" datetime="2019-10-24T23:15:15+08:00">2019-10-24</time>
+              <time title="Created: 2019-10-30 22:08:35" itemprop="dateCreated datePublished" datetime="2019-10-30T22:08:35+08:00">2019-10-30</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/10/30/ElasticSearch/%E6%95%B0%E6%8D%AE%E7%AE%80%E4%BB%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/10/30/ElasticSearch/%E6%95%B0%E6%8D%AE%E7%AE%80%E4%BB%8B/" class="post-title-link" itemprop="url">ElasticSearch中的数据</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-10-30 22:06:24" itemprop="dateCreated datePublished" datetime="2019-10-30T22:06:24+08:00">2019-10-30</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-26 18:40:46" itemprop="dateModified" datetime="2019-10-26T18:40:46+08:00">2019-10-26</time>
+                <time title="Modified: 2019-10-31 15:51:35" itemprop="dateModified" datetime="2019-10-31T15:51:35+08:00">2019-10-31</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -873,8 +572,8 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
+                  <a href="/categories/ElasticSearch/" itemprop="url" rel="index">
+                    <span itemprop="name">ElasticSearch</span>
                   </a>
                 </span>
             </span>
@@ -890,24 +589,102 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Linux常用网络指令介绍"><a href="#Linux常用网络指令介绍" class="headerlink" title="Linux常用网络指令介绍"></a>Linux常用网络指令介绍</h1><hr>
-<h2 id="网络参数设定指令"><a href="#网络参数设定指令" class="headerlink" title="网络参数设定指令"></a>网络参数设定指令</h2><ul>
-<li>ifconfig：ifconfig命令被用于配置和显示Linux内核中网络接口的网络参数。用ifconfig命令配置的网卡信息，在网卡重启后机器重启后，配置就不存在。要想将上述的配置信息永远的存的电脑里，那就要修改网卡的配置文件了。</li>
-<li>ifup,ifdown:这两个档案是script，透过更简单的方式来启动网络接口</li>
-<li>route：查询、设定路由表(route table)</li>
-<li>ip: 复合式的指令，可以直接修改上述提到的功能</li>
+          <h1 id="ElasticSearch中的数据简介"><a href="#ElasticSearch中的数据简介" class="headerlink" title="ElasticSearch中的数据简介"></a>ElasticSearch中的数据简介</h1><hr>
+<h2 id="数据吞吐"><a href="#数据吞吐" class="headerlink" title="数据吞吐"></a>数据吞吐</h2><p>无论程序怎么写，意图是一样的：组织数据为我们的目标所服务。但数据并不只是由随机比特和字节组成，我们在数据节点间建立关联来表示现实世界中的实体或者“某些东西”。属于同一个人的名字和Email地址会有更多的意义。<br>在现实世界中，并不是所有相同类型的实体看起来都是一样的。一个人可能有一个家庭电话号码，另一个人可能只有一个手机号码，有些人可能两者都有。一个人可能有三个Email地址，其他人可能没有。西班牙人可能有两个姓氏，但是英国人（英语系国家的人）可能只有一个。<br>面向对象编程语言流行的原因之一，是我们可以用对象来表示和处理现实生活中那些有着潜在关系和复杂结构的实体。到目前为止，这种方式还不错。<br>但当我们想存储这些实体时问题便来了。传统上，我们以行和列的形式把数据存储在关系型数据库中，相当于使用电子表格。这种固定的存储方式导致对象的灵活性不复存在了。<br>但是如何能以对象的形式存储对象呢？相对于围绕表格去为我们的程序去建模，我们可以专注于使用数据，把对象本来的灵活性找回来。<br>对象(object)是一种语言相关，记录在内存中的的数据结构。为了在网络间发送，或者存储它，我们需要一些标准的格式来表示它。JSON (JavaScript Object Notation)是一种可读的以文本来表示对象的方式。它已经成为NoSQL世界中数据交换的一种事实标准。当对象被序列化为JSON，它就成为JSON文档(JSON document)了。</p>
+<p>重点在下面这段话<br><em>Elasticsearch是一个分布式的文档(document)存储引擎。它可以实时存储并检索复杂数据结构——序列化的JSON文档。换言说，一旦文档被存储在Elasticsearch中，它就可以在集群的任一节点上被检索。<br>当然，我们不仅需要存储数据，还要快速的批量查询。虽然已经有很多NoSQL的解决方案允许我们以文档的形式存储对象，但它们依旧需要考虑如何查询这些数据，以及哪些字段需要被索引以便检索时更加快速。<br>在Elasticsearch中，每一个字段的数据都是默认被索引的。也就是说，每个字段专门有一个反向索引用于快速检索。而且，与其它数据库不同，它可以在同一个查询中利用所有的这些反向索引，以惊人的速度返回结果。<br>在这一章我们将探讨如何使用API来创建、检索、更新和删除文档。目前，我们并不关心数据如何在文档中以及如何查询他们。所有我们关心的是文档如何安全在Elasticsearch中存储，以及如何让它们返回。</em></p>
+<h2 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h2><h3 id="什么是文档？"><a href="#什么是文档？" class="headerlink" title="什么是文档？"></a>什么是文档？</h3><p>程序中大多的实体或对象能够被序列化为包含键值对的JSON对象，键(key)是字段(field)或属性(property)的名字，值(value)可以是字符串、数字、布尔类型、另一个对象、值数组或者其他特殊类型，比如表示日期的字符串或者表示地理位置的对象。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;name&quot;:         &quot;John Smith&quot;,</span><br><span class="line">    &quot;age&quot;:          42,</span><br><span class="line">    &quot;confirmed&quot;:    true,</span><br><span class="line">    &quot;join_date&quot;:    &quot;2014-06-01&quot;,</span><br><span class="line">    &quot;home&quot;: &#123;</span><br><span class="line">        &quot;lat&quot;:      51.5,</span><br><span class="line">        &quot;lon&quot;:      0.1</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;accounts&quot;: [</span><br><span class="line">        &#123;</span><br><span class="line">            &quot;type&quot;: &quot;facebook&quot;,</span><br><span class="line">            &quot;id&quot;:   &quot;johnsmith&quot;</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">            &quot;type&quot;: &quot;twitter&quot;,</span><br><span class="line">            &quot;id&quot;:   &quot;johnsmith&quot;</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>通常，我们可以认为对象(object)和文档(document)是等价相通的。不过，他们还是有所差别：对象(Object)是一个JSON结构体——类似于哈希、hashmap、字典或者关联数组；对象(Object)中还可能包含其他对象(Object)。 在Elasticsearch中，文档(document)这个术语有着特殊含义。它特指最顶层结构或者根对象(root object)序列化成的JSON数据（以唯一ID标识并存储于Elasticsearch中）。</p>
+<h3 id="文档元数据"><a href="#文档元数据" class="headerlink" title="文档元数据"></a>文档元数据</h3><p>一个文档不只有数据。它还包含了元数据(metadata)——关于文档的信息。三个必须的元数据节点是：<br>|节点|说明|<br>|—|—|<br>| <em>index</em>|文档存储的地方|<br>| <em>type</em>|文档代表的对象的类|<br>|<em>id</em>|文档的唯一标识|</p>
+<h4 id="index"><a href="#index" class="headerlink" title="index"></a><em>index</em></h4><p>索引(index)类似于关系型数据库里的“数据库”——它是我们存储和索引关联数据的地方</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">提示：</span><br><span class="line"></span><br><span class="line">事实上，我们的数据被存储和索引在分片(shards)中，索引只是一个把一个或多个分片分组在一起的逻辑空间。然而，这只是一些内部细节——我们的程序完全不用关心分片。对于我们的程序而言，文档存储在索引(index)中。剩下的细节由Elasticsearch关心既可。</span><br></pre></td></tr></table></figure>
+
+<h4 id="type"><a href="#type" class="headerlink" title="type"></a><em>type</em></h4><p>在应用中，我们使用对象表示一些“事物”，例如一个用户、一篇博客、一个评论，或者一封邮件。每个对象都属于一个类(class)，这个类定义了属性或与对象关联的数据。user类的对象可能包含姓名、性别、年龄和Email地址。</p>
+<p>在关系型数据库中，我们经常将相同类的对象存储在一个表里，因为它们有着相同的结构。同理，在Elasticsearch中，我们使用相同类型(type)的文档表示相同的“事物”，因为他们的数据结构也是相同的。<br>每个类型(type)都有自己的映射(mapping)或者结构定义，就像传统数据库表中的列一样。所有类型下的文档被存储在同一个索引下，但是类型的映射(mapping)会告诉Elasticsearch不同的文档如何被索引。 我们将会在《映射》章节探讨如何定义和管理映射，但是现在我们将依赖Elasticsearch去自动处理数据结构。<br><em>type</em> 的名字可以是大写或小写，不能包含下划线或逗号。我们将使用blog做为类型名。</p>
+<h4 id="id"><a href="#id" class="headerlink" title="id"></a><em>id</em></h4><p>id仅仅是一个字符串，它与_index和_type组合时，就可以在Elasticsearch中唯一标识一个文档。当创建一个文档，你可以自定义_id，也可以让Elasticsearch帮你自动生成。</p>
+<h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><h3 id="索引一个文档"><a href="#索引一个文档" class="headerlink" title="索引一个文档"></a>索引一个文档</h3><p>文档通过index API被索引——使数据可以被存储和搜索。但是首先我们需要决定文档所在。正如我们讨论的，文档通过其_index、_type、_id_唯一确定。们可以自己提供一个_id_，或者也使用index API 为我们生成一个。</p>
+<h3 id="使用自己的ID"><a href="#使用自己的ID" class="headerlink" title="使用自己的ID"></a>使用自己的ID</h3><p>如果你的文档有自然的标识符（例如user_account字段或者其他值表示文档），你就可以提供自己的_id，使用这种形式的index API：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">PUT /&#123;index&#125;/&#123;type&#125;/&#123;id&#125;</span><br><span class="line">&#123;</span><br><span class="line">  &quot;field&quot;: &quot;value&quot;,</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>例如我们的索引叫做“website”，类型叫做“blog”，我们选择的ID是“123”，那么这个索引请求就像这样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">PUT /website/blog/123</span><br><span class="line">&#123;</span><br><span class="line">  &quot;title&quot;: &quot;My first blog entry&quot;,</span><br><span class="line">  &quot;text&quot;:  &quot;Just trying this out...&quot;,</span><br><span class="line">  &quot;date&quot;:  &quot;2014/01/01&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Elasticsearch的响应：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">   &quot;_index&quot;:    &quot;website&quot;,</span><br><span class="line">   &quot;_type&quot;:     &quot;blog&quot;,</span><br><span class="line">   &quot;_id&quot;:       &quot;123&quot;,</span><br><span class="line">   &quot;_version&quot;:  1,</span><br><span class="line">   &quot;created&quot;:   true</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>响应指出请求的索引已经被成功创建，这个索引中包含<em>index、_type和_id元数据，以及一个新元素：_version</em><br>Elasticsearch中每个文档都有版本号，每当文档变化（包括删除）都会使_version增加。在《版本控制》章节中我们将探讨如何使用_version号确保你程序的一部分不会覆盖掉另一部分所做的更改。</p>
+<h3 id="自增id"><a href="#自增id" class="headerlink" title="自增id"></a>自增id</h3><p>如果我们的数据没有自然ID，我们可以让Elasticsearch自动为我们生成。请求结构发生了变化：PUT方法——“在这个URL中存储文档”变成了POST方法——“在这个类型下存储文档”。（译者注：原来是把文档存储到某个ID对应的空间，现在是把这个文档添加到某个_type下）。</p>
+<p>URL现在只包含_index和_type两个字段：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">POST /website/blog/</span><br><span class="line">&#123;</span><br><span class="line">  &quot;title&quot;: &quot;My second blog entry&quot;,</span><br><span class="line">  &quot;text&quot;:  &quot;Still trying this out...&quot;,</span><br><span class="line">  &quot;date&quot;:  &quot;2014/01/01&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>响应内容与刚才类似，只有_id字段变成了自动生成的值：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">   &quot;_index&quot;:    &quot;website&quot;,</span><br><span class="line">   &quot;_type&quot;:     &quot;blog&quot;,</span><br><span class="line">   &quot;_id&quot;:       &quot;wM0OSFhDQXGZAWDf0-drSA&quot;,</span><br><span class="line">   &quot;_version&quot;:  1,</span><br><span class="line">   &quot;created&quot;:   true</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>自动生成的ID有22个字符长，URL-safe, Base64-encoded string universally unique identifiers, 或者叫 UUIDs。</p>
+<h2 id="3-3-获取"><a href="#3-3-获取" class="headerlink" title="3.3 获取"></a>3.3 获取</h2><h3 id="检索文档"><a href="#检索文档" class="headerlink" title="检索文档"></a>检索文档</h3><p>想要从Elasticsearch中获取文档，我们使用同样的_index、_type、_id_，但是HTTP方法改为GET：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET /website/blog/123?pretty</span><br></pre></td></tr></table></figure>
+<p>响应包含了现在熟悉的元数据节点，增加了_source字段，它包含了在创建索引时我们发送给Elasticsearch的原始文档。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;_index&quot; :   &quot;website&quot;,</span><br><span class="line">  &quot;_type&quot; :    &quot;blog&quot;,</span><br><span class="line">  &quot;_id&quot; :      &quot;123&quot;,</span><br><span class="line">  &quot;_version&quot; : 1,</span><br><span class="line">  &quot;found&quot; :    true,</span><br><span class="line">  &quot;_source&quot; :  &#123;</span><br><span class="line">      &quot;title&quot;: &quot;My first blog entry&quot;,</span><br><span class="line">      &quot;text&quot;:  &quot;Just trying this out...&quot;,</span><br><span class="line">      &quot;date&quot;:  &quot;2014/01/01&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>提示</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pretty</span><br><span class="line">在任意的查询字符串中增加pretty参数，类似于上面的例子。会让Elasticsearch美化输出(pretty-print)JSON响应以便更加容易阅读。_source字段不会被美化，它的样子与我们输入的一致。</span><br></pre></td></tr></table></figure>
+
+<p>GET请求返回的响应内容包括{“found”: true}。这意味着文档已经找到。如果我们请求一个不存在的文档，依旧会得到一个JSON，不过found值变成了false。</p>
+<p>此外，HTTP响应状态码也会变成’404 Not Found’代替’200 OK’。我们可以在curl后加-i参数得到响应头：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -i -XGET http://localhost:9200/website/blog/124?pretty</span><br></pre></td></tr></table></figure>
+
+<p>现在响应类似于这样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 404 Not Found</span><br><span class="line">Content-Type: application/json; charset=UTF-8</span><br><span class="line">Content-Length: 83</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  &quot;_index&quot; : &quot;website&quot;,</span><br><span class="line">  &quot;_type&quot; :  &quot;blog&quot;,</span><br><span class="line">  &quot;_id&quot; :    &quot;124&quot;,</span><br><span class="line">  &quot;found&quot; :  false</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="检索文档的一部分"><a href="#检索文档的一部分" class="headerlink" title="检索文档的一部分"></a>检索文档的一部分</h3><p>通常，GET请求将返回文档的全部，存储在_source参数中。但是可能你感兴趣的字段只是title。请求个别字段可以使用_source参数。多个字段可以使用逗号分隔：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET /website/blog/123?_source=title,text</span><br></pre></td></tr></table></figure>
+<p><em>source</em> 字段现在只包含我们请求的字段，而且过滤了date字段：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;_index&quot; :   &quot;website&quot;,</span><br><span class="line">  &quot;_type&quot; :    &quot;blog&quot;,</span><br><span class="line">  &quot;_id&quot; :      &quot;123&quot;,</span><br><span class="line">  &quot;_version&quot; : 1,</span><br><span class="line">  &quot;exists&quot; :   true,</span><br><span class="line">  &quot;_source&quot; : &#123;</span><br><span class="line">      &quot;title&quot;: &quot;My first blog entry&quot; ,</span><br><span class="line">      &quot;text&quot;:  &quot;Just trying this out...&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>或者你只想得到_source字段而不要其他的元数据，你可以这样请求：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET /website/blog/123/_source</span><br></pre></td></tr></table></figure>
+<p>它仅仅返回</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">   &quot;title&quot;: &quot;My first blog entry&quot;,</span><br><span class="line">   &quot;text&quot;:  &quot;Just trying this out...&quot;,</span><br><span class="line">   &quot;date&quot;:  &quot;2014/01/01&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="存在"><a href="#存在" class="headerlink" title="存在"></a>存在</h2><h3 id="检查文档是否存在"><a href="#检查文档是否存在" class="headerlink" title="检查文档是否存在"></a>检查文档是否存在</h3><p>如果你想做的只是检查文档是否存在——你对内容完全不感兴趣——使用HEAD方法来代替GET。HEAD请求不会返回响应体，只有HTTP头：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -i -XHEAD http://localhost:9200/website/blog/123</span><br></pre></td></tr></table></figure>
+<p>Elasticsearch将会返回200 OK状态如果你的文档存在：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 200 OK</span><br><span class="line">Content-Type: text/plain; charset=UTF-8</span><br><span class="line">Content-Length: 0</span><br></pre></td></tr></table></figure>
+<p>如果不存在返回404 Not Found：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -i -XHEAD http://localhost:9200/website/blog/124</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 404 Not Found</span><br><span class="line">Content-Type: text/plain; charset=UTF-8</span><br><span class="line">Content-Length: 0</span><br></pre></td></tr></table></figure>
+<p>当然，这只表示你在查询的那一刻文档不存在，但并不表示几毫秒后依旧不存在。另一个进程在这期间可能创建新文档。</p>
+<h2 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h2><h3 id="更新整个文档"><a href="#更新整个文档" class="headerlink" title="更新整个文档"></a>更新整个文档</h3><p>文档在Elasticsearch中是不可变的——我们不能修改他们。如果需要更新已存在的文档，我们可以使用《索引文档》章节提到的index API 重建索引(reindex) 或者替换掉它。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">PUT /website/blog/123</span><br><span class="line">&#123;</span><br><span class="line">  &quot;title&quot;: &quot;My first blog entry&quot;,</span><br><span class="line">  &quot;text&quot;:  &quot;I am starting to get the hang of this...&quot;,</span><br><span class="line">  &quot;date&quot;:  &quot;2014/01/02&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在响应中，我们可以看到Elasticsearch把_version增加了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;_index&quot; :   &quot;website&quot;,</span><br><span class="line">  &quot;_type&quot; :    &quot;blog&quot;,</span><br><span class="line">  &quot;_id&quot; :      &quot;123&quot;,</span><br><span class="line">  &quot;_version&quot; : 2,</span><br><span class="line">  &quot;created&quot;:   false &lt;1&gt;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>&lt;1&gt; created标识为false因为同索引、同类型下已经存在同ID的文档。<br>在内部，Elasticsearch已经标记旧文档为删除并添加了一个完整的新文档。旧版本文档不会立即消失，但你也不能去访问它。Elasticsearch会在你继续索引更多数据时清理被删除的文档。</li>
 </ul>
-<p>语法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ifconfig(参数)</span><br><span class="line">ifconfig [interface] &#123;up/down&#125; 观察与启动接口</span><br><span class="line">ifconfig [interface] [options] 设定与修改接口</span><br></pre></td></tr></table></figure>
-<p>参数</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">add&lt;地址&gt;：设置网络设备IPv6的ip地址；</span><br><span class="line">del&lt;地址&gt;：删除网络设备IPv6的IP地址；</span><br><span class="line">down：关闭指定的网络设备；</span><br><span class="line">&lt;hw&lt;网络设备类型&gt;&lt;硬件地址&gt;：设置网络设备的类型与硬件地址；</span><br><span class="line">io_addr&lt;I/O地址&gt;：设置网络设备的I/O地址；</span><br><span class="line">irq&lt;IRQ地址&gt;：设置网络设备的IRQ；</span><br><span class="line">media&lt;网络媒介类型&gt;：设置网络设备的媒介类型；</span><br><span class="line">mem_start&lt;内存地址&gt;：设置网络设备在主内存所占用的起始地址；</span><br><span class="line">metric&lt;数目&gt;：指定在计算数据包的转送次数时，所要加上的数目；</span><br><span class="line">mtu&lt;字节&gt;：设置网络设备的MTU；</span><br><span class="line">netmask&lt;子网掩码&gt;：设置网络设备的子网掩码；</span><br><span class="line">tunnel&lt;地址&gt;：建立IPv4与IPv6之间的隧道通信地址；</span><br><span class="line">up：启动指定的网络设备；</span><br><span class="line">-broadcast&lt;地址&gt;：将要送往指定地址的数据包当成广播数据包来处理；</span><br><span class="line">-pointopoint&lt;地址&gt;：与指定地址的网络设备建立直接连线，此模式具有保密功能；</span><br><span class="line">-promisc：关闭或启动指定网络设备的promiscuous模式；</span><br><span class="line">IP地址：指定网络设备的IP地址；</span><br><span class="line">网络设备：指定网络设备的名称。</span><br></pre></td></tr></table></figure>
+<p>在本章的后面，我们将会在《局部更新》中探讨update API。这个API 似乎 允许你修改文档的局部，但事实上Elasticsearch遵循与之前所说完全相同的过程，这个过程如下：</p>
+<ul>
+<li>从旧文档中检索JSON</li>
+<li>修改它</li>
+<li>删除旧文档</li>
+<li>索引新文档<br>唯一的不同是update API完成这一过程只需要一个客户端请求既可，不再需要get和index请求了。</li>
+</ul>
+<h2 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h2><h3 id="创建一个新文档"><a href="#创建一个新文档" class="headerlink" title="创建一个新文档"></a>创建一个新文档</h3><p>当索引一个文档，我们如何确定是完全创建了一个新的还是覆盖了一个已经存在的呢？</p>
+<p>请记住<em>index、_type、_id</em> 三者唯一确定一个文档。所以要想保证文档是新加入的，最简单的方式是使用POST方法让Elasticsearch自动生成唯一_id：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">POST /website/blog/</span><br><span class="line">&#123; ... &#125;</span><br></pre></td></tr></table></figure>
+<p>然而，如果想使用自定义的<em>id，我们必须告诉Elasticsearch应该在_index、_type、_id</em> 三者都不同时才接受请求。为了做到这点有两种方法，它们其实做的是同一件事情。你可以选择适合自己的方式：</p>
+<p>第一种方法使用op_type查询参数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">PUT /website/blog/123?op_type=create</span><br><span class="line">&#123; ... &#125;</span><br></pre></td></tr></table></figure>
+<p>或者第二种方法是在URL后加/<em>create</em> 做为端点：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">PUT /website/blog/123/_create</span><br><span class="line">&#123; ... &#125;</span><br></pre></td></tr></table></figure>
 
-<p>实例</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# ifconfig</span><br><span class="line">eth0      Link encap:Ethernet  HWaddr 00:16:3E:00:1E:51  </span><br><span class="line">          inet addr:10.160.7.81  Bcast:10.160.15.255  Mask:255.255.240.0</span><br><span class="line">          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1</span><br><span class="line">          RX packets:61430830 errors:0 dropped:0 overruns:0 frame:0</span><br><span class="line">          TX packets:88534 errors:0 dropped:0 overruns:0 carrier:0</span><br><span class="line">          collisions:0 txqueuelen:1000</span><br><span class="line">          RX bytes:3607197869 (3.3 GiB)  TX bytes:6115042 (5.8 MiB)</span><br><span class="line"></span><br><span class="line">lo        Link encap:Local Loopback  </span><br><span class="line">          inet addr:127.0.0.1  Mask:255.0.0.0</span><br><span class="line">          UP LOOPBACK RUNNING  MTU:16436  Metric:1</span><br><span class="line">          RX packets:56103 errors:0 dropped:0 overruns:0 frame:0</span><br><span class="line">          TX packets:56103 errors:0 dropped:0 overruns:0 carrier:0</span><br><span class="line">          collisions:0 txqueuelen:0</span><br><span class="line">          RX bytes:5079451 (4.8 MiB)  TX bytes:5079451 (4.8 MiB)</span><br></pre></td></tr></table></figure>
-<p>说明</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">eth0表示第一块网卡，其中HWaddr表示网卡的物理地址，可以看到目前这个网卡的物理地址(MAC地址）是00:16:3E:00:1E:51。</span><br><span class="line"></span><br><span class="line">inet addr用来表示网卡的IP地址，此网卡的IP地址是10.160.7.81，广播地址Bcast:10.160.15.255，掩码地址Mask:255.255.240.0。</span><br><span class="line"></span><br><span class="line">lo是表示主机的回环地址，这个一般是用来测试一个网络程序，但又不想让局域网或外网的用户能够查看，只能在此台主机上运行和查看所用的网络接口。比如把 httpd服务器的指定到回环地址，在浏览器输入127.0.0.1就能看到你所架WEB网站了。但只是您能看得到，局域网的其它主机或用户无从知道。</span><br><span class="line"></span><br><span class="line">第一行：连接类型：Ethernet（以太网）HWaddr（硬件mac地址）。</span><br><span class="line">第二行：网卡的IP地址、子网、掩码。</span><br><span class="line">第三行：UP（代表网卡开启状态）RUNNING（代表网卡的网线被接上）MULTICAST（支持组播）MTU:1500（最大传输单元）：1500字节。</span><br><span class="line">第四、五行：接收、发送数据包情况统计。</span><br><span class="line">第七行：接收、发送数据字节数统计信息。</span><br></pre></td></tr></table></figure>
+<p>如果请求成功的创建了一个新文档，Elasticsearch将返回正常的元数据且响应状态码是201 Created。<br>另一方面，如果包含相同的<em>index、_type和_id</em> 的文档已经存在，Elasticsearch将返回409 Conflict响应状态码，错误信息类似如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;error&quot; : &quot;DocumentAlreadyExistsException[[website][4] [blog][123]:</span><br><span class="line">             document already exists]&quot;,</span><br><span class="line">  &quot;status&quot; : 409</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="网络侦错与观察指令"><a href="#网络侦错与观察指令" class="headerlink" title="网络侦错与观察指令"></a>网络侦错与观察指令</h2><h2 id="远程联机指令"><a href="#远程联机指令" class="headerlink" title="远程联机指令"></a>远程联机指令</h2><h2 id="文字接口网页浏览"><a href="#文字接口网页浏览" class="headerlink" title="文字接口网页浏览"></a>文字接口网页浏览</h2><h2 id="封包撷取功能"><a href="#封包撷取功能" class="headerlink" title="封包撷取功能"></a>封包撷取功能</h2>
+<h2 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h2><h3 id="删除文档"><a href="#删除文档" class="headerlink" title="删除文档"></a>删除文档</h3><p>删除文档的语法模式与之前基本一致，只不过要使用DELETE方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DELETE /website/blog/123</span><br></pre></td></tr></table></figure>
+<p>如果文档被找到，Elasticsearch将返回200 OK状态码和以下响应体。注意_version数字已经增加了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;found&quot; :    true,</span><br><span class="line">  &quot;_index&quot; :   &quot;website&quot;,</span><br><span class="line">  &quot;_type&quot; :    &quot;blog&quot;,</span><br><span class="line">  &quot;_id&quot; :      &quot;123&quot;,</span><br><span class="line">  &quot;_version&quot; : 3</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果文档未找到，我们将得到一个404 Not Found状态码，响应体是这样的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;found&quot; :    false,</span><br><span class="line">  &quot;_index&quot; :   &quot;website&quot;,</span><br><span class="line">  &quot;_type&quot; :    &quot;blog&quot;,</span><br><span class="line">  &quot;_id&quot; :      &quot;123&quot;,</span><br><span class="line">  &quot;_version&quot; : 4</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>尽管文档不存在——“found”的值是false——<em>version</em> 依旧增加了。这是内部记录的一部分，它确保在多节点间不同操作可以有正确的顺序。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">正如在《更新文档》一章中提到的，删除一个文档也不会立即从磁盘上移除，它只是被标记成已删除。Elasticsearch将会在你之后添加更多索引的时候才会在后台进行删除内容的清理。</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -926,7 +703,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/10/24/Linux/%E5%9C%A8Linux%E4%B8%8A%E9%85%8D%E7%BD%AEjava%E7%8E%AF%E5%A2%83/">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/10/30/ElasticSearch/ElasticSearch%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -940,7 +717,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/10/24/Linux/%E5%9C%A8Linux%E4%B8%8A%E9%85%8D%E7%BD%AEjava%E7%8E%AF%E5%A2%83/" class="post-title-link" itemprop="url">在Linux上配置java环境</a>
+            <a href="/2019/10/30/ElasticSearch/ElasticSearch%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/" class="post-title-link" itemprop="url">ElasticSearch分布式集群</a>
         </h1>
 
         <div class="post-meta">
@@ -949,24 +726,18 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
+              
 
-              <time title="Created: 2019-10-24 23:15:15" itemprop="dateCreated datePublished" datetime="2019-10-24T23:15:15+08:00">2019-10-24</time>
+              <time title="Created: 2019-10-30 22:00:25 / Modified: 22:03:03" itemprop="dateCreated datePublished" datetime="2019-10-30T22:00:25+08:00">2019-10-30</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-28 08:24:00" itemprop="dateModified" datetime="2019-10-28T08:24:00+08:00">2019-10-28</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
+                  <a href="/categories/ElasticSearch/" itemprop="url" rel="index">
+                    <span itemprop="name">ElasticSearch</span>
                   </a>
                 </span>
             </span>
@@ -982,24 +753,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="在Linux上配置java环境"><a href="#在Linux上配置java环境" class="headerlink" title="在Linux上配置java环境"></a>在Linux上配置java环境</h1><hr>
-<h2 id="下载jdk1-8"><a href="#下载jdk1-8" class="headerlink" title="下载jdk1.8"></a>下载jdk1.8</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># wget --no-check-certificate --no-cookies --header &quot;Cookie: oraclelicense=accept-securebackup-cookie&quot;  http://download.oracle.com/otn-pub/java/jdk/8u131-b11/d54c1d3a095b4ff2b6607d096fa80163/jdk-8u131-linux-x64.tar.gz</span><br></pre></td></tr></table></figure>
+          <h1 id="ElasticSearch分布式集群简介"><a href="#ElasticSearch分布式集群简介" class="headerlink" title="ElasticSearch分布式集群简介"></a>ElasticSearch分布式集群简介</h1><hr>
+<h2 id="集群内部工作方式"><a href="#集群内部工作方式" class="headerlink" title="集群内部工作方式"></a>集群内部工作方式</h2><p>Elasticsearch用于构建高可用和可扩展的系统。扩展的方式可以是购买更好的服务器(纵向扩展(vertical scale or scaling up))或者购买更多的服务器（横向扩展(horizontal scale or scaling out)）。</p>
+<p>Elasticsearch虽然能从更强大的硬件中获得更好的性能，但是纵向扩展有它的局限性。真正的扩展应该是横向的，它通过增加节点来均摊负载和增加可靠性。<br>对于大多数数据库而言，横向扩展意味着你的程序将做非常大的改动才能利用这些新添加的设备。对比来说，Elasticsearch天生就是分布式的：它知道如何管理节点来提供高扩展和高可用。这意味着你的程序不需要关心这些。<br>在这章我们将探索如何创建你的集群(cluster)、节点(node)和分片(shards)，使其按照你的需求进行扩展，并保证在硬件故障时数据依旧安全。</p>
 
-<h2 id="解压"><a href="#解压" class="headerlink" title="解压"></a>解压</h2><p>1.用tar命令解压后，会生成jdk1.8.0_131目录；</p>
-<p>2.为了方便用mv把jdk1.8.0_131更名为jdk1.8；</p>
-<p>3.把jdk1.8移动到/usr/local目录下(当然也可以移动到别的目录下，后面配置环境变量修改为自己的jdk路径即可)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># tar -zxvf jdk-8u131-linux-x64.tar.gz</span><br><span class="line"># mv jdk1.8.0_131 jdk1.8</span><br><span class="line"># mv jdk1.8 /usr/local</span><br></pre></td></tr></table></figure>
-
-<h2 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h2><p>1.修改/etc/profile文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># vim /etc/profile</span><br></pre></td></tr></table></figure>
-<p>在profile文件中配置jdk环境</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">export JAVA_HOME=/usr/local/jdk1.8</span><br><span class="line">export JRE_HOME=$&#123;JAVA_HOME&#125;/jre</span><br><span class="line">export CLASSPATH=.:$&#123;JAVA_HOME&#125;/lib:$&#123;JRE_HOME&#125;/lib:$CLASSPATH</span><br><span class="line">export JAVA_PATH=$&#123;JAVA_HOME&#125;/bin:$&#123;JRE_HOME&#125;/bin</span><br><span class="line">export PATH=$PATH:$&#123;JAVA_PATH&#125;</span><br></pre></td></tr></table></figure>
-
-<p>2.使profile生效</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># source /etc/profie</span><br></pre></td></tr></table></figure>
-
-<h2 id="查看配置环境是否成功"><a href="#查看配置环境是否成功" class="headerlink" title="查看配置环境是否成功"></a>查看配置环境是否成功</h2><p>java -version命令查看jdk版本</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># java -version</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -1018,7 +775,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/10/24/Linux/tar/">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/10/30/Nginx/%E6%AD%A3%E5%90%91%E4%BB%A3%E7%90%86%E5%92%8C%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1032,7 +789,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/10/24/Linux/tar/" class="post-title-link" itemprop="url">每天一个Linux指令-tar</a>
+            <a href="/2019/10/30/Nginx/%E6%AD%A3%E5%90%91%E4%BB%A3%E7%90%86%E5%92%8C%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/" class="post-title-link" itemprop="url">正向代理和反向代理</a>
         </h1>
 
         <div class="post-meta">
@@ -1041,24 +798,18 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
+              
 
-              <time title="Created: 2019-10-24 23:15:15" itemprop="dateCreated datePublished" datetime="2019-10-24T23:15:15+08:00">2019-10-24</time>
+              <time title="Created: 2019-10-30 21:23:29 / Modified: 22:08:11" itemprop="dateCreated datePublished" datetime="2019-10-30T21:23:29+08:00">2019-10-30</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-28 07:58:50" itemprop="dateModified" datetime="2019-10-28T07:58:50+08:00">2019-10-28</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
+                  <a href="/categories/Nginx/" itemprop="url" rel="index">
+                    <span itemprop="name">Nginx</span>
                   </a>
                 </span>
             </span>
@@ -1074,15 +825,232 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="每天一个Linux指令-tar"><a href="#每天一个Linux指令-tar" class="headerlink" title="每天一个Linux指令-tar"></a>每天一个Linux指令-tar</h1><hr>
-<p>tar命令可以为linux的文件和目录创建档案。利用tar，可以为某一特定文件创建档案（备份文件），也可以在档案中改变文件，或者向档案中加入新的文件。tar最初被用来在磁带上创建档案，现在，用户可以在任何设备上创建档案。利用tar命令，可以把一大堆的文件和目录全部打包成一个文件，这对于备份文件或将几个文件组合成为一个文件以便于网络传输是非常有用的。</p>
-<p>首先要弄清两个概念：打包和压缩。打包是指将一大堆文件或目录变成一个总的文件；压缩则是将一个大的文件通过一些压缩算法变成一个小文件。</p>
-<p>为什么要区分这两个概念呢？<em>这源于Linux中很多压缩程序只能针对一个文件进行压缩</em>，这样当你想要压缩一大堆文件时，你得先将这一大堆文件先打成一个包（tar命令），然后再用压缩程序进行压缩（gzip bzip2命令）。</p>
-<h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar(选项)(参数)</span><br></pre></td></tr></table></figure>
+          <h1 id="正向代理和反向代理"><a href="#正向代理和反向代理" class="headerlink" title="正向代理和反向代理"></a>正向代理和反向代理</h1><hr>
+<h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>正向代理是一个位于客户端和目标服务器之间的代理服务器(中间服务器)。为了从原始服务器取得内容，客户端向代理服务器发送一个请求，并且指定目标服务器，之后代理向目标服务器转交并且将获得的内容返回给客户端。正向代理的情况下客户端必须要进行一些特别的设置才能使用。</p>
+<p>  反向代理正好相反。对于客户端来说，反向代理就好像目标服务器。并且客户端不需要进行任何设置。客户端向反向代理发送请求，接着反向代理判断请求走向何处，并将请求转交给客户端，使得这些内容就好似他自己一样，一次客户端并不会感知到反向代理后面的服务，也因此不需要客户端做任何设置，只需要把反向代理服务器当成真正的服务器就好了。</p>
+<h2 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h2><p> 正向代理需要你主动设置代理服务器ip或者域名进行访问，由设置的服务器ip或者域名去获取访问内容并返回；而反向代理不需要你做任何设置，直接访问服务器真实ip或者域名，但是服务器内部会自动根据访问内容进行跳转及内容返回，你不知道它最终访问的是哪些机器。</p>
+<p>正向代理是代理客户端，为客户端收发请求，使真实客户端对服务器不可见；而反向代理是代理服务器端，为服务器收发请求，使真实服务器对客户端不可见。<br>从上面的描述也能看得出来正向代理和反向代理最关键的两点区别：</p>
+<ul>
+<li>是否指定目标服务器</li>
+<li>客户端是否要做设置<br>下面用一张图来表示两者的差异：<br><img src="https://i.loli.net/2019/10/30/GPH5oTDQAeKvRru.png" alt="12.PNG"><br>正向代理中，proxy和client同属一个LAN，对server透明； 反向代理中，proxy和server同属一个LAN，对client透明。 实际上proxy在两种代理中做的事都是代为收发请求和响应，不过从结构上来看正好左右互换了下，所以把前者那种代理方式叫做正向代理，后者叫做反向代理。<br>从用途区分</li>
+<li>正向代理：正向代理用途是为了在防火墙内的局域网提供访问internet的途径。另外还可以使用缓冲特性减少网络使用率</li>
+<li>反向代理：反向代理的用途是将防火墙后面的服务器提供给internet用户访问。同时还可以完成诸如负载均衡等功能<br> 从安全性来讲：</li>
+<li>正向代理：正向代理允许客户端通过它访问任意网站并且隐蔽客户端自身，因此你必须采取安全措施来确保仅为经过授权的客户端提供服务</li>
+<li>反向代理：对外是透明的，访问者并不知道自己访问的是代理。对访问者而言，他以为访问的就是原始服务器</li>
+</ul>
 
-<h2 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">-A或--catenate：新增文件到以存在的备份文件；</span><br><span class="line">-B：设置区块大小；</span><br><span class="line">-c或--create：建立新的备份文件；</span><br><span class="line">-C &lt;目录&gt;：这个选项用在解压缩，若要在特定目录解压缩，可以使用这个选项。</span><br><span class="line">-d：记录文件的差别；</span><br><span class="line">-x或--extract或--get：从备份文件中还原文件；</span><br><span class="line">-t或--list：列出备份文件的内容；</span><br><span class="line">-z或--gzip或--ungzip：通过gzip指令处理备份文件；(常用)</span><br><span class="line">-Z或--compress或--uncompress：通过compress指令处理备份文件；</span><br><span class="line">-f&lt;备份文件&gt;或--file=&lt;备份文件&gt;：指定要处理的文件名；(常用)</span><br><span class="line">-v或--verbose：显示指令执行过程；(常用)</span><br><span class="line">-r：添加文件到已经压缩的文件；</span><br><span class="line">-u：添加改变了和现有的文件到已经存在的压缩文件；</span><br><span class="line">-j：支持bzip2解压文件；</span><br><span class="line">-v：显示操作过程；</span><br><span class="line">-l：文件系统边界设置；</span><br><span class="line">-k：保留原有文件不覆盖；</span><br><span class="line">-m：保留文件不被覆盖；</span><br><span class="line">-w：确认压缩文件的正确性；</span><br><span class="line">-p或--same-permissions：用原来的文件权限还原文件；</span><br><span class="line">-P或--absolute-names：文件名使用绝对名称，不移除文件名称前的“/”号；</span><br><span class="line">-N &lt;日期格式&gt; 或 --newer=&lt;日期时间&gt;：只将较指定日期更新的文件保存到备份文件里；</span><br><span class="line">--exclude=&lt;范本样式&gt;：排除符合范本样式的文件。</span><br></pre></td></tr></table></figure>
+      
+    </div>
 
-<h2 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">文件或目录：指定要打包的文件或目录列表。</span><br></pre></td></tr></table></figure>
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/10/30/Dubbo/Dubbo%E5%85%A5%E9%97%A8%E9%A1%B9%E7%9B%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/10/30/Dubbo/Dubbo%E5%85%A5%E9%97%A8%E9%A1%B9%E7%9B%AE/" class="post-title-link" itemprop="url">Dubbo 入门项目</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2019-10-30 19:05:08 / Modified: 22:08:11" itemprop="dateCreated datePublished" datetime="2019-10-30T19:05:08+08:00">2019-10-30</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Dubbo/" itemprop="url" rel="index">
+                    <span itemprop="name">Dubbo</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Dubbo入门项目"><a href="#Dubbo入门项目" class="headerlink" title="Dubbo入门项目"></a>Dubbo入门项目</h1><hr>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/10/30/Dubbo/Dubbo%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/10/30/Dubbo/Dubbo%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" class="post-title-link" itemprop="url">Dubbo环境搭建</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2019-10-30 18:52:59 / Modified: 22:08:11" itemprop="dateCreated datePublished" datetime="2019-10-30T18:52:59+08:00">2019-10-30</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Dubbo/" itemprop="url" rel="index">
+                    <span itemprop="name">Dubbo</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Dubbo环境搭建"><a href="#Dubbo环境搭建" class="headerlink" title="Dubbo环境搭建"></a>Dubbo环境搭建</h1><hr>
+<h2 id="安装注册中心"><a href="#安装注册中心" class="headerlink" title="安装注册中心"></a>安装注册中心</h2><p>注册中心有多种，官网推荐使用zookeeper。我们在windows安装，供学习使用。下载zookeeper的zip包后，启动bin目录下的zkServer.cmd即可。</p>
+<h2 id="安装监控中心"><a href="#安装监控中心" class="headerlink" title="安装监控中心"></a>安装监控中心</h2><p>去dubbo的github地址下载incubator-dubbo-ops-master这个项目，将这个项目使用maven打成jar包并运行。注意需要在配置文件中将zookeeper的地址更改为正确的地址。然后运行打包好的jar文件即可。最后可以访问localhost:7001,默认账号和密码都是root。（zookeeper服务器必须处于启动状态）</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/10/30/Dubbo/Dubbo%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/10/30/Dubbo/Dubbo%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5/" class="post-title-link" itemprop="url">Dubbo核心概念</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2019-10-30 18:42:16 / Modified: 22:08:11" itemprop="dateCreated datePublished" datetime="2019-10-30T18:42:16+08:00">2019-10-30</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Dubbo/" itemprop="url" rel="index">
+                    <span itemprop="name">Dubbo</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Dubbo核心概念"><a href="#Dubbo核心概念" class="headerlink" title="Dubbo核心概念"></a>Dubbo核心概念</h1><hr>
+<p>Dubbo(读音[ˈdʌbəʊ])是阿里巴巴公司开源的一个高性能优秀的服务框架，使得应用可通过高性能的 RPC 实现服务的输出和输入功能，可以和Spring框架无缝集成。<br>Dubbo是一款高性能、轻量级的开源Java RPC框架，它提供了三大核心能力：面向接口的远程方法调用，智能容错和负载均衡，以及服务自动注册和发现。</p>
 
       
     </div>
@@ -1102,7 +1070,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1148,18 +1116,18 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">36</span>
+          <span class="site-state-item-count">64</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">15</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-count">22</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

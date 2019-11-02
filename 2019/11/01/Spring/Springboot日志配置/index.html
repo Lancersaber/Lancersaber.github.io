@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.2">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.2">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.2">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.2" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.2">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.4.2',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="springboot日志配置 Spring Boot在所有内部日志中使用Commons Logging，但是默认配置也提供了对常用日志的支持，如：Java Util Logging，Log4J, Log4J2和Logback。每种Logger都可以通过配置使用控制台或者文件输出日志内容。 SLF4J —— Simple Logging Facade For Java，它是一个针对于各类Java日志">
+<meta name="keywords" content="spring日志">
+<meta property="og:type" content="article">
+<meta property="og:title" content="springboot日志配置">
+<meta property="og:url" content="https:&#x2F;&#x2F;lancersaber.github.io&#x2F;2019&#x2F;11&#x2F;01&#x2F;Spring&#x2F;Springboot%E6%97%A5%E5%BF%97%E9%85%8D%E7%BD%AE&#x2F;index.html">
+<meta property="og:site_name" content="Lancersaber">
+<meta property="og:description" content="springboot日志配置 Spring Boot在所有内部日志中使用Commons Logging，但是默认配置也提供了对常用日志的支持，如：Java Util Logging，Log4J, Log4J2和Logback。每种Logger都可以通过配置使用控制台或者文件输出日志内容。 SLF4J —— Simple Logging Facade For Java，它是一个针对于各类Java日志">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-11-02T01:13:12.465Z">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://lancersaber.github.io/2019/11/01/Spring/Springboot%E6%97%A5%E5%BF%97%E9%85%8D%E7%BD%AE/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>springboot日志配置 | Lancersaber</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lancersaber</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/01/Spring/Springboot%E6%97%A5%E5%BF%97%E9%85%8D%E7%BD%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          springboot日志配置
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-11-01 12:18:10" itemprop="dateCreated datePublished" datetime="2019-11-01T12:18:10+08:00">2019-11-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-11-02 09:13:12" itemprop="dateModified" datetime="2019-11-02T09:13:12+08:00">2019-11-02</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/spring/" itemprop="url" rel="index">
+                    <span itemprop="name">spring</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="springboot日志配置"><a href="#springboot日志配置" class="headerlink" title="springboot日志配置"></a>springboot日志配置</h1><hr>
+<p>Spring Boot在所有内部日志中使用Commons Logging，但是默认配置也提供了对常用日志的支持，如：Java Util Logging，Log4J, Log4J2和Logback。每种Logger都可以通过配置使用控制台或者文件输出日志内容。</p>
+<p>SLF4J —— Simple Logging Facade For Java，它是一个针对于各类Java日志框架的统一Facade抽象。Java日志框架众多——常用的有java.util.logging, log4j, logback，commons-logging, Spring框架使用的是Jakarta Commons Logging API（JCL）。而SLF4J定义了统一的日志抽象接口，而真正的日志实现则是在运行时决定的——它提供了各类日志框架的绑定。</p>
+<p>Logback是log4j框架的作者开发的新一代日志框架，它效率更高、能够适应诸多的运行环境，同时天然支持SLF4J。</p>
+<p>默认情况下，Spring Boot会用Logback来记录日志，并用INFO级别输出到控制台。在运行应用程序和其他例子时，你应该已经看到很多INFO级别的日志了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">  _   _   _   _   _   _  </span><br><span class="line"> / \ / \ / \ / \ / \ / \ </span><br><span class="line">( m | r | b | i | r | d )</span><br><span class="line"> \_/ \_/ \_/ \_/ \_/ \_/ </span><br><span class="line">2018-02-08 15:05:03.368  INFO 14404 --- [ main] cc.mrbird.Application                    : Starting Application on SC-201802012049 with PID 14404 (D:\neonWorkspace\mrbird\target\classes started by Administrator in D:\neonWorkspace\mrbird)</span><br><span class="line">2018-02-08 15:05:03.375  INFO 14404 --- [ main] cc.mrbird.Application                    : No active profile set, falling back to default profiles: default</span><br><span class="line">2018-02-08 15:05:03.777  INFO 14404 --- [ main] ationConfigEmbeddedWebApplicationContext : Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@31321838: startup date [Thu Feb 08 15:05:03 CST 2018]; root of context hierarchy</span><br><span class="line">2018-02-08 15:05:05.083  INFO 14404 --- [ main] o.s.b.f.s.DefaultListableBeanFactory     : Overriding bean definition for bean &apos;advisorAutoProxyCreator&apos; with a different definition: replacing [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=shiroConfig; factoryMethodName=advisorAutoProxyCreator; initMethodName=null; destroyMethodName=(inferred); defined in class path resource [cc/mrbird/config/ShiroConfig.class]] with [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=com.alibaba.druid.spring.boot.autoconfigure.stat.DruidSpringAopConfiguration; factoryMethodName=advisorAutoProxyCreator; initMethodName=null; destroyMethodName=(inferred); defined in class path resource [com/alibaba/druid/spring/boot/autoconfigure/stat/DruidSpringAopConfiguration.class]]</span><br><span class="line">2018-02-08 15:05:05.554  INFO 14404 --- [ main] trationDelegate$BeanPostProcessorChecker : Bean &apos;shiroConfig&apos; of type [cc.mrbird.config.ShiroConfig$$EnhancerBySpringCGLIB$$b7e43ac8] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)</span><br><span class="line">2018-02-08 15:05:05.600  INFO 14404 --- [ main] trationDelegate$BeanPostProcessorChecker : Bean &apos;com.alibaba.druid.spring.boot.autoconfigure.stat.DruidSpringAopConfiguration&apos; of type [com.alibaba.druid.spring.boot.autoconfigure.stat.DruidSpringAopConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)</span><br><span class="line">2018-02-08 15:05:06.231  INFO 14404 --- [ main] trationDelegate$BeanPostProcessorChecker : Bean &apos;mybatis-org.mybatis.spring.boot.autoconfigure.MybatisProperties&apos; of type [org.mybatis.spring.boot.autoconfigure.MybatisProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>从上面可以看到，日志输出内容元素具体如下：<br>1、时间日期：精确到毫秒；</p>
+<p>2、日志级别：ERROR, WARN, INFO, DEBUG or TRACE；</p>
+<p>3、进程ID；</p>
+<p>4、分隔符：—标识实际日志的开始；</p>
+<p>5、线程名：方括号括起来（可能会截断控制台输出）；</p>
+<p>6、Logger名：通常使用源代码的类名；</p>
+<p>7、日志内容。</p>
+<h2 id="添加日志依赖"><a href="#添加日志依赖" class="headerlink" title="添加日志依赖"></a>添加日志依赖</h2><p>假如maven依赖中添加了spring-boot-starter-logging：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-boot-starter-logging&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<p>那么，我们的Spring Boot应用将自动使用logback作为应用日志框架，Spring Boot启动的时候，由org.springframework.boot.logging.Logging-Application-Listener根据情况初始化并使用。</p>
+<h2 id="默认配置属性支持"><a href="#默认配置属性支持" class="headerlink" title="默认配置属性支持"></a>默认配置属性支持</h2><p>Spring Boot为我们提供了很多默认的日志配置，所以，只要将spring-boot-starter-logging作为依赖加入到当前应用的classpath，则“开箱即用”。 下面介绍几种在application.properties就可以配置的日志相关属性。</p>
+<h2 id="控制台输出"><a href="#控制台输出" class="headerlink" title="控制台输出"></a>控制台输出</h2><p>日志级别从低到高分为TRACE &lt; DEBUG &lt; INFO &lt; WARN &lt; ERROR &lt; FATAL，如果设置为WARN，则低于WARN的信息都不会输出。 Spring Boot中默认配置ERROR、WARN和INFO级别的日志输出到控制台。您还可以通过启动您的应用程序–debug标志来启用“调试”模式（开发的时候推荐开启）,以下两种方式皆可：</p>
+<ul>
+<li><p>在运行命令后加入–debug标志，如：$ java -jar springTest.jar –debug。</p>
+</li>
+<li><p>在application.properties中配置debug=true，该属性置为true的时候，核心Logger（包含嵌入式容器、hibernate、spring）会输出更多内容，但是你自己应用的日志并不会输出为DEBUG级别。</p>
+</li>
+</ul>
+<h2 id="文件输出"><a href="#文件输出" class="headerlink" title="文件输出"></a>文件输出</h2><p>默认情况下，Spring Boot将日志输出到控制台，不会写到日志文件。如果要编写除控制台输出之外的日志文件，则需在application.properties中设置logging.file或logging.path属性。</p>
+<ul>
+<li><p>logging.file，设置文件，可以是绝对路径，也可以是相对路径。如：logging.file=my.log。</p>
+</li>
+<li><p>logging.path，设置目录，会在该目录下创建spring.log文件，并写入日志内容，如：logging.path=/var/log。<br>如果只配置 logging.file，会在项目的当前路径下生成一个 xxx.log 日志文件。</p>
+</li>
+</ul>
+<p>如果只配置 logging.path，在 /var/log文件夹生成一个日志文件为 spring.log。</p>
+<h2 id="级别控制"><a href="#级别控制" class="headerlink" title="级别控制"></a>级别控制</h2><p>所有支持的日志记录系统都可以在Spring环境中设置记录级别（例如在application.properties中） 格式为：’logging.level.* = LEVEL’</p>
+<ul>
+<li><p>logging.level：日志级别控制前缀，*为包名或Logger名</p>
+</li>
+<li><p>LEVEL：选项TRACE, DEBUG, INFO, WARN, ERROR, FATAL, OFF<br>举例：</p>
+</li>
+<li><p>logging.level.com.mrbird=DEBUG：com.mrbird包下所有class以DEBUG级别输出。</p>
+</li>
+<li><p>logging.level.root=WARN：root日志以WARN级别输出。</p>
+</li>
+</ul>
+<h2 id="自定义日志配置"><a href="#自定义日志配置" class="headerlink" title="自定义日志配置"></a>自定义日志配置</h2><p>由于日志服务一般都在ApplicationContext创建前就初始化了，它并不是必须通过Spring的配置文件控制。因此通过系统属性和传统的Spring Boot外部配置文件依然可以很好的支持日志控制和管理。</p>
+<p>根据不同的日志系统，你可以按如下规则组织配置文件名，就能被正确加载：</p>
+<ul>
+<li><p>Logback：logback-spring.xml, logback-spring.groovy, logback.xml, logback.groovy</p>
+</li>
+<li><p>Log4j：log4j-spring.properties, log4j-spring.xml, log4j.properties, log4j.xml</p>
+</li>
+<li><p>Log4j2：log4j2-spring.xml, log4j2.xml</p>
+</li>
+<li><p>JDK (Java Util Logging)：logging.properties</p>
+</li>
+</ul>
+<p>Spring Boot官方推荐优先使用带有-spring的文件名作为你的日志配置（如使用logback-spring.xml，而不是logback.xml），命名为logback-spring.xml的日志配置文件，spring boot可以为它添加一些spring boot特有的配置项（下面会提到）。</p>
+<p>上面是默认的命名规则，并且放在src/main/resources下面即可。<br>如果你即想完全掌控日志配置，但又不想用logback.xml作为Logback配置的名字，可以在application.properties配置文件里面通过logging.config属性指定自定义的名字：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">logging.config=classpath:logging-config.xml</span><br></pre></td></tr></table></figure>
+
+<p>日志输出的格式有以下几个选项</p>
+<ul>
+<li><p>%d{HH: mm:ss.SSS}——日志输出时间。</p>
+</li>
+<li><p>%thread——输出日志的进程名字，这在Web应用以及异步任务处理中很有用。</p>
+</li>
+<li><p>%-5level——日志级别，并且使用5个字符靠左对齐。</p>
+</li>
+<li><p>%logger{36}——日志输出者的名字。</p>
+</li>
+<li><p>%msg——日志消息。</p>
+</li>
+<li><p>%n——平台的换行符。</p>
+</li>
+</ul>
+<h2 id="logger在实际使用的时候有两种情况："><a href="#logger在实际使用的时候有两种情况：" class="headerlink" title="logger在实际使用的时候有两种情况："></a>logger在实际使用的时候有两种情况：</h2><p>先来看一看代码中如何使用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">package com.mrbird.controller;</span><br><span class="line"></span><br><span class="line">@Controller</span><br><span class="line">public class LearnController &#123;</span><br><span class="line">    private Logger logger = LoggerFactory.getLogger(this.getClass());</span><br><span class="line"></span><br><span class="line">    @RequestMapping(value = &quot;/login&quot;,method = RequestMethod.POST)</span><br><span class="line">    @ResponseBody</span><br><span class="line">    public Map&lt;String,Object&gt; login(HttpServletRequest request, HttpServletResponse response)&#123;</span><br><span class="line">        //日志级别从低到高分为TRACE &lt; DEBUG &lt; INFO &lt; WARN &lt; ERROR &lt; FATAL，如果设置为WARN，则低于WARN的信息都不会输出。</span><br><span class="line">        logger.trace(&quot;日志输出 trace&quot;);</span><br><span class="line">        logger.debug(&quot;日志输出 debug&quot;);</span><br><span class="line">        logger.info(&quot;日志输出 info&quot;);</span><br><span class="line">        logger.warn(&quot;日志输出 warn&quot;);</span><br><span class="line">        logger.error(&quot;日志输出 error&quot;);</span><br><span class="line">        Map&lt;String,Object&gt; map =new HashMap&lt;String,Object&gt;();</span><br><span class="line">        String userName=request.getParameter(&quot;userName&quot;);</span><br><span class="line">        String password=request.getParameter(&quot;password&quot;);</span><br><span class="line">        if(!userName.equals(&quot;&quot;) &amp;&amp; password!=&quot;&quot;)&#123;</span><br><span class="line">            User user =new User(userName,password);</span><br><span class="line">            request.getSession().setAttribute(&quot;user&quot;,user);</span><br><span class="line">            map.put(&quot;result&quot;,&quot;1&quot;);</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            map.put(&quot;result&quot;,&quot;0&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">        return map;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/spring%E6%97%A5%E5%BF%97/" rel="tag"># spring日志</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2019/10/31/Java%E5%9F%BA%E7%A1%80/Java%E4%B8%AD%E7%9A%84%E5%BC%82%E5%B8%B8/" rel="next" title="Java中的异常">
+                  <i class="fa fa-chevron-left"></i> Java中的异常
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+                <a href="/2019/11/01/Canvas/canvas%E7%9A%84%E4%B8%80%E4%BA%9B%E7%BB%98%E5%9B%BE%E6%A0%B7%E5%BC%8F/" rel="prev" title="canvas的绘图样式">
+                  canvas的绘图样式 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#springboot日志配置"><span class="nav-number">1.</span> <span class="nav-text">springboot日志配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#添加日志依赖"><span class="nav-number">1.1.</span> <span class="nav-text">添加日志依赖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#默认配置属性支持"><span class="nav-number">1.2.</span> <span class="nav-text">默认配置属性支持</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#控制台输出"><span class="nav-number">1.3.</span> <span class="nav-text">控制台输出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件输出"><span class="nav-number">1.4.</span> <span class="nav-text">文件输出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#级别控制"><span class="nav-number">1.5.</span> <span class="nav-text">级别控制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义日志配置"><span class="nav-number">1.6.</span> <span class="nav-text">自定义日志配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#logger在实际使用的时候有两种情况："><span class="nav-number">1.7.</span> <span class="nav-text">logger在实际使用的时候有两种情况：</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="site-author-image" itemprop="image" alt="Lancersaber"
+    src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Lancersaber</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">64</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">22</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lancersaber</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.4.2
+  </div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.2"></script><script src="/js/motion.js?v=7.4.2"></script>
+<script src="/js/schemes/muse.js?v=7.4.2"></script>
+<script src="/js/next-boot.js?v=7.4.2"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

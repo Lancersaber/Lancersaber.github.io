@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.2">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.2">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.2">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.2" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.2">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.4.2',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="Springboot异常处理 Spring Boot对异常的处理有一套默认的机制：当应用中产生异常时，Spring Boot根据发送请求头中的accept是否包含text&#x2F;html来分别返回不同的响应信息。当从浏览器地址栏中访问应用接口时，请求头中的accept便会包含text&#x2F;html信息，产生异常时，Spring Boot通过org.springframework.web.servlet.Mo">
+<meta name="keywords" content="spring">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Springboot异常处理">
+<meta property="og:url" content="https:&#x2F;&#x2F;lancersaber.github.io&#x2F;2019&#x2F;11&#x2F;02&#x2F;Spring&#x2F;Spring%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86&#x2F;index.html">
+<meta property="og:site_name" content="Lancersaber">
+<meta property="og:description" content="Springboot异常处理 Spring Boot对异常的处理有一套默认的机制：当应用中产生异常时，Spring Boot根据发送请求头中的accept是否包含text&#x2F;html来分别返回不同的响应信息。当从浏览器地址栏中访问应用接口时，请求头中的accept便会包含text&#x2F;html信息，产生异常时，Spring Boot通过org.springframework.web.servlet.Mo">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;11&#x2F;02&#x2F;udscfAS2bY7oBJq.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;11&#x2F;02&#x2F;yh6AuolHnT94Xs5.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;11&#x2F;02&#x2F;3T2iFt5Aaful9yx.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;11&#x2F;02&#x2F;iN3V6zaBPJSyebq.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;11&#x2F;02&#x2F;uDaL6OnkE5wmeZF.png">
+<meta property="og:updated_time" content="2019-11-02T01:33:23.666Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;11&#x2F;02&#x2F;udscfAS2bY7oBJq.png">
+
+<link rel="canonical" href="https://lancersaber.github.io/2019/11/02/Spring/Spring%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Springboot异常处理 | Lancersaber</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lancersaber</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/02/Spring/Spring%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Springboot异常处理
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2019-11-02 09:16:13 / Modified: 09:33:23" itemprop="dateCreated datePublished" datetime="2019-11-02T09:16:13+08:00">2019-11-02</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/spring/" itemprop="url" rel="index">
+                    <span itemprop="name">spring</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Springboot异常处理"><a href="#Springboot异常处理" class="headerlink" title="Springboot异常处理"></a>Springboot异常处理</h1><hr>
+<p>Spring Boot对异常的处理有一套默认的机制：当应用中产生异常时，Spring Boot根据发送请求头中的accept是否包含text/html来分别返回不同的响应信息。当从浏览器地址栏中访问应用接口时，请求头中的accept便会包含text/html信息，产生异常时，Spring Boot通过org.springframework.web.servlet.ModelAndView对象来装载异常信息，并以HTML的格式返回；而当从客户端访问应用接口产生异常时（客户端访问时，请求头中的accept不包含text/html），Spring Boot则以JSON的格式返回异常信息。下面来验证一下。</p>
+<h2 id="默认异常处理机制"><a href="#默认异常处理机制" class="headerlink" title="默认异常处理机制"></a>默认异常处理机制</h2><p>假设应用中有如下一个Controller：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@RestController</span><br><span class="line">@RequestMapping(&quot;user&quot;)</span><br><span class="line">public class UserController &#123;</span><br><span class="line"></span><br><span class="line">    @GetMapping(&quot;/&#123;id:\\d+&#125;&quot;)</span><br><span class="line">    public void get(@PathVariable String id) &#123;</span><br><span class="line">        throw new RuntimeException(&quot;user not exist&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在代码中我们主动的抛出了一个RuntimeException，使用浏览器访问<a href="http://localhost:8080/user/1：" target="_blank" rel="noopener">http://localhost:8080/user/1：</a><br><img src="https://i.loli.net/2019/11/02/udscfAS2bY7oBJq.png" alt="springbootError1.PNG"></p>
+<p>可看到页面返回了一些异常描述，并且请求头的accpet包含了text/html片段。<br>接着使用模拟发送REST请求的Chrome插件Restlet Client发送<a href="http://localhost:8080/user/1：" target="_blank" rel="noopener">http://localhost:8080/user/1：</a><br><img src="https://i.loli.net/2019/11/02/yh6AuolHnT94Xs5.png" alt="springbootError2.PNG"><br>可以看到请求头的accept值为<em>/</em>，并且返回一段JSON格式的信息。</p>
+<p>查看Spring Boot的BasicErrorController类便可看到这一默认机制的具体实现：<br><img src="https://i.loli.net/2019/11/02/3T2iFt5Aaful9yx.png" alt="springbootError3.PNG"><br>可看到errorHtml和error方法的请求地址和方法是一样的，唯一的区别就是errorHtml通过produces = {“text/html”}判断请求头的accpet属性中是否包含text/html，如果包含，便走该方法。</p>
+<h2 id="自定义html异常页面"><a href="#自定义html异常页面" class="headerlink" title="自定义html异常页面"></a>自定义html异常页面</h2><p>我们可以通过在src/main/resources/resources/error路径下定义友好的异常页面，比如定义一个500.html页面：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;title&gt;500&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    系统内部异常</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<p>然后再次通过浏览器访问:<a href="http://localhost:8080/user/1：" target="_blank" rel="noopener">http://localhost:8080/user/1：</a><br><img src="https://i.loli.net/2019/11/02/iN3V6zaBPJSyebq.png" alt="spring bootError4.PNG"><br>同样的，我们也可以定义404.html等常见的HTTP状态码对应的异常页面。</p>
+<p>通过自定义html异常页面并不会影响客户端发送请求异常返回的结果。</p>
+<h2 id="自定义异常处理"><a href="#自定义异常处理" class="headerlink" title="自定义异常处理"></a>自定义异常处理</h2><p>除了可以通过自定义html异常页面来改变浏览器访问接口时产生的异常信息，我们也可以自定义异常处理来改表默认的客户端访问接口产生的异常信息。</p>
+<p>我们手动定义一个UserNotExistException，继承RuntimeException。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">public class UserNotExistException extends RuntimeException&#123;</span><br><span class="line"></span><br><span class="line">    private static final long serialVersionUID = -1574716826948451793L;</span><br><span class="line"></span><br><span class="line">    private String id;</span><br><span class="line"></span><br><span class="line">    public UserNotExistException(String id)&#123;</span><br><span class="line">        super(&quot;user not exist&quot;);</span><br><span class="line">        this.id = id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getId() &#123;</span><br><span class="line">        return id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setId(String id) &#123;</span><br><span class="line">        this.id = id;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后定义一个Controller异常处理类ControllerExceptionHandler：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">@ControllerAdvice</span><br><span class="line">public class ControllerExceptionHandler &#123;</span><br><span class="line"></span><br><span class="line">    @ExceptionHandler(UserNotExistException.class)</span><br><span class="line">    @ResponseBody</span><br><span class="line">    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)</span><br><span class="line">    public Map&lt;String, Object&gt; handleUserNotExistsException(UserNotExistException e) &#123;</span><br><span class="line">        Map&lt;String, Object&gt; map = new HashMap&lt;&gt;();</span><br><span class="line">        map.put(&quot;id&quot;, e.getId());</span><br><span class="line">        map.put(&quot;message&quot;, e.getMessage());</span><br><span class="line">        return map;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其中注解@ExceptionHandler指定了要处理的异常类型，注解@ResponseStatus指定异常处理方法返回的HTTP状态码为HttpStatus.INTERNAL_SERVER_ERROR，即500。HttpStatus是一个spring自带的枚举类型，封装了常见的HTTP状态码及描述：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line">public enum HttpStatus &#123;</span><br><span class="line">    CONTINUE(100, &quot;Continue&quot;),</span><br><span class="line">    SWITCHING_PROTOCOLS(101, &quot;Switching Protocols&quot;),</span><br><span class="line">    PROCESSING(102, &quot;Processing&quot;),</span><br><span class="line">    CHECKPOINT(103, &quot;Checkpoint&quot;),</span><br><span class="line">    OK(200, &quot;OK&quot;),</span><br><span class="line">    CREATED(201, &quot;Created&quot;),</span><br><span class="line">    ACCEPTED(202, &quot;Accepted&quot;),</span><br><span class="line">    NON_AUTHORITATIVE_INFORMATION(203, &quot;Non-Authoritative Information&quot;),</span><br><span class="line">    NO_CONTENT(204, &quot;No Content&quot;),</span><br><span class="line">    RESET_CONTENT(205, &quot;Reset Content&quot;),</span><br><span class="line">    PARTIAL_CONTENT(206, &quot;Partial Content&quot;),</span><br><span class="line">    MULTI_STATUS(207, &quot;Multi-Status&quot;),</span><br><span class="line">    ALREADY_REPORTED(208, &quot;Already Reported&quot;),</span><br><span class="line">    IM_USED(226, &quot;IM Used&quot;),</span><br><span class="line">    MULTIPLE_CHOICES(300, &quot;Multiple Choices&quot;),</span><br><span class="line">    MOVED_PERMANENTLY(301, &quot;Moved Permanently&quot;),</span><br><span class="line">    FOUND(302, &quot;Found&quot;),</span><br><span class="line">    /** @deprecated */</span><br><span class="line">    @Deprecated</span><br><span class="line">    MOVED_TEMPORARILY(302, &quot;Moved Temporarily&quot;),</span><br><span class="line">    SEE_OTHER(303, &quot;See Other&quot;),</span><br><span class="line">    NOT_MODIFIED(304, &quot;Not Modified&quot;),</span><br><span class="line">    /** @deprecated */</span><br><span class="line">    @Deprecated</span><br><span class="line">    USE_PROXY(305, &quot;Use Proxy&quot;),</span><br><span class="line">    TEMPORARY_REDIRECT(307, &quot;Temporary Redirect&quot;),</span><br><span class="line">    PERMANENT_REDIRECT(308, &quot;Permanent Redirect&quot;),</span><br><span class="line">    BAD_REQUEST(400, &quot;Bad Request&quot;),</span><br><span class="line">    UNAUTHORIZED(401, &quot;Unauthorized&quot;),</span><br><span class="line">    PAYMENT_REQUIRED(402, &quot;Payment Required&quot;),</span><br><span class="line">    FORBIDDEN(403, &quot;Forbidden&quot;),</span><br><span class="line">    NOT_FOUND(404, &quot;Not Found&quot;),</span><br><span class="line">    METHOD_NOT_ALLOWED(405, &quot;Method Not Allowed&quot;),</span><br><span class="line">    NOT_ACCEPTABLE(406, &quot;Not Acceptable&quot;),</span><br><span class="line">    PROXY_AUTHENTICATION_REQUIRED(407, &quot;Proxy Authentication Required&quot;),</span><br><span class="line">    REQUEST_TIMEOUT(408, &quot;Request Timeout&quot;),</span><br><span class="line">    CONFLICT(409, &quot;Conflict&quot;),</span><br><span class="line">    GONE(410, &quot;Gone&quot;),</span><br><span class="line">    LENGTH_REQUIRED(411, &quot;Length Required&quot;),</span><br><span class="line">    PRECONDITION_FAILED(412, &quot;Precondition Failed&quot;),</span><br><span class="line">    PAYLOAD_TOO_LARGE(413, &quot;Payload Too Large&quot;),</span><br><span class="line">    /** @deprecated */</span><br><span class="line">    @Deprecated</span><br><span class="line">    REQUEST_ENTITY_TOO_LARGE(413, &quot;Request Entity Too Large&quot;),</span><br><span class="line">    URI_TOO_LONG(414, &quot;URI Too Long&quot;),</span><br><span class="line">    /** @deprecated */</span><br><span class="line">    @Deprecated</span><br><span class="line">    REQUEST_URI_TOO_LONG(414, &quot;Request-URI Too Long&quot;),</span><br><span class="line">    UNSUPPORTED_MEDIA_TYPE(415, &quot;Unsupported Media Type&quot;),</span><br><span class="line">    REQUESTED_RANGE_NOT_SATISFIABLE(416, &quot;Requested range not satisfiable&quot;),</span><br><span class="line">    EXPECTATION_FAILED(417, &quot;Expectation Failed&quot;),</span><br><span class="line">    I_AM_A_TEAPOT(418, &quot;I&apos;m a teapot&quot;),</span><br><span class="line">    /** @deprecated */</span><br><span class="line">    @Deprecated</span><br><span class="line">    INSUFFICIENT_SPACE_ON_RESOURCE(419, &quot;Insufficient Space On Resource&quot;),</span><br><span class="line">    /** @deprecated */</span><br><span class="line">    @Deprecated</span><br><span class="line">    METHOD_FAILURE(420, &quot;Method Failure&quot;),</span><br><span class="line">    /** @deprecated */</span><br><span class="line">    @Deprecated</span><br><span class="line">    DESTINATION_LOCKED(421, &quot;Destination Locked&quot;),</span><br><span class="line">    UNPROCESSABLE_ENTITY(422, &quot;Unprocessable Entity&quot;),</span><br><span class="line">    LOCKED(423, &quot;Locked&quot;),</span><br><span class="line">    FAILED_DEPENDENCY(424, &quot;Failed Dependency&quot;),</span><br><span class="line">    UPGRADE_REQUIRED(426, &quot;Upgrade Required&quot;),</span><br><span class="line">    PRECONDITION_REQUIRED(428, &quot;Precondition Required&quot;),</span><br><span class="line">    TOO_MANY_REQUESTS(429, &quot;Too Many Requests&quot;),</span><br><span class="line">    REQUEST_HEADER_FIELDS_TOO_LARGE(431, &quot;Request Header Fields Too Large&quot;),</span><br><span class="line">    UNAVAILABLE_FOR_LEGAL_REASONS(451, &quot;Unavailable For Legal Reasons&quot;),</span><br><span class="line">    INTERNAL_SERVER_ERROR(500, &quot;Internal Server Error&quot;),</span><br><span class="line">    NOT_IMPLEMENTED(501, &quot;Not Implemented&quot;),</span><br><span class="line">    BAD_GATEWAY(502, &quot;Bad Gateway&quot;),</span><br><span class="line">    SERVICE_UNAVAILABLE(503, &quot;Service Unavailable&quot;),</span><br><span class="line">    GATEWAY_TIMEOUT(504, &quot;Gateway Timeout&quot;),</span><br><span class="line">    HTTP_VERSION_NOT_SUPPORTED(505, &quot;HTTP Version not supported&quot;),</span><br><span class="line">    VARIANT_ALSO_NEGOTIATES(506, &quot;Variant Also Negotiates&quot;),</span><br><span class="line">    INSUFFICIENT_STORAGE(507, &quot;Insufficient Storage&quot;),</span><br><span class="line">    LOOP_DETECTED(508, &quot;Loop Detected&quot;),</span><br><span class="line">    BANDWIDTH_LIMIT_EXCEEDED(509, &quot;Bandwidth Limit Exceeded&quot;),</span><br><span class="line">    NOT_EXTENDED(510, &quot;Not Extended&quot;),</span><br><span class="line">    NETWORK_AUTHENTICATION_REQUIRED(511, &quot;Network Authentication Required&quot;);</span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>编写完自定义异常处理逻辑后，我们将UserController中的方法抛出的异常改为UserNotExistException：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> @GetMapping(&quot;/&#123;id:\\d+&#125;&quot;)</span><br><span class="line">public void get(@PathVariable String id) &#123;</span><br><span class="line">    throw new UserNotExistException(id);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>重启项目，使用Restlet Client再次访问<a href="http://localhost:8080/user/1，响应如下：" target="_blank" rel="noopener">http://localhost:8080/user/1，响应如下：</a><br><img src="https://i.loli.net/2019/11/02/uDaL6OnkE5wmeZF.png" alt="springbootError5.PNG"></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/spring/" rel="tag"># spring</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2019/11/01/Canvas/canvas%E7%9A%84%E8%BD%AC%E6%8D%A2%E5%87%BD%E6%95%B0/" rel="next" title="Canvas/canvas的转换函数">
+                  <i class="fa fa-chevron-left"></i> Canvas/canvas的转换函数
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+                <a href="/2019/11/02/Spring/Springboot%E4%B8%AD%E4%BD%BF%E7%94%A8%E8%BF%87%E6%BB%A4%E5%99%A8%E5%92%8C%E6%8B%A6%E6%88%AA%E5%99%A8/" rel="prev" title="springboot中使用过滤器和拦截器">
+                  springboot中使用过滤器和拦截器 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Springboot异常处理"><span class="nav-number">1.</span> <span class="nav-text">Springboot异常处理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#默认异常处理机制"><span class="nav-number">1.1.</span> <span class="nav-text">默认异常处理机制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义html异常页面"><span class="nav-number">1.2.</span> <span class="nav-text">自定义html异常页面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义异常处理"><span class="nav-number">1.3.</span> <span class="nav-text">自定义异常处理</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="site-author-image" itemprop="image" alt="Lancersaber"
+    src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Lancersaber</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">64</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">22</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lancersaber</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.4.2
+  </div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.2"></script><script src="/js/motion.js?v=7.4.2"></script>
+<script src="/js/schemes/muse.js?v=7.4.2"></script>
+<script src="/js/next-boot.js?v=7.4.2"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

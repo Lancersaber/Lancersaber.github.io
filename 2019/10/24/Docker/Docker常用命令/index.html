@@ -58,7 +58,7 @@
 <meta property="og:site_name" content="Lancersaber">
 <meta property="og:description" content="Docker常用命令 ##Docker帮助命令 123docker versiondocker infodocker --help：docker帮助手册，列出docker的一些常用指令  ##镜像命令 1234docker images:列出本地镜像docker search 镜像名:列出仓库中所有可用的镜像docker pull 镜像名[:tag]：下载镜像,如果不带版本号，默认下载的是late">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-10-26T08:28:19.921Z">
+<meta property="og:updated_time" content="2019-10-31T02:51:33.480Z">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://lancersaber.github.io/2019/10/24/Docker/Docker%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
@@ -206,7 +206,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-26 16:28:19" itemprop="dateModified" datetime="2019-10-26T16:28:19+08:00">2019-10-26</time>
+                <time title="Modified: 2019-10-31 10:51:33" itemprop="dateModified" datetime="2019-10-31T10:51:33+08:00">2019-10-31</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -274,6 +274,9 @@
 </ul>
 <p>从容器中拷贝文件到主机上</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker cp 容器ID:容器内路径 目的主机路径</span><br></pre></td></tr></table></figure>
+
+<p>提交容器副本使之成为一个新的镜像</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker commit -m=&quot;提交的描述信息&quot; -a=&quot;作者&quot; 容器ID 要创建的目标镜像名:[标签名]</span><br></pre></td></tr></table></figure>
     </div>
 
     
@@ -289,16 +292,16 @@
 
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
-                <a href="/2019/10/24/Java%E5%9F%BA%E7%A1%80/Java%E4%B8%AD%E7%9A%84%E6%B3%A8%E8%A7%A3/" rel="next" title="Java中的注解">
-                  <i class="fa fa-chevron-left"></i> Java中的注解
+                <a href="/2019/10/24/Docker/DockerFile%E8%A7%A3%E6%9E%90/" rel="next" title="DockerFile解析">
+                  <i class="fa fa-chevron-left"></i> DockerFile解析
                 </a>
             </div>
 
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
-                <a href="/2019/10/24/Docker/Docker%E9%95%9C%E5%83%8F%E5%8E%9F%E7%90%86/" rel="prev" title="Docker镜像原理">
-                  Docker镜像原理 <i class="fa fa-chevron-right"></i>
+                <a href="/2019/10/24/Docker/Docker%E5%AE%89%E8%A3%85/" rel="prev" title="Docker安装">
+                  Docker安装 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>
@@ -354,18 +357,18 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">36</span>
+          <span class="site-state-item-count">64</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">15</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-count">22</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

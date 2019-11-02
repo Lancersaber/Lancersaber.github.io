@@ -58,7 +58,7 @@
 <meta property="og:site_name" content="Lancersaber">
 <meta property="og:description" content="ElasticSearch搜索 检索文档现在Elasticsearch中已经存储了一些数据，我们可以根据业务需求开始工作了。第一个需求是能够检索单个员工的信息。这对于Elasticsearch来说非常简单。我们只要执行HTTP GET请求并指出文档的“地址”——索引、类型和ID既可。根据这三部分信息，我们就可以返回原始JSON文档： 1GET &#x2F;megacorp&#x2F;employee&#x2F;1  响应的内容">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-10-28T11:30:44.705Z">
+<meta property="og:updated_time" content="2019-10-28T11:41:16.857Z">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://lancersaber.github.io/2019/10/28/ElasticSearch/ElasticSearch%E6%90%9C%E7%B4%A2/">
@@ -200,7 +200,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2019-10-28 19:12:31 / Modified: 19:30:44" itemprop="dateCreated datePublished" datetime="2019-10-28T19:12:31+08:00">2019-10-28</time>
+              <time title="Created: 2019-10-28 19:12:31 / Modified: 19:41:16" itemprop="dateCreated datePublished" datetime="2019-10-28T19:12:31+08:00">2019-10-28</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -233,7 +233,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;_index&quot; :   &quot;megacorp&quot;,</span><br><span class="line">  &quot;_type&quot; :    &quot;employee&quot;,</span><br><span class="line">  &quot;_id&quot; :      &quot;1&quot;,</span><br><span class="line">  &quot;_version&quot; : 1,</span><br><span class="line">  &quot;found&quot; :    true,</span><br><span class="line">  &quot;_source&quot; :  &#123;</span><br><span class="line">      &quot;first_name&quot; :  &quot;John&quot;,</span><br><span class="line">      &quot;last_name&quot; :   &quot;Smith&quot;,</span><br><span class="line">      &quot;age&quot; :         25,</span><br><span class="line">      &quot;about&quot; :       &quot;I love to go rock climbing&quot;,</span><br><span class="line">      &quot;interests&quot;:  [ &quot;sports&quot;, &quot;music&quot; ]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">我们通过HTTP方法GET来检索文档，同样的，我们可以使用DELETE方法删除文档，使用HEAD方法检查某文档是否存在。如果想更新已存在的文档，我们只需再PUT一次。</span><br></pre></td></tr></table></figure>
 
-<p>##简单搜索<br>GET请求非常简单——你能轻松获取你想要的文档。让我们来进一步尝试一些东西，比如简单的搜索！<br>我们尝试一个最简单的搜索全部员工的请求：</p>
+<h2 id="简单搜索"><a href="#简单搜索" class="headerlink" title="简单搜索"></a>简单搜索</h2><p>GET请求非常简单——你能轻松获取你想要的文档。让我们来进一步尝试一些东西，比如简单的搜索！<br>我们尝试一个最简单的搜索全部员工的请求：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET /megacorp/employee/_search</span><br></pre></td></tr></table></figure>
 
 <p>你可以看到我们依然使用megacorp索引和employee类型，但是我们在结尾使用关键字_search来取代原来的文档ID。响应内容的hits数组中包含了我们所有的三个文档。默认情况下搜索会返回前10个结果。</p>
@@ -271,6 +271,12 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">   ...</span><br><span class="line">   &quot;hits&quot;: &#123;</span><br><span class="line">      &quot;total&quot;:      1,</span><br><span class="line">      &quot;max_score&quot;:  0.23013961,</span><br><span class="line">      &quot;hits&quot;: [</span><br><span class="line">         &#123;</span><br><span class="line">            ...</span><br><span class="line">            &quot;_score&quot;:         0.23013961,</span><br><span class="line">            &quot;_source&quot;: &#123;</span><br><span class="line">               &quot;first_name&quot;:  &quot;John&quot;,</span><br><span class="line">               &quot;last_name&quot;:   &quot;Smith&quot;,</span><br><span class="line">               &quot;age&quot;:         25,</span><br><span class="line">               &quot;about&quot;:       &quot;I love to go rock climbing&quot;,</span><br><span class="line">               &quot;interests&quot;: [ &quot;sports&quot;, &quot;music&quot; ]</span><br><span class="line">            &#125;</span><br><span class="line">         &#125;</span><br><span class="line">      ]</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="高亮我们的搜索"><a href="#高亮我们的搜索" class="headerlink" title="高亮我们的搜索"></a>高亮我们的搜索</h2><p>很多应用喜欢从每个搜索结果中高亮(highlight)匹配到的关键字，这样用户可以知道为什么这些文档和查询相匹配。在Elasticsearch中高亮片段是非常容易的。<br>让我们在之前的语句上增加highlight参数：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">GET /megacorp/employee/_search</span><br><span class="line">&#123;</span><br><span class="line">    &quot;query&quot; : &#123;</span><br><span class="line">        &quot;match_phrase&quot; : &#123;</span><br><span class="line">            &quot;about&quot; : &quot;rock climbing&quot;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;highlight&quot;: &#123;</span><br><span class="line">        &quot;fields&quot; : &#123;</span><br><span class="line">            &quot;about&quot; : &#123;&#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当我们运行这个语句时，会命中与之前相同的结果，但是在返回结果中会有一个新的部分叫做highlight，这里包含了来自about字段中的文本，并且用<em></em>来标识匹配到的单词。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">   ...</span><br><span class="line">   &quot;hits&quot;: &#123;</span><br><span class="line">      &quot;total&quot;:      1,</span><br><span class="line">      &quot;max_score&quot;:  0.23013961,</span><br><span class="line">      &quot;hits&quot;: [</span><br><span class="line">         &#123;</span><br><span class="line">            ...</span><br><span class="line">            &quot;_score&quot;:         0.23013961,</span><br><span class="line">            &quot;_source&quot;: &#123;</span><br><span class="line">               &quot;first_name&quot;:  &quot;John&quot;,</span><br><span class="line">               &quot;last_name&quot;:   &quot;Smith&quot;,</span><br><span class="line">               &quot;age&quot;:         25,</span><br><span class="line">               &quot;about&quot;:       &quot;I love to go rock climbing&quot;,</span><br><span class="line">               &quot;interests&quot;: [ &quot;sports&quot;, &quot;music&quot; ]</span><br><span class="line">            &#125;,</span><br><span class="line">            &quot;highlight&quot;: &#123;</span><br><span class="line">               &quot;about&quot;: [</span><br><span class="line">                  &quot;I love to go &lt;em&gt;rock&lt;/em&gt; &lt;em&gt;climbing&lt;/em&gt;&quot; &lt;1&gt;</span><br><span class="line">               ]</span><br><span class="line">            &#125;</span><br><span class="line">         &#125;</span><br><span class="line">      ]</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>&lt;1&gt; 原有文本中高亮的片段<br>你可以在高亮章节阅读更多关于搜索高亮的部分。</li>
+</ul>
 
     </div>
 
@@ -295,6 +301,9 @@
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
+                <a href="/2019/10/28/ElasticSearch/ElasticSearch%E8%81%9A%E5%90%88/" rel="prev" title="ElasticSearch聚合">
+                  ElasticSearch聚合 <i class="fa fa-chevron-right"></i>
+                </a>
             </div>
           </div>
       </footer>
@@ -333,7 +342,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ElasticSearch搜索"><span class="nav-number">1.</span> <span class="nav-text">ElasticSearch搜索</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#检索文档"><span class="nav-number">1.1.</span> <span class="nav-text">检索文档</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用DSL语句查询"><span class="nav-number">1.2.</span> <span class="nav-text">使用DSL语句查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更复杂的搜索"><span class="nav-number">1.3.</span> <span class="nav-text">更复杂的搜索</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#全文搜索"><span class="nav-number">1.4.</span> <span class="nav-text">全文搜索</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#短语搜索"><span class="nav-number">1.5.</span> <span class="nav-text">短语搜索</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#高亮我们的搜索"><span class="nav-number">1.6.</span> <span class="nav-text">高亮我们的搜索</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ElasticSearch搜索"><span class="nav-number">1.</span> <span class="nav-text">ElasticSearch搜索</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#检索文档"><span class="nav-number">1.1.</span> <span class="nav-text">检索文档</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简单搜索"><span class="nav-number">1.2.</span> <span class="nav-text">简单搜索</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用DSL语句查询"><span class="nav-number">1.3.</span> <span class="nav-text">使用DSL语句查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更复杂的搜索"><span class="nav-number">1.4.</span> <span class="nav-text">更复杂的搜索</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#全文搜索"><span class="nav-number">1.5.</span> <span class="nav-text">全文搜索</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#短语搜索"><span class="nav-number">1.6.</span> <span class="nav-text">短语搜索</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#高亮我们的搜索"><span class="nav-number">1.7.</span> <span class="nav-text">高亮我们的搜索</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -349,18 +358,18 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">36</span>
+          <span class="site-state-item-count">64</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">15</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-count">22</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
