@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.2">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.2">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.2">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.2" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.2">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.4.2',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="Activiti入门 简介Activiti是领先的轻量级，以Java为中心的开源BPMN引擎，可满足现实世界中的流程自动化需求。Activiti Cloud现在是新一代的业务自动化平台，提供了一组旨在在分布式基础架构上运行的云原生模块。 引入Activiti的依赖1234567891011&amp;lt;dependency&amp;gt;    &amp;lt;groupId&amp;gt;org.activiti&amp;lt;&#x2F;g">
+<meta name="keywords" content="Activiti">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Activiti入门">
+<meta property="og:url" content="https:&#x2F;&#x2F;lancersaber.github.io&#x2F;2019&#x2F;11&#x2F;02&#x2F;Activiti&#x2F;Activiti%E5%85%A5%E9%97%A8&#x2F;index.html">
+<meta property="og:site_name" content="Lancersaber">
+<meta property="og:description" content="Activiti入门 简介Activiti是领先的轻量级，以Java为中心的开源BPMN引擎，可满足现实世界中的流程自动化需求。Activiti Cloud现在是新一代的业务自动化平台，提供了一组旨在在分布式基础架构上运行的云原生模块。 引入Activiti的依赖1234567891011&amp;lt;dependency&amp;gt;    &amp;lt;groupId&amp;gt;org.activiti&amp;lt;&#x2F;g">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-11-02T13:25:59.898Z">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://lancersaber.github.io/2019/11/02/Activiti/Activiti%E5%85%A5%E9%97%A8/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Activiti入门 | Lancersaber</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lancersaber</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/02/Activiti/Activiti%E5%85%A5%E9%97%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Activiti入门
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2019-11-02 19:40:07 / Modified: 21:25:59" itemprop="dateCreated datePublished" datetime="2019-11-02T19:40:07+08:00">2019-11-02</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Activiti/" itemprop="url" rel="index">
+                    <span itemprop="name">Activiti</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Activiti入门"><a href="#Activiti入门" class="headerlink" title="Activiti入门"></a>Activiti入门</h1><hr>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Activiti是领先的轻量级，以Java为中心的开源BPMN引擎，可满足现实世界中的流程自动化需求。Activiti Cloud现在是新一代的业务自动化平台，提供了一组旨在在分布式基础架构上运行的云原生模块。</p>
+<h2 id="引入Activiti的依赖"><a href="#引入Activiti的依赖" class="headerlink" title="引入Activiti的依赖"></a>引入Activiti的依赖</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.activiti&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;activiti-engine&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;7.1.0.M4&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.activiti&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;activiti-spring&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;7.1.0.M4&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><h3 id="配置一个ProcessEngine"><a href="#配置一个ProcessEngine" class="headerlink" title="配置一个ProcessEngine"></a>配置一个ProcessEngine</h3><p>Activiti流程引擎通过名为的XML文件进行配置activiti.cfg.xml。请注意，如果您使用的是Spring风格的流程引擎构建，则此方法不适用。</p>
+<p>获得的最简单方法ProcessEngine是使用org.activiti.engine.ProcessEngines类：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();</span><br></pre></td></tr></table></figure>
+
+<p>这将activiti.cfg.xml在类路径上查找文件，并根据该文件中的配置构造一个引擎。以下代码段显示了示例配置。以下各节将详细介绍配置属性。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;</span><br><span class="line">       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><br><span class="line">       xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd&quot;&gt;</span><br><span class="line"></span><br><span class="line">  &lt;bean id=&quot;processEngineConfiguration&quot; class=&quot;org.activiti.engine.impl.cfg.StandaloneProcessEngineConfiguration&quot;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;property name=&quot;jdbcUrl&quot; value=&quot;jdbc:h2:mem:activiti;DB_CLOSE_DELAY=1000&quot; /&gt;</span><br><span class="line">    &lt;property name=&quot;jdbcDriver&quot; value=&quot;org.h2.Driver&quot; /&gt;</span><br><span class="line">    &lt;property name=&quot;jdbcUsername&quot; value=&quot;sa&quot; /&gt;</span><br><span class="line">    &lt;property name=&quot;jdbcPassword&quot; value=&quot;&quot; /&gt;</span><br><span class="line"></span><br><span class="line">    &lt;property name=&quot;databaseSchemaUpdate&quot; value=&quot;true&quot; /&gt;</span><br><span class="line"></span><br><span class="line">    &lt;property name=&quot;asyncExecutorActivate&quot; value=&quot;false&quot; /&gt;</span><br><span class="line"></span><br><span class="line">    &lt;property name=&quot;mailServerHost&quot; value=&quot;mail.my-corp.com&quot; /&gt;</span><br><span class="line">    &lt;property name=&quot;mailServerPort&quot; value=&quot;5025&quot; /&gt;</span><br><span class="line">  &lt;/bean&gt;</span><br><span class="line"></span><br><span class="line">&lt;/beans&gt;</span><br></pre></td></tr></table></figure>
+<p>请注意，配置XML实际上是Spring配置。<em>这并不意味着Activiti只能在Spring环境中使用！</em>我们只是在内部利用Spring的解析和依赖注入功能来构建引擎。</p>
+<p>也可以使用配置文件以编程方式创建ProcessEngineConfiguration对象。也可以使用其他bean id（例如，参见第3行）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ProcessEngineConfiguration.createProcessEngineConfigurationFromResourceDefault();</span><br><span class="line">ProcessEngineConfiguration.createProcessEngineConfigurationFromResource(String resource);</span><br><span class="line">ProcessEngineConfiguration.createProcessEngineConfigurationFromResource(String resource, String beanName);</span><br><span class="line">ProcessEngineConfiguration.createProcessEngineConfigurationFromInputStream(InputStream inputStream);</span><br><span class="line">ProcessEngineConfiguration.createProcessEngineConfigurationFromInputStream(InputStream inputStream, String beanName);</span><br></pre></td></tr></table></figure>
+
+<p>也可以不使用配置文件，并创建一个基于默认配置（见所支持的不同类的更多信息）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ProcessEngineConfiguration.createStandaloneProcessEngineConfiguration();</span><br><span class="line">ProcessEngineConfiguration.createStandaloneInMemProcessEngineConfiguration();</span><br></pre></td></tr></table></figure>
+
+<p>所有这些ProcessEngineConfiguration.createXXX()方法都返回一个a ProcessEngineConfiguration，可以根据需要对其进行进一步调整。调用buildProcessEngine()操作后，将创建一个ProcessEngine：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ProcessEngine processEngine = ProcessEngineConfiguration.createStandaloneInMemProcessEngineConfiguration()</span><br><span class="line">  .setDatabaseSchemaUpdate(ProcessEngineConfiguration.DB_SCHEMA_UPDATE_FALSE)</span><br><span class="line">  .setJdbcUrl(&quot;jdbc:h2:mem:my-own-db;DB_CLOSE_DELAY=1000&quot;)</span><br><span class="line">  .setAsyncExecutorActivate(false)</span><br><span class="line">  .buildProcessEngine();</span><br></pre></td></tr></table></figure>
+
+<h3 id="ProcessEngineConfiguration-bean"><a href="#ProcessEngineConfiguration-bean" class="headerlink" title="ProcessEngineConfiguration bean"></a>ProcessEngineConfiguration bean</h3><p>在activiti.cfg.xml必须包含有ID的Bean ‘processEngineConfiguration’。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;bean id=&quot;processEngineConfiguration&quot; class=&quot;org.activiti.engine.impl.cfg.StandaloneProcessEngineConfiguration&quot;&gt;</span><br></pre></td></tr></table></figure>
+
+<p>然后，此bean用于构造ProcessEngine。有多个可用的类可用于定义processEngineConfiguration。这些类表示不同的环境，并相应地设置默认值。最佳做法是选择与您的环境最匹配的类，以最大程度地减少配置引擎所需的属性数量。当前提供以下类（将来的版本中将有更多类）：</p>
+<ul>
+<li><p>org.activiti.engine.impl.cfg.StandaloneProcessEngineConfiguration：以独立方式使用流程引擎。Activiti将负责交易。默认情况下，仅在引擎启动时检查数据库（如果没有Activiti架构或架构版本不正确，则会引发异常）。</p>
+</li>
+<li><p>org.activiti.engine.impl.cfg.StandaloneInMemProcessEngineConfiguration：这是用于单元测试的便捷类。Activiti将负责交易。默认情况下使用H2内存数据库。引擎启动和关闭时，将创建并删除数据库。使用此功能时，可能不需要其他配置（例如，使用作业执行程序或邮件功能时除外）。</p>
+</li>
+<li><p>org.activiti.spring.SpringProcessEngineConfiguration：在Spring环境中使用流程引擎时使用。有关更多信息，请参见Spring集成部分。</p>
+</li>
+<li><p>org.activiti.engine.impl.cfg.JtaProcessEngineConfiguration：当引擎以JTA事务在独立模式下运行时使用。</p>
+</li>
+</ul>
+<h3 id="数据库配置"><a href="#数据库配置" class="headerlink" title="数据库配置"></a>数据库配置</h3><p>有两种方法可以配置Activiti引擎将使用的数据库。第一种选择是定义数据库的JDBC属性：</p>
+<ul>
+<li><p>jdbcUrl：数据库的JDBC URL。</p>
+</li>
+<li><p>jdbcDriver：针对特定数据库类型的驱动程序的实现。</p>
+</li>
+<li><p>jdbcUsername：用于连接数据库的用户名。</p>
+</li>
+<li><p>jdbcPassword：连接数据库的密码。</p>
+</li>
+</ul>
+<p>基于提供的JDBC属性构造的数据源将具有默认的MyBatis连接池设置。可以选择以下属性来调整该连接池（取自MyBatis文档）：</p>
+<ul>
+<li><p>jdbcMaxActiveConnections：连接池在任何时候最多可以包含的活动连接数。默认值是10。</p>
+</li>
+<li><p>jdbcMaxIdleConnections：连接池在任何时候最多可以包含的空闲连接数。</p>
+</li>
+<li><p>jdbcMaxCheckoutTime：在强制返回连接之前，可以从连接池中检出连接的时间（以毫秒为单位）。默认值为20000（20秒）。</p>
+</li>
+<li><p>jdbcMaxWaitTime：这是一个较低级别的设置，它使池有机会打印日志状态，并在连接花费异常长的情况下重新尝试获取连接（以避免在池配置错误时永久性地失败）。是20000（20秒）。</p>
+</li>
+</ul>
+<p>示例数据库配置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;property name=&quot;jdbcUrl&quot; value=&quot;jdbc:h2:mem:activiti;DB_CLOSE_DELAY=1000&quot; /&gt;</span><br><span class="line">&lt;property name=&quot;jdbcDriver&quot; value=&quot;org.h2.Driver&quot; /&gt;</span><br><span class="line">&lt;property name=&quot;jdbcUsername&quot; value=&quot;sa&quot; /&gt;</span><br><span class="line">&lt;property name=&quot;jdbcPassword&quot; value=&quot;&quot; /&gt;</span><br></pre></td></tr></table></figure>
+
+<p>我们的基准测试表明，在处理大量并发请求时，MyBatis连接池不是最有效或弹性最大的连接池。因此，建议给我们一个javax.sql.DataSource实现并将其注入到流程引擎配置中（例如DBCP，C3P0，Hikari，Tomcat连接池等）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;bean id=&quot;dataSource&quot; class=&quot;org.apache.commons.dbcp.BasicDataSource&quot; &gt;</span><br><span class="line">  &lt;property name=&quot;driverClassName&quot; value=&quot;com.mysql.jdbc.Driver&quot; /&gt;</span><br><span class="line">  &lt;property name=&quot;url&quot; value=&quot;jdbc:mysql://localhost:3306/activiti&quot; /&gt;</span><br><span class="line">  &lt;property name=&quot;username&quot; value=&quot;activiti&quot; /&gt;</span><br><span class="line">  &lt;property name=&quot;password&quot; value=&quot;activiti&quot; /&gt;</span><br><span class="line">  &lt;property name=&quot;defaultAutoCommit&quot; value=&quot;false&quot; /&gt;</span><br><span class="line">&lt;/bean&gt;</span><br><span class="line"></span><br><span class="line">&lt;bean id=&quot;processEngineConfiguration&quot; class=&quot;org.activiti.engine.impl.cfg.StandaloneProcessEngineConfiguration&quot;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot; /&gt;</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
+<p>请注意，Activiti并未附带允许定义此类数据源的库。因此，您必须确保这些库位于类路径中。<br>不管您使用的是JDBC还是数据源方法，都可以设置以下属性：</p>
+<p>databaseType：通常无需指定此属性，因为将从数据库连接元数据中自动分析该属性。仅在自动检测失败的情况下才应指定。可能的值：{h2，mysql，oracle，postgres，mssql，db2}。此设置将确定将使用哪些创建/删除脚本和查询。有关支持哪些类型的概述，请参见受支持的数据库部分。</p>
+<p>databaseSchemaUpdate：允许设置策略以在流程引擎启动和关闭时处理数据库架构。</p>
+<p>false （默认值）：在创建流程引擎时，对照库检查数据库模式的版本，如果版本不匹配，则引发异常。</p>
+<p>true：在构建流程引擎时，将执行检查并在必要时执行模式的更新。如果该模式不存在，则会创建它。</p>
+<p>create-drop：在创建流程引擎时创建架构，并在关闭流程引擎时删除架构。</p>
+<h3 id="数据库表的说明"><a href="#数据库表的说明" class="headerlink" title="数据库表的说明"></a>数据库表的说明</h3><ul>
+<li><p>ACT_RE_ *：RE代表repository。具有此前缀的表包含静态信息，例如流程定义和流程资源（图像，规则等）。</p>
+</li>
+<li><p>ACT_RU_ *：RU代表runtime。这些是运行时表，其中包含流程实例，用户任务，变量，作业等的运行时数据。Activiti仅在流程实例执行期间存储运行时数据，并在流程实例结束时删除记录。这样可以使运行时表较小而又快速。</p>
+</li>
+<li><p>ACT_ID_ *：ID代表identity。这些表包含身份信息，例如用户，组等。</p>
+</li>
+<li><p>ACT_HI_ *：HI代表history。这些表包含历史数据，例如过去的流程实例，变量，任务等。</p>
+</li>
+<li><p>ACT_GE_ *：general数据，用于各种用例中。</p>
+</li>
+</ul>
+<h3 id="数据库升级"><a href="#数据库升级" class="headerlink" title="数据库升级"></a>数据库升级</h3><p>在运行升级之前，请确保已使用数据库备份功能对数据库进行了备份。</p>
+<p>默认情况下，每次创建流程引擎时都会执行版本检查。这通常在应用程序或Activiti Web应用程序启动时发生一次。如果Activiti库注意到库版本与Activiti数据库表的版本之间存在差异，则将引发异常。</p>
+<p>要进行升级，必须首先将以下配置属性放入activiti.cfg.xml配置文件中：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;beans &gt;</span><br><span class="line"></span><br><span class="line">  &lt;bean id=&quot;processEngineConfiguration&quot; class=&quot;org.activiti.engine.impl.cfg.StandaloneProcessEngineConfiguration&quot;&gt;</span><br><span class="line">    &lt;!-- ... --&gt;</span><br><span class="line">    &lt;property name=&quot;databaseSchemaUpdate&quot; value=&quot;true&quot; /&gt;</span><br><span class="line">    &lt;!-- ... --&gt;</span><br><span class="line">  &lt;/bean&gt;</span><br><span class="line"></span><br><span class="line">&lt;/beans&gt;</span><br></pre></td></tr></table></figure>
+
+<p>另外，在类路径中包括适合您的数据库的数据库驱动程序。在应用程序中升级Activiti库。或启动新版本的Activiti并将其指向包含旧版本的数据库。随着databaseSchemaUpdate设置为true，Activiti的会自动将DB模式，当它注意到图书馆和数据库架构不同步的第一次升级到新版本。</p>
+<p>或者，您也可以运行升级DDL语句。也可以运行Activiti下载页面上的升级数据库脚本</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Activiti/" rel="tag"># Activiti</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2019/11/02/Spring/Springboot%E7%83%AD%E9%83%A8%E7%BD%B2/" rel="next" title="Spring/Springboot热部署">
+                  <i class="fa fa-chevron-left"></i> Spring/Springboot热部署
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+                <a href="/2019/11/02/Java%E5%9F%BA%E7%A1%80/%E5%AF%B9%E8%B1%A1%E5%BA%8F%E5%88%97%E5%8C%96/" rel="prev" title="对象序列化">
+                  对象序列化 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Activiti入门"><span class="nav-number">1.</span> <span class="nav-text">Activiti入门</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引入Activiti的依赖"><span class="nav-number">1.2.</span> <span class="nav-text">引入Activiti的依赖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置"><span class="nav-number">1.3.</span> <span class="nav-text">配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#配置一个ProcessEngine"><span class="nav-number">1.3.1.</span> <span class="nav-text">配置一个ProcessEngine</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ProcessEngineConfiguration-bean"><span class="nav-number">1.3.2.</span> <span class="nav-text">ProcessEngineConfiguration bean</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库配置"><span class="nav-number">1.3.3.</span> <span class="nav-text">数据库配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库表的说明"><span class="nav-number">1.3.4.</span> <span class="nav-text">数据库表的说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库升级"><span class="nav-number">1.3.5.</span> <span class="nav-text">数据库升级</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="site-author-image" itemprop="image" alt="Lancersaber"
+    src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Lancersaber</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">110</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lancersaber</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.4.2
+  </div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.2"></script><script src="/js/motion.js?v=7.4.2"></script>
+<script src="/js/schemes/muse.js?v=7.4.2"></script>
+<script src="/js/next-boot.js?v=7.4.2"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

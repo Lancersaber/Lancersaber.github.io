@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.2">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.2">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.2">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.2" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.2">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.4.2',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="深入学习Spring组件注册 接触过Spring的同学肯定都听过IOC。在传统的Java编程中，当需要用到某个对象的时候，我们都是主动地显示创建一个对象实例（new）。使用Spring后就不需要这样做了，因为Spring会帮我们在需要用到某些对象的地方自动注入该对象，而无须我们自己去创建。这种模式俗称控制反转，即IOC（Inversion of Control）。那么Spring是从什么地方获取到">
+<meta name="keywords" content="spring">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深入学习Spring组件注册">
+<meta property="og:url" content="https:&#x2F;&#x2F;lancersaber.github.io&#x2F;2019&#x2F;11&#x2F;04&#x2F;Spring&#x2F;%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0Spring%E7%BB%84%E4%BB%B6%E6%B3%A8%E5%86%8C&#x2F;index.html">
+<meta property="og:site_name" content="Lancersaber">
+<meta property="og:description" content="深入学习Spring组件注册 接触过Spring的同学肯定都听过IOC。在传统的Java编程中，当需要用到某个对象的时候，我们都是主动地显示创建一个对象实例（new）。使用Spring后就不需要这样做了，因为Spring会帮我们在需要用到某些对象的地方自动注入该对象，而无须我们自己去创建。这种模式俗称控制反转，即IOC（Inversion of Control）。那么Spring是从什么地方获取到">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;11&#x2F;06&#x2F;843mfaP5ljxdpbD.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;11&#x2F;06&#x2F;tZnzrAiHm1Rj3dk.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;11&#x2F;06&#x2F;jLfierT5y86NqMS.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;11&#x2F;06&#x2F;QkHAMz6gZPo8Rhb.png">
+<meta property="og:updated_time" content="2019-11-06T13:48:01.097Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;11&#x2F;06&#x2F;843mfaP5ljxdpbD.png">
+
+<link rel="canonical" href="https://lancersaber.github.io/2019/11/04/Spring/%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0Spring%E7%BB%84%E4%BB%B6%E6%B3%A8%E5%86%8C/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>深入学习Spring组件注册 | Lancersaber</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lancersaber</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/04/Spring/%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0Spring%E7%BB%84%E4%BB%B6%E6%B3%A8%E5%86%8C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          深入学习Spring组件注册
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-11-04 09:58:12" itemprop="dateCreated datePublished" datetime="2019-11-04T09:58:12+08:00">2019-11-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-11-06 21:48:01" itemprop="dateModified" datetime="2019-11-06T21:48:01+08:00">2019-11-06</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/spring/" itemprop="url" rel="index">
+                    <span itemprop="name">spring</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="深入学习Spring组件注册"><a href="#深入学习Spring组件注册" class="headerlink" title="深入学习Spring组件注册"></a>深入学习Spring组件注册</h1><hr>
+<p>接触过Spring的同学肯定都听过IOC。在传统的Java编程中，当需要用到某个对象的时候，我们都是主动地显示创建一个对象实例（new）。使用Spring后就不需要这样做了，因为Spring会帮我们在需要用到某些对象的地方自动注入该对象，而无须我们自己去创建。这种模式俗称控制反转，即IOC（Inversion of Control）。那么Spring是从什么地方获取到我们所需要的对象呢？其实Spring给我们提供了一个IOC容器，里面管理着所有我们需要的对象，组件注册就是我们去告诉Spring哪些类需要交给IOC容器管理。</p>
+<p>这里主要记录组件注册的一些细节。</p>
+<h2 id="通过-Bean注册组件"><a href="#通过-Bean注册组件" class="headerlink" title="通过@Bean注册组件"></a>通过@Bean注册组件</h2><p>在较早版本的Spring中，我们都是通过XML的方式来往IOC容器中注册组件的，下面这段代码大家肯定不会陌生：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// 返回 IOC 容器，基于 XML配置，传入配置文件的位置</span><br><span class="line">ApplicationContext applicationContext = new ClassPathXmlApplicationContext(&quot;xxx.xml&quot;);</span><br><span class="line">User user = (User) applicationContext.getBean(&quot;user&quot;);</span><br></pre></td></tr></table></figure>
+
+<p>Spring 4后推荐我们使用Java Config的方式来注册组件。</p>
+<p>为了演示，我们通过<a href="http://start.spring.io/搭建一个简单Spring" target="_blank" rel="noopener">http://start.spring.io/搭建一个简单Spring</a> Boot应用，然后引入Lombok依赖（编辑器也需要安装Lombok插件）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.projectlombok&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;lombok&lt;/artifactId&gt;</span><br><span class="line">    &lt;scope&gt;provided&lt;/scope&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<p>lombok注解解释</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@AllArgsConstructor:增加全参构造器</span><br><span class="line">@NoArgsConstructor ：增加无参构造器</span><br><span class="line"></span><br><span class="line">@ToString:增加toString方法</span><br><span class="line">@Getter：增加get方法</span><br><span class="line">@Setter：增加set方法</span><br><span class="line">@Data:@ToString,@EqualsAndHashCode,@Getter and @Setter的集合</span><br></pre></td></tr></table></figure>
+
+<p>然后创建一个User类：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@ToString</span><br><span class="line">@AllArgsConstructor</span><br><span class="line">@Data</span><br><span class="line">public class User &#123;</span><br><span class="line">    private String name;</span><br><span class="line">    private Integer age;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>接着创建一个配置类，在里面通过@Bean注解注册User类：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">public class WebConfig &#123;</span><br><span class="line">    @Bean()</span><br><span class="line">    public User user() &#123;</span><br><span class="line">        return new User(&quot;mrbird&quot;, 18);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>通过@Bean注解，我们向IOC容器注册了一个名称为user（Bean名称默认为方法名，我们也可以通过@Bean(“myUser”)方式来将组件名称指定为myUser）。<br>组件注册完毕后，我们测试一下从IOC容器中获取这个组件。在Spring Boot入口类中编写如下代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@SpringBootApplication</span><br><span class="line">public class DemoApplication &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">    	SpringApplication.run(DemoApplication.class, args);</span><br><span class="line"></span><br><span class="line">        // 返回 IOC 容器，使用注解配置，传入配置类</span><br><span class="line">        ApplicationContext context = new AnnotationConfigApplicationContext(WebConfig.class);</span><br><span class="line">        User user = context.getBean(User.class);</span><br><span class="line">        System.out.println(user);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>因为我们是通过注解方式来注册组件的，所以需要使用AnnotationConfigApplicationContext来获取相应的IOC容器，入参为配置类。</p>
+<p>启动项目，看下控制台输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">User(name=mrbird, age=18)</span><br></pre></td></tr></table></figure>
+
+<h2 id="使用-ComponentScan扫描"><a href="#使用-ComponentScan扫描" class="headerlink" title="使用@ComponentScan扫描"></a>使用@ComponentScan扫描</h2><p>在使用XML配置组件扫描的时候，我们都是这样配置的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;context:component-scan base-package=&quot;&quot;&gt;&lt;/context:component-scan&gt;</span><br></pre></td></tr></table></figure>
+
+<p>其中base-package指定了扫描的路径。路径下所有被@Controller、@Service、@Repository和@Component注解标注的类都会被纳入IOC容器中。</p>
+<p>现在我们脱离XML配置后，可以使用@ComponentScan注解来扫描组件并注册。</p>
+<p>在使用@ComponentScan扫描之前，我们先创建一个Controller，一个Service，一个Dao，并标注上相应的注解。</p>
+<p>然后修改配置类：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">@ComponentScan(&quot;cc.mrbird.demo&quot;)</span><br><span class="line">public class WebConfig &#123;</span><br><span class="line"></span><br><span class="line">    // @Bean(&quot;myUser&quot;)</span><br><span class="line">    // public User user() &#123;</span><br><span class="line">    //     return new User(&quot;mrbird&quot;, 18);</span><br><span class="line">    // &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在配置类中，我们通过@ComponentScan(“cc.mrbird.demo”)配置了扫描路径，并且将User组件注册注释掉了，取而代之的是在User类上加上@Component注解：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@ToString</span><br><span class="line">@AllArgsConstructor</span><br><span class="line">@NoArgsConstructor</span><br><span class="line">@Data</span><br><span class="line">@Component</span><br><span class="line">public class User &#123;</span><br><span class="line">    private String name;</span><br><span class="line">    private Integer age;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Tips:值得注意的是，我们不能将Spring Boot的入口类纳入扫描范围中，否则项目启动将出错。<br>接下来我们看下在基于注解的IOC容器中是否包含了这些组件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@SpringBootApplication</span><br><span class="line">public class DemoApplication &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        SpringApplication.run(DemoApplication.class, args);</span><br><span class="line"></span><br><span class="line">        ApplicationContext context = new AnnotationConfigApplicationContext(WebConfig.class);</span><br><span class="line">        // 查看基于注解的 IOC容器中所有组件名称</span><br><span class="line">        String[] beanNames = context.getBeanDefinitionNames();</span><br><span class="line">        Arrays.stream(beanNames).forEach(System.out::println);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>启动项目，观察控制台：<br><img src="https://i.loli.net/2019/11/06/843mfaP5ljxdpbD.png" alt="QQ截图20181207164418.png"><br>可见，组件已经成功被扫描进去了，并且名称默认为类名首字母小写。</p>
+<p>这里，配置类WebConfig也被扫描并注册了，查看@Configuration源码就会发现原因：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@Target(ElementType.TYPE)</span><br><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">@Documented</span><br><span class="line">@Component</span><br><span class="line">public @interface Configuration &#123;</span><br><span class="line">    String value() default &quot;&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="指定扫描策略"><a href="#指定扫描策略" class="headerlink" title="指定扫描策略"></a>指定扫描策略</h3><p>@ComponentScan注解允许我们指定扫描策略，即指定哪些被扫描，哪些不被扫描，查看其源码可发现这两个属性</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Specifies which types are eligible for component scanning.</span><br><span class="line"> * &lt;p&gt;Further narrows the set of candidate components from everything in &#123;@link #basePackages&#125;</span><br><span class="line"> * to everything in the base packages that matches the given filter or filters.</span><br><span class="line"> * &lt;p&gt;Note that these filters will be applied in addition to the default filters, if specified.</span><br><span class="line"> * Any type under the specified base packages which matches a given filter will be included,</span><br><span class="line"> * even if it does not match the default filters (i.e. is not annotated with &#123;@code @Component&#125;).</span><br><span class="line"> * @see #resourcePattern()</span><br><span class="line"> * @see #useDefaultFilters()</span><br><span class="line"> */</span><br><span class="line">Filter[] includeFilters() default &#123;&#125;;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * Specifies which types are not eligible for component scanning.</span><br><span class="line"> * @see #resourcePattern</span><br><span class="line"> */</span><br><span class="line">Filter[] excludeFilters() default &#123;&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>其中Filter也是一个注解:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Declares the type filter to be used as an &#123;@linkplain ComponentScan#includeFilters</span><br><span class="line"> * include filter&#125; or &#123;@linkplain ComponentScan#excludeFilters exclude filter&#125;.</span><br><span class="line"> */</span><br><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">@Target(&#123;&#125;)</span><br><span class="line">@interface Filter &#123;</span><br><span class="line"></span><br><span class="line">    FilterType type() default FilterType.ANNOTATION;</span><br><span class="line"></span><br><span class="line">    @AliasFor(&quot;classes&quot;)</span><br><span class="line">    Class&lt;?&gt;[] value() default &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    @AliasFor(&quot;value&quot;)</span><br><span class="line">    Class&lt;?&gt;[] classes() default &#123;&#125;;</span><br><span class="line">    String[] pattern() default &#123;&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>接下来我们使用excludeFilters来排除一些组件的扫描：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">@ComponentScan(value = &quot;cc.mrbird.demo&quot;,</span><br><span class="line">        excludeFilters = &#123;</span><br><span class="line">                @Filter(type = FilterType.ANNOTATION,</span><br><span class="line">                        classes = &#123;Controller.class, Repository.class&#125;),</span><br><span class="line">                @Filter(type = FilterType.ASSIGNABLE_TYPE, classes = User.class)</span><br><span class="line">        &#125;)</span><br><span class="line">public class WebConfig &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面我们指定了两种排除扫描的规则：<br>1、根据注解来排除（type = FilterType.ANNOTATION）,这些注解的类型为classes = {Controller.class, Repository.class}。即Controller和Repository注解标注的类不再被纳入到IOC容器中。</p>
+<p>2、根据指定类型类排除（type = FilterType.ASSIGNABLE_TYPE），排除类型为User.class，其子类，实现类都会被排除。</p>
+<p>启动项目，观察控制台：<br><img src="https://i.loli.net/2019/11/06/tZnzrAiHm1Rj3dk.png" alt="QQ截图20190129103606.png"></p>
+<p>除了上面两种常用的规则外，我们还可以使用别的规则，查看FilterType源码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">public enum FilterType &#123;</span><br><span class="line">    /**</span><br><span class="line">     * Filter candidates marked with a given annotation.</span><br><span class="line">     *</span><br><span class="line">     * @see org.springframework.core.type.filter.AnnotationTypeFilter</span><br><span class="line">     */</span><br><span class="line">    ANNOTATION,</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * Filter candidates assignable to a given type.</span><br><span class="line">     *</span><br><span class="line">     * @see org.springframework.core.type.filter.AssignableTypeFilter</span><br><span class="line">     */</span><br><span class="line">    ASSIGNABLE_TYPE,</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * Filter candidates matching a given AspectJ type pattern expression.</span><br><span class="line">     *</span><br><span class="line">     * @see org.springframework.core.type.filter.AspectJTypeFilter</span><br><span class="line">     */</span><br><span class="line">    ASPECTJ,</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * Filter candidates matching a given regex pattern.</span><br><span class="line">     *</span><br><span class="line">     * @see org.springframework.core.type.filter.RegexPatternTypeFilter</span><br><span class="line">     */</span><br><span class="line">    REGEX,</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * Filter candidates using a given custom</span><br><span class="line">     * &#123;@link org.springframework.core.type.filter.TypeFilter&#125; implementation.</span><br><span class="line">     */</span><br><span class="line">    CUSTOM</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="多扫描策略配置"><a href="#多扫描策略配置" class="headerlink" title="多扫描策略配置"></a>多扫描策略配置</h3><p>在Java 8之前，我们可以使用@ComponentScans来配置多个@ComponentScan以实现多扫描规则配置：<br><img src="https://i.loli.net/2019/11/06/jLfierT5y86NqMS.png" alt="QQ截图20190129100809.png"><br>而在Java 8中，新增了@Repeatable注解，使用该注解修饰的注解可以重复使用，查看@ComponentScan源码会发现其已经被该注解标注：<br><img src="https://i.loli.net/2019/11/06/QkHAMz6gZPo8Rhb.png" alt="QQ截图20190129101050.png"><br>所以除了使用@ComponentScans来配置多扫描规则外，我们还可以通过多次使用@ComponentScan来指定多个不同的扫描规则。</p>
+<h3 id="自定义策略配置"><a href="#自定义策略配置" class="headerlink" title="自定义策略配置"></a>自定义策略配置</h3><h2 id="组件作用域-Scope"><a href="#组件作用域-Scope" class="headerlink" title="组件作用域@Scope"></a>组件作用域@Scope</h2><p>默认情况下，在Spring的IOC容器中每个组件都是单例的，即无论在任何地方注入多少次，这些对象都是同一个，我们来看下例子。</p>
+<p>首先将User对象中的@Component注解去除，然后在配置类中配置User Bean：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">public class WebConfig &#123;</span><br><span class="line">    @Bean</span><br><span class="line">    public User user() &#123;</span><br><span class="line">        return new User(&quot;mrbird&quot;, 18);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>接着多次从IOC容器中获取这个组件，看看是否为同一个：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 返回 IOC 容器，使用注解配置，传入配置类</span><br><span class="line">ApplicationContext context = new AnnotationConfigApplicationContext(WebConfig.class);</span><br><span class="line">Object user1 = context.getBean(&quot;user&quot;);</span><br><span class="line">Object user2 = context.getBean(&quot;user&quot;);</span><br><span class="line">System.out.println(user1 == user2);</span><br></pre></td></tr></table></figure>
+
+<p>启动项目，观察控制台输出:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">true</span><br></pre></td></tr></table></figure>
+
+<p>结果证实了上面的观点。</p>
+<p>在Spring中我们可以使用@Scope注解来改变组件的作用域：</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/spring/" rel="tag"># spring</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2019/11/04/Spring/%E6%B7%B1%E5%85%A5Spring%20boot%E8%87%AA%E5%8A%A8%E8%A3%85%E9%85%8D/" rel="next" title="深入Spring boot自动装配">
+                  <i class="fa fa-chevron-left"></i> 深入Spring boot自动装配
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+                <a href="/2019/11/04/Spring/%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0springboot%E4%B8%AD%E7%9A%84SpringApplication/" rel="prev" title="深入学习Springboot中的SpringApplication">
+                  深入学习Springboot中的SpringApplication <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#深入学习Spring组件注册"><span class="nav-number">1.</span> <span class="nav-text">深入学习Spring组件注册</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#通过-Bean注册组件"><span class="nav-number">1.1.</span> <span class="nav-text">通过@Bean注册组件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用-ComponentScan扫描"><span class="nav-number">1.2.</span> <span class="nav-text">使用@ComponentScan扫描</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#指定扫描策略"><span class="nav-number">1.2.1.</span> <span class="nav-text">指定扫描策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多扫描策略配置"><span class="nav-number">1.2.2.</span> <span class="nav-text">多扫描策略配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自定义策略配置"><span class="nav-number">1.2.3.</span> <span class="nav-text">自定义策略配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#组件作用域-Scope"><span class="nav-number">1.3.</span> <span class="nav-text">组件作用域@Scope</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="site-author-image" itemprop="image" alt="Lancersaber"
+    src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Lancersaber</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">110</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lancersaber</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.4.2
+  </div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.2"></script><script src="/js/motion.js?v=7.4.2"></script>
+<script src="/js/schemes/muse.js?v=7.4.2"></script>
+<script src="/js/next-boot.js?v=7.4.2"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

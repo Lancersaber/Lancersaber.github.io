@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.2">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.2">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.2">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.2" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.2">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.4.2',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="Shiro配置 程序配置创建SecurityManager并将其提供给应用程序的最简单的绝对方法是创建一个org.apache.shiro.mgt.DefaultSecurityManager并将其连接到代码中。例如： 12345Realm realm = &#x2F;&#x2F;instantiate or acquire a Realm instance.  We&amp;apos;ll discuss Realms l">
+<meta name="keywords" content="shiro">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Shiro配置">
+<meta property="og:url" content="https:&#x2F;&#x2F;lancersaber.github.io&#x2F;2019&#x2F;11&#x2F;04&#x2F;shiro&#x2F;Shiro%E9%85%8D%E7%BD%AE&#x2F;index.html">
+<meta property="og:site_name" content="Lancersaber">
+<meta property="og:description" content="Shiro配置 程序配置创建SecurityManager并将其提供给应用程序的最简单的绝对方法是创建一个org.apache.shiro.mgt.DefaultSecurityManager并将其连接到代码中。例如： 12345Realm realm = &#x2F;&#x2F;instantiate or acquire a Realm instance.  We&amp;apos;ll discuss Realms l">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;11&#x2F;08&#x2F;RPKzTFsi6vDruGy.png">
+<meta property="og:updated_time" content="2019-11-08T11:55:31.879Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;11&#x2F;08&#x2F;RPKzTFsi6vDruGy.png">
+
+<link rel="canonical" href="https://lancersaber.github.io/2019/11/04/shiro/Shiro%E9%85%8D%E7%BD%AE/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Shiro配置 | Lancersaber</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lancersaber</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/04/shiro/Shiro%E9%85%8D%E7%BD%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Shiro配置
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-11-04 13:34:38" itemprop="dateCreated datePublished" datetime="2019-11-04T13:34:38+08:00">2019-11-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-11-08 19:55:31" itemprop="dateModified" datetime="2019-11-08T19:55:31+08:00">2019-11-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/shiro/" itemprop="url" rel="index">
+                    <span itemprop="name">shiro</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Shiro配置"><a href="#Shiro配置" class="headerlink" title="Shiro配置"></a>Shiro配置</h1><hr>
+<h2 id="程序配置"><a href="#程序配置" class="headerlink" title="程序配置"></a>程序配置</h2><p>创建SecurityManager并将其提供给应用程序的最简单的绝对方法是创建一个org.apache.shiro.mgt.DefaultSecurityManager并将其连接到代码中。例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Realm realm = //instantiate or acquire a Realm instance.  We&apos;ll discuss Realms later.</span><br><span class="line">SecurityManager securityManager = new DefaultSecurityManager(realm);</span><br><span class="line"></span><br><span class="line">//Make the SecurityManager instance available to the entire application via static memory: </span><br><span class="line">SecurityUtils.setSecurityManager(securityManager);</span><br></pre></td></tr></table></figure>
+
+<p>出乎意料的是，仅需三行代码，您便拥有了适用于许多应用程序的功能齐全的Shiro环境。那有多容易！！</p>
+<h2 id="INI配置"><a href="#INI配置" class="headerlink" title="INI配置"></a>INI配置</h2><p>相反，大多数应用程序受益于可以独立于源代码进行修改的基于文本的配置，对于不熟悉Shiro API的人来说，甚至可以使事情更容易理解。</p>
+<p>为了确保基于共同点的基于文本的配置机制可以在所有环境中以最少的第三方依赖性运行，Shiro支持INI格式来构建SecurityManager对象图及其支持组件。INI易于阅读，易于配置，设置简单，非常适合大多数应用。</p>
+<h3 id="从INI创建SecurityManager"><a href="#从INI创建SecurityManager" class="headerlink" title="从INI创建SecurityManager"></a>从INI创建SecurityManager</h3><p>这是两个如何基于INI配置构建SecurityManager的示例。</p>
+<h3 id="INI资源中的SecurityManager"><a href="#INI资源中的SecurityManager" class="headerlink" title="INI资源中的SecurityManager"></a>INI资源中的SecurityManager</h3><p>我们可以从INI资源路径创建SecurityManager实例。资源可以从文件系统，类路径，或者网址时前缀来获取file:，classpath:或url:分别。本示例使用a 从类路径的根Factory提取shiro.ini文件并返回SecurityManager实例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">import org.apache.shiro.SecurityUtils;</span><br><span class="line">import org.apache.shiro.util.Factory;</span><br><span class="line">import org.apache.shiro.mgt.SecurityManager;</span><br><span class="line">import org.apache.shiro.config.IniSecurityManagerFactory;</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">Factory&lt;SecurityManager&gt; factory = new IniSecurityManagerFactory(&quot;classpath:shiro.ini&quot;);</span><br><span class="line">SecurityManager securityManager = factory.getInstance();</span><br><span class="line">SecurityUtils.setSecurityManager(securityManager);</span><br></pre></td></tr></table></figure>
+
+<h3 id="INI的各个节点"><a href="#INI的各个节点" class="headerlink" title="INI的各个节点"></a>INI的各个节点</h3><p>INI基本上是一种文本配置，由按唯一命名的部分组织的键/值对组成。键仅在每个部分中是唯一的，而不是在整个配置中都是唯一的（不同于JDK Properties）。但是，每个部分都可以视为一个单独的Properties定义。</p>
+<p>带注释的行可以以Octothorpe（＃-又名“哈希”，“英镑”或“数字”符号）或分号（’;’）开头。</p>
+<p>这是Shiro理解的部分示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"># =======================</span><br><span class="line"># Shiro INI configuration</span><br><span class="line"># =======================</span><br><span class="line"></span><br><span class="line">[main]</span><br><span class="line"># Objects and their properties are defined here,</span><br><span class="line"># Such as the securityManager, Realms and anything</span><br><span class="line"># else needed to build the SecurityManager</span><br><span class="line"></span><br><span class="line">[users]</span><br><span class="line"># The &apos;users&apos; section is for simple deployments</span><br><span class="line"># when you only need a small number of statically-defined</span><br><span class="line"># set of User accounts.</span><br><span class="line"></span><br><span class="line">[roles]</span><br><span class="line"># The &apos;roles&apos; section is for simple deployments</span><br><span class="line"># when you only need a small number of statically-defined</span><br><span class="line"># roles.</span><br><span class="line"></span><br><span class="line">[urls]</span><br><span class="line"># The &apos;urls&apos; section is used for url-based security</span><br><span class="line"># in web applications.  We&apos;ll discuss this section in the</span><br><span class="line"># Web documentation</span><br></pre></td></tr></table></figure>
+<h4 id="main"><a href="#main" class="headerlink" title="main"></a>main</h4><p>在此[main]部分中，您可以配置应用程序的SecurityManager实例及其任何依赖项，例如Realm。</p>
+<p>配置对象实例（如SecurityManager或其任何依赖项）听起来很难使用INI，因为在INI中，我们只能使用名称/值对。但是通过一些约定和对对象图的了解，您会发现您可以做很多事情。Shiro使用这些假设来启用简单但相当简洁的配置机制。</p>
+<p>我们经常喜欢将这种方法称为“穷人”依赖注入，尽管它不如成熟的Spring / Guice / JBoss XML文件强大，但是您会发现它可以完成很多工作而没有太多复杂性。当然，这些其他配置机制也可用，但是使用Shiro并不是必需的。</p>
+<p>只是为了激发您的胃口，这里有一个有效的[main]配置示例。我们将在下面详细介绍它，但是您可能会发现，仅凭直觉就已经了解了很多事情：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[main]</span><br><span class="line">sha256Matcher = org.apache.shiro.authc.credential.Sha256CredentialsMatcher</span><br><span class="line"></span><br><span class="line">myRealm = com.company.security.shiro.DatabaseRealm</span><br><span class="line">myRealm.connectionTimeout = 30000</span><br><span class="line">myRealm.username = jsmith</span><br><span class="line">myRealm.password = secret</span><br><span class="line">myRealm.credentialsMatcher = $sha256Matcher</span><br><span class="line"></span><br><span class="line">securityManager.sessionManager.globalSessionTimeout = 1800000</span><br></pre></td></tr></table></figure>
+
+<h5 id="定义对象"><a href="#定义对象" class="headerlink" title="定义对象"></a>定义对象</h5><p>请考虑以下[main]部分代码片段：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[main]</span><br><span class="line">myRealm = com.company.shiro.realm.MyRealm</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>该行实例化一个类型为的新对象实例，com.company.shiro.realm.MyRealm并使该对象在myRealm名称下可用，以供进一步参考和配置。</p>
+<p>如果实例化的对象实现了该org.apache.shiro.util.Nameable接口，则将Nameable.setName使用名称值在该对象上调用方法（myRealm在此示例中）。</p>
+<h4 id="设置对象属性"><a href="#设置对象属性" class="headerlink" title="设置对象属性"></a>设置对象属性</h4><p>原始值：<br>只需使用等号即可分配简单的原始属性：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">myRealm.connectionTimeout = 30000</span><br><span class="line">myRealm.username = jsmith</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>这些配置行转换为方法调用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">myRealm.setConnectionTimeout(30000);</span><br><span class="line">myRealm.setUsername(&quot;jsmith&quot;);</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>在幕后，默认情况下，Shiro 在设置这些属性时使用Apache Commons BeanUtils进行所有繁重的工作。因此，尽管INI值是文本，但是BeanUtils知道如何将字符串值转换为适当的原始类型，然后调用相应的JavaBeans setter方法。</p>
+<h4 id="引用类型的值"><a href="#引用类型的值" class="headerlink" title="引用类型的值"></a>引用类型的值</h4><p>如果您需要设置的值不是原始类型，而是另一个对象，该怎么办？好了，您可以使用美元符号（$）来引用先前定义的实例。例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">sha256Matcher = org.apache.shiro.authc.credential.Sha256CredentialsMatcher</span><br><span class="line">...</span><br><span class="line">myRealm.credentialsMatcher = $sha256Matcher</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>这只是找到名称为sha256Matcher定义的对象，然后使用BeanUtils在myRealm实例上设置该对象（通过调用myRealm.setCredentialsMatcher(sha256Matcher)方法）。</p>
+<p>嵌套属性<br>使用INI线的等号左侧的虚线表示法，可以遍历对象图以到达要设置的最终对象/属性。例如，此配置行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">securityManager.sessionManager.globalSessionTimeout = 1800000</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>集合属性<br>可以像设置其他任何属性一样直接设置列表，集合和地图，也可以将其设置为嵌套属性。对于集和列表，只需指定一个以逗号分隔的值或对象引用集。</p>
+<p>例如，一些SessionListeners：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sessionListener1 = com.company.my.SessionListenerImplementation</span><br><span class="line">...</span><br><span class="line">sessionListener2 = com.company.my.other.SessionListenerImplementation</span><br><span class="line">...</span><br><span class="line">securityManager.sessionManager.sessionListeners = $sessionListener1, $sessionListener2</span><br></pre></td></tr></table></figure>
+
+<p>对于map，您可以指定键值对的逗号分隔列表，其中每个键值对均以冒号’：’分隔。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">object1 = com.company.some.Class</span><br><span class="line">object2 = com.company.another.Class</span><br><span class="line">...</span><br><span class="line">anObject = some.class.with.a.Map.property</span><br><span class="line"></span><br><span class="line">anObject.mapProperty = key1:$object1, key2:$object2</span><br></pre></td></tr></table></figure>
+
+<p>覆盖实例<br>任何对象都可以由稍后在配置中定义的新实例覆盖。因此，例如，第二个myRealm定义将覆盖第一个：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">myRealm = com.company.security.MyRealm</span><br><span class="line">...</span><br><span class="line">myRealm = com.company.security.DatabaseRealm</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>这将导致myRealm成为一个com.company.security.DatabaseRealm实例，并且以前的实例将永远不会被使用（并收集垃圾）。</p>
+<h4 id="默认的SecurityManager"><a href="#默认的SecurityManager" class="headerlink" title="默认的SecurityManager"></a>默认的SecurityManager</h4><p>您可能已经在上面的完整示例中注意到，尚未定义SecurityManager实例的类，而我们直接跳到设置了一个嵌套属性：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">myRealm = ...</span><br><span class="line"></span><br><span class="line">securityManager.sessionManager.globalSessionTimeout = 1800000</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>这是因为securityManager实例是一个特殊的实例-它已经为您实例化并且可以使用了，因此您无需知道SecurityManager要实例化的特定实现类。</p>
+<p>当然，如果您实际上要指定自己的实现，则可以按照上面“覆盖实例”部分中的定义定义实现：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">securityManager = com.company.security.shiro.MyCustomSecurityManager</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>当然，这几乎是不需要的-Shiro的SecurityManager实现是非常可定制的，通常可以配置任何必要的东西。您可能想问问自己（或用户列表）是否真的需要这样做。</p>
+<h3 id="User"><a href="#User" class="headerlink" title="User"></a>User</h3><p>本[users]部分允许您定义一组静态的用户帐户。这在用户帐户数量很少或不需要在运行时动态创建用户帐户的环境中最有用。这是一个例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[users]</span><br><span class="line">admin = secret</span><br><span class="line">lonestarr = vespa, goodguy, schwartz</span><br><span class="line">darkhelmet = ludicrousspeed, badguy, schwartz</span><br></pre></td></tr></table></figure>
+
+<h4 id="行格式"><a href="#行格式" class="headerlink" title="行格式"></a>行格式</h4><p>[users]部分中的每一行都必须符合以下格式：<br>username= password，roleName1，roleName2，…，roleNameN</p>
+<ul>
+<li>等号左侧的值是用户名</li>
+<li>等号右边的第一个值是用户的密码。必须输入密码。</li>
+<li>密码后的任何逗号分隔值都是分配给该用户的角色的名称。角色名称是可选的。</li>
+</ul>
+<h4 id="加密密码"><a href="#加密密码" class="headerlink" title="加密密码"></a>加密密码</h4><p>如果您不希望[users]部分的密码为纯文本格式，则可以根据自己的喜好使用自己喜欢的哈希算法（MD5，Sha1，Sha256等）对它们进行加密，并将结果字符串用作密码值。默认情况下，密码字符串应为十六进制编码，但可以将其配置为Base64编码（请参见下文）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">简易安全密码</span><br><span class="line">为了节省时间并使用最佳实践，您可能需要使用Shiro的Command Line Hasher，它将对密码以及任何其他类型的资源进行哈希处理。这对于加密INI [users]密码特别方便。</span><br></pre></td></tr></table></figure>
+
+<p>指定哈希文本密码值后，您必须告诉Shiro这些密码已加密。您可以通过配置iniRealm[main]部分中隐式创建的配置，以使用CredentialsMatcher与您指定的哈希算法相对应的适当实现来做到这一点：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[main]</span><br><span class="line">...</span><br><span class="line">sha256Matcher = org.apache.shiro.authc.credential.Sha256CredentialsMatcher</span><br><span class="line">...</span><br><span class="line">iniRealm.credentialsMatcher = $sha256Matcher</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">[users]</span><br><span class="line"># user1 = sha256-hashed-hex-encoded password, role1, role2, ...</span><br><span class="line">user1 = 2bb80d537b1da3e38bd30361aa855686bde0eacd7162fef6a25fe97bf527a25b, role1, role2, ...</span><br></pre></td></tr></table></figure>
+
+
+<p>您可以配置在任何属性CredentialsMatcher像任何其他对象，以反映你的散列策略，例如，指定是否使用或有多少哈希迭代执行腌制。请参阅org.apache.shiro.authc.credential.HashedCredentialsMatcherJavaDoc以更好地了解哈希策略以及它们是否对您有用。</p>
+<p>例如，如果用户的密码字符串是Base64编码的，而不是默认的十六进制，则可以指定：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[main]</span><br><span class="line">...</span><br><span class="line"># true = hex, false = base64:</span><br><span class="line">sha256Matcher.storedCredentialsHexEncoded = false</span><br></pre></td></tr></table></figure>
+
+<h3 id="roles"><a href="#roles" class="headerlink" title="roles"></a>roles</h3><p>本[roles]部分允许您将权限与[用户]部分中定义的角色相关联。同样，这在角色数量少的环境中或不需要在运行时动态创建角色的环境中很有用。这是一个例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[roles]</span><br><span class="line"># &apos;admin&apos; role has all permissions, indicated by the wildcard &apos;*&apos;</span><br><span class="line">admin = *</span><br><span class="line"># The &apos;schwartz&apos; role can do anything (*) with any lightsaber:</span><br><span class="line">schwartz = lightsaber:*</span><br><span class="line"># The &apos;goodguy&apos; role is allowed to &apos;drive&apos; (action) the winnebago (type) with</span><br><span class="line"># license plate &apos;eagle5&apos; (instance specific id)</span><br><span class="line">goodguy = winnebago:drive:eagle5</span><br></pre></td></tr></table></figure>
+
+<h4 id="行格式-1"><a href="#行格式-1" class="headerlink" title="行格式"></a>行格式</h4><p>[角色]部分中的每一行都必须使用以下格式定义角色到权限的键/值映射：<br>rolename= PermissionDefinition1，PermissionDefinition2，…，permissionDefinitionN<br>这里的PermissionDefinition是一个任意字符串，但是大多数人会希望使用符合格式的字符串，<br>以org.apache.shiro.authz.permission.WildcardPermission易于使用和灵活。有关权限以及如何从中受益的更多信息，请参见权限(<a href="https://shiro.apache.org/permissions.html)文档。" target="_blank" rel="noopener">https://shiro.apache.org/permissions.html)文档。</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> 内部逗号</span><br><span class="line">请注意，如果单个的PermissionDefinition需要在内部用逗号分隔（例如printer:5thFloor:print,info），则需要在该定义周围加上双引号（“），以避免解析错误：&quot;printer:5thFloor:print,info&quot;</span><br></pre></td></tr></table></figure>
+
+<h3 id="urls"><a href="#urls" class="headerlink" title="[urls]"></a>[urls]</h3><p>[urls]项允许你做一些在我们已经见过的任何 Web 框架都不存在的东西：在你的应用程序中定义自适应过滤器链来匹配URL 路径！</p>
+<p>这将更为灵活，功能更为强大，比你通常在 web.xml 中定义的过滤器链更为简洁：即使你从未使用任何 Shiro 提供的其他功能并仅仅使用了这个，但它即使是单独使用也是值得的。</p>
+<p>[urls]<br>在urls 项的每一行格式如下：<br>URL_Ant_Path_Expression = Path_Specific_Filter_Chain<br>举例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">[urls]</span><br><span class="line"></span><br><span class="line">/index.html = anon</span><br><span class="line">/user/create = anon</span><br><span class="line">/user/** = authc</span><br><span class="line">/admin/** = authc, roles[administrator]</span><br><span class="line">/rest/** = authc, rest</span><br><span class="line">/remoting/rpc/** = authc, perms[&quot;remote:invoke&quot;]</span><br></pre></td></tr></table></figure>
+
+<p>接下来我们将讨论这些行的具体含义</p>
+<h4 id="URL-Path-Expressions"><a href="#URL-Path-Expressions" class="headerlink" title="URL Path Expressions"></a>URL Path Expressions</h4><p>等号左边是一个与Web 应用程序上下文根目录相关的 Ant 风格的路径表达式。<br>例如，假设你有如下的[urls]行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/account/** = ssl, authc</span><br></pre></td></tr></table></figure>
+
+<p>此行表明，“任何对我应用程序的/accout 或任何它的子路径（/account/foo, account/bar/baz，等等）的请求都将触发’ssl, authc’过滤器链”。我们将在下面讨论过滤器链。</p>
+<p>请注意，所有的路径表达式都是相对于你的应用程序的上下文根目录而言的。这意味着如果某一天你在某个位置部署了你的应用程序，如 <a href="http://www.somehost.com/myapp" target="_blank" rel="noopener">www.somehost.com/myapp</a> ，然后又将它部署到了 <a href="http://www.anotherhost.com" target="_blank" rel="noopener">www.anotherhost.com</a> （没有’myapp’子目录），这样的匹配模式仍将继续工作。所有的路径都是相对于 HttpServletRequest.getContextPath() 的值来的。</p>
+<p>Order Matters! 秩序<br>URL 路径表达式按事先定义好的顺序判断传入的请求，并遵循 FIRST MATCH WINS 这一原则。例如，让我们假设有如下链的定义：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/account/** = ssl, authc</span><br><span class="line">/account/signup = anon</span><br></pre></td></tr></table></figure>
+
+<p>如果传入的请求旨在访问 /account/signup/index.html（所有 ‘anon’ymous 用户都能访问），那么它将永不会被处理！原因是因为/account/* 的模式第一个匹配了传入的请求，“短路”了其余的定义。 始终记住基于FIRST MATCH WINS 的原则定义你的过滤器链！*</p>
+<h4 id="Filter-Chain-Definitions-定义"><a href="#Filter-Chain-Definitions-定义" class="headerlink" title="Filter Chain Definitions 定义"></a>Filter Chain Definitions 定义</h4><p>等号右边是逗号隔开的过滤器列表，用来执行匹配该路径的请求。它必须符合以下格式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">filter1[optional_config1], filter2[optional_config2], ..., filterN[optional_configN]</span><br></pre></td></tr></table></figure>
+
+<p>并且：</p>
+<ul>
+<li>filterN 是一个定义在[main]项中的 filter bean 的名字</li>
+<li>[optional_configN]是一个可选的括号内的对特定的路径，特定的过滤器有特定含义的字符串（每个过滤器，每个路径的具体配置！）。若果该过滤器对该 URL 路径并不需要特定的配置，你可以忽略括号，于是 filteNr[] 就变成了 filterN.</li>
+</ul>
+<p>因为过滤器标志符定义了链（又名列表），所以请记住顺序问题！请按顺序定义好你的逗号分隔的列表，这样请求就能够流通这个链。<br>最后，每个过滤器按照它期望的方式自由的处理请求，即使不具备必要的条件（例如，执行一个重定向，响应一个 HTTP 错误代码，直接渲染等）。否则，它有可能允许该请求继续通过这个过滤器链到达最终的视图。</p>
+<p>确保能够对路径的具体配置作出反应，即[optional_configN]一个过滤器标志符的一部分，是一个对所有Shiro 过滤器 适用的独有的功能。</p>
+<p>你也可以这样做，如果你想创建你自己的 javax.servlet.Filter 的实现的话，确保你的过滤器子类<br>(<a href="http://shiro.apache.org/static/1.4.1/apidocs/org/apache/shiro/web/filter/PathMatchingFilter.html" target="_blank" rel="noopener">http://shiro.apache.org/static/1.4.1/apidocs/org/apache/shiro/web/filter/PathMatchingFilter.html</a>)</p>
+<h4 id="Available-Filters-可用的过滤器"><a href="#Available-Filters-可用的过滤器" class="headerlink" title="Available Filters 可用的过滤器"></a>Available Filters 可用的过滤器</h4><p>在过滤器链中能够使用的过滤器“池”被定义在[main]项。在[main]项中指派给它们的名字就是在过滤器链定义中使 用的名字。例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[main]</span><br><span class="line">...</span><br><span class="line">myFilter = com.company.web.some.FilterImplementation</span><br><span class="line">myFilter.property1 = value1</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">[urls]</span><br><span class="line">...</span><br><span class="line">/some/path/** = myFilter</span><br></pre></td></tr></table></figure>
+
+<h4 id="Default-Filters"><a href="#Default-Filters" class="headerlink" title="Default Filters"></a>Default Filters</h4><p>当运行一个 Web 应用程序时，Shiro 将会创建一些有用的默认 Filter 实例，并自动地在[main]项中将它们置为可用。</p>
+<p>你可以在 main 中配置它们，当作在你的链的定义中你是否有任何其他的bean 和 reference。例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[main]</span><br><span class="line">...</span><br><span class="line"># Notice how we didn&apos;t define the class for the FormAuthenticationFilter (&apos;authc&apos;) - it is instantiated and available already:</span><br><span class="line">authc.loginUrl = /login.jsp</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">[urls]</span><br><span class="line">...</span><br><span class="line"># make sure the end-user is authenticated.  If not, redirect to the &apos;authc.loginUrl&apos; above,</span><br><span class="line"># and after successful authentication, redirect them back to the original account page they</span><br><span class="line"># were trying to view:</span><br><span class="line">/account/** = authc</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>自动地可用的默认的Filter 实例是被 DefaultFilter 枚举定义的，枚举的名称字段是可供配置的名称。它们是：</p>
+<p>iframe id=”tmp_downloadhelper_iframe” style=”display: none;” /iframe</p>
+<p><img src="https://i.loli.net/2019/11/08/RPKzTFsi6vDruGy.png" alt="shiro13.PNG"></p>
+<table>
+<thead>
+<tr>
+<th>Filter Name</th>
+<th>Class</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>anon</td>
+<td>org.apache.shiro.web.filter.authc.AnonymousFilter</td>
+<td>匿名拦截器，即不需要登录即可访问；一般用于静态资源过滤；示例/static/**=anon</td>
+</tr>
+<tr>
+<td>authc</td>
+<td>org.apache.shiro.web.filter.authc.FormAuthenticationFilter</td>
+<td>基于表单的拦截器；如/**=authc，如果没有登录会跳到相应的登录页面登录</td>
+</tr>
+<tr>
+<td>authcBasic</td>
+<td>org.apache.shiro.web.filter.authc.BasicHttpAuthenticationFilter</td>
+<td>Basic HTTP身份验证拦截器</td>
+</tr>
+<tr>
+<td>logout</td>
+<td>org.apache.shiro.web.filter.authc.LogoutFilter</td>
+<td>退出拦截器，主要属性：redirectUrl：退出成功后重定向的地址（/），示例/logout=logout</td>
+</tr>
+<tr>
+<td>noSessionCreation</td>
+<td>org.apache.shiro.web.filter.session.NoSessionCreationFilter</td>
+<td>不创建会话拦截器，调用subject.getSession(false)不会有什么问题，但是如果subject.getSession(true)将抛出DisabledSessionException异常</td>
+</tr>
+<tr>
+<td>perms</td>
+<td>org.apache.shiro.web.filter.authz.PermissionsAuthorizationFilter</td>
+<td>权限授权拦截器，验证用户是否拥有所有权限；属性和roles一样；示例/user/**=perms[“user:create”]</td>
+</tr>
+<tr>
+<td>port</td>
+<td>org.apache.shiro.web.filter.authz.PortFilter</td>
+<td>端口拦截器，主要属性port(80)：可以通过的端口；示例/test= port[80]，如果用户访问该页面是非80，将自动将请求端口改为80并重定向到该80端口，其他路径/参数等都一样</td>
+</tr>
+<tr>
+<td>rest</td>
+<td>org.apache.shiro.web.filter.authz.HttpMethodPermissionFilter</td>
+<td>rest风格拦截器，自动根据请求方法构建权限字符串；示例/users=rest[user]，会自动拼出user:read,user:create,user:update,user:delete权限字符串进行权限匹配（所有都得匹配，isPermittedAll）</td>
+</tr>
+<tr>
+<td>roles</td>
+<td>org.apache.shiro.web.filter.authz.RolesAuthorizationFilter</td>
+<td>角色授权拦截器，验证用户是否拥有所有角色；示例/admin/**=roles[admin]</td>
+</tr>
+<tr>
+<td>ssl</td>
+<td>org.apache.shiro.web.filter.authz.SslFilter</td>
+<td>SSL拦截器，只有请求协议是https才能通过；否则自动跳转会https端口443；其他和port拦截器一样；</td>
+</tr>
+<tr>
+<td>user</td>
+<td>org.apache.shiro.web.filter.authc.UserFilter</td>
+<td>用户拦截器，用户已经身份验证/记住我登录的都可；示例/**=user</td>
+</tr>
+</tbody></table>
+<h4 id="启用和禁用过滤器启动，补充过滤器"><a href="#启用和禁用过滤器启动，补充过滤器" class="headerlink" title="启用和禁用过滤器启动，补充过滤器"></a>启用和禁用过滤器启动，补充过滤器</h4>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/shiro/" rel="tag"># shiro</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2019/11/04/Spring/%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0springboot%E4%B8%AD%E7%9A%84SpringApplication/" rel="next" title="深入学习Springboot中的SpringApplication">
+                  <i class="fa fa-chevron-left"></i> 深入学习Springboot中的SpringApplication
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+                <a href="/2019/11/04/shiro/Shiro%E4%B8%AD%E7%9A%84%E6%9D%83%E9%99%90,/" rel="prev" title="Shiro中的权限">
+                  Shiro中的权限 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Shiro配置"><span class="nav-number">1.</span> <span class="nav-text">Shiro配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#程序配置"><span class="nav-number">1.1.</span> <span class="nav-text">程序配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#INI配置"><span class="nav-number">1.2.</span> <span class="nav-text">INI配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#从INI创建SecurityManager"><span class="nav-number">1.2.1.</span> <span class="nav-text">从INI创建SecurityManager</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#INI资源中的SecurityManager"><span class="nav-number">1.2.2.</span> <span class="nav-text">INI资源中的SecurityManager</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#INI的各个节点"><span class="nav-number">1.2.3.</span> <span class="nav-text">INI的各个节点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#main"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">main</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#定义对象"><span class="nav-number">1.2.3.1.1.</span> <span class="nav-text">定义对象</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设置对象属性"><span class="nav-number">1.2.3.2.</span> <span class="nav-text">设置对象属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#引用类型的值"><span class="nav-number">1.2.3.3.</span> <span class="nav-text">引用类型的值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#默认的SecurityManager"><span class="nav-number">1.2.3.4.</span> <span class="nav-text">默认的SecurityManager</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#User"><span class="nav-number">1.2.4.</span> <span class="nav-text">User</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#行格式"><span class="nav-number">1.2.4.1.</span> <span class="nav-text">行格式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#加密密码"><span class="nav-number">1.2.4.2.</span> <span class="nav-text">加密密码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#roles"><span class="nav-number">1.2.5.</span> <span class="nav-text">roles</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#行格式-1"><span class="nav-number">1.2.5.1.</span> <span class="nav-text">行格式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#urls"><span class="nav-number">1.2.6.</span> <span class="nav-text">[urls]</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#URL-Path-Expressions"><span class="nav-number">1.2.6.1.</span> <span class="nav-text">URL Path Expressions</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Filter-Chain-Definitions-定义"><span class="nav-number">1.2.6.2.</span> <span class="nav-text">Filter Chain Definitions 定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Available-Filters-可用的过滤器"><span class="nav-number">1.2.6.3.</span> <span class="nav-text">Available Filters 可用的过滤器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Default-Filters"><span class="nav-number">1.2.6.4.</span> <span class="nav-text">Default Filters</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#启用和禁用过滤器启动，补充过滤器"><span class="nav-number">1.2.6.5.</span> <span class="nav-text">启用和禁用过滤器启动，补充过滤器</span></a></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="site-author-image" itemprop="image" alt="Lancersaber"
+    src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Lancersaber</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">110</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lancersaber</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.4.2
+  </div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.2"></script><script src="/js/motion.js?v=7.4.2"></script>
+<script src="/js/schemes/muse.js?v=7.4.2"></script>
+<script src="/js/next-boot.js?v=7.4.2"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

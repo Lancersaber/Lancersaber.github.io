@@ -50,12 +50,15 @@
   };
 </script>
 
-  <meta property="og:type" content="article">
-<meta property="og:title" content="Canvas&#x2F;canvas的转换函数">
+  <meta name="description" content="canvas中的转换函数 保存和还原状态在介绍转换方法之前，让我们看一下另外两种方法，一旦开始生成更复杂的图形，这些方法必不可少。  save()保存画布的整个状态。 restore()恢复最近保存的画布状态  画布状态存储在堆栈中。每次save()调用该方法时，当前的绘图状态都会被压入堆栈。绘图状态包括  已应用转换（即translate，rotate和scale-见下文）。 以下属性的当前值：">
+<meta name="keywords" content="canvas">
+<meta property="og:type" content="article">
+<meta property="og:title" content="canvas中的转换函数">
 <meta property="og:url" content="https:&#x2F;&#x2F;lancersaber.github.io&#x2F;2019&#x2F;11&#x2F;01&#x2F;Canvas&#x2F;canvas%E7%9A%84%E8%BD%AC%E6%8D%A2%E5%87%BD%E6%95%B0&#x2F;index.html">
 <meta property="og:site_name" content="Lancersaber">
+<meta property="og:description" content="canvas中的转换函数 保存和还原状态在介绍转换方法之前，让我们看一下另外两种方法，一旦开始生成更复杂的图形，这些方法必不可少。  save()保存画布的整个状态。 restore()恢复最近保存的画布状态  画布状态存储在堆栈中。每次save()调用该方法时，当前的绘图状态都会被压入堆栈。绘图状态包括  已应用转换（即translate，rotate和scale-见下文）。 以下属性的当前值：">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-11-01T05:50:02.770Z">
+<meta property="og:updated_time" content="2019-11-02T11:06:42.636Z">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://lancersaber.github.io/2019/11/01/Canvas/canvas%E7%9A%84%E8%BD%AC%E6%8D%A2%E5%87%BD%E6%95%B0/">
@@ -72,7 +75,7 @@
   };
 </script>
 
-  <title>Canvas/canvas的转换函数 | Lancersaber</title>
+  <title>canvas中的转换函数 | Lancersaber</title>
   
 
 
@@ -186,7 +189,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Canvas/canvas的转换函数
+          canvas中的转换函数
         </h1>
 
         <div class="post-meta">
@@ -197,6 +200,24 @@
               <span class="post-meta-item-text">Posted on</span>
 
               <time title="Created: 2019-11-01 13:50:02" itemprop="dateCreated datePublished" datetime="2019-11-01T13:50:02+08:00">2019-11-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-11-02 19:06:42" itemprop="dateModified" datetime="2019-11-02T19:06:42+08:00">2019-11-02</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/canvas/" itemprop="url" rel="index">
+                    <span itemprop="name">canvas</span>
+                  </a>
+                </span>
             </span>
 
           
@@ -210,7 +231,36 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        
+        <h1 id="canvas中的转换函数"><a href="#canvas中的转换函数" class="headerlink" title="canvas中的转换函数"></a>canvas中的转换函数</h1><hr>
+<h2 id="保存和还原状态"><a href="#保存和还原状态" class="headerlink" title="保存和还原状态"></a>保存和还原状态</h2><p>在介绍转换方法之前，让我们看一下另外两种方法，一旦开始生成更复杂的图形，这些方法必不可少。</p>
+<ul>
+<li>save()<br>保存画布的整个状态。</li>
+<li>restore()<br>恢复最近保存的画布状态</li>
+</ul>
+<p>画布状态存储在堆栈中。每次save()调用该方法时，当前的绘图状态都会被压入堆栈。绘图状态包括</p>
+<ul>
+<li>已应用转换（即translate，rotate和scale-见下文）。</li>
+<li>以下属性的当前值：strokeStyle，fillStyle，globalAlpha，lineWidth，lineCap，lineJoin，miterLimit，lineDashOffset，shadowOffsetX，shadowOffsetY，shadowBlur，shadowColor，globalCompositeOperation，font，textAlign，textBaseline，direction，imageSmoothingEnabled。</li>
+<li>当前的剪切路径，我们将在下一部分中看到。</li>
+</ul>
+<p>您可以save()根据需要多次调用该方法。每次restore()调用该方法时，都会从堆栈中弹出最后一个保存的状态，并还原所有保存的设置。</p>
+<h2 id="平移"><a href="#平移" class="headerlink" title="平移"></a>平移</h2><p>我们将介绍的第一种转换方法是translate()。此方法用于将画布及其原点移动到网格中的其他点。</p>
+<ul>
+<li>translate(x, y)<br>在画布上移动画布及其原点。x指示要移动的水平距离，并y指示垂直移动网格的距离。</li>
+</ul>
+<h2 id="旋转"><a href="#旋转" class="headerlink" title="旋转"></a>旋转</h2><p>第二种转换方法是rotate()。我们使用它来围绕当前原点旋转画布。</p>
+<ul>
+<li>rotate(angle)<br>按angle弧度数围绕当前原点<em>顺时针</em>旋转画布。</li>
+</ul>
+<p>旋转中心点始终是画布原点。要更改中心点，我们需要使用translate()方法移动画布。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">提醒：角度以弧度而不是度为单位。要进行转换，我们使用：radians = (Math.PI/180)*degrees。</span><br></pre></td></tr></table></figure>
+
+<h2 id="缩放"><a href="#缩放" class="headerlink" title="缩放"></a>缩放</h2><p>下一个转换方法是缩放。我们使用它来增加或减少画布网格中的单位。这可用于绘制按比例缩小或放大的形状和位图。</p>
+<ul>
+<li>scale(x, y)<br>水平按x缩放画布单位，垂直按y缩放画布单位。这两个参数都是实数。小于1.0的值将减小单位大小，而大于1.0的值将增大单位大小。值1.0会使单位保持相同大小。<br>使用负数可以进行轴镜像（例如，使用translate(0,canvas.height); scale(1,-1);会具有众所周知的笛卡尔坐标系，其原点位于左下角）。</li>
+</ul>
+<p>默认情况下，画布上的一个单位正好是一个像素。例如，如果我们应用比例因子0.5，则结果单位将变为0.5像素，因此将以一半大小绘制形状。以类似的方式将缩放因子设置为2.0将增加单位大小，并且一个单位现在变为两个像素。这将导致绘制两倍大的形状。</p>
+
     </div>
 
     
@@ -218,6 +268,9 @@
     
 
       <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/canvas/" rel="tag"># canvas</a>
+          </div>
 
         
 
@@ -272,6 +325,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#canvas中的转换函数"><span class="nav-number">1.</span> <span class="nav-text">canvas中的转换函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#保存和还原状态"><span class="nav-number">1.1.</span> <span class="nav-text">保存和还原状态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#平移"><span class="nav-number">1.2.</span> <span class="nav-text">平移</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#旋转"><span class="nav-number">1.3.</span> <span class="nav-text">旋转</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#缩放"><span class="nav-number">1.4.</span> <span class="nav-text">缩放</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -287,18 +341,18 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">64</span>
+          <span class="site-state-item-count">110</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
-        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-count">24</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">22</span>
+        <span class="site-state-item-count">37</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

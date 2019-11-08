@@ -172,7 +172,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/10/24/Docker/Docker%E9%95%9C%E5%83%8F%E5%8E%9F%E7%90%86/">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/02/Activiti/Activiti%E5%85%A5%E9%97%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -186,7 +186,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/10/24/Docker/Docker%E9%95%9C%E5%83%8F%E5%8E%9F%E7%90%86/" class="post-title-link" itemprop="url">Docker镜像原理</a>
+            <a href="/2019/11/02/Activiti/Activiti%E5%85%A5%E9%97%A8/" class="post-title-link" itemprop="url">Activiti入门</a>
         </h1>
 
         <div class="post-meta">
@@ -195,24 +195,18 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
+              
 
-              <time title="Created: 2019-10-24 23:15:15" itemprop="dateCreated datePublished" datetime="2019-10-24T23:15:15+08:00">2019-10-24</time>
+              <time title="Created: 2019-11-02 19:40:07 / Modified: 21:25:59" itemprop="dateCreated datePublished" datetime="2019-11-02T19:40:07+08:00">2019-11-02</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-31 10:51:33" itemprop="dateModified" datetime="2019-10-31T10:51:33+08:00">2019-10-31</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/docker/" itemprop="url" rel="index">
-                    <span itemprop="name">docker</span>
+                  <a href="/categories/Activiti/" itemprop="url" rel="index">
+                    <span itemprop="name">Activiti</span>
                   </a>
                 </span>
             </span>
@@ -228,484 +222,92 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Docker镜像原理"><a href="#Docker镜像原理" class="headerlink" title="Docker镜像原理"></a>Docker镜像原理</h1><hr>
-<h2 id="Docker镜像是什么？"><a href="#Docker镜像是什么？" class="headerlink" title="Docker镜像是什么？"></a>Docker镜像是什么？</h2><p>镜像是一种轻量级的、可执行的独立软件包，用来打包软件运行环境和基于环境开发的软件，它包含运行某个软件所需的所有内容，包阔代码、运行时、库、环境变量等等配置文件</p>
-<h2 id="UnionFS-联合文件系统"><a href="#UnionFS-联合文件系统" class="headerlink" title="UnionFS(联合文件系统)"></a>UnionFS(联合文件系统)</h2><p>UnionFS是一种分层、轻量级并且高性能的文件系统，它支持对文件系统的修改作为一次提交来一层层的叠加，同时可以将不同目录挂载到同一个虚拟文件系统下。Union文件系统是Docker镜像的基础。<em>镜像可以通过分层来进行继承，基于基础镜像，可以制作各种具体的应用镜像</em></p>
-<h2 id="Dockers镜像加载原理"><a href="#Dockers镜像加载原理" class="headerlink" title="Dockers镜像加载原理"></a>Dockers镜像加载原理</h2><p>docker的镜像实际上由一层一层的文件系统组成，这种层级的文件系统为UnionFS。</p>
-<h2 id="分层的镜像"><a href="#分层的镜像" class="headerlink" title="分层的镜像"></a>分层的镜像</h2><p>以我们的pul为例，在下载的过程中我们可以看到docker的镜像是一层一层在下载的</p>
-<p>##为什么Docker镜像要采用这种分层结构？<br>最大的好处是-共享资源。<br>比如：有多个镜像都从相同的base镜像构建而来，那么宿主主机只需在磁盘上保留一份base镜像，同时内存中也只需加载一份base镜像，就可以为所有容器服务了。而且镜像的每一层都可以共享。</p>
+          <h1 id="Activiti入门"><a href="#Activiti入门" class="headerlink" title="Activiti入门"></a>Activiti入门</h1><hr>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Activiti是领先的轻量级，以Java为中心的开源BPMN引擎，可满足现实世界中的流程自动化需求。Activiti Cloud现在是新一代的业务自动化平台，提供了一组旨在在分布式基础架构上运行的云原生模块。</p>
+<h2 id="引入Activiti的依赖"><a href="#引入Activiti的依赖" class="headerlink" title="引入Activiti的依赖"></a>引入Activiti的依赖</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.activiti&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;activiti-engine&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;7.1.0.M4&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.activiti&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;activiti-spring&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;7.1.0.M4&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
 
-      
-    </div>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><h3 id="配置一个ProcessEngine"><a href="#配置一个ProcessEngine" class="headerlink" title="配置一个ProcessEngine"></a>配置一个ProcessEngine</h3><p>Activiti流程引擎通过名为的XML文件进行配置activiti.cfg.xml。请注意，如果您使用的是Spring风格的流程引擎构建，则此方法不适用。</p>
+<p>获得的最简单方法ProcessEngine是使用org.activiti.engine.ProcessEngines类：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();</span><br></pre></td></tr></table></figure>
 
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
+<p>这将activiti.cfg.xml在类路径上查找文件，并根据该文件中的配置构造一个引擎。以下代码段显示了示例配置。以下各节将详细介绍配置属性。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;</span><br><span class="line">       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><br><span class="line">       xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd&quot;&gt;</span><br><span class="line"></span><br><span class="line">  &lt;bean id=&quot;processEngineConfiguration&quot; class=&quot;org.activiti.engine.impl.cfg.StandaloneProcessEngineConfiguration&quot;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;property name=&quot;jdbcUrl&quot; value=&quot;jdbc:h2:mem:activiti;DB_CLOSE_DELAY=1000&quot; /&gt;</span><br><span class="line">    &lt;property name=&quot;jdbcDriver&quot; value=&quot;org.h2.Driver&quot; /&gt;</span><br><span class="line">    &lt;property name=&quot;jdbcUsername&quot; value=&quot;sa&quot; /&gt;</span><br><span class="line">    &lt;property name=&quot;jdbcPassword&quot; value=&quot;&quot; /&gt;</span><br><span class="line"></span><br><span class="line">    &lt;property name=&quot;databaseSchemaUpdate&quot; value=&quot;true&quot; /&gt;</span><br><span class="line"></span><br><span class="line">    &lt;property name=&quot;asyncExecutorActivate&quot; value=&quot;false&quot; /&gt;</span><br><span class="line"></span><br><span class="line">    &lt;property name=&quot;mailServerHost&quot; value=&quot;mail.my-corp.com&quot; /&gt;</span><br><span class="line">    &lt;property name=&quot;mailServerPort&quot; value=&quot;5025&quot; /&gt;</span><br><span class="line">  &lt;/bean&gt;</span><br><span class="line"></span><br><span class="line">&lt;/beans&gt;</span><br></pre></td></tr></table></figure>
+<p>请注意，配置XML实际上是Spring配置。<em>这并不意味着Activiti只能在Spring环境中使用！</em>我们只是在内部利用Spring的解析和依赖注入功能来构建引擎。</p>
+<p>也可以使用配置文件以编程方式创建ProcessEngineConfiguration对象。也可以使用其他bean id（例如，参见第3行）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ProcessEngineConfiguration.createProcessEngineConfigurationFromResourceDefault();</span><br><span class="line">ProcessEngineConfiguration.createProcessEngineConfigurationFromResource(String resource);</span><br><span class="line">ProcessEngineConfiguration.createProcessEngineConfigurationFromResource(String resource, String beanName);</span><br><span class="line">ProcessEngineConfiguration.createProcessEngineConfigurationFromInputStream(InputStream inputStream);</span><br><span class="line">ProcessEngineConfiguration.createProcessEngineConfigurationFromInputStream(InputStream inputStream, String beanName);</span><br></pre></td></tr></table></figure>
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/10/24/Docker/Docker%E5%AE%89%E8%A3%85/">
+<p>也可以不使用配置文件，并创建一个基于默认配置（见所支持的不同类的更多信息）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ProcessEngineConfiguration.createStandaloneProcessEngineConfiguration();</span><br><span class="line">ProcessEngineConfiguration.createStandaloneInMemProcessEngineConfiguration();</span><br></pre></td></tr></table></figure>
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lancersaber">
-      <meta itemprop="description" content="">
-    </span>
+<p>所有这些ProcessEngineConfiguration.createXXX()方法都返回一个a ProcessEngineConfiguration，可以根据需要对其进行进一步调整。调用buildProcessEngine()操作后，将创建一个ProcessEngine：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ProcessEngine processEngine = ProcessEngineConfiguration.createStandaloneInMemProcessEngineConfiguration()</span><br><span class="line">  .setDatabaseSchemaUpdate(ProcessEngineConfiguration.DB_SCHEMA_UPDATE_FALSE)</span><br><span class="line">  .setJdbcUrl(&quot;jdbc:h2:mem:my-own-db;DB_CLOSE_DELAY=1000&quot;)</span><br><span class="line">  .setAsyncExecutorActivate(false)</span><br><span class="line">  .buildProcessEngine();</span><br></pre></td></tr></table></figure>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lancersaber">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/10/24/Docker/Docker%E5%AE%89%E8%A3%85/" class="post-title-link" itemprop="url">Docker安装</a>
-        </h1>
+<h3 id="ProcessEngineConfiguration-bean"><a href="#ProcessEngineConfiguration-bean" class="headerlink" title="ProcessEngineConfiguration bean"></a>ProcessEngineConfiguration bean</h3><p>在activiti.cfg.xml必须包含有ID的Bean ‘processEngineConfiguration’。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;bean id=&quot;processEngineConfiguration&quot; class=&quot;org.activiti.engine.impl.cfg.StandaloneProcessEngineConfiguration&quot;&gt;</span><br></pre></td></tr></table></figure>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-10-24 23:15:15" itemprop="dateCreated datePublished" datetime="2019-10-24T23:15:15+08:00">2019-10-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-30 22:08:11" itemprop="dateModified" datetime="2019-10-30T22:08:11+08:00">2019-10-30</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/docker/" itemprop="url" rel="index">
-                    <span itemprop="name">docker</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Docker安装"><a href="#Docker安装" class="headerlink" title="Docker安装"></a>Docker安装</h1><hr>
-<p>##Docker的组成</p>
-<h3 id="镜像"><a href="#镜像" class="headerlink" title="镜像"></a>镜像</h3><p>Docker镜像(Image)就是一个只读的模板，镜像可以用来创建Docker容器，一个镜像可以创建多个容器。可以把Docker中的镜像类比为Java中的类。</p>
-<h3 id="容器"><a href="#容器" class="headerlink" title="容器"></a>容器</h3><p>Docker 利用容器(Container)独立运行的一个或一组应用。容器是用镜像创建的运行实例。它可以被启动、开始、停止、删除。每个容器都是相互隔离的、保证安全的平台。可以把容器看作一个简易版的Linux环境和运行在其中的应用程序。容器的定义和镜像几乎一模一样，也是一堆层的统一视角，唯一的区别在于容器的最上面的那一层是可读可写的。</p>
-<h3 id="仓库"><a href="#仓库" class="headerlink" title="仓库"></a>仓库</h3><p>仓库(Repository)是集中存放镜像的地方。<br>仓库和仓库注册服务器(Registry)。仓库注册服务器上往往存放着多个仓库，每个仓库又包含了多个镜像，每个镜像有不同的标签(tag)。<br>仓库分为公开仓库和私有仓库。</p>
-<h3 id="Docker的运行流程"><a href="#Docker的运行流程" class="headerlink" title="Docker的运行流程"></a>Docker的运行流程</h3><p>Docker本身是一个容器运行载体或称之为管理引擎。我们把应用程序和配置依赖打包形成的一个可交付的运行环境，这个打包好的运行环境就是image镜像文件。只有通过这个镜像文件才能生成Docker容器。image文件可以看做是容器的模板。Docker根据image文件生成容器的实例。</p>
-<h3 id="安装指令"><a href="#安装指令" class="headerlink" title="安装指令"></a>安装指令</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum update</span><br><span class="line">yum install docker</span><br></pre></td></tr></table></figure>
-
-<h3 id="阿里云镜像加速"><a href="#阿里云镜像加速" class="headerlink" title="阿里云镜像加速"></a>阿里云镜像加速</h3><p>1、登陆<a href="https://cr.console.aliyun.com/cn-hangzhou/instances/repositories" target="_blank" rel="noopener">https://cr.console.aliyun.com/cn-hangzhou/instances/repositories</a><br>2、注册一个账号后进入控制台，然后搜索镜像容器服务，找到镜像加速器<br>3、根据自己的系统找到对应的文件(/etc/docker/daemon.json)，将文件中的内容修改即可。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;registry-mirrors&quot;: [&quot;https://lg0skm2p.mirror.aliyuncs.com&quot;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>配置完成后，还需重启应用</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl daemon-reload</span><br><span class="line">sudo systemctl restart docker</span><br></pre></td></tr></table></figure>
-
-<h3 id="利用docker-run-hello-world-指令进行测试"><a href="#利用docker-run-hello-world-指令进行测试" class="headerlink" title="利用docker run hello-world 指令进行测试"></a>利用docker run hello-world 指令进行测试</h3><p>docker run 镜像名：这个指令先从远程仓库中拉取镜像，然后运行这个镜像的一个实例。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/10/24/Linux/Linux%E5%BF%98%E8%AE%B0root%E5%AF%86%E7%A0%81%E8%A7%A3%E5%86%B3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lancersaber">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lancersaber">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/10/24/Linux/Linux%E5%BF%98%E8%AE%B0root%E5%AF%86%E7%A0%81%E8%A7%A3%E5%86%B3/" class="post-title-link" itemprop="url">Linux忘记root密码</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-10-24 23:15:15" itemprop="dateCreated datePublished" datetime="2019-10-24T23:15:15+08:00">2019-10-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-30 22:23:56" itemprop="dateModified" datetime="2019-10-30T22:23:56+08:00">2019-10-30</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Linux忘记root密码"><a href="#Linux忘记root密码" class="headerlink" title="Linux忘记root密码"></a>Linux忘记root密码</h1><hr>
-<p>1、按下systemctl reboot来重新启动<br>2、进入到开机界面，在开机的选单上按下e来进入编辑模式<br><img src="https://i.loli.net/2019/10/30/OPRzSYcKd7wWs5H.png" alt="Linux编辑界面.PNG"><br>改完后按下ctrl+x开机<br>3、按照以下指令进行更改密码<br><img src="https://i.loli.net/2019/10/30/9SwENMhoTFQ7blg.png" alt="Linux更改密码.PNG"><br>exit后使用reboot重新开机即可</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/10/24/Linux/Linux%E5%88%87%E6%8D%A2%E7%95%8C%E9%9D%A2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lancersaber">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lancersaber">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/10/24/Linux/Linux%E5%88%87%E6%8D%A2%E7%95%8C%E9%9D%A2/" class="post-title-link" itemprop="url">Linux切换界面</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-10-24 23:15:15" itemprop="dateCreated datePublished" datetime="2019-10-24T23:15:15+08:00">2019-10-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-25 22:21:05" itemprop="dateModified" datetime="2019-10-25T22:21:05+08:00">2019-10-25</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Linux切换工作模式"><a href="#Linux切换工作模式" class="headerlink" title="Linux切换工作模式"></a>Linux切换工作模式</h1><hr>
-<p>进入/etc目录下，打开inittab文件，这个文件包含设置用户界面和控制台界面的设置方式。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"># inittab is no longer used when using systemd.</span><br><span class="line">#</span><br><span class="line"># ADDING CONFIGURATION HERE WILL HAVE NO EFFECT ON YOUR SYSTEM.</span><br><span class="line">#</span><br><span class="line"># Ctrl-Alt-Delete is handled by /usr/lib/systemd/system/ctrl-alt-del.target</span><br><span class="line">#</span><br><span class="line"># systemd uses &apos;targets&apos; instead of runlevels. By default, there are two main targets:</span><br><span class="line">#</span><br><span class="line"># multi-user.target: analogous to runlevel 3</span><br><span class="line"># graphical.target: analogous to runlevel 5</span><br><span class="line">#</span><br><span class="line"># To view current default target, run:</span><br><span class="line"># systemctl get-default</span><br><span class="line">#</span><br><span class="line"># To set a default target, run:</span><br><span class="line"># systemctl set-default TARGET.target</span><br><span class="line">#</span><br><span class="line"></span><br><span class="line">systemctl set-default graphical.target //默认启用图形化界面</span><br><span class="line">init 5;切换图形界面</span><br><span class="line">init 3;切换控制台</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/10/24/Java%E5%9F%BA%E7%A1%80/Java%E4%B8%AD%E7%9A%84%E6%B3%A8%E8%A7%A3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lancersaber">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lancersaber">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/10/24/Java%E5%9F%BA%E7%A1%80/Java%E4%B8%AD%E7%9A%84%E6%B3%A8%E8%A7%A3/" class="post-title-link" itemprop="url">Java中的注解</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-10-24 23:15:15" itemprop="dateCreated datePublished" datetime="2019-10-24T23:15:15+08:00">2019-10-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-28 07:50:31" itemprop="dateModified" datetime="2019-10-28T07:50:31+08:00">2019-10-28</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index">
-                    <span itemprop="name">Java基础</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Java中的基本注解"><a href="#Java中的基本注解" class="headerlink" title="Java中的基本注解"></a>Java中的基本注解</h1><hr>
-<p>&emsp;&emsp;注解(也称为元数据)为我们在代码中添加信息提供了一种形式化的方法，使我们可以在稍后某个时刻非常方便地使用这些数据。</p>
-<h2 id="Rentention注解类"><a href="#Rentention注解类" class="headerlink" title="Rentention注解类"></a>Rentention注解类</h2><p>注解的生命周期：Java源文件—》class文件—》内存中的字节码。编译或者运行时，都有可能会取消注解。Rentention的3种取值意味让注解保留到哪个阶段，RententionPolicy.SOURCE、RententionPolicy.CLASS(默认值)、RententionPolicy.RUNTIME。Rentention的值是枚举RententionPolicy的值，只有3个：SOURCE、CLASS、RUNTIME。</p>
+<p>然后，此bean用于构造ProcessEngine。有多个可用的类可用于定义processEngineConfiguration。这些类表示不同的环境，并相应地设置默认值。最佳做法是选择与您的环境最匹配的类，以最大程度地减少配置引擎所需的属性数量。当前提供以下类（将来的版本中将有更多类）：</p>
 <ul>
-<li>source：源代码中，注解将被编译器丢弃</li>
-<li>class：类文件中，注解在class文件中可用</li>
-<li>runtime:运行时，VM将在运行期也保留注解，因此可以通过反射机制读取注解的信息</li>
+<li><p>org.activiti.engine.impl.cfg.StandaloneProcessEngineConfiguration：以独立方式使用流程引擎。Activiti将负责交易。默认情况下，仅在引擎启动时检查数据库（如果没有Activiti架构或架构版本不正确，则会引发异常）。</p>
+</li>
+<li><p>org.activiti.engine.impl.cfg.StandaloneInMemProcessEngineConfiguration：这是用于单元测试的便捷类。Activiti将负责交易。默认情况下使用H2内存数据库。引擎启动和关闭时，将创建并删除数据库。使用此功能时，可能不需要其他配置（例如，使用作业执行程序或邮件功能时除外）。</p>
+</li>
+<li><p>org.activiti.spring.SpringProcessEngineConfiguration：在Spring环境中使用流程引擎时使用。有关更多信息，请参见Spring集成部分。</p>
+</li>
+<li><p>org.activiti.engine.impl.cfg.JtaProcessEngineConfiguration：当引擎以JTA事务在独立模式下运行时使用。</p>
+</li>
 </ul>
-<h2 id="Target注解类"><a href="#Target注解类" class="headerlink" title="Target注解类"></a>Target注解类</h2><p>性质和Rentention一样，都是注解类的属性，表示注解类应该在什么位置，对那一块的数据有效。例如，@Target(ElementType.METHOD)<br>Target内部的值使用枚举ElementType表示，表示的主要位置有：注解、构造方法、属性、局部变量、函数、包、参数和类(默认值)。多个位置使用数组，例如，@Target({ElementType.METHOD,ElementType.TYPE})。</p>
-<h2 id="使用注解的例子"><a href="#使用注解的例子" class="headerlink" title="使用注解的例子"></a>使用注解的例子</h2><p>下面是一个简单的注解，我们可以用它来跟踪一个项目中的用例。如果一个方法或一组方法实现了某个用例的需求，那么程序员可以为此方法加上该注解。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@Target(ElementType.METHOD)</span><br><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">public @interface UseCase &#123;</span><br><span class="line">    public int id();</span><br><span class="line">    public String description() default &quot;no description&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>注意：id和description类似方法定义。编译器会对id和description进行类型检查。description元素有一个default值，如果在注解某个方法时没有给出description的值，则此注解的处理器就会使用元素的默认值。</p>
-<p>使用注解的类</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">public class PasswordUtils &#123;</span><br><span class="line">    </span><br><span class="line">    @UseCase(id=47,description = &quot;Passwords must contain ar least one numeric&quot;)</span><br><span class="line">    public boolean validatePassword(String password)&#123;</span><br><span class="line">        return (password.matches(&quot;\\w*\\d\\w*&quot;));</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    @UseCase(id=48)</span><br><span class="line">    public String encryptPassword(String password)&#123;</span><br><span class="line">        return new StringBuilder(password).reverse().toString();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    @UseCase(id=49,description = &quot;New passwords can&apos;t equal previously used ones&quot;)</span><br><span class="line">    public boolean checkForNewPassword(List&lt;String&gt; prevPasswords,String password)&#123;</span><br><span class="line">        return !prevPasswords.contains(password);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="编写注解处理器"><a href="#编写注解处理器" class="headerlink" title="编写注解处理器"></a>编写注解处理器</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">public class UseCaseTracker &#123;</span><br><span class="line"></span><br><span class="line">    public static void trackUseCases(List&lt;Integer&gt; useCases,Class&lt;?&gt; cl)&#123;</span><br><span class="line">        for (Method m: cl.getDeclaredMethods())&#123;</span><br><span class="line">            UseCase annotation = m.getAnnotation(UseCase.class);</span><br><span class="line"></span><br><span class="line">            if (annotation!=null)&#123;</span><br><span class="line">                System.out.println(&quot;Found Use Case:&quot;+annotation.id()+&quot; &quot;+annotation.description());</span><br><span class="line"></span><br><span class="line">                useCases.remove(new Integer(annotation.id()));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        for (int i:useCases)&#123;</span><br><span class="line">            System.out.println(&quot;Warning: Missing use case-&quot;+i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args)&#123;</span><br><span class="line">        List&lt;Integer&gt; useCases=new ArrayList&lt;&gt;();</span><br><span class="line">        Collections.addAll(useCases,47,48,49,50);</span><br><span class="line">        trackUseCases(useCases,PasswordUtils.class);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这里用到了两个反射的方法：getDeclaredMethods()和getAnnotation(),它们都属于AnnotatedElement接口(class,Method与Field等类都实现了该接口)。getAnnoation()方法返回指定类型的注解对象，在这里就是UseCase。如果被注解的方法上没有该类型的注解，则返回null值。</p>
-<h3 id="默认值限制"><a href="#默认值限制" class="headerlink" title="默认值限制"></a>默认值限制</h3><p>&emsp;&emsp;编译器对元素的默认值有些过分挑剔。首先，元素不能有不确定的值。也就是说，元素必须具有默认值，要么在使用注解时提供元素的值。<br>&emsp;&emsp;其次，对于非基本类型的元素，无论是在源代码中声明时，或是在注解接口定义默认值时，都不能以null为其值。为了绕开这个约束，我们可以定义一些特殊的值，例如空字符串或负数，以此表示某个元素不存在。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@Target(ElementType.METHOD)</span><br><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">public @interface SimulatingNull &#123;</span><br><span class="line">    public int id() default -1;</span><br><span class="line">    public String descption() default &quot;&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/10/24/Linux/ps%E6%8C%87%E4%BB%A4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lancersaber">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lancersaber">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/10/24/Linux/ps%E6%8C%87%E4%BB%A4/" class="post-title-link" itemprop="url">每天一个Linux指令-ps</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-10-24 23:15:15" itemprop="dateCreated datePublished" datetime="2019-10-24T23:15:15+08:00">2019-10-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-26 16:14:41" itemprop="dateModified" datetime="2019-10-26T16:14:41+08:00">2019-10-26</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="每天一个Linux指令-ps"><a href="#每天一个Linux指令-ps" class="headerlink" title="每天一个Linux指令-ps"></a>每天一个Linux指令-ps</h1><hr>
-<p>ps指令是用于查阅系统上面正在运行的进程(ps是截取一个时间点的进程状态，而后面介绍的top可以持续侦测进程运作的状态)。用法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps [options]</span><br></pre></td></tr></table></figure>
-<p>选项与参数</p>
+<h3 id="数据库配置"><a href="#数据库配置" class="headerlink" title="数据库配置"></a>数据库配置</h3><p>有两种方法可以配置Activiti引擎将使用的数据库。第一种选择是定义数据库的JDBC属性：</p>
 <ul>
-<li>-A：所有的process均显示出来，与-e具有同样的效用</li>
-<li>-a：不与terminal有关的所有process</li>
-<li>-u：有效使用者和相关的process</li>
-<li>x ：通常与a这个参数一起使用，可列出教完整的信息<br>输出格式规划</li>
-<li>l ：较长、较详细地将该PID的信息列出</li>
-<li>j ：工作的格式(jobs format)</li>
-<li>-f :做一个更为完整的输出</li>
+<li><p>jdbcUrl：数据库的JDBC URL。</p>
+</li>
+<li><p>jdbcDriver：针对特定数据库类型的驱动程序的实现。</p>
+</li>
+<li><p>jdbcUsername：用于连接数据库的用户名。</p>
+</li>
+<li><p>jdbcPassword：连接数据库的密码。</p>
+</li>
 </ul>
-<h2 id="仅观察自己的bash相关进程"><a href="#仅观察自己的bash相关进程" class="headerlink" title="仅观察自己的bash相关进程"></a>仅观察自己的bash相关进程</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -l</span><br></pre></td></tr></table></figure>
-<p><img src="https://i.loli.net/2019/10/26/cC4X1lVZorFujxB.png" alt=""><br>系统整体的进程运作是非常多的，但如果使用ps -l则仅列出你的操作环境(bash)有关的进程而已，亦即最上层的父进程会是你自己的bash而没有沿伸到systemd这支进程。ps -l显示出来的资料包含以下内容：</p>
+<p>基于提供的JDBC属性构造的数据源将具有默认的MyBatis连接池设置。可以选择以下属性来调整该连接池（取自MyBatis文档）：</p>
 <ul>
-<li><p>F:代表这个进程旗标(process flags),说明这个进程的总结权限，常见号码有</p>
-<ul>
-<li>若为4表示此进程的权限为root</li>
-<li>若为1则表示此进程仅复制(fork)而没有实际执行(exec)</li>
-</ul>
+<li><p>jdbcMaxActiveConnections：连接池在任何时候最多可以包含的活动连接数。默认值是10。</p>
 </li>
-<li><p>S:代表这个进程的状态(STAT),主要的状态有</p>
-<ul>
-<li>R(Running): 该程序正在运作中</li>
-<li>S(Sleep)  : 该程序目前正在睡眠状态(idle)，但可以被唤醒(signal)</li>
-<li>D:        : 不可被唤醒的睡眠状态，通常这只程序可能正在等待I/O的情况</li>
-<li>T:        ：停止状态(stop),可能是在工作控制(背景暂停)或除错状态</li>
-<li>Z:        ：僵尸状态，进程已经终止但却无法被移除到内存外</li>
-</ul>
+<li><p>jdbcMaxIdleConnections：连接池在任何时候最多可以包含的空闲连接数。</p>
 </li>
-<li><p>UID/PID/PPID：代表【此进程被UID所拥有/进程的PID号码/此进程的父进程PID号码】</p>
+<li><p>jdbcMaxCheckoutTime：在强制返回连接之前，可以从连接池中检出连接的时间（以毫秒为单位）。默认值为20000（20秒）。</p>
 </li>
-<li><p>C：代表CPU的使用率，单位为百分比</p>
-</li>
-<li><p>PRI/NI：Priority/Nice的缩写，代表此进程被CPU所执行的优先级，数值越小代表该进程越快被CPU执行。</p>
-</li>
-<li><p>ADDR/SZ/WCHAN：都与内存有关</p>
-</li>
-<li><p>TTY：登入者的终端机位置，若为远程登录则使用动态终端接口(pts/n)</p>
-</li>
-<li><p>Time:使用掉的CPU时间</p>
-</li>
-<li><p>CMD：就是command的缩写，造成此进程的触发程序指令为何</p>
+<li><p>jdbcMaxWaitTime：这是一个较低级别的设置，它使池有机会打印日志状态，并在连接花费异常长的情况下重新尝试获取连接（以避免在池配置错误时永久性地失败）。是20000（20秒）。</p>
 </li>
 </ul>
-<h2 id="观察系统所有进程-ps-aux"><a href="#观察系统所有进程-ps-aux" class="headerlink" title="观察系统所有进程 ps aux"></a>观察系统所有进程 ps aux</h2><p><img src="https://i.loli.net/2019/10/26/4oWKpXvA63rGwRV.png" alt="捕获13.PNG"><br>在ps aux显示的项目中，各字段的意义为：</p>
-<ul>
-<li>User:该process属于哪个使用者账号的</li>
-<li>PID：该process的进程标识符</li>
-<li>%CPU：该process使用掉的CPU资源百分比</li>
-<li>%MEM：该process所占用的物理内存百分比</li>
-<li>VSZ：该process使用掉的虚拟内存量(Kbytes)</li>
-<li>RSS:该process占用的固定的内存量(Kbytes)</li>
-<li>TTY:该process是在哪个终端机上面运作，若与终端机无关则显示？，另外，tty1-tty6是本机上面的登入者进程，若为pts/0等等的，则表示为由网络连接进主机的进程</li>
-<li>STAT：该进程目前的状态，状态显示与ps -l 的S 旗标相同</li>
-<li>START：该process被触发启动的时间</li>
-<li>TIME：该process 实际使用CPU运作的时间</li>
-<li>COMMAND：该进程的实际指令为何？</li>
+<p>示例数据库配置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;property name=&quot;jdbcUrl&quot; value=&quot;jdbc:h2:mem:activiti;DB_CLOSE_DELAY=1000&quot; /&gt;</span><br><span class="line">&lt;property name=&quot;jdbcDriver&quot; value=&quot;org.h2.Driver&quot; /&gt;</span><br><span class="line">&lt;property name=&quot;jdbcUsername&quot; value=&quot;sa&quot; /&gt;</span><br><span class="line">&lt;property name=&quot;jdbcPassword&quot; value=&quot;&quot; /&gt;</span><br></pre></td></tr></table></figure>
+
+<p>我们的基准测试表明，在处理大量并发请求时，MyBatis连接池不是最有效或弹性最大的连接池。因此，建议给我们一个javax.sql.DataSource实现并将其注入到流程引擎配置中（例如DBCP，C3P0，Hikari，Tomcat连接池等）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;bean id=&quot;dataSource&quot; class=&quot;org.apache.commons.dbcp.BasicDataSource&quot; &gt;</span><br><span class="line">  &lt;property name=&quot;driverClassName&quot; value=&quot;com.mysql.jdbc.Driver&quot; /&gt;</span><br><span class="line">  &lt;property name=&quot;url&quot; value=&quot;jdbc:mysql://localhost:3306/activiti&quot; /&gt;</span><br><span class="line">  &lt;property name=&quot;username&quot; value=&quot;activiti&quot; /&gt;</span><br><span class="line">  &lt;property name=&quot;password&quot; value=&quot;activiti&quot; /&gt;</span><br><span class="line">  &lt;property name=&quot;defaultAutoCommit&quot; value=&quot;false&quot; /&gt;</span><br><span class="line">&lt;/bean&gt;</span><br><span class="line"></span><br><span class="line">&lt;bean id=&quot;processEngineConfiguration&quot; class=&quot;org.activiti.engine.impl.cfg.StandaloneProcessEngineConfiguration&quot;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot; /&gt;</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
+<p>请注意，Activiti并未附带允许定义此类数据源的库。因此，您必须确保这些库位于类路径中。<br>不管您使用的是JDBC还是数据源方法，都可以设置以下属性：</p>
+<p>databaseType：通常无需指定此属性，因为将从数据库连接元数据中自动分析该属性。仅在自动检测失败的情况下才应指定。可能的值：{h2，mysql，oracle，postgres，mssql，db2}。此设置将确定将使用哪些创建/删除脚本和查询。有关支持哪些类型的概述，请参见受支持的数据库部分。</p>
+<p>databaseSchemaUpdate：允许设置策略以在流程引擎启动和关闭时处理数据库架构。</p>
+<p>false （默认值）：在创建流程引擎时，对照库检查数据库模式的版本，如果版本不匹配，则引发异常。</p>
+<p>true：在构建流程引擎时，将执行检查并在必要时执行模式的更新。如果该模式不存在，则会创建它。</p>
+<p>create-drop：在创建流程引擎时创建架构，并在关闭流程引擎时删除架构。</p>
+<h3 id="数据库表的说明"><a href="#数据库表的说明" class="headerlink" title="数据库表的说明"></a>数据库表的说明</h3><ul>
+<li><p>ACT_RE_ *：RE代表repository。具有此前缀的表包含静态信息，例如流程定义和流程资源（图像，规则等）。</p>
+</li>
+<li><p>ACT_RU_ *：RU代表runtime。这些是运行时表，其中包含流程实例，用户任务，变量，作业等的运行时数据。Activiti仅在流程实例执行期间存储运行时数据，并在流程实例结束时删除记录。这样可以使运行时表较小而又快速。</p>
+</li>
+<li><p>ACT_ID_ *：ID代表identity。这些表包含身份信息，例如用户，组等。</p>
+</li>
+<li><p>ACT_HI_ *：HI代表history。这些表包含历史数据，例如过去的流程实例，变量，任务等。</p>
+</li>
+<li><p>ACT_GE_ *：general数据，用于各种用例中。</p>
+</li>
 </ul>
+<h3 id="数据库升级"><a href="#数据库升级" class="headerlink" title="数据库升级"></a>数据库升级</h3><p>在运行升级之前，请确保已使用数据库备份功能对数据库进行了备份。</p>
+<p>默认情况下，每次创建流程引擎时都会执行版本检查。这通常在应用程序或Activiti Web应用程序启动时发生一次。如果Activiti库注意到库版本与Activiti数据库表的版本之间存在差异，则将引发异常。</p>
+<p>要进行升级，必须首先将以下配置属性放入activiti.cfg.xml配置文件中：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;beans &gt;</span><br><span class="line"></span><br><span class="line">  &lt;bean id=&quot;processEngineConfiguration&quot; class=&quot;org.activiti.engine.impl.cfg.StandaloneProcessEngineConfiguration&quot;&gt;</span><br><span class="line">    &lt;!-- ... --&gt;</span><br><span class="line">    &lt;property name=&quot;databaseSchemaUpdate&quot; value=&quot;true&quot; /&gt;</span><br><span class="line">    &lt;!-- ... --&gt;</span><br><span class="line">  &lt;/bean&gt;</span><br><span class="line"></span><br><span class="line">&lt;/beans&gt;</span><br></pre></td></tr></table></figure>
+
+<p>另外，在类路径中包括适合您的数据库的数据库驱动程序。在应用程序中升级Activiti库。或启动新版本的Activiti并将其指向包含旧版本的数据库。随着databaseSchemaUpdate设置为true，Activiti的会自动将DB模式，当它注意到图书馆和数据库架构不同步的第一次升级到新版本。</p>
+<p>或者，您也可以运行升级DDL语句。也可以运行Activiti下载页面上的升级数据库脚本</p>
 
       
     </div>
@@ -725,7 +327,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/10/24/Linux/tar/">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/02/Spring/Springboot%E7%83%AD%E9%83%A8%E7%BD%B2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -739,7 +341,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/10/24/Linux/tar/" class="post-title-link" itemprop="url">每天一个Linux指令-tar</a>
+            <a href="/2019/11/02/Spring/Springboot%E7%83%AD%E9%83%A8%E7%BD%B2/" class="post-title-link" itemprop="url">Spring/Springboot热部署</a>
         </h1>
 
         <div class="post-meta">
@@ -748,24 +350,87 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
+              
 
-              <time title="Created: 2019-10-24 23:15:15" itemprop="dateCreated datePublished" datetime="2019-10-24T23:15:15+08:00">2019-10-24</time>
+              <time title="Created: 2019-11-02 19:22:25 / Modified: 21:25:59" itemprop="dateCreated datePublished" datetime="2019-11-02T19:22:25+08:00">2019-11-02</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-28 07:58:50" itemprop="dateModified" datetime="2019-10-28T07:58:50+08:00">2019-10-28</time>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <hr>
+<p>title: Springboot Devtools热部署<br>平日里开发项目中，修改了Java代码或者配置文件的时候，必须手动重启项目才能生效。所谓的热部署就是在你修改了后端代码后不需要手动重启，工具会帮你快速的自动重启是修改生效。其深层原理是使用了两个ClassLoader，一个Classloader加载那些不会改变的类（第三方Jar包），另一个ClassLoader加载会更改的类，称为restart ClassLoader，这样在有代码更改的时候，原来的restart ClassLoader 被丢弃，重新创建一个restart ClassLoader，由于需要加载的类相比较少，所以实现了较快的重启时间。</p>
+<p>本文将介绍如何通过使用Spring-Boot-devtools来实现Spring Boot项目的热部署。IDE使用的是Eclipse Oxygen，并且使用Maven构建。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-boot-devtools&lt;/artifactId&gt;</span><br><span class="line">    &lt;optional&gt;true&lt;/optional&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="测试热部署"><a href="#测试热部署" class="headerlink" title="测试热部署"></a>测试热部署</h2><p>在入口类中添加一个方法，用于热部署测试：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">import org.springframework.boot.SpringApplication;</span><br><span class="line">import org.springframework.boot.autoconfigure.SpringBootApplication;</span><br><span class="line">import org.springframework.web.bind.annotation.RequestMapping;</span><br><span class="line">import org.springframework.web.bind.annotation.RestController;</span><br><span class="line"></span><br><span class="line">@RestController</span><br><span class="line">@SpringBootApplication</span><br><span class="line">public class DemoApplication &#123;</span><br><span class="line">    @RequestMapping(&quot;/&quot;)</span><br><span class="line">    String index() &#123;</span><br><span class="line">        return &quot;hello spring boot&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        SpringApplication.run(DemoApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>启动项目访问<a href="http://localhost:8080/，页面输出hello" target="_blank" rel="noopener">http://localhost:8080/，页面输出hello</a> spring boot。</p>
+<p>将方法的返回值修改为hello world并在保存的瞬间，应用便重启好了，刷新页面，内容也将得到更改。</p>
+<h2 id="所有配置"><a href="#所有配置" class="headerlink" title="所有配置"></a>所有配置</h2><p>下面是所有Devtools在Spring Boot中的可选配置:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"># Whether to enable a livereload.com-compatible server.</span><br><span class="line">spring.devtools.livereload.enabled=true </span><br><span class="line"></span><br><span class="line"># Server port.</span><br><span class="line">spring.devtools.livereload.port=35729 </span><br><span class="line"></span><br><span class="line"># Additional patterns that should be excluded from triggering a full restart.</span><br><span class="line">spring.devtools.restart.additional-exclude= </span><br><span class="line"></span><br><span class="line"># Additional paths to watch for changes.</span><br><span class="line">spring.devtools.restart.additional-paths= </span><br><span class="line"></span><br><span class="line"># Whether to enable automatic restart.</span><br><span class="line">spring.devtools.restart.enabled=true</span><br><span class="line"></span><br><span class="line"># Patterns that should be excluded from triggering a full restart.</span><br><span class="line">spring.devtools.restart.exclude=META-INF/maven/**,META-INF/resources/**,resources/**,static/**,public/**,templates/**,**/*Test.class,**/*Tests.class,git.properties,META-INF/build-info.properties</span><br><span class="line"></span><br><span class="line"># Whether to log the condition evaluation delta upon restart.</span><br><span class="line">spring.devtools.restart.log-condition-evaluation-delta=true </span><br><span class="line"></span><br><span class="line"># Amount of time to wait between polling for classpath changes.</span><br><span class="line">spring.devtools.restart.poll-interval=1s </span><br><span class="line"></span><br><span class="line"># Amount of quiet time required without any classpath changes before a restart is triggered.</span><br><span class="line">spring.devtools.restart.quiet-period=400ms </span><br><span class="line"></span><br><span class="line"># Name of a specific file that, when changed, triggers the restart check. If not specified, any classpath file change triggers the restart.</span><br><span class="line">spring.devtools.restart.trigger-file=</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/02/Spring/Springboot%E4%B8%AD%E4%BD%BF%E7%94%A8thymeleaf/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/02/Spring/Springboot%E4%B8%AD%E4%BD%BF%E7%94%A8thymeleaf/" class="post-title-link" itemprop="url">springboot中使用thymeleaf</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
               </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2019-11-02 19:04:34 / Modified: 21:25:59" itemprop="dateCreated datePublished" datetime="2019-11-02T19:04:34+08:00">2019-11-02</time>
+            </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
+                  <a href="/categories/spring/" itemprop="url" rel="index">
+                    <span itemprop="name">spring</span>
                   </a>
                 </span>
             </span>
@@ -781,15 +446,23 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="每天一个Linux指令-tar"><a href="#每天一个Linux指令-tar" class="headerlink" title="每天一个Linux指令-tar"></a>每天一个Linux指令-tar</h1><hr>
-<p>tar命令可以为linux的文件和目录创建档案。利用tar，可以为某一特定文件创建档案（备份文件），也可以在档案中改变文件，或者向档案中加入新的文件。tar最初被用来在磁带上创建档案，现在，用户可以在任何设备上创建档案。利用tar命令，可以把一大堆的文件和目录全部打包成一个文件，这对于备份文件或将几个文件组合成为一个文件以便于网络传输是非常有用的。</p>
-<p>首先要弄清两个概念：打包和压缩。打包是指将一大堆文件或目录变成一个总的文件；压缩则是将一个大的文件通过一些压缩算法变成一个小文件。</p>
-<p>为什么要区分这两个概念呢？<em>这源于Linux中很多压缩程序只能针对一个文件进行压缩</em>，这样当你想要压缩一大堆文件时，你得先将这一大堆文件先打成一个包（tar命令），然后再用压缩程序进行压缩（gzip bzip2命令）。</p>
-<h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar(选项)(参数)</span><br></pre></td></tr></table></figure>
+          <h1 id="springboot中使用thymeleaf"><a href="#springboot中使用thymeleaf" class="headerlink" title="springboot中使用thymeleaf"></a>springboot中使用thymeleaf</h1><hr>
+<p>Spring Boot支持FreeMarker、Groovy、Thymeleaf和Mustache四种模板解析引擎，官方推荐使用Thymeleaf。</p>
+<h2 id="spring-boot-starter-thymeleaf"><a href="#spring-boot-starter-thymeleaf" class="headerlink" title="spring-boot-starter-thymeleaf"></a>spring-boot-starter-thymeleaf</h2><p>在Spring Boot中使用Thymeleaf只需在pom中加入Thymeleaf的starter即可：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-boot-starter-thymeleaf&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
 
-<h2 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">-A或--catenate：新增文件到以存在的备份文件；</span><br><span class="line">-B：设置区块大小；</span><br><span class="line">-c或--create：建立新的备份文件；</span><br><span class="line">-C &lt;目录&gt;：这个选项用在解压缩，若要在特定目录解压缩，可以使用这个选项。</span><br><span class="line">-d：记录文件的差别；</span><br><span class="line">-x或--extract或--get：从备份文件中还原文件；</span><br><span class="line">-t或--list：列出备份文件的内容；</span><br><span class="line">-z或--gzip或--ungzip：通过gzip指令处理备份文件；(常用)</span><br><span class="line">-Z或--compress或--uncompress：通过compress指令处理备份文件；</span><br><span class="line">-f&lt;备份文件&gt;或--file=&lt;备份文件&gt;：指定要处理的文件名；(常用)</span><br><span class="line">-v或--verbose：显示指令执行过程；(常用)</span><br><span class="line">-r：添加文件到已经压缩的文件；</span><br><span class="line">-u：添加改变了和现有的文件到已经存在的压缩文件；</span><br><span class="line">-j：支持bzip2解压文件；</span><br><span class="line">-v：显示操作过程；</span><br><span class="line">-l：文件系统边界设置；</span><br><span class="line">-k：保留原有文件不覆盖；</span><br><span class="line">-m：保留文件不被覆盖；</span><br><span class="line">-w：确认压缩文件的正确性；</span><br><span class="line">-p或--same-permissions：用原来的文件权限还原文件；</span><br><span class="line">-P或--absolute-names：文件名使用绝对名称，不移除文件名称前的“/”号；</span><br><span class="line">-N &lt;日期格式&gt; 或 --newer=&lt;日期时间&gt;：只将较指定日期更新的文件保存到备份文件里；</span><br><span class="line">--exclude=&lt;范本样式&gt;：排除符合范本样式的文件。</span><br></pre></td></tr></table></figure>
+<p>在Spring Boot 1.5.9.RELEASE版本中，默认的Thymeleaf版本为2.1.6.RELEASE版本，这里推荐使用3.0以上版本。在pom中将Thymeleaf的版本修改为3.0.2.RELEASE：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;properties&gt;</span><br><span class="line">    &lt;thymeleaf.version&gt;3.0.2.RELEASE&lt;/thymeleaf.version&gt;</span><br><span class="line">    &lt;thymeleaf-layout-dialect.version&gt;2.0.1&lt;/thymeleaf-layout-dialect.version&gt;</span><br><span class="line">&lt;/properties&gt;</span><br></pre></td></tr></table></figure>
 
-<h2 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">文件或目录：指定要打包的文件或目录列表。</span><br></pre></td></tr></table></figure>
+<p>在Spring Boot中，默认的html页面地址为src/main/resources/templates，默认的静态资源地址为src/main/resources/static。</p>
+<h2 id="Thymeleaf默认配置"><a href="#Thymeleaf默认配置" class="headerlink" title="Thymeleaf默认配置"></a>Thymeleaf默认配置</h2><p>在Spring Boot配置文件中可对Thymeleaf的默认配置进行修改：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">#开启模板缓存（默认值：true）</span><br><span class="line">spring.thymeleaf.cache=true </span><br><span class="line">#Check that the template exists before rendering it.</span><br><span class="line">spring.thymeleaf.check-template=true </span><br><span class="line">#检查模板位置是否正确（默认值:true）</span><br><span class="line">spring.thymeleaf.check-template-location=true</span><br><span class="line">#Content-Type的值（默认值：text/html）</span><br><span class="line">spring.thymeleaf.content-type=text/html</span><br><span class="line">#开启MVC Thymeleaf视图解析（默认值：true）</span><br><span class="line">spring.thymeleaf.enabled=true</span><br><span class="line">#模板编码</span><br><span class="line">spring.thymeleaf.encoding=UTF-8</span><br><span class="line">#要被排除在解析之外的视图名称列表，用逗号分隔</span><br><span class="line">spring.thymeleaf.excluded-view-names=</span><br><span class="line">#要运用于模板之上的模板模式。另见StandardTemplate-ModeHandlers(默认值：HTML5)</span><br><span class="line">spring.thymeleaf.mode=HTML5</span><br><span class="line">#在构建URL时添加到视图名称前的前缀（默认值：classpath:/templates/）</span><br><span class="line">spring.thymeleaf.prefix=classpath:/templates/</span><br><span class="line">#在构建URL时添加到视图名称后的后缀（默认值：.html）</span><br><span class="line">spring.thymeleaf.suffix=.html</span><br><span class="line">#Thymeleaf模板解析器在解析器链中的顺序。默认情况下，它排第一位。顺序从1开始，只有在定义了额外的TemplateResolver Bean时才需要设置这个属性。</span><br><span class="line">spring.thymeleaf.template-resolver-order=</span><br><span class="line">#可解析的视图名称列表，用逗号分隔</span><br><span class="line">spring.thymeleaf.view-names=</span><br></pre></td></tr></table></figure>
+<p>一般开发中将spring.thymeleaf.cache设置为false，其他保持替换值即可。</p>
+<h2 id="简单示例"><a href="#简单示例" class="headerlink" title="简单示例"></a>简单示例</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">@Controller</span><br><span class="line">public class IndexController &#123;</span><br><span class="line">	</span><br><span class="line">    @RequestMapping(&quot;/account&quot;)</span><br><span class="line">    public String index(Model m) &#123;</span><br><span class="line">        List&lt;Account&gt; list = new ArrayList&lt;Account&gt;();</span><br><span class="line">        list.add(new Account(&quot;KangKang&quot;, &quot;康康&quot;, &quot;e10adc3949ba59abbe56e&quot;, &quot;超级管理员&quot;, &quot;17777777777&quot;));</span><br><span class="line">        list.add(new Account(&quot;Mike&quot;, &quot;麦克&quot;, &quot;e10adc3949ba59abbe56e&quot;, &quot;管理员&quot;, &quot;13444444444&quot;));</span><br><span class="line">        list.add(new Account(&quot;Jane&quot;,&quot;简&quot;,&quot;e10adc3949ba59abbe56e&quot;,&quot;运维人员&quot;,&quot;18666666666&quot;));</span><br><span class="line">        list.add(new Account(&quot;Maria&quot;, &quot;玛利亚&quot;, &quot;e10adc3949ba59abbe56e&quot;, &quot;清算人员&quot;, &quot;19999999999&quot;));</span><br><span class="line">        m.addAttribute(&quot;accountList&quot;,list);</span><br><span class="line">        return &quot;account&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>编写account.html页面：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html xmlns:th=&quot;http://www.thymeleaf.org&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;title&gt;account&lt;/title&gt;</span><br><span class="line">    &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot; /&gt;</span><br><span class="line">    &lt;link rel=&quot;stylesheet&quot; th:href=&quot;@&#123;/css/style.css&#125;&quot; type=&quot;text/css&quot;&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;table&gt;</span><br><span class="line">        &lt;tr&gt;</span><br><span class="line">            &lt;th&gt;no&lt;/th&gt;</span><br><span class="line">            &lt;th&gt;account&lt;/th&gt;</span><br><span class="line">            &lt;th&gt;name&lt;/th&gt;</span><br><span class="line">            &lt;th&gt;password&lt;/th&gt;</span><br><span class="line">            &lt;th&gt;accountType&lt;/th&gt;</span><br><span class="line">            &lt;th&gt;tel&lt;/th&gt;</span><br><span class="line">        &lt;/tr&gt;</span><br><span class="line">        &lt;tr th:each=&quot;list,stat : $&#123;accountList&#125;&quot;&gt;</span><br><span class="line">            &lt;td th:text=&quot;$&#123;stat.count&#125;&quot;&gt;&lt;/td&gt;</span><br><span class="line">            &lt;td th:text=&quot;$&#123;list.account&#125;&quot;&gt;&lt;/td&gt;</span><br><span class="line">            &lt;td th:text=&quot;$&#123;list.name&#125;&quot;&gt;&lt;/td&gt;</span><br><span class="line">            &lt;td th:text=&quot;$&#123;list.password&#125;&quot;&gt;&lt;/td&gt;</span><br><span class="line">            &lt;td th:text=&quot;$&#123;list.accountType&#125;&quot;&gt;&lt;/td&gt;</span><br><span class="line">            &lt;td th:text=&quot;$&#123;list.tel&#125;&quot;&gt;&lt;/td&gt;</span><br><span class="line">        &lt;/tr&gt;</span><br><span class="line">    &lt;/table&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
 
       
     </div>
@@ -809,7 +482,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/10/24/Linux/Linux%E5%B8%B8%E7%94%A8%E7%BD%91%E7%BB%9C%E6%8C%87%E4%BB%A4/">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/02/JavaScript/DOM%E4%BA%8B%E4%BB%B6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -823,7 +496,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/10/24/Linux/Linux%E5%B8%B8%E7%94%A8%E7%BD%91%E7%BB%9C%E6%8C%87%E4%BB%A4/" class="post-title-link" itemprop="url">Linux常用网络指令介绍</a>
+            <a href="/2019/11/02/JavaScript/DOM%E4%BA%8B%E4%BB%B6/" class="post-title-link" itemprop="url">DOM事件</a>
         </h1>
 
         <div class="post-meta">
@@ -832,24 +505,18 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
+              
 
-              <time title="Created: 2019-10-24 23:15:15" itemprop="dateCreated datePublished" datetime="2019-10-24T23:15:15+08:00">2019-10-24</time>
+              <time title="Created: 2019-11-02 17:43:02 / Modified: 19:06:42" itemprop="dateCreated datePublished" datetime="2019-11-02T17:43:02+08:00">2019-11-02</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-26 18:40:46" itemprop="dateModified" datetime="2019-10-26T18:40:46+08:00">2019-10-26</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
                   </a>
                 </span>
             </span>
@@ -865,24 +532,204 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Linux常用网络指令介绍"><a href="#Linux常用网络指令介绍" class="headerlink" title="Linux常用网络指令介绍"></a>Linux常用网络指令介绍</h1><hr>
-<h2 id="网络参数设定指令"><a href="#网络参数设定指令" class="headerlink" title="网络参数设定指令"></a>网络参数设定指令</h2><ul>
-<li>ifconfig：ifconfig命令被用于配置和显示Linux内核中网络接口的网络参数。用ifconfig命令配置的网卡信息，在网卡重启后机器重启后，配置就不存在。要想将上述的配置信息永远的存的电脑里，那就要修改网卡的配置文件了。</li>
-<li>ifup,ifdown:这两个档案是script，透过更简单的方式来启动网络接口</li>
-<li>route：查询、设定路由表(route table)</li>
-<li>ip: 复合式的指令，可以直接修改上述提到的功能</li>
+          <h1 id="DOM事件"><a href="#DOM事件" class="headerlink" title="DOM事件"></a>DOM事件</h1><hr>
+<h2 id="鼠标事件"><a href="#鼠标事件" class="headerlink" title="鼠标事件"></a>鼠标事件</h2><table>
+<thead>
+<tr>
+<th align="center">属性</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">onclick</td>
+<td align="center">当用户点击某个对象时调用的事件句柄。</td>
+</tr>
+<tr>
+<td align="center">oncontextmenu</td>
+<td align="center">在用户点击鼠标右键打开上下文菜单时触发</td>
+</tr>
+<tr>
+<td align="center">ondblclick</td>
+<td align="center">当用户双击某个对象时调用的事件句柄。</td>
+</tr>
+<tr>
+<td align="center">onmousedown</td>
+<td align="center">鼠标按钮被按下。</td>
+</tr>
+<tr>
+<td align="center">onmouseenter</td>
+<td align="center">当鼠标指针移动到元素上时触发。</td>
+</tr>
+<tr>
+<td align="center">onmouseleave</td>
+<td align="center">当鼠标指针移出元素时触发</td>
+</tr>
+<tr>
+<td align="center">onmousemove</td>
+<td align="center">鼠标被移动。</td>
+</tr>
+<tr>
+<td align="center">onmouseover</td>
+<td align="center">鼠标移到某元素之上。</td>
+</tr>
+<tr>
+<td align="center">onmouseout</td>
+<td align="center">鼠标从某元素移开。</td>
+</tr>
+<tr>
+<td align="center">onmouseup</td>
+<td align="center">鼠标按键被松开。</td>
+</tr>
+</tbody></table>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/02/Refactor/%E9%87%8D%E6%96%B0%E7%BB%84%E7%BB%87%E5%87%BD%E6%95%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/02/Refactor/%E9%87%8D%E6%96%B0%E7%BB%84%E7%BB%87%E5%87%BD%E6%95%B0/" class="post-title-link" itemprop="url">重新组织函数</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2019-11-02 13:54:27 / Modified: 19:06:42" itemprop="dateCreated datePublished" datetime="2019-11-02T13:54:27+08:00">2019-11-02</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%87%8D%E6%9E%84/" itemprop="url" rel="index">
+                    <span itemprop="name">重构</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="重新组织函数"><a href="#重新组织函数" class="headerlink" title="重新组织函数"></a>重新组织函数</h1>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/02/Refactor/%E4%BB%A3%E7%A0%81%E7%9A%84%E5%9D%8F%E5%91%B3%E9%81%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/02/Refactor/%E4%BB%A3%E7%A0%81%E7%9A%84%E5%9D%8F%E5%91%B3%E9%81%93/" class="post-title-link" itemprop="url">代码的坏味道</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2019-11-02 13:09:47 / Modified: 19:06:42" itemprop="dateCreated datePublished" datetime="2019-11-02T13:09:47+08:00">2019-11-02</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%87%8D%E6%9E%84/" itemprop="url" rel="index">
+                    <span itemprop="name">重构</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="代码的坏味道"><a href="#代码的坏味道" class="headerlink" title="代码的坏味道"></a>代码的坏味道</h1><hr>
+<h2 id="Duplicated-Code-重复代码"><a href="#Duplicated-Code-重复代码" class="headerlink" title="Duplicated Code(重复代码)"></a>Duplicated Code(重复代码)</h2><p>&emsp;&emsp;坏味道代码中首当其冲的就是Duplicateed Code。如果你在一个以上的地点看到相同的程序结构，那么可以肯定：设法将它们合而为一，程序会变得更好。<br>Duplicateed Code有以下几种情况：</p>
+<ul>
+<li>同一个类的两个函数含有相同的表达式<br>s:采用Extract Method提炼出重复的代码，然后让两个地点都调用被提炼出来的那一段代码</li>
+<li>两个互为兄弟的子类内含相同的表达式</li>
 </ul>
-<p>语法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ifconfig(参数)</span><br><span class="line">ifconfig [interface] &#123;up/down&#125; 观察与启动接口</span><br><span class="line">ifconfig [interface] [options] 设定与修改接口</span><br></pre></td></tr></table></figure>
-<p>参数</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">add&lt;地址&gt;：设置网络设备IPv6的ip地址；</span><br><span class="line">del&lt;地址&gt;：删除网络设备IPv6的IP地址；</span><br><span class="line">down：关闭指定的网络设备；</span><br><span class="line">&lt;hw&lt;网络设备类型&gt;&lt;硬件地址&gt;：设置网络设备的类型与硬件地址；</span><br><span class="line">io_addr&lt;I/O地址&gt;：设置网络设备的I/O地址；</span><br><span class="line">irq&lt;IRQ地址&gt;：设置网络设备的IRQ；</span><br><span class="line">media&lt;网络媒介类型&gt;：设置网络设备的媒介类型；</span><br><span class="line">mem_start&lt;内存地址&gt;：设置网络设备在主内存所占用的起始地址；</span><br><span class="line">metric&lt;数目&gt;：指定在计算数据包的转送次数时，所要加上的数目；</span><br><span class="line">mtu&lt;字节&gt;：设置网络设备的MTU；</span><br><span class="line">netmask&lt;子网掩码&gt;：设置网络设备的子网掩码；</span><br><span class="line">tunnel&lt;地址&gt;：建立IPv4与IPv6之间的隧道通信地址；</span><br><span class="line">up：启动指定的网络设备；</span><br><span class="line">-broadcast&lt;地址&gt;：将要送往指定地址的数据包当成广播数据包来处理；</span><br><span class="line">-pointopoint&lt;地址&gt;：与指定地址的网络设备建立直接连线，此模式具有保密功能；</span><br><span class="line">-promisc：关闭或启动指定网络设备的promiscuous模式；</span><br><span class="line">IP地址：指定网络设备的IP地址；</span><br><span class="line">网络设备：指定网络设备的名称。</span><br></pre></td></tr></table></figure>
+<h2 id="Long-Method-过长函数"><a href="#Long-Method-过长函数" class="headerlink" title="Long Method(过长函数)"></a>Long Method(过长函数)</h2><h2 id="Large-Class-过大的类"><a href="#Large-Class-过大的类" class="headerlink" title="Large Class(过大的类)"></a>Large Class(过大的类)</h2><h2 id="Long-Parameter-List-过长参数列"><a href="#Long-Parameter-List-过长参数列" class="headerlink" title="Long Parameter List(过长参数列)"></a>Long Parameter List(过长参数列)</h2><h2 id="Divergent-Change-发散式变化"><a href="#Divergent-Change-发散式变化" class="headerlink" title="Divergent Change(发散式变化)"></a>Divergent Change(发散式变化)</h2><p>&emsp;&emsp;我们希望软件能够更容易被修改。一旦需要修改，我们希望能够跳到系统的某一点，只在此处做修改。如果不能做到这点，你就嗅出两种紧密相关的刺鼻味道中的一种了。<br>&emsp;&emsp;如果某个类经常因为不同的原因在不同的方向上发生变化，Divergent Change就出现了。举个例子，当你看着一个类说，“呃，如果新加入一个数据库，我必须修改这三个函数”，那么此时也许将这个对象分成两个会更好，这么一来每个对象就可以只因一种变化而需要修改。</p>
+<h2 id="Shutgun-Surgery-霰弹式修改"><a href="#Shutgun-Surgery-霰弹式修改" class="headerlink" title="Shutgun Surgery(霰弹式修改)"></a>Shutgun Surgery(霰弹式修改)</h2><p>&emsp;&emsp;如果每遇到某种变化，你都必须在许多不同的类内做许多小修改，你所面临的坏味道就是Shotgun Surgery。如果需要修改的代码散步四处，你不但很难找到它们，也很容易忘记某个重要的修改。<br>&emsp;&emsp;这种情况下，你应该使用Move Method和Move Field把所有需要修改的代码放进同一个类中。如果眼下没有合适的类可以安置这些代码，就创造一个。通常可以运用Inline Class把一些列相关行为放进同一个类。</p>
+<h2 id="Feature-Envy-依恋情结"><a href="#Feature-Envy-依恋情结" class="headerlink" title="Feature Envy(依恋情结)"></a>Feature Envy(依恋情结)</h2><p>&emsp;&emsp;</p>
+<h2 id="Comments-过多的注释"><a href="#Comments-过多的注释" class="headerlink" title="Comments(过多的注释)"></a>Comments(过多的注释)</h2><p>&emsp;&emsp;</p>
 
-<p>实例</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# ifconfig</span><br><span class="line">eth0      Link encap:Ethernet  HWaddr 00:16:3E:00:1E:51  </span><br><span class="line">          inet addr:10.160.7.81  Bcast:10.160.15.255  Mask:255.255.240.0</span><br><span class="line">          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1</span><br><span class="line">          RX packets:61430830 errors:0 dropped:0 overruns:0 frame:0</span><br><span class="line">          TX packets:88534 errors:0 dropped:0 overruns:0 carrier:0</span><br><span class="line">          collisions:0 txqueuelen:1000</span><br><span class="line">          RX bytes:3607197869 (3.3 GiB)  TX bytes:6115042 (5.8 MiB)</span><br><span class="line"></span><br><span class="line">lo        Link encap:Local Loopback  </span><br><span class="line">          inet addr:127.0.0.1  Mask:255.0.0.0</span><br><span class="line">          UP LOOPBACK RUNNING  MTU:16436  Metric:1</span><br><span class="line">          RX packets:56103 errors:0 dropped:0 overruns:0 frame:0</span><br><span class="line">          TX packets:56103 errors:0 dropped:0 overruns:0 carrier:0</span><br><span class="line">          collisions:0 txqueuelen:0</span><br><span class="line">          RX bytes:5079451 (4.8 MiB)  TX bytes:5079451 (4.8 MiB)</span><br></pre></td></tr></table></figure>
-<p>说明</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">eth0表示第一块网卡，其中HWaddr表示网卡的物理地址，可以看到目前这个网卡的物理地址(MAC地址）是00:16:3E:00:1E:51。</span><br><span class="line"></span><br><span class="line">inet addr用来表示网卡的IP地址，此网卡的IP地址是10.160.7.81，广播地址Bcast:10.160.15.255，掩码地址Mask:255.255.240.0。</span><br><span class="line"></span><br><span class="line">lo是表示主机的回环地址，这个一般是用来测试一个网络程序，但又不想让局域网或外网的用户能够查看，只能在此台主机上运行和查看所用的网络接口。比如把 httpd服务器的指定到回环地址，在浏览器输入127.0.0.1就能看到你所架WEB网站了。但只是您能看得到，局域网的其它主机或用户无从知道。</span><br><span class="line"></span><br><span class="line">第一行：连接类型：Ethernet（以太网）HWaddr（硬件mac地址）。</span><br><span class="line">第二行：网卡的IP地址、子网、掩码。</span><br><span class="line">第三行：UP（代表网卡开启状态）RUNNING（代表网卡的网线被接上）MULTICAST（支持组播）MTU:1500（最大传输单元）：1500字节。</span><br><span class="line">第四、五行：接收、发送数据包情况统计。</span><br><span class="line">第七行：接收、发送数据字节数统计信息。</span><br></pre></td></tr></table></figure>
-
-<h2 id="网络侦错与观察指令"><a href="#网络侦错与观察指令" class="headerlink" title="网络侦错与观察指令"></a>网络侦错与观察指令</h2><h2 id="远程联机指令"><a href="#远程联机指令" class="headerlink" title="远程联机指令"></a>远程联机指令</h2><h2 id="文字接口网页浏览"><a href="#文字接口网页浏览" class="headerlink" title="文字接口网页浏览"></a>文字接口网页浏览</h2><h2 id="封包撷取功能"><a href="#封包撷取功能" class="headerlink" title="封包撷取功能"></a>封包撷取功能</h2>
       
     </div>
 
@@ -901,7 +748,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/10/24/Linux/systemctl%E6%8C%87%E4%BB%A4/">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/02/Spring/Springboot%E6%95%B4%E5%92%8CSwagger2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -915,7 +762,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/10/24/Linux/systemctl%E6%8C%87%E4%BB%A4/" class="post-title-link" itemprop="url">每天一个Linux指令-systemctl</a>
+            <a href="/2019/11/02/Spring/Springboot%E6%95%B4%E5%92%8CSwagger2/" class="post-title-link" itemprop="url">Spring Boot整合Swagger2构建RESTful API</a>
         </h1>
 
         <div class="post-meta">
@@ -924,24 +771,18 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
+              
 
-              <time title="Created: 2019-10-24 23:15:15" itemprop="dateCreated datePublished" datetime="2019-10-24T23:15:15+08:00">2019-10-24</time>
+              <time title="Created: 2019-11-02 10:40:00 / Modified: 19:13:14" itemprop="dateCreated datePublished" datetime="2019-11-02T10:40:00+08:00">2019-11-02</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-28 12:40:58" itemprop="dateModified" datetime="2019-10-28T12:40:58+08:00">2019-10-28</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
+                  <a href="/categories/spring/" itemprop="url" rel="index">
+                    <span itemprop="name">spring</span>
                   </a>
                 </span>
             </span>
@@ -957,18 +798,82 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="每天一个Linux指令-systemctl"><a href="#每天一个Linux指令-systemctl" class="headerlink" title="每天一个Linux指令-systemctl"></a>每天一个Linux指令-systemctl</h1><hr>
-<p>一般来说，服务的启动有两个阶段，一个是<em>开机的时候设定要不要启动这个服务</em>，以及<em>你现在要不要启动这个服务</em>。</p>
-<h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl [command] [unit]</span><br></pre></td></tr></table></figure>
+          <h1 id="Spring-Boot整合Swagger2构建RESTful-API"><a href="#Spring-Boot整合Swagger2构建RESTful-API" class="headerlink" title="Spring Boot整合Swagger2构建RESTful API"></a>Spring Boot整合Swagger2构建RESTful API</h1><hr>
+<p>Swagger是一款可以快速生成符合RESTful风格API并进行在线调试的插件。本文将介绍如何在Spring Boot中整合Swagger。</p>
+<p>在此之前，我们先聊聊什么是REST。REST实际上为Representational State Transfer的缩写，翻译为“表现层状态转化” 。如果一个架构符合REST 原则，就称它为RESTful架构。<br>实际上，“表现层状态转化”省略了主语，完整的说应该是“资源表现层状态转化”。什么是资源（Resource）？资源指的是网络中信息的表现形式，比如一段文本，一首歌，一个视频文件等等；什么是表现层（Reresentational）？表现层即资源的展现在你面前的形式，比如文本可以是JSON格式的，也可以是XML形式的，甚至为二进制形式的。图片可以是gif，也可以是PNG；什么是状态转换（State Transfer）？用户可使用URL通过HTTP协议来获取各种资源，HTTP协议包含了一些操作资源的方法，比如：GET 用来获取资源， POST 用来新建资源 , PUT 用来更新资源， DELETE 用来删除资源， PATCH 用来更新资源的部分属性。通过这些HTTP协议的方法来操作资源的过程即为状态转换。<br>下面对比下传统URL请求和RESTful风格请求的区别：</p>
+<table>
+<thead>
+<tr>
+<th align="left">描述</th>
+<th align="left">传统请求方法</th>
+<th align="left">RESTful请求</th>
+<th align="left">方法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">查询</td>
+<td align="left">/user/query?name=mrbird</td>
+<td align="left">GET/user?name=mrbird</td>
+<td align="left">GET</td>
+</tr>
+<tr>
+<td align="left">详情</td>
+<td align="left">/user/getInfo?id=1</td>
+<td align="left">GET/user/1</td>
+<td align="left">GET</td>
+</tr>
+<tr>
+<td align="left">创建</td>
+<td align="left">/user/create?name=mrbird</td>
+<td align="left">POST    /user</td>
+<td align="left">POST</td>
+</tr>
+<tr>
+<td align="left">修改</td>
+<td align="left">/user/update?name=mrbird&amp;id=1</td>
+<td align="left">POST/user/1</td>
+<td align="left">PUT</td>
+</tr>
+<tr>
+<td align="left">删除</td>
+<td align="left">/user/delete?id=1</td>
+<td align="left">GET/user/1</td>
+<td align="left">DELETE</td>
+</tr>
+</tbody></table>
+<p>从上面这张表，我们大致可以总结下传统请求和RESTful请求的几个区别：</p>
+<p>1、传统请求通过URL来描述行为，如create，delete等；RESTful请求通过URL来描述资源。</p>
+<p>2、RESTful请求通过HTTP请求的方法来描述行为，比如DELETE，POST，PUT等，并且使用HTTP状态码来表示不同的结果。</p>
+<p>3、RESTful请求通过JSON来交换数据。</p>
+<p>tips：RESTful只是一种风格，并不是一种强制性的标准。</p>
+<h2 id="引入Swagger依赖"><a href="#引入Swagger依赖" class="headerlink" title="引入Swagger依赖"></a>引入Swagger依赖</h2><p>本文使用的Swagger版本为2.6.1：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;io.springfox&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;springfox-swagger2&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;2.6.1&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;io.springfox&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;springfox-swagger-ui&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;2.6.1&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
 
-<h2 id="command"><a href="#command" class="headerlink" title="command"></a>command</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">start:立刻启动后面接的unit</span><br><span class="line">stop：立刻关闭后面接的unit</span><br><span class="line">restart：立刻关闭后重启后面接的unit，亦即执行stop再start的意思</span><br><span class="line">reload:不关闭后面接的unit的情况下，重载配置文件，让设定生效</span><br><span class="line">enable：设定下次开机时，后面接的unit会被启动</span><br><span class="line">disable：设定下次开机时，后面接的unit不会被启动</span><br><span class="line">status：目前后面接的这个unit的状态，会列出有没有正在执行、开机预设执行否、登录等信息</span><br><span class="line">is-active:目前有没有正在运行中</span><br><span class="line">is-enable:开机有没有预设要启用这个unit</span><br></pre></td></tr></table></figure>
+<h2 id="配置SwaggerConfig"><a href="#配置SwaggerConfig" class="headerlink" title="配置SwaggerConfig"></a>配置SwaggerConfig</h2><p>使用JavaConfig的形式配置Swagger：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">import org.springframework.context.annotation.Bean;</span><br><span class="line">import org.springframework.context.annotation.Configuration;</span><br><span class="line"></span><br><span class="line">import springfox.documentation.builders.ApiInfoBuilder;</span><br><span class="line">import springfox.documentation.builders.PathSelectors;</span><br><span class="line">import springfox.documentation.builders.RequestHandlerSelectors;</span><br><span class="line">import springfox.documentation.service.ApiInfo;</span><br><span class="line">import springfox.documentation.service.Contact;</span><br><span class="line">import springfox.documentation.spi.DocumentationType;</span><br><span class="line">import springfox.documentation.spring.web.plugins.Docket;</span><br><span class="line">import springfox.documentation.swagger2.annotations.EnableSwagger2;</span><br><span class="line"></span><br><span class="line">@Configuration</span><br><span class="line">@EnableSwagger2</span><br><span class="line">public class SwaggerConfig &#123;</span><br><span class="line">    @Bean</span><br><span class="line">    public Docket buildDocket() &#123;</span><br><span class="line">        return new Docket(DocumentationType.SWAGGER_2)</span><br><span class="line">            .apiInfo(buildApiInf())</span><br><span class="line">            .select()</span><br><span class="line">            .apis(RequestHandlerSelectors.basePackage(&quot;com.example.demo.controller&quot;))</span><br><span class="line">            .paths(PathSelectors.any())</span><br><span class="line">            .build();</span><br><span class="line">    &#125;</span><br><span class="line">    private ApiInfo buildApiInf() &#123;</span><br><span class="line">        return new ApiInfoBuilder()</span><br><span class="line">            .title(&quot;系统RESTful API文档&quot;)</span><br><span class="line">            .contact(new Contact(&quot;mrbird&quot;, &quot;https://mrbird.cc&quot;, &quot;852252810@qq.com&quot;))</span><br><span class="line">            .version(&quot;1.0&quot;)</span><br><span class="line">            .build();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在配置类中添加@EnableSwagger2注解来启用Swagger2，apis()定义了扫描的包路径。配置较为简单，其他不做过多说明。</p>
+<h2 id="Swagger常用注解"><a href="#Swagger常用注解" class="headerlink" title="Swagger常用注解"></a>Swagger常用注解</h2><p>@Api：修饰整个类，描述Controller的作用；</p>
+<p>@ApiOperation：描述一个类的一个方法，或者说一个接口；</p>
+<p>@ApiParam：单个参数描述；</p>
+<p>@ApiModel：用对象来接收参数；</p>
+<p>@ApiProperty：用对象接收参数时，描述对象的一个字段；</p>
+<p>@ApiResponse：HTTP响应其中1个描述；</p>
+<p>@ApiResponses：HTTP响应整体描述；</p>
+<p>@ApiIgnore：使用该注解忽略这个API；</p>
+<p>@ApiError ：发生错误返回的信息；</p>
+<p>@ApiImplicitParam：一个请求参数；</p>
+<p>@ApiImplicitParams：多个请求参数。</p>
+<h2 id="编写RESTful-API接口"><a href="#编写RESTful-API接口" class="headerlink" title="编写RESTful API接口"></a>编写RESTful API接口</h2><p>Spring Boot中包含了一些注解，对应于HTTP协议中的方法：<br>@GetMapping对应HTTP中的GET方法；</p>
+<p>@PostMapping对应HTTP中的POST方法；</p>
+<p>@PutMapping对应HTTP中的PUT方法；</p>
+<p>@DeleteMapping对应HTTP中的DELETE方法；</p>
+<p>@PatchMapping对应HTTP中的PATCH方法。</p>
+<p>我们使用这些注解来编写一个RESTful测试Controller：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><span class="line">import java.util.ArrayList;</span><br><span class="line">import java.util.HashMap;</span><br><span class="line">import java.util.List;</span><br><span class="line">import java.util.Map;</span><br><span class="line"></span><br><span class="line">import org.springframework.stereotype.Controller;</span><br><span class="line">import org.springframework.web.bind.annotation.DeleteMapping;</span><br><span class="line">import org.springframework.web.bind.annotation.GetMapping;</span><br><span class="line">import org.springframework.web.bind.annotation.PathVariable;</span><br><span class="line">import org.springframework.web.bind.annotation.PostMapping;</span><br><span class="line">import org.springframework.web.bind.annotation.PutMapping;</span><br><span class="line">import org.springframework.web.bind.annotation.RequestBody;</span><br><span class="line">import org.springframework.web.bind.annotation.RequestMapping;</span><br><span class="line">import org.springframework.web.bind.annotation.ResponseBody;</span><br><span class="line"></span><br><span class="line">import com.example.demo.domain.User;</span><br><span class="line"></span><br><span class="line">import io.swagger.annotations.Api;</span><br><span class="line">import io.swagger.annotations.ApiImplicitParam;</span><br><span class="line">import io.swagger.annotations.ApiImplicitParams;</span><br><span class="line">import io.swagger.annotations.ApiOperation;</span><br><span class="line">import springfox.documentation.annotations.ApiIgnore;</span><br><span class="line"></span><br><span class="line">@Api(value = &quot;用户Controller&quot;)</span><br><span class="line">@Controller</span><br><span class="line">@RequestMapping(&quot;user&quot;)</span><br><span class="line">public class UserController &#123;</span><br><span class="line"></span><br><span class="line">    @ApiIgnore</span><br><span class="line">    @GetMapping(&quot;hello&quot;)</span><br><span class="line">    public @ResponseBody String hello() &#123;</span><br><span class="line">        return &quot;hello&quot;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @ApiOperation(value = &quot;获取用户信息&quot;, notes = &quot;根据用户id获取用户信息&quot;)</span><br><span class="line">    @ApiImplicitParam(name = &quot;id&quot;, value = &quot;用户id&quot;, required = true, dataType = &quot;Long&quot;, paramType = &quot;path&quot;)</span><br><span class="line">    @GetMapping(&quot;/&#123;id&#125;&quot;)</span><br><span class="line">    public @ResponseBody User getUserById(@PathVariable(value = &quot;id&quot;) Long id) &#123;</span><br><span class="line">        User user = new User();</span><br><span class="line">        user.setId(id);</span><br><span class="line">        user.setName(&quot;mrbird&quot;);</span><br><span class="line">        user.setAge(25);</span><br><span class="line">        return user;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @ApiOperation(value = &quot;获取用户列表&quot;, notes = &quot;获取用户列表&quot;)</span><br><span class="line">    @GetMapping(&quot;/list&quot;)</span><br><span class="line">    public @ResponseBody List&lt;User&gt; getUserList() &#123;</span><br><span class="line">        List&lt;User&gt; list = new ArrayList&lt;&gt;();</span><br><span class="line">        User user1 = new User();</span><br><span class="line">        user1.setId(1l);</span><br><span class="line">        user1.setName(&quot;mrbird&quot;);</span><br><span class="line">        user1.setAge(25);</span><br><span class="line">        list.add(user1);</span><br><span class="line">        User user2 = new User();</span><br><span class="line">        user2.setId(2l);</span><br><span class="line">        user2.setName(&quot;scott&quot;);</span><br><span class="line">        user2.setAge(29);</span><br><span class="line">        list.add(user2);</span><br><span class="line">        return list;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @ApiOperation(value = &quot;新增用户&quot;, notes = &quot;根据用户实体创建用户&quot;)</span><br><span class="line">    @ApiImplicitParam(name = &quot;user&quot;, value = &quot;用户实体&quot;, required = true, dataType = &quot;User&quot;)</span><br><span class="line">    @PostMapping(&quot;/add&quot;)</span><br><span class="line">    public @ResponseBody Map&lt;String, Object&gt; addUser(@RequestBody User user) &#123;</span><br><span class="line">        Map&lt;String, Object&gt; map = new HashMap&lt;&gt;();</span><br><span class="line">        map.put(&quot;result&quot;, &quot;success&quot;);</span><br><span class="line">        return map;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @ApiOperation(value = &quot;删除用户&quot;, notes = &quot;根据用户id删除用户&quot;)</span><br><span class="line">    @ApiImplicitParam(name = &quot;id&quot;, value = &quot;用户id&quot;, required = true, dataType = &quot;Long&quot;, paramType = &quot;path&quot;)</span><br><span class="line">    @DeleteMapping(&quot;/&#123;id&#125;&quot;)</span><br><span class="line">    public @ResponseBody Map&lt;String, Object&gt; deleteUser(@PathVariable(value = &quot;id&quot;) Long id) &#123;</span><br><span class="line">        Map&lt;String, Object&gt; map = new HashMap&lt;&gt;();</span><br><span class="line">        map.put(&quot;result&quot;, &quot;success&quot;);</span><br><span class="line">        return map;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @ApiOperation(value = &quot;更新用户&quot;, notes = &quot;根据用户id更新用户&quot;)</span><br><span class="line">    @ApiImplicitParams(&#123;</span><br><span class="line">        @ApiImplicitParam(name = &quot;id&quot;, value = &quot;用户id&quot;, required = true, dataType = &quot;Long&quot;, paramType = &quot;path&quot;),</span><br><span class="line">        @ApiImplicitParam(name = &quot;user&quot;, value = &quot;用户实体&quot;, required = true, dataType = &quot;User&quot;) &#125;)</span><br><span class="line">    @PutMapping(&quot;/&#123;id&#125;&quot;)</span><br><span class="line">    public @ResponseBody Map&lt;String, Object&gt; updateUser(@PathVariable(value = &quot;id&quot;) Long id, @RequestBody User user) &#123;</span><br><span class="line">        Map&lt;String, Object&gt; map = new HashMap&lt;&gt;();</span><br><span class="line">        map.put(&quot;result&quot;, &quot;success&quot;);</span><br><span class="line">        return map;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="透过systemctl观察系统上所有的服务"><a href="#透过systemctl观察系统上所有的服务" class="headerlink" title="透过systemctl观察系统上所有的服务"></a>透过systemctl观察系统上所有的服务</h2><hr>
-<h3 id="语法-1"><a href="#语法-1" class="headerlink" title="语法"></a>语法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">systemctl [command] [--type=TYPE] [--all]</span><br><span class="line"></span><br><span class="line">command:</span><br><span class="line">	list-units	:依据unit列出目前有启动的unit，若加上--all才会列出没启动的</span><br><span class="line">	list-unit-files:</span><br><span class="line">--type=TYPE:就是unit type，主要有service，socket，target</span><br></pre></td></tr></table></figure>
+<p>对于不需要生成API的方法或者类，只需要在上面添加@ApiIgnore注解即可</p>
+<h2 id="启动-amp-测试"><a href="#启动-amp-测试" class="headerlink" title="启动&amp;测试"></a>启动&amp;测试</h2><p>启动项目，访问<a href="http://localhost:8080/swagger-ui.html即可看到Swagger给我们生成的API页面：" target="_blank" rel="noopener">http://localhost:8080/swagger-ui.html即可看到Swagger给我们生成的API页面：</a><br><img src="https://i.loli.net/2019/11/02/PTyqbOwZMxXQvca.png" alt="swagger.PNG"><br>点击接口下的“Try it out”Swagger会用curl命令发送请求，并且返回响应信息，如下所示:<br><img src="https://i.loli.net/2019/11/02/iAUYSur5E2ODLkt.png" alt="swagger2.PNG"></p>
 
-<h2 id="systemctl指令的几个应用"><a href="#systemctl指令的几个应用" class="headerlink" title="systemctl指令的几个应用"></a>systemctl指令的几个应用</h2><h3 id="设置Target"><a href="#设置Target" class="headerlink" title="设置Target"></a>设置Target</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">systemctl [command] [unit.target]</span><br><span class="line">选项与参数</span><br><span class="line">command:</span><br><span class="line">	get-default:取得目前的target</span><br><span class="line">	set-default:设定后面接的target成为默认的target</span><br><span class="line">	isolate	   :切换到后面接的模式</span><br></pre></td></tr></table></figure>
-
-<h3 id="设置模式"><a href="#设置模式" class="headerlink" title="设置模式"></a>设置模式</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">systemctl poweroff:系统关机</span><br><span class="line">systemctl reboot  ：重新启动</span><br><span class="line">systemctl suspend ：进入暂停模式</span><br><span class="line">systemctl hibernate：进入休眠模式</span><br><span class="line">systemctl rescue	：强制进入救援模式</span><br><span class="line">systemctl emergency：强制进入紧急救援模式</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -987,7 +892,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/10/24/Linux/%E5%9C%A8Linux%E4%B8%8A%E9%85%8D%E7%BD%AEjava%E7%8E%AF%E5%A2%83/">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/02/Spring/Springboot%E9%80%9A%E7%94%A8Mapper%E5%92%8CPageHelper/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1001,7 +906,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/10/24/Linux/%E5%9C%A8Linux%E4%B8%8A%E9%85%8D%E7%BD%AEjava%E7%8E%AF%E5%A2%83/" class="post-title-link" itemprop="url">在Linux上配置java环境</a>
+            <a href="/2019/11/02/Spring/Springboot%E9%80%9A%E7%94%A8Mapper%E5%92%8CPageHelper/" class="post-title-link" itemprop="url">Springboot通用Mapper和PageHelper</a>
         </h1>
 
         <div class="post-meta">
@@ -1010,24 +915,18 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
+              
 
-              <time title="Created: 2019-10-24 23:15:15" itemprop="dateCreated datePublished" datetime="2019-10-24T23:15:15+08:00">2019-10-24</time>
+              <time title="Created: 2019-11-02 10:17:04 / Modified: 10:59:28" itemprop="dateCreated datePublished" datetime="2019-11-02T10:17:04+08:00">2019-11-02</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-28 08:24:00" itemprop="dateModified" datetime="2019-10-28T08:24:00+08:00">2019-10-28</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
+                  <a href="/categories/spring/" itemprop="url" rel="index">
+                    <span itemprop="name">spring</span>
                   </a>
                 </span>
             </span>
@@ -1043,24 +942,241 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="在Linux上配置java环境"><a href="#在Linux上配置java环境" class="headerlink" title="在Linux上配置java环境"></a>在Linux上配置java环境</h1><hr>
-<h2 id="下载jdk1-8"><a href="#下载jdk1-8" class="headerlink" title="下载jdk1.8"></a>下载jdk1.8</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># wget --no-check-certificate --no-cookies --header &quot;Cookie: oraclelicense=accept-securebackup-cookie&quot;  http://download.oracle.com/otn-pub/java/jdk/8u131-b11/d54c1d3a095b4ff2b6607d096fa80163/jdk-8u131-linux-x64.tar.gz</span><br></pre></td></tr></table></figure>
+          <h1 id="Springboot通用Mapper和PageHelper"><a href="#Springboot通用Mapper和PageHelper" class="headerlink" title="Springboot通用Mapper和PageHelper"></a>Springboot通用Mapper和PageHelper</h1><hr>
+<p>如果项目中使用到了MyBatis框架，那么使用通用Mapper和PageHelper分页插件将极大的简化我们的操作。通用Mapper可以简化对单表的CRUD操作，PageHelper分页插件可以帮我们自动拼接分页SQL，并且可以使用MyBatis Geneator来自动生成实体类，Mapper接口和Mapper xml代码，非常的方便。插件地址及作者链接<a href="https://gitee.com/free。" target="_blank" rel="noopener">https://gitee.com/free。</a></p>
+<h2 id="引入依赖"><a href="#引入依赖" class="headerlink" title="引入依赖"></a>引入依赖</h2><p>这里使用Spring Boot来构建，可参考Spring-Boot中使用Mybatis.html搭建一个Spring boot + MyBatis的框架，然后在pom中引入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- mybatis --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.mybatis.spring.boot&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;mybatis-spring-boot-starter&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.3.1&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;!-- 通用mapper --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;tk.mybatis&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;mapper-spring-boot-starter&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.1.5&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;!-- pagehelper 分页插件 --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;com.github.pagehelper&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;pagehelper-spring-boot-starter&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.2.3&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<p>接着在pom中配置MyBatis Geneator：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">&lt;build&gt;</span><br><span class="line">    &lt;plugins&gt;</span><br><span class="line">        &lt;plugin&gt;</span><br><span class="line">            &lt;groupId&gt;org.mybatis.generator&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;mybatis-generator-maven-plugin&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;1.3.5&lt;/version&gt;</span><br><span class="line">            &lt;dependencies&gt;</span><br><span class="line">                &lt;dependency&gt;</span><br><span class="line">                    &lt;!-- 数据库连接驱动 --&gt;</span><br><span class="line">                    &lt;groupId&gt;com.oracle&lt;/groupId&gt;</span><br><span class="line">                    &lt;artifactId&gt;ojdbc6&lt;/artifactId&gt;</span><br><span class="line">                    &lt;version&gt;6.0&lt;/version&gt;</span><br><span class="line">                &lt;/dependency&gt;</span><br><span class="line">                &lt;dependency&gt;</span><br><span class="line">                    &lt;groupId&gt;tk.mybatis&lt;/groupId&gt;</span><br><span class="line">                    &lt;artifactId&gt;mapper&lt;/artifactId&gt;</span><br><span class="line">                    &lt;version&gt;3.4.0&lt;/version&gt;</span><br><span class="line">                &lt;/dependency&gt;</span><br><span class="line">            &lt;/dependencies&gt;</span><br><span class="line">            &lt;executions&gt;</span><br><span class="line">                &lt;execution&gt;</span><br><span class="line">                    &lt;id&gt;Generate MyBatis Artifacts&lt;/id&gt;</span><br><span class="line">                    &lt;phase&gt;package&lt;/phase&gt;</span><br><span class="line">                    &lt;goals&gt;</span><br><span class="line">                        &lt;goal&gt;generate&lt;/goal&gt;</span><br><span class="line">                    &lt;/goals&gt;</span><br><span class="line">                &lt;/execution&gt;</span><br><span class="line">            &lt;/executions&gt;</span><br><span class="line">            &lt;configuration&gt;</span><br><span class="line">                &lt;!--允许移动生成的文件 --&gt;</span><br><span class="line">                &lt;verbose&gt;true&lt;/verbose&gt;</span><br><span class="line">                &lt;!-- 是否覆盖 --&gt;</span><br><span class="line">                &lt;overwrite&gt;true&lt;/overwrite&gt;</span><br><span class="line">                &lt;!-- 自动生成的配置 --&gt;</span><br><span class="line">                &lt;configurationFile&gt;src/main/resources/mybatis-generator.xml&lt;/configurationFile&gt;</span><br><span class="line">            &lt;/configuration&gt;</span><br><span class="line">        &lt;/plugin&gt;</span><br><span class="line">    &lt;/plugins&gt;</span><br><span class="line">&lt;/build&gt;</span><br></pre></td></tr></table></figure>
+<p>src/main/resources/mybatis-generator.xml为生成器的配置，下文会介绍到。</p>
+<h2 id="配置插件"><a href="#配置插件" class="headerlink" title="配置插件"></a>配置插件</h2><p>在Spring Boot配置文件application.yml中配置MyBatis：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mybatis:</span><br><span class="line">  # type-aliases扫描路径</span><br><span class="line">  type-aliases-package: com.springboot.bean</span><br><span class="line">  # mapper xml实现扫描路径</span><br><span class="line">  mapper-locations: classpath:mapper/*.xml</span><br><span class="line">  property:</span><br><span class="line">    order: BEFORE</span><br></pre></td></tr></table></figure>
 
-<h2 id="解压"><a href="#解压" class="headerlink" title="解压"></a>解压</h2><p>1.用tar命令解压后，会生成jdk1.8.0_131目录；</p>
-<p>2.为了方便用mv把jdk1.8.0_131更名为jdk1.8；</p>
-<p>3.把jdk1.8移动到/usr/local目录下(当然也可以移动到别的目录下，后面配置环境变量修改为自己的jdk路径即可)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># tar -zxvf jdk-8u131-linux-x64.tar.gz</span><br><span class="line"># mv jdk1.8.0_131 jdk1.8</span><br><span class="line"># mv jdk1.8 /usr/local</span><br></pre></td></tr></table></figure>
+<p>接下来开始配置插件。</p>
+<h3 id="配置通用Mapper"><a href="#配置通用Mapper" class="headerlink" title="配置通用Mapper"></a>配置通用Mapper</h3><p>在Spring Boot配置文件application.yml中配置通用Mapper：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#mappers 多个接口时逗号隔开</span><br><span class="line">mapper:</span><br><span class="line">  mappers: com.springboot.config.MyMapper</span><br><span class="line">  not-empty: false</span><br><span class="line">  identity: oracle</span><br></pre></td></tr></table></figure>
 
-<h2 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h2><p>1.修改/etc/profile文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># vim /etc/profile</span><br></pre></td></tr></table></figure>
-<p>在profile文件中配置jdk环境</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">export JAVA_HOME=/usr/local/jdk1.8</span><br><span class="line">export JRE_HOME=$&#123;JAVA_HOME&#125;/jre</span><br><span class="line">export CLASSPATH=.:$&#123;JAVA_HOME&#125;/lib:$&#123;JRE_HOME&#125;/lib:$CLASSPATH</span><br><span class="line">export JAVA_PATH=$&#123;JAVA_HOME&#125;/bin:$&#123;JRE_HOME&#125;/bin</span><br><span class="line">export PATH=$PATH:$&#123;JAVA_PATH&#125;</span><br></pre></td></tr></table></figure>
+<p>关于参数的说明，参考<a href="https://gitee.com/free/Mapper/blob/master/wiki/mapper3/2.Integration.md中的可配参数介绍。" target="_blank" rel="noopener">https://gitee.com/free/Mapper/blob/master/wiki/mapper3/2.Integration.md中的可配参数介绍。</a></p>
+<p>除此之外，我们需要定义一个MyMapper接口：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">import tk.mybatis.mapper.common.Mapper;</span><br><span class="line">import tk.mybatis.mapper.common.MySqlMapper;</span><br><span class="line"></span><br><span class="line">public interface MyMapper&lt;T&gt; extends Mapper&lt;T&gt;, MySqlMapper&lt;T&gt; &#123;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>2.使profile生效</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># source /etc/profie</span><br></pre></td></tr></table></figure>
+<p>值得注意的是，该接口不能被扫描到，应该和自己定义的Mapper分开。自己定义的Mapper都需要继承这个接口。</p>
+<h3 id="配置PageHelper"><a href="#配置PageHelper" class="headerlink" title="配置PageHelper"></a>配置PageHelper</h3><p>在Spring Boot配置文件application.yml中配置通用配置PageHelper：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#pagehelper</span><br><span class="line">pagehelper: </span><br><span class="line">  helperDialect: oracle</span><br><span class="line">  reasonable: true</span><br><span class="line">  supportMethodsArguments: true</span><br><span class="line">  params: count=countSql</span><br></pre></td></tr></table></figure>
 
-<h2 id="查看配置环境是否成功"><a href="#查看配置环境是否成功" class="headerlink" title="查看配置环境是否成功"></a>查看配置环境是否成功</h2><p>java -version命令查看jdk版本</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># java -version</span><br></pre></td></tr></table></figure>
+<p>参数相关说明参考<a href="https://github.com/pagehelper/Mybatis-PageHelper/blob/master/wikis/zh/HowToUse.md中的分页插件参数介绍" target="_blank" rel="noopener">https://github.com/pagehelper/Mybatis-PageHelper/blob/master/wikis/zh/HowToUse.md中的分页插件参数介绍</a></p>
+<h3 id="配置Geneator"><a href="#配置Geneator" class="headerlink" title="配置Geneator*"></a>配置Geneator*</h3><p>在路径src/main/resources/下新建mybatis-generator.xml：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;!DOCTYPE generatorConfiguration</span><br><span class="line">    PUBLIC &quot;-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN&quot;</span><br><span class="line">    &quot;http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd&quot;&gt;</span><br><span class="line">&lt;generatorConfiguration&gt;</span><br><span class="line">    &lt;context id=&quot;oracle&quot; targetRuntime=&quot;MyBatis3Simple&quot; defaultModelType=&quot;flat&quot;&gt;</span><br><span class="line"></span><br><span class="line">        &lt;plugin type=&quot;tk.mybatis.mapper.generator.MapperPlugin&quot;&gt;</span><br><span class="line">            &lt;!-- 该配置会使生产的Mapper自动继承MyMapper --&gt;</span><br><span class="line">            &lt;property name=&quot;mappers&quot; value=&quot;com.springboot.config.MyMapper&quot; /&gt;</span><br><span class="line">            &lt;!-- caseSensitive默认false，当数据库表名区分大小写时，可以将该属性设置为true --&gt;</span><br><span class="line">            &lt;property name=&quot;caseSensitive&quot; value=&quot;false&quot;/&gt;</span><br><span class="line">        &lt;/plugin&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!-- 阻止生成自动注释 --&gt;</span><br><span class="line">        &lt;commentGenerator&gt;</span><br><span class="line">            &lt;property name=&quot;javaFileEncoding&quot; value=&quot;UTF-8&quot;/&gt;</span><br><span class="line">            &lt;property name=&quot;suppressDate&quot; value=&quot;true&quot;/&gt;</span><br><span class="line">            &lt;property name=&quot;suppressAllComments&quot; value=&quot;true&quot;/&gt;</span><br><span class="line">        &lt;/commentGenerator&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!-- 数据库链接地址账号密码 --&gt;</span><br><span class="line">        &lt;jdbcConnection </span><br><span class="line">            driverClass=&quot;oracle.jdbc.driver.OracleDriver&quot;</span><br><span class="line">            connectionURL=&quot;jdbc:oracle:thin:@localhost:1521:ORCL&quot;</span><br><span class="line">            userId=&quot;scott&quot;</span><br><span class="line">            password=&quot;6742530&quot;&gt;</span><br><span class="line">        &lt;/jdbcConnection&gt;</span><br><span class="line"></span><br><span class="line">        &lt;javaTypeResolver&gt;</span><br><span class="line">            &lt;property name=&quot;forceBigDecimals&quot; value=&quot;false&quot;/&gt;</span><br><span class="line">        &lt;/javaTypeResolver&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!-- 生成Model类存放位置 --&gt;</span><br><span class="line">        &lt;javaModelGenerator targetPackage=&quot;com.springboot.bean&quot; targetProject=&quot;src/main/java&quot;&gt;</span><br><span class="line">            &lt;property name=&quot;enableSubPackages&quot; value=&quot;true&quot;/&gt;</span><br><span class="line">            &lt;property name=&quot;trimStrings&quot; value=&quot;true&quot;/&gt;</span><br><span class="line">        &lt;/javaModelGenerator&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!-- 生成映射文件存放位置 --&gt;</span><br><span class="line">        &lt;sqlMapGenerator targetPackage=&quot;mapper&quot; targetProject=&quot;src/main/resources&quot;&gt;</span><br><span class="line">            &lt;property name=&quot;enableSubPackages&quot; value=&quot;true&quot;/&gt;</span><br><span class="line">        &lt;/sqlMapGenerator&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!-- 生成Dao类存放位置 --&gt;</span><br><span class="line">        &lt;!-- 客户端代码，生成易于使用的针对Model对象和XML配置文件的代码</span><br><span class="line">            type=&quot;ANNOTATEDMAPPER&quot;,生成Java Model 和基于注解的Mapper对象</span><br><span class="line">            type=&quot;XMLMAPPER&quot;,生成SQLMap XML文件和独立的Mapper接口 --&gt;</span><br><span class="line">        &lt;javaClientGenerator type=&quot;XMLMAPPER&quot; targetPackage=&quot;com.springboot.mapper&quot; targetProject=&quot;src/main/java&quot;&gt;</span><br><span class="line">            &lt;property name=&quot;enableSubPackages&quot; value=&quot;true&quot;/&gt;</span><br><span class="line">        &lt;/javaClientGenerator&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!-- 配置需要生成的表 --&gt;</span><br><span class="line">        &lt;table tableName=&quot;T_USER&quot; domainObjectName=&quot;User&quot; enableCountByExample=&quot;false&quot; enableUpdateByExample=&quot;false&quot; enableDeleteByExample=&quot;false&quot; enableSelectByExample=&quot;false&quot; selectByExampleQueryId=&quot;false&quot;&gt;</span><br><span class="line">            &lt;generatedKey column=&quot;id&quot; sqlStatement=&quot;oralce&quot; identity=&quot;true&quot;/&gt;</span><br><span class="line">        &lt;/table&gt;</span><br><span class="line">    &lt;/context&gt;</span><br><span class="line">&lt;/generatorConfiguration&gt;</span><br></pre></td></tr></table></figure>
+
+<p>更详细的说明可参考链接：<a href="http://blog.csdn.net/isea533/article/details/42102297。" target="_blank" rel="noopener">http://blog.csdn.net/isea533/article/details/42102297。</a></p>
+<h2 id="代码生成"><a href="#代码生成" class="headerlink" title="代码生成"></a>代码生成</h2><p>配置好MyBatis Geneator后，在eclipse中运行命令mybatis-generator:generate：</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/02/Spring/Springboot%E4%B8%AD%E4%BD%BF%E7%94%A8%E8%BF%87%E6%BB%A4%E5%99%A8%E5%92%8C%E6%8B%A6%E6%88%AA%E5%99%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/02/Spring/Springboot%E4%B8%AD%E4%BD%BF%E7%94%A8%E8%BF%87%E6%BB%A4%E5%99%A8%E5%92%8C%E6%8B%A6%E6%88%AA%E5%99%A8/" class="post-title-link" itemprop="url">springboot中使用过滤器和拦截器</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2019-11-02 09:33:42 / Modified: 10:59:28" itemprop="dateCreated datePublished" datetime="2019-11-02T09:33:42+08:00">2019-11-02</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/spring/" itemprop="url" rel="index">
+                    <span itemprop="name">spring</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="springboot中使用过滤器和拦截器"><a href="#springboot中使用过滤器和拦截器" class="headerlink" title="springboot中使用过滤器和拦截器"></a>springboot中使用过滤器和拦截器</h1><hr>
+<p>过滤器（Filter）和拦截器（Interceptor）是Web项目中常用的两个功能，本文将简单介绍在Spring Boot中使用过滤器和拦截器来计算Controller中方法的执行时长，并且简单对比两者的区别。</p>
+<p>现有如下Controller：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@RestController</span><br><span class="line">@RequestMapping(&quot;user&quot;)</span><br><span class="line">public class UserController &#123;</span><br><span class="line"></span><br><span class="line">    @GetMapping(&quot;/&#123;id:\\d+&#125;&quot;)</span><br><span class="line">    public void get(@PathVariable String id) &#123;</span><br><span class="line">        System.out.println(id);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>下面通过配置过滤器和拦截器来实现对get方法执行时间计算的功能</p>
+<h2 id="过滤器"><a href="#过滤器" class="headerlink" title="过滤器"></a>过滤器</h2><p>定义一个TimeFilter类，实现javax.servlet.Filter</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">public class TimeFilter implements Filter&#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void init(FilterConfig filterConfig) throws ServletException &#123;</span><br><span class="line">        System.out.println(&quot;过滤器初始化&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException &#123;</span><br><span class="line">        System.out.println(&quot;开始执行过滤器&quot;);</span><br><span class="line">        Long start = new Date().getTime();</span><br><span class="line">        filterChain.doFilter(servletRequest, servletResponse);</span><br><span class="line">        System.out.println(&quot;【过滤器】耗时 &quot; + (new Date().getTime() - start));</span><br><span class="line">        System.out.println(&quot;结束执行过滤器&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void destroy() &#123;</span><br><span class="line">        System.out.println(&quot;过滤器销毁&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>TimeFilter重写了Filter的三个方法，方法名称已经很直白的描述了其作用，这里不再赘述。</p>
+<p>要使该过滤器在Spring Boot中生效，还需要一些配置。这里主要有两种配置方式。</p>
+<h3 id="配置方式一"><a href="#配置方式一" class="headerlink" title="配置方式一"></a>配置方式一</h3><p>可通过在TimeFilter上加上如下注解：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@Component</span><br><span class="line">@WebFilter(urlPatterns = &#123;&quot;/*&quot;&#125;)</span><br><span class="line">public class TimeFilter implements Filter &#123;</span><br><span class="line">   ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>@Component注解让TimeFilter成为Spring上下文中的一个Bean，@WebFilter注解的urlPatterns属性配置了哪些请求可以进入该过滤器，/*表示所有请求。<br>启动项目时可以看到控制台输出了过滤器初始化，启动后访问<a href="http://localhost:8080/user/1，控制台输出如下" target="_blank" rel="noopener">http://localhost:8080/user/1，控制台输出如下</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">开始执行过滤器</span><br><span class="line">1</span><br><span class="line">【过滤器】耗时 31</span><br><span class="line">结束执行过滤器</span><br></pre></td></tr></table></figure>
+
+<h3 id="配置方式二"><a href="#配置方式二" class="headerlink" title="配置方式二"></a>配置方式二</h3><p>除了在过滤器类上加注解外，我们也可以通过FilterRegistrationBean来注册过滤器。<br>定义一个WebConfig类，加上@Configuration注解表明其为配置类，然后通过FilterRegistrationBean来注册过滤器:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">public class WebConfig &#123;</span><br><span class="line">    @Bean</span><br><span class="line">    public FilterRegistrationBean timeFilter() &#123;</span><br><span class="line">        FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();</span><br><span class="line">        TimeFilter timeFilter = new TimeFilter();</span><br><span class="line">        filterRegistrationBean.setFilter(timeFilter);</span><br><span class="line"></span><br><span class="line">        List&lt;String&gt; urlList = new ArrayList&lt;&gt;();</span><br><span class="line">        urlList.add(&quot;/*&quot;);</span><br><span class="line"></span><br><span class="line">        filterRegistrationBean.setUrlPatterns(urlList);</span><br><span class="line">        return filterRegistrationBean;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>FilterRegistrationBean除了注册过滤器TimeFilter外还通过setUrlPatterns方法配置了URL匹配规则。重启项目访问<a href="http://localhost:8080/user/1，我们可以看到和上面一样的效果。" target="_blank" rel="noopener">http://localhost:8080/user/1，我们可以看到和上面一样的效果。</a></p>
+<pre><code>注意：通过过滤器我们只可以获取到servletRequest对象，所以并不能获取到方法的名称，所属类，参数等额外的信息。</code></pre><h2 id="拦截器"><a href="#拦截器" class="headerlink" title="拦截器"></a>拦截器</h2><p>定义一个TimeInterceptor类，实现org.springframework.web.servlet.HandlerInterceptor接口:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">public class TimeInterceptor implements HandlerInterceptor &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception &#123;</span><br><span class="line">        System.out.println(&quot;处理拦截之前&quot;);</span><br><span class="line">        httpServletRequest.setAttribute(&quot;startTime&quot;, new Date().getTime());</span><br><span class="line">        System.out.println(((HandlerMethod) o).getBean().getClass().getName());</span><br><span class="line">        System.out.println(((HandlerMethod) o).getMethod().getName());</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, ModelAndView modelAndView) throws Exception &#123;</span><br><span class="line">        System.out.println(&quot;开始处理拦截&quot;);</span><br><span class="line">        Long start = (Long) httpServletRequest.getAttribute(&quot;startTime&quot;);</span><br><span class="line">        System.out.println(&quot;【拦截器】耗时 &quot; + (new Date().getTime() - start));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void afterCompletion(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, Exception e) throws Exception &#123;</span><br><span class="line">        System.out.println(&quot;处理拦截之后&quot;);</span><br><span class="line">        Long start = (Long) httpServletRequest.getAttribute(&quot;startTime&quot;);</span><br><span class="line">        System.out.println(&quot;【拦截器】耗时 &quot; + (new Date().getTime() - start));</span><br><span class="line">        System.out.println(&quot;异常信息 &quot; + e);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>TimeInterceptor实现了HandlerInterceptor接口的三个方法。preHandle方法在处理拦截之前执行，postHandle只有当被拦截的方法没有抛出异常成功时才会处理，afterCompletion方法无论被拦截的方法抛出异常与否都会执行。</p>
+<p>通过这三个方法的参数可以看到，相较于过滤器，拦截器多了Object和Exception对象，所以可以获取的信息比过滤器要多的多。但过滤器仍无法获取到方法的参数等信息，我们可以通过切面编程来实现这个目的，具体可参考<a href="https://mrbird.cc/Spring-Boot-AOP%20log.html。" target="_blank" rel="noopener">https://mrbird.cc/Spring-Boot-AOP%20log.html。</a></p>
+<p>要使拦截器在Spring Boot中生效，还需要如下两步配置：</p>
+<p>1.在拦截器类上加入@Component注解；</p>
+<p>2.在WebConfig中通过InterceptorRegistry注册过滤器:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">public class WebConfig extends WebMvcConfigurerAdapter &#123;</span><br><span class="line">    @Autowired</span><br><span class="line">    private TimeInterceptor timeInterceptor;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void addInterceptors(InterceptorRegistry registry) &#123;</span><br><span class="line">        registry.addInterceptor(timeInterceptor);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>启动项目，访问<a href="http://localhost:8080/user/1，控制台输出如下：" target="_blank" rel="noopener">http://localhost:8080/user/1，控制台输出如下：</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">处理拦截之前</span><br><span class="line">cc.mrbird.controller.UserController</span><br><span class="line">get</span><br><span class="line">1</span><br><span class="line">开始处理拦截</span><br><span class="line">【拦截器】耗时 24</span><br><span class="line">处理拦截之后</span><br><span class="line">【拦截器】耗时 24</span><br><span class="line">异常信息 null</span><br></pre></td></tr></table></figure>
+
+<p>从输出中我们可以了解到三个方法的执行顺序，并且三个方法都被执行了。</p>
+<p>我们在UserController的get方法中手动抛出一个异常：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> @GetMapping(&quot;/&#123;id:\\d+&#125;&quot;)</span><br><span class="line">public void get(@PathVariable String id) &#123;</span><br><span class="line">    System.out.println(id);</span><br><span class="line">    throw new RuntimeException(&quot;user not exist&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>重启项目后，访问<a href="http://localhost:8080/user/1，控制台输出如下：" target="_blank" rel="noopener">http://localhost:8080/user/1，控制台输出如下：</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">处理拦截之前</span><br><span class="line">cc.mrbird.controller.UserController</span><br><span class="line">get</span><br><span class="line">1</span><br><span class="line">处理拦截之后</span><br><span class="line">【拦截器】耗时 0</span><br><span class="line">异常信息 java.lang.RuntimeException: user not exist</span><br></pre></td></tr></table></figure>
+
+<p>可看到，postHandle方法并没有被执行。</p>
+<h2 id="执行时机的对比"><a href="#执行时机的对比" class="headerlink" title="执行时机的对比"></a>执行时机的对比</h2><p>我们将过滤器和拦截器都配置上，然后启动项目访问<a href="http://localhost:8080/user/1：" target="_blank" rel="noopener">http://localhost:8080/user/1：</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">开始执行过滤器</span><br><span class="line">处理拦截之前</span><br><span class="line">cc.mrbird.controller.UserController</span><br><span class="line">get</span><br><span class="line">1</span><br><span class="line">开始处理拦截</span><br><span class="line">【拦截器】耗时 25</span><br><span class="line">处理拦截之后</span><br><span class="line">【拦截器】耗时 25</span><br><span class="line">异常信息 null</span><br><span class="line">【过滤器】耗时 34</span><br><span class="line">结束执行过滤器</span><br></pre></td></tr></table></figure>
+
+<p>可看到过滤器要先于拦截器执行，晚于拦截器结束。下图很好的描述了它们的执行时间区别：<br><img src="https://i.loli.net/2019/11/02/tb8CHxd7R2ypu9W.png" alt="filter.PNG"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/02/Spring/Spring%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/02/Spring/Spring%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/" class="post-title-link" itemprop="url">Springboot异常处理</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2019-11-02 09:16:13 / Modified: 09:33:23" itemprop="dateCreated datePublished" datetime="2019-11-02T09:16:13+08:00">2019-11-02</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/spring/" itemprop="url" rel="index">
+                    <span itemprop="name">spring</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Springboot异常处理"><a href="#Springboot异常处理" class="headerlink" title="Springboot异常处理"></a>Springboot异常处理</h1><hr>
+<p>Spring Boot对异常的处理有一套默认的机制：当应用中产生异常时，Spring Boot根据发送请求头中的accept是否包含text/html来分别返回不同的响应信息。当从浏览器地址栏中访问应用接口时，请求头中的accept便会包含text/html信息，产生异常时，Spring Boot通过org.springframework.web.servlet.ModelAndView对象来装载异常信息，并以HTML的格式返回；而当从客户端访问应用接口产生异常时（客户端访问时，请求头中的accept不包含text/html），Spring Boot则以JSON的格式返回异常信息。下面来验证一下。</p>
+<h2 id="默认异常处理机制"><a href="#默认异常处理机制" class="headerlink" title="默认异常处理机制"></a>默认异常处理机制</h2><p>假设应用中有如下一个Controller：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@RestController</span><br><span class="line">@RequestMapping(&quot;user&quot;)</span><br><span class="line">public class UserController &#123;</span><br><span class="line"></span><br><span class="line">    @GetMapping(&quot;/&#123;id:\\d+&#125;&quot;)</span><br><span class="line">    public void get(@PathVariable String id) &#123;</span><br><span class="line">        throw new RuntimeException(&quot;user not exist&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在代码中我们主动的抛出了一个RuntimeException，使用浏览器访问<a href="http://localhost:8080/user/1：" target="_blank" rel="noopener">http://localhost:8080/user/1：</a><br><img src="https://i.loli.net/2019/11/02/udscfAS2bY7oBJq.png" alt="springbootError1.PNG"></p>
+<p>可看到页面返回了一些异常描述，并且请求头的accpet包含了text/html片段。<br>接着使用模拟发送REST请求的Chrome插件Restlet Client发送<a href="http://localhost:8080/user/1：" target="_blank" rel="noopener">http://localhost:8080/user/1：</a><br><img src="https://i.loli.net/2019/11/02/yh6AuolHnT94Xs5.png" alt="springbootError2.PNG"><br>可以看到请求头的accept值为<em>/</em>，并且返回一段JSON格式的信息。</p>
+<p>查看Spring Boot的BasicErrorController类便可看到这一默认机制的具体实现：<br><img src="https://i.loli.net/2019/11/02/3T2iFt5Aaful9yx.png" alt="springbootError3.PNG"><br>可看到errorHtml和error方法的请求地址和方法是一样的，唯一的区别就是errorHtml通过produces = {“text/html”}判断请求头的accpet属性中是否包含text/html，如果包含，便走该方法。</p>
+<h2 id="自定义html异常页面"><a href="#自定义html异常页面" class="headerlink" title="自定义html异常页面"></a>自定义html异常页面</h2><p>我们可以通过在src/main/resources/resources/error路径下定义友好的异常页面，比如定义一个500.html页面：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;title&gt;500&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    系统内部异常</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<p>然后再次通过浏览器访问:<a href="http://localhost:8080/user/1：" target="_blank" rel="noopener">http://localhost:8080/user/1：</a><br><img src="https://i.loli.net/2019/11/02/iN3V6zaBPJSyebq.png" alt="spring bootError4.PNG"><br>同样的，我们也可以定义404.html等常见的HTTP状态码对应的异常页面。</p>
+<p>通过自定义html异常页面并不会影响客户端发送请求异常返回的结果。</p>
+<h2 id="自定义异常处理"><a href="#自定义异常处理" class="headerlink" title="自定义异常处理"></a>自定义异常处理</h2><p>除了可以通过自定义html异常页面来改变浏览器访问接口时产生的异常信息，我们也可以自定义异常处理来改表默认的客户端访问接口产生的异常信息。</p>
+<p>我们手动定义一个UserNotExistException，继承RuntimeException。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">public class UserNotExistException extends RuntimeException&#123;</span><br><span class="line"></span><br><span class="line">    private static final long serialVersionUID = -1574716826948451793L;</span><br><span class="line"></span><br><span class="line">    private String id;</span><br><span class="line"></span><br><span class="line">    public UserNotExistException(String id)&#123;</span><br><span class="line">        super(&quot;user not exist&quot;);</span><br><span class="line">        this.id = id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getId() &#123;</span><br><span class="line">        return id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setId(String id) &#123;</span><br><span class="line">        this.id = id;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后定义一个Controller异常处理类ControllerExceptionHandler：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">@ControllerAdvice</span><br><span class="line">public class ControllerExceptionHandler &#123;</span><br><span class="line"></span><br><span class="line">    @ExceptionHandler(UserNotExistException.class)</span><br><span class="line">    @ResponseBody</span><br><span class="line">    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)</span><br><span class="line">    public Map&lt;String, Object&gt; handleUserNotExistsException(UserNotExistException e) &#123;</span><br><span class="line">        Map&lt;String, Object&gt; map = new HashMap&lt;&gt;();</span><br><span class="line">        map.put(&quot;id&quot;, e.getId());</span><br><span class="line">        map.put(&quot;message&quot;, e.getMessage());</span><br><span class="line">        return map;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其中注解@ExceptionHandler指定了要处理的异常类型，注解@ResponseStatus指定异常处理方法返回的HTTP状态码为HttpStatus.INTERNAL_SERVER_ERROR，即500。HttpStatus是一个spring自带的枚举类型，封装了常见的HTTP状态码及描述：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line">public enum HttpStatus &#123;</span><br><span class="line">    CONTINUE(100, &quot;Continue&quot;),</span><br><span class="line">    SWITCHING_PROTOCOLS(101, &quot;Switching Protocols&quot;),</span><br><span class="line">    PROCESSING(102, &quot;Processing&quot;),</span><br><span class="line">    CHECKPOINT(103, &quot;Checkpoint&quot;),</span><br><span class="line">    OK(200, &quot;OK&quot;),</span><br><span class="line">    CREATED(201, &quot;Created&quot;),</span><br><span class="line">    ACCEPTED(202, &quot;Accepted&quot;),</span><br><span class="line">    NON_AUTHORITATIVE_INFORMATION(203, &quot;Non-Authoritative Information&quot;),</span><br><span class="line">    NO_CONTENT(204, &quot;No Content&quot;),</span><br><span class="line">    RESET_CONTENT(205, &quot;Reset Content&quot;),</span><br><span class="line">    PARTIAL_CONTENT(206, &quot;Partial Content&quot;),</span><br><span class="line">    MULTI_STATUS(207, &quot;Multi-Status&quot;),</span><br><span class="line">    ALREADY_REPORTED(208, &quot;Already Reported&quot;),</span><br><span class="line">    IM_USED(226, &quot;IM Used&quot;),</span><br><span class="line">    MULTIPLE_CHOICES(300, &quot;Multiple Choices&quot;),</span><br><span class="line">    MOVED_PERMANENTLY(301, &quot;Moved Permanently&quot;),</span><br><span class="line">    FOUND(302, &quot;Found&quot;),</span><br><span class="line">    /** @deprecated */</span><br><span class="line">    @Deprecated</span><br><span class="line">    MOVED_TEMPORARILY(302, &quot;Moved Temporarily&quot;),</span><br><span class="line">    SEE_OTHER(303, &quot;See Other&quot;),</span><br><span class="line">    NOT_MODIFIED(304, &quot;Not Modified&quot;),</span><br><span class="line">    /** @deprecated */</span><br><span class="line">    @Deprecated</span><br><span class="line">    USE_PROXY(305, &quot;Use Proxy&quot;),</span><br><span class="line">    TEMPORARY_REDIRECT(307, &quot;Temporary Redirect&quot;),</span><br><span class="line">    PERMANENT_REDIRECT(308, &quot;Permanent Redirect&quot;),</span><br><span class="line">    BAD_REQUEST(400, &quot;Bad Request&quot;),</span><br><span class="line">    UNAUTHORIZED(401, &quot;Unauthorized&quot;),</span><br><span class="line">    PAYMENT_REQUIRED(402, &quot;Payment Required&quot;),</span><br><span class="line">    FORBIDDEN(403, &quot;Forbidden&quot;),</span><br><span class="line">    NOT_FOUND(404, &quot;Not Found&quot;),</span><br><span class="line">    METHOD_NOT_ALLOWED(405, &quot;Method Not Allowed&quot;),</span><br><span class="line">    NOT_ACCEPTABLE(406, &quot;Not Acceptable&quot;),</span><br><span class="line">    PROXY_AUTHENTICATION_REQUIRED(407, &quot;Proxy Authentication Required&quot;),</span><br><span class="line">    REQUEST_TIMEOUT(408, &quot;Request Timeout&quot;),</span><br><span class="line">    CONFLICT(409, &quot;Conflict&quot;),</span><br><span class="line">    GONE(410, &quot;Gone&quot;),</span><br><span class="line">    LENGTH_REQUIRED(411, &quot;Length Required&quot;),</span><br><span class="line">    PRECONDITION_FAILED(412, &quot;Precondition Failed&quot;),</span><br><span class="line">    PAYLOAD_TOO_LARGE(413, &quot;Payload Too Large&quot;),</span><br><span class="line">    /** @deprecated */</span><br><span class="line">    @Deprecated</span><br><span class="line">    REQUEST_ENTITY_TOO_LARGE(413, &quot;Request Entity Too Large&quot;),</span><br><span class="line">    URI_TOO_LONG(414, &quot;URI Too Long&quot;),</span><br><span class="line">    /** @deprecated */</span><br><span class="line">    @Deprecated</span><br><span class="line">    REQUEST_URI_TOO_LONG(414, &quot;Request-URI Too Long&quot;),</span><br><span class="line">    UNSUPPORTED_MEDIA_TYPE(415, &quot;Unsupported Media Type&quot;),</span><br><span class="line">    REQUESTED_RANGE_NOT_SATISFIABLE(416, &quot;Requested range not satisfiable&quot;),</span><br><span class="line">    EXPECTATION_FAILED(417, &quot;Expectation Failed&quot;),</span><br><span class="line">    I_AM_A_TEAPOT(418, &quot;I&apos;m a teapot&quot;),</span><br><span class="line">    /** @deprecated */</span><br><span class="line">    @Deprecated</span><br><span class="line">    INSUFFICIENT_SPACE_ON_RESOURCE(419, &quot;Insufficient Space On Resource&quot;),</span><br><span class="line">    /** @deprecated */</span><br><span class="line">    @Deprecated</span><br><span class="line">    METHOD_FAILURE(420, &quot;Method Failure&quot;),</span><br><span class="line">    /** @deprecated */</span><br><span class="line">    @Deprecated</span><br><span class="line">    DESTINATION_LOCKED(421, &quot;Destination Locked&quot;),</span><br><span class="line">    UNPROCESSABLE_ENTITY(422, &quot;Unprocessable Entity&quot;),</span><br><span class="line">    LOCKED(423, &quot;Locked&quot;),</span><br><span class="line">    FAILED_DEPENDENCY(424, &quot;Failed Dependency&quot;),</span><br><span class="line">    UPGRADE_REQUIRED(426, &quot;Upgrade Required&quot;),</span><br><span class="line">    PRECONDITION_REQUIRED(428, &quot;Precondition Required&quot;),</span><br><span class="line">    TOO_MANY_REQUESTS(429, &quot;Too Many Requests&quot;),</span><br><span class="line">    REQUEST_HEADER_FIELDS_TOO_LARGE(431, &quot;Request Header Fields Too Large&quot;),</span><br><span class="line">    UNAVAILABLE_FOR_LEGAL_REASONS(451, &quot;Unavailable For Legal Reasons&quot;),</span><br><span class="line">    INTERNAL_SERVER_ERROR(500, &quot;Internal Server Error&quot;),</span><br><span class="line">    NOT_IMPLEMENTED(501, &quot;Not Implemented&quot;),</span><br><span class="line">    BAD_GATEWAY(502, &quot;Bad Gateway&quot;),</span><br><span class="line">    SERVICE_UNAVAILABLE(503, &quot;Service Unavailable&quot;),</span><br><span class="line">    GATEWAY_TIMEOUT(504, &quot;Gateway Timeout&quot;),</span><br><span class="line">    HTTP_VERSION_NOT_SUPPORTED(505, &quot;HTTP Version not supported&quot;),</span><br><span class="line">    VARIANT_ALSO_NEGOTIATES(506, &quot;Variant Also Negotiates&quot;),</span><br><span class="line">    INSUFFICIENT_STORAGE(507, &quot;Insufficient Storage&quot;),</span><br><span class="line">    LOOP_DETECTED(508, &quot;Loop Detected&quot;),</span><br><span class="line">    BANDWIDTH_LIMIT_EXCEEDED(509, &quot;Bandwidth Limit Exceeded&quot;),</span><br><span class="line">    NOT_EXTENDED(510, &quot;Not Extended&quot;),</span><br><span class="line">    NETWORK_AUTHENTICATION_REQUIRED(511, &quot;Network Authentication Required&quot;);</span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>编写完自定义异常处理逻辑后，我们将UserController中的方法抛出的异常改为UserNotExistException：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> @GetMapping(&quot;/&#123;id:\\d+&#125;&quot;)</span><br><span class="line">public void get(@PathVariable String id) &#123;</span><br><span class="line">    throw new UserNotExistException(id);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>重启项目，使用Restlet Client再次访问<a href="http://localhost:8080/user/1，响应如下：" target="_blank" rel="noopener">http://localhost:8080/user/1，响应如下：</a><br><img src="https://i.loli.net/2019/11/02/uDaL6OnkE5wmeZF.png" alt="springbootError5.PNG"></p>
+
       
     </div>
 
@@ -1079,7 +1195,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1125,18 +1241,18 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">64</span>
+          <span class="site-state-item-count">110</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
-        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-count">24</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">22</span>
+        <span class="site-state-item-count">37</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

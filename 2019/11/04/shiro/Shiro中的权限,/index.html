@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.2">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.2">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.2">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.2" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.2">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.4.2',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="Shiro中的权限 Shiro将Permission定义为声明，该声明定义了明确的行为或动作。它是对应用程序中原始功能的声明，仅此而已。权限是安全策略中最底层的结构，它们明确定义仅应用程序可以执行的“操作”。 他们根本没有描述“谁”能够执行这些动作。权限的一些示例：  开启档案 查看“ &#x2F;用户&#x2F;列表”网页 列印文件 删除“ jsmith”用户  定义允许“谁”（用户）执行“什么”（权限）是一种以某">
+<meta name="keywords" content="shiro">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Shiro中的权限">
+<meta property="og:url" content="https:&#x2F;&#x2F;lancersaber.github.io&#x2F;2019&#x2F;11&#x2F;04&#x2F;shiro&#x2F;Shiro%E4%B8%AD%E7%9A%84%E6%9D%83%E9%99%90,&#x2F;index.html">
+<meta property="og:site_name" content="Lancersaber">
+<meta property="og:description" content="Shiro中的权限 Shiro将Permission定义为声明，该声明定义了明确的行为或动作。它是对应用程序中原始功能的声明，仅此而已。权限是安全策略中最底层的结构，它们明确定义仅应用程序可以执行的“操作”。 他们根本没有描述“谁”能够执行这些动作。权限的一些示例：  开启档案 查看“ &#x2F;用户&#x2F;列表”网页 列印文件 删除“ jsmith”用户  定义允许“谁”（用户）执行“什么”（权限）是一种以某">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-11-04T12:18:26.836Z">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://lancersaber.github.io/2019/11/04/shiro/Shiro%E4%B8%AD%E7%9A%84%E6%9D%83%E9%99%90,/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Shiro中的权限 | Lancersaber</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lancersaber</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/04/shiro/Shiro%E4%B8%AD%E7%9A%84%E6%9D%83%E9%99%90,/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Shiro中的权限
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2019-11-04 18:29:07 / Modified: 20:18:26" itemprop="dateCreated datePublished" datetime="2019-11-04T18:29:07+08:00">2019-11-04</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/shiro/" itemprop="url" rel="index">
+                    <span itemprop="name">shiro</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Shiro中的权限"><a href="#Shiro中的权限" class="headerlink" title="Shiro中的权限"></a>Shiro中的权限</h1><hr>
+<p>Shiro将Permission定义为声明，该声明定义了明确的行为或动作。它是对应用程序中原始功能的声明，仅此而已。权限是安全策略中最底层的结构，它们明确定义仅应用程序可以执行的“操作”。</p>
+<p>他们根本没有描述“谁”能够执行这些动作。<br>权限的一些示例：</p>
+<ul>
+<li>开启档案</li>
+<li>查看“ /用户/列表”网页</li>
+<li>列印文件</li>
+<li>删除“ jsmith”用户</li>
+</ul>
+<p>定义允许“谁”（用户）执行“什么”（权限）是一种以某种方式向用户分配权限的练习。这始终由应用程序的数据模型完成，并且在不同应用程序之间可能会有很大差异。</p>
+<p>例如，权限可以分组在一个角色中，并且该角色可以与一个或多个用户对象相关联。或者某些应用程序可以具有一个用户组，并且可以为一个组分配一个角色，这通过传递关联将意味着该组中的所有用户都隐式地获得了该角色中的权限。</p>
+<p>如何授予用户权限有很多变体-应用程序根据应用程序需求确定如何对此建模。</p>
+<h2 id="通配符权限"><a href="#通配符权限" class="headerlink" title="通配符权限"></a>通配符权限</h2><p>上面的权限示例，“打开文件”，“查看’用户/列表’网页”等都是有效的权限声明。但是，在计算上解释这些自然语言字符串并确定是否允许用户执行该行为将非常困难。</p>
+<p>因此，为了启用易于处理但仍可读的权限声明，Shiro提供了强大而直观的权限语法，我们称之为WildcardPermission。</p>
+<h3 id="简单用法"><a href="#简单用法" class="headerlink" title="简单用法"></a>简单用法</h3><p>假设您要保护对公司打印机的访问权限，以便某些人可以打印到特定打印机，而其他人可以查询队列中当前有哪些作业。</p>
+<p>一种非常简单的方法是向用户授予“ queryPrinter”权限。然后，您可以通过调用以下命令来检查用户是否具有queryPrinter权限：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">subject.isPermitted(&quot;queryPrinter&quot;)</span><br></pre></td></tr></table></figure>
+
+<p>这（主要）相当于</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">subject.isPermitted( new WildcardPermission(&quot;queryPrinter&quot;) )</span><br></pre></td></tr></table></figure>
+<p>但以后会更多。</p>
+<p>简单权限字符串可能适用于简单应用程序，但是它要求您具有“ printPrinter”，“ queryPrinter”，“ managePrinter”等权限。您还可以使用通配符向用户授予“ *”权限（赋予此权限构造其名称），这意味着它们拥有整个应用程序的所有权限。</p>
+<p>但是，使用这种方法无法仅说用户具有“所有打印机权限”。因此，通配符权限支持多个级别的权限。</p>
+<h3 id="Multiple-Parts"><a href="#Multiple-Parts" class="headerlink" title="Multiple Parts"></a>Multiple Parts</h3><p>通配符权限支持多个级别或部分的概念。例如，您可以通过向用户授予权限来重组前面的简单示例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">printer:query</span><br></pre></td></tr></table></figure>
+
+<p>在此示例中，冒号是一个特殊字符，用于分隔权限字符串中的下一部分。</p>
+<p>在此示例中，第一部分是正在（printer）上操作的域，第二部分是query正在执行的动作（）。上面的其他示例将更改为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">printer:print</span><br><span class="line">printer:manage</span><br></pre></td></tr></table></figure>
+
+<p>可以使用的部件数量没有限制，因此可以在应用程序中使用的方式取决于您的想象。</p>
+<h3 id="多个值"><a href="#多个值" class="headerlink" title="多个值"></a>多个值</h3><p>每个部分可以包含多个值。因此，除了向用户授予“ printer：print”和“ printer：query”权限之外，您还可以向他们授予一个权限：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">printer:print,query</span><br></pre></td></tr></table></figure>
+
+<p>这使他们能够使用print和query打印机。由于这两个操作都被授予，因此您可以通过调用以下命令来检查用户是否具有查询打印机的能力：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">subject.isPermitted(&quot;printer:query&quot;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="所有值"><a href="#所有值" class="headerlink" title="所有值"></a>所有值</h3><p>如果您想授予用户特定部分的所有值怎么办？这样做比手动列出每个值更方便。同样，基于通配符，我们可以执行此操作。如果printer域有3个可能的行动（query，print，和manage），这一点：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">printer:query,print,manage</span><br></pre></td></tr></table></figure>
+
+<p>变成这样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">printer:*</span><br></pre></td></tr></table></figure>
+
+<p>然后，将返回对“ printer：XXX”的任何权限检查true。以这种方式使用通配符的扩展性比显式列出操作更好，因为如果以后在应用程序中添加了新操作，则无需更新在该部分中使用通配符的权限。</p>
+<p>最后，也可以在通配符权限字符串的任何部分中使用通配符。例如，如果您想授予用户跨所有域（而不仅仅是打印机）的“查看”操作，则可以授予此权限：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">*:view</span><br></pre></td></tr></table></figure>
+
+<p>然后，任何对“ foo：view”的权限检查都将返回 true</p>
+<h3 id="实例级访问控制"><a href="#实例级访问控制" class="headerlink" title="实例级访问控制"></a>实例级访问控制</h3><p>通配符权限的另一种常见用法是为实例级访问控制列表建模。在这种情况下，您使用三个部分-第一部分是domain(域)，第二部分是action(操作)，第三部分是要执行的instance(实例)。</p>
+<p>例如，您可能有</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">printer:query:lp7200</span><br><span class="line">printer:print:epsoncolor</span><br></pre></td></tr></table></figure>
+
+<p>第一个定义的行为，以query在printer与该ID lp7200。第二权限定义的行为，以print到printer用ID epsoncolor。如果您将这些权限授予用户，则他们可以在特定实例上执行特定行为。然后，您可以执行签入代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">if ( SecurityUtils.getSubject().isPermitted(&quot;printer:query:lp7200&quot;) &#123;</span><br><span class="line">    // Return the current jobs on printer lp7200 &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这是表达权限的一种非常强大的方法。但是同样，必须为所有打印机定义多个实例ID不能很好地扩展，特别是在将新打印机添加到系统中时。您可以改用通配符:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">printer:print:*</span><br></pre></td></tr></table></figure>
+
+<p>这确实可以扩展，因为它也适用于所有新打印机。您甚至可以允许访问所有打印机上的所有操作：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">printer:*:*</span><br></pre></td></tr></table></figure>
+
+<p>或单个打印机上的所有操作：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">printer:*:lp7200</span><br></pre></td></tr></table></figure>
+
+<p>甚至特定的动作：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">printer:query,print:lp7200</span><br></pre></td></tr></table></figure>
+
+<p>许可的任何部分都可以使用“ *”通配符和“，”子部分分隔符。</p>
+<h3 id="缺少的部分"><a href="#缺少的部分" class="headerlink" title="缺少的部分"></a>缺少的部分</h3><p>关于权限分配要注意的最后一件事：缺少部分意味着用户可以访问与该部分相对应的所有值。换一种说法，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">printer:print</span><br></pre></td></tr></table></figure>
+
+<p>相当于</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">printer:print:*</span><br></pre></td></tr></table></figure>
+<p>和</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">printer</span><br></pre></td></tr></table></figure>
+
+<p>相当于</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">printer:*:*</span><br></pre></td></tr></table></figure>
+
+<p>但是，您只能从字符串末尾删除部分，因此：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">printer:lp7200</span><br></pre></td></tr></table></figure>
+
+<p>不等同于</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">printer:*:lp7200</span><br></pre></td></tr></table></figure>
+
+<h2 id="检查权限"><a href="#检查权限" class="headerlink" title="检查权限"></a>检查权限</h2><p>为了方便和可扩展性，权限分配大量使用通配符结构（“ printer：print：*” =可打印到任何打印机），但运行时的权限检查应始终基于最具体的权限字符串。</p>
+<p>例如，如果用户具有UI，并且他们想要将文档打印到lp7200打印机，则应通过执行以下代码来检查是否允许用户这样做：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">if ( SecurityUtils.getSubject().isPermitted(&quot;printer:print:lp7200&quot;) ) &#123;</span><br><span class="line">    //print the document to the lp7200 printer &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>该检查非常具体，并且明确反映了用户当时正在尝试执行的操作。</p>
+<p>但是，以下内容对于运行时检查不太理想</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">if ( SecurityUtils.getSubject().isPermitted(&quot;printer:print&quot;) ) &#123;</span><br><span class="line">    //print the document &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>为什么？因为第二个示例显示“您必须能够打印到任何打印机才能执行以下代码块”。但是请记住，“ printer：print”等同于“ printer：print：*”！</p>
+<p>因此，这是不正确的检查。如果当前用户没有能力打印到任何打印机，但是他们确实有能力打印说lp7200和epsoncolor打印机，该怎么办。然后，lp7200即使已被授予该功能，上面的第二个示例也将永远不允许它们打印到打印机上！</p>
+<p>因此，经验法则是在执行权限检查时，尽可能使用最具体的权限字符串。当然，如果您确实只想在允许用户使用任何打印机进行打印的情况下仅执行代码块，则上面的第二个块可能是应用程序中其他地方的有效检查（可疑，但可能）。您的应用程序将确定哪些检查有意义，但总的来说，检查越具体越好。</p>
+<h3 id="Implication-not-Equality"><a href="#Implication-not-Equality" class="headerlink" title="Implication, not Equality"></a>Implication, not Equality</h3><p>为什么运行时权限检查应尽可能具体，但权限分配却可能更通用？这是因为权限检查是通过隐含逻辑进行评估的，而不是相等性检查。</p>
+<p>也就是说，如果为用户分配了user:<em>权限，则意味着该用户可以执行该user:view操作。字符串“ user：\</em>”显然不等于“ user：view”，但是前者暗含后者。“用户：*”描述了“用户：视图”所定义功能的超集。</p>
+<p>为了支持隐含规则，所有权限都转换为实现该org.apache.shiro.authz.Permission接口的对象实例。这样，隐含逻辑可以在运行时执行，并且隐含逻辑通常比简单的字符串相等性检查更复杂。org.apache.shiro.authz.permission.WildcardPermission该类实现实际上使本文档中描述的所有通配符行为成为可能。以下是一些其他通配符权限字符串，这些字符串通过含义显示访问权限：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">user:*</span><br></pre></td></tr></table></figure>
+
+<p>意味着还可以删除用户：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">user:delete</span><br></pre></td></tr></table></figure>
+
+<p>同样，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">user:*:12345</span><br></pre></td></tr></table></figure>
+
+<p>表示还可以更新ID 12345的用户帐户：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">user:update:12345</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/shiro/" rel="tag"># shiro</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2019/11/04/shiro/Shiro%E9%85%8D%E7%BD%AE/" rel="next" title="Shiro配置">
+                  <i class="fa fa-chevron-left"></i> Shiro配置
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+                <a href="/2019/11/04/Java%E5%9F%BA%E7%A1%80/Java%E7%B1%BB%E5%9E%8B%E4%BF%A1%E6%81%AF/" rel="prev" title="Java类型信息">
+                  Java类型信息 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Shiro中的权限"><span class="nav-number">1.</span> <span class="nav-text">Shiro中的权限</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#通配符权限"><span class="nav-number">1.1.</span> <span class="nav-text">通配符权限</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简单用法"><span class="nav-number">1.1.1.</span> <span class="nav-text">简单用法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Multiple-Parts"><span class="nav-number">1.1.2.</span> <span class="nav-text">Multiple Parts</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多个值"><span class="nav-number">1.1.3.</span> <span class="nav-text">多个值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#所有值"><span class="nav-number">1.1.4.</span> <span class="nav-text">所有值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实例级访问控制"><span class="nav-number">1.1.5.</span> <span class="nav-text">实例级访问控制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缺少的部分"><span class="nav-number">1.1.6.</span> <span class="nav-text">缺少的部分</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#检查权限"><span class="nav-number">1.2.</span> <span class="nav-text">检查权限</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Implication-not-Equality"><span class="nav-number">1.2.1.</span> <span class="nav-text">Implication, not Equality</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="site-author-image" itemprop="image" alt="Lancersaber"
+    src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Lancersaber</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">110</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lancersaber</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.4.2
+  </div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.2"></script><script src="/js/motion.js?v=7.4.2"></script>
+<script src="/js/schemes/muse.js?v=7.4.2"></script>
+<script src="/js/next-boot.js?v=7.4.2"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

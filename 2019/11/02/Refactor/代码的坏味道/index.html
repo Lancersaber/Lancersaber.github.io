@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.2">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.2">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.2">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.2" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.2">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.4.2',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="代码的坏味道 Duplicated Code(重复代码)&amp;emsp;&amp;emsp;坏味道代码中首当其冲的就是Duplicateed Code。如果你在一个以上的地点看到相同的程序结构，那么可以肯定：设法将它们合而为一，程序会变得更好。Duplicateed Code有以下几种情况：  同一个类的两个函数含有相同的表达式s:采用Extract Method提炼出重复的代码，然后让两个地点都调用被提炼出">
+<meta name="keywords" content="重构">
+<meta property="og:type" content="article">
+<meta property="og:title" content="代码的坏味道">
+<meta property="og:url" content="https:&#x2F;&#x2F;lancersaber.github.io&#x2F;2019&#x2F;11&#x2F;02&#x2F;Refactor&#x2F;%E4%BB%A3%E7%A0%81%E7%9A%84%E5%9D%8F%E5%91%B3%E9%81%93&#x2F;index.html">
+<meta property="og:site_name" content="Lancersaber">
+<meta property="og:description" content="代码的坏味道 Duplicated Code(重复代码)&amp;emsp;&amp;emsp;坏味道代码中首当其冲的就是Duplicateed Code。如果你在一个以上的地点看到相同的程序结构，那么可以肯定：设法将它们合而为一，程序会变得更好。Duplicateed Code有以下几种情况：  同一个类的两个函数含有相同的表达式s:采用Extract Method提炼出重复的代码，然后让两个地点都调用被提炼出">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-11-02T11:06:42.330Z">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://lancersaber.github.io/2019/11/02/Refactor/%E4%BB%A3%E7%A0%81%E7%9A%84%E5%9D%8F%E5%91%B3%E9%81%93/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>代码的坏味道 | Lancersaber</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lancersaber</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/02/Refactor/%E4%BB%A3%E7%A0%81%E7%9A%84%E5%9D%8F%E5%91%B3%E9%81%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          代码的坏味道
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2019-11-02 13:09:47 / Modified: 19:06:42" itemprop="dateCreated datePublished" datetime="2019-11-02T13:09:47+08:00">2019-11-02</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%87%8D%E6%9E%84/" itemprop="url" rel="index">
+                    <span itemprop="name">重构</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="代码的坏味道"><a href="#代码的坏味道" class="headerlink" title="代码的坏味道"></a>代码的坏味道</h1><hr>
+<h2 id="Duplicated-Code-重复代码"><a href="#Duplicated-Code-重复代码" class="headerlink" title="Duplicated Code(重复代码)"></a>Duplicated Code(重复代码)</h2><p>&emsp;&emsp;坏味道代码中首当其冲的就是Duplicateed Code。如果你在一个以上的地点看到相同的程序结构，那么可以肯定：设法将它们合而为一，程序会变得更好。<br>Duplicateed Code有以下几种情况：</p>
+<ul>
+<li>同一个类的两个函数含有相同的表达式<br>s:采用Extract Method提炼出重复的代码，然后让两个地点都调用被提炼出来的那一段代码</li>
+<li>两个互为兄弟的子类内含相同的表达式</li>
+</ul>
+<h2 id="Long-Method-过长函数"><a href="#Long-Method-过长函数" class="headerlink" title="Long Method(过长函数)"></a>Long Method(过长函数)</h2><h2 id="Large-Class-过大的类"><a href="#Large-Class-过大的类" class="headerlink" title="Large Class(过大的类)"></a>Large Class(过大的类)</h2><h2 id="Long-Parameter-List-过长参数列"><a href="#Long-Parameter-List-过长参数列" class="headerlink" title="Long Parameter List(过长参数列)"></a>Long Parameter List(过长参数列)</h2><h2 id="Divergent-Change-发散式变化"><a href="#Divergent-Change-发散式变化" class="headerlink" title="Divergent Change(发散式变化)"></a>Divergent Change(发散式变化)</h2><p>&emsp;&emsp;我们希望软件能够更容易被修改。一旦需要修改，我们希望能够跳到系统的某一点，只在此处做修改。如果不能做到这点，你就嗅出两种紧密相关的刺鼻味道中的一种了。<br>&emsp;&emsp;如果某个类经常因为不同的原因在不同的方向上发生变化，Divergent Change就出现了。举个例子，当你看着一个类说，“呃，如果新加入一个数据库，我必须修改这三个函数”，那么此时也许将这个对象分成两个会更好，这么一来每个对象就可以只因一种变化而需要修改。</p>
+<h2 id="Shutgun-Surgery-霰弹式修改"><a href="#Shutgun-Surgery-霰弹式修改" class="headerlink" title="Shutgun Surgery(霰弹式修改)"></a>Shutgun Surgery(霰弹式修改)</h2><p>&emsp;&emsp;如果每遇到某种变化，你都必须在许多不同的类内做许多小修改，你所面临的坏味道就是Shotgun Surgery。如果需要修改的代码散步四处，你不但很难找到它们，也很容易忘记某个重要的修改。<br>&emsp;&emsp;这种情况下，你应该使用Move Method和Move Field把所有需要修改的代码放进同一个类中。如果眼下没有合适的类可以安置这些代码，就创造一个。通常可以运用Inline Class把一些列相关行为放进同一个类。</p>
+<h2 id="Feature-Envy-依恋情结"><a href="#Feature-Envy-依恋情结" class="headerlink" title="Feature Envy(依恋情结)"></a>Feature Envy(依恋情结)</h2><p>&emsp;&emsp;</p>
+<h2 id="Comments-过多的注释"><a href="#Comments-过多的注释" class="headerlink" title="Comments(过多的注释)"></a>Comments(过多的注释)</h2><p>&emsp;&emsp;</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E9%87%8D%E6%9E%84/" rel="tag"># 重构</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2019/11/02/Spring/Springboot%E6%95%B4%E5%92%8CSwagger2/" rel="next" title="Spring Boot整合Swagger2构建RESTful API">
+                  <i class="fa fa-chevron-left"></i> Spring Boot整合Swagger2构建RESTful API
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+                <a href="/2019/11/02/Refactor/%E9%87%8D%E6%96%B0%E7%BB%84%E7%BB%87%E5%87%BD%E6%95%B0/" rel="prev" title="重新组织函数">
+                  重新组织函数 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#代码的坏味道"><span class="nav-number">1.</span> <span class="nav-text">代码的坏味道</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Duplicated-Code-重复代码"><span class="nav-number">1.1.</span> <span class="nav-text">Duplicated Code(重复代码)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Long-Method-过长函数"><span class="nav-number">1.2.</span> <span class="nav-text">Long Method(过长函数)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Large-Class-过大的类"><span class="nav-number">1.3.</span> <span class="nav-text">Large Class(过大的类)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Long-Parameter-List-过长参数列"><span class="nav-number">1.4.</span> <span class="nav-text">Long Parameter List(过长参数列)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Divergent-Change-发散式变化"><span class="nav-number">1.5.</span> <span class="nav-text">Divergent Change(发散式变化)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Shutgun-Surgery-霰弹式修改"><span class="nav-number">1.6.</span> <span class="nav-text">Shutgun Surgery(霰弹式修改)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Feature-Envy-依恋情结"><span class="nav-number">1.7.</span> <span class="nav-text">Feature Envy(依恋情结)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Comments-过多的注释"><span class="nav-number">1.8.</span> <span class="nav-text">Comments(过多的注释)</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="site-author-image" itemprop="image" alt="Lancersaber"
+    src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Lancersaber</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">110</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lancersaber</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.4.2
+  </div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.2"></script><script src="/js/motion.js?v=7.4.2"></script>
+<script src="/js/schemes/muse.js?v=7.4.2"></script>
+<script src="/js/next-boot.js?v=7.4.2"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

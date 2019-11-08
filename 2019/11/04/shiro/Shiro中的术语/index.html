@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.2">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.2">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.2">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.2" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.2">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.4.2',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="Shiro中的术语 Authentication(身份)验证身份验证是验证主体身份的过程-本质上证明某人确实是他们所说的真实身份。身份验证尝试成功后，应用程序可以相信可以保证主题是应用程序期望的对象。 Authorizatio(授权)授权（也称为访问控制）是确定是否允许用户&#x2F;主题做某事的过程。通常，通过检查并解释主题的角色和权限（请参见下文），然后允许或拒绝对请求的资源或功能的访问来完成此操作。">
+<meta name="keywords" content="shiro">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Shiro中的术语">
+<meta property="og:url" content="https:&#x2F;&#x2F;lancersaber.github.io&#x2F;2019&#x2F;11&#x2F;04&#x2F;shiro&#x2F;Shiro%E4%B8%AD%E7%9A%84%E6%9C%AF%E8%AF%AD&#x2F;index.html">
+<meta property="og:site_name" content="Lancersaber">
+<meta property="og:description" content="Shiro中的术语 Authentication(身份)验证身份验证是验证主体身份的过程-本质上证明某人确实是他们所说的真实身份。身份验证尝试成功后，应用程序可以相信可以保证主题是应用程序期望的对象。 Authorizatio(授权)授权（也称为访问控制）是确定是否允许用户&#x2F;主题做某事的过程。通常，通过检查并解释主题的角色和权限（请参见下文），然后允许或拒绝对请求的资源或功能的访问来完成此操作。">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-11-04T00:20:46.892Z">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://lancersaber.github.io/2019/11/04/shiro/Shiro%E4%B8%AD%E7%9A%84%E6%9C%AF%E8%AF%AD/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Shiro中的术语 | Lancersaber</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lancersaber</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/04/shiro/Shiro%E4%B8%AD%E7%9A%84%E6%9C%AF%E8%AF%AD/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Shiro中的术语
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2019-11-04 08:08:51 / Modified: 08:20:46" itemprop="dateCreated datePublished" datetime="2019-11-04T08:08:51+08:00">2019-11-04</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/shiro/" itemprop="url" rel="index">
+                    <span itemprop="name">shiro</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Shiro中的术语"><a href="#Shiro中的术语" class="headerlink" title="Shiro中的术语"></a>Shiro中的术语</h1><hr>
+<h2 id="Authentication-身份"><a href="#Authentication-身份" class="headerlink" title="Authentication(身份)"></a>Authentication(身份)</h2><p>验证身份验证是验证主体身份的过程-本质上证明某人确实是他们所说的真实身份。身份验证尝试成功后，应用程序可以相信可以保证主题是应用程序期望的对象。</p>
+<h2 id="Authorizatio-授权"><a href="#Authorizatio-授权" class="headerlink" title="Authorizatio(授权)"></a>Authorizatio(授权)</h2><p>授权（也称为访问控制）是确定是否允许用户/主题做某事的过程。通常，通过检查并解释主题的角色和权限（请参见下文），然后允许或拒绝对请求的资源或功能的访问来完成此操作。</p>
+<h2 id="Cipher-密码"><a href="#Cipher-密码" class="headerlink" title="Cipher(密码)"></a>Cipher(密码)</h2><p>密码是一种用于执行加密或解密的算法。该算法通常依赖于一条称为密钥的信息。而且加密因密钥而异，因此如果没有密钥，解密将非常困难。<br>密码有不同的变化。块密码器处理通常具有固定大小的符号块，而流密码器处理连续的符号流。对称密码使用相同的密钥进行加密和解密，而非对称密码使用不同的密钥。而且，如果不能从另一个密钥中获得非对称密码中的一个密钥，则可以公开共享一个密钥，从而创建公共/私有密钥对。</p>
+<h2 id="Credential-凭证"><a href="#Credential-凭证" class="headerlink" title="Credential(凭证)"></a>Credential(凭证)</h2><p>凭证是一块用于验证用户/主题的身份的信息。在身份验证尝试期间，将一个（或多个）凭据与主体一起提交，以验证提交凭据的用户/主题实际上是关联的用户。凭证通常是只有特定用户/主体才能知道的非常机密的事物，例如密码或PGP密钥或生物特征或类似机制。<br>这个想法是，对于一个校长，只有一个人会知道与该校长“配对”的正确凭证。如果当前用户/主题提供的正确凭据与系统中存储的凭据相匹配，则系统可以假定并相信当前用户/主题确实是他们所说的真实身份。信任程度随着更安全的凭据类型（例如，生物特征签名&gt;密码）而增加。</p>
+<h2 id="Permission-权限"><a href="#Permission-权限" class="headerlink" title="Permission(权限)"></a>Permission(权限)</h2><p>至少按照Shiro的解释，权限是一种描述应用程序中原始功能的语句，仅此而已。权限是安全策略中最低级别的构造。它们仅定义应用程序可以执行的“操作”。他们没有描述“谁”能够执行这些动作。许可只是行为的陈述，仅此而已。<br>权限的一些示例：</p>
+<ul>
+<li>开启档案</li>
+<li>查看“ /用户/列表”网页</li>
+<li>列印文件</li>
+<li>删除“ jsmith”用户</li>
+</ul>
+<h2 id="Principal"><a href="#Principal" class="headerlink" title="Principal"></a>Principal</h2><h2 id="Relm"><a href="#Relm" class="headerlink" title="Relm"></a>Relm</h2><h2 id="Role"><a href="#Role" class="headerlink" title="Role"></a>Role</h2><h2 id="Session"><a href="#Session" class="headerlink" title="Session"></a>Session</h2><h2 id="Suject"><a href="#Suject" class="headerlink" title="Suject"></a>Suject</h2>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/shiro/" rel="tag"># shiro</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2019/11/04/shiro/Shiro%E7%AE%80%E4%BB%8B/" rel="next" title="Shiro简介">
+                  <i class="fa fa-chevron-left"></i> Shiro简介
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+                <a href="/2019/11/04/shiro/Shiro%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/" rel="prev" title="Shiro快速入门">
+                  Shiro快速入门 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Shiro中的术语"><span class="nav-number">1.</span> <span class="nav-text">Shiro中的术语</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Authentication-身份"><span class="nav-number">1.1.</span> <span class="nav-text">Authentication(身份)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Authorizatio-授权"><span class="nav-number">1.2.</span> <span class="nav-text">Authorizatio(授权)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Cipher-密码"><span class="nav-number">1.3.</span> <span class="nav-text">Cipher(密码)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Credential-凭证"><span class="nav-number">1.4.</span> <span class="nav-text">Credential(凭证)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Permission-权限"><span class="nav-number">1.5.</span> <span class="nav-text">Permission(权限)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Principal"><span class="nav-number">1.6.</span> <span class="nav-text">Principal</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Relm"><span class="nav-number">1.7.</span> <span class="nav-text">Relm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Role"><span class="nav-number">1.8.</span> <span class="nav-text">Role</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Session"><span class="nav-number">1.9.</span> <span class="nav-text">Session</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Suject"><span class="nav-number">1.10.</span> <span class="nav-text">Suject</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="site-author-image" itemprop="image" alt="Lancersaber"
+    src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Lancersaber</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">110</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lancersaber</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.4.2
+  </div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.2"></script><script src="/js/motion.js?v=7.4.2"></script>
+<script src="/js/schemes/muse.js?v=7.4.2"></script>
+<script src="/js/next-boot.js?v=7.4.2"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

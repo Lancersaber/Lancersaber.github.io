@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.2">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.2">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.2">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.2" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.2">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.4.2',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="Activiti API ProcessEngine API是与Activiti交互的最常见方式。中心起点是ProcessEngine，可以按照配置部分中所述的多种方式创建 。从ProcessEngine，您可以获取包含工作流&#x2F; BPM方法的各种服务。ProcessEngine和服务对象是线程安全的。因此，您可以为整个服务器保留对其中之一的引用。 12345678910ProcessEngine">
+<meta name="keywords" content="Activiti">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Activiti API">
+<meta property="og:url" content="https:&#x2F;&#x2F;lancersaber.github.io&#x2F;2019&#x2F;11&#x2F;02&#x2F;Activiti&#x2F;Activiti%20API&#x2F;index.html">
+<meta property="og:site_name" content="Lancersaber">
+<meta property="og:description" content="Activiti API ProcessEngine API是与Activiti交互的最常见方式。中心起点是ProcessEngine，可以按照配置部分中所述的多种方式创建 。从ProcessEngine，您可以获取包含工作流&#x2F; BPM方法的各种服务。ProcessEngine和服务对象是线程安全的。因此，您可以为整个服务器保留对其中之一的引用。 12345678910ProcessEngine">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;11&#x2F;02&#x2F;XmiH2ZJc5v3a8Sh.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;11&#x2F;02&#x2F;zswSxg3GMAHL5Iy.png">
+<meta property="og:updated_time" content="2019-11-04T15:53:36.303Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;11&#x2F;02&#x2F;XmiH2ZJc5v3a8Sh.png">
+
+<link rel="canonical" href="https://lancersaber.github.io/2019/11/02/Activiti/Activiti%20API/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Activiti API | Lancersaber</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lancersaber</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/02/Activiti/Activiti%20API/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Activiti API
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-11-02 21:12:45" itemprop="dateCreated datePublished" datetime="2019-11-02T21:12:45+08:00">2019-11-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-11-04 23:53:36" itemprop="dateModified" datetime="2019-11-04T23:53:36+08:00">2019-11-04</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Activiti/" itemprop="url" rel="index">
+                    <span itemprop="name">Activiti</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Activiti-API"><a href="#Activiti-API" class="headerlink" title="Activiti API"></a>Activiti API</h1><hr>
+<p>ProcessEngine API是与Activiti交互的最常见方式。中心起点是ProcessEngine，可以按照配置部分中所述的多种方式创建 。从ProcessEngine，您可以获取包含工作流/ BPM方法的各种服务。ProcessEngine和服务对象是线程安全的。因此，您可以为整个服务器保留对其中之一的引用。<br><img src="https://i.loli.net/2019/11/02/XmiH2ZJc5v3a8Sh.png" alt="api.services.png"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();</span><br><span class="line"></span><br><span class="line">RuntimeService runtimeService = processEngine.getRuntimeService();</span><br><span class="line">RepositoryService repositoryService = processEngine.getRepositoryService();</span><br><span class="line">TaskService taskService = processEngine.getTaskService();</span><br><span class="line">ManagementService managementService = processEngine.getManagementService();</span><br><span class="line">IdentityService identityService = processEngine.getIdentityService();</span><br><span class="line">HistoryService historyService = processEngine.getHistoryService();</span><br><span class="line">FormService formService = processEngine.getFormService();</span><br><span class="line">DynamicBpmnService dynamicBpmnService = processEngine.getDynamicBpmnService();</span><br></pre></td></tr></table></figure>
+
+<p>ProcessEngines.getDefaultProcessEngine()会在首次调用时初始化并构建一个流程引擎，此后始终返回相同的流程引擎。可以使用ProcessEngines.init() 和正确创建和关闭所有流程引擎ProcessEngines.destroy()。</p>
+<p>ProcessEngines类将扫描所有activiti.cfg.xml和activiti-context.xml文件。对于所有activiti.cfg.xml文件，将以典型的Activiti方式构建流程引擎：ProcessEngineConfiguration.createProcessEngineConfigurationFromInputStream(inputStream).buildProcessEngine()。对于所有activiti-context.xml文件，将以Spring方式构建流程引擎：首先创建Spring应用程序上下文，然后从该应用程序上下文中获取流程引擎。</p>
+<p>所有服务都是无状态的。这意味着您可以轻松地在群集中的多个节点上运行Activiti，每个节点都访问同一数据库，而不必担心哪台计算机实际执行了先前的调用。无论在何处执行，对任何服务的任何调用都是幂等的。</p>
+<h2 id="各个节点的Service"><a href="#各个节点的Service" class="headerlink" title="各个节点的Service"></a>各个节点的Service</h2><h3 id="RepositoryService"><a href="#RepositoryService" class="headerlink" title="RepositoryService"></a>RepositoryService</h3><p>当使用Activiti引擎时，RepositoryService可能是第一个需要的服务。这项服务提供运营管理和操纵deployments和process definitions。此处无需赘述，流程定义是BPMN 2.0流程的Java对应项。它代表了流程中每个步骤的结构和行为。A deployment是Activiti引擎中包装的单位。一个部署可以包含多个BPMN 2.0 xml文件和任何其他资源。一个部署中包含的内容的选择取决于开发人员。它的范围从单个流程BPMN 2.0 xml文件到整个流程包和相关资源（例如，部署hr-processes）可能包含与HR流程的一切）。在RepositoryService允许deploy这样的包。部署部署意味着将其上载到引擎，在这里将检查并解析所有进程，然后再将它们存储在数据库中。从那时起，系统便知道该部署，并且现在可以启动该部署中包括的任何过程。</p>
+<p>此外，这项服务还可以</p>
+<ul>
+<li><p>查询引擎已知的部署和流程定义。</p>
+</li>
+<li><p>挂起并激活整个部署或特定过程定义。挂起表示无法对其进行进一步的操作，而激活是相反的操作。</p>
+</li>
+<li><p>检索各种资源，例如部署中包含的文件或引擎自动生成的流程图。</p>
+</li>
+<li><p>检索流程定义的POJO版本，该版本可用于使用Java而不是xml自省流程。</p>
+</li>
+</ul>
+<h3 id="RuntimeService"><a href="#RuntimeService" class="headerlink" title="RuntimeService"></a>RuntimeService</h3><p>它处理启动流程定义的新流程实例。如上所述，a process definition定义了过程中不同步骤的结构和行为。流程实例是这种流程定义的一种执行。对于每个流程定义，通常会同时运行许多实例。这RuntimeService也是用于检索和存储的服务process variables。这是特定于给定流程实例的数据，并且可以由流程中的各种构造使用（例如，专用网关通常使用流程变量来确定选择哪个路径来继续该流程）。</p>
+<h2 id="使用Activiti服务"><a href="#使用Activiti服务" class="headerlink" title="使用Activiti服务"></a>使用Activiti服务</h2><p>如上所述，与Activiti引擎进行交互的方式是通过org.activiti.engine.ProcessEngine类实例公开的服务。以下代码段假定您具有有效的Activiti环境，即您可以访问有效的org.activiti.engine.ProcessEngine。如果您只想尝试下面的代码，则可以下载或克隆Activiti单元测试模板，将其导入IDE中，然后将testUserguideCode()方法添加到org.activiti.MyUnitTest单元测试中。</p>
+<p>这个小教程的最终目标是要有一个能正常工作的业务流程，该流程模仿公司中一个简单的假期请求流程：<br><img src="https://i.loli.net/2019/11/02/zswSxg3GMAHL5Iy.png" alt="api.vacationRequest.png"></p>
+<h3 id="部署流程"><a href="#部署流程" class="headerlink" title="部署流程"></a>部署流程</h3><p>与静态数据相关的所有内容（例如流程定义）都可以通过RepositoryService访问。从概念上讲，每个此类静态数据都是Activiti引擎存储库的内容。</p>
+<p>为了使Activiti引擎知道此过程，我们必须首先对其进行部署。部署意味着引擎将BPMN 2.0 xml解析为可执行文件，并为部署中包括的每个流程定义添加新的数据库记录。这样，当引擎重新启动时，它仍然会知道所有已部署的进程：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();</span><br><span class="line">RepositoryService repositoryService = processEngine.getRepositoryService();</span><br><span class="line">repositoryService.createDeployment()</span><br><span class="line">  .addClasspathResource(&quot;org/activiti/test/VacationRequest.bpmn20.xml&quot;)</span><br><span class="line">  .deploy();</span><br><span class="line"></span><br><span class="line">Log.info(&quot;Number of process definitions: &quot; + repositoryService.createProcessDefinitionQuery().count());</span><br></pre></td></tr></table></figure>
+
+<h3 id="启动流程实例"><a href="#启动流程实例" class="headerlink" title="启动流程实例"></a>启动流程实例</h3><p>将流程定义部署到Activiti引擎后，我们可以从中启动新流程实例。对于每个流程定义，通常都有许多流程实例。流程定义是蓝图，而流程实例是其运行时执行。<br>与进程的运行时状态相关的所有内容都可以在RuntimeService中找到。有多种启动新流程实例的方法。在以下代码段中，我们使用在流程定义xml中定义的键来启动流程实例。我们还在流程实例启动时提供了一些流程变量，因为第一个用户任务的描述将在其表达式中使用它们。通常使用过程变量，因为它们为特定过程定义的过程实例赋予了含义。通常，流程变量使流程实例彼此不同。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">//定义流程变量</span><br><span class="line">Map&lt;String, Object&gt; variables = new HashMap&lt;String, Object&gt;();</span><br><span class="line">variables.put(&quot;employeeName&quot;, &quot;Kermit&quot;);</span><br><span class="line">variables.put(&quot;numberOfDays&quot;, new Integer(4));</span><br><span class="line">variables.put(&quot;vacationMotivation&quot;, &quot;I&apos;m really tired!&quot;);</span><br><span class="line"></span><br><span class="line">RuntimeService runtimeService = processEngine.getRuntimeService();</span><br><span class="line">ProcessInstance processInstance = runtimeService.startProcessInstanceByKey(&quot;vacationRequest&quot;, variables);</span><br><span class="line"></span><br><span class="line">// Verify that we started a new process instance</span><br><span class="line">Log.info(&quot;Number of process instances: &quot; + runtimeService.createProcessInstanceQuery().count());</span><br></pre></td></tr></table></figure>
+
+<h3 id="完成任务"><a href="#完成任务" class="headerlink" title="完成任务"></a>完成任务</h3><p>该过程开始时，第一步将是用户任务。这是系统用户必须执行的步骤。通常，此类用户将拥有一个任务收件箱，其中列出了该用户需要完成的所有任务。以下代码段显示了如何执行这种查询：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// Fetch all tasks for the management group</span><br><span class="line">TaskService taskService = processEngine.getTaskService();</span><br><span class="line">List&lt;Task&gt; tasks = taskService.createTaskQuery().taskCandidateGroup(&quot;management&quot;).list();</span><br><span class="line">for (Task task : tasks) &#123;</span><br><span class="line">  Log.info(&quot;Task available: &quot; + task.getName());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>要继续该流程实例，我们需要完成此任务。对于Activiti引擎，这意味着您需要complete执行任务。以下片段显示了如何完成此操作：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Task task = tasks.get(0);</span><br><span class="line"></span><br><span class="line">Map&lt;String, Object&gt; taskVariables = new HashMap&lt;String, Object&gt;();</span><br><span class="line">taskVariables.put(&quot;vacationApproved&quot;, &quot;false&quot;);</span><br><span class="line">taskVariables.put(&quot;managerMotivation&quot;, &quot;We have a tight deadline!&quot;);</span><br><span class="line">taskService.complete(task.getId(), taskVariables);</span><br></pre></td></tr></table></figure>
+
+<p>现在，流程实例将继续进行下一步。在此示例中，下一步允许员工填写可调整其原始休假请求的表格。员工可以重新提交休假请求，这将导致流程循环回到启动任务。</p>
+<h3 id="暂停或激活流程"><a href="#暂停或激活流程" class="headerlink" title="暂停或激活流程"></a>暂停或激活流程</h3><p>可以暂停流程定义。流程定义被挂起时，无法创建新的流程实例（将引发异常）。可以通过以下方式暂停流程定义RepositoryService：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">repositoryService.suspendProcessDefinitionByKey(&quot;vacationRequest&quot;);</span><br><span class="line">try &#123;</span><br><span class="line">  runtimeService.startProcessInstanceByKey(&quot;vacationRequest&quot;);</span><br><span class="line">&#125; catch (ActivitiException e) &#123;</span><br><span class="line">  e.printStackTrace();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>要重新激活流程定义，只需调用其中一种repositoryService.activateProcessDefinitionXXX方法。<br>也可以挂起流程实例。暂停后，该过程将无法继续执行（例如，完成任务会引发异常），并且不会执行任何作业（例如计时器）。可以通过调用runtimeService.suspendProcessInstance方法来挂起流程实例。通过调用runtimeService.activateProcessInstanceXXX方法来再次激活流程实例。</p>
+<h2 id="查询API"><a href="#查询API" class="headerlink" title="查询API"></a>查询API</h2><p>…待写</p>
+<h2 id="流程变量"><a href="#流程变量" class="headerlink" title="流程变量"></a>流程变量</h2><p>=====待写</p>
+<h2 id="瞬态变量"><a href="#瞬态变量" class="headerlink" title="瞬态变量"></a>瞬态变量</h2>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Activiti/" rel="tag"># Activiti</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2019/11/02/Java%E5%9F%BA%E7%A1%80/%E5%AF%B9%E8%B1%A1%E5%BA%8F%E5%88%97%E5%8C%96/" rel="next" title="对象序列化">
+                  <i class="fa fa-chevron-left"></i> 对象序列化
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+                <a href="/2019/11/02/Mysql/Mysql%E5%87%A0%E5%A4%A7%E7%BA%A6%E6%9D%9F/" rel="prev" title="Mysql几大约束">
+                  Mysql几大约束 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Activiti-API"><span class="nav-number">1.</span> <span class="nav-text">Activiti API</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#各个节点的Service"><span class="nav-number">1.1.</span> <span class="nav-text">各个节点的Service</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RepositoryService"><span class="nav-number">1.1.1.</span> <span class="nav-text">RepositoryService</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RuntimeService"><span class="nav-number">1.1.2.</span> <span class="nav-text">RuntimeService</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用Activiti服务"><span class="nav-number">1.2.</span> <span class="nav-text">使用Activiti服务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#部署流程"><span class="nav-number">1.2.1.</span> <span class="nav-text">部署流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动流程实例"><span class="nav-number">1.2.2.</span> <span class="nav-text">启动流程实例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#完成任务"><span class="nav-number">1.2.3.</span> <span class="nav-text">完成任务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#暂停或激活流程"><span class="nav-number">1.2.4.</span> <span class="nav-text">暂停或激活流程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查询API"><span class="nav-number">1.3.</span> <span class="nav-text">查询API</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#流程变量"><span class="nav-number">1.4.</span> <span class="nav-text">流程变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#瞬态变量"><span class="nav-number">1.5.</span> <span class="nav-text">瞬态变量</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="site-author-image" itemprop="image" alt="Lancersaber"
+    src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Lancersaber</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">110</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lancersaber</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.4.2
+  </div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.2"></script><script src="/js/motion.js?v=7.4.2"></script>
+<script src="/js/schemes/muse.js?v=7.4.2"></script>
+<script src="/js/next-boot.js?v=7.4.2"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -60,7 +60,7 @@
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;11&#x2F;02&#x2F;PTyqbOwZMxXQvca.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;11&#x2F;02&#x2F;iAUYSur5E2ODLkt.png">
-<meta property="og:updated_time" content="2019-11-02T04:01:02.627Z">
+<meta property="og:updated_time" content="2019-11-02T11:13:14.355Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;11&#x2F;02&#x2F;PTyqbOwZMxXQvca.png">
 
@@ -203,7 +203,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2019-11-02 10:40:00 / Modified: 12:01:02" itemprop="dateCreated datePublished" datetime="2019-11-02T10:40:00+08:00">2019-11-02</time>
+              <time title="Created: 2019-11-02 10:40:00 / Modified: 19:13:14" itemprop="dateCreated datePublished" datetime="2019-11-02T10:40:00+08:00">2019-11-02</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -230,7 +230,47 @@
       
         <h1 id="Spring-Boot整合Swagger2构建RESTful-API"><a href="#Spring-Boot整合Swagger2构建RESTful-API" class="headerlink" title="Spring Boot整合Swagger2构建RESTful API"></a>Spring Boot整合Swagger2构建RESTful API</h1><hr>
 <p>Swagger是一款可以快速生成符合RESTful风格API并进行在线调试的插件。本文将介绍如何在Spring Boot中整合Swagger。</p>
-<p>在此之前，我们先聊聊什么是REST。REST实际上为Representational State Transfer的缩写，翻译为“表现层状态转化” 。如果一个架构符合REST 原则，就称它为RESTful架构。<br>实际上，“表现层状态转化”省略了主语，完整的说应该是“资源表现层状态转化”。什么是资源（Resource）？资源指的是网络中信息的表现形式，比如一段文本，一首歌，一个视频文件等等；什么是表现层（Reresentational）？表现层即资源的展现在你面前的形式，比如文本可以是JSON格式的，也可以是XML形式的，甚至为二进制形式的。图片可以是gif，也可以是PNG；什么是状态转换（State Transfer）？用户可使用URL通过HTTP协议来获取各种资源，HTTP协议包含了一些操作资源的方法，比如：GET 用来获取资源， POST 用来新建资源 , PUT 用来更新资源， DELETE 用来删除资源， PATCH 用来更新资源的部分属性。通过这些HTTP协议的方法来操作资源的过程即为状态转换。<br>下面对比下传统URL请求和RESTful风格请求的区别：<br>|描述|传统请求|方法|RESTful请求|方法|<br>|—|—|—|—|—|<br>|查询|/user/query?name=mrbird|GET|/user?name=mrbird|GET|<br>|详情|/user/getInfo?id=1|GET|/user/1|GET|<br>|创建|/user/create?name=mrbird|POST|    /user|POST|<br>|修改|/user/update?name=mrbird&amp;id=1|    POST|/user/1|PUT|<br>|删除|/user/delete?id=1|GET|    /user/1|DELETE|</p>
+<p>在此之前，我们先聊聊什么是REST。REST实际上为Representational State Transfer的缩写，翻译为“表现层状态转化” 。如果一个架构符合REST 原则，就称它为RESTful架构。<br>实际上，“表现层状态转化”省略了主语，完整的说应该是“资源表现层状态转化”。什么是资源（Resource）？资源指的是网络中信息的表现形式，比如一段文本，一首歌，一个视频文件等等；什么是表现层（Reresentational）？表现层即资源的展现在你面前的形式，比如文本可以是JSON格式的，也可以是XML形式的，甚至为二进制形式的。图片可以是gif，也可以是PNG；什么是状态转换（State Transfer）？用户可使用URL通过HTTP协议来获取各种资源，HTTP协议包含了一些操作资源的方法，比如：GET 用来获取资源， POST 用来新建资源 , PUT 用来更新资源， DELETE 用来删除资源， PATCH 用来更新资源的部分属性。通过这些HTTP协议的方法来操作资源的过程即为状态转换。<br>下面对比下传统URL请求和RESTful风格请求的区别：</p>
+<table>
+<thead>
+<tr>
+<th align="left">描述</th>
+<th align="left">传统请求方法</th>
+<th align="left">RESTful请求</th>
+<th align="left">方法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">查询</td>
+<td align="left">/user/query?name=mrbird</td>
+<td align="left">GET/user?name=mrbird</td>
+<td align="left">GET</td>
+</tr>
+<tr>
+<td align="left">详情</td>
+<td align="left">/user/getInfo?id=1</td>
+<td align="left">GET/user/1</td>
+<td align="left">GET</td>
+</tr>
+<tr>
+<td align="left">创建</td>
+<td align="left">/user/create?name=mrbird</td>
+<td align="left">POST    /user</td>
+<td align="left">POST</td>
+</tr>
+<tr>
+<td align="left">修改</td>
+<td align="left">/user/update?name=mrbird&amp;id=1</td>
+<td align="left">POST/user/1</td>
+<td align="left">PUT</td>
+</tr>
+<tr>
+<td align="left">删除</td>
+<td align="left">/user/delete?id=1</td>
+<td align="left">GET/user/1</td>
+<td align="left">DELETE</td>
+</tr>
+</tbody></table>
 <p>从上面这张表，我们大致可以总结下传统请求和RESTful请求的几个区别：</p>
 <p>1、传统请求通过URL来描述行为，如create，delete等；RESTful请求通过URL来描述资源。</p>
 <p>2、RESTful请求通过HTTP请求的方法来描述行为，比如DELETE，POST，PUT等，并且使用HTTP状态码来表示不同的结果。</p>
@@ -287,6 +327,9 @@
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
+                <a href="/2019/11/02/Refactor/%E4%BB%A3%E7%A0%81%E7%9A%84%E5%9D%8F%E5%91%B3%E9%81%93/" rel="prev" title="代码的坏味道">
+                  代码的坏味道 <i class="fa fa-chevron-right"></i>
+                </a>
             </div>
           </div>
       </footer>
@@ -341,18 +384,18 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">64</span>
+          <span class="site-state-item-count">110</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
-        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-count">24</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">22</span>
+        <span class="site-state-item-count">37</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.2">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.2">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.2">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.2" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.2">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.4.2',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="Spring Boot Shiro权限控制 在《Spring-Boot-shiro用户认证》中，我们通过继承AuthorizingRealm抽象类实现了doGetAuthenticationInfo()方法完成了用户认证操作。接下来继续实现doGetAuthorizationInfo()方法完成Shiro的权限控制功能。授权也称为访问控制，是管理资源访问的过程。即根据不同用户的权限判断其是否有访问">
+<meta name="keywords" content="spring,shiro">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring Boot Shiro权限控制">
+<meta property="og:url" content="https:&#x2F;&#x2F;lancersaber.github.io&#x2F;2019&#x2F;11&#x2F;06&#x2F;Spring&#x2F;Spring%20Boot%20Shiro%E6%9D%83%E9%99%90%E6%8E%A7%E5%88%B6&#x2F;index.html">
+<meta property="og:site_name" content="Lancersaber">
+<meta property="og:description" content="Spring Boot Shiro权限控制 在《Spring-Boot-shiro用户认证》中，我们通过继承AuthorizingRealm抽象类实现了doGetAuthenticationInfo()方法完成了用户认证操作。接下来继续实现doGetAuthorizationInfo()方法完成Shiro的权限控制功能。授权也称为访问控制，是管理资源访问的过程。即根据不同用户的权限判断其是否有访问">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;11&#x2F;06&#x2F;xjfz52LbogPi6qW.png">
+<meta property="og:updated_time" content="2019-11-08T11:29:48.093Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;11&#x2F;06&#x2F;xjfz52LbogPi6qW.png">
+
+<link rel="canonical" href="https://lancersaber.github.io/2019/11/06/Spring/Spring%20Boot%20Shiro%E6%9D%83%E9%99%90%E6%8E%A7%E5%88%B6/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Spring Boot Shiro权限控制 | Lancersaber</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lancersaber</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/06/Spring/Spring%20Boot%20Shiro%E6%9D%83%E9%99%90%E6%8E%A7%E5%88%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Spring Boot Shiro权限控制
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-11-06 22:04:47" itemprop="dateCreated datePublished" datetime="2019-11-06T22:04:47+08:00">2019-11-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-11-08 19:29:48" itemprop="dateModified" datetime="2019-11-08T19:29:48+08:00">2019-11-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/spring/" itemprop="url" rel="index">
+                    <span itemprop="name">spring</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Spring-Boot-Shiro权限控制"><a href="#Spring-Boot-Shiro权限控制" class="headerlink" title="Spring Boot Shiro权限控制"></a>Spring Boot Shiro权限控制</h1><hr>
+<p>在《Spring-Boot-shiro用户认证》中，我们通过继承AuthorizingRealm抽象类实现了doGetAuthenticationInfo()方法完成了用户认证操作。接下来继续实现doGetAuthorizationInfo()方法完成Shiro的权限控制功能。<br>授权也称为访问控制，是管理资源访问的过程。即根据不同用户的权限判断其是否有访问相应资源的权限。在Shiro中，权限控制有三个核心的元素：权限，角色和用户。</p>
+<h2 id="库模型设计"><a href="#库模型设计" class="headerlink" title="库模型设计"></a>库模型设计</h2><p>在这里，我们使用RBAC（Role-Based Access Control，基于角色的访问控制）模型设计用户，角色和权限间的关系。简单地说，一个用户拥有若干角色，每一个角色拥有若干权限。这样，就构造成“用户-角色-权限”的授权模型。在这种模型中，用户与角色之间，角色与权限之间，一般者是多对多的关系。如下图所示：<br><img src="https://i.loli.net/2019/11/06/xjfz52LbogPi6qW.png" alt="QQ截图20171214123601.png"><br>根据这个模型，设计数据库表，并插入一些测试数据：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br></pre></td><td class="code"><pre><span class="line">-- ----------------------------</span><br><span class="line">-- Table structure for T_PERMISSION</span><br><span class="line">-- ----------------------------</span><br><span class="line">CREATE TABLE &quot;SCOTT&quot;.&quot;T_PERMISSION&quot; (</span><br><span class="line">   &quot;ID&quot; NUMBER(10) NOT NULL ,</span><br><span class="line">   &quot;URL&quot; VARCHAR2(256 BYTE) NULL ,</span><br><span class="line">   &quot;NAME&quot; VARCHAR2(64 BYTE) NULL </span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">COMMENT ON COLUMN &quot;SCOTT&quot;.&quot;T_PERMISSION&quot;.&quot;URL&quot; IS &apos;url地址&apos;;</span><br><span class="line">COMMENT ON COLUMN &quot;SCOTT&quot;.&quot;T_PERMISSION&quot;.&quot;NAME&quot; IS &apos;url描述&apos;;</span><br><span class="line"></span><br><span class="line">-- ----------------------------</span><br><span class="line">-- Records of T_PERMISSION</span><br><span class="line">-- ----------------------------</span><br><span class="line">INSERT INTO &quot;SCOTT&quot;.&quot;T_PERMISSION&quot; VALUES (&apos;1&apos;, &apos;/user&apos;, &apos;user:user&apos;);</span><br><span class="line">INSERT INTO &quot;SCOTT&quot;.&quot;T_PERMISSION&quot; VALUES (&apos;2&apos;, &apos;/user/add&apos;, &apos;user:add&apos;);</span><br><span class="line">INSERT INTO &quot;SCOTT&quot;.&quot;T_PERMISSION&quot; VALUES (&apos;3&apos;, &apos;/user/delete&apos;, &apos;user:delete&apos;);</span><br><span class="line"></span><br><span class="line">-- ----------------------------</span><br><span class="line">-- Table structure for T_ROLE</span><br><span class="line">-- ----------------------------</span><br><span class="line">CREATE TABLE &quot;SCOTT&quot;.&quot;T_ROLE&quot; (</span><br><span class="line">   &quot;ID&quot; NUMBER NOT NULL ,</span><br><span class="line">   &quot;NAME&quot; VARCHAR2(32 BYTE) NULL ,</span><br><span class="line">   &quot;MEMO&quot; VARCHAR2(32 BYTE) NULL </span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">COMMENT ON COLUMN &quot;SCOTT&quot;.&quot;T_ROLE&quot;.&quot;NAME&quot; IS &apos;角色名称&apos;;</span><br><span class="line">COMMENT ON COLUMN &quot;SCOTT&quot;.&quot;T_ROLE&quot;.&quot;MEMO&quot; IS &apos;角色描述&apos;;</span><br><span class="line"></span><br><span class="line">-- ----------------------------</span><br><span class="line">-- Records of T_ROLE</span><br><span class="line">-- ----------------------------</span><br><span class="line">INSERT INTO &quot;SCOTT&quot;.&quot;T_ROLE&quot; VALUES (&apos;1&apos;, &apos;admin&apos;, &apos;超级管理员&apos;);</span><br><span class="line">INSERT INTO &quot;SCOTT&quot;.&quot;T_ROLE&quot; VALUES (&apos;2&apos;, &apos;test&apos;, &apos;测试账户&apos;);</span><br><span class="line"></span><br><span class="line">-- ----------------------------</span><br><span class="line">-- Table structure for T_ROLE_PERMISSION</span><br><span class="line">-- ----------------------------</span><br><span class="line">CREATE TABLE &quot;SCOTT&quot;.&quot;T_ROLE_PERMISSION&quot; (</span><br><span class="line">   &quot;RID&quot; NUMBER(10) NULL ,</span><br><span class="line">   &quot;PID&quot; NUMBER(10) NULL </span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">COMMENT ON COLUMN &quot;SCOTT&quot;.&quot;T_ROLE_PERMISSION&quot;.&quot;RID&quot; IS &apos;角色id&apos;;</span><br><span class="line">COMMENT ON COLUMN &quot;SCOTT&quot;.&quot;T_ROLE_PERMISSION&quot;.&quot;PID&quot; IS &apos;权限id&apos;;</span><br><span class="line"></span><br><span class="line">-- ----------------------------</span><br><span class="line">-- Records of T_ROLE_PERMISSION</span><br><span class="line">-- ----------------------------</span><br><span class="line">INSERT INTO &quot;SCOTT&quot;.&quot;T_ROLE_PERMISSION&quot; VALUES (&apos;1&apos;, &apos;2&apos;);</span><br><span class="line">INSERT INTO &quot;SCOTT&quot;.&quot;T_ROLE_PERMISSION&quot; VALUES (&apos;1&apos;, &apos;3&apos;);</span><br><span class="line">INSERT INTO &quot;SCOTT&quot;.&quot;T_ROLE_PERMISSION&quot; VALUES (&apos;2&apos;, &apos;1&apos;);</span><br><span class="line">INSERT INTO &quot;SCOTT&quot;.&quot;T_ROLE_PERMISSION&quot; VALUES (&apos;1&apos;, &apos;1&apos;);</span><br><span class="line"></span><br><span class="line">-- ----------------------------</span><br><span class="line">-- Table structure for T_USER</span><br><span class="line">-- ----------------------------</span><br><span class="line">CREATE TABLE &quot;SCOTT&quot;.&quot;T_USER&quot; (</span><br><span class="line">   &quot;ID&quot; NUMBER NOT NULL ,</span><br><span class="line">   &quot;USERNAME&quot; VARCHAR2(20 BYTE) NOT NULL ,</span><br><span class="line">   &quot;PASSWD&quot; VARCHAR2(128 BYTE) NOT NULL ,</span><br><span class="line">   &quot;CREATE_TIME&quot; DATE NULL ,</span><br><span class="line">   &quot;STATUS&quot; CHAR(1 BYTE) NOT NULL </span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">COMMENT ON COLUMN &quot;SCOTT&quot;.&quot;T_USER&quot;.&quot;USERNAME&quot; IS &apos;用户名&apos;;</span><br><span class="line">COMMENT ON COLUMN &quot;SCOTT&quot;.&quot;T_USER&quot;.&quot;PASSWD&quot; IS &apos;密码&apos;;</span><br><span class="line">COMMENT ON COLUMN &quot;SCOTT&quot;.&quot;T_USER&quot;.&quot;CREATE_TIME&quot; IS &apos;创建时间&apos;;</span><br><span class="line">COMMENT ON COLUMN &quot;SCOTT&quot;.&quot;T_USER&quot;.&quot;STATUS&quot; IS &apos;是否有效 1：有效  0：锁定&apos;;</span><br><span class="line"></span><br><span class="line">-- ----------------------------</span><br><span class="line">-- Records of T_USER</span><br><span class="line">-- ----------------------------</span><br><span class="line">INSERT INTO &quot;SCOTT&quot;.&quot;T_USER&quot; VALUES (&apos;2&apos;, &apos;tester&apos;, &apos;243e29429b340192700677d48c09d992&apos;, TO_DATE(&apos;2017-12-11 17:20:21&apos;, &apos;YYYY-MM-DD HH24:MI:SS&apos;), &apos;1&apos;);</span><br><span class="line">INSERT INTO &quot;SCOTT&quot;.&quot;T_USER&quot; VALUES (&apos;1&apos;, &apos;mrbird&apos;, &apos;42ee25d1e43e9f57119a00d0a39e5250&apos;, TO_DATE(&apos;2017-12-11 10:52:48&apos;, &apos;YYYY-MM-DD HH24:MI:SS&apos;), &apos;1&apos;);</span><br><span class="line"></span><br><span class="line">-- ----------------------------</span><br><span class="line">-- Table structure for T_USER_ROLE</span><br><span class="line">-- ----------------------------</span><br><span class="line">CREATE TABLE &quot;SCOTT&quot;.&quot;T_USER_ROLE&quot; (</span><br><span class="line">   &quot;USER_ID&quot; NUMBER(10) NULL ,</span><br><span class="line">   &quot;RID&quot; NUMBER(10) NULL </span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">COMMENT ON COLUMN &quot;SCOTT&quot;.&quot;T_USER_ROLE&quot;.&quot;USER_ID&quot; IS &apos;用户id&apos;;</span><br><span class="line">COMMENT ON COLUMN &quot;SCOTT&quot;.&quot;T_USER_ROLE&quot;.&quot;RID&quot; IS &apos;角色id&apos;;</span><br><span class="line"></span><br><span class="line">-- ----------------------------</span><br><span class="line">-- Records of T_USER_ROLE</span><br><span class="line">-- ----------------------------</span><br><span class="line">INSERT INTO &quot;SCOTT&quot;.&quot;T_USER_ROLE&quot; VALUES (&apos;1&apos;, &apos;1&apos;);</span><br><span class="line">INSERT INTO &quot;SCOTT&quot;.&quot;T_USER_ROLE&quot; VALUES (&apos;2&apos;, &apos;2&apos;);</span><br></pre></td></tr></table></figure>
+
+<p>上面的sql创建了五张表：用户表T_USER、角色表T_ROLE、用户角色关联表T_USER_ROLE、权限表T_PERMISSION和权限角色关联表T_ROLE_PERMISSION。用户mrbird角色为admin，用户tester角色为test。admin角色拥有用户的所有权限（user:user,user:add,user:delete），而test角色只拥有用户的查看权限（user:user）。密码都是123456，经过Shiro提供的MD5加密。</p>
+<h2 id="Dao层"><a href="#Dao层" class="headerlink" title="Dao层"></a>Dao层</h2><p>创建两个实体类，对应用户角色表Role和用户权限表Permission：<br>Role:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public class Role implements Serializable&#123;</span><br><span class="line"></span><br><span class="line">    private static final long serialVersionUID = -227437593919820521L;</span><br><span class="line">    private Integer id;</span><br><span class="line">    private String name;</span><br><span class="line">    private String memo;</span><br><span class="line">    // get set略</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Permission:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public class Permission implements Serializable&#123;</span><br><span class="line"></span><br><span class="line">    private static final long serialVersionUID = 7160557680614732403L;</span><br><span class="line">    private Integer id;</span><br><span class="line">    private String url;</span><br><span class="line">    private String name;</span><br><span class="line">    // get,set略	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>创建两个dao接口，分别用户查询用户的所有角色和用户的所有权限：</p>
+<p>UserRoleMapper：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@Mapper</span><br><span class="line">public interface UserRoleMapper &#123;</span><br><span class="line">    List&lt;Role&gt; findByUserName(String userName);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>UserPermissionMapper：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@Mapper</span><br><span class="line">public interface UserPermissionMapper &#123;</span><br><span class="line">    List&lt;Permission&gt; findByUserName(String userName);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Realm"><a href="#Realm" class="headerlink" title="Realm"></a>Realm</h2><p>在Shiro中，用户角色和权限的获取是在Realm的doGetAuthorizationInfo()方法中实现的，所以接下来手动实现该方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">public class ShiroRealm extends AuthorizingRealm &#123;</span><br><span class="line">    @Autowired</span><br><span class="line">    private UserMapper userMapper;</span><br><span class="line">    @Autowired</span><br><span class="line">    private UserRoleMapper userRoleMapper;</span><br><span class="line">    @Autowired</span><br><span class="line">    private UserPermissionMapper userPermissionMapper;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 获取用户角色和权限</span><br><span class="line">     */</span><br><span class="line">    @Override</span><br><span class="line">    protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principal) &#123;</span><br><span class="line">        User user = (User) SecurityUtils.getSubject().getPrincipal();</span><br><span class="line">        String userName = user.getUserName();</span><br><span class="line">        </span><br><span class="line">        System.out.println(&quot;用户&quot; + userName + &quot;获取权限-----ShiroRealm.doGetAuthorizationInfo&quot;);</span><br><span class="line">        SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();</span><br><span class="line">        </span><br><span class="line">        // 获取用户角色集</span><br><span class="line">        List&lt;Role&gt; roleList = userRoleMapper.findByUserName(userName);</span><br><span class="line">        Set&lt;String&gt; roleSet = new HashSet&lt;String&gt;();</span><br><span class="line">        for (Role r : roleList) &#123;</span><br><span class="line">            roleSet.add(r.getName());</span><br><span class="line">        &#125;</span><br><span class="line">        simpleAuthorizationInfo.setRoles(roleSet);</span><br><span class="line">        </span><br><span class="line">        // 获取用户权限集</span><br><span class="line">        List&lt;Permission&gt; permissionList = userPermissionMapper.findByUserName(userName);</span><br><span class="line">        Set&lt;String&gt; permissionSet = new HashSet&lt;String&gt;();</span><br><span class="line">        for (Permission p : permissionList) &#123;</span><br><span class="line">            permissionSet.add(p.getName());</span><br><span class="line">        &#125;</span><br><span class="line">        simpleAuthorizationInfo.setStringPermissions(permissionSet);</span><br><span class="line">        return simpleAuthorizationInfo;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 登录认证</span><br><span class="line">     */</span><br><span class="line">    @Override</span><br><span class="line">    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException &#123;</span><br><span class="line">        // 登录认证已经实现过，这里不再贴代码</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在上述代码中，我们通过方法userRoleMapper.findByUserName(userName)和userPermissionMapper.findByUserName(userName)获取了当前登录用户的角色和权限集，然后保存到SimpleAuthorizationInfo对象中，并返回给Shiro，这样Shiro中就存储了当前用户的角色和权限信息了。</p>
+<p>除了对Realm进行改造外，我们还需修改ShiroConfig配置。</p>
+<h2 id="ShiroConfig"><a href="#ShiroConfig" class="headerlink" title="ShiroConfig"></a>ShiroConfig</h2><p>Shiro为我们提供了一些和权限相关的注解，如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// 表示当前Subject已经通过login进行了身份验证；即Subject.isAuthenticated()返回true。</span><br><span class="line">@RequiresAuthentication  </span><br><span class="line"> </span><br><span class="line">// 表示当前Subject已经身份验证或者通过记住我登录的。</span><br><span class="line">@RequiresUser  </span><br><span class="line"></span><br><span class="line">// 表示当前Subject没有身份验证或通过记住我登录过，即是游客身份。</span><br><span class="line">@RequiresGuest  </span><br><span class="line"></span><br><span class="line">// 表示当前Subject需要角色admin和user。  </span><br><span class="line">@RequiresRoles(value=&#123;&quot;admin&quot;, &quot;user&quot;&#125;, logical= Logical.AND)  </span><br><span class="line"></span><br><span class="line">// 表示当前Subject需要权限user:a或user:b。</span><br><span class="line">@RequiresPermissions (value=&#123;&quot;user:a&quot;, &quot;user:b&quot;&#125;, logical= Logical.OR)</span><br></pre></td></tr></table></figure>
+
+<p>要开启这些注解的使用，需要在ShiroConfig中添加如下配置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">@Bean</span><br><span class="line">public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(SecurityManager securityManager) &#123;</span><br><span class="line">    AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor = new AuthorizationAttributeSourceAdvisor();</span><br><span class="line">    authorizationAttributeSourceAdvisor.setSecurityManager(securityManager);</span><br><span class="line">    return authorizationAttributeSourceAdvisor;</span><br><span class="line">&#125;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<h2 id="Controller"><a href="#Controller" class="headerlink" title="Controller"></a>Controller</h2><p>编写一个UserController，用于处理User类的访问请求，并使用Shiro权限注解控制权限：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">@Controller</span><br><span class="line">@RequestMapping(&quot;/user&quot;)</span><br><span class="line">public class UserController &#123;</span><br><span class="line"></span><br><span class="line">    @RequiresPermissions(&quot;user:user&quot;)</span><br><span class="line">    @RequestMapping(&quot;list&quot;)</span><br><span class="line">    public String userList(Model model) &#123;</span><br><span class="line">        model.addAttribute(&quot;value&quot;, &quot;获取用户信息&quot;);</span><br><span class="line">        return &quot;user&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    @RequiresPermissions(&quot;user:add&quot;)</span><br><span class="line">    @RequestMapping(&quot;add&quot;)</span><br><span class="line">    public String userAdd(Model model) &#123;</span><br><span class="line">        model.addAttribute(&quot;value&quot;, &quot;新增用户&quot;);</span><br><span class="line">        return &quot;user&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    @RequiresPermissions(&quot;user:delete&quot;)</span><br><span class="line">    @RequestMapping(&quot;delete&quot;)</span><br><span class="line">    public String userDelete(Model model) &#123;</span><br><span class="line">        model.addAttribute(&quot;value&quot;, &quot;删除用户&quot;);</span><br><span class="line">        return &quot;user&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在LoginController中添加一个/403跳转：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@GetMapping(&quot;/403&quot;)</span><br><span class="line">public String forbid() &#123;</span><br><span class="line">    return &quot;403&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="前端页面"><a href="#前端页面" class="headerlink" title="前端页面"></a>前端页面</h2><p>对index.html进行改造，添加三个用户操作的链接：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html xmlns:th=&quot;http://www.thymeleaf.org&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;title&gt;首页&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;p&gt;你好！[[$&#123;user.userName&#125;]]&lt;/p&gt;</span><br><span class="line">    &lt;h3&gt;权限测试链接&lt;/h3&gt;</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">        &lt;a th:href=&quot;@&#123;/user/list&#125;&quot;&gt;获取用户信息&lt;/a&gt;</span><br><span class="line">        &lt;a th:href=&quot;@&#123;/user/add&#125;&quot;&gt;新增用户&lt;/a&gt;</span><br><span class="line">        &lt;a th:href=&quot;@&#123;/user/delete&#125;&quot;&gt;删除用户&lt;/a&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;a th:href=&quot;@&#123;/logout&#125;&quot;&gt;注销&lt;/a&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/spring-shiro/" rel="tag"># spring,shiro</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2019/11/06/Spring/Spring%20Boot%E4%B8%AD%E5%BC%80%E5%90%AFSpring%20Security/" rel="next" title="Spring Boot中开启Spring Security">
+                  <i class="fa fa-chevron-left"></i> Spring Boot中开启Spring Security
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+                <a href="/2019/11/07/Spring/Springboot%20Shiro%20Remember%20me/" rel="prev" title="Springboot shiro remember me">
+                  Springboot shiro remember me <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Spring-Boot-Shiro权限控制"><span class="nav-number">1.</span> <span class="nav-text">Spring Boot Shiro权限控制</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#库模型设计"><span class="nav-number">1.1.</span> <span class="nav-text">库模型设计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dao层"><span class="nav-number">1.2.</span> <span class="nav-text">Dao层</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Realm"><span class="nav-number">1.3.</span> <span class="nav-text">Realm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ShiroConfig"><span class="nav-number">1.4.</span> <span class="nav-text">ShiroConfig</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Controller"><span class="nav-number">1.5.</span> <span class="nav-text">Controller</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#前端页面"><span class="nav-number">1.6.</span> <span class="nav-text">前端页面</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="site-author-image" itemprop="image" alt="Lancersaber"
+    src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Lancersaber</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">110</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lancersaber</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.4.2
+  </div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.2"></script><script src="/js/motion.js?v=7.4.2"></script>
+<script src="/js/schemes/muse.js?v=7.4.2"></script>
+<script src="/js/next-boot.js?v=7.4.2"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

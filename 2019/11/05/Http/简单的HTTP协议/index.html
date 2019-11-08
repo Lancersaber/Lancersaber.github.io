@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.2">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.2">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.2">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.2" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.2">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.4.2',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="简单的HTTP协议 2.1 HTTP协议用于客户端和服务器端之间的通信&amp;emsp;&amp;emsp;在两台计算机之间使用HTTP协议通信时，在一条通信线路上必定有一端是客户端，另一端是服务器端。使用HTTP协议能够明确区分哪端是客户端，哪端是服务器端。 2.2 通过请求和响应的交换达成通信&amp;emsp;&amp;emsp;HTTP协议规定，请求从客户端发出，最后服务器端响应该请求并返回。换句话说，肯定是先从客户端">
+<meta name="keywords" content="Http">
+<meta property="og:type" content="article">
+<meta property="og:title" content="简单的HTTP协议">
+<meta property="og:url" content="https:&#x2F;&#x2F;lancersaber.github.io&#x2F;2019&#x2F;11&#x2F;05&#x2F;Http&#x2F;%E7%AE%80%E5%8D%95%E7%9A%84HTTP%E5%8D%8F%E8%AE%AE&#x2F;index.html">
+<meta property="og:site_name" content="Lancersaber">
+<meta property="og:description" content="简单的HTTP协议 2.1 HTTP协议用于客户端和服务器端之间的通信&amp;emsp;&amp;emsp;在两台计算机之间使用HTTP协议通信时，在一条通信线路上必定有一端是客户端，另一端是服务器端。使用HTTP协议能够明确区分哪端是客户端，哪端是服务器端。 2.2 通过请求和响应的交换达成通信&amp;emsp;&amp;emsp;HTTP协议规定，请求从客户端发出，最后服务器端响应该请求并返回。换句话说，肯定是先从客户端">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-11-06T05:15:44.671Z">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://lancersaber.github.io/2019/11/05/Http/%E7%AE%80%E5%8D%95%E7%9A%84HTTP%E5%8D%8F%E8%AE%AE/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>简单的HTTP协议 | Lancersaber</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lancersaber</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/05/Http/%E7%AE%80%E5%8D%95%E7%9A%84HTTP%E5%8D%8F%E8%AE%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          简单的HTTP协议
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-11-05 10:36:14" itemprop="dateCreated datePublished" datetime="2019-11-05T10:36:14+08:00">2019-11-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-11-06 13:15:44" itemprop="dateModified" datetime="2019-11-06T13:15:44+08:00">2019-11-06</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Http/" itemprop="url" rel="index">
+                    <span itemprop="name">Http</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="简单的HTTP协议"><a href="#简单的HTTP协议" class="headerlink" title="简单的HTTP协议"></a>简单的HTTP协议</h1><hr>
+<h2 id="2-1-HTTP协议用于客户端和服务器端之间的通信"><a href="#2-1-HTTP协议用于客户端和服务器端之间的通信" class="headerlink" title="2.1 HTTP协议用于客户端和服务器端之间的通信"></a>2.1 HTTP协议用于客户端和服务器端之间的通信</h2><p>&emsp;&emsp;在两台计算机之间使用HTTP协议通信时，在一条通信线路上必定有一端是客户端，另一端是服务器端。使用HTTP协议能够明确区分哪端是客户端，哪端是服务器端。</p>
+<h2 id="2-2-通过请求和响应的交换达成通信"><a href="#2-2-通过请求和响应的交换达成通信" class="headerlink" title="2.2 通过请求和响应的交换达成通信"></a>2.2 通过请求和响应的交换达成通信</h2><p>&emsp;&emsp;HTTP协议规定，请求从客户端发出，最后服务器端响应该请求并返回。换句话说，肯定是先从客户端开始建立通信的，服务器端在没有接收到请求之前不会发送响应。</p>
+<h2 id="2-3-HTTP是不保存状态的协议"><a href="#2-3-HTTP是不保存状态的协议" class="headerlink" title="2.3 HTTP是不保存状态的协议"></a>2.3 HTTP是不保存状态的协议</h2><p>&emsp;&emsp;HTTP是一种不保存状态，即无状态(stateless)的协议.HTTP协议自身不对请求和响应之间的通信状态进行保存。也就是说在HTTP这个级别，协议对于发送过的请求或响应都不做持久化处理。<br>&emsp;&emsp;Http/1.1 虽然是无状态协议，但为了实现期望的保持状态功能，于是引入cookie技术。有了Cookie再用Http协议通信，就可以管理状态了。</p>
+<h2 id="2-4-请求URI定位资源"><a href="#2-4-请求URI定位资源" class="headerlink" title="2.4 请求URI定位资源"></a>2.4 请求URI定位资源</h2><p>&emsp;&emsp;HTTP协议使用URI定位互联网上的资源。正是因为URI的特定功能，在互联网上任意位置的资源都能访问到。</p>
+<h2 id="2-5-告知服务器意图的HTTP方法"><a href="#2-5-告知服务器意图的HTTP方法" class="headerlink" title="2.5 告知服务器意图的HTTP方法"></a>2.5 告知服务器意图的HTTP方法</h2><h3 id="Get：获取资源"><a href="#Get：获取资源" class="headerlink" title="Get：获取资源"></a>Get：获取资源</h3><p>Get方法用来请求访问已被URI识别的资源。指定的资源经服务器端解析后返回响应内容。也就是说，如果请求的是资源是文本，那就保持原样直接返回；如果是像CGI(Common Gateway Interface,通用网关接口)那样的程序，则返回经过执行后的输出结果。</p>
+<h3 id="POST-传输实体主体"><a href="#POST-传输实体主体" class="headerlink" title="POST:传输实体主体"></a>POST:传输实体主体</h3><p>POST方法用来传输实体的主体。<br>虽然用GET方法也可以传输实体的主体，但一般不使用GET方法进行传输，而是用POST方法。虽说POST的功能与GET很相似，但POST的主要目的不是获取响应的主体内容。</p>
+<h3 id="PUT：传输文件"><a href="#PUT：传输文件" class="headerlink" title="PUT：传输文件"></a>PUT：传输文件</h3><p>PUT方法用于传输文件。要求在请求报文的主体中包含文件的内容，然后保存到请求URI指定的位置。</p>
+<h3 id="HEAD：获得报文首部"><a href="#HEAD：获得报文首部" class="headerlink" title="HEAD：获得报文首部"></a>HEAD：获得报文首部</h3><p>Head方法和GET方法一样，只是不返回报文主体部分。用于确认URI的有效性及资源更新的日期时间等。</p>
+<h3 id="DELETE：删除文件"><a href="#DELETE：删除文件" class="headerlink" title="DELETE：删除文件"></a>DELETE：删除文件</h3><p>DELETE方法用来删除文件，是与PUT相反的方法，DELETE方法按请求的URI删除指定的资源。</p>
+<h3 id="OPTIONS：询问支持的方法"><a href="#OPTIONS：询问支持的方法" class="headerlink" title="OPTIONS：询问支持的方法"></a>OPTIONS：询问支持的方法</h3><p>OPTIONS方法用来查询针对请求URI指定的资源支持的方法。</p>
+<h3 id="TRACE"><a href="#TRACE" class="headerlink" title="TRACE"></a>TRACE</h3><p>Trace方法是让web服务器端将之前的请求通信环回给客户端的方法。</p>
+<h3 id="Connect：要求用隧道协议连接代理"><a href="#Connect：要求用隧道协议连接代理" class="headerlink" title="Connect：要求用隧道协议连接代理"></a>Connect：要求用隧道协议连接代理</h3><h2 id="2-8-使用Cookie的状态管理"><a href="#2-8-使用Cookie的状态管理" class="headerlink" title="2.8 使用Cookie的状态管理"></a>2.8 使用Cookie的状态管理</h2><p>Cookie技术通过在请求和响应报文中写入cookie信息来控制客户端的状态。<br>Cookie会根据从服务器端发出的响应报文内的一个叫做Set-Cookie的首部字段信息，通知客户端保存Cookie。当下次客户端再往该服务器发送请求时，客户端会自动在请求报文中加入Cookie值后发送出去。服务器端发现客户端发送过来的Cookie后，会去检查究竟是从哪一个客户端发来的连接请求，然后对比服务器上的记录，最后得到之前的状态信息。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Http/" rel="tag"># Http</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2019/11/04/Activiti/Spring%E6%95%B4%E5%90%88activiti/" rel="next" title="Springboot整合Activiti">
+                  <i class="fa fa-chevron-left"></i> Springboot整合Activiti
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+                <a href="/2019/11/05/Http/Http%E6%8A%A5%E6%96%87%E5%86%85%E7%9A%84HTTP%E4%BF%A1%E6%81%AF/" rel="prev" title="Http报文内的HTTP信息">
+                  Http报文内的HTTP信息 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#简单的HTTP协议"><span class="nav-number">1.</span> <span class="nav-text">简单的HTTP协议</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-HTTP协议用于客户端和服务器端之间的通信"><span class="nav-number">1.1.</span> <span class="nav-text">2.1 HTTP协议用于客户端和服务器端之间的通信</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-通过请求和响应的交换达成通信"><span class="nav-number">1.2.</span> <span class="nav-text">2.2 通过请求和响应的交换达成通信</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-HTTP是不保存状态的协议"><span class="nav-number">1.3.</span> <span class="nav-text">2.3 HTTP是不保存状态的协议</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-请求URI定位资源"><span class="nav-number">1.4.</span> <span class="nav-text">2.4 请求URI定位资源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-5-告知服务器意图的HTTP方法"><span class="nav-number">1.5.</span> <span class="nav-text">2.5 告知服务器意图的HTTP方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Get：获取资源"><span class="nav-number">1.5.1.</span> <span class="nav-text">Get：获取资源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#POST-传输实体主体"><span class="nav-number">1.5.2.</span> <span class="nav-text">POST:传输实体主体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PUT：传输文件"><span class="nav-number">1.5.3.</span> <span class="nav-text">PUT：传输文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HEAD：获得报文首部"><span class="nav-number">1.5.4.</span> <span class="nav-text">HEAD：获得报文首部</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DELETE：删除文件"><span class="nav-number">1.5.5.</span> <span class="nav-text">DELETE：删除文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OPTIONS：询问支持的方法"><span class="nav-number">1.5.6.</span> <span class="nav-text">OPTIONS：询问支持的方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TRACE"><span class="nav-number">1.5.7.</span> <span class="nav-text">TRACE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Connect：要求用隧道协议连接代理"><span class="nav-number">1.5.8.</span> <span class="nav-text">Connect：要求用隧道协议连接代理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-8-使用Cookie的状态管理"><span class="nav-number">1.6.</span> <span class="nav-text">2.8 使用Cookie的状态管理</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="site-author-image" itemprop="image" alt="Lancersaber"
+    src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Lancersaber</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">110</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lancersaber</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.4.2
+  </div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.2"></script><script src="/js/motion.js?v=7.4.2"></script>
+<script src="/js/schemes/muse.js?v=7.4.2"></script>
+<script src="/js/next-boot.js?v=7.4.2"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

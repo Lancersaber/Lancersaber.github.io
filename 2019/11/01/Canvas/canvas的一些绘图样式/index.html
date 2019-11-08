@@ -50,15 +50,15 @@
   };
 </script>
 
-  <meta name="description" content="Canvas的绘图样式">
+  <meta name="description" content="Canvas的绘图样式 色彩到目前为止，我们只看到了绘图上下文的方法。如果要对形状应用颜色，可以使用两个重要的属性：fillStyle和strokeStyle。  fillStyle = color设置填充形状时使用的样式。 strokeStyle = color设置形状轮廓的样式。  color是表示CSS ，渐变对象或图案对象的字符串。稍后我们将介绍渐变和图案对象。默认情况下，笔触和填充颜色设">
 <meta name="keywords" content="canvas">
 <meta property="og:type" content="article">
 <meta property="og:title" content="canvas的绘图样式">
 <meta property="og:url" content="https:&#x2F;&#x2F;lancersaber.github.io&#x2F;2019&#x2F;11&#x2F;01&#x2F;Canvas&#x2F;canvas%E7%9A%84%E4%B8%80%E4%BA%9B%E7%BB%98%E5%9B%BE%E6%A0%B7%E5%BC%8F&#x2F;index.html">
 <meta property="og:site_name" content="Lancersaber">
-<meta property="og:description" content="Canvas的绘图样式">
+<meta property="og:description" content="Canvas的绘图样式 色彩到目前为止，我们只看到了绘图上下文的方法。如果要对形状应用颜色，可以使用两个重要的属性：fillStyle和strokeStyle。  fillStyle = color设置填充形状时使用的样式。 strokeStyle = color设置形状轮廓的样式。  color是表示CSS ，渐变对象或图案对象的字符串。稍后我们将介绍渐变和图案对象。默认情况下，笔触和填充颜色设">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-11-02T01:13:12.582Z">
+<meta property="og:updated_time" content="2019-11-02T11:06:42.606Z">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://lancersaber.github.io/2019/11/01/Canvas/canvas%E7%9A%84%E4%B8%80%E4%BA%9B%E7%BB%98%E5%9B%BE%E6%A0%B7%E5%BC%8F/">
@@ -206,7 +206,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-02 09:13:12" itemprop="dateModified" datetime="2019-11-02T09:13:12+08:00">2019-11-02</time>
+                <time title="Modified: 2019-11-02 19:06:42" itemprop="dateModified" datetime="2019-11-02T19:06:42+08:00">2019-11-02</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -232,6 +232,42 @@
 
       
         <h1 id="Canvas的绘图样式"><a href="#Canvas的绘图样式" class="headerlink" title="Canvas的绘图样式"></a>Canvas的绘图样式</h1><hr>
+<h2 id="色彩"><a href="#色彩" class="headerlink" title="色彩"></a>色彩</h2><p>到目前为止，我们只看到了绘图上下文的方法。如果要对形状应用颜色，可以使用两个重要的属性：fillStyle和strokeStyle。</p>
+<ul>
+<li>fillStyle = color<br>设置填充形状时使用的样式。</li>
+<li>strokeStyle = color<br>设置形状轮廓的样式。</li>
+</ul>
+<p>color是表示CSS <color>，渐变对象或图案对象的字符串。稍后我们将介绍渐变和图案对象。默认情况下，笔触和填充颜色设置为黑色（CSS颜色值#000000）。<br>tips：注意：设置strokeStyleand / or fillStyle属性时，新值将成为从此以后绘制的所有形状的默认值。对于您要使用不同颜色的每个形状，都需要重新分配fillStyle或strokeStyle属性。</p>
+<p>根据规范，您可以输入的有效字符串应为CSS <color>值。下面的每个示例描述相同的颜色</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// these all set the fillStyle to &apos;orange&apos;</span><br><span class="line"></span><br><span class="line">ctx.fillStyle = &apos;orange&apos;;</span><br><span class="line">ctx.fillStyle = &apos;#FFA500&apos;;</span><br><span class="line">ctx.fillStyle = &apos;rgb(255, 165, 0)&apos;;</span><br><span class="line">ctx.fillStyle = &apos;rgba(255, 165, 0, 1)&apos;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="透明度"><a href="#透明度" class="headerlink" title="透明度"></a>透明度</h2><p>除了在画布上绘制不透明形状外，我们还可以绘制半透明（或半透明）形状。这可以通过设置globalAlpha属性或为笔触和/或填充样式分配半透明颜色来完成。</p>
+<ul>
+<li>globalAlpha = transparencyValue<br>将指定的透明度值应用于画布上绘制的所有将来形状。该值必须介于0.0（完全透明）到1.0（完全不透明）之间。默认情况下，此值为1.0（完全不透明）。</li>
+</ul>
+<p>globalAlpha如果要在画布上绘制许多具有相似透明度的形状，则此属性很有用，但是通常在设置单个形状的颜色时设置其透明度通常会更有用。<br>由于strokeStyleand fillStyle属性接受CSS rgba颜色值，因此我们可以使用以下符号为它们分配透明颜色。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// Assigning transparent colors to stroke and fill style</span><br><span class="line"></span><br><span class="line">ctx.strokeStyle = &apos;rgba(255, 0, 0, 0.5)&apos;;</span><br><span class="line">ctx.fillStyle = &apos;rgba(255, 0, 0, 0.5)&apos;;</span><br></pre></td></tr></table></figure>
+
+<p>该rgba()功能与该功能相似，rgb()但是有一个额外的参数。最后一个参数设置此特定颜色的透明度值。有效范围还是介于0.0（完全透明）和1.0（完全不透明）之间。</p>
+<h2 id="线型"><a href="#线型" class="headerlink" title="线型"></a>线型</h2><p>有几个属性使我们可以设置线条样式。</p>
+<ul>
+<li>lineWidth = value<br>设置将来绘制的线条的宽度。</li>
+<li>lineCap = type<br>设置行尾的外观。</li>
+<li>lineJoin = type<br>设置线条相交处的“角”的外观。</li>
+<li>miterLimit = value<br>当两条直线以锐角连接时，对斜接进行限制，以使您可以控制接合处的厚度。</li>
+<li>getLineDash()<br>返回包含偶数个非负数的当前行虚线图案阵列。</li>
+<li>setLineDash(segments)<br>设置当前线的虚线图案。</li>
+<li>lineDashOffset = value<br>指定在一行上从何处开始破折号数组。</li>
+</ul>
+<h2 id="渐变色"><a href="#渐变色" class="headerlink" title="渐变色"></a>渐变色</h2><p>就像任何普通的绘图程序一样，我们可以使用线性和径向渐变来填充和描边形状。我们CanvasGradient使用以下方法之一创建对象。然后，我们可以将此对象分配给fillStyle或strokeStyle属性。</p>
+<ul>
+<li>createLinearGradient(x1, y1, x2, y2)<br>创建一个线性渐变对象，其起点为（x1，y1），终点为（x2，y2）。</li>
+<li>createRadialGradient(x1, y1, r1, x2, y2, r2)<br>创建一个径向渐变。参数代表两个圆，一个圆的中心为（x1，y1），半径为r1，另一个圆的中心为（x2，y2），半径为r2。<br>例：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var lineargradient = ctx.createLinearGradient(0, 0, 150, 150);</span><br><span class="line">var radialgradient = ctx.createRadialGradient(75, 75, 0, 75, 75, 100);</span><br></pre></td></tr></table></figure>
+创建CanvasGradient对象后，可以使用addColorStop()方法为对象分配颜色</li>
+<li>gradient.addColorStop(position, color)<br>在gradient对象上创建一个新的色标。position是在0.0和1.0之间的数，并且限定在渐变中的颜色的相对位置，并且所述color参数必须是表示CSS一个字符串color，表示颜色的梯度应该偏移处的过渡达到。</li>
+</ul>
+<p>您可以根据需要向渐变添加尽可能多的色标。下面是一个非常简单的从白色到黑色的线性渐变。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var lineargradient = ctx.createLinearGradient(0, 0, 150, 150);</span><br><span class="line">lineargradient.addColorStop(0, &apos;white&apos;);</span><br><span class="line">lineargradient.addColorStop(1, &apos;black&apos;);</span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -256,8 +292,8 @@
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
-                <a href="/2019/11/01/Canvas/canvas%E7%9A%84%E8%BD%AC%E6%8D%A2%E5%87%BD%E6%95%B0/" rel="prev" title="Canvas/canvas的转换函数">
-                  Canvas/canvas的转换函数 <i class="fa fa-chevron-right"></i>
+                <a href="/2019/11/01/Canvas/canvas%E7%9A%84%E8%BD%AC%E6%8D%A2%E5%87%BD%E6%95%B0/" rel="prev" title="canvas中的转换函数">
+                  canvas中的转换函数 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>
@@ -297,7 +333,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Canvas的绘图样式"><span class="nav-number">1.</span> <span class="nav-text">Canvas的绘图样式</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Canvas的绘图样式"><span class="nav-number">1.</span> <span class="nav-text">Canvas的绘图样式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#色彩"><span class="nav-number">1.1.</span> <span class="nav-text">色彩</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#透明度"><span class="nav-number">1.2.</span> <span class="nav-text">透明度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线型"><span class="nav-number">1.3.</span> <span class="nav-text">线型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#渐变色"><span class="nav-number">1.4.</span> <span class="nav-text">渐变色</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -313,18 +349,18 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">64</span>
+          <span class="site-state-item-count">110</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
-        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-count">24</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">22</span>
+        <span class="site-state-item-count">37</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
