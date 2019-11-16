@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.2">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.2">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.2">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.2" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.2">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.4.2',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="注解解析 @Slf4j注解实现日志输出自己写日志的时候，肯定需要: 1private final Logger logger = LoggerFactory.getLogger(LoggerTest.class); 每次写新的类，就需要重新写logger有简单的方式，就是使用@Slf4j注解 首先引入依赖 12345&amp;lt;!--可以引入日志 @Slf4j注解--&amp;gt;&amp;lt;dependenc">
+<meta name="keywords" content="reading">
+<meta property="og:type" content="article">
+<meta property="og:title" content="注解解析">
+<meta property="og:url" content="https:&#x2F;&#x2F;lancersaber.github.io&#x2F;2019&#x2F;11&#x2F;11&#x2F;%E8%A7%A3%E8%AF%BB%E4%B8%80%E4%B8%AA%E9%A1%B9%E7%9B%AE&#x2F;%E6%B3%A8%E8%A7%A3%E7%9A%84%E8%A7%A3%E6%9E%90&#x2F;index.html">
+<meta property="og:site_name" content="Lancersaber">
+<meta property="og:description" content="注解解析 @Slf4j注解实现日志输出自己写日志的时候，肯定需要: 1private final Logger logger = LoggerFactory.getLogger(LoggerTest.class); 每次写新的类，就需要重新写logger有简单的方式，就是使用@Slf4j注解 首先引入依赖 12345&amp;lt;!--可以引入日志 @Slf4j注解--&amp;gt;&amp;lt;dependenc">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-11-12T05:17:50.134Z">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://lancersaber.github.io/2019/11/11/%E8%A7%A3%E8%AF%BB%E4%B8%80%E4%B8%AA%E9%A1%B9%E7%9B%AE/%E6%B3%A8%E8%A7%A3%E7%9A%84%E8%A7%A3%E6%9E%90/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>注解解析 | Lancersaber</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lancersaber</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/11/%E8%A7%A3%E8%AF%BB%E4%B8%80%E4%B8%AA%E9%A1%B9%E7%9B%AE/%E6%B3%A8%E8%A7%A3%E7%9A%84%E8%A7%A3%E6%9E%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          注解解析
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-11-11 22:04:55" itemprop="dateCreated datePublished" datetime="2019-11-11T22:04:55+08:00">2019-11-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-11-12 13:17:50" itemprop="dateModified" datetime="2019-11-12T13:17:50+08:00">2019-11-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/reading/" itemprop="url" rel="index">
+                    <span itemprop="name">reading</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="注解解析"><a href="#注解解析" class="headerlink" title="注解解析"></a>注解解析</h1><hr>
+<h2 id="Slf4j注解实现日志输出"><a href="#Slf4j注解实现日志输出" class="headerlink" title="@Slf4j注解实现日志输出"></a>@Slf4j注解实现日志输出</h2><p>自己写日志的时候，肯定需要:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">private final Logger logger = LoggerFactory.getLogger(LoggerTest.class);</span><br></pre></td></tr></table></figure>
+<p>每次写新的类，就需要重新写logger<br>有简单的方式，就是使用@Slf4j注解</p>
+<p>首先引入依赖</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--可以引入日志 @Slf4j注解--&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.projectlombok&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;lombok&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<p>然后在类上写上@Slf4j注解<br>在方法中直接使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@Slf4j</span><br><span class="line">@SpringBootTest</span><br><span class="line">class DemoApplicationTests &#123;</span><br><span class="line"></span><br><span class="line">    @Test</span><br><span class="line">    void contextLoads() &#123;</span><br><span class="line">        log.info(&quot;hello&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意使用lombok时需要安装lombok插件</p>
+<h2 id="Param注解的用法解析"><a href="#Param注解的用法解析" class="headerlink" title="@Param注解的用法解析"></a>@Param注解的用法解析</h2><p>实例一 @Param注解单一属性<br>dao层示例</p>
+<p>Public User selectUser(@param(“userName”) String name,@param(“userpassword”) String password);</p>
+<p>xml映射对应示例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;select id=&quot; selectUser&quot; resultMap=&quot;BaseResultMap&quot;&gt;  </span><br><span class="line">   select  *  from user_user_t   where user_name = #&#123;userName，jdbcType=VARCHAR&#125; and user_password=#&#123;userPassword,jdbcType=VARCHAR&#125;  </span><br><span class="line">&lt;/select&gt;</span><br></pre></td></tr></table></figure>
+
+<p>注意：采用#{}的方式把@Param注解括号内的参数进行引用（括号内参数对应的是形参如 userName对应的是name）；</p>
+<p>实例二 @Param注解JavaBean对象<br>dao层示例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public List&lt;user&gt; getUserInformation(@Param(&quot;user&quot;) User user);</span><br></pre></td></tr></table></figure>
+
+<p>xml映射对应示例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;select id=&quot;getUserInformation&quot; parameterType=&quot;com.github.demo.vo.User&quot; resultMap=&quot;userMapper&quot;&gt;  </span><br><span class="line">        select   </span><br><span class="line">        &lt;include refid=&quot;User_Base_Column_List&quot; /&gt;  </span><br><span class="line">        from mo_user t where 1=1  </span><br><span class="line">                      &lt;!-- 因为传进来的是对象所以这样写是取不到值得 --&gt;  </span><br><span class="line">            &lt;if test=&quot;user.userName!=null  and user.userName!=&apos;&apos;&quot;&gt;   and   t.user_name = #&#123;user.userName&#125;  &lt;/if&gt;  </span><br><span class="line">            &lt;if test=&quot;user.userAge!=null  and user.userAge!=&apos;&apos;&quot;&gt;   and   t.user_age = #&#123;user.userAge&#125;  &lt;/if&gt;  </span><br><span class="line">    &lt;/select&gt;</span><br></pre></td></tr></table></figure>
+
+<p>总结<br>1，使用@Param注解<br>当以下面的方式进行写SQL语句时：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@Select(&quot;select column from table where userid = #&#123;userid&#125; &quot;)</span><br><span class="line">public int selectColumn(int userid);</span><br></pre></td></tr></table></figure>
+
+<p>当你使用了使用@Param注解来声明参数时，如果使用 #{} 或 ${} 的方式都可以。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@Select(&quot;select column from table where userid = $&#123;userid&#125; &quot;)</span><br><span class="line">  public int selectColumn(@Param(&quot;userid&quot;) int userid);</span><br></pre></td></tr></table></figure>
+
+<p>当你不使用@Param注解来声明参数时，必须使用使用 #{}方式。如果使用 ${} 的方式，会报错。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@Select(&quot;select column from table where userid = $&#123;userid&#125; &quot;)</span><br><span class="line">    public int selectColumn(@Param(&quot;userid&quot;) int userid);</span><br></pre></td></tr></table></figure>
+
+<p>2，不使用@Param注解<br>不使用@Param注解时，参数只能有一个，并且是Javabean。在SQL语句里可以引用JavaBean的属性，而且只能引用JavaBean的属性。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 这里id是user的属性</span><br><span class="line"></span><br><span class="line">   @Select(&quot;SELECT * from Table where id = $&#123;id&#125;&quot;)</span><br><span class="line">   Enchashment selectUserById(User user);</span><br></pre></td></tr></table></figure>
+
+<h2 id="Spring中的-AliasFor标签"><a href="#Spring中的-AliasFor标签" class="headerlink" title="Spring中的@AliasFor标签"></a>Spring中的@AliasFor标签</h2><p>1，在同一个注解内显示使用；比如在@RequestMapping中的使用示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">@Target(&#123;ElementType.METHOD, ElementType.TYPE&#125;)</span><br><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">@Documented</span><br><span class="line">@Mapping</span><br><span class="line">public @interface RequestMapping &#123;</span><br><span class="line"></span><br><span class="line">    @AliasFor(&quot;path&quot;)</span><br><span class="line">    String[] value() default &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    @AliasFor(&quot;value&quot;)</span><br><span class="line">    String[] path() default &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    //...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>又比如@ContextConfiguration注解中的value和locations属性：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">@Documented</span><br><span class="line">@Inherited</span><br><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">@Target(ElementType.TYPE)</span><br><span class="line">public @interface ContextConfiguration &#123;</span><br><span class="line">    @AliasFor(&quot;locations&quot;)</span><br><span class="line">    String[] value() default &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    @AliasFor(&quot;value&quot;)</span><br><span class="line">    String[] locations() default &#123;&#125;;</span><br><span class="line">    //...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在同一个注解中成对使用即可，比如示例代码中，value和path就是互为别名。但是要注意一点，@AliasFor标签有一些使用限制，但是这应该能想到的，比如要求互为别名的属性属性值类型，默认值，都是相同的，互为别名的注解必须成对出现，比如value属性添加了@AliasFor(“path”)，那么path属性就必须添加@AliasFor(“value”)，另外还有一点，互为别名的属性必须定义默认值。</p>
+<p>2，显示的覆盖元注解中的属性；<br>先来看一段代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@RunWith(SpringJUnit4ClassRunner.class)</span><br><span class="line">@ContextConfiguration(classes = AopConfig.class)</span><br><span class="line">public class AopUtilsTest &#123;</span><br></pre></td></tr></table></figure>
+
+<p>这段代码是一个非常熟悉的基于JavaConfig的Spring测试代码；假如现在我有个癖好，我觉得每次写@ContextConfiguration(classes = AopConfig.class)太麻烦了，我想写得简单一点，我就可以定义一个这样的标签：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">@ContextConfiguration</span><br><span class="line">public @interface STC &#123;</span><br><span class="line"></span><br><span class="line">    @AliasFor(value = &quot;classes&quot;, annotation = ContextConfiguration.class)</span><br><span class="line">    Class&lt;?&gt;[] cs() default &#123;&#125;;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>1，因为@ContextConfiguration注解本身被定义为@Inherited的，所以我们的STC注解即可理解为继承了@ContextConfiguration注解；<br>2，我觉得classes属性太长了，所以我创建了一个cs属性，为了让这个属性等同于@ContextConfiguration属性中的classes属性，我使用了@AliasFor标签，分别设置了value（即作为哪个属性的别名）和annotation（即作为哪个注解）；</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/reading/" rel="tag"># reading</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2019/11/11/%E8%A7%A3%E8%AF%BB%E4%B8%80%E4%B8%AA%E9%A1%B9%E7%9B%AE/%E5%BC%80%E5%A7%8B/" rel="next" title="前言">
+                  <i class="fa fa-chevron-left"></i> 前言
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+                <a href="/2019/11/12/Fastjson/Fastjson%20%E7%AE%80%E6%98%8E%E6%95%99%E7%A8%8B/" rel="prev" title="Fastjson 简明教程">
+                  Fastjson 简明教程 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#注解解析"><span class="nav-number">1.</span> <span class="nav-text">注解解析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Slf4j注解实现日志输出"><span class="nav-number">1.1.</span> <span class="nav-text">@Slf4j注解实现日志输出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Param注解的用法解析"><span class="nav-number">1.2.</span> <span class="nav-text">@Param注解的用法解析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring中的-AliasFor标签"><span class="nav-number">1.3.</span> <span class="nav-text">Spring中的@AliasFor标签</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="site-author-image" itemprop="image" alt="Lancersaber"
+    src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Lancersaber</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">148</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lancersaber</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.4.2
+  </div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.2"></script><script src="/js/motion.js?v=7.4.2"></script>
+<script src="/js/schemes/muse.js?v=7.4.2"></script>
+<script src="/js/next-boot.js?v=7.4.2"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

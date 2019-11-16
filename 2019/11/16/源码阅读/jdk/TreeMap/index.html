@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.2">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.2">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.2">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.2" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.2">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.4.2',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="TreeMap TreeMap简介TreeMap是一个有序的key-value集合，基于红黑树（Red-Black tree）的 NavigableMap实现。该映射根据其键的自然顺序进行排序，或者根据创建映射时提供的 Comparator进行排序，具体取决于使用的构造方法。 TreeMap中的属性 private transient Entry&amp;lt;K,V&amp;gt; root:一个Treemap">
+<meta name="keywords" content="TreeMap">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TreeMap">
+<meta property="og:url" content="https:&#x2F;&#x2F;lancersaber.github.io&#x2F;2019&#x2F;11&#x2F;16&#x2F;%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB&#x2F;jdk&#x2F;TreeMap&#x2F;index.html">
+<meta property="og:site_name" content="Lancersaber">
+<meta property="og:description" content="TreeMap TreeMap简介TreeMap是一个有序的key-value集合，基于红黑树（Red-Black tree）的 NavigableMap实现。该映射根据其键的自然顺序进行排序，或者根据创建映射时提供的 Comparator进行排序，具体取决于使用的构造方法。 TreeMap中的属性 private transient Entry&amp;lt;K,V&amp;gt; root:一个Treemap">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;11&#x2F;16&#x2F;1GupYB8kfUQMPX4.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;11&#x2F;16&#x2F;r61Dx8Y4iVfkuy9.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;11&#x2F;16&#x2F;xH3sIW16RXiVnDy.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;11&#x2F;16&#x2F;LFPdWT5VfUtGlD6.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;11&#x2F;16&#x2F;GFejvIiQh1roLtU.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;11&#x2F;16&#x2F;3f8wIQLJz5XNHKu.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;11&#x2F;16&#x2F;7I1MOcjhPUmxrt4.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;11&#x2F;16&#x2F;RPX82WSwVZsQyzU.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;11&#x2F;16&#x2F;siRpFocXGfqC2Ij.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;11&#x2F;16&#x2F;wZYeTvSs8PWIpEa.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;11&#x2F;16&#x2F;k1Iai9rnNyzuYcM.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;11&#x2F;16&#x2F;YQTbPX4dSKHv1GB.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;11&#x2F;16&#x2F;HhgOPRkQVKE5CDl.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;11&#x2F;16&#x2F;QF3TYaEqXZdzmny.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;11&#x2F;16&#x2F;AIt4oev6bMdUqsK.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;11&#x2F;16&#x2F;y9lACvc6tkbGo3U.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;11&#x2F;16&#x2F;L9nY28csilbtM5a.png">
+<meta property="og:updated_time" content="2019-11-16T11:23:01.097Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;11&#x2F;16&#x2F;1GupYB8kfUQMPX4.png">
+
+<link rel="canonical" href="https://lancersaber.github.io/2019/11/16/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/jdk/TreeMap/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>TreeMap | Lancersaber</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lancersaber</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/16/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/jdk/TreeMap/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          TreeMap
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2019-11-16 13:47:13 / Modified: 19:23:01" itemprop="dateCreated datePublished" datetime="2019-11-16T13:47:13+08:00">2019-11-16</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sourceread/" itemprop="url" rel="index">
+                    <span itemprop="name">sourceread</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="TreeMap"><a href="#TreeMap" class="headerlink" title="TreeMap"></a>TreeMap</h1><hr>
+<h2 id="TreeMap简介"><a href="#TreeMap简介" class="headerlink" title="TreeMap简介"></a>TreeMap简介</h2><p>TreeMap是一个有序的key-value集合，基于红黑树（Red-Black tree）的 NavigableMap实现。该映射根据其键的自然顺序进行排序，或者根据创建映射时提供的 Comparator进行排序，具体取决于使用的构造方法。</p>
+<h2 id="TreeMap中的属性"><a href="#TreeMap中的属性" class="headerlink" title="TreeMap中的属性"></a>TreeMap中的属性</h2><ul>
+<li>private transient Entry&lt;K,V&gt; root:一个Treemap的根节点</li>
+<li>private final Comparator&lt;? super K&gt; comparator;比较器，由于treemap是有序的，所以需要有一个比较的规则</li>
+<li>private transient int size = 0;记录treemap中有多少个结点</li>
+<li>private transient int modCount = 0;记录treemap经过多少次修改</li>
+<li>private static final boolean RED   = false;treemap是基于红黑树这种数据结构的，定义这两个变量用于区分结点是红结点还是黑结点</li>
+<li>private static final boolean BLACK = true;</li>
+</ul>
+<h2 id="TreeMap中比较重要的点"><a href="#TreeMap中比较重要的点" class="headerlink" title="TreeMap中比较重要的点"></a>TreeMap中比较重要的点</h2><h3 id="1、Entry-lt-K-V-gt"><a href="#1、Entry-lt-K-V-gt" class="headerlink" title="1、Entry&lt;K,V&gt;"></a>1、Entry&lt;K,V&gt;</h3><p>TreeMap中传入key和value后，内部会将key，value封装为一个Entry,然后将该Entry放入到合适的位置</p>
+<p><img src="https://i.loli.net/2019/11/16/1GupYB8kfUQMPX4.png" alt="2019-11-16 14_01_13-HashMapRead _D__垃圾_HashMapRead_ - C__Program Files_Java_jdk1.8.0_144_src.zip!_ja.png"></p>
+<p>可以看到，在Entry中定义了上面几个属性，</p>
+<ul>
+<li>key:存储key值</li>
+<li>value：存储value值</li>
+<li>left：该结点的左结点</li>
+<li>right：该结点的右结点</li>
+<li>parent：该结点的父节点</li>
+<li>color：标识该结点是红结点还是黑结点，默认是黑结点</li>
+</ul>
+<p><img src="https://i.loli.net/2019/11/16/r61Dx8Y4iVfkuy9.png" alt="2019-11-16 14_08_10-HashMapRead _D__垃圾_HashMapRead_ - C__Program Files_Java_jdk1.8.0_144_src.zip!_ja.png"></p>
+<p>Entry中需要注意的是它的构造函数，它传入了parent结点，标识当前结点的parent结点，其他的函数没什么。</p>
+<h3 id="2、使用一个小程序进行debug"><a href="#2、使用一个小程序进行debug" class="headerlink" title="2、使用一个小程序进行debug"></a>2、使用一个小程序进行debug</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;Integer,String&gt; treemap=new TreeMap&lt;&gt;();</span><br><span class="line">        treemap.put(1,&quot;Mike&quot;);</span><br><span class="line">        treemap.put(2,&quot;Jack&quot;);</span><br><span class="line">        treemap.put(-99,&quot;hike&quot;);</span><br><span class="line">        System.out.println(treemap);</span><br></pre></td></tr></table></figure>
+
+<p>在第一行打上断点，进行调试<br><img src="https://i.loli.net/2019/11/16/xH3sIW16RXiVnDy.png" alt="2019-11-16 14_23_07-HashMapRead _D__垃圾_HashMapRead_ - C__Program Files_Java_jdk1.8.0_144_src.zip!_ja.png"></p>
+<p>可以看到初始化了比较器为null。其余的操作都未进行。下面一张图表示了treemap各个属性的初始值情况<br><img src="https://i.loli.net/2019/11/16/LFPdWT5VfUtGlD6.png" alt="2019-11-16 14_37_05-HashMapRead _D__垃圾_HashMapRead_ - C__Program Files_Java_jdk1.8.0_144_src.zip!_ja.png"></p>
+<p>继续往下看，进入put方法，在进入put方法之前，我们可以先预测几种情况</p>
+<ol>
+<li>treemap中root为null，这是第一个插入的值</li>
+<li>treemap中root不为null，那么需要从root开始根据比较器中的规则进行比较，根据比较结果是否大于0，等于0，小于0来判断该结点的走向<ul>
+<li>大于0，前往右边</li>
+<li>小于0，去往左边‘</li>
+<li>等于0，说明这是替换操作<br>下面我们来验证一下<br><img src="https://i.loli.net/2019/11/16/GFejvIiQh1roLtU.png" alt="2019-11-16 14_30_40-HashMapRead _D__垃圾_HashMapRead_ - C__Program Files_Java_jdk1.8.0_144_src.zip!_ja.png"></li>
+</ul>
+</li>
+</ol>
+<p>使用t来接收root值，防止更改root值造成混乱。可以看到，如果是第一次插入值，root为null，那么这个值就是root的初始值，注意高亮的部分调用了一个compare方法</p>
+<p><img src="https://i.loli.net/2019/11/16/3f8wIQLJz5XNHKu.png" alt="2019-11-16 14_38_27-HashMapRead _D__垃圾_HashMapRead_ - C__Program Files_Java_jdk1.8.0_144_src.zip!_ja.png"></p>
+<p>注意看画线的部分，是将传入的key转化为Comparable类型然后调用compareTo()方法，这表明如果没有传入可用的Comparator，那么传入的key值就必须实现了Comparable接口。否则会报下面的错误</p>
+<p><img src="https://i.loli.net/2019/11/16/7I1MOcjhPUmxrt4.png" alt="2019-11-16 14_42_43-HashMapRead _D__垃圾_HashMapRead_ - ..._src_com_lancer_package1_Test.java _HashMap.png"></p>
+<p>好，到现在我们已经验证了第一种情况，下面我们继续看put函数中后面的代码</p>
+<p><img src="https://i.loli.net/2019/11/16/RPX82WSwVZsQyzU.png" alt="2019-11-16 14_51_27-HashMapRead _D__垃圾_HashMapRead_ - C__Program Files_Java_jdk1.8.0_144_src.zip!_ja.png"></p>
+<p>如果root不为null，那么执行这段代码，首先定义了三个值，</p>
+<ol>
+<li>cmp：用于保存比较的结果</li>
+<li>parent：用于保存父节点</li>
+<li>cpr：用于保存比较器</li>
+</ol>
+<p>后面根据比较器是否使用默认的分为两种情况，如果使用自定义的比较器，则进入块1，使用默认的比较器就进入块2，显然我们没有显示地传入构造器，因此进入else块中。<br>首先判断key值是否为null，这也表明key不能为null。将key转成Comparable类型赋值给cpr，根据比较结果选择进入左子树遍历还是右子树遍历，一通循环后，退出循环时待插入的结点的父节点就是parent结点。</p>
+<p>来看最后的一点代码<br><img src="https://i.loli.net/2019/11/16/siRpFocXGfqC2Ij.png" alt="2019-11-16 15_03_15-HashMapRead _D__垃圾_HashMapRead_ - C__Program Files_Java_jdk1.8.0_144_src.zip!_ja.png"></p>
+<p>将待插入结点转换为一个Entry结点，与parent的key值进行比较，判断是插入到parent的左边还是右边。修改size和modCount的值，在这里面调用了fixAfterInsertion()函数，这个函数就是将修改后的tree转换化一棵红黑树，搞懂了这个函数，对treemap源码可以说就理解2/3了。</p>
+<h3 id="红黑树"><a href="#红黑树" class="headerlink" title="红黑树"></a>红黑树</h3><p>除了二叉树的基本要求外，红黑树必须满足以下几点性质。</p>
+<ul>
+<li>节点必须是红色或者黑色。</li>
+<li>根节点必须是黑色。</li>
+<li>叶节点(NIL)是黑色的。（NIL节点无数据，是空节点）</li>
+<li>红色节点必须有两个黑色儿子节点。</li>
+<li>从任一节点出发到其每个叶子节点的路径，黑色节点的数量是相等的。</li>
+</ul>
+<p>我们先来看一下平衡二叉树的旋转</p>
+<h4 id="平衡二叉树的旋转"><a href="#平衡二叉树的旋转" class="headerlink" title="平衡二叉树的旋转"></a>平衡二叉树的旋转</h4><p><img src="https://i.loli.net/2019/11/16/wZYeTvSs8PWIpEa.png" alt="20170429150914755.png"><br><img src="https://i.loli.net/2019/11/16/k1Iai9rnNyzuYcM.png" alt="20170429151109740.png"><br>注意在treemap中，第二种情况会先化为第一种情况<br><img src="https://i.loli.net/2019/11/16/YQTbPX4dSKHv1GB.png" alt="2019-11-16 16_40_58-未命名表单.drawio - draw.io.png"><br>然后再使用第一种情况来进行旋转</p>
+<p>我们来看一下再treemap中右旋转的代码<br><img src="https://i.loli.net/2019/11/16/HhgOPRkQVKE5CDl.png" alt="2019-11-16 16_43_35-HashMapRead _D__垃圾_HashMapRead_ - C__Program Files_Java_jdk1.8.0_144_src.zip!_ja.png"></p>
+<p>这个代码可以分为四部分<br>其中传入的参数为最上面的结点p(parent)，也就是上面40那个结点。</p>
+<ul>
+<li><p>第一部分获得传入结点的左子结点l(left)。</p>
+</li>
+<li><p>第二部分将r的右子结点赋予给p，作为p的左子结点，这是因为r最终的右子结点是p，这会导致原来的右子节点丢失，所以必须将它们转移至p的左子结点，因为它们只有小于p才会位于左侧。</p>
+</li>
+<li><p>第三部分设置r的parent为p的parent，并判断r是p.praent的左子结点还是右子结点。这个判断对应得模型为下面三种模型<br><img src="https://i.loli.net/2019/11/16/QF3TYaEqXZdzmny.png" alt="2019-11-16 16_58_16-未命名表单.drawio - draw.io.png"><br><img src="https://i.loli.net/2019/11/16/AIt4oev6bMdUqsK.png" alt="2019-11-16 17_01_35-未命名表单.drawio - draw.io.png"><br><img src="https://i.loli.net/2019/11/16/y9lACvc6tkbGo3U.png" alt="2019-11-16 18_30_50-未命名表单.drawio - draw.io.png"></p>
+</li>
+<li><p>第四部分将p设为r的右子结点，r设为p的父节点</p>
+</li>
+</ul>
+<p>左旋转代码类似</p>
+<p>回到fixAfterInsertinon()函数<br><img src="https://i.loli.net/2019/11/16/L9nY28csilbtM5a.png" alt="2019-11-16 18_41_28-HashMapRead _D__垃圾_HashMapRead_ - C__Program Files_Java_jdk1.8.0_144_src.zip!_ja.png"></p>
+<p>之所以先设置每个节点颜色的初始值为red，还是因为需要保证从根节点到每个叶子节点经过的黑节点数目必须相等，因此增加红色节点不影响，还有就是旋转时将x的parent设置为black，给x的parent的parent设置为red是为了到达旋转后黑节点下面挂着两个红节点，这样也不会破坏条件。后半部分代码类似，只不过是针对x的parent位于右子节点时的情况。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/TreeMap/" rel="tag"># TreeMap</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2019/11/15/Java%E5%9F%BA%E7%A1%80/Java%E4%B8%AD%E7%9A%84%E6%B3%9B%E5%9E%8B/" rel="next" title="Java中泛型">
+                  <i class="fa fa-chevron-left"></i> Java中泛型
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+                <a href="/2019/11/16/%E9%AB%98%E5%B9%B6%E5%8F%91%E6%9E%B6%E6%9E%84/%E6%B6%88%E6%81%AF%E4%B8%AD%E9%97%B4%E4%BB%B6/%E4%BD%BF%E7%94%A8%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%9A%84%E5%A5%BD%E5%A4%84%E5%92%8C%E5%9D%8F%E5%A4%84/" rel="prev" title="使用消息中间件的好处和坏处">
+                  使用消息中间件的好处和坏处 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#TreeMap"><span class="nav-number">1.</span> <span class="nav-text">TreeMap</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#TreeMap简介"><span class="nav-number">1.1.</span> <span class="nav-text">TreeMap简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TreeMap中的属性"><span class="nav-number">1.2.</span> <span class="nav-text">TreeMap中的属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TreeMap中比较重要的点"><span class="nav-number">1.3.</span> <span class="nav-text">TreeMap中比较重要的点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、Entry-lt-K-V-gt"><span class="nav-number">1.3.1.</span> <span class="nav-text">1、Entry&lt;K,V&gt;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、使用一个小程序进行debug"><span class="nav-number">1.3.2.</span> <span class="nav-text">2、使用一个小程序进行debug</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#红黑树"><span class="nav-number">1.3.3.</span> <span class="nav-text">红黑树</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#平衡二叉树的旋转"><span class="nav-number">1.3.3.1.</span> <span class="nav-text">平衡二叉树的旋转</span></a></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="site-author-image" itemprop="image" alt="Lancersaber"
+    src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Lancersaber</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">148</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lancersaber</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.4.2
+  </div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.2"></script><script src="/js/motion.js?v=7.4.2"></script>
+<script src="/js/schemes/muse.js?v=7.4.2"></script>
+<script src="/js/next-boot.js?v=7.4.2"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

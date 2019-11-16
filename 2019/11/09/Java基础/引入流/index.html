@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.2">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.2">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.2">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.2" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.2">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.4.2',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="引入流 流是什么?流是Java Api的新成员，它允许你以声明性方式处理数据集合。简短的定义就是”从支持数据处理操作的源生成的元素序列”。 流的两大特点  流水线：很多流操作本身会返回一个流，这样多个操作就可以链接起来，形成一个大的流水线。 内部迭代：与使用迭代器显式迭代的集合不同，流的迭代操作是在背后进行的。  一个流只能访问一次，想要访问多次只能重新获取流进行访问。 流操作中间操作诸如filt">
+<meta name="keywords" content="Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="引入流">
+<meta property="og:url" content="https:&#x2F;&#x2F;lancersaber.github.io&#x2F;2019&#x2F;11&#x2F;09&#x2F;Java%E5%9F%BA%E7%A1%80&#x2F;%E5%BC%95%E5%85%A5%E6%B5%81&#x2F;index.html">
+<meta property="og:site_name" content="Lancersaber">
+<meta property="og:description" content="引入流 流是什么?流是Java Api的新成员，它允许你以声明性方式处理数据集合。简短的定义就是”从支持数据处理操作的源生成的元素序列”。 流的两大特点  流水线：很多流操作本身会返回一个流，这样多个操作就可以链接起来，形成一个大的流水线。 内部迭代：与使用迭代器显式迭代的集合不同，流的迭代操作是在背后进行的。  一个流只能访问一次，想要访问多次只能重新获取流进行访问。 流操作中间操作诸如filt">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-11-09T10:04:25.827Z">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://lancersaber.github.io/2019/11/09/Java%E5%9F%BA%E7%A1%80/%E5%BC%95%E5%85%A5%E6%B5%81/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>引入流 | Lancersaber</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lancersaber</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/09/Java%E5%9F%BA%E7%A1%80/%E5%BC%95%E5%85%A5%E6%B5%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          引入流
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2019-11-09 15:56:20 / Modified: 18:04:25" itemprop="dateCreated datePublished" datetime="2019-11-09T15:56:20+08:00">2019-11-09</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="引入流"><a href="#引入流" class="headerlink" title="引入流"></a>引入流</h1><hr>
+<h2 id="流是什么"><a href="#流是什么" class="headerlink" title="流是什么?"></a>流是什么?</h2><p>流是Java Api的新成员，它允许你以声明性方式处理数据集合。简短的定义就是”从支持数据处理操作的源生成的元素序列”。</p>
+<p>流的两大特点</p>
+<ul>
+<li>流水线：很多流操作本身会返回一个流，这样多个操作就可以链接起来，形成一个大的流水线。</li>
+<li>内部迭代：与使用迭代器显式迭代的集合不同，流的迭代操作是在背后进行的。</li>
+</ul>
+<p>一个流只能访问一次，想要访问多次只能重新获取流进行访问。</p>
+<h2 id="流操作"><a href="#流操作" class="headerlink" title="流操作"></a>流操作</h2><h3 id="中间操作"><a href="#中间操作" class="headerlink" title="中间操作"></a>中间操作</h3><p>诸如filter或sorted等中间操作会返回另一个流。这让多个操作可以连接起来形成一个查询。重要的是，除非流水线上触发一个终端操作，否则中间操作不会执行任何处理—它们很懒。这是因为中间操作一般都可以合并起来，在终端操作时一次性全部处理。</p>
+<p>中间操作</p>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>类型</th>
+<th>返回类型</th>
+<th>操作参数</th>
+<th>函数描述符</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>filter</td>
+<td>中间</td>
+<td>Stream<T></td>
+<td>Predicate<T></td>
+<td>T-&gt;boolean</td>
+</tr>
+<tr>
+<td>map</td>
+<td>中间</td>
+<td>Stream<T></td>
+<td>Function&lt;T,R&gt;</td>
+<td>T-&gt;R</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>中间</td>
+<td>Stream<T></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>sorted</td>
+<td>中间</td>
+<td>Stream<T></td>
+<td>Comparator<T></td>
+<td>(T,T)-&gt;int</td>
+</tr>
+<tr>
+<td>distinct</td>
+<td>中间</td>
+<td>Stream<T></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p>终端操作</p>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>类型</th>
+<th>目的</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>foreach</td>
+<td>终端</td>
+<td>消费流中的每个元素并对其应用Lamada。这一操作一般返回void</td>
+</tr>
+<tr>
+<td>count</td>
+<td>终端</td>
+<td>返回流中的个数，返回long</td>
+</tr>
+<tr>
+<td>collect</td>
+<td>终端</td>
+<td>把流归约成一个集合，比如List,Map,甚至是Integer</td>
+</tr>
+</tbody></table>
+<h2 id="使用流"><a href="#使用流" class="headerlink" title="使用流"></a>使用流</h2><h3 id="筛选和切片"><a href="#筛选和切片" class="headerlink" title="筛选和切片"></a>筛选和切片</h3><h3 id="筛选各异的元素"><a href="#筛选各异的元素" class="headerlink" title="筛选各异的元素"></a>筛选各异的元素</h3><p>使用distinct方法，它会去除重复的元素</p>
+<h3 id="截短流"><a href="#截短流" class="headerlink" title="截短流"></a>截短流</h3><p>使用limit(n)方法，会返回一个不超过给定长度的流。</p>
+<h3 id="跳过元素"><a href="#跳过元素" class="headerlink" title="跳过元素"></a>跳过元素</h3><p>使用skip(n)方法，该方法会扔掉前n个元素的流。如果流中的元素不足n个，则返回一个空流</p>
+<h2 id="映射"><a href="#映射" class="headerlink" title="映射"></a>映射</h2><h3 id="对流中的每一个元素应用函数"><a href="#对流中的每一个元素应用函数" class="headerlink" title="对流中的每一个元素应用函数"></a>对流中的每一个元素应用函数</h3><p>流支持map方法，它会接受一个函数作为参数。这个函数会被应用到每个元素上，并将其映射成一个新的元素。<em>流中的类型会发生改变</em>。</p>
+<h2 id="查找和匹配"><a href="#查找和匹配" class="headerlink" title="查找和匹配"></a>查找和匹配</h2><p>另一个常见的数据处理套路是看看数据集中的某些元素是否匹配一个给定的属性。</p>
+<h3 id="检查谓词是否至少匹配一个元素"><a href="#检查谓词是否至少匹配一个元素" class="headerlink" title="检查谓词是否至少匹配一个元素"></a>检查谓词是否至少匹配一个元素</h3><p>anyMatch方法可以回答”流中是否有一个元素能匹配给定的谓词”。</p>
+<h3 id="检查谓词是否匹配所有元素"><a href="#检查谓词是否匹配所有元素" class="headerlink" title="检查谓词是否匹配所有元素"></a>检查谓词是否匹配所有元素</h3><p>allMatch方法</p>
+<p>对立方法：noneMatch()</p>
+<h3 id="查找元素"><a href="#查找元素" class="headerlink" title="查找元素"></a>查找元素</h3><p>findAny方法将返回当前流中的任意元素。</p>
+<h3 id="查找第一个元素"><a href="#查找第一个元素" class="headerlink" title="查找第一个元素"></a>查找第一个元素</h3><p>findFirst()</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Java/" rel="tag"># Java</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2019/11/09/Java%E5%9F%BA%E7%A1%80/Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/" rel="next" title="lambda表达式">
+                  <i class="fa fa-chevron-left"></i> lambda表达式
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+                <a href="/2019/11/09/Spring2/Spring%20Boot%20%E2%80%93%E5%A6%82%E4%BD%95%E7%9F%A5%E9%81%93%E4%BD%BF%E7%94%A8%E5%93%AA%E4%B8%AA%E8%BF%9E%E6%8E%A5%E6%B1%A0/" rel="prev" title="Spring Boot –如何知道使用哪个连接池">
+                  Spring Boot –如何知道使用哪个连接池 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#引入流"><span class="nav-number">1.</span> <span class="nav-text">引入流</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#流是什么"><span class="nav-number">1.1.</span> <span class="nav-text">流是什么?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#流操作"><span class="nav-number">1.2.</span> <span class="nav-text">流操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#中间操作"><span class="nav-number">1.2.1.</span> <span class="nav-text">中间操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用流"><span class="nav-number">1.3.</span> <span class="nav-text">使用流</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#筛选和切片"><span class="nav-number">1.3.1.</span> <span class="nav-text">筛选和切片</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#筛选各异的元素"><span class="nav-number">1.3.2.</span> <span class="nav-text">筛选各异的元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#截短流"><span class="nav-number">1.3.3.</span> <span class="nav-text">截短流</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#跳过元素"><span class="nav-number">1.3.4.</span> <span class="nav-text">跳过元素</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#映射"><span class="nav-number">1.4.</span> <span class="nav-text">映射</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#对流中的每一个元素应用函数"><span class="nav-number">1.4.1.</span> <span class="nav-text">对流中的每一个元素应用函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查找和匹配"><span class="nav-number">1.5.</span> <span class="nav-text">查找和匹配</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#检查谓词是否至少匹配一个元素"><span class="nav-number">1.5.1.</span> <span class="nav-text">检查谓词是否至少匹配一个元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#检查谓词是否匹配所有元素"><span class="nav-number">1.5.2.</span> <span class="nav-text">检查谓词是否匹配所有元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查找元素"><span class="nav-number">1.5.3.</span> <span class="nav-text">查找元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查找第一个元素"><span class="nav-number">1.5.4.</span> <span class="nav-text">查找第一个元素</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="site-author-image" itemprop="image" alt="Lancersaber"
+    src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Lancersaber</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">148</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lancersaber</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.4.2
+  </div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.2"></script><script src="/js/motion.js?v=7.4.2"></script>
+<script src="/js/schemes/muse.js?v=7.4.2"></script>
+<script src="/js/next-boot.js?v=7.4.2"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

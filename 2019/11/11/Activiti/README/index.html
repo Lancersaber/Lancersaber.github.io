@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.2">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.2">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.2">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.2" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.2">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.4.2',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="BootDo 面向学习型的开源框架平台简介一群[]二群三群: BootDo是高效率，低封装，面向学习型，面向微服的开源Java EE开发框架。 BootDo是在SpringBoot基础上搭建的一个Java基础开发平台，MyBatis为数据访问层，ApacheShiro为权限授权层，Ehcahe对常用数据进行缓存。 BootDo主要定位于后台管理系统学习交流，已内置后台管理系统的基础功能和高效的代码">
+<meta property="og:type" content="article">
+<meta property="og:title" content="wu">
+<meta property="og:url" content="https:&#x2F;&#x2F;lancersaber.github.io&#x2F;2019&#x2F;11&#x2F;11&#x2F;Activiti&#x2F;README&#x2F;index.html">
+<meta property="og:site_name" content="Lancersaber">
+<meta property="og:description" content="BootDo 面向学习型的开源框架平台简介一群[]二群三群: BootDo是高效率，低封装，面向学习型，面向微服的开源Java EE开发框架。 BootDo是在SpringBoot基础上搭建的一个Java基础开发平台，MyBatis为数据访问层，ApacheShiro为权限授权层，Ehcahe对常用数据进行缓存。 BootDo主要定位于后台管理系统学习交流，已内置后台管理系统的基础功能和高效的代码">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https:&#x2F;&#x2F;pub.idqqimg.com&#x2F;wpa&#x2F;images&#x2F;group.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;pub.idqqimg.com&#x2F;wpa&#x2F;images&#x2F;group.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;pub.idqqimg.com&#x2F;wpa&#x2F;images&#x2F;group.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;pub.idqqimg.com&#x2F;wpa&#x2F;images&#x2F;group.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;gitee.com&#x2F;uploads&#x2F;images&#x2F;2018&#x2F;0228&#x2F;172207_751b45c4_1204498.jpeg">
+<meta property="og:image" content="https:&#x2F;&#x2F;gitee.com&#x2F;uploads&#x2F;images&#x2F;2018&#x2F;0228&#x2F;172216_fbcc5c30_1204498.jpeg">
+<meta property="og:updated_time" content="2019-11-11T09:50:40.493Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;pub.idqqimg.com&#x2F;wpa&#x2F;images&#x2F;group.png">
+
+<link rel="canonical" href="https://lancersaber.github.io/2019/11/11/Activiti/README/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>wu | Lancersaber</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lancersaber</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/11/Activiti/README/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          wu
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2019-11-11 17:49:26 / Modified: 17:50:40" itemprop="dateCreated datePublished" datetime="2019-11-11T17:49:26+08:00">2019-11-11</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Activiti/" itemprop="url" rel="index">
+                    <span itemprop="name">Activiti</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="BootDo-面向学习型的开源框架"><a href="#BootDo-面向学习型的开源框架" class="headerlink" title="BootDo 面向学习型的开源框架"></a>BootDo 面向学习型的开源框架</h1><h2 id="平台简介"><a href="#平台简介" class="headerlink" title="平台简介"></a>平台简介</h2><p>一群[]<a target="_blank" href="https://jq.qq.com/?_wv=1027&k=5ojKYFG"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="BootDo交流群" title="BootDo交流群"></a><br>二群<a target="_blank" href="https://jq.qq.com/?_wv=1027&k=54UlM7d"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="BootDo交流群" title="BootDo交流群"></a><br>三群:<a target="_blank" href="https://jq.qq.com/?_wv=1027&k=5rB9i8M"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="BootDo交流群" title="BootDo交流群"></a></p>
+<p>BootDo是高效率，低封装，面向学习型，面向微服的<strong>开源</strong>Java EE开发框架。</p>
+<p>BootDo是在SpringBoot基础上搭建的一个Java基础开发平台，MyBatis为数据访问层，ApacheShiro为权限授权层，Ehcahe对常用数据进行缓存。</p>
+<p>BootDo主要定位于后台管理系统学习交流，已内置后台管理系统的基础功能和高效的<strong>代码生成</strong>工具，<br>包括：系统权限组件、数据权限组件、数据字典组件、核心工具组件、视图操作组件、工作流组件、代码生成等。<br>前端界面风格采用了结构简单、性能优良、页面美观大气的Twitter Bootstrap页面展示框架。<br>采用分层设计、双重验证、提交数据安全编码、密码加密、访问验证、数据权限验证。<br>使用Maven做项目管理，提高项目的易开发性、扩展性。</p>
+<p>BootDo目前包括以下四大模块，系统管理（SYS）模块、<br>内容管理（CMS）模块、在线办公（OA）模块、代码生成（GEN）模块。 <strong>系统管理模块</strong> ，包括企业组织架构（用户管理、机构管理、区域管理）、<br>菜单管理、角色权限管理、字典管理等功能； <strong>内容管理模块</strong> ，包括内容管理（文章、链接），栏目管理、站点管理、<br>公共留言、文件管理、前端网站展示等功能； <strong>在线办公模块</strong> ，提供简单的请假流程实例；<strong>代码生成模块</strong> ，完成重复的工作。</p>
+<p>BootDo 提供了常用工具进行封装，包括日志工具、缓存工具、服务器端验证、数据字典、当前组织机构数据<br>（用户、机构、区域）以及其它常用小工具等。另外还提供一个强大的在线 <strong>代码生成</strong> 工具。</p>
+<h2 id="内置功能"><a href="#内置功能" class="headerlink" title="内置功能"></a>内置功能</h2><ol>
+<li>用户管理：用户是系统操作者，该功能主要完成系统用户配置。</li>
+<li>机构管理：配置系统组织机构（公司、部门、小组），树结构展现，可随意调整上下级。</li>
+<li>区域管理：系统城市区域模型，如：国家、省市、地市、区县的维护。</li>
+<li>菜单管理：配置系统菜单，操作权限，按钮权限标识等。</li>
+<li>角色管理：角色菜单权限分配、设置角色按机构进行数据范围权限划分。</li>
+<li>字典管理：对系统中经常使用的一些较为固定的数据进行维护，如：是否、男女、类别、级别等。</li>
+<li>操作日志：系统正常操作日志记录和查询；系统异常信息日志记录和查询。</li>
+<li>连接池监视：监视当期系统数据库连接池状态，可进行分析SQL找出系统性能瓶颈。</li>
+<li>工作流引擎：实现业务工单流转、在线流程设计器。</li>
+</ol>
+<h2 id="技术选型"><a href="#技术选型" class="headerlink" title="技术选型"></a>技术选型</h2><p>1、后端</p>
+<ul>
+<li>核心框架：Spring Boot</li>
+<li>安全框架：Apache Shiro </li>
+<li>模板引擎：Thymeleaf</li>
+<li>持久层框架：MyBatis</li>
+<li>数据库连接池：Alibaba Druid </li>
+<li>缓存框架：Ehcache 、Redis</li>
+<li>日志管理：SLF4J </li>
+<li>工具类：Apache Commons、Jackson </li>
+</ul>
+<p>2、前端</p>
+<ul>
+<li>JS框架：jQuery</li>
+<li>客户端验证：JQuery Validation </li>
+<li>富文本在线编辑：summernote</li>
+<li>数据表格：bootstrapTable</li>
+<li>弹出层：layer</li>
+<li>树结构控件：jsTree</li>
+</ul>
+<p>4、平台</p>
+<ul>
+<li>服务器中间件：SpringBoot内置</li>
+<li>数据库支持：目前仅提供MySql数据库的支持，但不限于数据库</li>
+<li>开发环境：Java、Eclipse Java EE 、Maven 、Git</li>
+</ul>
+<h2 id="安全考虑"><a href="#安全考虑" class="headerlink" title="安全考虑"></a>安全考虑</h2><ol>
+<li>开发语言：系统采用Java 语言开发，具有卓越的通用性、高效性、平台移植性和安全性。</li>
+<li>分层设计：（数据库层，数据访问层，业务逻辑层，展示层）层次清楚，低耦合，各层必须通过接口才能接入并进行参数校验（如：在展示层不可直接操作数据库），保证数据操作的安全。</li>
+<li>双重验证：用户表单提交双验证：包括服务器端验证及客户端验证，防止用户通过浏览器恶意修改（如不可写文本域、隐藏变量篡改、上传非法文件等），跳过客户端验证操作数据库。</li>
+<li>安全编码：用户表单提交所有数据，在服务器端都进行安全编码，防止用户提交非法脚本及SQL注入获取敏感数据等，确保数据安全。</li>
+<li>密码加密：登录用户密码进行SHA1散列加密，此加密方法是不可逆的。保证密文泄露后的安全问题。</li>
+<li>强制访问：系统对所有管理端链接都进行用户身份权限验证，防止用户直接填写url进行访问。</li>
+</ol>
+<h2 id="演示地址"><a href="#演示地址" class="headerlink" title="演示地址"></a>演示地址</h2><h2 id="www-bootdo-com"><a href="#www-bootdo-com" class="headerlink" title="www.bootdo.com"></a><a href="http://www.bootdo.com" target="_blank" rel="noopener">www.bootdo.com</a></h2><h2 id="交流反馈"><a href="#交流反馈" class="headerlink" title="交流反馈"></a>交流反馈</h2><h2 id="QQ群-669039323（满），614726589"><a href="#QQ群-669039323（满），614726589" class="headerlink" title="QQ群 669039323（满），614726589"></a>QQ群 669039323（满），614726589<a target="_blank" href="https://jq.qq.com/?_wv=1027&k=54UlM7d"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="BootDo交流群" title="BootDo交流群"></a></h2><h2 id="版权声明"><a href="#版权声明" class="headerlink" title="版权声明"></a>版权声明</h2><p>本软件使用 <a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank" rel="noopener">Apache License 2.0</a> 协议，请严格遵照协议内容</p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 注：已上内容为整体规化，部分功能还在实现中</li>
+</ul>
+<p>如果感觉对您有帮助，请作者喝杯咖啡吧，请注明您的名字或者昵称，方便作者感谢o(<em>￣︶￣</em>)o<br><img src="https://gitee.com/uploads/images/2018/0228/172207_751b45c4_1204498.jpeg" alt="输入图片说明" title="843167056429717736.jpg"><img src="https://gitee.com/uploads/images/2018/0228/172216_fbcc5c30_1204498.jpeg" alt="输入图片说明" title="12959670678378076.jpg"></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2019/11/11/Spring2/%E4%BB%80%E4%B9%88%E6%98%AF%E5%93%8D%E5%BA%94%E5%BC%8F%E7%BC%96%E7%A8%8B/" rel="next" title="什么是响应式编程">
+                  <i class="fa fa-chevron-left"></i> 什么是响应式编程
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+                <a href="/2019/11/11/%E8%A7%A3%E8%AF%BB%E4%B8%80%E4%B8%AA%E9%A1%B9%E7%9B%AE/%E5%BC%80%E5%A7%8B/" rel="prev" title="前言">
+                  前言 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#BootDo-面向学习型的开源框架"><span class="nav-number">1.</span> <span class="nav-text">BootDo 面向学习型的开源框架</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#平台简介"><span class="nav-number">1.1.</span> <span class="nav-text">平台简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内置功能"><span class="nav-number">1.2.</span> <span class="nav-text">内置功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#技术选型"><span class="nav-number">1.3.</span> <span class="nav-text">技术选型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安全考虑"><span class="nav-number">1.4.</span> <span class="nav-text">安全考虑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#演示地址"><span class="nav-number">1.5.</span> <span class="nav-text">演示地址</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#www-bootdo-com"><span class="nav-number">1.6.</span> <span class="nav-text">www.bootdo.com</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#交流反馈"><span class="nav-number">1.7.</span> <span class="nav-text">交流反馈</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#QQ群-669039323（满），614726589"><span class="nav-number">1.8.</span> <span class="nav-text">QQ群 669039323（满），614726589</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#版权声明"><span class="nav-number">1.9.</span> <span class="nav-text">版权声明</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="site-author-image" itemprop="image" alt="Lancersaber"
+    src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Lancersaber</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">148</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lancersaber</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.4.2
+  </div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.2"></script><script src="/js/motion.js?v=7.4.2"></script>
+<script src="/js/schemes/muse.js?v=7.4.2"></script>
+<script src="/js/next-boot.js?v=7.4.2"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

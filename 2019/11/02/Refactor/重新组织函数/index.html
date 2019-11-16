@@ -50,15 +50,15 @@
   };
 </script>
 
-  <meta name="description" content="重新组织函数">
+  <meta name="description" content="重新组织函数 1.Extract Method(提炼函数)概述将一段代码放进一个独立函数中，并让函数名称解释该函数的作用 动机有下面几个原因造成我喜欢简短而命名良好的函数  如果每个函数的粒度都很小，那么函数被复用的机会就更大 这会使高层函数读起来就像一系列注释 如果函数都是细粒度，那么函数的覆写也会更容易  做法 创造一个新函数，根据这个函数的意图来对它命名 将提炼出的代码从源函数复制到新建的目">
 <meta name="keywords" content="重构">
 <meta property="og:type" content="article">
 <meta property="og:title" content="重新组织函数">
 <meta property="og:url" content="https:&#x2F;&#x2F;lancersaber.github.io&#x2F;2019&#x2F;11&#x2F;02&#x2F;Refactor&#x2F;%E9%87%8D%E6%96%B0%E7%BB%84%E7%BB%87%E5%87%BD%E6%95%B0&#x2F;index.html">
 <meta property="og:site_name" content="Lancersaber">
-<meta property="og:description" content="重新组织函数">
+<meta property="og:description" content="重新组织函数 1.Extract Method(提炼函数)概述将一段代码放进一个独立函数中，并让函数名称解释该函数的作用 动机有下面几个原因造成我喜欢简短而命名良好的函数  如果每个函数的粒度都很小，那么函数被复用的机会就更大 这会使高层函数读起来就像一系列注释 如果函数都是细粒度，那么函数的覆写也会更容易  做法 创造一个新函数，根据这个函数的意图来对它命名 将提炼出的代码从源函数复制到新建的目">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-11-02T11:06:42.355Z">
+<meta property="og:updated_time" content="2019-11-16T06:20:29.257Z">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://lancersaber.github.io/2019/11/02/Refactor/%E9%87%8D%E6%96%B0%E7%BB%84%E7%BB%87%E5%87%BD%E6%95%B0/">
@@ -198,10 +198,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2019-11-02 13:54:27 / Modified: 19:06:42" itemprop="dateCreated datePublished" datetime="2019-11-02T13:54:27+08:00">2019-11-02</time>
+              <time title="Created: 2019-11-02 13:54:27" itemprop="dateCreated datePublished" datetime="2019-11-02T13:54:27+08:00">2019-11-02</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-11-16 14:20:29" itemprop="dateModified" datetime="2019-11-16T14:20:29+08:00">2019-11-16</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -225,7 +231,23 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="重新组织函数"><a href="#重新组织函数" class="headerlink" title="重新组织函数"></a>重新组织函数</h1>
+        <h1 id="重新组织函数"><a href="#重新组织函数" class="headerlink" title="重新组织函数"></a>重新组织函数</h1><hr>
+<h2 id="1-Extract-Method-提炼函数"><a href="#1-Extract-Method-提炼函数" class="headerlink" title="1.Extract Method(提炼函数)"></a>1.Extract Method(提炼函数)</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>将一段代码放进一个独立函数中，并让函数名称解释该函数的作用</p>
+<h3 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h3><p>有下面几个原因造成我喜欢简短而命名良好的函数</p>
+<ul>
+<li>如果每个函数的粒度都很小，那么函数被复用的机会就更大</li>
+<li>这会使高层函数读起来就像一系列注释</li>
+<li>如果函数都是细粒度，那么函数的覆写也会更容易</li>
+</ul>
+<h3 id="做法"><a href="#做法" class="headerlink" title="做法"></a>做法</h3><ol>
+<li>创造一个新函数，根据这个函数的意图来对它命名</li>
+<li>将提炼出的代码从源函数复制到新建的目标函数中</li>
+<li>仔细检查提炼的代码，看看其中是否引用了局部变量被它修改</li>
+<li>将被提炼的代码段中需要读取的局部变量，当作参数传给目标函数</li>
+<li>处理完所有局部变量之后，进行编译</li>
+<li>编译，测试</li>
+</ol>
+
     </div>
 
     
@@ -290,7 +312,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#重新组织函数"><span class="nav-number">1.</span> <span class="nav-text">重新组织函数</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#重新组织函数"><span class="nav-number">1.</span> <span class="nav-text">重新组织函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Extract-Method-提炼函数"><span class="nav-number">1.1.</span> <span class="nav-text">1.Extract Method(提炼函数)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#概述"><span class="nav-number">1.1.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动机"><span class="nav-number">1.1.2.</span> <span class="nav-text">动机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#做法"><span class="nav-number">1.1.3.</span> <span class="nav-text">做法</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -306,18 +328,18 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">110</span>
+          <span class="site-state-item-count">148</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
-        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-count">37</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-count">51</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

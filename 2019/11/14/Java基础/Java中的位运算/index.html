@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.2">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.2">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.2">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.2" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.2">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.4.2',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="Java中的位运算 Java提供的位运算符有：左移( &amp;lt;&amp;lt; )、右移( &amp;gt;&amp;gt; ) 、无符号右移( &amp;gt;&amp;gt;&amp;gt; ) 、位与( &amp;amp; ) 、位或( | )、位非( ~ )、位异或( ^ )，除了位非( ~ )是一元操作符外，其它的都是二元操作符。 1、左移( &amp;lt;&amp;lt; )Test1、将5左移2位： 1234567package com.xcy; pu">
+<meta name="keywords" content="Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java中的位运算">
+<meta property="og:url" content="https:&#x2F;&#x2F;lancersaber.github.io&#x2F;2019&#x2F;11&#x2F;14&#x2F;Java%E5%9F%BA%E7%A1%80&#x2F;Java%E4%B8%AD%E7%9A%84%E4%BD%8D%E8%BF%90%E7%AE%97&#x2F;index.html">
+<meta property="og:site_name" content="Lancersaber">
+<meta property="og:description" content="Java中的位运算 Java提供的位运算符有：左移( &amp;lt;&amp;lt; )、右移( &amp;gt;&amp;gt; ) 、无符号右移( &amp;gt;&amp;gt;&amp;gt; ) 、位与( &amp;amp; ) 、位或( | )、位非( ~ )、位异或( ^ )，除了位非( ~ )是一元操作符外，其它的都是二元操作符。 1、左移( &amp;lt;&amp;lt; )Test1、将5左移2位： 1234567package com.xcy; pu">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-11-15T07:53:06.267Z">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://lancersaber.github.io/2019/11/14/Java%E5%9F%BA%E7%A1%80/Java%E4%B8%AD%E7%9A%84%E4%BD%8D%E8%BF%90%E7%AE%97/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Java中的位运算 | Lancersaber</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lancersaber</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/14/Java%E5%9F%BA%E7%A1%80/Java%E4%B8%AD%E7%9A%84%E4%BD%8D%E8%BF%90%E7%AE%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Java中的位运算
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-11-14 20:12:44" itemprop="dateCreated datePublished" datetime="2019-11-14T20:12:44+08:00">2019-11-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-11-15 15:53:06" itemprop="dateModified" datetime="2019-11-15T15:53:06+08:00">2019-11-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Java中的位运算"><a href="#Java中的位运算" class="headerlink" title="Java中的位运算"></a>Java中的位运算</h1><hr>
+<p>Java提供的位运算符有：左移( &lt;&lt; )、右移( &gt;&gt; ) 、无符号右移( &gt;&gt;&gt; ) 、位与( &amp; ) 、位或( | )、位非( ~ )、位异或( ^ )，除了位非( ~ )是一元操作符外，其它的都是二元操作符。</p>
+<h2 id="1、左移-lt-lt"><a href="#1、左移-lt-lt" class="headerlink" title="1、左移( &lt;&lt; )"></a>1、左移( &lt;&lt; )</h2><p>Test1、将5左移2位：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">package com.xcy;</span><br><span class="line"> </span><br><span class="line">public class Test &#123;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		System.out.println(5&lt;&lt;2);//运行结果是20</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行结果是20，但是程序是怎样执行的呢？<br>首先会将5转为2进制表示形式(java中，整数默认就是int类型,也就是32位):</p>
+<p>0000 0000 0000 0000 0000 0000 0000 0101           然后左移2位后，低位补0：</p>
+<p>0000 0000 0000 0000 0000 0000 0001 0100           换算成10进制为20</p>
+<h2 id="2、右移-gt-gt-，右移同理，只是方向不一样罢了-感觉和没说一样"><a href="#2、右移-gt-gt-，右移同理，只是方向不一样罢了-感觉和没说一样" class="headerlink" title="2、右移( &gt;&gt; ) ，右移同理，只是方向不一样罢了(感觉和没说一样)"></a>2、右移( &gt;&gt; ) ，右移同理，只是方向不一样罢了(感觉和没说一样)</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(5&gt;&gt;2);//运行结果是1</span><br></pre></td></tr></table></figure>
+
+<p>还是先将5转为2进制表示形式：<br>0000 0000 0000 0000 0000 0000 0000 0101 然后右移2位，高位补0：</p>
+<p>0000 0000 0000 0000 0000 0000 0000 0001</p>
+<h2 id="3、无符号右移-gt-gt-gt"><a href="#3、无符号右移-gt-gt-gt" class="headerlink" title="3、无符号右移( &gt;&gt;&gt; )"></a>3、无符号右移( &gt;&gt;&gt; )</h2><p>我们知道在Java中int类型占32位，可以表示一个正数，也可以表示一个负数。正数换算成二进制后的最高位为0，负数的二进制最高为为1</p>
+<p>例如  -5换算成二进制后为：</p>
+<p>1111 1111 1111 1111 1111 1111 1111 1011   (刚开始接触二进制时，不知道最高位是用来表示正负之分的，当时就总想不通。。明明算起来得到的就是一个正数)</p>
+<p>我们分别对5进行右移3位、 -5进行右移3位和无符号右移3位：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">package com.xcy;</span><br><span class="line"> </span><br><span class="line">public class Test &#123;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		System.out.println(5&gt;&gt;3);//结果是0</span><br><span class="line">		System.out.println(-5&gt;&gt;3);//结果是-1</span><br><span class="line">		System.out.println(-5&gt;&gt;&gt;3);//结果是536870911</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="4、位与-amp"><a href="#4、位与-amp" class="headerlink" title="4、位与( &amp; )"></a>4、位与( &amp; )</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">package com.xcy;</span><br><span class="line"> </span><br><span class="line">public class Test &#123;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		System.out.println(5 &amp; 3);//结果为1</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>还是老套路，将2个操作数和结果都转换为二进制进行比较：<br>5转换为二进制：0000 0000 0000 0000 0000 0000 0000 0101</p>
+<p>3转换为二进制：0000 0000 0000 0000 0000 0000 0000 0011</p>
+<hr>
+<p>1转换为二进制：0000 0000 0000 0000 0000 0000 0000 0001</p>
+<p>位与：第一个操作数的的第n位于第二个操作数的第n位如果都是1，那么结果的第n为也为1，否则为0</p>
+<h2 id="5、位或"><a href="#5、位或" class="headerlink" title="5、位或( | )"></a>5、位或( | )</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">package com.xcy;</span><br><span class="line"> </span><br><span class="line">public class Test &#123;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		System.out.println(5 | 3);//结果为7</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>5转换为二进制：0000 0000 0000 0000 0000 0000 0000 0101</p>
+<p>3转换为二进制：0000 0000 0000 0000 0000 0000 0000 0011</p>
+<hr>
+<p>7转换为二进制：0000 0000 0000 0000 0000 0000 0000 0111<br>位或操作：第一个操作数的的第n位于第二个操作数的第n位 只要有一个是1，那么结果的第n为也为1，否则为0</p>
+<h2 id="6、位异或"><a href="#6、位异或" class="headerlink" title="6、位异或( ^ )"></a>6、位异或( ^ )</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">package com.xcy;</span><br><span class="line"> </span><br><span class="line">public class Test &#123;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		System.out.println(5 ^ 3);//结果为6</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>5转换为二进制：0000 0000 0000 0000 0000 0000 0000 0101</p>
+<p>3转换为二进制：0000 0000 0000 0000 0000 0000 0000 0011</p>
+<hr>
+<p>6转换为二进制：0000 0000 0000 0000 0000 0000 0000 0110<br>位异或：第一个操作数的的第n位于第二个操作数的第n位 相反，那么结果的第n为也为1，否则为0</p>
+<h2 id="7、位非-位非是一元操作符"><a href="#7、位非-位非是一元操作符" class="headerlink" title="7、位非( ~ )           位非是一元操作符"></a>7、位非( ~ )           位非是一元操作符</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">package com.xcy;</span><br><span class="line"> </span><br><span class="line">public class Test &#123;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		System.out.println(~5);//结果为-6</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="5转换为二进制：0000-0000-0000-0000-0000-0000-0000-0101"><a href="#5转换为二进制：0000-0000-0000-0000-0000-0000-0000-0101" class="headerlink" title="5转换为二进制：0000 0000 0000 0000 0000 0000 0000 0101"></a>5转换为二进制：0000 0000 0000 0000 0000 0000 0000 0101</h2><p>-6转换为二进制：1111 1111 1111 1111 1111 1111 1111 1010</p>
+<p>位非：操作数的第n位为1，那么结果的第n位为0，反之。</p>
+<p>由位运算操作符衍生而来的有：</p>
+<p>&amp;= 按位与赋值</p>
+<p>|=  按位或赋值</p>
+<p>^= 按位非赋值</p>
+<blockquote>
+<blockquote>
+<p>= 右移赋值</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>= 无符号右移赋值</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>&lt;&lt;= 赋值左移</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Java/" rel="tag"># Java</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2019/11/14/Unknown/%E5%A4%A7%E5%9E%8B%E7%BD%91%E7%AB%99%E7%B3%BB%E7%BB%9F/" rel="next" title="大型网站系统架构的演进">
+                  <i class="fa fa-chevron-left"></i> 大型网站系统架构的演进
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+                <a href="/2019/11/15/Java%E5%9F%BA%E7%A1%80/Java%E4%B8%AD%E7%9A%84%E6%B3%9B%E5%9E%8B/" rel="prev" title="Java中泛型">
+                  Java中泛型 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Java中的位运算"><span class="nav-number">1.</span> <span class="nav-text">Java中的位运算</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、左移-lt-lt"><span class="nav-number">1.1.</span> <span class="nav-text">1、左移( &lt;&lt; )</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、右移-gt-gt-，右移同理，只是方向不一样罢了-感觉和没说一样"><span class="nav-number">1.2.</span> <span class="nav-text">2、右移( &gt;&gt; ) ，右移同理，只是方向不一样罢了(感觉和没说一样)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3、无符号右移-gt-gt-gt"><span class="nav-number">1.3.</span> <span class="nav-text">3、无符号右移( &gt;&gt;&gt; )</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4、位与-amp"><span class="nav-number">1.4.</span> <span class="nav-text">4、位与( &amp; )</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5、位或"><span class="nav-number">1.5.</span> <span class="nav-text">5、位或( | )</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6、位异或"><span class="nav-number">1.6.</span> <span class="nav-text">6、位异或( ^ )</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7、位非-位非是一元操作符"><span class="nav-number">1.7.</span> <span class="nav-text">7、位非( ~ )           位非是一元操作符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5转换为二进制：0000-0000-0000-0000-0000-0000-0000-0101"><span class="nav-number">1.8.</span> <span class="nav-text">5转换为二进制：0000 0000 0000 0000 0000 0000 0000 0101</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="site-author-image" itemprop="image" alt="Lancersaber"
+    src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Lancersaber</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">148</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lancersaber</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.4.2
+  </div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.2"></script><script src="/js/motion.js?v=7.4.2"></script>
+<script src="/js/schemes/muse.js?v=7.4.2"></script>
+<script src="/js/next-boot.js?v=7.4.2"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

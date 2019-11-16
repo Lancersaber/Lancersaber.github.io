@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.2">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.2">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.2">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.2" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.2">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.4.2',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="什么是sql注入直接举个例子说明一下这个sql注入的全过程吧~ 初步注入–绕过验证，直接登录公司网站登陆框如下： 可以看到除了账号密码之外，还有一个公司名的输入框，根据输入框的形式不难推出SQL的写法如下：SELECT * From Table WHERE Name=’XX’ andPassword=’YY’ and Corp=’ZZ’我发现前两者都做一些检查，而第三个输入框却疏忽了，漏洞就在这里">
+<meta name="keywords" content="mybatis">
+<meta property="og:type" content="article">
+<meta property="og:title" content="什么是sql注入">
+<meta property="og:url" content="https:&#x2F;&#x2F;lancersaber.github.io&#x2F;2019&#x2F;11&#x2F;12&#x2F;Mybatis&#x2F;%E4%BB%80%E4%B9%88%E6%98%AFsql%E6%B3%A8%E5%85%A5&#x2F;index.html">
+<meta property="og:site_name" content="Lancersaber">
+<meta property="og:description" content="什么是sql注入直接举个例子说明一下这个sql注入的全过程吧~ 初步注入–绕过验证，直接登录公司网站登陆框如下： 可以看到除了账号密码之外，还有一个公司名的输入框，根据输入框的形式不难推出SQL的写法如下：SELECT * From Table WHERE Name=’XX’ andPassword=’YY’ and Corp=’ZZ’我发现前两者都做一些检查，而第三个输入框却疏忽了，漏洞就在这里">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;11&#x2F;12&#x2F;AXGMZOKdBJgetFn.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;11&#x2F;12&#x2F;sdRHXfmVbouYkKJ.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;11&#x2F;12&#x2F;COzlpAoHNe83BDY.png">
+<meta property="og:updated_time" content="2019-11-12T05:25:48.201Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;11&#x2F;12&#x2F;AXGMZOKdBJgetFn.png">
+
+<link rel="canonical" href="https://lancersaber.github.io/2019/11/12/Mybatis/%E4%BB%80%E4%B9%88%E6%98%AFsql%E6%B3%A8%E5%85%A5/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>什么是sql注入 | Lancersaber</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lancersaber</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/12/Mybatis/%E4%BB%80%E4%B9%88%E6%98%AFsql%E6%B3%A8%E5%85%A5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          什么是sql注入
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2019-11-12 13:04:22 / Modified: 13:25:48" itemprop="dateCreated datePublished" datetime="2019-11-12T13:04:22+08:00">2019-11-12</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/mybatis/" itemprop="url" rel="index">
+                    <span itemprop="name">mybatis</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="什么是sql注入"><a href="#什么是sql注入" class="headerlink" title="什么是sql注入"></a>什么是sql注入</h1><p>直接举个例子说明一下这个sql注入的全过程吧~</p>
+<h2 id="初步注入–绕过验证，直接登录"><a href="#初步注入–绕过验证，直接登录" class="headerlink" title="初步注入–绕过验证，直接登录"></a>初步注入–绕过验证，直接登录</h2><p>公司网站登陆框如下：<br><img src="https://i.loli.net/2019/11/12/AXGMZOKdBJgetFn.png" alt="20180321110526347.png"></p>
+<p>可以看到除了账号密码之外，还有一个公司名的输入框，根据输入框的形式不难推出SQL的写法如下：<br>SELECT * From Table WHERE Name=’XX’ andPassword=’YY’ and Corp=’ZZ’<br>我发现前两者都做一些检查，而第三个输入框却疏忽了，漏洞就在这里！注入开始，在输入框中输入以下内容：</p>
+<p><img src="https://i.loli.net/2019/11/12/sdRHXfmVbouYkKJ.png" alt="20180321110534421.png"></p>
+<p>用户名乱填，密码留空，这种情况下点击登录按钮后竟然成功登录了。我们看一下最终的SQL就会找到原因：<br>SELECT * FromTable WHERE Name=’SQL inject’ and Password=” and Corp=” or 1=1–’<br>从代码可以看出，前一半单引号被闭合，后一半单引号被 “–”给注释掉，中间多了一个永远成立的条件“1=1”，这就造成任何字符都能成功登录的结果。而Sql注入的危害却不仅仅是匿名登录。</p>
+<h2 id="中级注入–借助异常获取信息。"><a href="#中级注入–借助异常获取信息。" class="headerlink" title="中级注入–借助异常获取信息。"></a>中级注入–借助异常获取信息。</h2><p>现在我们在第三个输入框中写入：“‘ or 1=(SELECT@@version) –”。如下：<br><img src="https://i.loli.net/2019/11/12/COzlpAoHNe83BDY.png" alt="20180321110545134.png"></p>
+<p>后台的SQL变成了这样：</p>
+<p>SELECT * FromTable WHERE Name=’SQL inject’ and Password=” and Corp=” or 1=(SELECT@@VERSION)–’</p>
+<p>判断条件变成了 1=(SELECT@@VERSION),这个写法肯定会导致错误，但出错正是我们想要的。点击登录后，页面出现以下信息：<br>Conversion failedwhen converting the nvarchar value ‘Microsoft SQL Server 2008 (SP3) -10.0.5500.0 (X64) Sep 21 2011 22:45:45 Copyright (c) 1988-2008 MicrosoftCorporation Developer Edition (64-bit) on Windows NT 6.1 <X64> (Build7601: Service Pack 1) ’ to data type int.</p>
+<p>可怕的事情出现了，服务器的操作系统和SQL Server版本信息竟然通过错误显示出来。</p>
+<h2 id="危害扩大–获取服务器所有的库名、表名、字段名"><a href="#危害扩大–获取服务器所有的库名、表名、字段名" class="headerlink" title="危害扩大–获取服务器所有的库名、表名、字段名"></a>危害扩大–获取服务器所有的库名、表名、字段名</h2><p>接着，我们在输入框中输入如下信息：“t’ or 1=(SELECTtop 1 name FROM master..sysdatabases where name not in (SELECT top 0 name FROMmaster..sysdatabases))–”，此时发现第三个输入框有字数长度的限制，然而这种客户端的限制形同虚设，直接通过Google浏览器就能去除。</p>
+<p>点击登录，返回的信息如下：</p>
+<p>Conversion failedwhen converting the nvarchar value ‘master’ to data type int.</p>
+<p>数据库名称“master”通过异常被显示出来！依次改变上面SQL语句中的序号，就能得到服务器上所有数据库的名称。</p>
+<p>接着，输入信息如下：“b’ or 1=(SELECTtop 1 name FROM master..sysobjects where xtype=’U’ and name not in (SELECT top1 name FROM master..sysobjects where xtype=’U’))–”</p>
+<p>得到返回信息如下：</p>
+<p>Conversion failedwhen converting the nvarchar value ‘spt_fallback_db’ to data type int.</p>
+<p>我们得到了master数据库中的第一张表名：“spt_fallback_db”，同上，依次改变序号，可得到该库全部表名。<br>于是，得到错误提示如下：</p>
+<p>“Conversionfailed when converting the nvarchar value ‘xserver_name’ to data typeint.”;</p>
+<p>这样第一个字段名“xserver_name”就出来了，依次改变序号，就能遍历出所有的字段名。</p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>关于安全性，本文可总结出一下几点：</p>
+<ol>
+<li><p>对用户输入的内容要时刻保持警惕。</p>
+</li>
+<li><p>只有客户端的验证等于没有验证。</p>
+</li>
+<li><p>永远不要把服务器错误信息暴露给用户。</p>
+</li>
+</ol>
+<p>除此之外，我还要补充几点：</p>
+<ol>
+<li><p>SQL注入不仅能通过输入框，还能通过Url达到目的。</p>
+</li>
+<li><p>除了服务器错误页面，还有其他办法获取到数据库信息。</p>
+</li>
+<li><p>可通过软件模拟注入行为，这种方式盗取信息的速度要比你想象中快的多。</p>
+</li>
+<li><p>漏洞跟语言平台无关，并非asp才有注入漏洞而asp.net就没有注入漏洞，一切要看设计者是否用心。</p>
+</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/mybatis/" rel="tag"># mybatis</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2019/11/12/Fastjson/Fastjson%20%E7%AE%80%E6%98%8E%E6%95%99%E7%A8%8B/" rel="next" title="Fastjson 简明教程">
+                  <i class="fa fa-chevron-left"></i> Fastjson 简明教程
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+                <a href="/2019/11/12/Mybatis/mybatis%E4%B8%AD%E7%9A%84#%7B%7D%E5%92%8C$%7B%7D%E5%8C%BA%E5%88%AB/" rel="prev" title="mybatis中的#{}和${}区别">
+                  mybatis中的#{}和${}区别 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#什么是sql注入"><span class="nav-number">1.</span> <span class="nav-text">什么是sql注入</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#初步注入–绕过验证，直接登录"><span class="nav-number">1.1.</span> <span class="nav-text">初步注入–绕过验证，直接登录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#中级注入–借助异常获取信息。"><span class="nav-number">1.2.</span> <span class="nav-text">中级注入–借助异常获取信息。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#危害扩大–获取服务器所有的库名、表名、字段名"><span class="nav-number">1.3.</span> <span class="nav-text">危害扩大–获取服务器所有的库名、表名、字段名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结语"><span class="nav-number">1.4.</span> <span class="nav-text">结语</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="site-author-image" itemprop="image" alt="Lancersaber"
+    src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Lancersaber</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">148</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lancersaber</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.4.2
+  </div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.2"></script><script src="/js/motion.js?v=7.4.2"></script>
+<script src="/js/schemes/muse.js?v=7.4.2"></script>
+<script src="/js/next-boot.js?v=7.4.2"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

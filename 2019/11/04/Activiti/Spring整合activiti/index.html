@@ -51,15 +51,18 @@
 </script>
 
   <meta name="description" content="Springboot整合Activiti 入门Spring Boot完全是关于配置的约定。首先，只需将spring-boot-starters-basic依赖项添加到您的项目中。以Maven为例 12345&amp;lt;dependency&amp;gt;	&amp;lt;groupId&amp;gt;org.activiti&amp;lt;&#x2F;groupId&amp;gt;	&amp;lt;artifactId&amp;gt;activiti-spring-">
-<meta name="keywords" content="activiti">
+<meta name="keywords" content="Activiti">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Springboot整合Activiti">
 <meta property="og:url" content="https:&#x2F;&#x2F;lancersaber.github.io&#x2F;2019&#x2F;11&#x2F;04&#x2F;Activiti&#x2F;Spring%E6%95%B4%E5%90%88activiti&#x2F;index.html">
 <meta property="og:site_name" content="Lancersaber">
 <meta property="og:description" content="Springboot整合Activiti 入门Spring Boot完全是关于配置的约定。首先，只需将spring-boot-starters-basic依赖项添加到您的项目中。以Maven为例 12345&amp;lt;dependency&amp;gt;	&amp;lt;groupId&amp;gt;org.activiti&amp;lt;&#x2F;groupId&amp;gt;	&amp;lt;artifactId&amp;gt;activiti-spring-">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-11-04T15:53:36.358Z">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;11&#x2F;10&#x2F;dIQbE9ZsG4gxwBV.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;11&#x2F;10&#x2F;vbf7Ysr3LjN4TIB.png">
+<meta property="og:updated_time" content="2019-11-11T08:41:39.943Z">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;11&#x2F;10&#x2F;dIQbE9ZsG4gxwBV.png">
 
 <link rel="canonical" href="https://lancersaber.github.io/2019/11/04/Activiti/Spring%E6%95%B4%E5%90%88activiti/">
 
@@ -198,18 +201,24 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2019-11-04 22:11:28 / Modified: 23:53:36" itemprop="dateCreated datePublished" datetime="2019-11-04T22:11:28+08:00">2019-11-04</time>
+              <time title="Created: 2019-11-04 22:11:28" itemprop="dateCreated datePublished" datetime="2019-11-04T22:11:28+08:00">2019-11-04</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-11-11 16:41:39" itemprop="dateModified" datetime="2019-11-11T16:41:39+08:00">2019-11-11</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/activiti/" itemprop="url" rel="index">
-                    <span itemprop="name">activiti</span>
+                  <a href="/categories/Activiti/" itemprop="url" rel="index">
+                    <span itemprop="name">Activiti</span>
                   </a>
                 </span>
             </span>
@@ -239,6 +248,12 @@
 <p>要更改数据源，只需提供Datasource bean即可覆盖默认值。我们在这里使用DataSourceBuilder类，它是Spring Boot的帮助器类。如果在类路径上有Tomcat，HikariCP或Commons DBCP，则将选择其中之一（首先按Tomcat的顺序）。例如，要切换到MySQL数据库：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@Bean</span><br><span class="line">public DataSource database() &#123;</span><br><span class="line">    return DataSourceBuilder.create()</span><br><span class="line">        .url(&quot;jdbc:mysql://127.0.0.1:3306/activiti-spring-boot?characterEncoding=UTF-8&quot;)</span><br><span class="line">        .username(&quot;alfresco&quot;)</span><br><span class="line">        .password(&quot;alfresco&quot;)</span><br><span class="line">        .driverClassName(&quot;com.mysql.jdbc.Driver&quot;)</span><br><span class="line">        .build();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<p>对数据源的配置也可以写在Spring的配置文件中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">spring:</span><br><span class="line">  datasource:</span><br><span class="line">    url: jdbc:mysql://49.234.9.177:3306/activiti_test?nullCatalogMeansCurrent=true</span><br><span class="line">    username: root</span><br><span class="line">    password: 3468989340</span><br></pre></td></tr></table></figure>
+<p>注意有的版本后面必须加上?nullCatalogMeansCurrent=true，否则会报错。数据源会自动读取配置文件的内容</p>
+<h2 id="添加配置类"><a href="#添加配置类" class="headerlink" title="添加配置类"></a>添加配置类</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br></pre></td><td class="code"><pre><span class="line">package com.example.demo.config;</span><br><span class="line"></span><br><span class="line">import org.activiti.engine.*;</span><br><span class="line">import org.activiti.engine.impl.cfg.ProcessEngineConfigurationImpl;</span><br><span class="line">import org.activiti.spring.ProcessEngineFactoryBean;</span><br><span class="line">import org.activiti.spring.SpringProcessEngineConfiguration;</span><br><span class="line">import org.springframework.context.annotation.Bean;</span><br><span class="line">import org.springframework.context.annotation.Configuration;</span><br><span class="line">import org.springframework.transaction.PlatformTransactionManager;</span><br><span class="line"></span><br><span class="line">import javax.sql.DataSource;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * @author: Lancer</span><br><span class="line"> * @date: 2019/11/10</span><br><span class="line"> */</span><br><span class="line">@Configuration</span><br><span class="line">public class ActivitiConfig &#123;</span><br><span class="line"></span><br><span class="line">    @Bean</span><br><span class="line">    public ProcessEngineConfiguration processEngineConfiguration(DataSource dataSource, PlatformTransactionManager transactionManager)&#123;</span><br><span class="line">        SpringProcessEngineConfiguration processEngineConfiguration = new SpringProcessEngineConfiguration();</span><br><span class="line">        processEngineConfiguration.setDataSource(dataSource);</span><br><span class="line">        processEngineConfiguration.setDatabaseSchemaUpdate(&quot;true&quot;);</span><br><span class="line">        processEngineConfiguration.setDatabaseType(&quot;mysql&quot;);</span><br><span class="line"></span><br><span class="line">        processEngineConfiguration.setTransactionManager(transactionManager);</span><br><span class="line"></span><br><span class="line">        //流程图字体</span><br><span class="line">//        processEngineConfiguration.setActiviti(&quot;宋体&quot;);</span><br><span class="line">//        processEngineConfiguration.setAnnotationFontName(&quot;宋体&quot;);</span><br><span class="line">//        processEngineConfiguration.setLabelFontName(&quot;宋体&quot;);</span><br><span class="line"></span><br><span class="line">        return processEngineConfiguration;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    //流程引擎，与spring整合使用factoryBean</span><br><span class="line">    @Bean</span><br><span class="line">    public ProcessEngineFactoryBean processEngine(ProcessEngineConfiguration processEngineConfiguration)&#123;</span><br><span class="line">        ProcessEngineFactoryBean processEngineFactoryBean = new ProcessEngineFactoryBean();</span><br><span class="line">        processEngineFactoryBean.setProcessEngineConfiguration((ProcessEngineConfigurationImpl) processEngineConfiguration);</span><br><span class="line">        return processEngineFactoryBean;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    //八大接口</span><br><span class="line">    @Bean</span><br><span class="line">    public RepositoryService repositoryService(ProcessEngine processEngine)&#123;</span><br><span class="line">        return processEngine.getRepositoryService();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Bean</span><br><span class="line">    public RuntimeService runtimeService(ProcessEngine processEngine)&#123;</span><br><span class="line">        return processEngine.getRuntimeService();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Bean</span><br><span class="line">    public TaskService taskService(ProcessEngine processEngine)&#123;</span><br><span class="line">        return processEngine.getTaskService();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Bean</span><br><span class="line">    public HistoryService historyService(ProcessEngine processEngine)&#123;</span><br><span class="line">        return processEngine.getHistoryService();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">//    @Bean</span><br><span class="line">//    public FormService formService(ProcessEngine processEngine)&#123;</span><br><span class="line">//        return processEngine.getFormService();</span><br><span class="line">//    &#125;</span><br><span class="line">//</span><br><span class="line">//    @Bean</span><br><span class="line">//    public IdentityService identityService(ProcessEngine processEngine)&#123;</span><br><span class="line">//        return processEngine.getIdentityService();</span><br><span class="line">//    &#125;</span><br><span class="line"></span><br><span class="line">    @Bean</span><br><span class="line">    public ManagementService managementService(ProcessEngine processEngine)&#123;</span><br><span class="line">        return processEngine.getManagementService();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Bean</span><br><span class="line">    public DynamicBpmnService dynamicBpmnService(ProcessEngine processEngine)&#123;</span><br><span class="line">        return processEngine.getDynamicBpmnService();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //八大接口 end</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在ProcessEngineConfiguration类中可以配置很多东西<br><img src="https://i.loli.net/2019/11/10/dIQbE9ZsG4gxwBV.png" alt="activiti1.PNG"></p>
+<p>注意：processEngine对象已经在ProcessEngineConfigurationImpl中被创建<br><img src="https://i.loli.net/2019/11/10/vbf7Ysr3LjN4TIB.png" alt="atciviti2.PNG"></p>
 
     </div>
 
@@ -248,7 +263,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/activiti/" rel="tag"># activiti</a>
+              <a href="/tags/Activiti/" rel="tag"># Activiti</a>
           </div>
 
         
@@ -304,7 +319,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Springboot整合Activiti"><span class="nav-number">1.</span> <span class="nav-text">Springboot整合Activiti</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#入门"><span class="nav-number">1.1.</span> <span class="nav-text">入门</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更改数据库和连接池"><span class="nav-number">1.2.</span> <span class="nav-text">更改数据库和连接池</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Springboot整合Activiti"><span class="nav-number">1.</span> <span class="nav-text">Springboot整合Activiti</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#入门"><span class="nav-number">1.1.</span> <span class="nav-text">入门</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更改数据库和连接池"><span class="nav-number">1.2.</span> <span class="nav-text">更改数据库和连接池</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加配置类"><span class="nav-number">1.3.</span> <span class="nav-text">添加配置类</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -320,18 +335,18 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">110</span>
+          <span class="site-state-item-count">148</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
-        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-count">37</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-count">51</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

@@ -172,7 +172,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/10/24/Linux/systemctl%E6%8C%87%E4%BB%A4/">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/01/Spring/Springboot%E6%97%A5%E5%BF%97%E9%85%8D%E7%BD%AE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -186,7 +186,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/10/24/Linux/systemctl%E6%8C%87%E4%BB%A4/" class="post-title-link" itemprop="url">每天一个Linux指令-systemctl</a>
+            <a href="/2019/11/01/Spring/Springboot%E6%97%A5%E5%BF%97%E9%85%8D%E7%BD%AE/" class="post-title-link" itemprop="url">springboot日志配置</a>
         </h1>
 
         <div class="post-meta">
@@ -196,14 +196,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2019-10-24 23:15:15" itemprop="dateCreated datePublished" datetime="2019-10-24T23:15:15+08:00">2019-10-24</time>
+              <time title="Created: 2019-11-01 12:18:10" itemprop="dateCreated datePublished" datetime="2019-11-01T12:18:10+08:00">2019-11-01</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-28 12:40:58" itemprop="dateModified" datetime="2019-10-28T12:40:58+08:00">2019-10-28</time>
+                <time title="Modified: 2019-11-02 09:13:12" itemprop="dateModified" datetime="2019-11-02T09:13:12+08:00">2019-11-02</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -211,8 +211,8 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
+                  <a href="/categories/spring/" itemprop="url" rel="index">
+                    <span itemprop="name">spring</span>
                   </a>
                 </span>
             </span>
@@ -228,229 +228,83 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="每天一个Linux指令-systemctl"><a href="#每天一个Linux指令-systemctl" class="headerlink" title="每天一个Linux指令-systemctl"></a>每天一个Linux指令-systemctl</h1><hr>
-<p>一般来说，服务的启动有两个阶段，一个是<em>开机的时候设定要不要启动这个服务</em>，以及<em>你现在要不要启动这个服务</em>。</p>
-<h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl [command] [unit]</span><br></pre></td></tr></table></figure>
-
-<h2 id="command"><a href="#command" class="headerlink" title="command"></a>command</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">start:立刻启动后面接的unit</span><br><span class="line">stop：立刻关闭后面接的unit</span><br><span class="line">restart：立刻关闭后重启后面接的unit，亦即执行stop再start的意思</span><br><span class="line">reload:不关闭后面接的unit的情况下，重载配置文件，让设定生效</span><br><span class="line">enable：设定下次开机时，后面接的unit会被启动</span><br><span class="line">disable：设定下次开机时，后面接的unit不会被启动</span><br><span class="line">status：目前后面接的这个unit的状态，会列出有没有正在执行、开机预设执行否、登录等信息</span><br><span class="line">is-active:目前有没有正在运行中</span><br><span class="line">is-enable:开机有没有预设要启用这个unit</span><br></pre></td></tr></table></figure>
-
-<h2 id="透过systemctl观察系统上所有的服务"><a href="#透过systemctl观察系统上所有的服务" class="headerlink" title="透过systemctl观察系统上所有的服务"></a>透过systemctl观察系统上所有的服务</h2><hr>
-<h3 id="语法-1"><a href="#语法-1" class="headerlink" title="语法"></a>语法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">systemctl [command] [--type=TYPE] [--all]</span><br><span class="line"></span><br><span class="line">command:</span><br><span class="line">	list-units	:依据unit列出目前有启动的unit，若加上--all才会列出没启动的</span><br><span class="line">	list-unit-files:</span><br><span class="line">--type=TYPE:就是unit type，主要有service，socket，target</span><br></pre></td></tr></table></figure>
-
-<h2 id="systemctl指令的几个应用"><a href="#systemctl指令的几个应用" class="headerlink" title="systemctl指令的几个应用"></a>systemctl指令的几个应用</h2><h3 id="设置Target"><a href="#设置Target" class="headerlink" title="设置Target"></a>设置Target</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">systemctl [command] [unit.target]</span><br><span class="line">选项与参数</span><br><span class="line">command:</span><br><span class="line">	get-default:取得目前的target</span><br><span class="line">	set-default:设定后面接的target成为默认的target</span><br><span class="line">	isolate	   :切换到后面接的模式</span><br></pre></td></tr></table></figure>
-
-<h3 id="设置模式"><a href="#设置模式" class="headerlink" title="设置模式"></a>设置模式</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">systemctl poweroff:系统关机</span><br><span class="line">systemctl reboot  ：重新启动</span><br><span class="line">systemctl suspend ：进入暂停模式</span><br><span class="line">systemctl hibernate：进入休眠模式</span><br><span class="line">systemctl rescue	：强制进入救援模式</span><br><span class="line">systemctl emergency：强制进入紧急救援模式</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/10/24/Linux/Linux%E5%BF%98%E8%AE%B0root%E5%AF%86%E7%A0%81%E8%A7%A3%E5%86%B3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lancersaber">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lancersaber">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/10/24/Linux/Linux%E5%BF%98%E8%AE%B0root%E5%AF%86%E7%A0%81%E8%A7%A3%E5%86%B3/" class="post-title-link" itemprop="url">Linux忘记root密码</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-10-24 23:15:15" itemprop="dateCreated datePublished" datetime="2019-10-24T23:15:15+08:00">2019-10-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-30 22:23:56" itemprop="dateModified" datetime="2019-10-30T22:23:56+08:00">2019-10-30</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Linux忘记root密码"><a href="#Linux忘记root密码" class="headerlink" title="Linux忘记root密码"></a>Linux忘记root密码</h1><hr>
-<p>1、按下systemctl reboot来重新启动<br>2、进入到开机界面，在开机的选单上按下e来进入编辑模式<br><img src="https://i.loli.net/2019/10/30/OPRzSYcKd7wWs5H.png" alt="Linux编辑界面.PNG"><br>改完后按下ctrl+x开机<br>3、按照以下指令进行更改密码<br><img src="https://i.loli.net/2019/10/30/9SwENMhoTFQ7blg.png" alt="Linux更改密码.PNG"><br>exit后使用reboot重新开机即可</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/10/24/Linux/ps%E6%8C%87%E4%BB%A4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lancersaber">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lancersaber">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/10/24/Linux/ps%E6%8C%87%E4%BB%A4/" class="post-title-link" itemprop="url">每天一个Linux指令-ps</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-10-24 23:15:15" itemprop="dateCreated datePublished" datetime="2019-10-24T23:15:15+08:00">2019-10-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-26 16:14:41" itemprop="dateModified" datetime="2019-10-26T16:14:41+08:00">2019-10-26</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="每天一个Linux指令-ps"><a href="#每天一个Linux指令-ps" class="headerlink" title="每天一个Linux指令-ps"></a>每天一个Linux指令-ps</h1><hr>
-<p>ps指令是用于查阅系统上面正在运行的进程(ps是截取一个时间点的进程状态，而后面介绍的top可以持续侦测进程运作的状态)。用法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps [options]</span><br></pre></td></tr></table></figure>
-<p>选项与参数</p>
+          <h1 id="springboot日志配置"><a href="#springboot日志配置" class="headerlink" title="springboot日志配置"></a>springboot日志配置</h1><hr>
+<p>Spring Boot在所有内部日志中使用Commons Logging，但是默认配置也提供了对常用日志的支持，如：Java Util Logging，Log4J, Log4J2和Logback。每种Logger都可以通过配置使用控制台或者文件输出日志内容。</p>
+<p>SLF4J —— Simple Logging Facade For Java，它是一个针对于各类Java日志框架的统一Facade抽象。Java日志框架众多——常用的有java.util.logging, log4j, logback，commons-logging, Spring框架使用的是Jakarta Commons Logging API（JCL）。而SLF4J定义了统一的日志抽象接口，而真正的日志实现则是在运行时决定的——它提供了各类日志框架的绑定。</p>
+<p>Logback是log4j框架的作者开发的新一代日志框架，它效率更高、能够适应诸多的运行环境，同时天然支持SLF4J。</p>
+<p>默认情况下，Spring Boot会用Logback来记录日志，并用INFO级别输出到控制台。在运行应用程序和其他例子时，你应该已经看到很多INFO级别的日志了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">  _   _   _   _   _   _  </span><br><span class="line"> / \ / \ / \ / \ / \ / \ </span><br><span class="line">( m | r | b | i | r | d )</span><br><span class="line"> \_/ \_/ \_/ \_/ \_/ \_/ </span><br><span class="line">2018-02-08 15:05:03.368  INFO 14404 --- [ main] cc.mrbird.Application                    : Starting Application on SC-201802012049 with PID 14404 (D:\neonWorkspace\mrbird\target\classes started by Administrator in D:\neonWorkspace\mrbird)</span><br><span class="line">2018-02-08 15:05:03.375  INFO 14404 --- [ main] cc.mrbird.Application                    : No active profile set, falling back to default profiles: default</span><br><span class="line">2018-02-08 15:05:03.777  INFO 14404 --- [ main] ationConfigEmbeddedWebApplicationContext : Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@31321838: startup date [Thu Feb 08 15:05:03 CST 2018]; root of context hierarchy</span><br><span class="line">2018-02-08 15:05:05.083  INFO 14404 --- [ main] o.s.b.f.s.DefaultListableBeanFactory     : Overriding bean definition for bean &apos;advisorAutoProxyCreator&apos; with a different definition: replacing [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=shiroConfig; factoryMethodName=advisorAutoProxyCreator; initMethodName=null; destroyMethodName=(inferred); defined in class path resource [cc/mrbird/config/ShiroConfig.class]] with [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=com.alibaba.druid.spring.boot.autoconfigure.stat.DruidSpringAopConfiguration; factoryMethodName=advisorAutoProxyCreator; initMethodName=null; destroyMethodName=(inferred); defined in class path resource [com/alibaba/druid/spring/boot/autoconfigure/stat/DruidSpringAopConfiguration.class]]</span><br><span class="line">2018-02-08 15:05:05.554  INFO 14404 --- [ main] trationDelegate$BeanPostProcessorChecker : Bean &apos;shiroConfig&apos; of type [cc.mrbird.config.ShiroConfig$$EnhancerBySpringCGLIB$$b7e43ac8] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)</span><br><span class="line">2018-02-08 15:05:05.600  INFO 14404 --- [ main] trationDelegate$BeanPostProcessorChecker : Bean &apos;com.alibaba.druid.spring.boot.autoconfigure.stat.DruidSpringAopConfiguration&apos; of type [com.alibaba.druid.spring.boot.autoconfigure.stat.DruidSpringAopConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)</span><br><span class="line">2018-02-08 15:05:06.231  INFO 14404 --- [ main] trationDelegate$BeanPostProcessorChecker : Bean &apos;mybatis-org.mybatis.spring.boot.autoconfigure.MybatisProperties&apos; of type [org.mybatis.spring.boot.autoconfigure.MybatisProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>从上面可以看到，日志输出内容元素具体如下：<br>1、时间日期：精确到毫秒；</p>
+<p>2、日志级别：ERROR, WARN, INFO, DEBUG or TRACE；</p>
+<p>3、进程ID；</p>
+<p>4、分隔符：—标识实际日志的开始；</p>
+<p>5、线程名：方括号括起来（可能会截断控制台输出）；</p>
+<p>6、Logger名：通常使用源代码的类名；</p>
+<p>7、日志内容。</p>
+<h2 id="添加日志依赖"><a href="#添加日志依赖" class="headerlink" title="添加日志依赖"></a>添加日志依赖</h2><p>假如maven依赖中添加了spring-boot-starter-logging：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-boot-starter-logging&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<p>那么，我们的Spring Boot应用将自动使用logback作为应用日志框架，Spring Boot启动的时候，由org.springframework.boot.logging.Logging-Application-Listener根据情况初始化并使用。</p>
+<h2 id="默认配置属性支持"><a href="#默认配置属性支持" class="headerlink" title="默认配置属性支持"></a>默认配置属性支持</h2><p>Spring Boot为我们提供了很多默认的日志配置，所以，只要将spring-boot-starter-logging作为依赖加入到当前应用的classpath，则“开箱即用”。 下面介绍几种在application.properties就可以配置的日志相关属性。</p>
+<h2 id="控制台输出"><a href="#控制台输出" class="headerlink" title="控制台输出"></a>控制台输出</h2><p>日志级别从低到高分为TRACE &lt; DEBUG &lt; INFO &lt; WARN &lt; ERROR &lt; FATAL，如果设置为WARN，则低于WARN的信息都不会输出。 Spring Boot中默认配置ERROR、WARN和INFO级别的日志输出到控制台。您还可以通过启动您的应用程序–debug标志来启用“调试”模式（开发的时候推荐开启）,以下两种方式皆可：</p>
 <ul>
-<li>-A：所有的process均显示出来，与-e具有同样的效用</li>
-<li>-a：不与terminal有关的所有process</li>
-<li>-u：有效使用者和相关的process</li>
-<li>x ：通常与a这个参数一起使用，可列出教完整的信息<br>输出格式规划</li>
-<li>l ：较长、较详细地将该PID的信息列出</li>
-<li>j ：工作的格式(jobs format)</li>
-<li>-f :做一个更为完整的输出</li>
+<li><p>在运行命令后加入–debug标志，如：$ java -jar springTest.jar –debug。</p>
+</li>
+<li><p>在application.properties中配置debug=true，该属性置为true的时候，核心Logger（包含嵌入式容器、hibernate、spring）会输出更多内容，但是你自己应用的日志并不会输出为DEBUG级别。</p>
+</li>
 </ul>
-<h2 id="仅观察自己的bash相关进程"><a href="#仅观察自己的bash相关进程" class="headerlink" title="仅观察自己的bash相关进程"></a>仅观察自己的bash相关进程</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -l</span><br></pre></td></tr></table></figure>
-<p><img src="https://i.loli.net/2019/10/26/cC4X1lVZorFujxB.png" alt=""><br>系统整体的进程运作是非常多的，但如果使用ps -l则仅列出你的操作环境(bash)有关的进程而已，亦即最上层的父进程会是你自己的bash而没有沿伸到systemd这支进程。ps -l显示出来的资料包含以下内容：</p>
+<h2 id="文件输出"><a href="#文件输出" class="headerlink" title="文件输出"></a>文件输出</h2><p>默认情况下，Spring Boot将日志输出到控制台，不会写到日志文件。如果要编写除控制台输出之外的日志文件，则需在application.properties中设置logging.file或logging.path属性。</p>
 <ul>
-<li><p>F:代表这个进程旗标(process flags),说明这个进程的总结权限，常见号码有</p>
+<li><p>logging.file，设置文件，可以是绝对路径，也可以是相对路径。如：logging.file=my.log。</p>
+</li>
+<li><p>logging.path，设置目录，会在该目录下创建spring.log文件，并写入日志内容，如：logging.path=/var/log。<br>如果只配置 logging.file，会在项目的当前路径下生成一个 xxx.log 日志文件。</p>
+</li>
+</ul>
+<p>如果只配置 logging.path，在 /var/log文件夹生成一个日志文件为 spring.log。</p>
+<h2 id="级别控制"><a href="#级别控制" class="headerlink" title="级别控制"></a>级别控制</h2><p>所有支持的日志记录系统都可以在Spring环境中设置记录级别（例如在application.properties中） 格式为：’logging.level.* = LEVEL’</p>
 <ul>
-<li>若为4表示此进程的权限为root</li>
-<li>若为1则表示此进程仅复制(fork)而没有实际执行(exec)</li>
-</ul>
+<li><p>logging.level：日志级别控制前缀，*为包名或Logger名</p>
 </li>
-<li><p>S:代表这个进程的状态(STAT),主要的状态有</p>
+<li><p>LEVEL：选项TRACE, DEBUG, INFO, WARN, ERROR, FATAL, OFF<br>举例：</p>
+</li>
+<li><p>logging.level.com.mrbird=DEBUG：com.mrbird包下所有class以DEBUG级别输出。</p>
+</li>
+<li><p>logging.level.root=WARN：root日志以WARN级别输出。</p>
+</li>
+</ul>
+<h2 id="自定义日志配置"><a href="#自定义日志配置" class="headerlink" title="自定义日志配置"></a>自定义日志配置</h2><p>由于日志服务一般都在ApplicationContext创建前就初始化了，它并不是必须通过Spring的配置文件控制。因此通过系统属性和传统的Spring Boot外部配置文件依然可以很好的支持日志控制和管理。</p>
+<p>根据不同的日志系统，你可以按如下规则组织配置文件名，就能被正确加载：</p>
 <ul>
-<li>R(Running): 该程序正在运作中</li>
-<li>S(Sleep)  : 该程序目前正在睡眠状态(idle)，但可以被唤醒(signal)</li>
-<li>D:        : 不可被唤醒的睡眠状态，通常这只程序可能正在等待I/O的情况</li>
-<li>T:        ：停止状态(stop),可能是在工作控制(背景暂停)或除错状态</li>
-<li>Z:        ：僵尸状态，进程已经终止但却无法被移除到内存外</li>
-</ul>
+<li><p>Logback：logback-spring.xml, logback-spring.groovy, logback.xml, logback.groovy</p>
 </li>
-<li><p>UID/PID/PPID：代表【此进程被UID所拥有/进程的PID号码/此进程的父进程PID号码】</p>
+<li><p>Log4j：log4j-spring.properties, log4j-spring.xml, log4j.properties, log4j.xml</p>
 </li>
-<li><p>C：代表CPU的使用率，单位为百分比</p>
+<li><p>Log4j2：log4j2-spring.xml, log4j2.xml</p>
 </li>
-<li><p>PRI/NI：Priority/Nice的缩写，代表此进程被CPU所执行的优先级，数值越小代表该进程越快被CPU执行。</p>
-</li>
-<li><p>ADDR/SZ/WCHAN：都与内存有关</p>
-</li>
-<li><p>TTY：登入者的终端机位置，若为远程登录则使用动态终端接口(pts/n)</p>
-</li>
-<li><p>Time:使用掉的CPU时间</p>
-</li>
-<li><p>CMD：就是command的缩写，造成此进程的触发程序指令为何</p>
+<li><p>JDK (Java Util Logging)：logging.properties</p>
 </li>
 </ul>
-<h2 id="观察系统所有进程-ps-aux"><a href="#观察系统所有进程-ps-aux" class="headerlink" title="观察系统所有进程 ps aux"></a>观察系统所有进程 ps aux</h2><p><img src="https://i.loli.net/2019/10/26/4oWKpXvA63rGwRV.png" alt="捕获13.PNG"><br>在ps aux显示的项目中，各字段的意义为：</p>
+<p>Spring Boot官方推荐优先使用带有-spring的文件名作为你的日志配置（如使用logback-spring.xml，而不是logback.xml），命名为logback-spring.xml的日志配置文件，spring boot可以为它添加一些spring boot特有的配置项（下面会提到）。</p>
+<p>上面是默认的命名规则，并且放在src/main/resources下面即可。<br>如果你即想完全掌控日志配置，但又不想用logback.xml作为Logback配置的名字，可以在application.properties配置文件里面通过logging.config属性指定自定义的名字：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">logging.config=classpath:logging-config.xml</span><br></pre></td></tr></table></figure>
+
+<p>日志输出的格式有以下几个选项</p>
 <ul>
-<li>User:该process属于哪个使用者账号的</li>
-<li>PID：该process的进程标识符</li>
-<li>%CPU：该process使用掉的CPU资源百分比</li>
-<li>%MEM：该process所占用的物理内存百分比</li>
-<li>VSZ：该process使用掉的虚拟内存量(Kbytes)</li>
-<li>RSS:该process占用的固定的内存量(Kbytes)</li>
-<li>TTY:该process是在哪个终端机上面运作，若与终端机无关则显示？，另外，tty1-tty6是本机上面的登入者进程，若为pts/0等等的，则表示为由网络连接进主机的进程</li>
-<li>STAT：该进程目前的状态，状态显示与ps -l 的S 旗标相同</li>
-<li>START：该process被触发启动的时间</li>
-<li>TIME：该process 实际使用CPU运作的时间</li>
-<li>COMMAND：该进程的实际指令为何？</li>
+<li><p>%d{HH: mm:ss.SSS}——日志输出时间。</p>
+</li>
+<li><p>%thread——输出日志的进程名字，这在Web应用以及异步任务处理中很有用。</p>
+</li>
+<li><p>%-5level——日志级别，并且使用5个字符靠左对齐。</p>
+</li>
+<li><p>%logger{36}——日志输出者的名字。</p>
+</li>
+<li><p>%msg——日志消息。</p>
+</li>
+<li><p>%n——平台的换行符。</p>
+</li>
 </ul>
+<h2 id="logger在实际使用的时候有两种情况："><a href="#logger在实际使用的时候有两种情况：" class="headerlink" title="logger在实际使用的时候有两种情况："></a>logger在实际使用的时候有两种情况：</h2><p>先来看一看代码中如何使用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">package com.mrbird.controller;</span><br><span class="line"></span><br><span class="line">@Controller</span><br><span class="line">public class LearnController &#123;</span><br><span class="line">    private Logger logger = LoggerFactory.getLogger(this.getClass());</span><br><span class="line"></span><br><span class="line">    @RequestMapping(value = &quot;/login&quot;,method = RequestMethod.POST)</span><br><span class="line">    @ResponseBody</span><br><span class="line">    public Map&lt;String,Object&gt; login(HttpServletRequest request, HttpServletResponse response)&#123;</span><br><span class="line">        //日志级别从低到高分为TRACE &lt; DEBUG &lt; INFO &lt; WARN &lt; ERROR &lt; FATAL，如果设置为WARN，则低于WARN的信息都不会输出。</span><br><span class="line">        logger.trace(&quot;日志输出 trace&quot;);</span><br><span class="line">        logger.debug(&quot;日志输出 debug&quot;);</span><br><span class="line">        logger.info(&quot;日志输出 info&quot;);</span><br><span class="line">        logger.warn(&quot;日志输出 warn&quot;);</span><br><span class="line">        logger.error(&quot;日志输出 error&quot;);</span><br><span class="line">        Map&lt;String,Object&gt; map =new HashMap&lt;String,Object&gt;();</span><br><span class="line">        String userName=request.getParameter(&quot;userName&quot;);</span><br><span class="line">        String password=request.getParameter(&quot;password&quot;);</span><br><span class="line">        if(!userName.equals(&quot;&quot;) &amp;&amp; password!=&quot;&quot;)&#123;</span><br><span class="line">            User user =new User(userName,password);</span><br><span class="line">            request.getSession().setAttribute(&quot;user&quot;,user);</span><br><span class="line">            map.put(&quot;result&quot;,&quot;1&quot;);</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            map.put(&quot;result&quot;,&quot;0&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">        return map;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 
       
     </div>
@@ -470,7 +324,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/10/24/Linux/Linux%E5%B8%B8%E7%94%A8%E7%BD%91%E7%BB%9C%E6%8C%87%E4%BB%A4/">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/10/31/Java%E5%9F%BA%E7%A1%80/Java%E4%B8%AD%E7%9A%84%E5%BC%82%E5%B8%B8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -484,7 +338,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/10/24/Linux/Linux%E5%B8%B8%E7%94%A8%E7%BD%91%E7%BB%9C%E6%8C%87%E4%BB%A4/" class="post-title-link" itemprop="url">Linux常用网络指令介绍</a>
+            <a href="/2019/10/31/Java%E5%9F%BA%E7%A1%80/Java%E4%B8%AD%E7%9A%84%E5%BC%82%E5%B8%B8/" class="post-title-link" itemprop="url">Java中的异常</a>
         </h1>
 
         <div class="post-meta">
@@ -494,14 +348,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2019-10-24 23:15:15" itemprop="dateCreated datePublished" datetime="2019-10-24T23:15:15+08:00">2019-10-24</time>
+              <time title="Created: 2019-10-31 17:57:21" itemprop="dateCreated datePublished" datetime="2019-10-31T17:57:21+08:00">2019-10-31</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-26 18:40:46" itemprop="dateModified" datetime="2019-10-26T18:40:46+08:00">2019-10-26</time>
+                <time title="Modified: 2019-11-09 15:57:41" itemprop="dateModified" datetime="2019-11-09T15:57:41+08:00">2019-11-09</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -509,8 +363,8 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
                   </a>
                 </span>
             </span>
@@ -526,24 +380,12 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Linux常用网络指令介绍"><a href="#Linux常用网络指令介绍" class="headerlink" title="Linux常用网络指令介绍"></a>Linux常用网络指令介绍</h1><hr>
-<h2 id="网络参数设定指令"><a href="#网络参数设定指令" class="headerlink" title="网络参数设定指令"></a>网络参数设定指令</h2><ul>
-<li>ifconfig：ifconfig命令被用于配置和显示Linux内核中网络接口的网络参数。用ifconfig命令配置的网卡信息，在网卡重启后机器重启后，配置就不存在。要想将上述的配置信息永远的存的电脑里，那就要修改网卡的配置文件了。</li>
-<li>ifup,ifdown:这两个档案是script，透过更简单的方式来启动网络接口</li>
-<li>route：查询、设定路由表(route table)</li>
-<li>ip: 复合式的指令，可以直接修改上述提到的功能</li>
-</ul>
-<p>语法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ifconfig(参数)</span><br><span class="line">ifconfig [interface] &#123;up/down&#125; 观察与启动接口</span><br><span class="line">ifconfig [interface] [options] 设定与修改接口</span><br></pre></td></tr></table></figure>
-<p>参数</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">add&lt;地址&gt;：设置网络设备IPv6的ip地址；</span><br><span class="line">del&lt;地址&gt;：删除网络设备IPv6的IP地址；</span><br><span class="line">down：关闭指定的网络设备；</span><br><span class="line">&lt;hw&lt;网络设备类型&gt;&lt;硬件地址&gt;：设置网络设备的类型与硬件地址；</span><br><span class="line">io_addr&lt;I/O地址&gt;：设置网络设备的I/O地址；</span><br><span class="line">irq&lt;IRQ地址&gt;：设置网络设备的IRQ；</span><br><span class="line">media&lt;网络媒介类型&gt;：设置网络设备的媒介类型；</span><br><span class="line">mem_start&lt;内存地址&gt;：设置网络设备在主内存所占用的起始地址；</span><br><span class="line">metric&lt;数目&gt;：指定在计算数据包的转送次数时，所要加上的数目；</span><br><span class="line">mtu&lt;字节&gt;：设置网络设备的MTU；</span><br><span class="line">netmask&lt;子网掩码&gt;：设置网络设备的子网掩码；</span><br><span class="line">tunnel&lt;地址&gt;：建立IPv4与IPv6之间的隧道通信地址；</span><br><span class="line">up：启动指定的网络设备；</span><br><span class="line">-broadcast&lt;地址&gt;：将要送往指定地址的数据包当成广播数据包来处理；</span><br><span class="line">-pointopoint&lt;地址&gt;：与指定地址的网络设备建立直接连线，此模式具有保密功能；</span><br><span class="line">-promisc：关闭或启动指定网络设备的promiscuous模式；</span><br><span class="line">IP地址：指定网络设备的IP地址；</span><br><span class="line">网络设备：指定网络设备的名称。</span><br></pre></td></tr></table></figure>
+          <h1 id="Java中的异常"><a href="#Java中的异常" class="headerlink" title="Java中的异常"></a>Java中的异常</h1><hr>
+<h2 id="为什么使用异常？"><a href="#为什么使用异常？" class="headerlink" title="为什么使用异常？"></a>为什么使用异常？</h2><p>它能够降低错误处理代码的复杂度。如果不使用异常，那么就必须检查特定的错误，并在程序中的许多地方去处理它。而如果使用异常，就不必在方法调用处进行检查，因为异常机制将保证能够捕获这个错误。并且，只需在一个地方处理错误，即所谓的异常处理程序中。这种方式不仅节省代码，而且把“描述在正常执行过程中做什么事”的代码和“出了问题怎么办”的代码相分离。总之，与之前的错误处理方式相比，异常机制使代码的阅读、编写和调试工作变得更加井井有条。</p>
+<h2 id="基本异常"><a href="#基本异常" class="headerlink" title="基本异常"></a>基本异常</h2><p>&emsp;&emsp;异常情形(exceptional condition)是指阻止当前方法或作用域继续执行的问题。把异常情形与普通问题区分很重要，所谓的普通问题是指，在当前环境下能够得到足够的信息，总能把问题解决。而对于异常情形，就不能继续下去了，因为在当前环境下无法获得必要的信息来解决问题。你所能做的就是从当前环境中跳出，并且把问题交给上一级环境。这就是抛出异常时所发生的事情。<br>&emsp;&emsp;当抛出异常后，有几件事会随之发生。首先，同Java中其他对象的创建一样，将使用new在堆上创建异常对象。然后，当前的执行路径(它不能再继续下去了)被终止，并且从当前环境中弹出对异常对象的引用。此时，异常处理机制接管程序，并开始寻找一个恰当的地方来继续执行程序。这个恰当的地方就是异常处理程序，它的任务就是将程序从错误状态中恢复，以使程序能要么换一种方式运行，要么继续运行下去。</p>
+<h3 id="异常参数"><a href="#异常参数" class="headerlink" title="异常参数"></a>异常参数</h3><p>&emsp;&emsp;所有标准异常类都有两个构造器：一个是默认构造器，另一个是接受字符串作为参数，以便能把相关信息放入异常对象的构造器。此外，能够抛出任意类型的Throwable对象，它是异常类型的根类。通常，对于不同类型的错误，要抛出相对应的异常。错误信息可以保存在对象内部或者用异常类的名称来暗示。</p>
+<h2 id="捕获异常"><a href="#捕获异常" class="headerlink" title="捕获异常"></a>捕获异常</h2><h2 id="创建自定义异常"><a href="#创建自定义异常" class="headerlink" title="创建自定义异常"></a>创建自定义异常</h2><p>&emsp;&emsp;不必拘泥于Java中已有的异常类型。Java提供的异常体系不可能预见所有的希望加以报告的错误，所以可以自己定义异常类来表示程序中可能会遇到的特定问题。<br>&emsp;&emsp;要自己定义异常类，<em>必须从已有的异常类继承，最好是选择意思相近的异常类来继承</em>。</p>
 
-<p>实例</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# ifconfig</span><br><span class="line">eth0      Link encap:Ethernet  HWaddr 00:16:3E:00:1E:51  </span><br><span class="line">          inet addr:10.160.7.81  Bcast:10.160.15.255  Mask:255.255.240.0</span><br><span class="line">          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1</span><br><span class="line">          RX packets:61430830 errors:0 dropped:0 overruns:0 frame:0</span><br><span class="line">          TX packets:88534 errors:0 dropped:0 overruns:0 carrier:0</span><br><span class="line">          collisions:0 txqueuelen:1000</span><br><span class="line">          RX bytes:3607197869 (3.3 GiB)  TX bytes:6115042 (5.8 MiB)</span><br><span class="line"></span><br><span class="line">lo        Link encap:Local Loopback  </span><br><span class="line">          inet addr:127.0.0.1  Mask:255.0.0.0</span><br><span class="line">          UP LOOPBACK RUNNING  MTU:16436  Metric:1</span><br><span class="line">          RX packets:56103 errors:0 dropped:0 overruns:0 frame:0</span><br><span class="line">          TX packets:56103 errors:0 dropped:0 overruns:0 carrier:0</span><br><span class="line">          collisions:0 txqueuelen:0</span><br><span class="line">          RX bytes:5079451 (4.8 MiB)  TX bytes:5079451 (4.8 MiB)</span><br></pre></td></tr></table></figure>
-<p>说明</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">eth0表示第一块网卡，其中HWaddr表示网卡的物理地址，可以看到目前这个网卡的物理地址(MAC地址）是00:16:3E:00:1E:51。</span><br><span class="line"></span><br><span class="line">inet addr用来表示网卡的IP地址，此网卡的IP地址是10.160.7.81，广播地址Bcast:10.160.15.255，掩码地址Mask:255.255.240.0。</span><br><span class="line"></span><br><span class="line">lo是表示主机的回环地址，这个一般是用来测试一个网络程序，但又不想让局域网或外网的用户能够查看，只能在此台主机上运行和查看所用的网络接口。比如把 httpd服务器的指定到回环地址，在浏览器输入127.0.0.1就能看到你所架WEB网站了。但只是您能看得到，局域网的其它主机或用户无从知道。</span><br><span class="line"></span><br><span class="line">第一行：连接类型：Ethernet（以太网）HWaddr（硬件mac地址）。</span><br><span class="line">第二行：网卡的IP地址、子网、掩码。</span><br><span class="line">第三行：UP（代表网卡开启状态）RUNNING（代表网卡的网线被接上）MULTICAST（支持组播）MTU:1500（最大传输单元）：1500字节。</span><br><span class="line">第四、五行：接收、发送数据包情况统计。</span><br><span class="line">第七行：接收、发送数据字节数统计信息。</span><br></pre></td></tr></table></figure>
-
-<h2 id="网络侦错与观察指令"><a href="#网络侦错与观察指令" class="headerlink" title="网络侦错与观察指令"></a>网络侦错与观察指令</h2><h2 id="远程联机指令"><a href="#远程联机指令" class="headerlink" title="远程联机指令"></a>远程联机指令</h2><h2 id="文字接口网页浏览"><a href="#文字接口网页浏览" class="headerlink" title="文字接口网页浏览"></a>文字接口网页浏览</h2><h2 id="封包撷取功能"><a href="#封包撷取功能" class="headerlink" title="封包撷取功能"></a>封包撷取功能</h2>
       
     </div>
 
@@ -562,7 +404,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/10/24/Linux/%E5%9C%A8Linux%E4%B8%8A%E9%85%8D%E7%BD%AEjava%E7%8E%AF%E5%A2%83/">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/10/31/Spring/Linux%E4%B8%8B%E9%83%A8%E7%BD%B2jar%E5%8C%85/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -576,7 +418,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/10/24/Linux/%E5%9C%A8Linux%E4%B8%8A%E9%85%8D%E7%BD%AEjava%E7%8E%AF%E5%A2%83/" class="post-title-link" itemprop="url">在Linux上配置java环境</a>
+            <a href="/2019/10/31/Spring/Linux%E4%B8%8B%E9%83%A8%E7%BD%B2jar%E5%8C%85/" class="post-title-link" itemprop="url">Linux下部署springboot jar包</a>
         </h1>
 
         <div class="post-meta">
@@ -586,14 +428,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2019-10-24 23:15:15" itemprop="dateCreated datePublished" datetime="2019-10-24T23:15:15+08:00">2019-10-24</time>
+              <time title="Created: 2019-10-31 17:43:18" itemprop="dateCreated datePublished" datetime="2019-10-31T17:43:18+08:00">2019-10-31</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-28 08:24:00" itemprop="dateModified" datetime="2019-10-28T08:24:00+08:00">2019-10-28</time>
+                <time title="Modified: 2019-11-02 09:14:58" itemprop="dateModified" datetime="2019-11-02T09:14:58+08:00">2019-11-02</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -601,8 +443,8 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
+                  <a href="/categories/spring/" itemprop="url" rel="index">
+                    <span itemprop="name">spring</span>
                   </a>
                 </span>
             </span>
@@ -618,24 +460,18 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="在Linux上配置java环境"><a href="#在Linux上配置java环境" class="headerlink" title="在Linux上配置java环境"></a>在Linux上配置java环境</h1><hr>
-<h2 id="下载jdk1-8"><a href="#下载jdk1-8" class="headerlink" title="下载jdk1.8"></a>下载jdk1.8</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># wget --no-check-certificate --no-cookies --header &quot;Cookie: oraclelicense=accept-securebackup-cookie&quot;  http://download.oracle.com/otn-pub/java/jdk/8u131-b11/d54c1d3a095b4ff2b6607d096fa80163/jdk-8u131-linux-x64.tar.gz</span><br></pre></td></tr></table></figure>
+          <h1 id="Linux下部署springboot-jar包"><a href="#Linux下部署springboot-jar包" class="headerlink" title="Linux下部署springboot jar包"></a>Linux下部署springboot jar包</h1><hr>
+<p>部署Spring Boot项目可以使用Maven命令mvn:clean package将项目打包成只执行的jar文件，然后使用命令java -jar XX.jar来执行。但这样做无法将shell命令行释放，关闭terminal后项目也随之关闭了。这里介绍在Linux系统中后台运行Spring Boot jar文件的方法。</p>
+<p>实现这个功能主要依赖于Linux的nohup命令。nohup命令可以将程序以忽略挂起信号的方式运行起来，被运行的程序的输出信息将不会显示到终端。<br>nohup语法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">nohup 命令</span><br><span class="line">用途：不挂断地运行命令。</span><br><span class="line">语法：nohup Command [ Arg … ][ &amp; ]</span><br></pre></td></tr></table></figure>
 
-<h2 id="解压"><a href="#解压" class="headerlink" title="解压"></a>解压</h2><p>1.用tar命令解压后，会生成jdk1.8.0_131目录；</p>
-<p>2.为了方便用mv把jdk1.8.0_131更名为jdk1.8；</p>
-<p>3.把jdk1.8移动到/usr/local目录下(当然也可以移动到别的目录下，后面配置环境变量修改为自己的jdk路径即可)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># tar -zxvf jdk-8u131-linux-x64.tar.gz</span><br><span class="line"># mv jdk1.8.0_131 jdk1.8</span><br><span class="line"># mv jdk1.8 /usr/local</span><br></pre></td></tr></table></figure>
+<p>所以只需要在启动命令前加上nohup命令，末尾加上&amp;即可：nohup java -jar XX.jar &amp;。<br>为了方便，我们可以编写启动脚本start.sh：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup java -jar XX.jar &amp;</span><br></pre></td></tr></table></figure>
 
-<h2 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h2><p>1.修改/etc/profile文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># vim /etc/profile</span><br></pre></td></tr></table></figure>
-<p>在profile文件中配置jdk环境</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">export JAVA_HOME=/usr/local/jdk1.8</span><br><span class="line">export JRE_HOME=$&#123;JAVA_HOME&#125;/jre</span><br><span class="line">export CLASSPATH=.:$&#123;JAVA_HOME&#125;/lib:$&#123;JRE_HOME&#125;/lib:$CLASSPATH</span><br><span class="line">export JAVA_PATH=$&#123;JAVA_HOME&#125;/bin:$&#123;JRE_HOME&#125;/bin</span><br><span class="line">export PATH=$PATH:$&#123;JAVA_PATH&#125;</span><br></pre></td></tr></table></figure>
-
-<p>2.使profile生效</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># source /etc/profie</span><br></pre></td></tr></table></figure>
-
-<h2 id="查看配置环境是否成功"><a href="#查看配置环境是否成功" class="headerlink" title="查看配置环境是否成功"></a>查看配置环境是否成功</h2><p>java -version命令查看jdk版本</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># java -version</span><br></pre></td></tr></table></figure>
+<p>关停脚本stop.sh：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">PID=`ps -ef | grep sms-2.0.jar | grep -v grep | awk &apos;&#123;print $2&#125;&apos;`</span><br><span class="line">if [ -z &quot;$PID&quot; ]</span><br><span class="line">then</span><br><span class="line">    echo Application is already stopped</span><br><span class="line">else</span><br><span class="line">    echo kill $PID</span><br><span class="line">    kill -9 $PID</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+<p>使用了nohup命令后，会在jar文件目录下生成一个nohup.out文件，可通过其观察当前项目的运行情况：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">$ ll</span><br><span class="line">总用量 76612</span><br><span class="line">drwxrwxr-x 2 zjrun zjrun     4096 2月   8 08:49 log</span><br><span class="line">-rw------- 1 zjrun zjrun 58695723 2月   8 10:15 nohup.out</span><br><span class="line">-rwxrw-r-- 1 zjrun zjrun       88 2月   7 15:17 run.sh</span><br><span class="line">-rw-rw-r-- 1 zjrun zjrun 19730199 2月   8 10:11 sms-1.0.jar</span><br><span class="line">-rwxrw-r-- 1 zjrun zjrun       60 2月   7 15:22 start.sh</span><br><span class="line">-rwxrw-r-- 1 zjrun zjrun      184 2月   7 15:19 stop.sh</span><br><span class="line"></span><br><span class="line">$ tail -10f nohup.out </span><br><span class="line">10:14:31.309 logback [main] INFO  o.s.j.e.a.AnnotationMBeanExporter - Registering beans for JMX exposure on startup</span><br><span class="line">10:14:31.478 logback [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler [&quot;http-nio-8963&quot;]</span><br><span class="line">10:14:31.498 logback [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler [&quot;http-nio-8963&quot;]</span><br><span class="line">10:14:31.506 logback [main] INFO  o.a.tomcat.util.net.NioSelectorPool - Using a shared selector for servlet write/read</span><br><span class="line">10:14:31.634 logback [main] INFO  o.s.b.c.e.t.TomcatEmbeddedServletContainer - Tomcat started on port(s): 8963 (http)</span><br><span class="line">10:14:31.644 logback [main] INFO  com.xingyi.sms.SmsApplication - Started SmsApplication in 7.213 seconds (JVM running for 8.03)</span><br><span class="line">complete!</span><br><span class="line">10:15:26.978 logback [http-nio-8963-exec-1] INFO  o.a.c.c.C.[.[localhost].[/mobilePre] - Initializing Spring FrameworkServlet &apos;dispatcherServlet&apos;</span><br><span class="line">10:15:26.979 logback [http-nio-8963-exec-1] INFO  o.s.web.servlet.DispatcherServlet - FrameworkServlet &apos;dispatcherServlet&apos;: initialization started</span><br><span class="line">10:15:27.004 logback [http-nio-8963-exec-1] INFO  o.s.web.servlet.DispatcherServlet - FrameworkServlet &apos;dispatcherServlet&apos;: initialization completed in 25 ms</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -654,7 +490,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/10/24/Linux/tar/">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/10/31/Spring/springboot%E4%B8%AD%E7%BC%96%E5%86%99%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -668,171 +504,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/10/24/Linux/tar/" class="post-title-link" itemprop="url">每天一个Linux指令-tar</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-10-24 23:15:15" itemprop="dateCreated datePublished" datetime="2019-10-24T23:15:15+08:00">2019-10-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-28 07:58:50" itemprop="dateModified" datetime="2019-10-28T07:58:50+08:00">2019-10-28</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="每天一个Linux指令-tar"><a href="#每天一个Linux指令-tar" class="headerlink" title="每天一个Linux指令-tar"></a>每天一个Linux指令-tar</h1><hr>
-<p>tar命令可以为linux的文件和目录创建档案。利用tar，可以为某一特定文件创建档案（备份文件），也可以在档案中改变文件，或者向档案中加入新的文件。tar最初被用来在磁带上创建档案，现在，用户可以在任何设备上创建档案。利用tar命令，可以把一大堆的文件和目录全部打包成一个文件，这对于备份文件或将几个文件组合成为一个文件以便于网络传输是非常有用的。</p>
-<p>首先要弄清两个概念：打包和压缩。打包是指将一大堆文件或目录变成一个总的文件；压缩则是将一个大的文件通过一些压缩算法变成一个小文件。</p>
-<p>为什么要区分这两个概念呢？<em>这源于Linux中很多压缩程序只能针对一个文件进行压缩</em>，这样当你想要压缩一大堆文件时，你得先将这一大堆文件先打成一个包（tar命令），然后再用压缩程序进行压缩（gzip bzip2命令）。</p>
-<h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar(选项)(参数)</span><br></pre></td></tr></table></figure>
-
-<h2 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">-A或--catenate：新增文件到以存在的备份文件；</span><br><span class="line">-B：设置区块大小；</span><br><span class="line">-c或--create：建立新的备份文件；</span><br><span class="line">-C &lt;目录&gt;：这个选项用在解压缩，若要在特定目录解压缩，可以使用这个选项。</span><br><span class="line">-d：记录文件的差别；</span><br><span class="line">-x或--extract或--get：从备份文件中还原文件；</span><br><span class="line">-t或--list：列出备份文件的内容；</span><br><span class="line">-z或--gzip或--ungzip：通过gzip指令处理备份文件；(常用)</span><br><span class="line">-Z或--compress或--uncompress：通过compress指令处理备份文件；</span><br><span class="line">-f&lt;备份文件&gt;或--file=&lt;备份文件&gt;：指定要处理的文件名；(常用)</span><br><span class="line">-v或--verbose：显示指令执行过程；(常用)</span><br><span class="line">-r：添加文件到已经压缩的文件；</span><br><span class="line">-u：添加改变了和现有的文件到已经存在的压缩文件；</span><br><span class="line">-j：支持bzip2解压文件；</span><br><span class="line">-v：显示操作过程；</span><br><span class="line">-l：文件系统边界设置；</span><br><span class="line">-k：保留原有文件不覆盖；</span><br><span class="line">-m：保留文件不被覆盖；</span><br><span class="line">-w：确认压缩文件的正确性；</span><br><span class="line">-p或--same-permissions：用原来的文件权限还原文件；</span><br><span class="line">-P或--absolute-names：文件名使用绝对名称，不移除文件名称前的“/”号；</span><br><span class="line">-N &lt;日期格式&gt; 或 --newer=&lt;日期时间&gt;：只将较指定日期更新的文件保存到备份文件里；</span><br><span class="line">--exclude=&lt;范本样式&gt;：排除符合范本样式的文件。</span><br></pre></td></tr></table></figure>
-
-<h2 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">文件或目录：指定要打包的文件或目录列表。</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/10/24/JavaScript/BOM/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lancersaber">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lancersaber">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/10/24/JavaScript/BOM/" class="post-title-link" itemprop="url">BOM(浏览器对象模型)</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-10-24 22:59:25" itemprop="dateCreated datePublished" datetime="2019-10-24T22:59:25+08:00">2019-10-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-05 19:05:34" itemprop="dateModified" datetime="2019-11-05T19:05:34+08:00">2019-11-05</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
-                    <span itemprop="name">JavaScript</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="BOM"><a href="#BOM" class="headerlink" title="BOM"></a>BOM</h1><hr>
-<h2 id="window对象"><a href="#window对象" class="headerlink" title="window对象"></a>window对象</h2><p>&emsp;&emsp;BOM的核心对象是window，它表示浏览器的一个实例。在浏览器中，window对象有双重角色，既是通过Js访问浏览器窗口的一个接口，又是ECMAScript规定的Global对象。这意味着在网页定义的任何一个对象、变量和函数，都以window作为其Global对象，因此有权访问。</p>
-<h3 id="全局作用域"><a href="#全局作用域" class="headerlink" title="全局作用域"></a>全局作用域</h3><p>&emsp;&emsp;由于window对象是Global对象，因此所有在全局作用域中声明的变量、函数都会变成window对象的属性和方法。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var age=29;</span><br><span class="line">function sayAge() &#123;</span><br><span class="line">    alert(this.age);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">alert(window.age);</span><br><span class="line">sayAge();</span><br><span class="line">window.sayAge();</span><br></pre></td></tr></table></figure>
-<p>我们在全局作用域中定义了一个变量age和一个函数sayAge()，它们被自动归在了window对象名下。于是，可以通过window.age访问变量age，可以通过window.sayAge()访问函数sayAge()。由于sayAge()存在于全局作用域中，因此this.age被映射到window.age,最终显示的仍然是正确的结果。</p>
-<h3 id="窗口位置"><a href="#窗口位置" class="headerlink" title="窗口位置"></a>窗口位置</h3>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/10/24/JavaScript/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lancersaber">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lancersaber">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/10/24/JavaScript/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" class="post-title-link" itemprop="url">面向对象的程序设计</a>
+            <a href="/2019/10/31/Spring/springboot%E4%B8%AD%E7%BC%96%E5%86%99%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/" class="post-title-link" itemprop="url">Springboot中编写单元测试</a>
         </h1>
 
         <div class="post-meta">
@@ -843,7 +515,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2019-10-24 20:24:37 / Modified: 22:58:24" itemprop="dateCreated datePublished" datetime="2019-10-24T20:24:37+08:00">2019-10-24</time>
+              <time title="Created: 2019-10-31 15:53:41 / Modified: 17:49:39" itemprop="dateCreated datePublished" datetime="2019-10-31T15:53:41+08:00">2019-10-31</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -851,8 +523,8 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
-                    <span itemprop="name">JavaScript</span>
+                  <a href="/categories/spring/" itemprop="url" rel="index">
+                    <span itemprop="name">spring</span>
                   </a>
                 </span>
             </span>
@@ -868,144 +540,37 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="面向对象的程序设计"><a href="#面向对象的程序设计" class="headerlink" title="面向对象的程序设计"></a>面向对象的程序设计</h1><hr>
-<h2 id="创建对象"><a href="#创建对象" class="headerlink" title="创建对象"></a>创建对象</h2><p>创建自定义对象的最简单的方式就是创建一个Object的实例，然后再为它添加属性和方法。</p>
-<h3 id="工厂模式"><a href="#工厂模式" class="headerlink" title="工厂模式"></a>工厂模式</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function createPerson(name,age,job)&#123;</span><br><span class="line">	var o=new Object();</span><br><span class="line">	o.name=name;</span><br><span class="line">	o.age=age;</span><br><span class="line">	o.job=job;</span><br><span class="line">	o.sayName=function()&#123;</span><br><span class="line">		alert(this.name);</span><br><span class="line">	&#125;</span><br><span class="line">	return o;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>工厂模式没有解决对象标识的问题(即怎样知道一个对象的类型)</p>
-<h3 id="构造函数模式"><a href="#构造函数模式" class="headerlink" title="构造函数模式"></a>构造函数模式</h3><p>创建自定义的构造函数，从而自定义对象类型的属性和方法。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function Person(name,age,job)&#123;</span><br><span class="line">	this.name=name;</span><br><span class="line">	this.age=age;</span><br><span class="line">	this.job=job;</span><br><span class="line">	this.sayName=function()&#123;</span><br><span class="line">		alert(this.name);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>以这种方式调用构造函数实际上会经历以下4个步骤</p>
+          <h1 id="Springboot中编写单元测试"><a href="#Springboot中编写单元测试" class="headerlink" title="Springboot中编写单元测试"></a>Springboot中编写单元测试</h1><hr>
+<p>编写单元测试可以帮助开发人员编写高质量的代码，提升代码质量，减少Bug，便于重构。Spring Boot提供了一些实用程序和注解，用来帮助我们测试应用程序，在Spring Boot中开启单元测试只需引入spring-boot-starter-test即可，其包含了一些主流的测试库。本文主要介绍基于 Service和Controller的单元测试。</p>
+<p>引入spring-boot-starter-test：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;</span><br><span class="line">    &lt;scope&gt;test&lt;/scope&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="知识准备"><a href="#知识准备" class="headerlink" title="知识准备"></a>知识准备</h2><h3 id="Junit4注解"><a href="#Junit4注解" class="headerlink" title="Junit4注解"></a>Junit4注解</h3><p>JUnit4中包含了几个比较重要的注解：@BeforeClass、@AfterClass、@Before、@After和@Test。其中， @BeforeClass和@AfterClass在每个类加载的开始和结束时运行，必须为静态方法；而@Before和@After则在每个测试方法开始之前和结束之后运行。见如下例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">@RunWith(SpringRunner.class)</span><br><span class="line">@SpringBootTest</span><br><span class="line">public class TestApplicationTests &#123;</span><br><span class="line"></span><br><span class="line">    @BeforeClass</span><br><span class="line">    public static void beforeClassTest() &#123;</span><br><span class="line">        System.out.println(&quot;before class test&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    @Before</span><br><span class="line">    public void beforeTest() &#123;</span><br><span class="line">        System.out.println(&quot;before test&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    @Test</span><br><span class="line">    public void Test1() &#123;</span><br><span class="line">        System.out.println(&quot;test 1+1=2&quot;);</span><br><span class="line">        Assert.assertEquals(2, 1 + 1);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    @Test</span><br><span class="line">    public void Test2() &#123;</span><br><span class="line">        System.out.println(&quot;test 2+2=4&quot;);</span><br><span class="line">        Assert.assertEquals(4, 2 + 2);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    @After</span><br><span class="line">    public void afterTest() &#123;</span><br><span class="line">        System.out.println(&quot;after test&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    @AfterClass</span><br><span class="line">    public static void afterClassTest() &#123;</span><br><span class="line">        System.out.println(&quot;after class test&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行输出如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">before class test</span><br><span class="line">before test</span><br><span class="line">test 1+1=2</span><br><span class="line">after test</span><br><span class="line">before test</span><br><span class="line">test 2+2=4</span><br><span class="line">after test</span><br><span class="line">after class test</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>从上面的输出可以看出各个注解的运行时机。</p>
+<h3 id="Assert"><a href="#Assert" class="headerlink" title="Assert"></a>Assert</h3><p>上面代码中，我们使用了Assert类提供的assert口方法，下面列出了一些常用的assert方法：</p>
 <ul>
-<li>创建一个新的对象</li>
-<li>将构造函数的作用域赋给新对象(因此this就指向了这个新对象)</li>
-<li>执行构造函数中的代码(为这个新对象添加属性)</li>
-<li>返回新对象</li>
+<li><p>assertEquals(“message”,A,B)，判断A对象和B对象是否相等，这个判断在比较两个对象时调用了equals()方法。</p>
+</li>
+<li><p>assertSame(“message”,A,B)，判断A对象与B对象是否相同，使用的是==操作符。</p>
+</li>
+<li><p>assertTrue(“message”,A)，判断A条件是否为真。</p>
+</li>
+<li><p>assertFalse(“message”,A)，判断A条件是否不为真。</p>
+</li>
+<li><p>assertNotNull(“message”,A)，判断A对象是否不为null。</p>
+</li>
+<li><p>assertArrayEquals(“message”,A,B)，判断A数组与B数组是否相等。</p>
+</li>
 </ul>
-<p>1、将构造函数当作函数<br>&emsp;&emsp;构造函数与其他函数的唯一不同，就在于调用它们的方式不同。任何函数，只要通过new操作符来调用，那么它就可以作为构造函数，而任何函数，如果不通过new操作符来调用，那它就跟普通函数没什么两样。<br>2、将一些函数定义移到函数外部</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function Person(name,age,job)&#123;</span><br><span class="line">	this.name=name;</span><br><span class="line">	this.age=age;</span><br><span class="line">	this.job=job;</span><br><span class="line">	this.sayName=sayName;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function sayName()&#123;</span><br><span class="line">	alert(this.name);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这样的好处是两个不同的Person实例中的sayName函数是相同的。</p>
-<h3 id="原型模式"><a href="#原型模式" class="headerlink" title="原型模式"></a>原型模式</h3><p>&emsp;&emsp;我们创建的每个函数都有一个prototype(原型)属性，这个属性是一个对象，它的用途是包含可以由特定类型的所有实例共享的属性和方法。使用原型的好处是例：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">function Person() &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Person.prototype.name=&quot;Mike&quot;;</span><br><span class="line">Person.prototype.age=29;</span><br><span class="line">Person.prototype.job=&quot;Softwarer&quot;;</span><br><span class="line">Person.prototype.sayName=function () &#123;</span><br><span class="line">    alert(this.name);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var person1=new Person();</span><br><span class="line">person1.sayName();//Mike</span><br><span class="line"></span><br><span class="line">var person2=new Person();</span><br><span class="line">person2.sayName();//Mike</span><br><span class="line"></span><br><span class="line">alert(person1.sayName == person2.sayName)//true</span><br></pre></td></tr></table></figure>
+<h3 id="MockMvc"><a href="#MockMvc" class="headerlink" title="MockMvc"></a>MockMvc</h3><p>下文中，对Controller的测试需要用到MockMvc技术。MockMvc，从字面上来看指的是模拟的MVC，即其可以模拟一个MVC环境，向Controller发送请求然后得到响应。</p>
+<p>在单元测试中，使用MockMvc前需要进行初始化，如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">private MockMvc mockMvc;</span><br><span class="line"></span><br><span class="line">@Autowired</span><br><span class="line">private WebApplicationContext wac;</span><br><span class="line"></span><br><span class="line">@Before</span><br><span class="line">public void setupMockMvc()&#123;</span><br><span class="line">    mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h4 id="理解原型"><a href="#理解原型" class="headerlink" title="理解原型"></a>理解原型</h4><p>&emsp;&emsp;无论什么时候，只要创建了一个新函数，就会根据一组特定的规则为该函数创建一个prototype属性。在默认情况下，所有prototype属性都会自动获得一个constructor(构造函数)属性，这个属性包含一个指向prototype属性所在函数的指针。拿上面的为例，Person.prototype.constructor指向Person。而通过这个构造函数，我们还可继续为原型添加其他属性和方法。<br>&emsp;&emsp;创建了自定义的构造函数之后，其原型属性默认只会取得constructor属性，至于其他方法，则都是从Object继承而来的。而调用构造函数创建一个新实例后，该实例的内部将包含一个指针(内部属性)，指向构造函数的原型属性。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Person.prototype.isPrototypeOf(person1); //测试person1实例的内部指向原型属性的指针是不是Person.prototype</span><br></pre></td></tr></table></figure>
-
-<p>当为对象实例添加一个属性时，这个属性就会屏蔽原型对象中保存的同名属性。使用hasOwnProperty()方法可以检测一个属性是存在于实例中，还是存在于原型中。这个方法(别忘了它是从Object继承而来的)只在给定属性存在于对象实例中时，才会返回true。</p>
-<h4 id="原型与in操作符"><a href="#原型与in操作符" class="headerlink" title="原型与in操作符"></a>原型与in操作符</h4><p>&emsp;&emsp;单独使用时，in操作符会通过对象能够访问给定属性时返回true，无论该属性存在于实例中还是原型中。</p>
-<h4 id="更简单的原型语法"><a href="#更简单的原型语法" class="headerlink" title="更简单的原型语法"></a>更简单的原型语法</h4><p>&emsp;&emsp;为了避免添加原型对象时输入过多重复代码，可以用一个包含所有属性和方法的对象字面量来重写整个原型对象。如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">function Person() &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Person.prototype=&#123;</span><br><span class="line">	name: &quot;Mike&quot;,</span><br><span class="line">	age: 29,</span><br><span class="line">	job: &quot;soft&quot;,</span><br><span class="line">	sayname: function()&#123;</span><br><span class="line">		alert(this.name);</span><br><span class="line">	&#125;</span><br><span class="line">	//constructor: Person</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>这里我们将Person.prototype设置为等于一个以对象字面量形式创建的新对象。最终结果相同，但是constructor属性不再指向Person了。这里使用的语法，本质上完全重写了默认的prototype对象，因此constructor属性也就变成了新对象的constructor属性(指向Object构造函数)。不过可以显示地添加constructor的属性值并指向Person。</p>
-<h4 id="原型的动态性"><a href="#原型的动态性" class="headerlink" title="原型的动态性"></a>原型的动态性</h4><p>&emsp;&emsp;我们对原型对象所做的任何修改都能够立即从实例上反映出来，即使是先创建了实例后修改原型也是如此。</p>
-<h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/10/24/JavaScript/%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lancersaber">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lancersaber">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/10/24/JavaScript/%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B/" class="post-title-link" itemprop="url">引用类型</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2019-10-24 18:34:43 / Modified: 20:23:40" itemprop="dateCreated datePublished" datetime="2019-10-24T18:34:43+08:00">2019-10-24</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
-                    <span itemprop="name">JavaScript</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="引用类型"><a href="#引用类型" class="headerlink" title="引用类型"></a>引用类型</h1><hr>
-<p>&emsp;&emsp;引用类型的值(对象)是引用类型的一个实例。在ECMAScript中，引用类型是一种数据结构，用于将数据和功能组织在一起</p>
-<h2 id="Object类型"><a href="#Object类型" class="headerlink" title="Object类型"></a>Object类型</h2><p>&emsp;&emsp;创建Object实例的方式有两种。第一种是使用new操作符后跟Object构造函数，如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var person=new Object();</span><br><span class="line">person.name=&quot;Mike&quot;;</span><br><span class="line">person.age=29;</span><br></pre></td></tr></table></figure>
-
-<p>另一种方式是使用对象字面量表示法。对象字面量是对象定义的一种简写，目的在于创建包含大量属性的对象的过程。如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var person=&#123;</span><br><span class="line">	name: &apos;Mike&apos;,</span><br><span class="line">	age: 29</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>上面两个代码达到的效果是一样的。另外，如果留其花括号，则可以定义只包含默认属性和方法的对象，如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var person=&#123;&#125;;</span><br><span class="line">person.name=&quot;Mike&quot;;</span><br><span class="line">person.age=29;</span><br></pre></td></tr></table></figure>
-
-<pre><code>在通过对象字面量表示法时，实际上不会调用Object的构造函数。</code></pre><h2 id="Array类型"><a href="#Array类型" class="headerlink" title="Array类型"></a>Array类型</h2><hr>
-<h3 id="数组的创建"><a href="#数组的创建" class="headerlink" title="数组的创建"></a>数组的创建</h3><p>&emsp;&emsp;ECMAScript数组的每一项可以保存任何类型的数据。而且，ECMAScript数组的大小是可以动态调整的，既可以随着数据的添加自动增长以容纳新的数据。创建数组的基本方式有两种。第一种是使用Array构造函数，如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var colors=new Array();</span><br></pre></td></tr></table></figure>
-<p>如果预先知道数组要保存的个数，也可以给构造函数传递该数量，得到的数组就会具有那么多的位置(每一项的初始值都是undefined),如</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var colors=new Array(20);</span><br></pre></td></tr></table></figure>
-<p>也可以向Array构造函数传递数组应该包含的项。以下代码创建了一个包含3个字符串的数组：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var colors=new Array(&quot;red&quot;,&quot;blue&quot;,&quot;green&quot;);</span><br></pre></td></tr></table></figure>
-
-<p>&emsp;&emsp;创建数组的第二种方式是使用数组字面量表示法。数组字面量由一对包含数组项的方括号表示，多个数组项之间以逗号隔开，如下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var colors=[&quot;red&quot;,&quot;blue&quot;,&quot;green&quot;];//创建一个包含3个字符串的数组</span><br><span class="line">var name=[];					  //创建一个空数组</span><br><span class="line">var values=[1,2,]				  //不要这样！这样会创建一个包含2或3项的数组</span><br></pre></td></tr></table></figure>
-<p>数组的length属性很有特点，它不只是只读的。因此，可以通过设置这个属性，从数组的末尾移除项或向数组添加新项。</p>
-<h3 id="数组的转换"><a href="#数组的转换" class="headerlink" title="数组的转换"></a>数组的转换</h3><p>&emsp;&emsp;调用数组的toString()和valueOf()方法会返回相同的值，即由数组中每个值的字符串形式拼接而成的一个以逗号分隔的字符串。实际上，为了创建这个字符串会调用数组每一项的toString()方法。<br>&emsp;&emsp;在默认的情况下数组都会以逗号分隔的字符串返回数组项。而如果使用join方法，则可以使用不同的分割符来构建这个字符串。join()方法只接收一个参数，即作为分隔符的字符串，然后返回包含所有数组项的字符串。如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var colors=[&quot;red&quot;,&quot;green&quot;,&quot;blue&quot;];</span><br><span class="line">alert(colors.join(&quot;,&quot;));		//red,green,blue</span><br><span class="line">alert(colors.join(&quot;||&quot;));		//red||green||blue</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">如果数组中的某一项的值是null或者undefined，那么该值在join()、toLocalString()、toString()、和valueOf()方法返回的结果中以空字符串表示。</span><br></pre></td></tr></table></figure>
-
-<h3 id="栈方法"><a href="#栈方法" class="headerlink" title="栈方法"></a>栈方法</h3><ul>
-<li>push():接收任意数量的参数，把它们逐个添加到数组末尾，并返回修改后数组的长度</li>
-<li>pop() :从数组末尾移除最后一项，减少length值，然后返回移除的项</li>
-</ul>
-<h3 id="队列方法"><a href="#队列方法" class="headerlink" title="队列方法"></a>队列方法</h3><ul>
-<li>shift():移除数组的第一项并返回该项</li>
-</ul>
-<h3 id="重排序方法"><a href="#重排序方法" class="headerlink" title="重排序方法"></a>重排序方法</h3><ul>
-<li>reverse() :反转数组项的顺序</li>
-<li>sort()    :对数组进行排序，默认升序。sort可以接收一个比较函数作为参数，以便我们指定哪个值在位于哪个值的前面。<br>比较函数接收两个参数，如果第一个参数应该位于第二个参数则返回一个负数，如果相等则返回0，大于返回整数。例：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">function compare(value1,value2)&#123;</span><br><span class="line">	if(value1&lt;value2)&#123;</span><br><span class="line">		return -1;</span><br><span class="line">	&#125;else if(value1== value2)&#123;</span><br><span class="line">		return 0;</span><br><span class="line">	&#125;else&#123;</span><br><span class="line">		return 1;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">arrays.sort(compare);</span><br><span class="line">```	</span><br><span class="line">在compare函数中使用减法可以简化比较函数。</span><br><span class="line"></span><br><span class="line">### 操作方法</span><br><span class="line">* concat():可以基于当前数组中的所有项创建一个新的数组。可以传入参数。</span><br><span class="line">* slice() :可以基于当前数组中的一项或多个项创建一个新的数组。slice()方法可以接收一或两个参数，即要返回项的起始和结束位置。在只要一个参数的情况下，slice()方法返回从该参数指定位置开始到当前数组末尾的所有项。注意：slice()方法不会影响原始数组。</span><br><span class="line">* splice():主要用途是向数组的中部插入项。包含以下几种使用方式</span><br><span class="line">	+ 删除--可以删除任意数量的项，只需指定2个参数：要删除的第一项的位置和要删除的项数。</span><br><span class="line">	+ 插入--可以项指定位置插入任意数量的项，只需3个参数：起始位置，0和要插入的项</span><br><span class="line">	+ 替换--可以向指定位置插入任意数量的项，且同时删除任意数量的项，只需3个参数：起始位置、要删除的项数、要插入的任意数量的项。</span><br><span class="line"></span><br><span class="line">## Date类型</span><br></pre></td></tr></table></figure>
-var now=new Date();<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## Function实例</span><br><span class="line">&amp;emsp;&amp;emsp;函数实际上是对象。每个函数都是Function类型的实例，而且与其他引用类型一样具有属性和方法。由于函数是对象，因此函数名实际上也是一个指向函数对象的指针。函数通常是使用函数声明语法定义的，</span><br></pre></td></tr></table></figure>
-function sum(num1,num2){<br>  return num1+num2;<br>}</li>
-</ul>
-<p>另一种方式<br>var sum=function(num1,num2){<br>    return num1+num2;<br>}</p>
-<p>```</p>
-<p>未完待续</p>
 
       
     </div>
@@ -1025,7 +590,7 @@ function sum(num1,num2){<br>  return num1+num2;<br>}</li>
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/10/24/JavaScript/%E5%8F%98%E9%87%8F_%E4%BD%9C%E7%94%A8%E5%9F%9F_%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/10/31/Spring/Springboot%E4%B8%AD%E7%9A%84json%E6%8A%80%E6%9C%AF/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1039,7 +604,7 @@ function sum(num1,num2){<br>  return num1+num2;<br>}</li>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/10/24/JavaScript/%E5%8F%98%E9%87%8F_%E4%BD%9C%E7%94%A8%E5%9F%9F_%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">page</a>
+            <a href="/2019/10/31/Spring/Springboot%E4%B8%AD%E7%9A%84json%E6%8A%80%E6%9C%AF/" class="post-title-link" itemprop="url">Springboot中的json技术</a>
         </h1>
 
         <div class="post-meta">
@@ -1050,7 +615,7 @@ function sum(num1,num2){<br>  return num1+num2;<br>}</li>
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2019-10-24 16:14:30 / Modified: 18:33:56" itemprop="dateCreated datePublished" datetime="2019-10-24T16:14:30+08:00">2019-10-24</time>
+              <time title="Created: 2019-10-31 14:27:58 / Modified: 15:51:35" itemprop="dateCreated datePublished" datetime="2019-10-31T14:27:58+08:00">2019-10-31</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1058,8 +623,8 @@ function sum(num1,num2){<br>  return num1+num2;<br>}</li>
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
-                    <span itemprop="name">JavaScript</span>
+                  <a href="/categories/spring/" itemprop="url" rel="index">
+                    <span itemprop="name">spring</span>
                   </a>
                 </span>
             </span>
@@ -1075,24 +640,550 @@ function sum(num1,num2){<br>  return num1+num2;<br>}</li>
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="变量、作用域和内存问题"><a href="#变量、作用域和内存问题" class="headerlink" title="变量、作用域和内存问题"></a>变量、作用域和内存问题</h1><hr>
-<h2 id="基本类型和引用类型的值"><a href="#基本类型和引用类型的值" class="headerlink" title="基本类型和引用类型的值"></a>基本类型和引用类型的值</h2><p>&emsp;&emsp;ECMAScript变量可能包含两种不同数据类型的值：基本类型值和引用类型值。</p>
+          <h1 id="Springboot中的json技术"><a href="#Springboot中的json技术" class="headerlink" title="Springboot中的json技术"></a>Springboot中的json技术</h1><hr>
+<p>平日里在项目中处理JSON一般用的都是阿里巴巴的Fastjson，后来发现使用Spring Boot内置的Jackson来完成JSON的序列化和反序列化操作也挺方便。Jackson不但可以完成简单的序列化和反序列化操作，也能实现复杂的个性化的序列化和反序列化操作。</p>
+<h2 id="自定义ObjectMapper"><a href="#自定义ObjectMapper" class="headerlink" title="自定义ObjectMapper"></a>自定义ObjectMapper</h2><p>我们都知道，在Spring中使用@ResponseBody注解可以将方法返回的对象序列化成JSON，比如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@RequestMapping(&quot;getuser&quot;)</span><br><span class="line">@ResponseBody</span><br><span class="line">public User getUser() &#123;</span><br><span class="line">    User user = new User();</span><br><span class="line">    user.setUserName(&quot;mrbird&quot;);</span><br><span class="line">    user.setBirthday(new Date());</span><br><span class="line">    return user;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>User类：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public class User implements Serializable &#123;</span><br><span class="line">    private static final long serialVersionUID = 6222176558369919436L;</span><br><span class="line">    </span><br><span class="line">    private String userName;</span><br><span class="line">    private int age;</span><br><span class="line">    private String password;</span><br><span class="line">    private Date birthday;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>访问getuser页面输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&quot;userName&quot;:&quot;mrbird&quot;,&quot;age&quot;:0,&quot;password&quot;:null,&quot;birthday&quot;:1522634892365&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可看到时间默认以时间戳的形式输出，如果想要改变这个默认行为，我们可以自定义一个ObjectMapper来替代：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">import java.text.SimpleDateFormat;</span><br><span class="line"></span><br><span class="line">import org.springframework.context.annotation.Bean;</span><br><span class="line">import org.springframework.context.annotation.Configuration;</span><br><span class="line"></span><br><span class="line">import com.fasterxml.jackson.databind.ObjectMapper;</span><br><span class="line"></span><br><span class="line">@Configuration</span><br><span class="line">public class JacksonConfig &#123;</span><br><span class="line">    @Bean</span><br><span class="line">    public ObjectMapper getObjectMapper()&#123;</span><br><span class="line">        ObjectMapper mapper = new ObjectMapper();</span><br><span class="line">        mapper.setDateFormat(new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss&quot;));</span><br><span class="line">        return mapper;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面配置获取了ObjectMapper对象，并且设置了时间格式。再次访问getuser，页面输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&quot;userName&quot;:&quot;mrbird&quot;,&quot;age&quot;:0,&quot;password&quot;:null,&quot;birthday&quot;:&quot;2018-04-02 10:14:24&quot;&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="序列化"><a href="#序列化" class="headerlink" title="序列化"></a>序列化</h2><p>Jackson通过使用mapper的writeValueAsString方法将Java对象序列化为JSON格式字符串：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">@Autowired</span><br><span class="line">ObjectMapper mapper;</span><br><span class="line"></span><br><span class="line">@RequestMapping(&quot;serialization&quot;)</span><br><span class="line">@ResponseBody</span><br><span class="line">public String serialization() &#123;</span><br><span class="line">    try &#123;</span><br><span class="line">        User user = new User();</span><br><span class="line">        user.setUserName(&quot;mrbird&quot;);</span><br><span class="line">        user.setBirthday(new Date());</span><br><span class="line">        String str = mapper.writeValueAsString(user);</span><br><span class="line">        return str;</span><br><span class="line">    &#125; catch (Exception e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">    return null;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="反序列化"><a href="#反序列化" class="headerlink" title="反序列化"></a>反序列化</h2><p>使用@ResponseBody注解可以使对象序列化为JSON格式字符串，除此之外，Jackson也提供了反序列化方法。</p>
+<h3 id="树遍历"><a href="#树遍历" class="headerlink" title="树遍历"></a>树遍历</h3><p>当采用树遍历的方式时，JSON被读入到JsonNode对象中，可以像操作XML DOM那样读取JSON。比如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">@Autowired</span><br><span class="line">ObjectMapper mapper;</span><br><span class="line"></span><br><span class="line">@RequestMapping(&quot;readjsonstring&quot;)</span><br><span class="line">@ResponseBody</span><br><span class="line">public String readJsonString() &#123;</span><br><span class="line">    try &#123;</span><br><span class="line">        String json = &quot;&#123;\&quot;name\&quot;:\&quot;mrbird\&quot;,\&quot;age\&quot;:26&#125;&quot;;</span><br><span class="line">        JsonNode node = this.mapper.readTree(json);</span><br><span class="line">        String name = node.get(&quot;name&quot;).asText();</span><br><span class="line">        int age = node.get(&quot;age&quot;).asInt();</span><br><span class="line">        return name + &quot; &quot; + age;</span><br><span class="line">    &#125; catch (Exception e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">    return null;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>readTree方法可以接受一个字符串或者字节数组、文件、InputStream等， 返回JsonNode作为根节点，你可以像操作XML DOM那样操作遍历JsonNode以获取数据。</p>
+<p>解析多级JSON例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">String json = &quot;&#123;\&quot;name\&quot;:\&quot;mrbird\&quot;,\&quot;hobby\&quot;:&#123;\&quot;first\&quot;:\&quot;sleep\&quot;,\&quot;second\&quot;:\&quot;eat\&quot;&#125;&#125;&quot;;;</span><br><span class="line">JsonNode node = this.mapper.readTree(json);</span><br><span class="line">JsonNode hobby = node.get(&quot;hobby&quot;);</span><br><span class="line">String first = hobby.get(&quot;first&quot;).asText();</span><br></pre></td></tr></table></figure>
+
+<h3 id="绑定对象"><a href="#绑定对象" class="headerlink" title="绑定对象"></a>绑定对象</h3><p>我们也可以将Java对象和JSON数据进行绑定，如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">@Autowired</span><br><span class="line">ObjectMapper mapper;</span><br><span class="line"></span><br><span class="line">@RequestMapping(&quot;readjsonasobject&quot;)</span><br><span class="line">@ResponseBody</span><br><span class="line">public String readJsonAsObject() &#123;</span><br><span class="line">    try &#123;</span><br><span class="line">        String json = &quot;&#123;\&quot;name\&quot;:\&quot;mrbird\&quot;,\&quot;age\&quot;:26&#125;&quot;;</span><br><span class="line">        User user = mapper.readValue(json, User.class);</span><br><span class="line">        String name = user.getUserName();</span><br><span class="line">        int age = user.getAge();</span><br><span class="line">        return name + &quot; &quot; + age;</span><br><span class="line">    &#125; catch (Exception e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">    return null;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Jackson注解"><a href="#Jackson注解" class="headerlink" title="Jackson注解"></a>Jackson注解</h2><p>Jackson包含了一些实用的注解：</p>
+<h3 id="JsonProperty"><a href="#JsonProperty" class="headerlink" title="@JsonProperty"></a>@JsonProperty</h3><p>@JsonProperty，作用在属性上，用来为JSON Key指定一个别名。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@JsonProperty(&quot;bth&quot;)</span><br><span class="line">private Date birthday;</span><br></pre></td></tr></table></figure>
+<p>再次访问getuser页面输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&quot;userName&quot;:&quot;mrbird&quot;,&quot;age&quot;:0,&quot;password&quot;:null,&quot;bth&quot;:&quot;2018-04-02 10:38:37&quot;&#125;</span><br></pre></td></tr></table></figure>
+<p>key birthday已经被替换为了bth。</p>
+<h3 id="Jsonlgnore"><a href="#Jsonlgnore" class="headerlink" title="@Jsonlgnore"></a>@Jsonlgnore</h3><p>@Jsonlgnore，作用在属性上，用来忽略此属性。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@JsonIgnore</span><br><span class="line">private String password;</span><br></pre></td></tr></table></figure>
+
+<p>再次访问getuser页面输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&quot;userName&quot;:&quot;mrbird&quot;,&quot;age&quot;:0,&quot;bth&quot;:&quot;2018-04-02 10:40:45&quot;&#125;</span><br></pre></td></tr></table></figure>
+<p>password属性已被忽略。</p>
+<h3 id="JsonIgnoreProperties"><a href="#JsonIgnoreProperties" class="headerlink" title="@JsonIgnoreProperties"></a>@JsonIgnoreProperties</h3><p>@JsonIgnoreProperties，忽略一组属性，作用于类上，比如JsonIgnoreProperties({ “password”, “age” })。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@JsonIgnoreProperties(&#123; &quot;password&quot;, &quot;age&quot; &#125;)</span><br><span class="line">public class User implements Serializable &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>再次访问getuser页面输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&quot;userName&quot;:&quot;mrbird&quot;,&quot;bth&quot;:&quot;2018-04-02 10:45:34&quot;&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="JsonFormat"><a href="#JsonFormat" class="headerlink" title="@JsonFormat"></a>@JsonFormat</h3><p>@JsonFormat，用于日期格式化，如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@JsonFormat(pattern = &quot;yyyy-MM-dd HH:mm:ss&quot;)</span><br><span class="line">private Date birthday;</span><br></pre></td></tr></table></figure>
+
+<h3 id="JsonNaming"><a href="#JsonNaming" class="headerlink" title="@JsonNaming"></a>@JsonNaming</h3><p>@JsonNaming，用于指定一个命名策略，作用于类或者属性上。Jackson自带了多种命名策略，你可以实现自己的命名策略，比如输出的key 由Java命名方式转为下面线命名方法 —— userName转化为user-name。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@JsonNaming(PropertyNamingStrategy.LowerCaseWithUnderscoresStrategy.class)</span><br><span class="line">public class User implements Serializable &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>再次访问getuser页面输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&quot;user_name&quot;:&quot;mrbird&quot;,&quot;bth&quot;:&quot;2018-04-02 10:52:12&quot;&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="JsonSerialize"><a href="#JsonSerialize" class="headerlink" title="@JsonSerialize"></a>@JsonSerialize</h3><p>@JsonSerialize，指定一个实现类来自定义序列化。类必须实现JsonSerializer接口，代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">import java.io.IOException;</span><br><span class="line"></span><br><span class="line">import com.example.pojo.User;</span><br><span class="line">import com.fasterxml.jackson.core.JsonGenerator;</span><br><span class="line">import com.fasterxml.jackson.core.JsonProcessingException;</span><br><span class="line">import com.fasterxml.jackson.databind.JsonSerializer;</span><br><span class="line">import com.fasterxml.jackson.databind.SerializerProvider;</span><br><span class="line"></span><br><span class="line">public class UserSerializer extends JsonSerializer&lt;User&gt; &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void serialize(User user, JsonGenerator generator, SerializerProvider provider)</span><br><span class="line">            throws IOException, JsonProcessingException &#123;</span><br><span class="line">        generator.writeStartObject();</span><br><span class="line">        generator.writeStringField(&quot;user-name&quot;, user.getUserName());</span><br><span class="line">        generator.writeEndObject();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面的代码中我们仅仅序列化userName属性，且输出的key是user-name。 使用注解@JsonSerialize来指定User对象的序列化方式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@JsonSerialize(using = UserSerializer.class)</span><br><span class="line">public class User implements Serializable &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>再次访问getuser页面输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&quot;user-name&quot;:&quot;mrbird&quot;&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="JsonDeserialize"><a href="#JsonDeserialize" class="headerlink" title="@JsonDeserialize"></a>@JsonDeserialize</h3><p>@JsonDeserialize，用户自定义反序列化，同@JsonSerialize ，类需要实现JsonDeserializer接口。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">import java.io.IOException;</span><br><span class="line"></span><br><span class="line">import com.example.pojo.User;</span><br><span class="line">import com.fasterxml.jackson.core.JsonParser;</span><br><span class="line">import com.fasterxml.jackson.core.JsonProcessingException;</span><br><span class="line">import com.fasterxml.jackson.databind.DeserializationContext;</span><br><span class="line">import com.fasterxml.jackson.databind.JsonDeserializer;</span><br><span class="line">import com.fasterxml.jackson.databind.JsonNode;</span><br><span class="line"></span><br><span class="line">public class UserDeserializer extends JsonDeserializer&lt;User&gt; &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public User deserialize(JsonParser parser, DeserializationContext context)</span><br><span class="line">            throws IOException, JsonProcessingException &#123;</span><br><span class="line">        JsonNode node = parser.getCodec().readTree(parser);</span><br><span class="line">        String userName = node.get(&quot;user-name&quot;).asText();</span><br><span class="line">        User user = new User();</span><br><span class="line">        user.setUserName(userName);</span><br><span class="line">        return user;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用注解@JsonDeserialize来指定User对象的反序列化方式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@JsonDeserialize (using = UserDeserializer.class)</span><br><span class="line">public class User implements Serializable &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>测试</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">@Autowired</span><br><span class="line">ObjectMapper mapper;</span><br><span class="line"></span><br><span class="line">@RequestMapping(&quot;readjsonasobject&quot;)</span><br><span class="line">@ResponseBody</span><br><span class="line">public String readJsonAsObject() &#123;</span><br><span class="line">    try &#123;</span><br><span class="line">        String json = &quot;&#123;\&quot;user-name\&quot;:\&quot;mrbird\&quot;&#125;&quot;;</span><br><span class="line">        User user = mapper.readValue(json, User.class);</span><br><span class="line">        String name = user.getUserName();</span><br><span class="line">        return name;</span><br><span class="line">    &#125; catch (Exception e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">    return null;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>访问readjsonasobject，页面输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mrbird</span><br></pre></td></tr></table></figure>
+
+<h3 id="JsonView"><a href="#JsonView" class="headerlink" title="@JsonView"></a>@JsonView</h3><p>@JsonView，作用在类或者属性上，用来定义一个序列化组。 比如对于User对象，某些情况下只返回userName属性就行，而某些情况下需要返回全部属性。 因此User对象可以定义成如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">public class User implements Serializable &#123;</span><br><span class="line">    private static final long serialVersionUID = 6222176558369919436L;</span><br><span class="line">    </span><br><span class="line">    public interface UserNameView &#123;&#125;;</span><br><span class="line">    public interface AllUserFieldView extends UserNameView &#123;&#125;;</span><br><span class="line">    </span><br><span class="line">    @JsonView(UserNameView.class)</span><br><span class="line">    private String userName;</span><br><span class="line">    </span><br><span class="line">    @JsonView(AllUserFieldView.class)</span><br><span class="line">    private int age;</span><br><span class="line">    </span><br><span class="line">    @JsonView(AllUserFieldView.class)</span><br><span class="line">    private String password;</span><br><span class="line">    </span><br><span class="line">    @JsonView(AllUserFieldView.class)</span><br><span class="line">    private Date birthday;</span><br><span class="line">    ...	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>User定义了两个接口类，一个为userNameView，另外一个为AllUserFieldView继承了userNameView接口。这两个接口代表了两个序列化组的名称。属性userName使用了@JsonView(UserNameView.class)，而剩下属性使用了@JsonView(AllUserFieldView.class)。</p>
+<p>Spring中Controller方法允许使用@JsonView指定一个组名，被序列化的对象只有在这个组的属性才会被序列化，代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@JsonView(User.UserNameView.class)</span><br><span class="line">@RequestMapping(&quot;getuser&quot;)</span><br><span class="line">@ResponseBody</span><br><span class="line">public User getUser() &#123;</span><br><span class="line">    User user = new User();</span><br><span class="line">    user.setUserName(&quot;mrbird&quot;);</span><br><span class="line">    user.setAge(26);</span><br><span class="line">    user.setPassword(&quot;123456&quot;);</span><br><span class="line">    user.setBirthday(new Date());</span><br><span class="line">    return user;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>访问getuser页面输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&quot;userName&quot;:&quot;mrbird&quot;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果将@JsonView(User.UserNameView.class)替换为@JsonView(User.AllUserFieldView.class)，输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&quot;userName&quot;:&quot;mrbird&quot;,&quot;age&quot;:26,&quot;password&quot;:&quot;123456&quot;,&quot;birthday&quot;:&quot;2018-04-02 11:24:00&quot;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>因为接口AllUserFieldView继承了接口UserNameView所以userName也会被输出。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/10/31/Refactor/%E9%87%8D%E6%9E%84%E5%8E%9F%E5%88%99/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/10/31/Refactor/%E9%87%8D%E6%9E%84%E5%8E%9F%E5%88%99/" class="post-title-link" itemprop="url">重构原则</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2019-10-31 13:18:35 / Modified: 15:51:35" itemprop="dateCreated datePublished" datetime="2019-10-31T13:18:35+08:00">2019-10-31</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%87%8D%E6%9E%84/" itemprop="url" rel="index">
+                    <span itemprop="name">重构</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="重构原则"><a href="#重构原则" class="headerlink" title="重构原则"></a>重构原则</h1><hr>
+<h2 id="何谓重构？"><a href="#何谓重构？" class="headerlink" title="何谓重构？"></a>何谓重构？</h2><p>第一类定义名词形式的定义：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">重构(名词)：对软件内部结构的一种调整，目的是在不改变软件可观察行为的前提下，提高其可理解性，降低其修改成本。</span><br></pre></td></tr></table></figure>
+<p>一般而言，重构都是对软件的小改动。<br>重构的另一个用法是动词形式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">重构(动词)：使用一系列重构手法，在不改变软件可观察行为的前提下。调整其结构。</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/10/31/ElasticSearch/ElasticSearch%E6%90%9C%E7%B4%A2%E6%B7%B1%E5%85%A5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/10/31/ElasticSearch/ElasticSearch%E6%90%9C%E7%B4%A2%E6%B7%B1%E5%85%A5/" class="post-title-link" itemprop="url">ElasticSearch搜索深入</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-10-31 11:11:44" itemprop="dateCreated datePublished" datetime="2019-10-31T11:11:44+08:00">2019-10-31</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-11-11 10:52:42" itemprop="dateModified" datetime="2019-11-11T10:52:42+08:00">2019-11-11</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ElasticSearch/" itemprop="url" rel="index">
+                    <span itemprop="name">ElasticSearch</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="ElasticSearch搜索深入"><a href="#ElasticSearch搜索深入" class="headerlink" title="ElasticSearch搜索深入"></a>ElasticSearch搜索深入</h1><h2 id="搜索——基本的工具"><a href="#搜索——基本的工具" class="headerlink" title="搜索——基本的工具"></a>搜索——基本的工具</h2><p>到目前为止，我们已经学会了如何使用elasticsearch作为一个简单的NoSQL风格的分布式文件存储器——我们可以将一个JSON文档扔给Elasticsearch，也可以根据ID检索它们。但Elasticsearch真正强大之处在于可以从混乱的数据中找出有意义的信息——从大数据到全面的信息。</p>
+<p>这也是为什么我们使用结构化的JSON文档，而不是无结构的二进制数据。Elasticsearch不只会存储(store)文档，也会索引(indexes)文档内容来使之可以被搜索。<br>每个文档里的字段都会被索引并被查询。而且不仅如此。在简单查询时，Elasticsearch可以使用所有的索引，以非常快的速度返回结果。这让你永远不必考虑传统数据库的一些东西。<br>A search can be: 搜索(search)可以：</p>
 <ul>
-<li>基本类型：那些保存在栈内存中的简单数据段，即这种值完全保存在内存中的一个位置。</li>
-<li>引用类型：那些保存在堆内存中的对象，意思是变量中保存的实际上只是一个指针，这个指针指向内存中的另一个位置，这个位置保存对象<br>&emsp;&emsp;在将一个值赋给变量时，解析器必须确定这个值是基本类型值还是引用类型值。前面讨论的五种基本数据类型：Undefined,Null,Boolean,Number和string。这五种基本数据类型的值在内存中分别占有固定大小的空间，因此可以把它们的值保存在栈内存中。<br>&emsp;&emsp;如果赋给变量的是一个引用类型的值，则必须在堆内存中为这个值分配空间。由于这种值的大小不固定，因此不能把它们保存在栈中。但内存地址的大小是固定的，因此可以将内存地址保存在栈内存中。</li>
+<li>在类似于gender或者age这样的字段上使用结构化查询，join_date这样的字段上使用排序，就像SQL的结构化查询一样。</li>
+<li>全文检索，可以使用所有字段来匹配关键字，然后按照关联性(relevance)排序返回结果。</li>
+<li>或者结合以上两条。<br>很多搜索都是开箱即用的，为了充分挖掘Elasticsearch的潜力，你需要理解以下三个概念：</li>
 </ul>
-<h3 id="动态属性"><a href="#动态属性" class="headerlink" title="动态属性"></a>动态属性</h3><p>&emsp;&emsp;定义基本类型和引用类型值的方式类似：创建一个变量并为该变量赋值。但对不同类型变量的操作则大相径庭。对于引用类型的值，我们可以为其添加属性和方法，也可以改变和删除其属性和方法。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var person = new Object();</span><br><span class="line">person.name=&quot;Mike&quot;;</span><br><span class="line">alert(person.name);</span><br></pre></td></tr></table></figure>
-<p>如果对象不被销毁或者这个属性不被删除，则这个属性将一直存在。</p>
-<p>但是我们不能给基本类型的值添加属性，尽管这样做不会导致任何错误。</p>
-<h3 id="复制变量值"><a href="#复制变量值" class="headerlink" title="复制变量值"></a>复制变量值</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var num1=num2;</span><br></pre></td></tr></table></figure>
+<h3 id="空搜索"><a href="#空搜索" class="headerlink" title="空搜索"></a>空搜索</h3><p>最基本的搜索API表单是空搜索(empty search)，它没有指定任何的查询条件，只返回集群索引中的所有文档：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET /_search</span><br></pre></td></tr></table></figure>
+
+<p>响应内容（为了编辑简洁）类似于这样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/10/30/Mybatis/Mybatis%E4%B8%AD%E7%9A%84%E4%B8%80%E4%BA%9B%E7%BB%86%E8%8A%82/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/10/30/Mybatis/Mybatis%E4%B8%AD%E7%9A%84%E4%B8%80%E4%BA%9B%E7%BB%86%E8%8A%82/" class="post-title-link" itemprop="url">Mybatis/Mybatis中的一些细节</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-10-30 22:08:35" itemprop="dateCreated datePublished" datetime="2019-10-30T22:08:35+08:00">2019-10-30</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/10/30/ElasticSearch/%E6%95%B0%E6%8D%AE%E7%AE%80%E4%BB%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/10/30/ElasticSearch/%E6%95%B0%E6%8D%AE%E7%AE%80%E4%BB%8B/" class="post-title-link" itemprop="url">ElasticSearch中的数据</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-10-30 22:06:24" itemprop="dateCreated datePublished" datetime="2019-10-30T22:06:24+08:00">2019-10-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-10-31 15:51:35" itemprop="dateModified" datetime="2019-10-31T15:51:35+08:00">2019-10-31</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ElasticSearch/" itemprop="url" rel="index">
+                    <span itemprop="name">ElasticSearch</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="ElasticSearch中的数据简介"><a href="#ElasticSearch中的数据简介" class="headerlink" title="ElasticSearch中的数据简介"></a>ElasticSearch中的数据简介</h1><hr>
+<h2 id="数据吞吐"><a href="#数据吞吐" class="headerlink" title="数据吞吐"></a>数据吞吐</h2><p>无论程序怎么写，意图是一样的：组织数据为我们的目标所服务。但数据并不只是由随机比特和字节组成，我们在数据节点间建立关联来表示现实世界中的实体或者“某些东西”。属于同一个人的名字和Email地址会有更多的意义。<br>在现实世界中，并不是所有相同类型的实体看起来都是一样的。一个人可能有一个家庭电话号码，另一个人可能只有一个手机号码，有些人可能两者都有。一个人可能有三个Email地址，其他人可能没有。西班牙人可能有两个姓氏，但是英国人（英语系国家的人）可能只有一个。<br>面向对象编程语言流行的原因之一，是我们可以用对象来表示和处理现实生活中那些有着潜在关系和复杂结构的实体。到目前为止，这种方式还不错。<br>但当我们想存储这些实体时问题便来了。传统上，我们以行和列的形式把数据存储在关系型数据库中，相当于使用电子表格。这种固定的存储方式导致对象的灵活性不复存在了。<br>但是如何能以对象的形式存储对象呢？相对于围绕表格去为我们的程序去建模，我们可以专注于使用数据，把对象本来的灵活性找回来。<br>对象(object)是一种语言相关，记录在内存中的的数据结构。为了在网络间发送，或者存储它，我们需要一些标准的格式来表示它。JSON (JavaScript Object Notation)是一种可读的以文本来表示对象的方式。它已经成为NoSQL世界中数据交换的一种事实标准。当对象被序列化为JSON，它就成为JSON文档(JSON document)了。</p>
+<p>重点在下面这段话<br><em>Elasticsearch是一个分布式的文档(document)存储引擎。它可以实时存储并检索复杂数据结构——序列化的JSON文档。换言说，一旦文档被存储在Elasticsearch中，它就可以在集群的任一节点上被检索。<br>当然，我们不仅需要存储数据，还要快速的批量查询。虽然已经有很多NoSQL的解决方案允许我们以文档的形式存储对象，但它们依旧需要考虑如何查询这些数据，以及哪些字段需要被索引以便检索时更加快速。<br>在Elasticsearch中，每一个字段的数据都是默认被索引的。也就是说，每个字段专门有一个反向索引用于快速检索。而且，与其它数据库不同，它可以在同一个查询中利用所有的这些反向索引，以惊人的速度返回结果。<br>在这一章我们将探讨如何使用API来创建、检索、更新和删除文档。目前，我们并不关心数据如何在文档中以及如何查询他们。所有我们关心的是文档如何安全在Elasticsearch中存储，以及如何让它们返回。</em></p>
+<h2 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h2><h3 id="什么是文档？"><a href="#什么是文档？" class="headerlink" title="什么是文档？"></a>什么是文档？</h3><p>程序中大多的实体或对象能够被序列化为包含键值对的JSON对象，键(key)是字段(field)或属性(property)的名字，值(value)可以是字符串、数字、布尔类型、另一个对象、值数组或者其他特殊类型，比如表示日期的字符串或者表示地理位置的对象。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;name&quot;:         &quot;John Smith&quot;,</span><br><span class="line">    &quot;age&quot;:          42,</span><br><span class="line">    &quot;confirmed&quot;:    true,</span><br><span class="line">    &quot;join_date&quot;:    &quot;2014-06-01&quot;,</span><br><span class="line">    &quot;home&quot;: &#123;</span><br><span class="line">        &quot;lat&quot;:      51.5,</span><br><span class="line">        &quot;lon&quot;:      0.1</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;accounts&quot;: [</span><br><span class="line">        &#123;</span><br><span class="line">            &quot;type&quot;: &quot;facebook&quot;,</span><br><span class="line">            &quot;id&quot;:   &quot;johnsmith&quot;</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">            &quot;type&quot;: &quot;twitter&quot;,</span><br><span class="line">            &quot;id&quot;:   &quot;johnsmith&quot;</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>通常，我们可以认为对象(object)和文档(document)是等价相通的。不过，他们还是有所差别：对象(Object)是一个JSON结构体——类似于哈希、hashmap、字典或者关联数组；对象(Object)中还可能包含其他对象(Object)。 在Elasticsearch中，文档(document)这个术语有着特殊含义。它特指最顶层结构或者根对象(root object)序列化成的JSON数据（以唯一ID标识并存储于Elasticsearch中）。</p>
+<h3 id="文档元数据"><a href="#文档元数据" class="headerlink" title="文档元数据"></a>文档元数据</h3><p>一个文档不只有数据。它还包含了元数据(metadata)——关于文档的信息。三个必须的元数据节点是：<br>|节点|说明|<br>|—|—|<br>| <em>index</em>|文档存储的地方|<br>| <em>type</em>|文档代表的对象的类|<br>|<em>id</em>|文档的唯一标识|</p>
+<h4 id="index"><a href="#index" class="headerlink" title="index"></a><em>index</em></h4><p>索引(index)类似于关系型数据库里的“数据库”——它是我们存储和索引关联数据的地方</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">提示：</span><br><span class="line"></span><br><span class="line">事实上，我们的数据被存储和索引在分片(shards)中，索引只是一个把一个或多个分片分组在一起的逻辑空间。然而，这只是一些内部细节——我们的程序完全不用关心分片。对于我们的程序而言，文档存储在索引(index)中。剩下的细节由Elasticsearch关心既可。</span><br></pre></td></tr></table></figure>
+
+<h4 id="type"><a href="#type" class="headerlink" title="type"></a><em>type</em></h4><p>在应用中，我们使用对象表示一些“事物”，例如一个用户、一篇博客、一个评论，或者一封邮件。每个对象都属于一个类(class)，这个类定义了属性或与对象关联的数据。user类的对象可能包含姓名、性别、年龄和Email地址。</p>
+<p>在关系型数据库中，我们经常将相同类的对象存储在一个表里，因为它们有着相同的结构。同理，在Elasticsearch中，我们使用相同类型(type)的文档表示相同的“事物”，因为他们的数据结构也是相同的。<br>每个类型(type)都有自己的映射(mapping)或者结构定义，就像传统数据库表中的列一样。所有类型下的文档被存储在同一个索引下，但是类型的映射(mapping)会告诉Elasticsearch不同的文档如何被索引。 我们将会在《映射》章节探讨如何定义和管理映射，但是现在我们将依赖Elasticsearch去自动处理数据结构。<br><em>type</em> 的名字可以是大写或小写，不能包含下划线或逗号。我们将使用blog做为类型名。</p>
+<h4 id="id"><a href="#id" class="headerlink" title="id"></a><em>id</em></h4><p>id仅仅是一个字符串，它与_index和_type组合时，就可以在Elasticsearch中唯一标识一个文档。当创建一个文档，你可以自定义_id，也可以让Elasticsearch帮你自动生成。</p>
+<h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><h3 id="索引一个文档"><a href="#索引一个文档" class="headerlink" title="索引一个文档"></a>索引一个文档</h3><p>文档通过index API被索引——使数据可以被存储和搜索。但是首先我们需要决定文档所在。正如我们讨论的，文档通过其_index、_type、_id_唯一确定。们可以自己提供一个_id_，或者也使用index API 为我们生成一个。</p>
+<h3 id="使用自己的ID"><a href="#使用自己的ID" class="headerlink" title="使用自己的ID"></a>使用自己的ID</h3><p>如果你的文档有自然的标识符（例如user_account字段或者其他值表示文档），你就可以提供自己的_id，使用这种形式的index API：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">PUT /&#123;index&#125;/&#123;type&#125;/&#123;id&#125;</span><br><span class="line">&#123;</span><br><span class="line">  &quot;field&quot;: &quot;value&quot;,</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>例如我们的索引叫做“website”，类型叫做“blog”，我们选择的ID是“123”，那么这个索引请求就像这样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">PUT /website/blog/123</span><br><span class="line">&#123;</span><br><span class="line">  &quot;title&quot;: &quot;My first blog entry&quot;,</span><br><span class="line">  &quot;text&quot;:  &quot;Just trying this out...&quot;,</span><br><span class="line">  &quot;date&quot;:  &quot;2014/01/01&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Elasticsearch的响应：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">   &quot;_index&quot;:    &quot;website&quot;,</span><br><span class="line">   &quot;_type&quot;:     &quot;blog&quot;,</span><br><span class="line">   &quot;_id&quot;:       &quot;123&quot;,</span><br><span class="line">   &quot;_version&quot;:  1,</span><br><span class="line">   &quot;created&quot;:   true</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>响应指出请求的索引已经被成功创建，这个索引中包含<em>index、_type和_id元数据，以及一个新元素：_version</em><br>Elasticsearch中每个文档都有版本号，每当文档变化（包括删除）都会使_version增加。在《版本控制》章节中我们将探讨如何使用_version号确保你程序的一部分不会覆盖掉另一部分所做的更改。</p>
+<h3 id="自增id"><a href="#自增id" class="headerlink" title="自增id"></a>自增id</h3><p>如果我们的数据没有自然ID，我们可以让Elasticsearch自动为我们生成。请求结构发生了变化：PUT方法——“在这个URL中存储文档”变成了POST方法——“在这个类型下存储文档”。（译者注：原来是把文档存储到某个ID对应的空间，现在是把这个文档添加到某个_type下）。</p>
+<p>URL现在只包含_index和_type两个字段：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">POST /website/blog/</span><br><span class="line">&#123;</span><br><span class="line">  &quot;title&quot;: &quot;My second blog entry&quot;,</span><br><span class="line">  &quot;text&quot;:  &quot;Still trying this out...&quot;,</span><br><span class="line">  &quot;date&quot;:  &quot;2014/01/01&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>响应内容与刚才类似，只有_id字段变成了自动生成的值：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">   &quot;_index&quot;:    &quot;website&quot;,</span><br><span class="line">   &quot;_type&quot;:     &quot;blog&quot;,</span><br><span class="line">   &quot;_id&quot;:       &quot;wM0OSFhDQXGZAWDf0-drSA&quot;,</span><br><span class="line">   &quot;_version&quot;:  1,</span><br><span class="line">   &quot;created&quot;:   true</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>自动生成的ID有22个字符长，URL-safe, Base64-encoded string universally unique identifiers, 或者叫 UUIDs。</p>
+<h2 id="3-3-获取"><a href="#3-3-获取" class="headerlink" title="3.3 获取"></a>3.3 获取</h2><h3 id="检索文档"><a href="#检索文档" class="headerlink" title="检索文档"></a>检索文档</h3><p>想要从Elasticsearch中获取文档，我们使用同样的_index、_type、_id_，但是HTTP方法改为GET：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET /website/blog/123?pretty</span><br></pre></td></tr></table></figure>
+<p>响应包含了现在熟悉的元数据节点，增加了_source字段，它包含了在创建索引时我们发送给Elasticsearch的原始文档。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;_index&quot; :   &quot;website&quot;,</span><br><span class="line">  &quot;_type&quot; :    &quot;blog&quot;,</span><br><span class="line">  &quot;_id&quot; :      &quot;123&quot;,</span><br><span class="line">  &quot;_version&quot; : 1,</span><br><span class="line">  &quot;found&quot; :    true,</span><br><span class="line">  &quot;_source&quot; :  &#123;</span><br><span class="line">      &quot;title&quot;: &quot;My first blog entry&quot;,</span><br><span class="line">      &quot;text&quot;:  &quot;Just trying this out...&quot;,</span><br><span class="line">      &quot;date&quot;:  &quot;2014/01/01&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>提示</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pretty</span><br><span class="line">在任意的查询字符串中增加pretty参数，类似于上面的例子。会让Elasticsearch美化输出(pretty-print)JSON响应以便更加容易阅读。_source字段不会被美化，它的样子与我们输入的一致。</span><br></pre></td></tr></table></figure>
+
+<p>GET请求返回的响应内容包括{“found”: true}。这意味着文档已经找到。如果我们请求一个不存在的文档，依旧会得到一个JSON，不过found值变成了false。</p>
+<p>此外，HTTP响应状态码也会变成’404 Not Found’代替’200 OK’。我们可以在curl后加-i参数得到响应头：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -i -XGET http://localhost:9200/website/blog/124?pretty</span><br></pre></td></tr></table></figure>
+
+<p>现在响应类似于这样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 404 Not Found</span><br><span class="line">Content-Type: application/json; charset=UTF-8</span><br><span class="line">Content-Length: 83</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  &quot;_index&quot; : &quot;website&quot;,</span><br><span class="line">  &quot;_type&quot; :  &quot;blog&quot;,</span><br><span class="line">  &quot;_id&quot; :    &quot;124&quot;,</span><br><span class="line">  &quot;found&quot; :  false</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="检索文档的一部分"><a href="#检索文档的一部分" class="headerlink" title="检索文档的一部分"></a>检索文档的一部分</h3><p>通常，GET请求将返回文档的全部，存储在_source参数中。但是可能你感兴趣的字段只是title。请求个别字段可以使用_source参数。多个字段可以使用逗号分隔：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET /website/blog/123?_source=title,text</span><br></pre></td></tr></table></figure>
+<p><em>source</em> 字段现在只包含我们请求的字段，而且过滤了date字段：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;_index&quot; :   &quot;website&quot;,</span><br><span class="line">  &quot;_type&quot; :    &quot;blog&quot;,</span><br><span class="line">  &quot;_id&quot; :      &quot;123&quot;,</span><br><span class="line">  &quot;_version&quot; : 1,</span><br><span class="line">  &quot;exists&quot; :   true,</span><br><span class="line">  &quot;_source&quot; : &#123;</span><br><span class="line">      &quot;title&quot;: &quot;My first blog entry&quot; ,</span><br><span class="line">      &quot;text&quot;:  &quot;Just trying this out...&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>或者你只想得到_source字段而不要其他的元数据，你可以这样请求：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET /website/blog/123/_source</span><br></pre></td></tr></table></figure>
+<p>它仅仅返回</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">   &quot;title&quot;: &quot;My first blog entry&quot;,</span><br><span class="line">   &quot;text&quot;:  &quot;Just trying this out...&quot;,</span><br><span class="line">   &quot;date&quot;:  &quot;2014/01/01&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="存在"><a href="#存在" class="headerlink" title="存在"></a>存在</h2><h3 id="检查文档是否存在"><a href="#检查文档是否存在" class="headerlink" title="检查文档是否存在"></a>检查文档是否存在</h3><p>如果你想做的只是检查文档是否存在——你对内容完全不感兴趣——使用HEAD方法来代替GET。HEAD请求不会返回响应体，只有HTTP头：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -i -XHEAD http://localhost:9200/website/blog/123</span><br></pre></td></tr></table></figure>
+<p>Elasticsearch将会返回200 OK状态如果你的文档存在：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 200 OK</span><br><span class="line">Content-Type: text/plain; charset=UTF-8</span><br><span class="line">Content-Length: 0</span><br></pre></td></tr></table></figure>
+<p>如果不存在返回404 Not Found：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -i -XHEAD http://localhost:9200/website/blog/124</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 404 Not Found</span><br><span class="line">Content-Type: text/plain; charset=UTF-8</span><br><span class="line">Content-Length: 0</span><br></pre></td></tr></table></figure>
+<p>当然，这只表示你在查询的那一刻文档不存在，但并不表示几毫秒后依旧不存在。另一个进程在这期间可能创建新文档。</p>
+<h2 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h2><h3 id="更新整个文档"><a href="#更新整个文档" class="headerlink" title="更新整个文档"></a>更新整个文档</h3><p>文档在Elasticsearch中是不可变的——我们不能修改他们。如果需要更新已存在的文档，我们可以使用《索引文档》章节提到的index API 重建索引(reindex) 或者替换掉它。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">PUT /website/blog/123</span><br><span class="line">&#123;</span><br><span class="line">  &quot;title&quot;: &quot;My first blog entry&quot;,</span><br><span class="line">  &quot;text&quot;:  &quot;I am starting to get the hang of this...&quot;,</span><br><span class="line">  &quot;date&quot;:  &quot;2014/01/02&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在响应中，我们可以看到Elasticsearch把_version增加了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;_index&quot; :   &quot;website&quot;,</span><br><span class="line">  &quot;_type&quot; :    &quot;blog&quot;,</span><br><span class="line">  &quot;_id&quot; :      &quot;123&quot;,</span><br><span class="line">  &quot;_version&quot; : 2,</span><br><span class="line">  &quot;created&quot;:   false &lt;1&gt;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <ul>
-<li>基本类型(num2是基本类型)：拷贝一份副本</li>
-<li>引用类型(num2是引用类型)：指向同一个地址，一个改变时另一个也会变。</li>
+<li>&lt;1&gt; created标识为false因为同索引、同类型下已经存在同ID的文档。<br>在内部，Elasticsearch已经标记旧文档为删除并添加了一个完整的新文档。旧版本文档不会立即消失，但你也不能去访问它。Elasticsearch会在你继续索引更多数据时清理被删除的文档。</li>
 </ul>
-<h3 id="传递参数"><a href="#传递参数" class="headerlink" title="传递参数"></a>传递参数</h3><p>&emsp;&emsp;ECMAScript中所有的参数都是按值传递的。在向参数传递引用类型的值时，会把这个值在内存中的地址复制给一个局部变量，因此这个局部变量的变化会反应在函数的外部。</p>
-<h3 id="检测类型"><a href="#检测类型" class="headerlink" title="检测类型"></a>检测类型</h3><p>&emsp;&emsp;有时候我们想知道某个对象具体是什么类型的对象，为此，ECMAScript提供了instanceof操作符</p>
-<h2 id="执行环境及作用域"><a href="#执行环境及作用域" class="headerlink" title="执行环境及作用域"></a>执行环境及作用域</h2><p>&emsp;&emsp;执行环境(execution context)是JavaScript中最为重要的一个概念。执行环境定义了变量或函数有权访问的其他数据，决定了它们各自的行为。每个执行环境都有一个与之关联的变量对象。环境中定义的所有变量和函数都保存在这个对象中。<br>额，和Java中的变量的环境差不多。</p>
+<p>在本章的后面，我们将会在《局部更新》中探讨update API。这个API 似乎 允许你修改文档的局部，但事实上Elasticsearch遵循与之前所说完全相同的过程，这个过程如下：</p>
+<ul>
+<li>从旧文档中检索JSON</li>
+<li>修改它</li>
+<li>删除旧文档</li>
+<li>索引新文档<br>唯一的不同是update API完成这一过程只需要一个客户端请求既可，不再需要get和index请求了。</li>
+</ul>
+<h2 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h2><h3 id="创建一个新文档"><a href="#创建一个新文档" class="headerlink" title="创建一个新文档"></a>创建一个新文档</h3><p>当索引一个文档，我们如何确定是完全创建了一个新的还是覆盖了一个已经存在的呢？</p>
+<p>请记住<em>index、_type、_id</em> 三者唯一确定一个文档。所以要想保证文档是新加入的，最简单的方式是使用POST方法让Elasticsearch自动生成唯一_id：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">POST /website/blog/</span><br><span class="line">&#123; ... &#125;</span><br></pre></td></tr></table></figure>
+<p>然而，如果想使用自定义的<em>id，我们必须告诉Elasticsearch应该在_index、_type、_id</em> 三者都不同时才接受请求。为了做到这点有两种方法，它们其实做的是同一件事情。你可以选择适合自己的方式：</p>
+<p>第一种方法使用op_type查询参数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">PUT /website/blog/123?op_type=create</span><br><span class="line">&#123; ... &#125;</span><br></pre></td></tr></table></figure>
+<p>或者第二种方法是在URL后加/<em>create</em> 做为端点：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">PUT /website/blog/123/_create</span><br><span class="line">&#123; ... &#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果请求成功的创建了一个新文档，Elasticsearch将返回正常的元数据且响应状态码是201 Created。<br>另一方面，如果包含相同的<em>index、_type和_id</em> 的文档已经存在，Elasticsearch将返回409 Conflict响应状态码，错误信息类似如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;error&quot; : &quot;DocumentAlreadyExistsException[[website][4] [blog][123]:</span><br><span class="line">             document already exists]&quot;,</span><br><span class="line">  &quot;status&quot; : 409</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h2><h3 id="删除文档"><a href="#删除文档" class="headerlink" title="删除文档"></a>删除文档</h3><p>删除文档的语法模式与之前基本一致，只不过要使用DELETE方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DELETE /website/blog/123</span><br></pre></td></tr></table></figure>
+<p>如果文档被找到，Elasticsearch将返回200 OK状态码和以下响应体。注意_version数字已经增加了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;found&quot; :    true,</span><br><span class="line">  &quot;_index&quot; :   &quot;website&quot;,</span><br><span class="line">  &quot;_type&quot; :    &quot;blog&quot;,</span><br><span class="line">  &quot;_id&quot; :      &quot;123&quot;,</span><br><span class="line">  &quot;_version&quot; : 3</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果文档未找到，我们将得到一个404 Not Found状态码，响应体是这样的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;found&quot; :    false,</span><br><span class="line">  &quot;_index&quot; :   &quot;website&quot;,</span><br><span class="line">  &quot;_type&quot; :    &quot;blog&quot;,</span><br><span class="line">  &quot;_id&quot; :      &quot;123&quot;,</span><br><span class="line">  &quot;_version&quot; : 4</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>尽管文档不存在——“found”的值是false——<em>version</em> 依旧增加了。这是内部记录的一部分，它确保在多节点间不同操作可以有正确的顺序。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">正如在《更新文档》一章中提到的，删除一个文档也不会立即从磁盘上移除，它只是被标记成已删除。Elasticsearch将会在你之后添加更多索引的时候才会在后台进行删除内容的清理。</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/10/30/ElasticSearch/ElasticSearch%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/10/30/ElasticSearch/ElasticSearch%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/" class="post-title-link" itemprop="url">ElasticSearch分布式集群</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2019-10-30 22:00:25 / Modified: 22:03:03" itemprop="dateCreated datePublished" datetime="2019-10-30T22:00:25+08:00">2019-10-30</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ElasticSearch/" itemprop="url" rel="index">
+                    <span itemprop="name">ElasticSearch</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="ElasticSearch分布式集群简介"><a href="#ElasticSearch分布式集群简介" class="headerlink" title="ElasticSearch分布式集群简介"></a>ElasticSearch分布式集群简介</h1><hr>
+<h2 id="集群内部工作方式"><a href="#集群内部工作方式" class="headerlink" title="集群内部工作方式"></a>集群内部工作方式</h2><p>Elasticsearch用于构建高可用和可扩展的系统。扩展的方式可以是购买更好的服务器(纵向扩展(vertical scale or scaling up))或者购买更多的服务器（横向扩展(horizontal scale or scaling out)）。</p>
+<p>Elasticsearch虽然能从更强大的硬件中获得更好的性能，但是纵向扩展有它的局限性。真正的扩展应该是横向的，它通过增加节点来均摊负载和增加可靠性。<br>对于大多数数据库而言，横向扩展意味着你的程序将做非常大的改动才能利用这些新添加的设备。对比来说，Elasticsearch天生就是分布式的：它知道如何管理节点来提供高扩展和高可用。这意味着你的程序不需要关心这些。<br>在这章我们将探索如何创建你的集群(cluster)、节点(node)和分片(shards)，使其按照你的需求进行扩展，并保证在硬件故障时数据依旧安全。</p>
 
       
     </div>
@@ -1112,7 +1203,7 @@ function sum(num1,num2){<br>  return num1+num2;<br>}</li>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/9/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/11/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/page/9/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/11/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1158,18 +1249,18 @@ function sum(num1,num2){<br>  return num1+num2;<br>}</li>
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">110</span>
+          <span class="site-state-item-count">148</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
-        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-count">37</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-count">51</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
