@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.2">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.2">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.2">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.2" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.2">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.4.2',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="Kafka核心概念 1、消息消息是Kafka中最基本的数据单元。消息由一串字节构成，其中主要由key和value构成，key和value也都是byte数组。key的主要作用是根据一定的策略，将次消息路由到指定的分区中，这样就可以保证包含同一key的消息全部写入同一分区中，key可以是null。消息的真正有效负载是value部分的数据。为了提高网络和存储的利用率，生产者会批量发送消息到Kafka，并">
+<meta name="keywords" content="Kafka">
+<meta property="og:type" content="article">
+<meta property="og:title" content="kafka核心概念">
+<meta property="og:url" content="https:&#x2F;&#x2F;lancersaber.github.io&#x2F;2019&#x2F;11&#x2F;17&#x2F;kafka&#x2F;Kafka%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5&#x2F;index.html">
+<meta property="og:site_name" content="Lancersaber">
+<meta property="og:description" content="Kafka核心概念 1、消息消息是Kafka中最基本的数据单元。消息由一串字节构成，其中主要由key和value构成，key和value也都是byte数组。key的主要作用是根据一定的策略，将次消息路由到指定的分区中，这样就可以保证包含同一key的消息全部写入同一分区中，key可以是null。消息的真正有效负载是value部分的数据。为了提高网络和存储的利用率，生产者会批量发送消息到Kafka，并">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;11&#x2F;17&#x2F;75lfDVbnQOTWq26.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;11&#x2F;17&#x2F;imfGPgnpz1NlwOL.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;11&#x2F;17&#x2F;ZRqDsXc7YhokajF.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;11&#x2F;17&#x2F;GVoNhRkyfvSs3Z9.png">
+<meta property="og:updated_time" content="2019-11-24T06:43:03.932Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;11&#x2F;17&#x2F;75lfDVbnQOTWq26.png">
+
+<link rel="canonical" href="https://lancersaber.github.io/2019/11/17/kafka/Kafka%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>kafka核心概念 | Lancersaber</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lancersaber</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/17/kafka/Kafka%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          kafka核心概念
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-11-17 12:31:18" itemprop="dateCreated datePublished" datetime="2019-11-17T12:31:18+08:00">2019-11-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-11-24 14:43:03" itemprop="dateModified" datetime="2019-11-24T14:43:03+08:00">2019-11-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Kafka/" itemprop="url" rel="index">
+                    <span itemprop="name">Kafka</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Kafka核心概念"><a href="#Kafka核心概念" class="headerlink" title="Kafka核心概念"></a>Kafka核心概念</h1><hr>
+<h2 id="1、消息"><a href="#1、消息" class="headerlink" title="1、消息"></a>1、消息</h2><p>消息是Kafka中最基本的数据单元。消息由一串字节构成，其中主要由key和value构成，key和value也都是byte数组。key的主要作用是根据一定的策略，将次消息路由到指定的分区中，这样就可以保证包含同一key的消息全部写入同一分区中，key可以是null。消息的真正有效负载是value部分的数据。为了提高网络和存储的利用率，生产者会批量发送消息到Kafka，并在发送之前对消息进行压缩。</p>
+<h2 id="2、Topic-amp-分区-amp-Log"><a href="#2、Topic-amp-分区-amp-Log" class="headerlink" title="2、Topic&amp;分区&amp;Log"></a>2、Topic&amp;分区&amp;Log</h2><p>&emsp;&emsp;Topic是用于存储消息的逻辑概念，可以看作一个消息集合。每个Topic可以有多个生产者向其中推送(push)消息，也可以有任意多个消费者消费其中的消息，入下图<br><img src="https://i.loli.net/2019/11/17/75lfDVbnQOTWq26.png" alt="2019011811321224.png"></p>
+<p>&emsp;&emsp;每个Topic可以划分成多个分区(每个Topic都至少有一个分区)，同一Topic下的不同分区包含的消息是不同的。每个消息在被添加到分区时，都会被分配一个offset，它是消息在此分区中的唯一编号，Kafka通过offset保证消息在分区内的顺序，offset的顺序性不跨分区，即Kafka只保证在同一个分区内的消息是有序的；同一Topic的多个分区内的消息，Kafka并不保证其顺序性<br><img src="https://i.loli.net/2019/11/17/imfGPgnpz1NlwOL.png" alt="2019011811343340.png"></p>
+<p>&emsp;&emsp;同一Topic的不同分区会分配到不同的Broke。分区是Kafka水平扩展性的基础，我们可以通过增加服务器并在其上分配Partition的方式来增加Kafka的并行处理能力。<br>&emsp;&emsp;分区在逻辑上对应着一个Log，当生产者将消息写入分区时，实际上是写入到了分区对应的Log中。Log是一个逻辑概念，可以对应到磁盘上的一个文件夹。Log由多个Segment组成，每个Segment对应一个日志文件和索引文件。在面对海量数据时，为避免出现超大文件，每个日志文件的大小是有限制的，当超出限制后则会创建新的Segment，继续对外提供服务。这里需要注意，因为Kafka采用顺序I/O，所以只向最新的Segment追加数据。</p>
+<h3 id="保留策略-Rentention-Policy-amp-日志压缩-Log-Compaction"><a href="#保留策略-Rentention-Policy-amp-日志压缩-Log-Compaction" class="headerlink" title="保留策略(Rentention Policy) &amp; 日志压缩(Log Compaction)"></a>保留策略(Rentention Policy) &amp; 日志压缩(Log Compaction)</h3><p>&emsp;&emsp;无论消费者是否已经消费了消息，Kafka都会一直保存这些消息，但不会像数据库那样长期保存。为了避免磁盘被占满，Kafka会配置相应的“保留策略(rentention policy”),以长期周期性地删除陈旧的消息。</p>
+<p>&emsp;&emsp;两种保留策略</p>
+<ul>
+<li>1.根据消息保留的时间，当消息在Kafka中保存的时间超过了指定的时间，就可以被删除</li>
+<li>2.根据Topic存储的数据大小，当Topic所占的日志文件大小大于一个阈值，则可以开始删除最旧的消息。<br>Kafka会启动一个后台线程，定期检查是否存在可以删除的消息。保留策略的配置非常灵活，可以有全局的配置，也可以针对Topic进行配置来覆盖全局配置。</li>
+</ul>
+<p>&emsp;&emsp;除此之外，Kafka还会进行“日志压缩”(Log Compaction).在很多场景中，消息的key与value的值之间的对应关系是不断变化的，就像数据库中的数据会不断修改一样，消费者只关心key对应的最新的value值。此时，可以开启Kafka的日志压缩功能，Kafka会在后台启动一个线程，定期将相同key的消息进行合并吗，只保留最新的value值。如下图：<br><img src="https://i.loli.net/2019/11/17/ZRqDsXc7YhokajF.png" alt="2019-11-17 16_35_26-未命名表单.drawio - draw.io.png"></p>
+<h2 id="3、Broker"><a href="#3、Broker" class="headerlink" title="3、Broker"></a>3、Broker</h2><p>一个单独的Kafka Server就是一个Broker。Broker的主要工作就是接收生产者发过来的消息，分配offset，之后保存到磁盘中，同时，接收消费者、其他Broker的请求，根据请求类型进行相应处理并返回响应。在一般的生产环境中，一个Broker独占一台物理服务器。</p>
+<h2 id="副本"><a href="#副本" class="headerlink" title="副本"></a>副本</h2><p>Kafka对消息进行了冗余备份，每个Partition可以有多个副本，每个副本中包含的消息是一样的。每个分区至少有一个副本，当分区中只有一个副本时，就只有Leader副本，没有Follower副本</p>
+<p>每个分区的副本集合中，都会选举出一个副本作为Leader副本，Kafka在不同的场景下会采用不同的选举策略。所有的读写请求都由选举出的Leader副本处理，其他都作为Follower副本，Follower副本仅仅是从Leader副本处把数据拉取到本地之后，同步更新到自己的Log中。下图展示了出来。<br><img src="https://i.loli.net/2019/11/17/GVoNhRkyfvSs3Z9.png" alt="2019-11-17 16_52_08-未命名表单.drawio - draw.io.png"></p>
+<p>一般情况下，同一分区的多个分区会被分配到不同的Broker上，这样，当Leader所在的Broker宕机后，可以重新选举新的Leader，继续对外提供服务。</p>
+<h2 id="ISR集合"><a href="#ISR集合" class="headerlink" title="ISR集合"></a>ISR集合</h2><h2 id="HW-amp-LEO"><a href="#HW-amp-LEO" class="headerlink" title="HW&amp;LEO"></a>HW&amp;LEO</h2><h2 id="Cluster-amp-Controller"><a href="#Cluster-amp-Controller" class="headerlink" title="Cluster&amp;Controller"></a>Cluster&amp;Controller</h2><h2 id="生产者"><a href="#生产者" class="headerlink" title="生产者"></a>生产者</h2><h2 id="消费者"><a href="#消费者" class="headerlink" title="消费者"></a>消费者</h2><h2 id="Consumer-Group"><a href="#Consumer-Group" class="headerlink" title="Consumer Group"></a>Consumer Group</h2><p>在Kafka中，多个Consumer可以组成一个Consumer Group，一个Consumer只能属于一个Consumer Group。Consumer Group保证其订阅的Topic的每个分区只能被分配给此Consumer Group中的一个消费者处理。如果不同的Consumer Group订阅了同一个Topic，Consumer Group彼此之间不会干扰。 </p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Kafka/" rel="tag"># Kafka</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2019/11/17/kafka/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%A8%A1%E5%BC%8F/" rel="next" title="消息队列的两种模式">
+                  <i class="fa fa-chevron-left"></i> 消息队列的两种模式
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+                <a href="/2019/11/17/zookeeper/%E5%88%9D%E5%A7%8Bzookeeper/" rel="prev" title="初始zookeeper">
+                  初始zookeeper <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Kafka核心概念"><span class="nav-number">1.</span> <span class="nav-text">Kafka核心概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、消息"><span class="nav-number">1.1.</span> <span class="nav-text">1、消息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、Topic-amp-分区-amp-Log"><span class="nav-number">1.2.</span> <span class="nav-text">2、Topic&amp;分区&amp;Log</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#保留策略-Rentention-Policy-amp-日志压缩-Log-Compaction"><span class="nav-number">1.2.1.</span> <span class="nav-text">保留策略(Rentention Policy) &amp; 日志压缩(Log Compaction)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3、Broker"><span class="nav-number">1.3.</span> <span class="nav-text">3、Broker</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#副本"><span class="nav-number">1.4.</span> <span class="nav-text">副本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ISR集合"><span class="nav-number">1.5.</span> <span class="nav-text">ISR集合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HW-amp-LEO"><span class="nav-number">1.6.</span> <span class="nav-text">HW&amp;LEO</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Cluster-amp-Controller"><span class="nav-number">1.7.</span> <span class="nav-text">Cluster&amp;Controller</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#生产者"><span class="nav-number">1.8.</span> <span class="nav-text">生产者</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#消费者"><span class="nav-number">1.9.</span> <span class="nav-text">消费者</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Consumer-Group"><span class="nav-number">1.10.</span> <span class="nav-text">Consumer Group</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="site-author-image" itemprop="image" alt="Lancersaber"
+    src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Lancersaber</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">185</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">56</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lancersaber</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.4.2
+  </div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.2"></script><script src="/js/motion.js?v=7.4.2"></script>
+<script src="/js/schemes/muse.js?v=7.4.2"></script>
+<script src="/js/next-boot.js?v=7.4.2"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

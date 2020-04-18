@@ -172,7 +172,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/09/Spring2/Spring%20Boot%20%E2%80%93%E5%A6%82%E4%BD%95%E7%9F%A5%E9%81%93%E4%BD%BF%E7%94%A8%E5%93%AA%E4%B8%AA%E8%BF%9E%E6%8E%A5%E6%B1%A0/">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/18/Redis/Redis%20%E6%8C%81%E4%B9%85%E5%8C%96/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -186,7 +186,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/11/09/Spring2/Spring%20Boot%20%E2%80%93%E5%A6%82%E4%BD%95%E7%9F%A5%E9%81%93%E4%BD%BF%E7%94%A8%E5%93%AA%E4%B8%AA%E8%BF%9E%E6%8E%A5%E6%B1%A0/" class="post-title-link" itemprop="url">Spring Boot –如何知道使用哪个连接池</a>
+            <a href="/2019/11/18/Redis/Redis%20%E6%8C%81%E4%B9%85%E5%8C%96/" class="post-title-link" itemprop="url">Redis 持久化</a>
         </h1>
 
         <div class="post-meta">
@@ -197,7 +197,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2019-11-09 18:09:00 / Modified: 18:11:42" itemprop="dateCreated datePublished" datetime="2019-11-09T18:09:00+08:00">2019-11-09</time>
+              <time title="Created: 2019-11-18 15:56:01 / Modified: 21:51:14" itemprop="dateCreated datePublished" datetime="2019-11-18T15:56:01+08:00">2019-11-18</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -205,8 +205,8 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/spring/" itemprop="url" rel="index">
-                    <span itemprop="name">spring</span>
+                  <a href="/categories/redis/" itemprop="url" rel="index">
+                    <span itemprop="name">redis</span>
                   </a>
                 </span>
             </span>
@@ -222,178 +222,71 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Spring-Boot-–如何知道使用哪个连接池？"><a href="#Spring-Boot-–如何知道使用哪个连接池？" class="headerlink" title="Spring Boot –如何知道使用哪个连接池？"></a>Spring Boot –如何知道使用哪个连接池？</h1><hr>
-<p>在Spring Boot中，@Autowired一个javax.sql.DataSource，您将知道当前正在运行的应用程序正在使用哪个数据库连接池。</p>
-<h2 id="1-测试默认"><a href="#1-测试默认" class="headerlink" title="1.测试默认"></a>1.测试默认</h2><p>Spring Boot示例打印一个 javax.sql.DataSource</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">package com.mkyong;</span><br><span class="line"></span><br><span class="line">import org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line">import org.springframework.boot.CommandLineRunner;</span><br><span class="line">import org.springframework.boot.SpringApplication;</span><br><span class="line">import org.springframework.boot.autoconfigure.SpringBootApplication;</span><br><span class="line"></span><br><span class="line">import javax.sql.DataSource;</span><br><span class="line"></span><br><span class="line">@SpringBootApplication</span><br><span class="line">public class SpringBootConsoleApplication implements CommandLineRunner &#123;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    DataSource dataSource;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) throws Exception &#123;</span><br><span class="line">        SpringApplication.run(SpringBootConsoleApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void run(String... args) throws Exception &#123;</span><br><span class="line"></span><br><span class="line">        System.out.println(&quot;DATASOURCE = &quot; + dataSource);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>输出，Spring Boot默认使用Tomcat池。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DATASOURCE = org.apache.tomcat.jdbc.pool.DataSource@7c541c15...</span><br></pre></td></tr></table></figure>
-
-<h2 id="2-测试HikariCP"><a href="#2-测试HikariCP" class="headerlink" title="2.测试HikariCP"></a>2.测试HikariCP</h2><p>要切换到另一个连接池，例如HikariCP，只需排除默认值，并将HikariCP包含在类路径中即可。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">         &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">         &lt;artifactId&gt;spring-boot-starter-jdbc&lt;/artifactId&gt;</span><br><span class="line">         &lt;exclusions&gt;</span><br><span class="line">             &lt;exclusion&gt;</span><br><span class="line">                 &lt;groupId&gt;org.apache.tomcat&lt;/groupId&gt;</span><br><span class="line">                 &lt;artifactId&gt;tomcat-jdbc&lt;/artifactId&gt;</span><br><span class="line">             &lt;/exclusion&gt;</span><br><span class="line">         &lt;/exclusions&gt;</span><br><span class="line">     &lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">     &lt;!-- connection pools --&gt;</span><br><span class="line">     &lt;dependency&gt;</span><br><span class="line">         &lt;groupId&gt;com.zaxxer&lt;/groupId&gt;</span><br><span class="line">         &lt;artifactId&gt;HikariCP&lt;/artifactId&gt;</span><br><span class="line">         &lt;version&gt;2.6.0&lt;/version&gt;</span><br><span class="line">     &lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
-
-<p>输出值</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DATASOURCE = HikariDataSource (HikariPool-1)</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/09/Java%E5%9F%BA%E7%A1%80/%E5%BC%95%E5%85%A5%E6%B5%81/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lancersaber">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lancersaber">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/09/Java%E5%9F%BA%E7%A1%80/%E5%BC%95%E5%85%A5%E6%B5%81/" class="post-title-link" itemprop="url">引入流</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2019-11-09 15:56:20 / Modified: 18:04:25" itemprop="dateCreated datePublished" datetime="2019-11-09T15:56:20+08:00">2019-11-09</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="引入流"><a href="#引入流" class="headerlink" title="引入流"></a>引入流</h1><hr>
-<h2 id="流是什么"><a href="#流是什么" class="headerlink" title="流是什么?"></a>流是什么?</h2><p>流是Java Api的新成员，它允许你以声明性方式处理数据集合。简短的定义就是”从支持数据处理操作的源生成的元素序列”。</p>
-<p>流的两大特点</p>
+          <h1 id="Redis-持久化"><a href="#Redis-持久化" class="headerlink" title="Redis 持久化"></a>Redis 持久化</h1><hr>
+<p>Redis 提供了不同级别的持久化方式。一种方法叫快照(snapshotting)也称为RDB,另一种方法叫<em>只追加文件(append-only file),也称为AOF</em>。</p>
 <ul>
-<li>流水线：很多流操作本身会返回一个流，这样多个操作就可以链接起来，形成一个大的流水线。</li>
-<li>内部迭代：与使用迭代器显式迭代的集合不同，流的迭代操作是在背后进行的。</li>
+<li>RDB持久化方式能够在指定的时间间隔能对你的数据进行快照存储.</li>
+<li>AOF持久化方式记录每次对服务器写的操作,当服务器重启的时候会重新执行这些命令来恢复原始的数据,AOF命令以redis协议追加保存每次写的操作到文件末尾.Redis还能对AOF文件进行后台重写,使得AOF文件的体积不至于过大.</li>
+<li>如果你只希望你的数据在服务器运行的时候存在,你也可以不使用任何持久化方式.</li>
+<li>你也可以同时开启两种持久化方式, 在这种情况下, 当redis重启的时候会优先载入AOF文件来恢复原始的数据,因为在通常情况下AOF文件保存的数据集要比RDB文件保存的数据集要完整.</li>
+<li>最重要的事情是了解RDB和AOF持久化方式的不同,让我们以RDB持久化方式开始:</li>
 </ul>
-<p>一个流只能访问一次，想要访问多次只能重新获取流进行访问。</p>
-<h2 id="流操作"><a href="#流操作" class="headerlink" title="流操作"></a>流操作</h2><h3 id="中间操作"><a href="#中间操作" class="headerlink" title="中间操作"></a>中间操作</h3><p>诸如filter或sorted等中间操作会返回另一个流。这让多个操作可以连接起来形成一个查询。重要的是，除非流水线上触发一个终端操作，否则中间操作不会执行任何处理—它们很懒。这是因为中间操作一般都可以合并起来，在终端操作时一次性全部处理。</p>
-<p>中间操作</p>
-<table>
-<thead>
-<tr>
-<th>操作</th>
-<th>类型</th>
-<th>返回类型</th>
-<th>操作参数</th>
-<th>函数描述符</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>filter</td>
-<td>中间</td>
-<td>Stream<T></td>
-<td>Predicate<T></td>
-<td>T-&gt;boolean</td>
-</tr>
-<tr>
-<td>map</td>
-<td>中间</td>
-<td>Stream<T></td>
-<td>Function&lt;T,R&gt;</td>
-<td>T-&gt;R</td>
-</tr>
-<tr>
-<td>limit</td>
-<td>中间</td>
-<td>Stream<T></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>sorted</td>
-<td>中间</td>
-<td>Stream<T></td>
-<td>Comparator<T></td>
-<td>(T,T)-&gt;int</td>
-</tr>
-<tr>
-<td>distinct</td>
-<td>中间</td>
-<td>Stream<T></td>
-<td></td>
-<td></td>
-</tr>
-</tbody></table>
-<p>终端操作</p>
-<table>
-<thead>
-<tr>
-<th>操作</th>
-<th>类型</th>
-<th>目的</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>foreach</td>
-<td>终端</td>
-<td>消费流中的每个元素并对其应用Lamada。这一操作一般返回void</td>
-</tr>
-<tr>
-<td>count</td>
-<td>终端</td>
-<td>返回流中的个数，返回long</td>
-</tr>
-<tr>
-<td>collect</td>
-<td>终端</td>
-<td>把流归约成一个集合，比如List,Map,甚至是Integer</td>
-</tr>
-</tbody></table>
-<h2 id="使用流"><a href="#使用流" class="headerlink" title="使用流"></a>使用流</h2><h3 id="筛选和切片"><a href="#筛选和切片" class="headerlink" title="筛选和切片"></a>筛选和切片</h3><h3 id="筛选各异的元素"><a href="#筛选各异的元素" class="headerlink" title="筛选各异的元素"></a>筛选各异的元素</h3><p>使用distinct方法，它会去除重复的元素</p>
-<h3 id="截短流"><a href="#截短流" class="headerlink" title="截短流"></a>截短流</h3><p>使用limit(n)方法，会返回一个不超过给定长度的流。</p>
-<h3 id="跳过元素"><a href="#跳过元素" class="headerlink" title="跳过元素"></a>跳过元素</h3><p>使用skip(n)方法，该方法会扔掉前n个元素的流。如果流中的元素不足n个，则返回一个空流</p>
-<h2 id="映射"><a href="#映射" class="headerlink" title="映射"></a>映射</h2><h3 id="对流中的每一个元素应用函数"><a href="#对流中的每一个元素应用函数" class="headerlink" title="对流中的每一个元素应用函数"></a>对流中的每一个元素应用函数</h3><p>流支持map方法，它会接受一个函数作为参数。这个函数会被应用到每个元素上，并将其映射成一个新的元素。<em>流中的类型会发生改变</em>。</p>
-<h2 id="查找和匹配"><a href="#查找和匹配" class="headerlink" title="查找和匹配"></a>查找和匹配</h2><p>另一个常见的数据处理套路是看看数据集中的某些元素是否匹配一个给定的属性。</p>
-<h3 id="检查谓词是否至少匹配一个元素"><a href="#检查谓词是否至少匹配一个元素" class="headerlink" title="检查谓词是否至少匹配一个元素"></a>检查谓词是否至少匹配一个元素</h3><p>anyMatch方法可以回答”流中是否有一个元素能匹配给定的谓词”。</p>
-<h3 id="检查谓词是否匹配所有元素"><a href="#检查谓词是否匹配所有元素" class="headerlink" title="检查谓词是否匹配所有元素"></a>检查谓词是否匹配所有元素</h3><p>allMatch方法</p>
-<p>对立方法：noneMatch()</p>
-<h3 id="查找元素"><a href="#查找元素" class="headerlink" title="查找元素"></a>查找元素</h3><p>findAny方法将返回当前流中的任意元素。</p>
-<h3 id="查找第一个元素"><a href="#查找第一个元素" class="headerlink" title="查找第一个元素"></a>查找第一个元素</h3><p>findFirst()</p>
+<h2 id="RDB的优点"><a href="#RDB的优点" class="headerlink" title="RDB的优点"></a>RDB的优点</h2><ul>
+<li>RDB是一个非常紧凑的文件,它保存了某个时间点得数据集,非常适用于数据集的备份,比如你可以在每个小时报保存一下过去24小时内的数据,同时每天保存过去30天的数据,这样即使出了问题你也可以根据需求恢复到不同版本的数据集.</li>
+<li>RDB是一个紧凑的单一文件,很方便传送到另一个远端数据中心或者亚马逊的S3（可能加密），非常适用于灾难恢复.</li>
+<li>RDB在保存RDB文件时父进程唯一需要做的就是fork出一个子进程,接下来的工作全部由子进程来做，父进程不需要再做其他IO操作，所以RDB持久化方式可以最大化redis的性能.</li>
+<li>与AOF相比,在恢复大的数据集的时候，RDB方式会更快一些.</li>
+</ul>
+<h2 id="RDB的缺点"><a href="#RDB的缺点" class="headerlink" title="RDB的缺点"></a>RDB的缺点</h2><ul>
+<li>如果你希望在redis意外停止工作（例如电源中断）的情况下丢失的数据最少的话，那么RDB不适合你.虽然你可以配置不同的save时间点(例如每隔5分钟并且对数据集有100个写的操作),是Redis要完整的保存整个数据集是一个比较繁重的工作,你通常会每隔5分钟或者更久做一次完整的保存,万一在Redis意外宕机,你可能会丢失几分钟的数据.</li>
+<li>RDB 需要经常fork子进程来保存数据集到硬盘上,当数据集比较大的时候,fork的过程是非常耗时的,可能会导致Redis在一些毫秒级内不能响应客户端的请求.如果数据集巨大并且CPU性能不是很好的情况下,这种情况会持续1秒,AOF也需要fork,但是你可以调节重写日志文件的频率来提高数据集的耐久度.</li>
+</ul>
+<h2 id="AOF的优点"><a href="#AOF的优点" class="headerlink" title="AOF的优点"></a>AOF的优点</h2><ul>
+<li>使用AOF 会让你的Redis更加耐久: 你可以使用不同的fsync策略：无fsync,每秒fsync,每次写的时候fsync.使用默认的每秒fsync策略,Redis的性能依然很好(fsync是由后台线程进行处理的,主线程会尽力处理客户端请求),一旦出现故障，你最多丢失1秒的数据.</li>
+<li>AOF文件是一个只进行追加的日志文件,所以不需要写入seek,即使由于某些原因(磁盘空间已满，写的过程中宕机等等)未执行完整的写入命令,你也也可使用redis-check-aof工具修复这些问题.</li>
+<li>Redis 可以在 AOF 文件体积变得过大时，自动地在后台对 AOF 进行重写： 重写后的新 AOF 文件包含了恢复当前数据集所需的最小命令集合。 整个重写操作是绝对安全的，因为 Redis 在创建新 AOF 文件的过程中，会继续将命令追加到现有的 AOF 文件里面，即使重写过程中发生停机，现有的 AOF 文件也不会丢失。 而一旦新 AOF 文件创建完毕，Redis 就会从旧 AOF 文件切换到新 AOF 文件，并开始对新 AOF 文件进行追加操作。</li>
+<li>AOF 文件有序地保存了对数据库执行的所有写入操作， 这些写入操作以 Redis 协议的格式保存， 因此 AOF 文件的内容非常容易被人读懂， 对文件进行分析（parse）也很轻松。 导出（export） AOF 文件也非常简单： 举个例子， 如果你不小心执行了 FLUSHALL 命令， 但只要 AOF 文件未被重写， 那么只要停止服务器， 移除 AOF 文件末尾的 FLUSHALL 命令， 并重启 Redis ， 就可以将数据集恢复到 FLUSHALL 执行之前的状态。</li>
+</ul>
+<h2 id="AOF的缺点"><a href="#AOF的缺点" class="headerlink" title="AOF的缺点"></a>AOF的缺点</h2><ul>
+<li>对于相同的数据集来说，AOF 文件的体积通常要大于 RDB 文件的体积。</li>
+<li>根据所使用的 fsync 策略，AOF 的速度可能会慢于 RDB 。 在一般情况下， 每秒 fsync 的性能依然非常高， 而关闭 fsync 可以让 AOF 的速度和 RDB 一样快， 即使在高负荷之下也是如此。 不过在处理巨大的写入载入时，RDB 可以提供更有保证的最大延迟时间（latency）。</li>
+</ul>
+<h2 id="如何选择使用哪种持久化方式？"><a href="#如何选择使用哪种持久化方式？" class="headerlink" title="如何选择使用哪种持久化方式？"></a>如何选择使用哪种持久化方式？</h2><p>一般来说， 如果想达到足以媲美 PostgreSQL 的数据安全性， 你应该同时使用两种持久化功能。</p>
+<p>如果你非常关心你的数据， 但仍然可以承受数分钟以内的数据丢失， 那么你可以只使用 RDB 持久化。</p>
+<p>有很多用户都只使用 AOF 持久化， 但我们并不推荐这种方式： 因为定时生成 RDB 快照（snapshot）非常便于进行数据库备份， 并且 RDB 恢复数据集的速度也要比 AOF 恢复的速度要快， 除此之外， 使用 RDB 还可以避免之前提到的 AOF 程序的 bug 。</p>
+<h2 id="快照"><a href="#快照" class="headerlink" title="快照"></a>快照</h2><p>在默认情况下， Redis 将数据库快照保存在名字为 dump.rdb的二进制文件中。你可以对 Redis 进行设置， 让它在“ N 秒内数据集至少有 M 个改动”这一条件被满足时， 自动保存一次数据集。你也可以通过调用 SAVE或者 BGSAVE ， 手动让 Redis 进行数据集保存操作。</p>
+<p>比如说， 以下设置会让 Redis 在满足“ 60 秒内有至少有 1000 个键被改动”这一条件时， 自动保存一次数据集:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">save 60 1000</span><br></pre></td></tr></table></figure>
+
+<p>这种持久化方式被称为快照 snapshotting.</p>
+<h3 id="工作方式"><a href="#工作方式" class="headerlink" title="工作方式"></a>工作方式</h3><p>当 Redis 需要保存 dump.rdb 文件时， 服务器执行以下操作:</p>
+<ul>
+<li>Redis 调用forks. 同时拥有父进程和子进程。</li>
+<li>子进程将数据集写入到一个临时 RDB 文件中。</li>
+<li>当子进程完成对新 RDB 文件的写入时，Redis 用新 RDB 文件替换原来的 RDB 文件，并删除旧的 RDB 文件。</li>
+</ul>
+<p>这种工作方式使得 Redis 可以从写时复制（copy-on-write）机制中获益。</p>
+<h3 id="只追加操作的文件（Append-only-file，AOF）"><a href="#只追加操作的文件（Append-only-file，AOF）" class="headerlink" title="只追加操作的文件（Append-only file，AOF）"></a>只追加操作的文件（Append-only file，AOF）</h3><p>快照功能并不是非常耐久（dura ble）： 如果 Redis 因为某些原因而造成故障停机， 那么服务器将丢失最近写入、且仍未保存到快照中的那些数据。 从 1.1 版本开始， Redis 增加了一种完全耐久的持久化方式： AOF 持久化。</p>
+<p>你可以在配置文件中打开AOF方式:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">appendonly yes</span><br></pre></td></tr></table></figure>
+
+<p>从现在开始， 每当 Redis 执行一个改变数据集的命令时（比如 SET）， 这个命令就会被追加到 AOF 文件的末尾。这样的话， 当 Redis 重新启时， 程序就可以通过重新执行 AOF 文件中的命令来达到重建数据集的目的。</p>
+<h3 id="日志重写"><a href="#日志重写" class="headerlink" title="日志重写"></a>日志重写</h3><p>因为 AOF 的运作方式是不断地将命令追加到文件的末尾， 所以随着写入命令的不断增加， AOF 文件的体积也会变得越来越大。举个例子， 如果你对一个计数器调用了 100 次 INCR ， 那么仅仅是为了保存这个计数器的当前值， AOF 文件就需要使用 100 条记录（entry）。然而在实际上， 只使用一条 SET 命令已经足以保存计数器的当前值了， 其余 99 条记录实际上都是多余的。</p>
+<p>为了处理这种情况， Redis 支持一种有趣的特性： 可以在不打断服务客户端的情况下， 对 AOF 文件进行重建（rebuild）。执行 BGREWRITEAOF 命令， Redis 将生成一个新的 AOF 文件， 这个文件包含重建当前数据集所需的最少命令。Redis 2.2 需要自己手动执行 BGREWRITEAOF 命令； Redis 2.4 则可以自动触发 AOF 重写， 具体信息请查看 2.4 的示例配置文件。</p>
+<h3 id="AOF有多耐用"><a href="#AOF有多耐用" class="headerlink" title="AOF有多耐用?"></a>AOF有多耐用?</h3><p>你可以配置 Redis 多久才将数据 fsync 到磁盘一次。有三种方式：</p>
+<ul>
+<li>每次有新命令追加到 AOF 文件时就执行一次 fsync ：非常慢，也非常安全</li>
+<li>每秒 fsync 一次：足够快（和使用 RDB 持久化差不多），并且在故障时只会丢失 1 秒钟的数据。</li>
+<li>从不 fsync ：将数据交给操作系统来处理。更快，也更不安全的选择。</li>
+<li>推荐（并且也是默认）的措施为每秒 fsync 一次， 这种 fsync 策略可以兼顾速度和安全性。</li>
+</ul>
+<h3 id="如果AOF文件损坏了怎么办？"><a href="#如果AOF文件损坏了怎么办？" class="headerlink" title="如果AOF文件损坏了怎么办？"></a>如果AOF文件损坏了怎么办？</h3><p>服务器可能在程序正在对 AOF 文件进行写入时停机， 如果停机造成了 AOF 文件出错（corrupt）， 那么 Redis 在重启时会拒绝载入这个 AOF 文件， 从而确保数据的一致性不会被破坏。当发生这种情况时， 可以用以下方法来修复出错的 AOF 文件：</p>
+<ul>
+<li>为现有的 AOF 文件创建一个备份。</li>
+<li>使用 Redis 附带的 redis-check-aof 程序，对原来的 AOF 文件进行修复:<br>$ redis-check-aof –fix</li>
+<li>（可选）使用 diff -u 对比修复后的 AOF 文件和原始 AOF 文件的备份，查看两个文件之间的不同之处。</li>
+<li>重启 Redis 服务器，等待服务器载入修复后的 AOF 文件，并进行数据恢复。</li>
+</ul>
 
       
     </div>
@@ -413,7 +306,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/09/Java%E5%9F%BA%E7%A1%80/Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/18/Redis/Redis%E7%9A%84%E5%93%A8%E5%85%B5%E7%B3%BB%E7%BB%9F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -427,7 +320,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/11/09/Java%E5%9F%BA%E7%A1%80/Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/" class="post-title-link" itemprop="url">lambda表达式</a>
+            <a href="/2019/11/18/Redis/Redis%E7%9A%84%E5%93%A8%E5%85%B5%E7%B3%BB%E7%BB%9F/" class="post-title-link" itemprop="url">Redis的哨兵系统</a>
         </h1>
 
         <div class="post-meta">
@@ -436,18 +329,24 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2019-11-09 14:57:20 / Modified: 15:57:41" itemprop="dateCreated datePublished" datetime="2019-11-09T14:57:20+08:00">2019-11-09</time>
+              <time title="Created: 2019-11-18 15:49:59" itemprop="dateCreated datePublished" datetime="2019-11-18T15:49:59+08:00">2019-11-18</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-11-20 18:54:30" itemprop="dateModified" datetime="2019-11-20T18:54:30+08:00">2019-11-20</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
+                  <a href="/categories/redis/" itemprop="url" rel="index">
+                    <span itemprop="name">redis</span>
                   </a>
                 </span>
             </span>
@@ -463,556 +362,83 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="lambda表达式"><a href="#lambda表达式" class="headerlink" title="lambda表达式"></a>lambda表达式</h1><p>可以把lambda表达式理解为简洁地表示可传递的匿名函数的一种方式：它没有名称，但它有参数列表、函数主体、返回类型，可能还有一个可以抛出的异常列表。这个定义够大的，让我们慢慢道来。</p>
+          <h1 id="Redis的哨兵系统"><a href="#Redis的哨兵系统" class="headerlink" title="Redis的哨兵系统"></a>Redis的哨兵系统</h1><hr>
+<h2 id="哨兵的介绍"><a href="#哨兵的介绍" class="headerlink" title="哨兵的介绍"></a>哨兵的介绍</h2><p>Redis 的 Sentinel 系统用于管理多个 Redis 服务器（instance）， 该系统执行以下三个任务：</p>
 <ul>
-<li>匿名—我们说匿名，是因为它不像普通的方法那样有一个明确的名称</li>
-<li>函数—我们说它是函数，是因为Lambda函数不像方法那样属于某个特定的类，但和方法一样，Lambda有参数列表、函数主体、返回类型</li>
-<li>传递—Lambda表达式可以作为参数传递给方法或存储在变量中</li>
-<li>简洁—无需像匿名类那样写很多模板代码</li>
+<li><strong>监控（Monitoring）</strong>： Sentinel 会不断地检查你的主服务器和从服务器是否运作正常。</li>
+<li><strong>提醒（Notification）</strong>： 当被监控的某个 Redis 服务器出现问题时， Sentinel 可以通过 API 向管理员或者其他应用程序发送通知。</li>
+<li><strong>自动故障迁移（Automatic failover）</strong>： 当一个主服务器不能正常工作时， Sentinel 会开始一次自动故障迁移操作， 它会将失效主服务器的其中一个从服务器升级为新的主服务器， 并让失效主服务器的其他从服务器改为复制新的主服务器； 当客户端试图连接失效的主服务器时， 集群也会向客户端返回新主服务器的地址， 使得集群可以使用新主服务器代替失效服务器。</li>
 </ul>
-<p>Lambda表达式有三个部分</p>
+<p>Redis Sentinel 是一个分布式系统， 你可以在一个架构中运行多个 Sentinel 进程（progress）， 这些进程使用流言协议（gossip protocols)来接收关于主服务器是否下线的信息， 并使用投票协议（agreement protocols）来决定是否执行自动故障迁移， 以及选择哪个从服务器作为新的主服务器。</p>
+<p>虽然 Redis Sentinel 释出为一个单独的可执行文件 redis-sentinel ， 但实际上它只是一个运行在特殊模式下的 Redis 服务器， 你可以在启动一个普通 Redis 服务器时通过给定 –sentinel 选项来启动 Redis Sentinel 。</p>
+<p>哨兵用于实现 redis 集群的高可用，本身也是分布式的，作为一个哨兵集群去运行，互相协同工作。</p>
 <ul>
-<li>参数列表</li>
-<li>箭头</li>
-<li>Lambda主体<br>几个有效的Lambda表达式<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">(String s)-&gt;s.length</span><br><span class="line">(Apple a) -&gt; a.getWeight()&gt;150</span><br><span class="line">(int x,int y) -&gt;&#123;</span><br><span class="line">	System.out.println(x+y);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">() -&gt; 42</span><br></pre></td></tr></table></figure>
+<li>故障转移时，判断一个 master node 是否宕机了，需要大部分的哨兵都同意才行，涉及到了分布式选举的问题。</li>
+<li>即使部分哨兵节点挂掉了，哨兵集群还是能正常工作的，因为如果一个作为高可用机制重要组成部分的故障转移系统本身是单点的，那就很坑爹了。</li>
+</ul>
+<h2 id="哨兵的核心知识"><a href="#哨兵的核心知识" class="headerlink" title="哨兵的核心知识"></a>哨兵的核心知识</h2><ul>
+<li>哨兵至少需要 3 个实例，来保证自己的健壮性。</li>
+<li>哨兵 + redis 主从的部署架构，是不保证数据零丢失的，只能保证 redis 集群的高可用性。</li>
+<li>对于哨兵 + redis 主从这种复杂的部署架构，尽量在测试环境和生产环境，都进行充足的测试和演练。</li>
+</ul>
+<p>哨兵集群必须部署 2 个以上节点，如果哨兵集群仅仅部署了 2 个哨兵实例，quorum = 1。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">+----+         +----+</span><br><span class="line">| M1 |---------| R1 |</span><br><span class="line">| S1 |         | S2 |</span><br><span class="line">+----+         +----+</span><br></pre></td></tr></table></figure>
 
+<p>配置 quorum=1，如果 master 宕机， s1 和 s2 中只要有 1 个哨兵认为 master 宕机了，就可以进行切换，同时 s1 和 s2 会选举出一个哨兵来执行故障转移。但是同时这个时候，需要 majority，也就是大多数哨兵都是运行的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">2 个哨兵，majority=2</span><br><span class="line">3 个哨兵，majority=2</span><br><span class="line">4 个哨兵，majority=2</span><br><span class="line">5 个哨兵，majority=3</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>如果此时仅仅是 M1 进程宕机了，哨兵 s1 正常运行，那么故障转移是 OK 的。但是如果是整个 M1 和 S1 运行的机器宕机了，那么哨兵只有 1 个，此时就没有 majority 来允许执行故障转移，虽然另外一台机器上还有一个 R1，但是故障转移不会执行。</p>
+<p>经典的 3 节点哨兵集群是这样的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">       +----+</span><br><span class="line">       | M1 |</span><br><span class="line">       | S1 |</span><br><span class="line">       +----+</span><br><span class="line">          |</span><br><span class="line">+----+    |    +----+</span><br><span class="line">| R2 |----+----| R3 |</span><br><span class="line">| S2 |         | S3 |</span><br><span class="line">+----+         +----+</span><br></pre></td></tr></table></figure>
+
+<p>配置 quorum=2，如果 M1 所在机器宕机了，那么三个哨兵还剩下 2 个，S2 和 S3 可以一致认为 master 宕机了，然后选举出一个来执行故障转移，同时 3 个哨兵的 majority 是 2，所以还剩下的 2 个哨兵运行着，就可以允许执行故障转移。</p>
+<h2 id="redis-哨兵主备切换的数据丢失问题"><a href="#redis-哨兵主备切换的数据丢失问题" class="headerlink" title="redis 哨兵主备切换的数据丢失问题"></a>redis 哨兵主备切换的数据丢失问题</h2><h3 id="两种情况和导致数据丢失"><a href="#两种情况和导致数据丢失" class="headerlink" title="两种情况和导致数据丢失"></a>两种情况和导致数据丢失</h3><p>主备切换的过程，可能会导致数据丢失：</p>
+<ul>
+<li>异步复制导致的数据丢失</li>
+</ul>
+<p>因为 master-&gt;slave 的复制是异步的，所以可能有部分数据还没复制到 slave，master 就宕机了，此时这部分数据就丢失了。</p>
+<p><img src="https://i.loli.net/2019/11/20/jI89HFsNR6diBe5.png" alt="async-replication-data-lose-case.png"></p>
+<ul>
+<li>脑裂导致的数据丢失<br>脑裂，也就是说，某个 master 所在机器突然脱离了正常的网络，跟其他 slave 机器不能连接，但是实际上 master 还运行着。此时哨兵可能就会认为 master 宕机了，然后开启选举，将其他 slave 切换成了 master。这个时候，集群里就会有两个 master ，也就是所谓的脑裂。</li>
+</ul>
+<p>此时虽然某个 slave 被切换成了 master，但是可能 client 还没来得及切换到新的 master，还继续向旧 master 写数据。因此旧 master 再次恢复的时候，会被作为一个 slave 挂到新的 master 上去，自己的数据会清空，重新从新的 master 复制数据。而新的 master 并没有后来 client 写入的数据，因此，这部分数据也就丢失了。</p>
+<p><img src="https://i.loli.net/2019/11/20/ZcutjMXv7qRrKeg.png" alt="redis-cluster-split-brain.png"></p>
+<h3 id="数据丢失问题的解决方案"><a href="#数据丢失问题的解决方案" class="headerlink" title="数据丢失问题的解决方案"></a>数据丢失问题的解决方案</h3><p>进行如下配置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">min-slaves-to-write 1</span><br><span class="line">min-slaves-max-lag 10</span><br></pre></td></tr></table></figure>
+
+<p>表示，要求至少有 1 个 slave，数据复制和同步的延迟不能超过 10 秒。<br>如果说一旦所有的 slave，数据复制和同步的延迟都超过了 10 秒钟，那么这个时候，master 就不会再接收任何请求了。</p>
+<ul>
+<li><p>减少异步复制数据的丢失<br>有了 min-slaves-max-lag 这个配置，就可以确保说，一旦 slave 复制数据和 ack 延时太长，就认为可能 master 宕机后损失的数据太多了，那么就拒绝写请求，这样可以把 master 宕机时由于部分数据未同步到 slave 导致的数据丢失降低的可控范围内。</p>
+</li>
+<li><p>减少脑裂的数据丢失<br>如果一个 master 出现了脑裂，跟其他 slave 丢了连接，那么上面两个配置可以确保说，如果不能继续给指定数量的 slave 发送数据，而且 slave 超过 10 秒没有给自己 ack 消息，那么就直接拒绝客户端的写请求。因此在脑裂场景下，最多就丢失 10 秒的数据。</p>
 </li>
 </ul>
-<h2 id="在哪里使用Lambda表达式"><a href="#在哪里使用Lambda表达式" class="headerlink" title="在哪里使用Lambda表达式"></a>在哪里使用Lambda表达式</h2><p>可以在函数式接口上使用Lambda表达式。什么是函数式接口？简单来说，就是只含有一个方法的接口。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/09/Java%E5%9F%BA%E7%A1%80/Java%E4%B8%AD%E7%9A%84%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lancersaber">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lancersaber">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/09/Java%E5%9F%BA%E7%A1%80/Java%E4%B8%AD%E7%9A%84%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" class="post-title-link" itemprop="url">Java中的正则表达式</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2019-11-09 13:34:14 / Modified: 15:57:41" itemprop="dateCreated datePublished" datetime="2019-11-09T13:34:14+08:00">2019-11-09</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Java中的正则表达式"><a href="#Java中的正则表达式" class="headerlink" title="Java中的正则表达式"></a>Java中的正则表达式</h1><hr>
-<p>正则表达式(regular expression)描述了一种字符串匹配的模式（pattern），可以用来检查一个串是否含有某种子串、将匹配的子串替换或者从某个串中取出符合某个条件的子串等。</p>
-<p>例如：</p>
-<ul>
-<li>runoo+b，可以匹配 runoob、runooob、runoooooob 等，+ 号代表前面的字符必须至少出现一次（1次或多次）</li>
-<li>runoo*b，可以匹配 runob、runoob、runoooooob 等，* 号代表字符可以不出现，也可以出现一次或者多次（0次、或1次、或多次）。</li>
-<li>colou?r 可以匹配 color 或者 colour，? 问号代表前面的字符最多只可以出现一次（0次、或1次）。</li>
+<h3 id="sdown-和-odown-转换机制"><a href="#sdown-和-odown-转换机制" class="headerlink" title="sdown 和 odown 转换机制"></a>sdown 和 odown 转换机制</h3><ul>
+<li>sdown 是主观宕机，就一个哨兵如果自己觉得一个 master 宕机了，那么就是主观宕机</li>
+<li>odown 是客观宕机，如果 quorum 数量的哨兵都觉得一个 master 宕机了，那么就是客观宕机</li>
 </ul>
-<h2 id="正则表达式中的元字符"><a href="#正则表达式中的元字符" class="headerlink" title="正则表达式中的元字符"></a>正则表达式中的元字符</h2><p>见(<a href="https://www.runoob.com/regexp/regexp-metachar.html" target="_blank" rel="noopener">https://www.runoob.com/regexp/regexp-metachar.html</a>)</p>
-<p>String类还自带了一个非常有用的正则表达式工具—split()方法，其功能是“将字符串从正则表达式匹配的地方切开”。</p>
-<h2 id="Pattern和Matcher类"><a href="#Pattern和Matcher类" class="headerlink" title="Pattern和Matcher类"></a>Pattern和Matcher类</h2><p>&emsp;&emsp;一般来说，比起功能有限的String类，我们更愿意构造功能更强大的正则表达式对象。只需导入 java.util.regax包，然后使用static Pattern.compile()方法来编译你的正则表达式即可。它会根据你的String类型的正则表达式生成一个Pattern对象。接下来，把你想要检索的字符串传入Pattern对象的matcher()方法。matcher()方法会生成一个Matcher对象，它有很多功能可用。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Pattern compile = Pattern.compile(&quot;\\d+&quot;);</span><br><span class="line">        Matcher matcher = compile.matcher(&quot;345&quot;);</span><br><span class="line">        System.out.println(matcher.find());</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/09/Java%E5%9F%BA%E7%A1%80/%E5%86%85%E9%83%A8%E7%B1%BB/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lancersaber">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lancersaber">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/09/Java%E5%9F%BA%E7%A1%80/%E5%86%85%E9%83%A8%E7%B1%BB/" class="post-title-link" itemprop="url">内部类</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2019-11-09 13:19:57 / Modified: 15:57:41" itemprop="dateCreated datePublished" datetime="2019-11-09T13:19:57+08:00">2019-11-09</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="内部类"><a href="#内部类" class="headerlink" title="内部类"></a>内部类</h1><hr>
-<p>可以将一个类的定义放在另一个类的定义内部，这就是内部类。<br>内部类是一种非常有用的特性，因为它允许你把一些逻辑相关的类组织在一起，并控制位于内部的类的可视化。然而必须了解，内部类与组合是完全不同的概念。</p>
-<h2 id="创建内部类"><a href="#创建内部类" class="headerlink" title="创建内部类"></a>创建内部类</h2><p>创建内部类的方式就如同你想的一样–把类的定义置于外围类的里面。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">package innerclasses;//: innerclasses/Parcel1.java</span><br><span class="line">// Creating inner classes.</span><br><span class="line"></span><br><span class="line">public class Parcel1 &#123;</span><br><span class="line">  class Contents &#123;</span><br><span class="line">    private int i = 11;</span><br><span class="line">    public int value() &#123; return i; &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  class Destination &#123;</span><br><span class="line">    private String label;</span><br><span class="line">    Destination(String whereTo) &#123;</span><br><span class="line">      label = whereTo;</span><br><span class="line">    &#125;</span><br><span class="line">    String readLabel() &#123; return label; &#125;</span><br><span class="line">  &#125;	</span><br><span class="line">  // Using inner classes looks just like</span><br><span class="line">  // using any other class, within Parcel1:</span><br><span class="line">  public void ship(String dest) &#123;</span><br><span class="line">    Contents c = new Contents();</span><br><span class="line">    Destination d = new Destination(dest);</span><br><span class="line">    System.out.println(d.readLabel());</span><br><span class="line">  &#125;</span><br><span class="line">  public static void main(String[] args) &#123;</span><br><span class="line">    Parcel1 p = new Parcel1();</span><br><span class="line">    p.ship(&quot;Tasmania&quot;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125; /* Output:</span><br><span class="line">Tasmania</span><br><span class="line">*///:~</span><br></pre></td></tr></table></figure>
-
-<p>如果想从外部类的非静态方法之外的任意位置创建某个内部类的对象，那么必须具体指明这个对象的类型：OuterClassName.InnerClassName</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/09/Spring2/Spring%20REST%20Error%20Handling%20Example/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lancersaber">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lancersaber">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/09/Spring2/Spring%20REST%20Error%20Handling%20Example/" class="post-title-link" itemprop="url">Spring REST Error Handling Example</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-11-09 12:10:21" itemprop="dateCreated datePublished" datetime="2019-11-09T12:10:21+08:00">2019-11-09</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-10 14:22:33" itemprop="dateModified" datetime="2019-11-10T14:22:33+08:00">2019-11-10</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/spring/" itemprop="url" rel="index">
-                    <span itemprop="name">spring</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Spring-REST-Error-Handling-Example"><a href="#Spring-REST-Error-Handling-Example" class="headerlink" title="Spring REST Error Handling Example"></a>Spring REST Error Handling Example</h1><hr>
-<p>In this article, we will show you error handling in Spring Boot REST application.</p>
-<h2 id="1-error"><a href="#1-error" class="headerlink" title="1. /error"></a>1. /error</h2><p>1.1 By default, Spring Boot provides a BasicErrorController controller for /error mapping that handles all errors, and getErrorAttributes to produce a JSON response with details of the error, the HTTP status, and the exception message.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;	</span><br><span class="line">	&quot;timestamp&quot;:&quot;2019-02-27T04:03:52.398+0000&quot;,</span><br><span class="line">	&quot;status&quot;:500,</span><br><span class="line">	&quot;error&quot;:&quot;Internal Server Error&quot;,</span><br><span class="line">	&quot;message&quot;:&quot;...&quot;,</span><br><span class="line">	&quot;path&quot;:&quot;/path&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>BasicErrorController.java</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">package org.springframework.boot.autoconfigure.web.servlet.error;</span><br><span class="line"></span><br><span class="line">//...</span><br><span class="line"></span><br><span class="line">@Controller</span><br><span class="line">@RequestMapping(&quot;$&#123;server.error.path:$&#123;error.path:/error&#125;&#125;&quot;)</span><br><span class="line">public class BasicErrorController extends AbstractErrorController &#123;</span><br><span class="line"></span><br><span class="line">	//...</span><br><span class="line"></span><br><span class="line">	@RequestMapping</span><br><span class="line">	public ResponseEntity&lt;Map&lt;String, Object&gt;&gt; error(HttpServletRequest request) &#123;</span><br><span class="line">		Map&lt;String, Object&gt; body = getErrorAttributes(request,</span><br><span class="line">				isIncludeStackTrace(request, MediaType.ALL));</span><br><span class="line">		HttpStatus status = getStatus(request);</span><br><span class="line">		return new ResponseEntity&lt;&gt;(body, status);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-<p>In the IDE, puts a breakpoint in this method, you will understand how Spring Boot generates the default JSON error response.</p>
-<h2 id="2-Custom-Exception"><a href="#2-Custom-Exception" class="headerlink" title="2. Custom Exception"></a>2. Custom Exception</h2><p>In Spring Boot, we can use @ControllerAdvice to handle custom exceptions.</p>
-<p>2.1 A custom exception.</p>
-<p>BookNotFoundException.java</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">package com.mkyong.error;</span><br><span class="line"></span><br><span class="line">public class BookNotFoundException extends RuntimeException &#123;</span><br><span class="line"></span><br><span class="line">    public BookNotFoundException(Long id) &#123;</span><br><span class="line">        super(&quot;Book id not found : &quot; + id);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>A controller, if a book id is not found, throws the above BookNotFoundException</p>
-<p>BookController.java</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">package com.mkyong;</span><br><span class="line"></span><br><span class="line">//...</span><br><span class="line"></span><br><span class="line">@RestController</span><br><span class="line">public class BookController &#123;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    private BookRepository repository;</span><br><span class="line">	</span><br><span class="line">    // Find</span><br><span class="line">    @GetMapping(&quot;/books/&#123;id&#125;&quot;)</span><br><span class="line">    Book findOne(@PathVariable Long id) &#123;</span><br><span class="line">        return repository.findById(id)</span><br><span class="line">                .orElseThrow(() -&gt; new BookNotFoundException(id));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">	//...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>By default, Spring Boot generates the following JSON error response, http 500 error.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">curl localhost:8080/books/5</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">	&quot;timestamp&quot;:&quot;2019-02-27T04:03:52.398+0000&quot;,</span><br><span class="line">	&quot;status&quot;:500,</span><br><span class="line">	&quot;error&quot;:&quot;Internal Server Error&quot;,</span><br><span class="line">	&quot;message&quot;:&quot;Book id not found : 5&quot;,</span><br><span class="line">	&quot;path&quot;:&quot;/books/5&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> 2.2 If a book id not found, it should return a 404 error instead of 500, we can override the status code like this :</p>
-<p> CustomGlobalExceptionHandler.java</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">package com.mkyong.error;</span><br><span class="line"></span><br><span class="line">import org.springframework.http.HttpHeaders;</span><br><span class="line">import org.springframework.http.HttpStatus;</span><br><span class="line">import org.springframework.http.ResponseEntity;</span><br><span class="line">import org.springframework.web.bind.MethodArgumentNotValidException;</span><br><span class="line">import org.springframework.web.bind.annotation.ControllerAdvice;</span><br><span class="line">import org.springframework.web.bind.annotation.ExceptionHandler;</span><br><span class="line">import org.springframework.web.bind.annotation.RestControllerAdvice;</span><br><span class="line">import org.springframework.web.context.request.WebRequest;</span><br><span class="line">import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;</span><br><span class="line"></span><br><span class="line">import javax.servlet.http.HttpServletResponse;</span><br><span class="line">import javax.validation.ConstraintViolationException;</span><br><span class="line">import java.io.IOException;</span><br><span class="line">import java.util.Date;</span><br><span class="line">import java.util.LinkedHashMap;</span><br><span class="line">import java.util.List;</span><br><span class="line">import java.util.Map;</span><br><span class="line">import java.util.stream.Collectors;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@ControllerAdvice</span><br><span class="line">public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler &#123;</span><br><span class="line"></span><br><span class="line">    // Let Spring BasicErrorController handle the exception, we just override the status code</span><br><span class="line">    @ExceptionHandler(BookNotFoundException.class)</span><br><span class="line">    public void springHandleNotFound(HttpServletResponse response) throws IOException &#123;</span><br><span class="line">        response.sendError(HttpStatus.NOT_FOUND.value());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">	//...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>2.3 It returns a 404 now.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">curl localhost:8080/books/5</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">	&quot;timestamp&quot;:&quot;2019-02-27T04:21:17.740+0000&quot;,</span><br><span class="line">	&quot;status&quot;:404,</span><br><span class="line">	&quot;error&quot;:&quot;Not Found&quot;,</span><br><span class="line">	&quot;message&quot;:&quot;Book id not found : 5&quot;,</span><br><span class="line">	&quot;path&quot;:&quot;/books/5&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<p>2.4 Furthermore, we can customize the entire JSON error response :</p>
-<p>CustomErrorResponse.java</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">package com.mkyong.error;</span><br><span class="line"></span><br><span class="line">import com.fasterxml.jackson.annotation.JsonFormat;</span><br><span class="line"></span><br><span class="line">import java.time.LocalDateTime;</span><br><span class="line"></span><br><span class="line">public class CustomErrorResponse &#123;</span><br><span class="line"></span><br><span class="line">    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = &quot;yyyy-MM-dd hh:mm:ss&quot;)</span><br><span class="line">    private LocalDateTime timestamp;</span><br><span class="line">    private int status;</span><br><span class="line">    private String error;</span><br><span class="line"></span><br><span class="line">    //...getters setters</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">package com.example.demo.exceptionHandler;</span><br><span class="line"></span><br><span class="line">import com.example.demo.errorresponse.CustomErrorResponse;</span><br><span class="line">import com.example.demo.exception.BookNotFoundException;</span><br><span class="line">import org.springframework.http.HttpStatus;</span><br><span class="line">import org.springframework.http.ResponseEntity;</span><br><span class="line">import org.springframework.web.bind.annotation.ControllerAdvice;</span><br><span class="line">import org.springframework.web.bind.annotation.ExceptionHandler;</span><br><span class="line">import org.springframework.web.context.request.WebRequest;</span><br><span class="line">import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;</span><br><span class="line"></span><br><span class="line">import javax.servlet.http.HttpServletResponse;</span><br><span class="line">import java.io.IOException;</span><br><span class="line">import java.time.LocalDateTime;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * @author: Lancer</span><br><span class="line"> * @date: 2019/11/9</span><br><span class="line"> */</span><br><span class="line">@ControllerAdvice</span><br><span class="line">public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler &#123;</span><br><span class="line"></span><br><span class="line">    // Let Spring BasicErrorController handle the exception, we just override the status code</span><br><span class="line">//    @ExceptionHandler(BookNotFoundException.class)</span><br><span class="line">    public void springHandleNotFound(HttpServletResponse response) throws IOException &#123;</span><br><span class="line">        System.out.println(&quot;hello&quot;);</span><br><span class="line">        response.sendError(HttpStatus.NOT_FOUND.value());</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //...</span><br><span class="line">    @ExceptionHandler(BookNotFoundException.class)</span><br><span class="line">    public ResponseEntity&lt;CustomErrorResponse&gt; customHandleNotFound(Exception ex, WebRequest request) &#123;</span><br><span class="line"></span><br><span class="line">        CustomErrorResponse errors = new CustomErrorResponse();</span><br><span class="line"></span><br><span class="line">        errors.setTimestamp(LocalDateTime.now());</span><br><span class="line">        errors.setError(ex.getMessage());</span><br><span class="line">        errors.setStatus(HttpStatus.NOT_FOUND.value());</span><br><span class="line"></span><br><span class="line">        return new ResponseEntity&lt;&gt;(errors, HttpStatus.NOT_FOUND);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>terminal</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">curl localhost:8080/books/5</span><br><span class="line">&#123;</span><br><span class="line">	&quot;timestamp&quot;:&quot;2019-02-27 12:40:45&quot;,</span><br><span class="line">	&quot;status&quot;:404,</span><br><span class="line">	&quot;error&quot;:&quot;Book id not found : 5&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="3-JSR-303-Validation-error"><a href="#3-JSR-303-Validation-error" class="headerlink" title="3. JSR 303 Validation error"></a>3. JSR 303 Validation error</h2><p>3.1 For Spring @valid validation errors, it will throw handleMethodArgumentNotValid</p>
-<p>CustomGlobalExceptionHandler.java</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">package com.mkyong.error;</span><br><span class="line"></span><br><span class="line">import org.springframework.http.HttpHeaders;</span><br><span class="line">import org.springframework.http.HttpStatus;</span><br><span class="line">import org.springframework.http.ResponseEntity;</span><br><span class="line">import org.springframework.web.bind.MethodArgumentNotValidException;</span><br><span class="line">import org.springframework.web.bind.annotation.ControllerAdvice;</span><br><span class="line">import org.springframework.web.bind.annotation.ExceptionHandler;</span><br><span class="line">import org.springframework.web.context.request.WebRequest;</span><br><span class="line">import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;</span><br><span class="line"></span><br><span class="line">import javax.servlet.http.HttpServletResponse;</span><br><span class="line">import javax.validation.ConstraintViolationException;</span><br><span class="line">import java.io.IOException;</span><br><span class="line">import java.util.Date;</span><br><span class="line">import java.util.LinkedHashMap;</span><br><span class="line">import java.util.List;</span><br><span class="line">import java.util.Map;</span><br><span class="line">import java.util.stream.Collectors;</span><br><span class="line"></span><br><span class="line">@ControllerAdvice</span><br><span class="line">public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler &#123;</span><br><span class="line"></span><br><span class="line">    //...</span><br><span class="line"></span><br><span class="line">    // @Validate For Validating Path Variables and Request Parameters</span><br><span class="line">    @ExceptionHandler(ConstraintViolationException.class)</span><br><span class="line">    public void constraintViolationException(HttpServletResponse response) throws IOException &#123;</span><br><span class="line">        response.sendError(HttpStatus.BAD_REQUEST.value());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // error handle for @Valid</span><br><span class="line">    @Override</span><br><span class="line">    protected ResponseEntity&lt;Object&gt;</span><br><span class="line">    handleMethodArgumentNotValid(MethodArgumentNotValidException ex,</span><br><span class="line">                                 HttpHeaders headers,</span><br><span class="line">                                 HttpStatus status, WebRequest request) &#123;</span><br><span class="line"></span><br><span class="line">        Map&lt;String, Object&gt; body = new LinkedHashMap&lt;&gt;();</span><br><span class="line">        body.put(&quot;timestamp&quot;, new Date());</span><br><span class="line">        body.put(&quot;status&quot;, status.value());</span><br><span class="line"></span><br><span class="line">        //Get all fields errors</span><br><span class="line">        List&lt;String&gt; errors = ex.getBindingResult()</span><br><span class="line">                .getFieldErrors()</span><br><span class="line">                .stream()</span><br><span class="line">                .map(x -&gt; x.getDefaultMessage())</span><br><span class="line">                .collect(Collectors.toList());</span><br><span class="line"></span><br><span class="line">        body.put(&quot;errors&quot;, errors);</span><br><span class="line"></span><br><span class="line">        return new ResponseEntity&lt;&gt;(body, headers, status);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="4-ResponseEntityExceptionHandler"><a href="#4-ResponseEntityExceptionHandler" class="headerlink" title="4. ResponseEntityExceptionHandler"></a>4. ResponseEntityExceptionHandler</h2><p>4.1 If we are not sure, what exception was thrown by the Spring Boot, puts a breakpoint in this method for debugging.</p>
-<p>ResponseEntityExceptionHandler.java</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">package org.springframework.web.servlet.mvc.method.annotation;</span><br><span class="line"></span><br><span class="line">//...</span><br><span class="line">public abstract class ResponseEntityExceptionHandler &#123;</span><br><span class="line"></span><br><span class="line">	@ExceptionHandler(&#123;</span><br><span class="line">			HttpRequestMethodNotSupportedException.class,</span><br><span class="line">			HttpMediaTypeNotSupportedException.class,</span><br><span class="line">			HttpMediaTypeNotAcceptableException.class,</span><br><span class="line">			MissingPathVariableException.class,</span><br><span class="line">			MissingServletRequestParameterException.class,</span><br><span class="line">			ServletRequestBindingException.class,</span><br><span class="line">			ConversionNotSupportedException.class,</span><br><span class="line">			TypeMismatchException.class,</span><br><span class="line">			HttpMessageNotReadableException.class,</span><br><span class="line">			HttpMessageNotWritableException.class,</span><br><span class="line">			MethodArgumentNotValidException.class,</span><br><span class="line">			MissingServletRequestPartException.class,</span><br><span class="line">			BindException.class,</span><br><span class="line">			NoHandlerFoundException.class,</span><br><span class="line">			AsyncRequestTimeoutException.class</span><br><span class="line">		&#125;)</span><br><span class="line">	@Nullable</span><br><span class="line">	public final ResponseEntity&lt;Object&gt; handleException(Exception ex, WebRequest request) throws Exception &#123;</span><br><span class="line">		HttpHeaders headers = new HttpHeaders();</span><br><span class="line"></span><br><span class="line">		if (ex instanceof HttpRequestMethodNotSupportedException) &#123;</span><br><span class="line">			HttpStatus status = HttpStatus.METHOD_NOT_ALLOWED;</span><br><span class="line">			return handleHttpRequestMethodNotSupported((HttpRequestMethodNotSupportedException) ex, headers, status, request);</span><br><span class="line">		&#125;</span><br><span class="line">		else if (ex instanceof HttpMediaTypeNotSupportedException) &#123;</span><br><span class="line">			HttpStatus status = HttpStatus.UNSUPPORTED_MEDIA_TYPE;</span><br><span class="line">			return handleHttpMediaTypeNotSupported((HttpMediaTypeNotSupportedException) ex, headers, status, request);</span><br><span class="line">		&#125;</span><br><span class="line">		//...</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	//...</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="5-DefaultErrorAttributes"><a href="#5-DefaultErrorAttributes" class="headerlink" title="5. DefaultErrorAttributes"></a>5. DefaultErrorAttributes</h2><p>5.1 To override the default JSON error response for all exceptions, create a bean and extends DefaultErrorAttributes</p>
-<p>CustomErrorAttributes.java</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">package com.mkyong.error;</span><br><span class="line"></span><br><span class="line">import org.springframework.boot.web.servlet.error.DefaultErrorAttributes;</span><br><span class="line">import org.springframework.stereotype.Component;</span><br><span class="line">import org.springframework.web.context.request.WebRequest;</span><br><span class="line"></span><br><span class="line">import java.text.DateFormat;</span><br><span class="line">import java.text.SimpleDateFormat;</span><br><span class="line">import java.util.Date;</span><br><span class="line">import java.util.Map;</span><br><span class="line"></span><br><span class="line">@Component</span><br><span class="line">public class CustomErrorAttributes extends DefaultErrorAttributes &#123;</span><br><span class="line"></span><br><span class="line">    private static final DateFormat dateFormat = new SimpleDateFormat(&quot;yyyy/MM/dd HH:mm:ss&quot;);</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public Map&lt;String, Object&gt; getErrorAttributes(WebRequest webRequest, boolean includeStackTrace) &#123;</span><br><span class="line"></span><br><span class="line">        // Let Spring handle the error first, we will modify later :)</span><br><span class="line">        Map&lt;String, Object&gt; errorAttributes = super.getErrorAttributes(webRequest, includeStackTrace);</span><br><span class="line"></span><br><span class="line">        // format &amp; update timestamp</span><br><span class="line">        Object timestamp = errorAttributes.get(&quot;timestamp&quot;);</span><br><span class="line">        if (timestamp == null) &#123;</span><br><span class="line">            errorAttributes.put(&quot;timestamp&quot;, dateFormat.format(new Date()));</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            errorAttributes.put(&quot;timestamp&quot;, dateFormat.format((Date) timestamp));</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // insert a new key</span><br><span class="line">        errorAttributes.put(&quot;version&quot;, &quot;1.2&quot;);</span><br><span class="line"></span><br><span class="line">        return errorAttributes;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Now, the date time is formatted and a new field – version is added to the JSON error response.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">curl localhost:8080/books/5</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">	&quot;timestamp&quot;:&quot;2019/02/27 13:34:24&quot;,</span><br><span class="line">	&quot;status&quot;:404,</span><br><span class="line">	&quot;error&quot;:&quot;Not Found&quot;,</span><br><span class="line">	&quot;message&quot;:&quot;Book id not found : 5&quot;,</span><br><span class="line">	&quot;path&quot;:&quot;/books/5&quot;,</span><br><span class="line">	&quot;version&quot;:&quot;1.2&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">curl localhost:8080/abc</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">	&quot;timestamp&quot;:&quot;2019/02/27 13:35:10&quot;,</span><br><span class="line">	&quot;status&quot;:404,</span><br><span class="line">	&quot;error&quot;:&quot;Not Found&quot;,</span><br><span class="line">	&quot;message&quot;:&quot;No message available&quot;,</span><br><span class="line">	&quot;path&quot;:&quot;/abc&quot;,</span><br><span class="line">	&quot;version&quot;:&quot;1.2&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/08/Spring2/%E8%AF%A6%E8%A7%A3WebMvcConfigurer%E6%8E%A5%E5%8F%A3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lancersaber">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lancersaber">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/08/Spring2/%E8%AF%A6%E8%A7%A3WebMvcConfigurer%E6%8E%A5%E5%8F%A3/" class="post-title-link" itemprop="url">详解WebMvcConfigurer接口</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-11-08 21:41:18" itemprop="dateCreated datePublished" datetime="2019-11-08T21:41:18+08:00">2019-11-08</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-09 13:11:18" itemprop="dateModified" datetime="2019-11-09T13:11:18+08:00">2019-11-09</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/springmvc/" itemprop="url" rel="index">
-                    <span itemprop="name">springmvc</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="详解WebMvcConfigurer接口"><a href="#详解WebMvcConfigurer接口" class="headerlink" title="详解WebMvcConfigurer接口"></a>详解WebMvcConfigurer接口</h1><hr>
-<p>SpringBoot 确实为我们做了很多事情， 但有时候我们想要自己定义一些Handler，Interceptor，ViewResolver，MessageConverter，该怎么做呢。在Spring Boot 1.5版本都是靠重写WebMvcConfigurerAdapter的方法来添加自定义拦截器，消息转换器等。SpringBoot 2.0 后，该类被标记为@Deprecated。因此我们只能靠实现WebMvcConfigurer接口来实现。接下来让我们来看看这个接口类吧！（列举下常用的方法供参考）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br></pre></td><td class="code"><pre><span class="line">package com.developlee.config;</span><br><span class="line"></span><br><span class="line">import com.alibaba.fastjson.serializer.SerializerFeature;</span><br><span class="line">import com.alibaba.fastjson.support.config.FastJsonConfig;</span><br><span class="line">import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;</span><br><span class="line">import com.developlee.configurer.USLocalDateFormatter;</span><br><span class="line">import org.springframework.format.FormatterRegistry;</span><br><span class="line">import org.springframework.http.MediaType;</span><br><span class="line">import org.springframework.http.converter.HttpMessageConverter;</span><br><span class="line">import org.springframework.http.converter.json.JsonbHttpMessageConverter;</span><br><span class="line">import org.springframework.web.bind.annotation.RequestMethod;</span><br><span class="line">import org.springframework.web.servlet.config.annotation.CorsRegistry;</span><br><span class="line">import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;</span><br><span class="line">import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;</span><br><span class="line">import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;</span><br><span class="line"></span><br><span class="line">import java.time.LocalDate;</span><br><span class="line">import java.util.ArrayList;</span><br><span class="line">import java.util.List;</span><br><span class="line">import java.util.Locale;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * @TODO //</span><br><span class="line"> * @Author Lensen</span><br><span class="line"> * @Date 2018/7/21</span><br><span class="line"> * @Description 实现WebMvcConfigurer接口，</span><br><span class="line"> */</span><br><span class="line"> @Configuration</span><br><span class="line">public class WebConfig implements WebMvcConfigurer &#123;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 添加类型转换器和格式化器</span><br><span class="line">     * @param registry</span><br><span class="line">     */</span><br><span class="line">    @Override</span><br><span class="line">    public void addFormatters(FormatterRegistry registry) &#123;</span><br><span class="line">        registry.addFormatterForFieldType(LocalDate.class, new USLocalDateFormatter());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 跨域支持</span><br><span class="line">     * @param registry</span><br><span class="line">     */</span><br><span class="line">    @Override</span><br><span class="line">    public void addCorsMappings(CorsRegistry registry) &#123;</span><br><span class="line">        registry.addMapping(&quot;/**&quot;)</span><br><span class="line">                .allowedOrigins(&quot;*&quot;)</span><br><span class="line">                .allowCredentials(true)</span><br><span class="line">                .allowedMethods(&quot;GET&quot;, &quot;POST&quot;, &quot;DELETE&quot;, &quot;PUT&quot;)</span><br><span class="line">                .maxAge(3600 * 24);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">     /**</span><br><span class="line">     * 添加静态资源--过滤swagger-api (开源的在线API文档)</span><br><span class="line">     * @param registry</span><br><span class="line">     */</span><br><span class="line">    @Override</span><br><span class="line">    public void addResourceHandlers(ResourceHandlerRegistry registry) &#123;</span><br><span class="line">        //过滤swagger</span><br><span class="line">        registry.addResourceHandler(&quot;swagger-ui.html&quot;)</span><br><span class="line">                .addResourceLocations(&quot;classpath:/META-INF/resources/&quot;);</span><br><span class="line"></span><br><span class="line">        registry.addResourceHandler(&quot;/webjars/**&quot;)</span><br><span class="line">                .addResourceLocations(&quot;classpath:/META-INF/resources/webjars/&quot;);</span><br><span class="line"></span><br><span class="line">        registry.addResourceHandler(&quot;/swagger-resources/**&quot;)</span><br><span class="line">                .addResourceLocations(&quot;classpath:/META-INF/resources/swagger-resources/&quot;);</span><br><span class="line"></span><br><span class="line">        registry.addResourceHandler(&quot;/swagger/**&quot;) .addResourceLocations(&quot;classpath:/META-INF/resources/swagger*&quot;);</span><br><span class="line"></span><br><span class="line">        registry.addResourceHandler(&quot;/v2/api-docs/**&quot;)</span><br><span class="line">                .addResourceLocations(&quot;classpath:/META-INF/resources/v2/api-docs/&quot;);</span><br><span class="line"></span><br><span class="line">       &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 配置消息转换器--这里我用的是alibaba 开源的 fastjson</span><br><span class="line">     * @param converters</span><br><span class="line">     */</span><br><span class="line">    @Override</span><br><span class="line">    public void configureMessageConverters(List&lt;HttpMessageConverter&lt;?&gt;&gt; converters) &#123;</span><br><span class="line">        //1.需要定义一个convert转换消息的对象;</span><br><span class="line">        FastJsonHttpMessageConverter fastJsonHttpMessageConverter = new FastJsonHttpMessageConverter();</span><br><span class="line">        //2.添加fastJson的配置信息，比如：是否要格式化返回的json数据;</span><br><span class="line">        FastJsonConfig fastJsonConfig = new FastJsonConfig();</span><br><span class="line">        fastJsonConfig.setSerializerFeatures(SerializerFeature.PrettyFormat,</span><br><span class="line">                SerializerFeature.WriteMapNullValue,</span><br><span class="line">                SerializerFeature.WriteNullStringAsEmpty,</span><br><span class="line">                SerializerFeature.DisableCircularReferenceDetect,</span><br><span class="line">                SerializerFeature.WriteNullListAsEmpty,</span><br><span class="line">                SerializerFeature.WriteDateUseDateFormat);</span><br><span class="line">        //3处理中文乱码问题</span><br><span class="line">        List&lt;MediaType&gt; fastMediaTypes = new ArrayList&lt;&gt;();</span><br><span class="line">        fastMediaTypes.add(MediaType.APPLICATION_JSON_UTF8);</span><br><span class="line">        //4.在convert中添加配置信息.</span><br><span class="line">        fastJsonHttpMessageConverter.setSupportedMediaTypes(fastMediaTypes);</span><br><span class="line">        fastJsonHttpMessageConverter.setFastJsonConfig(fastJsonConfig);</span><br><span class="line">        //5.将convert添加到converters当中.</span><br><span class="line">        converters.add(fastJsonHttpMessageConverter);</span><br><span class="line">    &#125;</span><br><span class="line">  @Override</span><br><span class="line">    public void addInterceptors(InterceptorRegistry registry) &#123;</span><br><span class="line">        registry.addInterceptor(new ReqInterceptor()).addPathPatterns(&quot;/**&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/08/JavaWeb/%E5%AE%9E%E7%8E%B0%E5%BF%85%E9%A1%BB%E5%85%88%E7%99%BB%E9%99%86%E5%90%8E%E6%89%8D%E8%83%BD%E8%AE%BF%E9%97%AE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lancersaber">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lancersaber">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/08/JavaWeb/%E5%AE%9E%E7%8E%B0%E5%BF%85%E9%A1%BB%E5%85%88%E7%99%BB%E9%99%86%E5%90%8E%E6%89%8D%E8%83%BD%E8%AE%BF%E9%97%AE/" class="post-title-link" itemprop="url">实现先登陆后才能访问网站</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-11-08 21:22:43" itemprop="dateCreated datePublished" datetime="2019-11-08T21:22:43+08:00">2019-11-08</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-09 13:11:19" itemprop="dateModified" datetime="2019-11-09T13:11:19+08:00">2019-11-09</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java-Web/" itemprop="url" rel="index">
-                    <span itemprop="name">Java Web</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="实现先登陆后才能访问网站"><a href="#实现先登陆后才能访问网站" class="headerlink" title="实现先登陆后才能访问网站"></a>实现先登陆后才能访问网站</h1><hr>
-<p>&emsp;&emsp;在开发网站时，可能会遇到必须让用户先登陆才能进入网站的情况。对于这种情况，有几种实现方式。</p>
-<h2 id="使用Filter"><a href="#使用Filter" class="headerlink" title="使用Filter"></a>使用Filter</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">@Component</span><br><span class="line">@WebFilter(urlPatterns = &#123;&quot;/*&quot;&#125;)</span><br><span class="line">public class MyFilter implements Filter &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void init(FilterConfig filterConfig) throws ServletException &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    @Override</span><br><span class="line">    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException &#123;</span><br><span class="line"></span><br><span class="line">        HttpServletRequest request=(HttpServletRequest) servletRequest;</span><br><span class="line">        HttpServletResponse response=(HttpServletResponse) servletResponse;</span><br><span class="line"></span><br><span class="line">        String requestURI = request.getRequestURI();</span><br><span class="line">        if (&quot;/login&quot;.equals(requestURI))&#123;</span><br><span class="line">            filterChain.doFilter(servletRequest,servletResponse);</span><br><span class="line">        &#125;else &#123;</span><br><span class="line">            String username = servletRequest.getParameter(&quot;username&quot;);</span><br><span class="line"></span><br><span class="line">            if (username!=null)&#123;</span><br><span class="line">                System.out.println(username);</span><br><span class="line">            &#125;else &#123;</span><br><span class="line"></span><br><span class="line">                response.sendRedirect(&quot;/login&quot;);</span><br><span class="line"></span><br><span class="line">                //注意这里需要直接return</span><br><span class="line">                return;</span><br><span class="line">            &#125;</span><br><span class="line">            filterChain.doFilter(servletRequest,servletResponse);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    @Override</span><br><span class="line">    public void destroy() &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="使用HandlerInterceptorAdapter"><a href="#使用HandlerInterceptorAdapter" class="headerlink" title="使用HandlerInterceptorAdapter"></a>使用HandlerInterceptorAdapter</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">@Component</span><br><span class="line">public class MyHandlerInterceptor extends HandlerInterceptorAdapter &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception &#123;</span><br><span class="line">        System.out.println(&quot;preHandle()&quot;);</span><br><span class="line">//        String username = request.getParameter(&quot;username&quot;);</span><br><span class="line">//</span><br><span class="line">//        if (username==null||&quot;&quot;.equals(username))&#123;</span><br><span class="line">//            response.sendRedirect(&quot;/&quot;);</span><br><span class="line">//            return false;</span><br><span class="line">//        &#125;</span><br><span class="line">        HttpSession session = request.getSession();</span><br><span class="line">        User user =(User) session.getAttribute(&quot;user&quot;);</span><br><span class="line">        if (user==null)&#123;</span><br><span class="line">            response.sendRedirect(&quot;/&quot;);</span><br><span class="line">            return false;</span><br><span class="line">        &#125;else &#123;</span><br><span class="line">            System.out.println(user);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, @Nullable ModelAndView modelAndView) throws Exception &#123;</span><br><span class="line">//        String username=request.getParameter(&quot;username&quot;);</span><br><span class="line"></span><br><span class="line">        //System.out.println(&quot;postHandle&quot;);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, @Nullable Exception ex) throws Exception &#123;</span><br><span class="line">        System.out.println(&quot;afterCompletion()&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>为了让这个HandlerInterceptorAdapter生效，必须进行一些配置</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">public class WebConfig implements WebMvcConfigurer &#123;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    private MyHandlerInterceptor handlerInterceptor;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void addInterceptors(InterceptorRegistry registry) &#123;</span><br><span class="line">        registry.addInterceptor(handlerInterceptor).addPathPatterns(&quot;/*&quot;).excludePathPatterns(&quot;/login&quot;,&quot;/&quot;,&quot;/static/**&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/08/Java%E5%9F%BA%E7%A1%80/Java%E6%9E%9A%E4%B8%BE%E7%B1%BB%E5%9E%8B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lancersaber">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lancersaber">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/08/Java%E5%9F%BA%E7%A1%80/Java%E6%9E%9A%E4%B8%BE%E7%B1%BB%E5%9E%8B/" class="post-title-link" itemprop="url">Java枚举类型</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-11-08 19:36:30" itemprop="dateCreated datePublished" datetime="2019-11-08T19:36:30+08:00">2019-11-08</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-09 15:57:41" itemprop="dateModified" datetime="2019-11-09T15:57:41+08:00">2019-11-09</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Java枚举类型"><a href="#Java枚举类型" class="headerlink" title="Java枚举类型"></a>Java枚举类型</h1><hr>
-<p>&emsp;&emsp;关键字enum可以将一组具名的值的有限集合创建为一种新的类型，而这些具名的值可以作为常规的程序组件使用。这是一种非常有用的功能。</p>
-<h2 id="基本enum特性"><a href="#基本enum特性" class="headerlink" title="基本enum特性"></a>基本enum特性</h2><p>&emsp;&emsp;创建enum时，编译器会为你生成一个相关的类，这个类继承自java.lang.Enum.下面是这个类的一些功能</p>
+<p>sdown 达成的条件很简单，如果一个哨兵 ping 一个 master，超过了 is-master-down-after-milliseconds 指定的毫秒数之后，就主观认为 master 宕机了；如果一个哨兵在指定时间内，收到了 quorum 数量的其它哨兵也认为那个 master 是 sdown 的，那么就认为是 odown 了。</p>
+<h2 id="哨兵集群的自动发现机制"><a href="#哨兵集群的自动发现机制" class="headerlink" title="哨兵集群的自动发现机制"></a>哨兵集群的自动发现机制</h2><p>哨兵互相之间的发现，是通过 redis 的 pub/sub 系统实现的，每个哨兵都会往 <strong>sentinel</strong>:hello 这个 channel 里发送一个消息，这时候所有其他哨兵都可以消费到这个消息，并感知到其他的哨兵的存在。</p>
+<p>每隔两秒钟，每个哨兵都会往自己监控的某个 master+slaves 对应的 <strong>sentinel</strong>:hello channel 里发送一个消息，内容是自己的 host、ip 和 runid 还有对这个 master 的监控配置。</p>
+<p>每个哨兵也会去监听自己监控的每个 master+slaves 对应的 <strong>sentinel</strong>:hello channel，然后去感知到同样在监听这个 master+slaves 的其他哨兵的存在。</p>
+<p>每个哨兵还会跟其他哨兵交换对 master 的监控配置，互相进行监控配置的同步。</p>
+<h2 id="slave-配置的自动纠正"><a href="#slave-配置的自动纠正" class="headerlink" title="slave 配置的自动纠正"></a>slave 配置的自动纠正</h2><p>哨兵会负责自动纠正 slave 的一些配置，比如 slave 如果要成为潜在的 master 候选人，哨兵会确保 slave 复制现有 master 的数据；如果 slave 连接到了一个错误的 master 上，比如故障转移之后，那么哨兵会确保它们连接到正确的 master 上。</p>
+<h2 id="slave-gt-master-选举算法"><a href="#slave-gt-master-选举算法" class="headerlink" title="slave-&gt;master 选举算法"></a>slave-&gt;master 选举算法</h2><p>如果一个 master 被认为 odown 了，而且 majority 数量的哨兵都允许主备切换，那么某个哨兵就会执行主备切换操作，此时首先要选举一个 slave 来，会考虑 slave 的一些信息：</p>
 <ul>
-<li>ordinal()：返回一个int值，这是每个enum实例在声明时的次序</li>
-<li>values():遍历enum实例的数组，而且该数组中的元素严格保持其在enum中声明时的顺序，</li>
-<li>Enum类实现了Comparable接口和Serializable接口</li>
+<li>跟 master 断开连接的时长</li>
+<li>slave 优先级</li>
+<li>复制 offset</li>
+<li>run id</li>
 </ul>
-<h2 id="向enum中添加新方法"><a href="#向enum中添加新方法" class="headerlink" title="向enum中添加新方法"></a>向enum中添加新方法</h2><p>&emsp;&emsp;除了不能继承自一个enum之外，我们基本上可以将enum看作一个常规的类。也就是说，我们可以向enum中添加方法。enum甚至可以有main方法。<br>一般来说，我们希望每个枚举类型实例能够返回对自身的描述，而不仅仅只是默认的toString()实现，这只能返回枚举实例类型的名字。为此，你可以提供一个构造器，专门负责处理这个额外的信息，然后添加一个方法，返回这个描述信息。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">public enum OzWitch &#123;</span><br><span class="line">  // Instances must be defined first, before methods:</span><br><span class="line">  WEST(&quot;Miss Gulch, aka the Wicked Witch of the West&quot;),</span><br><span class="line">  NORTH(&quot;Glinda, the Good Witch of the North&quot;),</span><br><span class="line">  EAST(&quot;Wicked Witch of the East, wearer of the Ruby &quot; +</span><br><span class="line">    &quot;Slippers, crushed by Dorothy&apos;s house&quot;),</span><br><span class="line">  SOUTH(&quot;Good by inference, but missing&quot;);</span><br><span class="line"></span><br><span class="line">  private String description;</span><br><span class="line"></span><br><span class="line">  // Constructor must be package or private access:</span><br><span class="line">  private OzWitch(String description) &#123;</span><br><span class="line">    this.description = description;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public String getDescription() &#123; return description; &#125;</span><br><span class="line"></span><br><span class="line">  public static void main(String[] args) &#123;</span><br><span class="line">    for(OzWitch witch : OzWitch.values())</span><br><span class="line">      print(witch + &quot;: &quot; + witch.getDescription());</span><br><span class="line">  &#125;</span><br><span class="line">&#125; /* Output:</span><br><span class="line">WEST: Miss Gulch, aka the Wicked Witch of the West</span><br><span class="line">NORTH: Glinda, the Good Witch of the North</span><br><span class="line">EAST: Wicked Witch of the East, wearer of the Ruby Slippers, crushed by Dorothy&apos;s house</span><br><span class="line">SOUTH: Good by inference, but missing</span><br><span class="line">*///:~</span><br></pre></td></tr></table></figure>
+<p>如果一个 slave 跟 master 断开连接的时间已经超过了 down-after-milliseconds 的 10 倍，外加 master 宕机的时长，那么 slave 就被认为不适合选举为 master。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(down-after-milliseconds * 10) + milliseconds_since_master_is_in_SDOWN_state</span><br></pre></td></tr></table></figure>
 
-<p>后面还有更加高级的知识，见Java编程思想</p>
+<p>接下来会对 slave 进行排序：</p>
+<ul>
+<li>按照 slave 优先级进行排序，slave priority 越低，优先级就越高。</li>
+<li>如果 slave priority 相同，那么看 replica offset，哪个 slave 复制了越多的数据，offset 越靠后，优先级就越高。</li>
+<li>如果上面两个条件都相同，那么选择一个 run id 比较小的那个 slave。</li>
+</ul>
 
       
     </div>
@@ -1032,7 +458,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/08/Spring/Spring%E8%A1%A8%E5%8D%95%E6%A0%A1%E9%AA%8C/">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/18/Redis/Redis%E4%BA%8B%E5%8A%A1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1046,7 +472,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/11/08/Spring/Spring%E8%A1%A8%E5%8D%95%E6%A0%A1%E9%AA%8C/" class="post-title-link" itemprop="url">Spring表单校验</a>
+            <a href="/2019/11/18/Redis/Redis%E4%BA%8B%E5%8A%A1/" class="post-title-link" itemprop="url">Redis的事务</a>
         </h1>
 
         <div class="post-meta">
@@ -1057,7 +483,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2019-11-08 18:10:35 / Modified: 19:29:48" itemprop="dateCreated datePublished" datetime="2019-11-08T18:10:35+08:00">2019-11-08</time>
+              <time title="Created: 2019-11-18 15:25:39 / Modified: 15:41:51" itemprop="dateCreated datePublished" datetime="2019-11-18T15:25:39+08:00">2019-11-18</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1065,8 +491,8 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/spring/" itemprop="url" rel="index">
-                    <span itemprop="name">spring</span>
+                  <a href="/categories/redis/" itemprop="url" rel="index">
+                    <span itemprop="name">redis</span>
                   </a>
                 </span>
             </span>
@@ -1082,114 +508,739 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Spring表单校验"><a href="#Spring表单校验" class="headerlink" title="Spring表单校验"></a>Spring表单校验</h1><hr>
-<p>从Spring 3.0开始，Spring对Java校验API（Java Validation API，又称JSR-303）提供了支持。在Spring MVC中要使用Java校验API的话，并不需要什么额外的配置。只要保证在类路径下包含这个Java API的实现即可，比如Hibernate Validator。</p>
-<p>引入hibernate-validator：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-validator --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.hibernate&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;hibernate-validator&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;5.2.4.Final&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+          <h1 id="Redis的事务"><a href="#Redis的事务" class="headerlink" title="Redis的事务"></a>Redis的事务</h1><hr>
+<p>MULTI 、 EXEC 、 DISCARD 和 WATCH 是 Redis 事务相关的命令。事务可以一次执行多个命令， 并且带有以下两个重要的保证：</p>
+<ul>
+<li>事务是一个单独的隔离操作：事务中的所有命令都会序列化、按顺序地执行。事务在执行的过程中，不会被其他客户端发送来的命令请求所打断。</li>
+<li>事务是一个原子操作：事务中的命令要么全部被执行，要么全部都不执行。</li>
+</ul>
+<p>EXEC 命令负责触发并执行事务中的所有命令：</p>
+<ul>
+<li>如果客户端在使用 MULTI 开启了一个事务之后，却因为断线而没有成功执行 EXEC ，那么事务中的所有命令都不会被执行。</li>
+<li>另一方面，如果客户端成功在开启事务之后执行 EXEC ，那么事务中的所有命令都会被执行。</li>
+</ul>
+<h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><p>MULTI 命令用于开启一个事务，它总是返回 OK 。 MULTI 执行之后， 客户端可以继续向服务器发送任意多条命令， 这些命令不会立即被执行， 而是被放到一个队列中， 当 EXEC命令被调用时， 所有队列中的命令才会被执行。</p>
+<p>另一方面， 通过调用 DISCARD ， 客户端可以清空事务队列， 并放弃执行事务。<br>以下是一个事务例子， 它原子地增加了 foo 和 bar 两个键的值：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt; MULTI</span><br><span class="line">OK</span><br><span class="line">&gt; INCR foo</span><br><span class="line">QUEUED</span><br><span class="line">&gt; INCR bar</span><br><span class="line">QUEUED</span><br><span class="line">&gt; EXEC</span><br><span class="line">1) (integer) 1</span><br><span class="line">2) (integer) 1</span><br></pre></td></tr></table></figure>
 
-<h2 id="校验注解"><a href="#校验注解" class="headerlink" title="校验注解"></a>校验注解</h2><p>所有的注解都位于javax.validation.constraints和org.hibernate.validator.constraints包中。下表列出了这些校验注解。</p>
-<table>
-<thead>
-<tr>
-<th>注解</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>@Null</td>
-<td>限制只能为null</td>
-</tr>
-<tr>
-<td>@NotNull</td>
-<td>限制必须不为null</td>
-</tr>
-<tr>
-<td>@AssertFalse</td>
-<td>限制必须为false</td>
-</tr>
-<tr>
-<td>@AssertTrue</td>
-<td>限制必须为true</td>
-</tr>
-<tr>
-<td>@DecimalMax(value)</td>
-<td>限制必须为一个不大于指定值的数字</td>
-</tr>
-<tr>
-<td>@DecimalMin(value)</td>
-<td>限制必须为一个不小于指定值的数字</td>
-</tr>
-<tr>
-<td>@Digits(integer,fraction)</td>
-<td>限制必须为一个小数，且整数部分的位数不能超过integer， 小数部分的位数不能超过fraction</td>
-</tr>
-<tr>
-<td>@Future</td>
-<td>限制必须是一个将来的日期</td>
-</tr>
-<tr>
-<td>@Past</td>
-<td>限制必须是一个过去的日期</td>
-</tr>
-<tr>
-<td>@Max(value)</td>
-<td>限制必须为一个不大于指定值的数字</td>
-</tr>
-<tr>
-<td>@Min(value)</td>
-<td>限制必须为一个不小于指定值的数字</td>
-</tr>
-<tr>
-<td>@Past</td>
-<td>限制必须是一个过去的日期</td>
-</tr>
-<tr>
-<td>@Pattern(value)</td>
-<td>限制必须符合指定的正则表达式</td>
-</tr>
-<tr>
-<td>@Size(max,min)</td>
-<td>限制字符长度必须在min到max之间</td>
-</tr>
-<tr>
-<td>@SafeHtml</td>
-<td>字符串是安全的html</td>
-</tr>
-<tr>
-<td>@URL</td>
-<td>字符串是合法的URL</td>
-</tr>
-<tr>
-<td>@NotBlank</td>
-<td>字符串必须有字符</td>
-</tr>
-<tr>
-<td>@NotEmpty</td>
-<td>字符串不为NULL，集合有字符</td>
-</tr>
-<tr>
-<td>@AssertFalse</td>
-<td>必须是false</td>
-</tr>
-<tr>
-<td>@AssertTrue</td>
-<td>必须是true</td>
-</tr>
-</tbody></table>
-<h2 id="使用校验注解配置实体类"><a href="#使用校验注解配置实体类" class="headerlink" title="使用校验注解配置实体类"></a>使用校验注解配置实体类</h2><p>新建一个表单实体类，并加上注解：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">import javax.validation.constraints.NotNull;</span><br><span class="line">import javax.validation.constraints.Size;</span><br><span class="line">import org.hibernate.validator.constraints.Email;</span><br><span class="line"> </span><br><span class="line">public class Form &#123;</span><br><span class="line">    @NotNull</span><br><span class="line">    @Size(min = 5, max = 16, message = &quot;&#123;name.msg&#125;&quot;)</span><br><span class="line">    private String name;</span><br><span class="line"></span><br><span class="line">    @NotNull()</span><br><span class="line">    @Email(message = &quot;&#123;email.msg&#125;&quot;)</span><br><span class="line">    private String email;</span><br><span class="line"></span><br><span class="line">    @NotNull</span><br><span class="line">    @Size(min = 5, max = 16, message = &quot;&#123;password.msg&#125;&quot;)</span><br><span class="line">    private String password;</span><br><span class="line"></span><br><span class="line">    public String getName() &#123;</span><br><span class="line">        return name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setName(String name) &#123;</span><br><span class="line">        this.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getEmail() &#123;</span><br><span class="line">        return email;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setEmail(String email) &#123;</span><br><span class="line">        this.email = email;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getPassword() &#123;</span><br><span class="line">        return password;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setPassword(String password) &#123;</span><br><span class="line">        this.password = password;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>EXEC 命令的回复是一个数组， 数组中的每个元素都是执行事务中的命令所产生的回复。 其中， 回复元素的先后顺序和命令发送的先后顺序一致。<br>当客户端处于事务状态时， 所有传入的命令都会返回一个内容为 QUEUED 的状态回复（status reply）， 这些被入队的命令将在 EXEC 命令被调用时执行。</p>
+<h2 id="事务中的错误"><a href="#事务中的错误" class="headerlink" title="事务中的错误"></a>事务中的错误</h2><p>使用事务时可能会遇上以下两种错误：</p>
+<ul>
+<li>事务在执行 EXEC 之前，入队的命令可能会出错。比如说，命令可能会产生语法错误（参数数量错误，参数名错误，等等），或者其他更严重的错误，比如内存不足（如果服务器使用 maxmemory 设置了最大内存限制的话）。</li>
+<li>命令可能在 EXEC 调用之后失败。举个例子，事务中的命令可能处理了错误类型的键，比如将列表命令用在了字符串键上面，诸如此类。</li>
+</ul>
+<p>对于发生在 EXEC 执行之前的错误，客户端以前的做法是检查命令入队所得的返回值：如果命令入队时返回 QUEUED ，那么入队成功；否则，就是入队失败。如果有命令在入队时失败，那么大部分客户端都会停止并取消这个事务。<br>不过，从 Redis 2.6.5 开始，服务器会对命令入队失败的情况进行记录，并在客户端调用 EXEC 命令时，拒绝执行并自动放弃这个事务。<br>在 Redis 2.6.5 以前， Redis 只执行事务中那些入队成功的命令，而忽略那些入队失败的命令。 而新的处理方式则使得在流水线（pipeline）中包含事务变得简单，因为发送事务和读取事务的回复都只需要和服务器进行一次通讯。<br>至于那些在 EXEC 命令执行之后所产生的错误， 并没有对它们进行特别处理： 即使事务中有某个/某些命令在执行时产生了错误， 事务中的其他命令仍然会继续执行。</p>
+<p>从协议的角度来看这个问题，会更容易理解一些。 以下例子中， LPOP 命令的执行将出错， 尽管调用它的语法是正确的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Trying 127.0.0.1...</span><br><span class="line">Connected to localhost.</span><br><span class="line">Escape character is &apos;^]&apos;.</span><br><span class="line">MULTI</span><br><span class="line">+OK</span><br><span class="line">SET a 3</span><br><span class="line">abc</span><br><span class="line">+QUEUED</span><br><span class="line">LPOP a</span><br><span class="line">+QUEUED</span><br><span class="line">EXEC</span><br><span class="line">*2</span><br><span class="line">+OK</span><br><span class="line">-ERR Operation against a key holding the wrong kind of value</span><br></pre></td></tr></table></figure>
 
-<h2 id="自定义校验规则"><a href="#自定义校验规则" class="headerlink" title="自定义校验规则"></a>自定义校验规则</h2><p>上面的注解都是较为简单的注解，实际编程中校验的规则可能五花八门。当自带的这些注解无法满足我们的需求时，我们也可以自定义校验注解。下面是一个自定义校验注解的基本格式：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">import javax.validation.Constraint;</span><br><span class="line">import java.lang.annotation.ElementType;</span><br><span class="line">import java.lang.annotation.Retention;</span><br><span class="line">import java.lang.annotation.RetentionPolicy;</span><br><span class="line">import java.lang.annotation.Target</span><br><span class="line"></span><br><span class="line">@Target(&#123;ElementType.FIELD, ElementType.METHOD&#125;)</span><br><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">@Constraint(validatedBy = MyConstraintValidator.class)</span><br><span class="line">public @interface MyConstraint &#123;</span><br><span class="line"></span><br><span class="line">    String message();</span><br><span class="line"></span><br><span class="line">    Class&lt;?&gt;[] groups() default &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    Class&lt;? extends Payload&gt;[] payload() default &#123;&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>EXEC 返回两条bulk-string-reply： 第一条是 OK ，而第二条是 -ERR 。 至于怎样用合适的方法来表示事务中的错误， 则是由客户端自己决定的。</p>
+<p>最重要的是记住这样一条， 即使事务中有某条/某些命令执行失败了， 事务队列中的其他命令仍然会继续执行 —— Redis 不会停止执行事务中的命令。</p>
+<p>以下例子展示的是另一种情况， 当命令在入队时产生错误， 错误会立即被返回给客户端：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">MULTI</span><br><span class="line">+OK</span><br><span class="line">INCR a b c</span><br><span class="line">-ERR wrong number of arguments for &apos;incr&apos; command</span><br></pre></td></tr></table></figure>
 
-<p>其中@Constraint注解表明这个注解是用于规则校验的，validatedBy属性表明用什么去校验，这里我们指定的类为MyConstraintValidator。注解还包含了三个书属性，属性message指定当校验不通过的时候提示什么信息。</p>
-<p>接下来编写MyConstraintValidator，代码如下所示：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">import javax.validation.ConstraintValidator;</span><br><span class="line">import javax.validation.ConstraintValidatorContext;</span><br><span class="line"></span><br><span class="line">public class MyConstraintValidator implements ConstraintValidator&lt;MyConstraint, Object&gt; &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void initialize(MyConstraint myConstraint) &#123;</span><br><span class="line">        System.out.println(&quot;my validator init&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public boolean isValid(Object o, ConstraintValidatorContext constraintValidatorContext) &#123;</span><br><span class="line">        System.out.println(o);</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>因为调用 INCR 命令的参数格式不正确， 所以这个 INCR 命令入队失败。</p>
+<h2 id="为什么-Redis-不支持回滚（roll-back）"><a href="#为什么-Redis-不支持回滚（roll-back）" class="headerlink" title="为什么 Redis 不支持回滚（roll back）"></a>为什么 Redis 不支持回滚（roll back）</h2><p>如果你有使用关系式数据库的经验， 那么 “Redis 在事务失败时不进行回滚，而是继续执行余下的命令”这种做法可能会让你觉得有点奇怪。<br>以下是这种做法的优点：</p>
+<ul>
+<li><p>Redis 命令只会因为错误的语法而失败（并且这些问题不能在入队时发现），或是命令用在了错误类型的键上面：这也就是说，从实用性的角度来说，失败的命令是由编程错误造成的，而这些错误应该在开发的过程中被发现，而不应该出现在生产环境中。</p>
+</li>
+<li><p>因为不需要对回滚进行支持，所以 Redis 的内部可以保持简单且快速。</p>
+</li>
+</ul>
+<h2 id="放弃事务"><a href="#放弃事务" class="headerlink" title="放弃事务"></a>放弃事务</h2><p>当执行 DISCARD 命令时， 事务会被放弃， 事务队列会被清空， 并且客户端会从事务状态中退出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&gt; SET foo 1</span><br><span class="line">OK</span><br><span class="line">&gt; MULTI</span><br><span class="line">OK</span><br><span class="line">&gt; INCR foo</span><br><span class="line">QUEUED</span><br><span class="line">&gt; DISCARD</span><br><span class="line">OK</span><br><span class="line">&gt; GET foo</span><br><span class="line">&quot;1&quot;</span><br></pre></td></tr></table></figure>
 
-<p>MyConstraintValidator实现了ConstraintValidator接口，该接口必须指定两个泛型，第一个泛型指的是上面定义的注解类型，第二个泛型表示校验对象的类型。MyConstraintValidator实现了ConstraintValidator接口的initialize方法和isValid方法。</p>
-<p>initialize方法用于该校验初始化的时候进行一些操作；isValid方法用于编写校验逻辑，第一个参数为需要校验的值，第二个参数为校验上下文。</p>
-<h2 id="编写controller"><a href="#编写controller" class="headerlink" title="编写controller"></a>编写controller</h2><p>Regester控制器如下所示：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">import javax.validation.Valid;</span><br><span class="line">import mrbird.mvc.entity.Form;</span><br><span class="line">import org.springframework.stereotype.Controller;</span><br><span class="line">import org.springframework.ui.Model;</span><br><span class="line">import org.springframework.validation.BindingResult;</span><br><span class="line">import org.springframework.web.bind.annotation.PathVariable;</span><br><span class="line">import org.springframework.web.bind.annotation.RequestMapping;</span><br><span class="line">import org.springframework.web.bind.annotation.RequestMethod;</span><br><span class="line"></span><br><span class="line">@Controller</span><br><span class="line">public class LeanoteController &#123;</span><br><span class="line">    @RequestMapping(value = &quot;/registerindex&quot;, method = RequestMethod.GET)</span><br><span class="line">    public String register(Model model) &#123;</span><br><span class="line">        //对应&lt;sf:form/&gt;标签的commandName属性值</span><br><span class="line">        model.addAttribute(new Form());</span><br><span class="line">        return &quot;register&quot;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @RequestMapping(value = &quot;/register&quot;, method = RequestMethod.POST)</span><br><span class="line">    //form参数添加了@Valid注解，这会告知Spring，需要确保这个对象满足校验限制。</span><br><span class="line">    //Errors参数要紧跟在带有@Valid注解的参数后面</span><br><span class="line">    public String submit(@Valid Form form, BindingResult result) &#123;</span><br><span class="line">        if (result.hasErrors()) &#123;</span><br><span class="line">            // 输出校验失败信息</span><br><span class="line">            result.getAllErrors().stream().forEach(e -&gt; &#123;</span><br><span class="line">                        FieldError fieldError = (FieldError) e;</span><br><span class="line">                        System.out.println(((FieldError) e).getField() + &quot; &quot; + e.getDefaultMessage());</span><br><span class="line">                    &#125;</span><br><span class="line">            );</span><br><span class="line">            //出错时回到注册页面，这里不能够用重定向，不然看不到错误提示信息</span><br><span class="line">            return &quot;register&quot;;</span><br><span class="line">        &#125;</span><br><span class="line">        //校验通过，重定向到/success/&#123;name&#125;</span><br><span class="line">        return &quot;redirect:/success/&quot; + form.getName();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @RequestMapping(value = &quot;/success/&#123;name&#125;&quot;, method = RequestMethod.GET)</span><br><span class="line">    public String success(@PathVariable String name, Model model) &#123;</span><br><span class="line">        model.addAttribute(name);</span><br><span class="line">        return &quot;success&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="使用-check-and-set-操作实现乐观锁"><a href="#使用-check-and-set-操作实现乐观锁" class="headerlink" title="使用 check-and-set 操作实现乐观锁"></a>使用 check-and-set 操作实现乐观锁</h2><p>WATCH 命令可以为 Redis 事务提供 check-and-set （CAS）行为。</p>
+<p>被 WATCH 的键会被监视，并会发觉这些键是否被改动过了。 如果有至少一个被监视的键在 EXEC 执行之前被修改了， 那么整个事务都会被取消， EXEC 返回nil-reply来表示事务已经失败。<br>举个例子， 假设我们需要原子性地为某个值进行增 1 操作（假设 INCR 不存在）。<br>首先我们可能会这样做：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">val = GET mykey</span><br><span class="line">val = val + 1</span><br><span class="line">SET mykey $val</span><br></pre></td></tr></table></figure>
+
+<p>上面的这个实现在只有一个客户端的时候可以执行得很好。 但是， 当多个客户端同时对同一个键进行这样的操作时， 就会产生竞争条件。举个例子， 如果客户端 A 和 B 都读取了键原来的值， 比如 10 ， 那么两个客户端都会将键的值设为 11 ， 但正确的结果应该是 12 才对。<br>有了 WATCH ， 我们就可以轻松地解决这类问题了：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">WATCH mykey</span><br><span class="line">val = GET mykey</span><br><span class="line">val = val + 1</span><br><span class="line">MULTI</span><br><span class="line">SET mykey $val</span><br><span class="line">EXEC</span><br></pre></td></tr></table></figure>
+
+<p>使用上面的代码， 如果在 WATCH 执行之后， EXEC 执行之前， 有其他客户端修改了 mykey 的值， 那么当前客户端的事务就会失败。 程序需要做的， 就是不断重试这个操作， 直到没有发生碰撞为止。<br>这种形式的锁被称作乐观锁， 它是一种非常强大的锁机制。 并且因为大多数情况下， 不同的客户端会访问不同的键， 碰撞的情况一般都很少， 所以通常并不需要进行重试。</p>
+<h2 id="了解-WATCH"><a href="#了解-WATCH" class="headerlink" title="了解 WATCH"></a>了解 WATCH</h2><p>WATCH 使得 EXEC 命令需要有条件地执行： 事务只能在所有被监视键都没有被修改的前提下执行， 如果这个前提不能满足的话，事务就不会被执行。 了解更多-&gt;</p>
+<p>WATCH 命令可以被调用多次。 对键的监视从 WATCH 执行之后开始生效， 直到调用 EXEC 为止。</p>
+<p>用户还可以在单个 WATCH 命令中监视任意多个键， 就像这样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">redis&gt; WATCH key1 key2 key3</span><br><span class="line">OK</span><br></pre></td></tr></table></figure>
+
+<p>当 EXEC 被调用时， 不管事务是否成功执行， 对所有键的监视都会被取消。</p>
+<p>另外， 当客户端断开连接时， 该客户端对键的监视也会被取消。<br>使用无参数的 UNWATCH 命令可以手动取消对所有键的监视。 对于一些需要改动多个键的事务， 有时候程序需要同时对多个键进行加锁， 然后检查这些键的当前值是否符合程序的要求。 当值达不到要求时， 就可以使用 UNWATCH 命令来取消目前对键的监视， 中途放弃这个事务， 并等待事务的下次尝试。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/17/zookeeper/%E5%88%9D%E5%A7%8Bzookeeper/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/17/zookeeper/%E5%88%9D%E5%A7%8Bzookeeper/" class="post-title-link" itemprop="url">初始zookeeper</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-11-17 21:58:25" itemprop="dateCreated datePublished" datetime="2019-11-17T21:58:25+08:00">2019-11-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-11-18 13:48:56" itemprop="dateModified" datetime="2019-11-18T13:48:56+08:00">2019-11-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/zookeeper/" itemprop="url" rel="index">
+                    <span itemprop="name">zookeeper</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="初始zookeeper"><a href="#初始zookeeper" class="headerlink" title="初始zookeeper"></a>初始zookeeper</h1><hr>
+<h2 id="Zookeeper介绍"><a href="#Zookeeper介绍" class="headerlink" title="Zookeeper介绍"></a>Zookeeper介绍</h2><p>Zookeeper是一个开放源代码的分布式协调服务。Zookeeper的设计目标是将那些复杂且容易出错的分布式一致性服务封装起来，构成一个高效可靠的原语集，并以一系列简单易用的接口提供给用户使用。</p>
+<h3 id="Zookeeper是什么"><a href="#Zookeeper是什么" class="headerlink" title="Zookeeper是什么"></a>Zookeeper是什么</h3><p>Zookeeper是一个典型的分布式数据一致性的解决方案，分布式应用程序可以基于它实现诸如数据发布订阅、负载均衡，命名服务、分布式协调/通知、集群管理、Master选举、分布式锁和分布式队列等功能。Zookeeper可以保证如下分布式一致等特性</p>
+<ul>
+<li>顺序一致性</li>
+<li>原子性</li>
+<li>单一试图</li>
+<li>可靠性</li>
+<li>实时性</li>
+</ul>
+<h3 id="Zookeeper的设计目标"><a href="#Zookeeper的设计目标" class="headerlink" title="Zookeeper的设计目标"></a>Zookeeper的设计目标</h3><p>Zookeeper致力于提供一个高性能、高可用、且具有严格的顺序访问控制能力的分布式协调服务。下面我们来具体看一下Zookeeper的四个设计目标</p>
+<h4 id="目标一：简单的数据模型"><a href="#目标一：简单的数据模型" class="headerlink" title="目标一：简单的数据模型"></a>目标一：简单的数据模型</h4><h4 id="目标二：可以构建集群"><a href="#目标二：可以构建集群" class="headerlink" title="目标二：可以构建集群"></a>目标二：可以构建集群</h4><h4 id="目标三：顺序访问"><a href="#目标三：顺序访问" class="headerlink" title="目标三：顺序访问"></a>目标三：顺序访问</h4><h4 id="目标四：高性能"><a href="#目标四：高性能" class="headerlink" title="目标四：高性能"></a>目标四：高性能</h4><h3 id="Zookeeper的基本概念"><a href="#Zookeeper的基本概念" class="headerlink" title="Zookeeper的基本概念"></a>Zookeeper的基本概念</h3><p>下面介绍几个Zookeeper的核心概念</p>
+<h4 id="集群角色"><a href="#集群角色" class="headerlink" title="集群角色"></a>集群角色</h4><p>zookeeper中引用了Leader，Follower和Observer三种角色，Zookeeper集群中的所有机器通过一个Leader选举过程来选定一台被称为“Leader”的机器，Leader服务器为客户端提供读和写服务。Follower和Observer都能够提供读服务，唯一的区别在于，Observer机器不参与Leader的选举过程，也不参与写操作的“过半写成功”策略，因此Observer可以在不影响写性能的情况下提升集群的读性能。</p>
+<h4 id="会话-Session"><a href="#会话-Session" class="headerlink" title="会话(Session)"></a>会话(Session)</h4><p>Session是指客户端会话，在讲解会话之前，我们首先来了解一下客户端连接。在Zookeeper中，一个客户端连接是指客户端和服务器之间的一个TCP长连接。客户端启动的时候，首先会与服务器建立一个TCP连接，从第一次连接建立开始，客户端会话的生命周期也开始了，通过这个连接，客户端能够通过心跳检测与服务器保持有效的会话，也能够向Zookeeper服务器发送请求并接受响应，同时还能够通过该连接接收来自服务器的Watch事件通知。Session的session Timeout值用来设置一个客户端会话的超时时间。当由于服务器压力太大、网络故障或是客户端能够重新连接上集群中的任何一台服务器，那么之前场景的会话仍然有效。</p>
+<h4 id="数据节点-Znode"><a href="#数据节点-Znode" class="headerlink" title="数据节点(Znode)"></a>数据节点(Znode)</h4><h2 id="Zookeeper的ZAB协议"><a href="#Zookeeper的ZAB协议" class="headerlink" title="Zookeeper的ZAB协议"></a>Zookeeper的ZAB协议</h2><p>ZAB(Zookeeper Atmoic Brodercast,原子消息广播协议)协议是为分布式协调服务Zookeeper专门设计的一种支持崩溃恢复的原子广播协议.<br>ZBA协议的核心是定义了对于那些会改变Zookeeper服务器数据状态的事务请求的处理方式，即：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">所有事务请求必须由一个全局唯一的服务器来协调处理，这样的服务器被称为Leader服务器，而余下的其他服务器则成为Follower服务器。Leader服务器负责将一个客户端请求转换成一个事务Proposal(提议)，并将该Proposal分发给集群中所有的Follower服务器。之后Leader服务器需要等待所有Follower服务器的反馈，一旦超过半数的Follower服务器进行了正确的反馈后，那么Leaeder就会再次向所有的Follower服务器分发Commit消息，要求其将前一个Proposal进行提交。</span><br></pre></td></tr></table></figure>
+
+<h3 id="协议介绍"><a href="#协议介绍" class="headerlink" title="协议介绍"></a>协议介绍</h3><p>ZAB协议包括了两种基本的模式，分别是崩溃恢复和消息广播。</p>
+<h4 id="崩溃恢复"><a href="#崩溃恢复" class="headerlink" title="崩溃恢复"></a>崩溃恢复</h4><p>当整个服务框架在启动过程中，或是当Leader服务器出现网络中断、崩溃退出与重启等异常情况时，ZAB协议就会进入恢复模式并选举产生新的Leader服务器。当选举产生了新的Leader服务器，同时集群中已经有过半的机器与该Leader服务器完成了状态同步之后，ZAB协议就会退出恢复模式。其中，所谓的状态同步是指数据同步，用来保证集群中存在过半的机器能够和Leader服务器的数据状态保持一致。因此，ZAB协议需要一个高效且可靠的Leader选举算法，从而确保快速地选举新的Leader。同时，Leader选举算法不仅仅需要让Leader自己知道其自身已经被选举为新的Leader，同时还需要让集群中其他的所有机器也能够快速地感知到新选举的Leader服务器。</p>
+<h5 id="基本特性"><a href="#基本特性" class="headerlink" title="基本特性"></a>基本特性</h5><p>接下来我们看看在崩溃恢复过程中，可能会出现的两个数据不一致的隐患及针对这些情况ZAB协议所需要保证的特性。</p>
+<p><em>ZAB协议需要确保那些已经在Leader服务器上提交的事务最终被所有的服务器都提交</em><br>假设一个事务在Leader服务器上都提交了，并且已经得到过半Follower服务器的Ack反馈，但是在它将Commit消息发送给所有的Follower机器之前，Leader服务器就挂了</p>
+<p><em>ZAB协议需要保证丢弃那些只在Leader服务器上被提交的事务</em></p>
+<h4 id="消息广播"><a href="#消息广播" class="headerlink" title="消息广播"></a>消息广播</h4><p>当集群中已经有过半的Follower服务器完成了和Leader服务器的状态同步，那么整个服务器框架就可以进入消息广播模式。当一台同样遵守ZAB协议的服务器启动后加入到集群中，如果此时集群中已经存在一个Leader服务器在负责进行消息广播，那么新加入的服务器就会自觉地进入数据恢复模式：找到Leader所在的服务器，并与其进行数据同步，然后一起参与到消息广播流程中。如果集群中的其他机器接收到客户端的事务请求，那么这些非Leader服务器会首先将这个事务请求转发给Leader服务器。</p>
+<p> 在整个消息广播过程中，Leader服务器会为每个事务请求生成对应的Proposal来进行广播，并且在广播事务Proposal之前，Leader服务器会首先为这个Proposal分配一个全局单调递增的唯一ID，我们称之为事务ID(即ZXID)。由于ZAB协议需要保证每一个消息的严格的因果关系，因此必须将每一个事务Proposal按照其ZXID的先后顺序来进行排序与处理。</p>
+<p> 具体的，在消息广播过程中，Leader服务器会为每一个Follower服务器都各自分配一个单独的队列，然后将需要广播的事务Proposal依次放入这些队列中去，并且根据FIFO策略进行消息发送。每一个Follower服务器在接收到这个事务Proposal之后，都会首先将其以事务日志的形式写入到本地磁盘中去，并且在写入成功后反馈给Leader服务器一个Ack响应。当Leader服务器接收安东超过半数的Follower的Ack响应后，就会广播一个Commit消息给所有的Follower服务器以通知其进行事务提交，同时Leader自身也会完成对事务的提交，而每一个Follower服务器在接收到Commit消息后，也会完成对事务的提交。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/17/kafka/Kafka%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/17/kafka/Kafka%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5/" class="post-title-link" itemprop="url">kafka核心概念</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-11-17 12:31:18" itemprop="dateCreated datePublished" datetime="2019-11-17T12:31:18+08:00">2019-11-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-11-24 14:43:03" itemprop="dateModified" datetime="2019-11-24T14:43:03+08:00">2019-11-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Kafka/" itemprop="url" rel="index">
+                    <span itemprop="name">Kafka</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Kafka核心概念"><a href="#Kafka核心概念" class="headerlink" title="Kafka核心概念"></a>Kafka核心概念</h1><hr>
+<h2 id="1、消息"><a href="#1、消息" class="headerlink" title="1、消息"></a>1、消息</h2><p>消息是Kafka中最基本的数据单元。消息由一串字节构成，其中主要由key和value构成，key和value也都是byte数组。key的主要作用是根据一定的策略，将次消息路由到指定的分区中，这样就可以保证包含同一key的消息全部写入同一分区中，key可以是null。消息的真正有效负载是value部分的数据。为了提高网络和存储的利用率，生产者会批量发送消息到Kafka，并在发送之前对消息进行压缩。</p>
+<h2 id="2、Topic-amp-分区-amp-Log"><a href="#2、Topic-amp-分区-amp-Log" class="headerlink" title="2、Topic&amp;分区&amp;Log"></a>2、Topic&amp;分区&amp;Log</h2><p>&emsp;&emsp;Topic是用于存储消息的逻辑概念，可以看作一个消息集合。每个Topic可以有多个生产者向其中推送(push)消息，也可以有任意多个消费者消费其中的消息，入下图<br><img src="https://i.loli.net/2019/11/17/75lfDVbnQOTWq26.png" alt="2019011811321224.png"></p>
+<p>&emsp;&emsp;每个Topic可以划分成多个分区(每个Topic都至少有一个分区)，同一Topic下的不同分区包含的消息是不同的。每个消息在被添加到分区时，都会被分配一个offset，它是消息在此分区中的唯一编号，Kafka通过offset保证消息在分区内的顺序，offset的顺序性不跨分区，即Kafka只保证在同一个分区内的消息是有序的；同一Topic的多个分区内的消息，Kafka并不保证其顺序性<br><img src="https://i.loli.net/2019/11/17/imfGPgnpz1NlwOL.png" alt="2019011811343340.png"></p>
+<p>&emsp;&emsp;同一Topic的不同分区会分配到不同的Broke。分区是Kafka水平扩展性的基础，我们可以通过增加服务器并在其上分配Partition的方式来增加Kafka的并行处理能力。<br>&emsp;&emsp;分区在逻辑上对应着一个Log，当生产者将消息写入分区时，实际上是写入到了分区对应的Log中。Log是一个逻辑概念，可以对应到磁盘上的一个文件夹。Log由多个Segment组成，每个Segment对应一个日志文件和索引文件。在面对海量数据时，为避免出现超大文件，每个日志文件的大小是有限制的，当超出限制后则会创建新的Segment，继续对外提供服务。这里需要注意，因为Kafka采用顺序I/O，所以只向最新的Segment追加数据。</p>
+<h3 id="保留策略-Rentention-Policy-amp-日志压缩-Log-Compaction"><a href="#保留策略-Rentention-Policy-amp-日志压缩-Log-Compaction" class="headerlink" title="保留策略(Rentention Policy) &amp; 日志压缩(Log Compaction)"></a>保留策略(Rentention Policy) &amp; 日志压缩(Log Compaction)</h3><p>&emsp;&emsp;无论消费者是否已经消费了消息，Kafka都会一直保存这些消息，但不会像数据库那样长期保存。为了避免磁盘被占满，Kafka会配置相应的“保留策略(rentention policy”),以长期周期性地删除陈旧的消息。</p>
+<p>&emsp;&emsp;两种保留策略</p>
+<ul>
+<li>1.根据消息保留的时间，当消息在Kafka中保存的时间超过了指定的时间，就可以被删除</li>
+<li>2.根据Topic存储的数据大小，当Topic所占的日志文件大小大于一个阈值，则可以开始删除最旧的消息。<br>Kafka会启动一个后台线程，定期检查是否存在可以删除的消息。保留策略的配置非常灵活，可以有全局的配置，也可以针对Topic进行配置来覆盖全局配置。</li>
+</ul>
+<p>&emsp;&emsp;除此之外，Kafka还会进行“日志压缩”(Log Compaction).在很多场景中，消息的key与value的值之间的对应关系是不断变化的，就像数据库中的数据会不断修改一样，消费者只关心key对应的最新的value值。此时，可以开启Kafka的日志压缩功能，Kafka会在后台启动一个线程，定期将相同key的消息进行合并吗，只保留最新的value值。如下图：<br><img src="https://i.loli.net/2019/11/17/ZRqDsXc7YhokajF.png" alt="2019-11-17 16_35_26-未命名表单.drawio - draw.io.png"></p>
+<h2 id="3、Broker"><a href="#3、Broker" class="headerlink" title="3、Broker"></a>3、Broker</h2><p>一个单独的Kafka Server就是一个Broker。Broker的主要工作就是接收生产者发过来的消息，分配offset，之后保存到磁盘中，同时，接收消费者、其他Broker的请求，根据请求类型进行相应处理并返回响应。在一般的生产环境中，一个Broker独占一台物理服务器。</p>
+<h2 id="副本"><a href="#副本" class="headerlink" title="副本"></a>副本</h2><p>Kafka对消息进行了冗余备份，每个Partition可以有多个副本，每个副本中包含的消息是一样的。每个分区至少有一个副本，当分区中只有一个副本时，就只有Leader副本，没有Follower副本</p>
+<p>每个分区的副本集合中，都会选举出一个副本作为Leader副本，Kafka在不同的场景下会采用不同的选举策略。所有的读写请求都由选举出的Leader副本处理，其他都作为Follower副本，Follower副本仅仅是从Leader副本处把数据拉取到本地之后，同步更新到自己的Log中。下图展示了出来。<br><img src="https://i.loli.net/2019/11/17/GVoNhRkyfvSs3Z9.png" alt="2019-11-17 16_52_08-未命名表单.drawio - draw.io.png"></p>
+<p>一般情况下，同一分区的多个分区会被分配到不同的Broker上，这样，当Leader所在的Broker宕机后，可以重新选举新的Leader，继续对外提供服务。</p>
+<h2 id="ISR集合"><a href="#ISR集合" class="headerlink" title="ISR集合"></a>ISR集合</h2><h2 id="HW-amp-LEO"><a href="#HW-amp-LEO" class="headerlink" title="HW&amp;LEO"></a>HW&amp;LEO</h2><h2 id="Cluster-amp-Controller"><a href="#Cluster-amp-Controller" class="headerlink" title="Cluster&amp;Controller"></a>Cluster&amp;Controller</h2><h2 id="生产者"><a href="#生产者" class="headerlink" title="生产者"></a>生产者</h2><h2 id="消费者"><a href="#消费者" class="headerlink" title="消费者"></a>消费者</h2><h2 id="Consumer-Group"><a href="#Consumer-Group" class="headerlink" title="Consumer Group"></a>Consumer Group</h2><p>在Kafka中，多个Consumer可以组成一个Consumer Group，一个Consumer只能属于一个Consumer Group。Consumer Group保证其订阅的Topic的每个分区只能被分配给此Consumer Group中的一个消费者处理。如果不同的Consumer Group订阅了同一个Topic，Consumer Group彼此之间不会干扰。 </p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/17/kafka/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%A8%A1%E5%BC%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/17/kafka/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%A8%A1%E5%BC%8F/" class="post-title-link" itemprop="url">消息队列的两种模式</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-11-17 09:27:18" itemprop="dateCreated datePublished" datetime="2019-11-17T09:27:18+08:00">2019-11-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-11-18 13:48:56" itemprop="dateModified" datetime="2019-11-18T13:48:56+08:00">2019-11-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MQ/" itemprop="url" rel="index">
+                    <span itemprop="name">MQ</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="消息队列的两种模式"><a href="#消息队列的两种模式" class="headerlink" title="消息队列的两种模式"></a>消息队列的两种模式</h1><hr>
+<p>Java消息服务（Java Message Service，JMS）应用程序接口是一个Java平台中关于面向消息中间件（MOM）的API，用于在两个应用程序之间，或分布式系统中发送消息，进行异步通信。</p>
+<p>点对点与发布订阅最初是由JMS定义的。<em>这两种模式主要区别或解决的问题就是发送到队列的消息能否重复消费(多订阅)</em></p>
+<h2 id="1、定义"><a href="#1、定义" class="headerlink" title="1、定义"></a>1、定义</h2><p>JMS规范目前支持两种消息模型：点对点（point to point， queue）和发布/订阅（publish/subscribe，topic）</p>
+<h3 id="1-1-点对点：Queue，不可重复消费"><a href="#1-1-点对点：Queue，不可重复消费" class="headerlink" title="1.1 点对点：Queue，不可重复消费"></a>1.1 点对点：Queue，不可重复消费</h3><p>消息生产者生产消息发送到queue中，然后消息消费者从queue中取出并且消费消息。<br>消息被消费以后，queue中不再有存储，所以消息消费者不可能消费到已经被消费的消息。<strong>Queue支持存在多个消费者，但是对一个消息而言，只会有一个消费者可以消费。</strong></p>
+<p><img src="https://i.loli.net/2019/11/17/FQVeKHnMc97Ckmx.jpg" alt="20151201162724900.jpg"></p>
+<h3 id="1-2、发布-订阅：Topic，可以重复消费"><a href="#1-2、发布-订阅：Topic，可以重复消费" class="headerlink" title="1.2、发布/订阅：Topic，可以重复消费"></a>1.2、发布/订阅：Topic，可以重复消费</h3><p>消息生产者（发布）将消息发布到topic中，同时有多个消息消费者（订阅）消费该消息。和点对点方式不同，发布到topic的消息会被所有订阅者消费。<br><img src="https://i.loli.net/2019/11/17/hi6Vzy1tOvmw2Mx.jpg" alt="20151201162752176.jpg"></p>
+<p>支持订阅组的发布订阅模式：<br>发布订阅模式下，当发布者消息量很大时，显然单个订阅者的处理能力是不足的。实际上现实场景中是多个订阅者节点组成一个订阅组负载均衡消费topic消息即分组订阅，这样订阅者很容易实现消费能力线性扩展。可以看成是一个topic下有多个Queue，每个Queue是点对点的方式，Queue之间是发布订阅方式。<br><img src="https://i.loli.net/2019/11/17/EzLbiy3gwDZedXT.jpg" alt="20151201162825775.jpg"></p>
+<h2 id="2、区别"><a href="#2、区别" class="headerlink" title="2、区别"></a>2、区别</h2><h3 id="2-1、点对点模式"><a href="#2-1、点对点模式" class="headerlink" title="2.1、点对点模式"></a>2.1、点对点模式</h3><p>生产者发送一条消息到queue，一个queue可以有很多消费者，但是一个消息只能被一个消费者接受，当没有消费者可用时，这个消息会被保存直到有 一个可用的消费者，<em>所以Queue实现了一个可靠的负载均衡。</em></p>
+<h3 id="2-2、发布订阅模式"><a href="#2-2、发布订阅模式" class="headerlink" title="2.2、发布订阅模式"></a>2.2、发布订阅模式</h3><p>发布者发送到topic的消息，只有订阅了topic的订阅者才会收到消息。topic实现了发布和订阅，<strong>当你发布一个消息，所有订阅这个topic的服务都能得到这个消息，所以从1到N个订阅者都能得到这个消息的拷贝。</strong></p>
+<h2 id="3、流行模型比较"><a href="#3、流行模型比较" class="headerlink" title="3、流行模型比较"></a>3、流行模型比较</h2><p>传统企业型消息队列ActiveMQ遵循了JMS规范，实现了点对点和发布订阅模型，但其他流行的消息队列RabbitMQ、Kafka并没有遵循JMS规范。</p>
+<h3 id="3-1、RabbitMQ"><a href="#3-1、RabbitMQ" class="headerlink" title="3.1、RabbitMQ"></a>3.1、RabbitMQ</h3><h3 id="3-2、Kafka"><a href="#3-2、Kafka" class="headerlink" title="3.2、Kafka"></a>3.2、Kafka</h3><p>Kafka只支持消息持久化，消费端为拉模型，消费状态和订阅关系由客户端端负责维护，消息消费完后不会立即删除，会保留历史消息。因此支持多订阅时，消息只会存储一份就可以了。但是可能产生重复消费的情况。</p>
+<h4 id="（1）点对点-amp-多订阅"><a href="#（1）点对点-amp-多订阅" class="headerlink" title="（1）点对点&amp;多订阅"></a>（1）点对点&amp;多订阅</h4><p>发布者生产一条消息到topic中，不同订阅组消费此消息。<br><img src="https://i.loli.net/2019/11/17/lgKEapIT3d4hcyO.jpg" alt="20151201162920224.jpg"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/17/%E9%AB%98%E5%B9%B6%E5%8F%91%E6%9E%B6%E6%9E%84/%E6%B6%88%E6%81%AF%E4%B8%AD%E9%97%B4%E4%BB%B6/%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%9A%84%E9%AB%98%E5%8F%AF%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/17/%E9%AB%98%E5%B9%B6%E5%8F%91%E6%9E%B6%E6%9E%84/%E6%B6%88%E6%81%AF%E4%B8%AD%E9%97%B4%E4%BB%B6/%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%9A%84%E9%AB%98%E5%8F%AF%E7%94%A8/" class="post-title-link" itemprop="url">如何保证消息队列的高可用？</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-11-17 09:06:57" itemprop="dateCreated datePublished" datetime="2019-11-17T09:06:57+08:00">2019-11-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-11-20 18:34:37" itemprop="dateModified" datetime="2019-11-20T18:34:37+08:00">2019-11-20</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MQ/" itemprop="url" rel="index">
+                    <span itemprop="name">MQ</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="如何保证消息队列的高可用？"><a href="#如何保证消息队列的高可用？" class="headerlink" title="如何保证消息队列的高可用？"></a>如何保证消息队列的高可用？</h1><hr>
+<h2 id="面试题"><a href="#面试题" class="headerlink" title="面试题"></a>面试题</h2><p>如何保证消息队列的高可用？</p>
+<h2 id="面试官心理分析"><a href="#面试官心理分析" class="headerlink" title="面试官心理分析"></a>面试官心理分析</h2><p>如果有人问到你 MQ 的知识，高可用是必问的。上一讲提到，MQ 会导致系统可用性降低。所以只要你用了 MQ，接下来问的一些要点肯定就是围绕着 MQ 的那些缺点怎么来解决了。</p>
+<p>要是你傻乎乎的就干用了一个 MQ，各种问题从来没考虑过，那你就杯具了，面试官对你的感觉就是，只会简单使用一些技术，没任何思考，马上对你的印象就不太好了。这样的同学招进来要是做个 20k 薪资以内的普通小弟还凑合，要是做薪资 20k+ 的高工，那就惨了，让你设计个系统，里面肯定一堆坑，出了事故公司受损失，团队一起背锅。</p>
+<h2 id="面试题剖析"><a href="#面试题剖析" class="headerlink" title="面试题剖析"></a>面试题剖析</h2><p>这个问题这么问是很好的，因为不能问你 Kafka 的高可用性怎么保证？ActiveMQ 的高可用性怎么保证？一个面试官要是这么问就显得很没水平，人家可能用的就是 RabbitMQ，没用过 Kafka，你上来问人家 Kafka 干什么？这不是摆明了刁难人么。</p>
+<p>所以有水平的面试官，问的是 MQ 的高可用性怎么保证？这样就是你用过哪个 MQ，你就说说你对那个 MQ 的高可用性的理解。</p>
+<h3 id="Kafka-的高可用性"><a href="#Kafka-的高可用性" class="headerlink" title="Kafka 的高可用性"></a>Kafka 的高可用性</h3><p>Kafka 一个最基本的架构认识：由多个 broker 组成，每个 broker 是一个节点；你创建一个 topic，这个 topic 可以划分为多个 partition，每个 partition 可以存在于不同的 broker 上，每个 partition 就放一部分数据。</p>
+<p>这就是<strong>天然的分布式消息队列</strong>，就是说一个 topic 的数据，<strong>是分散放在多个机器上的，每个机器就放一部分数据。</strong><br>实际上 RabbmitMQ 之类的，并不是分布式消息队列，它就是传统的消息队列，只不过提供了一些集群、HA(High Availability, 高可用性) 的机制而已，因为无论怎么玩儿，RabbitMQ 一个 queue 的数据都是放在一个节点里的，镜像集群下，也是每个节点都放这个 queue 的完整数据。<br>Kafka 0.8 以前，是没有 HA 机制的，就是任何一个 broker 宕机了，那个 broker 上的 partition 就废了，没法写也没法读，没有什么高可用性可言。<br>比如说，我们假设创建了一个 topic，指定其 partition 数量是 3 个，分别在三台机器上。但是，如果第二台机器宕机了，会导致这个 topic 的 1/3 的数据就丢了，因此这个是做不到高可用的。</p>
+<p><img src="https://i.loli.net/2019/11/20/SU9NxZViW7qG53C.png" alt="kafka-before.png"></p>
+<p>Kafka 0.8 以后，提供了 HA 机制，就是 replica（复制品） 副本机制。每个 partition 的数据都会同步到其它机器上，形成自己的多个 replica 副本。所有 replica 会选举一个 leader 出来，那么生产和消费都跟这个 leader 打交道，然后其他 replica 就是 follower。写的时候，leader 会负责把数据同步到所有 follower 上去，读的时候就直接读 leader 上的数据即可。只能读写 leader？很简单，要是你可以随意读写每个 follower，那么就要 care 数据一致性的问题，系统复杂度太高，很容易出问题。Kafka 会均匀地将一个 partition 的所有 replica 分布在不同的机器上，这样才可以提高容错性。</p>
+<p><img src="https://i.loli.net/2019/11/20/4XjCtv9rO7fwdqc.png" alt="kafka-after.png"></p>
+<p>这么搞，就有所谓的高可用性了，因为如果某个 broker 宕机了，没事儿，那个 broker上面的 partition 在其他机器上都有副本的。如果这个宕机的 broker 上面有某个 partition 的 leader，那么此时会从 follower 中重新选举一个新的 leader 出来，大家继续读写那个新的 leader 即可。这就有所谓的高可用性了。</p>
+<p>写数据的时候，生产者就写 leader，然后 leader 将数据落地写本地磁盘，接着其他 follower 自己主动从 leader 来 pull 数据。一旦所有 follower 同步好数据了，就会发送 ack 给 leader，leader 收到所有 follower 的 ack 之后，就会返回写成功的消息给生产者。（当然，这只是其中一种模式，还可以适当调整这个行为）</p>
+<p>消费的时候，只会从 leader 去读，但是只有当一个消息已经被所有 follower 都同步成功返回 ack 的时候，这个消息才会被消费者读到。</p>
+<p>看到这里，相信你大致明白了 Kafka 是如何保证高可用机制的了，对吧？不至于一无所知，现场还能给面试官画画图。要是遇上面试官确实是 Kafka 高手，深挖了问，那你只能说不好意思，太深入的你没研究过。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/16/%E9%AB%98%E5%B9%B6%E5%8F%91%E6%9E%B6%E6%9E%84/%E7%BC%93%E5%AD%98/redis%E7%9A%84%E8%BF%87%E6%9C%9F%E7%AD%96%E7%95%A5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/16/%E9%AB%98%E5%B9%B6%E5%8F%91%E6%9E%B6%E6%9E%84/%E7%BC%93%E5%AD%98/redis%E7%9A%84%E8%BF%87%E6%9C%9F%E7%AD%96%E7%95%A5/" class="post-title-link" itemprop="url">redis的过期策略</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-11-16 21:38:28" itemprop="dateCreated datePublished" datetime="2019-11-16T21:38:28+08:00">2019-11-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-11-22 16:02:56" itemprop="dateModified" datetime="2019-11-22T16:02:56+08:00">2019-11-22</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/redis/" itemprop="url" rel="index">
+                    <span itemprop="name">redis</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="redis的过期策略"><a href="#redis的过期策略" class="headerlink" title="redis的过期策略"></a>redis的过期策略</h1><hr>
+<h2 id="面试题"><a href="#面试题" class="headerlink" title="面试题"></a>面试题</h2><p>redis 的过期策略都有哪些？内存淘汰机制都有哪些？手写一下 LRU 代码实现？</p>
+<h2 id="面试官心理分析"><a href="#面试官心理分析" class="headerlink" title="面试官心理分析"></a>面试官心理分析</h2><p>如果你连这个问题都不知道，上来就懵了，回答不出来，那线上你写代码的时候，想当然的认为写进 redis 的数据就一定会存在，后面导致系统各种 bug，谁来负责？</p>
+<p>常见的有两个问题：</p>
+<ul>
+<li>往 redis 写入的数据怎么没了？<br>可能有同学会遇到，在生产环境的 redis 经常会丢掉一些数据，写进去了，过一会儿可能就没了。我的天，同学，你问这个问题就说明 redis 你就没用对啊。redis 是缓存，你给当存储了是吧？</li>
+</ul>
+<p>啥叫缓存？用内存当缓存。内存是无限的吗，内存是很宝贵而且是有限的，磁盘是廉价而且是大量的。可能一台机器就几十个 G 的内存，但是可以有几个 T 的硬盘空间。redis 主要是基于内存来进行高性能、高并发的读写操作的。</p>
+<p>那既然内存是有限的，比如 redis 就只能用 10G，你要是往里面写了 20G 的数据，会咋办？当然会干掉 10G 的数据，然后就保留 10G 的数据了。那干掉哪些数据？保留哪些数据？当然是干掉不常用的数据，保留常用的数据了。</p>
+<ul>
+<li>数据明明过期了，怎么还占用着内存？<br>这是由 redis 的过期策略来决定。</li>
+</ul>
+<h2 id="面试题剖析"><a href="#面试题剖析" class="headerlink" title="面试题剖析"></a>面试题剖析</h2><h3 id="redis-过期策略"><a href="#redis-过期策略" class="headerlink" title="redis 过期策略"></a>redis 过期策略</h3><p>redis 过期策略是：定期删除+惰性删除。<br>所谓定期删除，指的是 redis 默认是每隔 100ms 就随机抽取一些设置了过期时间的 key，检查其是否过期，如果过期就删除。</p>
+<p>假设 redis 里放了 10w 个 key，都设置了过期时间，你每隔几百毫秒，就检查 10w 个 key，那 redis 基本上就死了，cpu 负载会很高的，消耗在你的检查过期 key 上了。注意，这里可不是每隔 100ms 就遍历所有的设置过期时间的 key，那样就是一场性能上的灾难。实际上 redis 是每隔 100ms 随机抽取一些 key 来检查和删除的。</p>
+<p>但是问题是，定期删除可能会导致很多过期 key 到了时间并没有被删除掉，那咋整呢？所以就是惰性删除了。这就是说，在你获取某个 key 的时候，redis 会检查一下 ，这个 key 如果设置了过期时间那么是否过期了？如果过期了此时就会删除，不会给你返回任何东西。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">获取 key 的时候，如果此时 key 已经过期，就删除，不会返回任何东西。</span><br></pre></td></tr></table></figure>
+
+<p>但是实际上这还是有问题的，如果定期删除漏掉了很多过期 key，然后你也没及时去查，也就没走惰性删除，此时会怎么样？如果大量过期 key 堆积在内存里，导致 redis 内存块耗尽了，咋整？</p>
+<p>答案是：走内存淘汰机制。</p>
+<h3 id="内存淘汰机制"><a href="#内存淘汰机制" class="headerlink" title="内存淘汰机制"></a>内存淘汰机制</h3><p>redis 内存淘汰机制有以下几个：</p>
+<ul>
+<li>noeviction: 当内存不足以容纳新写入数据时，新写入操作会报错，这个一般没人用吧，实在是太恶心了。</li>
+<li>allkeys-lru：当内存不足以容纳新写入数据时，在键空间中，移除最近最少使用的 key（这个是最常用的）。</li>
+<li>allkeys-random：当内存不足以容纳新写入数据时，在键空间中，随机移除某个 key，这个一般没人用吧，为啥要随机，肯定是把最近最少使用的 key 给干掉啊。</li>
+<li>volatile-lru：当内存不足以容纳新写入数据时，在设置了过期时间的键空间中，移除最近最少使用的 key（这个一般不太合适）。</li>
+<li>volatile-random：当内存不足以容纳新写入数据时，在设置了过期时间的键空间中，随机移除某个 key。</li>
+<li>volatile-ttl：当内存不足以容纳新写入数据时，在设置了过期时间的键空间中，有更早过期时间的 key 优先移除。</li>
+</ul>
+<h3 id="手写一个-LRU-算法"><a href="#手写一个-LRU-算法" class="headerlink" title="手写一个 LRU 算法"></a>手写一个 LRU 算法</h3><p>你可以现场手写最原始的 LRU 算法，那个代码量太大了，似乎不太现实。</p>
+<p>不求自己纯手工从底层开始打造出自己的 LRU，但是起码要知道如何利用已有的 JDK 数据结构实现一个 Java 版的 LRU。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">class LRUCache&lt;K, V&gt; extends LinkedHashMap&lt;K, V&gt; &#123;</span><br><span class="line">    private final int CACHE_SIZE;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 传递进来最多能缓存多少数据</span><br><span class="line">     *</span><br><span class="line">     * @param cacheSize 缓存大小</span><br><span class="line">     */</span><br><span class="line">    public LRUCache(int cacheSize) &#123;</span><br><span class="line">        // true 表示让 linkedHashMap 按照访问顺序来进行排序，最近访问的放在头部，最老访问的放在尾部。</span><br><span class="line">        super((int) Math.ceil(cacheSize / 0.75) + 1, 0.75f, true);</span><br><span class="line">        CACHE_SIZE = cacheSize;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected boolean removeEldestEntry(Map.Entry&lt;K, V&gt; eldest) &#123;</span><br><span class="line">        // 当 map中的数据量大于指定的缓存个数的时候，就自动删除最老的数据。</span><br><span class="line">        return size() &gt; CACHE_SIZE;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/16/%E9%AB%98%E5%B9%B6%E5%8F%91%E6%9E%B6%E6%9E%84/%E7%BC%93%E5%AD%98/redis%E7%9A%84%E5%87%A0%E7%A7%8D%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/16/%E9%AB%98%E5%B9%B6%E5%8F%91%E6%9E%B6%E6%9E%84/%E7%BC%93%E5%AD%98/redis%E7%9A%84%E5%87%A0%E7%A7%8D%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" class="post-title-link" itemprop="url">redis的几种数据类型</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-11-16 21:37:41" itemprop="dateCreated datePublished" datetime="2019-11-16T21:37:41+08:00">2019-11-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-11-22 16:02:56" itemprop="dateModified" datetime="2019-11-22T16:02:56+08:00">2019-11-22</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/redis/" itemprop="url" rel="index">
+                    <span itemprop="name">redis</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="redis的几种数据类型"><a href="#redis的几种数据类型" class="headerlink" title="redis的几种数据类型"></a>redis的几种数据类型</h1><hr>
+<h2 id="面试题"><a href="#面试题" class="headerlink" title="面试题"></a>面试题</h2><p>redis 都有哪些数据类型？分别在哪些场景下使用比较合适？</p>
+<h2 id="面试官心理分析"><a href="#面试官心理分析" class="headerlink" title="面试官心理分析"></a>面试官心理分析</h2><p>除非是面试官感觉看你简历，是工作 3 年以内的比较初级的同学，可能对技术没有很深入的研究，面试官才会问这类问题。否则，在宝贵的面试时间里，面试官实在不想多问。</p>
+<p>其实问这个问题，主要有两个原因：</p>
+<ul>
+<li>看看你到底有没有全面的了解 redis 有哪些功能，一般怎么来用，啥场景用什么，就怕你别就会最简单的 KV 操作；</li>
+<li>看看你在实际项目里都怎么玩儿过 redis。</li>
+</ul>
+<p>要是你回答的不好，没说出几种数据类型，也没说什么场景，你完了，面试官对你印象肯定不好，觉得你平时就是做个简单的 set 和 get。</p>
+<h2 id="面试题剖析"><a href="#面试题剖析" class="headerlink" title="面试题剖析"></a>面试题剖析</h2><p>redis 主要有以下几种数据类型：</p>
+<ul>
+<li>string</li>
+<li>hash</li>
+<li>list</li>
+<li>set</li>
+<li>sorted set</li>
+</ul>
+<h3 id="string"><a href="#string" class="headerlink" title="string"></a>string</h3><p>这是最简单的类型，就是普通的 set 和 get，做简单的 KV 缓存。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set college szu</span><br></pre></td></tr></table></figure>
+
+<h3 id="hash"><a href="#hash" class="headerlink" title="hash"></a>hash</h3><p>这个是类似 map 的一种结构，这个一般就是可以将结构化的数据，比如一个对象（前提是这个对象没嵌套其他的对象）给缓存在 redis 里，然后每次读写缓存的时候，可以就操作 hash 里的某个字段。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">hset person name bingo</span><br><span class="line">hset person age 20</span><br><span class="line">hset person id 1</span><br><span class="line">hget person name</span><br><span class="line">person = &#123;</span><br><span class="line">    &quot;name&quot;: &quot;bingo&quot;,</span><br><span class="line">    &quot;age&quot;: 20,</span><br><span class="line">    &quot;id&quot;: 1</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="list"><a href="#list" class="headerlink" title="list"></a>list</h3><p>list 是有序列表，这个可以玩儿出很多花样。<br>比如可以通过 list 存储一些列表型的数据结构，类似粉丝列表、文章的评论列表之类的东西。<br>比如可以通过 lrange 命令，读取某个闭区间内的元素，可以基于 list 实现分页查询，这个是很棒的一个功能，基于 redis 实现简单的高性能分页，可以做类似微博那种下拉不断分页的东西，性能高，就一页一页走。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 0开始位置，-1结束位置，结束位置为-1时，表示列表的最后一个位置，即查看所有。</span><br><span class="line">lrange mylist 0 -1</span><br></pre></td></tr></table></figure>
+
+<p>比如可以搞个简单的消息队列，从 list 头怼进去，从 list 尾巴那里弄出来。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">lpush mylist 1</span><br><span class="line">lpush mylist 2</span><br><span class="line">lpush mylist 3 4 5</span><br><span class="line"></span><br><span class="line"># 1</span><br><span class="line">rpop mylist</span><br></pre></td></tr></table></figure>
+
+<h3 id="set"><a href="#set" class="headerlink" title="set"></a>set</h3><p>set 是无序集合，自动去重。</p>
+<p>直接基于 set 将系统里需要去重的数据扔进去，自动就给去重了，如果你需要对一些数据进行快速的全局去重，你当然也可以基于 jvm 内存里的 HashSet 进行去重，但是如果你的某个系统部署在多台机器上呢？得基于 redis 进行全局的 set 去重。</p>
+<p>可以基于 set 玩儿交集、并集、差集的操作，比如交集吧，可以把两个人的粉丝列表整一个交集，看看俩人的共同好友是谁？对吧。</p>
+<p>把两个大 V 的粉丝都放在两个 set 中，对两个 set 做交集。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">#-------操作一个set-------</span><br><span class="line"># 添加元素</span><br><span class="line">sadd mySet 1</span><br><span class="line"></span><br><span class="line"># 查看全部元素</span><br><span class="line">smembers mySet</span><br><span class="line"></span><br><span class="line"># 判断是否包含某个值</span><br><span class="line">sismember mySet 3</span><br><span class="line"></span><br><span class="line"># 删除某个/些元素</span><br><span class="line">srem mySet 1</span><br><span class="line">srem mySet 2 4</span><br><span class="line"></span><br><span class="line"># 查看元素个数</span><br><span class="line">scard mySet</span><br><span class="line"></span><br><span class="line"># 随机删除一个元素</span><br><span class="line">spop mySet</span><br><span class="line"></span><br><span class="line">#-------操作多个set-------</span><br><span class="line"># 将一个set的元素移动到另外一个set</span><br><span class="line">smove yourSet mySet 2</span><br><span class="line"></span><br><span class="line"># 求两set的交集</span><br><span class="line">sinter yourSet mySet</span><br><span class="line"></span><br><span class="line"># 求两set的并集</span><br><span class="line">sunion yourSet mySet</span><br><span class="line"></span><br><span class="line"># 求在yourSet中而不在mySet中的元素</span><br><span class="line">sdiff yourSet mySet</span><br></pre></td></tr></table></figure>
+
+<h3 id="sorted-set"><a href="#sorted-set" class="headerlink" title="sorted set"></a>sorted set</h3><p>sorted set 是排序的 set，去重但可以排序，写进去的时候给一个分数，自动根据分数排序。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">zadd board 85 zhangsan</span><br><span class="line">zadd board 72 lisi</span><br><span class="line">zadd board 96 wangwu</span><br><span class="line">zadd board 63 zhaoliu</span><br><span class="line"></span><br><span class="line"># 获取排名前三的用户（默认是升序，所以需要 rev 改为降序）</span><br><span class="line">zrevrange board 0 3</span><br><span class="line"></span><br><span class="line"># 获取某用户的排名</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/16/%E9%AB%98%E5%B9%B6%E5%8F%91%E6%9E%B6%E6%9E%84/%E7%BC%93%E5%AD%98/%E7%BC%93%E5%AD%98%E7%9A%84%E4%BD%BF%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/16/%E9%AB%98%E5%B9%B6%E5%8F%91%E6%9E%B6%E6%9E%84/%E7%BC%93%E5%AD%98/%E7%BC%93%E5%AD%98%E7%9A%84%E4%BD%BF%E7%94%A8/" class="post-title-link" itemprop="url">缓存的使用</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2019-11-16 20:32:00 / Modified: 22:05:36" itemprop="dateCreated datePublished" datetime="2019-11-16T20:32:00+08:00">2019-11-16</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/cache/" itemprop="url" rel="index">
+                    <span itemprop="name">cache</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="缓存的使用"><a href="#缓存的使用" class="headerlink" title="缓存的使用"></a>缓存的使用</h1><hr>
+<h2 id="面试题"><a href="#面试题" class="headerlink" title="面试题"></a>面试题</h2><p>项目中缓存是如何使用的？为什么要用缓存？缓存使用不当会造成什么后果？</p>
+<h2 id="面试官心理分析"><a href="#面试官心理分析" class="headerlink" title="面试官心理分析"></a>面试官心理分析</h2><p>这个问题，互联网公司必问，要是一个人连缓存都不太清楚，那确实比较尴尬。</p>
+<p>只要问到缓存，上来第一个问题，肯定是先问问你项目哪里用了缓存？为啥要用？不用行不行？如果用了以后可能会有什么不良的后果？</p>
+<p>这就是看看你对缓存这个东西背后有没有思考，如果你就是傻乎乎的瞎用，没法给面试官一个合理的解答，那面试官对你印象肯定不太好，觉得你平时思考太少，就知道干活儿。</p>
+<h2 id="面试题剖析"><a href="#面试题剖析" class="headerlink" title="面试题剖析"></a>面试题剖析</h2><h3 id="项目中缓存是如何使用的？"><a href="#项目中缓存是如何使用的？" class="headerlink" title="项目中缓存是如何使用的？"></a>项目中缓存是如何使用的？</h3><p>这个，需要结合自己项目的业务来。</p>
+<h3 id="为什么要用缓存？"><a href="#为什么要用缓存？" class="headerlink" title="为什么要用缓存？"></a>为什么要用缓存？</h3><p>用缓存，主要有两个用途：高性能、高并发。</p>
+<h4 id="高性能"><a href="#高性能" class="headerlink" title="高性能"></a>高性能</h4><p>假设这么个场景，你有个操作，一个请求过来，吭哧吭哧你各种乱七八糟操作 mysql，半天查出来一个结果，耗时 600ms。但是这个结果可能接下来几个小时都不会变了，或者变了也可以不用立即反馈给用户。那么此时咋办？</p>
+<p>缓存啊，折腾 600ms 查出来的结果，扔缓存里，一个 key 对应一个 value，下次再有人查，别走 mysql 折腾 600ms 了，直接从缓存里，通过一个 key 查出来一个 value，2ms 搞定。性能提升 300 倍。</p>
+<p>就是说对于一些需要复杂操作耗时查出来的结果，且确定后面不怎么变化，但是有很多读请求，那么直接将查询出来的结果放在缓存中，后面直接读缓存就好。</p>
+<h4 id="高并发"><a href="#高并发" class="headerlink" title="高并发"></a>高并发</h4><p>mysql 这么重的数据库，压根儿设计不是让你玩儿高并发的，虽然也可以玩儿，但是天然支持不好。mysql 单机支撑到 2000QPS 也开始容易报警了。</p>
+<p>所以要是你有个系统，高峰期一秒钟过来的请求有 1万，那一个 mysql 单机绝对会死掉。你这个时候就只能上缓存，把很多数据放缓存，别放 mysql。缓存功能简单，说白了就是 key-value 式操作，单机支撑的并发量轻松一秒几万十几万，支撑高并发 so easy。单机承载并发量是 mysql 单机的几十倍。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">缓存是走内存的，内存天然就支撑高并发。</span><br></pre></td></tr></table></figure>
+
+<h3 id="用了缓存之后会有什么不良后果？"><a href="#用了缓存之后会有什么不良后果？" class="headerlink" title="用了缓存之后会有什么不良后果？"></a>用了缓存之后会有什么不良后果？</h3><p>常见的缓存问题有以下几个：</p>
+<ul>
+<li>缓存与数据库双写不一致</li>
+<li>缓存雪崩、缓存穿透</li>
+<li>缓存并发竞争</li>
+</ul>
+
       
     </div>
 
@@ -1208,7 +1259,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1254,18 +1305,18 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">148</span>
+          <span class="site-state-item-count">185</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
-        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-count">43</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-count">56</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -1290,7 +1341,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2019</span>
+  <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

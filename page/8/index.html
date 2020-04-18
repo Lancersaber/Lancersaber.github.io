@@ -172,7 +172,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/04/Spring/%E6%B7%B1%E5%85%A5Spring%20boot%E8%87%AA%E5%8A%A8%E8%A3%85%E9%85%8D/">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/09/Java%E5%9F%BA%E7%A1%80/Java%E4%B8%AD%E7%9A%84%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -186,7 +186,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/11/04/Spring/%E6%B7%B1%E5%85%A5Spring%20boot%E8%87%AA%E5%8A%A8%E8%A3%85%E9%85%8D/" class="post-title-link" itemprop="url">深入Spring boot自动装配</a>
+            <a href="/2019/11/09/Java%E5%9F%BA%E7%A1%80/Java%E4%B8%AD%E7%9A%84%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" class="post-title-link" itemprop="url">Java中的正则表达式</a>
         </h1>
 
         <div class="post-meta">
@@ -197,8 +197,171 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2019-11-04 08:33:38 / Modified: 11:08:19" itemprop="dateCreated datePublished" datetime="2019-11-04T08:33:38+08:00">2019-11-04</time>
+              <time title="Created: 2019-11-09 13:34:14 / Modified: 15:57:41" itemprop="dateCreated datePublished" datetime="2019-11-09T13:34:14+08:00">2019-11-09</time>
             </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Java中的正则表达式"><a href="#Java中的正则表达式" class="headerlink" title="Java中的正则表达式"></a>Java中的正则表达式</h1><hr>
+<p>正则表达式(regular expression)描述了一种字符串匹配的模式（pattern），可以用来检查一个串是否含有某种子串、将匹配的子串替换或者从某个串中取出符合某个条件的子串等。</p>
+<p>例如：</p>
+<ul>
+<li>runoo+b，可以匹配 runoob、runooob、runoooooob 等，+ 号代表前面的字符必须至少出现一次（1次或多次）</li>
+<li>runoo*b，可以匹配 runob、runoob、runoooooob 等，* 号代表字符可以不出现，也可以出现一次或者多次（0次、或1次、或多次）。</li>
+<li>colou?r 可以匹配 color 或者 colour，? 问号代表前面的字符最多只可以出现一次（0次、或1次）。</li>
+</ul>
+<h2 id="正则表达式中的元字符"><a href="#正则表达式中的元字符" class="headerlink" title="正则表达式中的元字符"></a>正则表达式中的元字符</h2><p>见(<a href="https://www.runoob.com/regexp/regexp-metachar.html" target="_blank" rel="noopener">https://www.runoob.com/regexp/regexp-metachar.html</a>)</p>
+<p>String类还自带了一个非常有用的正则表达式工具—split()方法，其功能是“将字符串从正则表达式匹配的地方切开”。</p>
+<h2 id="Pattern和Matcher类"><a href="#Pattern和Matcher类" class="headerlink" title="Pattern和Matcher类"></a>Pattern和Matcher类</h2><p>&emsp;&emsp;一般来说，比起功能有限的String类，我们更愿意构造功能更强大的正则表达式对象。只需导入 java.util.regax包，然后使用static Pattern.compile()方法来编译你的正则表达式即可。它会根据你的String类型的正则表达式生成一个Pattern对象。接下来，把你想要检索的字符串传入Pattern对象的matcher()方法。matcher()方法会生成一个Matcher对象，它有很多功能可用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Pattern compile = Pattern.compile(&quot;\\d+&quot;);</span><br><span class="line">        Matcher matcher = compile.matcher(&quot;345&quot;);</span><br><span class="line">        System.out.println(matcher.find());</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/09/Java%E5%9F%BA%E7%A1%80/%E5%86%85%E9%83%A8%E7%B1%BB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/09/Java%E5%9F%BA%E7%A1%80/%E5%86%85%E9%83%A8%E7%B1%BB/" class="post-title-link" itemprop="url">内部类</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2019-11-09 13:19:57 / Modified: 15:57:41" itemprop="dateCreated datePublished" datetime="2019-11-09T13:19:57+08:00">2019-11-09</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="内部类"><a href="#内部类" class="headerlink" title="内部类"></a>内部类</h1><hr>
+<p>可以将一个类的定义放在另一个类的定义内部，这就是内部类。<br>内部类是一种非常有用的特性，因为它允许你把一些逻辑相关的类组织在一起，并控制位于内部的类的可视化。然而必须了解，内部类与组合是完全不同的概念。</p>
+<h2 id="创建内部类"><a href="#创建内部类" class="headerlink" title="创建内部类"></a>创建内部类</h2><p>创建内部类的方式就如同你想的一样–把类的定义置于外围类的里面。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">package innerclasses;//: innerclasses/Parcel1.java</span><br><span class="line">// Creating inner classes.</span><br><span class="line"></span><br><span class="line">public class Parcel1 &#123;</span><br><span class="line">  class Contents &#123;</span><br><span class="line">    private int i = 11;</span><br><span class="line">    public int value() &#123; return i; &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  class Destination &#123;</span><br><span class="line">    private String label;</span><br><span class="line">    Destination(String whereTo) &#123;</span><br><span class="line">      label = whereTo;</span><br><span class="line">    &#125;</span><br><span class="line">    String readLabel() &#123; return label; &#125;</span><br><span class="line">  &#125;	</span><br><span class="line">  // Using inner classes looks just like</span><br><span class="line">  // using any other class, within Parcel1:</span><br><span class="line">  public void ship(String dest) &#123;</span><br><span class="line">    Contents c = new Contents();</span><br><span class="line">    Destination d = new Destination(dest);</span><br><span class="line">    System.out.println(d.readLabel());</span><br><span class="line">  &#125;</span><br><span class="line">  public static void main(String[] args) &#123;</span><br><span class="line">    Parcel1 p = new Parcel1();</span><br><span class="line">    p.ship(&quot;Tasmania&quot;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125; /* Output:</span><br><span class="line">Tasmania</span><br><span class="line">*///:~</span><br></pre></td></tr></table></figure>
+
+<p>如果想从外部类的非静态方法之外的任意位置创建某个内部类的对象，那么必须具体指明这个对象的类型：OuterClassName.InnerClassName</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/09/Spring2/Spring%20REST%20Error%20Handling%20Example/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/09/Spring2/Spring%20REST%20Error%20Handling%20Example/" class="post-title-link" itemprop="url">Spring REST Error Handling Example</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-11-09 12:10:21" itemprop="dateCreated datePublished" datetime="2019-11-09T12:10:21+08:00">2019-11-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-11-10 14:22:33" itemprop="dateModified" datetime="2019-11-10T14:22:33+08:00">2019-11-10</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -222,172 +385,58 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="深入Spring-boot自动装配"><a href="#深入Spring-boot自动装配" class="headerlink" title="深入Spring boot自动装配"></a>深入Spring boot自动装配</h1><hr>
-<h2 id="模式注解"><a href="#模式注解" class="headerlink" title="模式注解"></a>模式注解</h2><p>Stereotype Annotation俗称为模式注解，Spring中常见的模式注解有@Service，@Repository，@Controller等，它们都“派生”自@Component注解。我们都知道，凡是被@Component标注的类都会被Spring扫描并纳入到IOC容器中，那么由@Component派生的注解所标注的类也会被扫描到IOC容器中。下面我们主要来通过自定义模式注解来了解@Component的“派生性”和“层次性”。</p>
-<h3 id="Component-“派生性”"><a href="#Component-“派生性”" class="headerlink" title="@Component “派生性”"></a>@Component “派生性”</h3><p>新建一个Spring Boot工程，Spring Boot版本为2.1.0.RELEASE，artifactId为autoconfig，并引入spring-boot-starter-web依赖<br>在com.example.demo下新建annotation包，然后创建一个FirstLevelService注解：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@Target(&#123;ElementType.TYPE&#125;)</span><br><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">@Documented</span><br><span class="line">@Service</span><br><span class="line">public @interface FirstLevelService &#123;</span><br><span class="line">    String value() default &quot;&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这个注解定义由@Service标注，查看@Service的源码会发现其被@Component注解标注，所以它们的层次关系为:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">└─@Component</span><br><span class="line">   └─@Service</span><br><span class="line">      └─@FirstLevelService</span><br></pre></td></tr></table></figure>
+          <h1 id="Spring-REST-Error-Handling-Example"><a href="#Spring-REST-Error-Handling-Example" class="headerlink" title="Spring REST Error Handling Example"></a>Spring REST Error Handling Example</h1><hr>
+<p>In this article, we will show you error handling in Spring Boot REST application.</p>
+<h2 id="1-error"><a href="#1-error" class="headerlink" title="1. /error"></a>1. /error</h2><p>1.1 By default, Spring Boot provides a BasicErrorController controller for /error mapping that handles all errors, and getErrorAttributes to produce a JSON response with details of the error, the HTTP status, and the exception message.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;	</span><br><span class="line">	&quot;timestamp&quot;:&quot;2019-02-27T04:03:52.398+0000&quot;,</span><br><span class="line">	&quot;status&quot;:500,</span><br><span class="line">	&quot;error&quot;:&quot;Internal Server Error&quot;,</span><br><span class="line">	&quot;message&quot;:&quot;...&quot;,</span><br><span class="line">	&quot;path&quot;:&quot;/path&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>即@FirstLevelService为@Component派生出来的模式注解，我们来测试一下被它标注的类是否能够被扫描到IOC容器中：</p>
-<p>在com.example.demo下新建service包，然后创建一个TestService类：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@FirstLevelService</span><br><span class="line">public class TestService &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>BasicErrorController.java</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">package org.springframework.boot.autoconfigure.web.servlet.error;</span><br><span class="line"></span><br><span class="line">//...</span><br><span class="line"></span><br><span class="line">@Controller</span><br><span class="line">@RequestMapping(&quot;$&#123;server.error.path:$&#123;error.path:/error&#125;&#125;&quot;)</span><br><span class="line">public class BasicErrorController extends AbstractErrorController &#123;</span><br><span class="line"></span><br><span class="line">	//...</span><br><span class="line"></span><br><span class="line">	@RequestMapping</span><br><span class="line">	public ResponseEntity&lt;Map&lt;String, Object&gt;&gt; error(HttpServletRequest request) &#123;</span><br><span class="line">		Map&lt;String, Object&gt; body = getErrorAttributes(request,</span><br><span class="line">				isIncludeStackTrace(request, MediaType.ALL));</span><br><span class="line">		HttpStatus status = getStatus(request);</span><br><span class="line">		return new ResponseEntity&lt;&gt;(body, status);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<p>In the IDE, puts a breakpoint in this method, you will understand how Spring Boot generates the default JSON error response.</p>
+<h2 id="2-Custom-Exception"><a href="#2-Custom-Exception" class="headerlink" title="2. Custom Exception"></a>2. Custom Exception</h2><p>In Spring Boot, we can use @ControllerAdvice to handle custom exceptions.</p>
+<p>2.1 A custom exception.</p>
+<p>BookNotFoundException.java</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">package com.mkyong.error;</span><br><span class="line"></span><br><span class="line">public class BookNotFoundException extends RuntimeException &#123;</span><br><span class="line"></span><br><span class="line">    public BookNotFoundException(Long id) &#123;</span><br><span class="line">        super(&quot;Book id not found : &quot; + id);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>在com.example.demo下新建bootstrap包，然后创建一个ServiceBootStrap类，用于测试注册TestService并从IOC容器中获取它：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">@ComponentScan(&quot;com.example.demo.service&quot;)</span><br><span class="line">public class ServiceBootstrap &#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        ConfigurableApplicationContext context = new SpringApplicationBuilder(ServiceBootstrap.class)</span><br><span class="line">                .web(WebApplicationType.NONE)</span><br><span class="line">                .run(args);</span><br><span class="line">        TestService testService = context.getBean(&quot;testService&quot;, TestService.class);</span><br><span class="line">        System.out.println(&quot;TestService Bean: &quot; + testService);</span><br><span class="line">        context.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>A controller, if a book id is not found, throws the above BookNotFoundException</p>
+<p>BookController.java</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">package com.mkyong;</span><br><span class="line"></span><br><span class="line">//...</span><br><span class="line"></span><br><span class="line">@RestController</span><br><span class="line">public class BookController &#123;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    private BookRepository repository;</span><br><span class="line">	</span><br><span class="line">    // Find</span><br><span class="line">    @GetMapping(&quot;/books/&#123;id&#125;&quot;)</span><br><span class="line">    Book findOne(@PathVariable Long id) &#123;</span><br><span class="line">        return repository.findById(id)</span><br><span class="line">                .orElseThrow(() -&gt; new BookNotFoundException(id));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">	//...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>运行该类的main方法，控制台输出如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TestService Bean: com.example.ceshi.service.TestService@5dd1c9f2</span><br></pre></td></tr></table></figure>
+<p>By default, Spring Boot generates the following JSON error response, http 500 error.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">curl localhost:8080/books/5</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">	&quot;timestamp&quot;:&quot;2019-02-27T04:03:52.398+0000&quot;,</span><br><span class="line">	&quot;status&quot;:500,</span><br><span class="line">	&quot;error&quot;:&quot;Internal Server Error&quot;,</span><br><span class="line">	&quot;message&quot;:&quot;Book id not found : 5&quot;,</span><br><span class="line">	&quot;path&quot;:&quot;/books/5&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="Component-“层次性”"><a href="#Component-“层次性”" class="headerlink" title="@Component “层次性”"></a>@Component “层次性”</h3><p>我们在com.example.demo.annotation路径下再创建一个SecondLevelService注解定义，该注解由上面的@FirstLevelService标注：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@Target(&#123;ElementType.TYPE&#125;)</span><br><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">@Documented</span><br><span class="line">@FirstLevelService</span><br><span class="line">public @interface SecondLevelService &#123;</span><br><span class="line">    String value() default &quot;&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这时层次关系为</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">└─@Component</span><br><span class="line">   └─@Service</span><br><span class="line">      └─@FirstLevelService</span><br><span class="line">            └─@SecondLevelService</span><br></pre></td></tr></table></figure>
+<p> 2.2 If a book id not found, it should return a 404 error instead of 500, we can override the status code like this :</p>
+<p> CustomGlobalExceptionHandler.java</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">package com.mkyong.error;</span><br><span class="line"></span><br><span class="line">import org.springframework.http.HttpHeaders;</span><br><span class="line">import org.springframework.http.HttpStatus;</span><br><span class="line">import org.springframework.http.ResponseEntity;</span><br><span class="line">import org.springframework.web.bind.MethodArgumentNotValidException;</span><br><span class="line">import org.springframework.web.bind.annotation.ControllerAdvice;</span><br><span class="line">import org.springframework.web.bind.annotation.ExceptionHandler;</span><br><span class="line">import org.springframework.web.bind.annotation.RestControllerAdvice;</span><br><span class="line">import org.springframework.web.context.request.WebRequest;</span><br><span class="line">import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;</span><br><span class="line"></span><br><span class="line">import javax.servlet.http.HttpServletResponse;</span><br><span class="line">import javax.validation.ConstraintViolationException;</span><br><span class="line">import java.io.IOException;</span><br><span class="line">import java.util.Date;</span><br><span class="line">import java.util.LinkedHashMap;</span><br><span class="line">import java.util.List;</span><br><span class="line">import java.util.Map;</span><br><span class="line">import java.util.stream.Collectors;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@ControllerAdvice</span><br><span class="line">public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler &#123;</span><br><span class="line"></span><br><span class="line">    // Let Spring BasicErrorController handle the exception, we just override the status code</span><br><span class="line">    @ExceptionHandler(BookNotFoundException.class)</span><br><span class="line">    public void springHandleNotFound(HttpServletResponse response) throws IOException &#123;</span><br><span class="line">        response.sendError(HttpStatus.NOT_FOUND.value());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">	//...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>我们将TestService上的注解换成@SecondLevelService，然后再次运行ServiceBootStrap的main方法，输出如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TestService Bean: com.example.ceshi.service.TestService@134d26af</span><br></pre></td></tr></table></figure>
-<p>可见结果也是成功的。</p>
-<pre><code>这里有一点需要注意的是：@Component注解只包含一个value属性定义，所以其“派生”的注解也只能包含一个vlaue属性定义。</code></pre><h2 id="Enable模块驱动"><a href="#Enable模块驱动" class="headerlink" title="@Enable模块驱动"></a>@Enable模块驱动</h2><p>@Enable模块驱动在Spring Framework 3.1后开始支持。这里的模块通俗的来说就是一些为了实现某个功能的组件的集合。通过@Enable模块驱动，我们可以开启相应的模块功能。</p>
-<p>@Enable模块驱动可以分为“注解驱动”和“接口编程”两种实现方式，下面逐一进行演示：</p>
-<h3 id="注解驱动"><a href="#注解驱动" class="headerlink" title="注解驱动"></a>注解驱动</h3><p>Spring中，基于注解驱动的示例可以查看@EnableWebMvc源码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">@Target(&#123;ElementType.TYPE&#125;)</span><br><span class="line">@Documented</span><br><span class="line">@Import(&#123;DelegatingWebMvcConfiguration.class&#125;)</span><br><span class="line">public @interface EnableWebMvc &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>该注解通过@Import导入一个配置类DelegatingWebMvcConfiguration：<br><img src="https://i.loli.net/2019/11/04/upAFjtLqYCJhbeX.png" alt="QQ截图20190220170120.png"><br>该配置类又继承自WebMvcConfigurationSupport，里面定义了一些Bean的声明。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">所以，基于注解驱动的@Enable模块驱动其实就是通过@Import来导入一个配置类，以此实现相应模块的组件注册，当这些组件注册到IOC容器中，这个模块对应的功能也就可以使用了。</span><br></pre></td></tr></table></figure>
-
-<p>我们来定义一个基于注解驱动的@Enable模块驱动。<br>在com.example.demo下新建configuration包，然后创建一个HelloWorldConfiguration配置类：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//@Configuration</span><br><span class="line">public class HelloWorldConfiguration &#123;</span><br><span class="line"></span><br><span class="line">    @Bean</span><br><span class="line">    public String hello() &#123;</span><br><span class="line">        return &quot;hello world&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这个配置类里定义了一个名为hello的Bean，内容为hello world。<br>在com.example.demo.annotation下创建一个EnableHelloWorld注解定义：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@Target(&#123;ElementType.TYPE&#125;)</span><br><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">@Documented</span><br><span class="line">@Import(HelloWorldConfiguration.class)</span><br><span class="line">public @interface EnableHelloWorld &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>运行该类的main方法，控制台输出如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hello Bean: hello world</span><br></pre></td></tr></table></figure>
-<p>说明我们自定义的基于注解驱动的@EnableHelloWorld是可行的。</p>
-<p>注意：在HelloWorldConfiguration类不要加上@Configuration注解，否则@EnableHelloWorld注解不起作用</p>
-<h3 id="接口编程"><a href="#接口编程" class="headerlink" title="接口编程"></a>接口编程</h3><p>除了使用上面这个方式外，我们还可以通过接口编程的方式来实现@Enable模块驱动。Spring中，基于接口编程方式的有@EnableCaching注解，查看其源码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@Target(&#123;ElementType.TYPE&#125;)</span><br><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">@Documented</span><br><span class="line">@Import(&#123;CachingConfigurationSelector.class&#125;)</span><br><span class="line">public @interface EnableCaching &#123;</span><br><span class="line">    boolean proxyTargetClass() default false;</span><br><span class="line"></span><br><span class="line">    AdviceMode mode() default AdviceMode.PROXY;</span><br><span class="line"></span><br><span class="line">    int order() default 2147483647;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>2.3 It returns a 404 now.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">curl localhost:8080/books/5</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">	&quot;timestamp&quot;:&quot;2019-02-27T04:21:17.740+0000&quot;,</span><br><span class="line">	&quot;status&quot;:404,</span><br><span class="line">	&quot;error&quot;:&quot;Not Found&quot;,</span><br><span class="line">	&quot;message&quot;:&quot;Book id not found : 5&quot;,</span><br><span class="line">	&quot;path&quot;:&quot;/books/5&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
-      
-    </div>
+<p>2.4 Furthermore, we can customize the entire JSON error response :</p>
+<p>CustomErrorResponse.java</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">package com.mkyong.error;</span><br><span class="line"></span><br><span class="line">import com.fasterxml.jackson.annotation.JsonFormat;</span><br><span class="line"></span><br><span class="line">import java.time.LocalDateTime;</span><br><span class="line"></span><br><span class="line">public class CustomErrorResponse &#123;</span><br><span class="line"></span><br><span class="line">    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = &quot;yyyy-MM-dd hh:mm:ss&quot;)</span><br><span class="line">    private LocalDateTime timestamp;</span><br><span class="line">    private int status;</span><br><span class="line">    private String error;</span><br><span class="line"></span><br><span class="line">    //...getters setters</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">package com.example.demo.exceptionHandler;</span><br><span class="line"></span><br><span class="line">import com.example.demo.errorresponse.CustomErrorResponse;</span><br><span class="line">import com.example.demo.exception.BookNotFoundException;</span><br><span class="line">import org.springframework.http.HttpStatus;</span><br><span class="line">import org.springframework.http.ResponseEntity;</span><br><span class="line">import org.springframework.web.bind.annotation.ControllerAdvice;</span><br><span class="line">import org.springframework.web.bind.annotation.ExceptionHandler;</span><br><span class="line">import org.springframework.web.context.request.WebRequest;</span><br><span class="line">import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;</span><br><span class="line"></span><br><span class="line">import javax.servlet.http.HttpServletResponse;</span><br><span class="line">import java.io.IOException;</span><br><span class="line">import java.time.LocalDateTime;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * @author: Lancer</span><br><span class="line"> * @date: 2019/11/9</span><br><span class="line"> */</span><br><span class="line">@ControllerAdvice</span><br><span class="line">public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler &#123;</span><br><span class="line"></span><br><span class="line">    // Let Spring BasicErrorController handle the exception, we just override the status code</span><br><span class="line">//    @ExceptionHandler(BookNotFoundException.class)</span><br><span class="line">    public void springHandleNotFound(HttpServletResponse response) throws IOException &#123;</span><br><span class="line">        System.out.println(&quot;hello&quot;);</span><br><span class="line">        response.sendError(HttpStatus.NOT_FOUND.value());</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //...</span><br><span class="line">    @ExceptionHandler(BookNotFoundException.class)</span><br><span class="line">    public ResponseEntity&lt;CustomErrorResponse&gt; customHandleNotFound(Exception ex, WebRequest request) &#123;</span><br><span class="line"></span><br><span class="line">        CustomErrorResponse errors = new CustomErrorResponse();</span><br><span class="line"></span><br><span class="line">        errors.setTimestamp(LocalDateTime.now());</span><br><span class="line">        errors.setError(ex.getMessage());</span><br><span class="line">        errors.setStatus(HttpStatus.NOT_FOUND.value());</span><br><span class="line"></span><br><span class="line">        return new ResponseEntity&lt;&gt;(errors, HttpStatus.NOT_FOUND);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/04/shiro/Shiro%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/">
+<p>terminal</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">curl localhost:8080/books/5</span><br><span class="line">&#123;</span><br><span class="line">	&quot;timestamp&quot;:&quot;2019-02-27 12:40:45&quot;,</span><br><span class="line">	&quot;status&quot;:404,</span><br><span class="line">	&quot;error&quot;:&quot;Book id not found : 5&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lancersaber">
-      <meta itemprop="description" content="">
-    </span>
+<h2 id="3-JSR-303-Validation-error"><a href="#3-JSR-303-Validation-error" class="headerlink" title="3. JSR 303 Validation error"></a>3. JSR 303 Validation error</h2><p>3.1 For Spring @valid validation errors, it will throw handleMethodArgumentNotValid</p>
+<p>CustomGlobalExceptionHandler.java</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">package com.mkyong.error;</span><br><span class="line"></span><br><span class="line">import org.springframework.http.HttpHeaders;</span><br><span class="line">import org.springframework.http.HttpStatus;</span><br><span class="line">import org.springframework.http.ResponseEntity;</span><br><span class="line">import org.springframework.web.bind.MethodArgumentNotValidException;</span><br><span class="line">import org.springframework.web.bind.annotation.ControllerAdvice;</span><br><span class="line">import org.springframework.web.bind.annotation.ExceptionHandler;</span><br><span class="line">import org.springframework.web.context.request.WebRequest;</span><br><span class="line">import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;</span><br><span class="line"></span><br><span class="line">import javax.servlet.http.HttpServletResponse;</span><br><span class="line">import javax.validation.ConstraintViolationException;</span><br><span class="line">import java.io.IOException;</span><br><span class="line">import java.util.Date;</span><br><span class="line">import java.util.LinkedHashMap;</span><br><span class="line">import java.util.List;</span><br><span class="line">import java.util.Map;</span><br><span class="line">import java.util.stream.Collectors;</span><br><span class="line"></span><br><span class="line">@ControllerAdvice</span><br><span class="line">public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler &#123;</span><br><span class="line"></span><br><span class="line">    //...</span><br><span class="line"></span><br><span class="line">    // @Validate For Validating Path Variables and Request Parameters</span><br><span class="line">    @ExceptionHandler(ConstraintViolationException.class)</span><br><span class="line">    public void constraintViolationException(HttpServletResponse response) throws IOException &#123;</span><br><span class="line">        response.sendError(HttpStatus.BAD_REQUEST.value());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // error handle for @Valid</span><br><span class="line">    @Override</span><br><span class="line">    protected ResponseEntity&lt;Object&gt;</span><br><span class="line">    handleMethodArgumentNotValid(MethodArgumentNotValidException ex,</span><br><span class="line">                                 HttpHeaders headers,</span><br><span class="line">                                 HttpStatus status, WebRequest request) &#123;</span><br><span class="line"></span><br><span class="line">        Map&lt;String, Object&gt; body = new LinkedHashMap&lt;&gt;();</span><br><span class="line">        body.put(&quot;timestamp&quot;, new Date());</span><br><span class="line">        body.put(&quot;status&quot;, status.value());</span><br><span class="line"></span><br><span class="line">        //Get all fields errors</span><br><span class="line">        List&lt;String&gt; errors = ex.getBindingResult()</span><br><span class="line">                .getFieldErrors()</span><br><span class="line">                .stream()</span><br><span class="line">                .map(x -&gt; x.getDefaultMessage())</span><br><span class="line">                .collect(Collectors.toList());</span><br><span class="line"></span><br><span class="line">        body.put(&quot;errors&quot;, errors);</span><br><span class="line"></span><br><span class="line">        return new ResponseEntity&lt;&gt;(body, headers, status);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lancersaber">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/04/shiro/Shiro%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/" class="post-title-link" itemprop="url">Shiro快速入门</a>
-        </h1>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
+<h2 id="4-ResponseEntityExceptionHandler"><a href="#4-ResponseEntityExceptionHandler" class="headerlink" title="4. ResponseEntityExceptionHandler"></a>4. ResponseEntityExceptionHandler</h2><p>4.1 If we are not sure, what exception was thrown by the Spring Boot, puts a breakpoint in this method for debugging.</p>
+<p>ResponseEntityExceptionHandler.java</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">package org.springframework.web.servlet.mvc.method.annotation;</span><br><span class="line"></span><br><span class="line">//...</span><br><span class="line">public abstract class ResponseEntityExceptionHandler &#123;</span><br><span class="line"></span><br><span class="line">	@ExceptionHandler(&#123;</span><br><span class="line">			HttpRequestMethodNotSupportedException.class,</span><br><span class="line">			HttpMediaTypeNotSupportedException.class,</span><br><span class="line">			HttpMediaTypeNotAcceptableException.class,</span><br><span class="line">			MissingPathVariableException.class,</span><br><span class="line">			MissingServletRequestParameterException.class,</span><br><span class="line">			ServletRequestBindingException.class,</span><br><span class="line">			ConversionNotSupportedException.class,</span><br><span class="line">			TypeMismatchException.class,</span><br><span class="line">			HttpMessageNotReadableException.class,</span><br><span class="line">			HttpMessageNotWritableException.class,</span><br><span class="line">			MethodArgumentNotValidException.class,</span><br><span class="line">			MissingServletRequestPartException.class,</span><br><span class="line">			BindException.class,</span><br><span class="line">			NoHandlerFoundException.class,</span><br><span class="line">			AsyncRequestTimeoutException.class</span><br><span class="line">		&#125;)</span><br><span class="line">	@Nullable</span><br><span class="line">	public final ResponseEntity&lt;Object&gt; handleException(Exception ex, WebRequest request) throws Exception &#123;</span><br><span class="line">		HttpHeaders headers = new HttpHeaders();</span><br><span class="line"></span><br><span class="line">		if (ex instanceof HttpRequestMethodNotSupportedException) &#123;</span><br><span class="line">			HttpStatus status = HttpStatus.METHOD_NOT_ALLOWED;</span><br><span class="line">			return handleHttpRequestMethodNotSupported((HttpRequestMethodNotSupportedException) ex, headers, status, request);</span><br><span class="line">		&#125;</span><br><span class="line">		else if (ex instanceof HttpMediaTypeNotSupportedException) &#123;</span><br><span class="line">			HttpStatus status = HttpStatus.UNSUPPORTED_MEDIA_TYPE;</span><br><span class="line">			return handleHttpMediaTypeNotSupported((HttpMediaTypeNotSupportedException) ex, headers, status, request);</span><br><span class="line">		&#125;</span><br><span class="line">		//...</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	//...</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-              <time title="Created: 2019-11-04 08:30:18 / Modified: 20:18:26" itemprop="dateCreated datePublished" datetime="2019-11-04T08:30:18+08:00">2019-11-04</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/shiro/" itemprop="url" rel="index">
-                    <span itemprop="name">shiro</span>
-                  </a>
-                </span>
-            </span>
+<h2 id="5-DefaultErrorAttributes"><a href="#5-DefaultErrorAttributes" class="headerlink" title="5. DefaultErrorAttributes"></a>5. DefaultErrorAttributes</h2><p>5.1 To override the default JSON error response for all exceptions, create a bean and extends DefaultErrorAttributes</p>
+<p>CustomErrorAttributes.java</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">package com.mkyong.error;</span><br><span class="line"></span><br><span class="line">import org.springframework.boot.web.servlet.error.DefaultErrorAttributes;</span><br><span class="line">import org.springframework.stereotype.Component;</span><br><span class="line">import org.springframework.web.context.request.WebRequest;</span><br><span class="line"></span><br><span class="line">import java.text.DateFormat;</span><br><span class="line">import java.text.SimpleDateFormat;</span><br><span class="line">import java.util.Date;</span><br><span class="line">import java.util.Map;</span><br><span class="line"></span><br><span class="line">@Component</span><br><span class="line">public class CustomErrorAttributes extends DefaultErrorAttributes &#123;</span><br><span class="line"></span><br><span class="line">    private static final DateFormat dateFormat = new SimpleDateFormat(&quot;yyyy/MM/dd HH:mm:ss&quot;);</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public Map&lt;String, Object&gt; getErrorAttributes(WebRequest webRequest, boolean includeStackTrace) &#123;</span><br><span class="line"></span><br><span class="line">        // Let Spring handle the error first, we will modify later :)</span><br><span class="line">        Map&lt;String, Object&gt; errorAttributes = super.getErrorAttributes(webRequest, includeStackTrace);</span><br><span class="line"></span><br><span class="line">        // format &amp; update timestamp</span><br><span class="line">        Object timestamp = errorAttributes.get(&quot;timestamp&quot;);</span><br><span class="line">        if (timestamp == null) &#123;</span><br><span class="line">            errorAttributes.put(&quot;timestamp&quot;, dateFormat.format(new Date()));</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            errorAttributes.put(&quot;timestamp&quot;, dateFormat.format((Date) timestamp));</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // insert a new key</span><br><span class="line">        errorAttributes.put(&quot;version&quot;, &quot;1.2&quot;);</span><br><span class="line"></span><br><span class="line">        return errorAttributes;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Shiro快速入门"><a href="#Shiro快速入门" class="headerlink" title="Shiro快速入门"></a>Shiro快速入门</h1><hr>
-<h2 id="搭建Shiro环境"><a href="#搭建Shiro环境" class="headerlink" title="搭建Shiro环境"></a>搭建Shiro环境</h2><p>引入Shiro的依赖</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.apache.shiro&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;shiro-core&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.4.1&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
-
-<p>如果要和springboot项目整合，则需要引入shiro的starter</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">   &lt;groupId&gt;org.apache.shiro&lt;/groupId&gt;</span><br><span class="line">   &lt;artifactId&gt;shiro-spring-boot-starter&lt;/artifactId&gt;</span><br><span class="line">   &lt;version&gt;1.4.0&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
-
-<h2 id="快速入门"><a href="#快速入门" class="headerlink" title="快速入门"></a>快速入门</h2><h3 id="Enable-Shiro"><a href="#Enable-Shiro" class="headerlink" title="Enable Shiro"></a>Enable Shiro</h3><p>在应用程序中启用Shiro时要了解的第一件事是，Shiro中的几乎所有内容都与称为的中央/核心组件有关SecurityManager。对于那些熟悉Java安全性的人来说，这是Shiro的SecurityManager的概念-它与并不相同java.lang.SecurityManager。<br>虽然我们将在“ 体系结构”一章中详细介绍Shiro的设计，但现在足以知道Shiro SecurityManager是应用程序Shiro环境的核心，SecurityManager每个应用程序必须存在一个。因此，我们在Tutorial应用程序中必须做的第一件事就是设置SecurityManager实例。</p>
-<h4 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h4><p>尽管我们可以SecurityManager直接实例化一个类，但Shiro的SecurityManager实现具有足够的配置选项和内部组件，这使得在Java源代码中很难做到这一点- SecurityManager使用基于文本的灵活配置格式进行配置会容易得多。</p>
-<p>为此，Shiro通过基于文本的INI配置提供了默认的“共母”解决方案。如今，人们已经厌倦了使用庞大的XML文件，并且INI易于阅读，易于使用并且几乎不需要依赖。稍后您还将看到，通过简单地了解对象图导航，可以有效地使用INI来配置简单的对象图，例如SecurityManager。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Shiro许多配置选项</span><br><span class="line"></span><br><span class="line">Shiro的SecurityManager实现和所有支持组件都与JavaBeans兼容。这使得Shiro几乎可以使用任何配置格式进行配置，例如XML（Spring，JBoss，Guice等），YAML，JSON，Groovy Builder标记等。INI只是Shiro的“通用分母”格式，允许在没有其他选项的情况下在任何环境中进行配置。</span><br></pre></td></tr></table></figure>
-
-<p>shiro.ini<br>因此，我们将使用INI文件SecurityManager为该简单应用程序配置Shiro 。首先，创建一个src/main/resources目录，从所在的目录开始pom.xml。然后shiro.ini在该新目录中创建一个文件，其内容如下：</p>
-<p>src / main / resources / shiro.ini</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"># =============================================================================</span><br><span class="line"># Tutorial INI configuration</span><br><span class="line">#</span><br><span class="line"># Usernames/passwords are based on the classic Mel Brooks&apos; film &quot;Spaceballs&quot; :)</span><br><span class="line"># =============================================================================</span><br><span class="line"></span><br><span class="line"># -----------------------------------------------------------------------------</span><br><span class="line"># Users and their (optional) assigned roles</span><br><span class="line"># username = password, role1, role2, ..., roleN</span><br><span class="line"># -----------------------------------------------------------------------------</span><br><span class="line">[users]</span><br><span class="line">root = secret, admin</span><br><span class="line">guest = guest, guest</span><br><span class="line">presidentskroob = 12345, president</span><br><span class="line">darkhelmet = ludicrousspeed, darklord, schwartz</span><br><span class="line">lonestarr = vespa, goodguy, schwartz</span><br><span class="line"></span><br><span class="line"># -----------------------------------------------------------------------------</span><br><span class="line"># Roles with assigned permissions</span><br><span class="line"># roleName = perm1, perm2, ..., permN</span><br><span class="line"># -----------------------------------------------------------------------------</span><br><span class="line">[roles]</span><br><span class="line">admin = *</span><br><span class="line">schwartz = lightsaber:*</span><br><span class="line">goodguy = winnebago:drive:eagle5</span><br></pre></td></tr></table></figure>
-
-<h4 id="引用配置"><a href="#引用配置" class="headerlink" title="引用配置"></a>引用配置</h4><p>现在已经定义了一个INI文件，我们可以SecurityManager在Tutorial应用程序类中创建实例。更改main方法以反映以下更新：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">    log.info(&quot;My First Apache Shiro Application&quot;);</span><br><span class="line"></span><br><span class="line">    //1.</span><br><span class="line">    Factory&lt;SecurityManager&gt; factory = new IniSecurityManagerFactory(&quot;classpath:shiro.ini&quot;);</span><br><span class="line"></span><br><span class="line">    //2.</span><br><span class="line">    SecurityManager securityManager = factory.getInstance();</span><br><span class="line"></span><br><span class="line">    //3.</span><br><span class="line">    SecurityUtils.setSecurityManager(securityManager);</span><br><span class="line"></span><br><span class="line">    System.exit(0);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="使用Shiro"><a href="#使用Shiro" class="headerlink" title="使用Shiro"></a>使用Shiro</h3><p>现在我们的SecurityManager已经设置好并且可以使用了，现在我们可以开始做我们真正关心的事情了-执行安全操作。</p>
-<p>在保护我们的应用程序安全时，我们可能问自己最相关的问题是“当前用户是谁？”或“是否允许当前用户执行X”？在编写代码或设计用户界面时，通常会问这些问题：应用程序通常是基于用户案例构建的，并且您希望基于每个用户来表示（并保护）功能。因此，我们考虑应用程序安全性的最自然方法是基于当前用户。Shiro的API从根本上代表了“当前用户”的Subject概念。</p>
-<p>在几乎所有环境中，您都可以通过以下调用获取当前执行的用户：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Subject currentUser = SecurityUtils.getSubject();</span><br></pre></td></tr></table></figure>
-
-<p>使用SecurityUtils.getSubject()，我们可以获得当前正在执行的Subject。一个主题仅仅是一个应用程序用户的特定安全“视图”。我们实际上想将其称为“用户”，因为那“很合理”，但我们决定反对：太多的应用程序具有已经具有自己的用户类/框架的现有API，并且我们不想与它们发生冲突。同样，在安全领域，该术语Subject实际上是公认的术语。好吧，继续…</p>
-<p>getSubject()独立应用程序中的调用可能会Subject在特定于应用程序的位置中返回基于用户数据的，而在服务器环境（例如Web应用程序）中，它会获取Subject与当前线程或传入请求相关联的基于用户数据的。</p>
-<p>现在您有了Subject，您可以使用它做什么？<br>如果要在用户与应用程序的当前会话期间使事情可用，则可以获取他们的会话：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Session session = currentUser.getSession();</span><br><span class="line">session.setAttribute( &quot;someKey&quot;, &quot;aValue&quot; );</span><br></pre></td></tr></table></figure>
-<p>这Session是Shiro特有的实例，它提供了常规HttpSession所使用的大部分功能，但具有一些额外的优点和一个很大的不同：它不需要HTTP环境！如果部署在Web应用程序内部，则默认情况下Session将HttpSession基于该应用程序。但是，在非Web环境中，例如简单的快速入门，Shiro将默认自动使用其企业会话管理。这意味着无论部署环境如何，您都可以在任何层的应用程序中使用相同的API。这就打开了一个全新的应用程序世界，因为不需要强制要求使用会话的任何应用程序使用HttpSession或EJB状态会话Bean。而且，任何客户端技术现在都可以共享会话数据。</p>
-<p>因此，现在您可以获取Subject和Session。怎么样真的像检查，如果他们被允许做的事情，比如对角色和权限检查有用的东西？</p>
-<p>好吧，我们只能对已知用户进行检查。我们Subject上面的实例表示当前用户，但谁是当前用户？好吧，他们是匿名的-也就是说，直到他们至少登录一次。因此，让我们这样做：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">if ( !currentUser.isAuthenticated() ) &#123;</span><br><span class="line">    //collect user principals and credentials in a gui specific manner</span><br><span class="line">    //such as username/password html form, X509 certificate, OpenID, etc.</span><br><span class="line">    //We&apos;ll use the username/password example here since it is the most common.</span><br><span class="line">    //(do you know what movie this is from? ;)</span><br><span class="line">    UsernamePasswordToken token = new UsernamePasswordToken(&quot;lonestarr&quot;, &quot;vespa&quot;);</span><br><span class="line">    //this is all you have to do to support &apos;remember me&apos; (no config - built in!):</span><br><span class="line">    token.setRememberMe(true);</span><br><span class="line">    currentUser.login(token);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>而已！再简单不过了。</p>
-<p>但是，如果他们的登录尝试失败了怎么办？您可以捕获各种特定的异常，这些异常可以准确地告诉您发生了什么，并允许您进行相应的处理和响应：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">try &#123;</span><br><span class="line">    currentUser.login( token );</span><br><span class="line">    //if no exception, that&apos;s it, we&apos;re done!</span><br><span class="line">&#125; catch ( UnknownAccountException uae ) &#123;</span><br><span class="line">    //username wasn&apos;t in the system, show them an error message?</span><br><span class="line">&#125; catch ( IncorrectCredentialsException ice ) &#123;</span><br><span class="line">    //password didn&apos;t match, try again?</span><br><span class="line">&#125; catch ( LockedAccountException lae ) &#123;</span><br><span class="line">    //account for that username is locked - can&apos;t login.  Show them a message?</span><br><span class="line">&#125;</span><br><span class="line">    ... more types exceptions to check if you want ...</span><br><span class="line">&#125; catch ( AuthenticationException ae ) &#123;</span><br><span class="line">    //unexpected condition - error?</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>您可以检查许多不同类型的异常，也可以针对自定义条件抛出自己的异常，而Shiro可能无法解决。有关更多信息，请参见AuthenticationException JavaDoc(<a href="https://shiro.apache.org/static/1.4.1/apidocs/org/apache/shiro/authc/AuthenticationException.html)。" target="_blank" rel="noopener">https://shiro.apache.org/static/1.4.1/apidocs/org/apache/shiro/authc/AuthenticationException.html)。</a></p>
-<p><em>安全最佳实践是将通用的登录失败消息发送给用户，因为您不想帮助攻击者尝试闯入您的系统。</em></p>
-<p>好的，现在，我们已经有一个登录用户。我们还能做什么？</p>
-<p>假设他们是谁：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//print their identifying principal (in this case, a username): </span><br><span class="line">log.info( &quot;User [&quot; + currentUser.getPrincipal() + &quot;] logged in successfully.&quot; );</span><br></pre></td></tr></table></figure>
-
-<p>我们还可以测试一下它们是否具有特定作用：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">if ( currentUser.hasRole( &quot;schwartz&quot; ) ) &#123;</span><br><span class="line">    log.info(&quot;May the Schwartz be with you!&quot; );</span><br><span class="line">&#125; else &#123;</span><br><span class="line">    log.info( &quot;Hello, mere mortal.&quot; );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>我们还可以查看他们是否有权对某种类型的实体采取行动：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">if ( currentUser.isPermitted( &quot;lightsaber:weild&quot; ) ) &#123;</span><br><span class="line">    log.info(&quot;You may use a lightsaber ring.  Use it wisely.&quot;);</span><br><span class="line">&#125; else &#123;</span><br><span class="line">    log.info(&quot;Sorry, lightsaber rings are for schwartz masters only.&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>此外，我们可以执行功能非常强大的实例级权限检查-能够查看用户是否具有访问类型的特定实例的能力：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">if ( currentUser.isPermitted( &quot;winnebago:drive:eagle5&quot; ) ) &#123;</span><br><span class="line">    log.info(&quot;You are permitted to &apos;drive&apos; the &apos;winnebago&apos; with license plate (id) &apos;eagle5&apos;.  &quot; +</span><br><span class="line">                &quot;Here are the keys - have fun!&quot;);</span><br><span class="line">&#125; else &#123;</span><br><span class="line">    log.info(&quot;Sorry, you aren&apos;t allowed to drive the &apos;eagle5&apos; winnebago!&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>小菜一碟吧？</p>
-<p>最后，当用户使用完应用程序后，他们可以注销：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">currentUser.logout(); //removes all identifying information and invalidates their session too.</span><br></pre></td></tr></table></figure>
+<p>Now, the date time is formatted and a new field – version is added to the JSON error response.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">curl localhost:8080/books/5</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">	&quot;timestamp&quot;:&quot;2019/02/27 13:34:24&quot;,</span><br><span class="line">	&quot;status&quot;:404,</span><br><span class="line">	&quot;error&quot;:&quot;Not Found&quot;,</span><br><span class="line">	&quot;message&quot;:&quot;Book id not found : 5&quot;,</span><br><span class="line">	&quot;path&quot;:&quot;/books/5&quot;,</span><br><span class="line">	&quot;version&quot;:&quot;1.2&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">curl localhost:8080/abc</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">	&quot;timestamp&quot;:&quot;2019/02/27 13:35:10&quot;,</span><br><span class="line">	&quot;status&quot;:404,</span><br><span class="line">	&quot;error&quot;:&quot;Not Found&quot;,</span><br><span class="line">	&quot;message&quot;:&quot;No message available&quot;,</span><br><span class="line">	&quot;path&quot;:&quot;/abc&quot;,</span><br><span class="line">	&quot;version&quot;:&quot;1.2&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
       
@@ -408,7 +457,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/04/shiro/Shiro%E4%B8%AD%E7%9A%84%E6%9C%AF%E8%AF%AD/">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/08/Spring2/%E8%AF%A6%E8%A7%A3WebMvcConfigurer%E6%8E%A5%E5%8F%A3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -422,270 +471,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/11/04/shiro/Shiro%E4%B8%AD%E7%9A%84%E6%9C%AF%E8%AF%AD/" class="post-title-link" itemprop="url">Shiro中的术语</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2019-11-04 08:08:51 / Modified: 08:20:46" itemprop="dateCreated datePublished" datetime="2019-11-04T08:08:51+08:00">2019-11-04</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/shiro/" itemprop="url" rel="index">
-                    <span itemprop="name">shiro</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Shiro中的术语"><a href="#Shiro中的术语" class="headerlink" title="Shiro中的术语"></a>Shiro中的术语</h1><hr>
-<h2 id="Authentication-身份"><a href="#Authentication-身份" class="headerlink" title="Authentication(身份)"></a>Authentication(身份)</h2><p>验证身份验证是验证主体身份的过程-本质上证明某人确实是他们所说的真实身份。身份验证尝试成功后，应用程序可以相信可以保证主题是应用程序期望的对象。</p>
-<h2 id="Authorizatio-授权"><a href="#Authorizatio-授权" class="headerlink" title="Authorizatio(授权)"></a>Authorizatio(授权)</h2><p>授权（也称为访问控制）是确定是否允许用户/主题做某事的过程。通常，通过检查并解释主题的角色和权限（请参见下文），然后允许或拒绝对请求的资源或功能的访问来完成此操作。</p>
-<h2 id="Cipher-密码"><a href="#Cipher-密码" class="headerlink" title="Cipher(密码)"></a>Cipher(密码)</h2><p>密码是一种用于执行加密或解密的算法。该算法通常依赖于一条称为密钥的信息。而且加密因密钥而异，因此如果没有密钥，解密将非常困难。<br>密码有不同的变化。块密码器处理通常具有固定大小的符号块，而流密码器处理连续的符号流。对称密码使用相同的密钥进行加密和解密，而非对称密码使用不同的密钥。而且，如果不能从另一个密钥中获得非对称密码中的一个密钥，则可以公开共享一个密钥，从而创建公共/私有密钥对。</p>
-<h2 id="Credential-凭证"><a href="#Credential-凭证" class="headerlink" title="Credential(凭证)"></a>Credential(凭证)</h2><p>凭证是一块用于验证用户/主题的身份的信息。在身份验证尝试期间，将一个（或多个）凭据与主体一起提交，以验证提交凭据的用户/主题实际上是关联的用户。凭证通常是只有特定用户/主体才能知道的非常机密的事物，例如密码或PGP密钥或生物特征或类似机制。<br>这个想法是，对于一个校长，只有一个人会知道与该校长“配对”的正确凭证。如果当前用户/主题提供的正确凭据与系统中存储的凭据相匹配，则系统可以假定并相信当前用户/主题确实是他们所说的真实身份。信任程度随着更安全的凭据类型（例如，生物特征签名&gt;密码）而增加。</p>
-<h2 id="Permission-权限"><a href="#Permission-权限" class="headerlink" title="Permission(权限)"></a>Permission(权限)</h2><p>至少按照Shiro的解释，权限是一种描述应用程序中原始功能的语句，仅此而已。权限是安全策略中最低级别的构造。它们仅定义应用程序可以执行的“操作”。他们没有描述“谁”能够执行这些动作。许可只是行为的陈述，仅此而已。<br>权限的一些示例：</p>
-<ul>
-<li>开启档案</li>
-<li>查看“ /用户/列表”网页</li>
-<li>列印文件</li>
-<li>删除“ jsmith”用户</li>
-</ul>
-<h2 id="Principal"><a href="#Principal" class="headerlink" title="Principal"></a>Principal</h2><h2 id="Relm"><a href="#Relm" class="headerlink" title="Relm"></a>Relm</h2><h2 id="Role"><a href="#Role" class="headerlink" title="Role"></a>Role</h2><h2 id="Session"><a href="#Session" class="headerlink" title="Session"></a>Session</h2><h2 id="Suject"><a href="#Suject" class="headerlink" title="Suject"></a>Suject</h2>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/04/shiro/Shiro%E7%AE%80%E4%BB%8B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lancersaber">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lancersaber">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/04/shiro/Shiro%E7%AE%80%E4%BB%8B/" class="post-title-link" itemprop="url">Shiro简介</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2019-11-04 08:00:58 / Modified: 11:08:19" itemprop="dateCreated datePublished" datetime="2019-11-04T08:00:58+08:00">2019-11-04</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/shiro/" itemprop="url" rel="index">
-                    <span itemprop="name">shiro</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Shiro简介"><a href="#Shiro简介" class="headerlink" title="Shiro简介"></a>Shiro简介</h1><hr>
-<h2 id="什么是Apache-Shiro"><a href="#什么是Apache-Shiro" class="headerlink" title="什么是Apache Shiro"></a>什么是Apache Shiro</h2><p>Apache Shiro是一个功能强大且灵活的开源安全框架，可以干净地处理身份验证，授权，企业会话管理和加密。</p>
-<p>Apache Shiro的首要目标是易于使用和理解。安全有时可能非常复杂，甚至会很痛苦，但这不是必须的。框架应尽可能掩盖复杂性，并公开简洁直观的API，以简化开发人员确保其应用程序安全的工作。<br>您可以使用Apache Shiro进行以下操作：</p>
-<ul>
-<li>验证用户身份以验证其身份</li>
-<li>对用户执行访问控制，例如：<ul>
-<li>确定是否为用户分配了特定的安全角色</li>
-<li>确定是否允许用户做某事</li>
-</ul>
-</li>
-<li>即使在没有Web或EJB容器的情况下，也可以在任何环境中使用Session API。</li>
-<li>在身份验证，访问控制或会话的生存期内对事件做出反应。</li>
-<li>汇总1个或更多用户安全数据的数据源，并将其全部显示为单个复合用户“视图”。</li>
-<li>启用单点登录（SSO）功能</li>
-<li>启用“记住我”服务以进行用户关联，而无需登录<br>等等-所有这些都集成到一个易于使用的统一API中。<br>Shiro尝试在所有应用程序环境中实现这些目标-从最简单的命令行应用程序到最大的企业应用程序，而不必强加对其他第三方框架，容器或应用程序服务器的依赖。当然，该项目旨在尽可能地集成到这些环境中，但是可以在任何环境中直接使用它。</li>
-</ul>
-<h2 id="Apache-Shiro功能"><a href="#Apache-Shiro功能" class="headerlink" title="Apache Shiro功能"></a>Apache Shiro功能</h2><p>Apache Shiro是具有许多功能的全面的应用程序安全框架。下图显示了Shiro集中精力的地方，本参考手册的组织方式也类似：<br><img src="https://i.loli.net/2019/11/04/7TkNwl2PFvadBRI.png" alt="ShiroFeatures.png"><br>Shiro以Shiro开发团队所谓的“应用程序安全性的四个基石”为目标-身份验证，授权，会话管理和密码学：</p>
-<ul>
-<li><p>身份验证：有时称为“登录”，这是证明用户是他们所说的身份的行为。</p>
-</li>
-<li><p>授权：访问控制的过程，即确定“谁”有权访问“什么”。</p>
-</li>
-<li><p>会话管理：即使在非Web或EJB应用程序中，也可以管理用户特定的会话。</p>
-</li>
-<li><p>密码术：使用密码算法保持数据安全，同时仍然易于使用。</p>
-</li>
-</ul>
-<p>在不同的应用程序环境中，还具有其他功能来支持和加强这些问题，尤其是：</p>
-<ul>
-<li>Web支持：Shiro的Web支持API可帮助轻松保护Web应用程序的安全。</li>
-<li>缓存：缓存是Apache Shiro API的第一层公民，可确保安全操作保持快速有效。</li>
-<li>并发性：Apache Shiro的并发功能支持多线程应用程序。</li>
-<li>测试：测试支持可以帮助您编写单元测试和集成测试，并确保您的代码将按预期进行保护。</li>
-<li>“运行方式”：一种功能，允许用户采用其他用户的身份（如果允许），有时在管理方案中很有用。</li>
-<li>“记住我”：在整个会话中记住用户的身份，因此他们只需要在必要时登录。</li>
-</ul>
-<p>shiro不会去维护用户，维护权限；这些需要我们自己去设计/提供；然后通过相应的接口注入给shiro<br><img src="https://i.loli.net/2019/11/04/CjdnexzlNaWQByI.png" alt="shiro1.PNG"><br>直接与代码交互的对象是Subject，也就是说Shiro对外API的核心是Subject<br>Subject: 主体，代表当前“用户”，所有的Subject都绑定到SecurityManager，都委托给SecurityManager, SUbject相当于门面，而SecurityManager才是实际的执行者；<br>SecurityManager：我是安全管理器，所有有安全相关的操作，都会交给我来处理，我管理着所有的Subject，我是核心，我负责与其他组件进行交互，你也可以你把我比作springmvc里面的前端控制器，<br>Realm: 我叫域，Shiro要从我这里获取安全数据（用户，角色，权限），也就是说SecurityManager要验证身份，需要从我这里获取相应用户的身份，也需要从我这里获取权限，可以把我 看作安全数据源；</p>
-<p>从上面也可以看出，Shiro不提供维护用户和权限，而是用过Realm让开发人员自己注入；<br><img src="https://i.loli.net/2019/11/04/KOv4hQXotmpJ9DY.png" alt="shiro2.PNG"><br>Subject: 主体<br>SecurityManager:心脏<br>Authentication:认证器<br>Authorizer: 授权器<br>Realm:可以有一个或者多个，安全的实体数据源<br>SessionManager: Shiro并不仅仅可以用在Web环境，也可以用在如普通的JavaSE环境、EJB等环境<br>SessionDao:<br>CacheManager:缓存控制器 ，放到 缓存中可以提高访问性能；<br>Cryptography: 密码模块；</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/02/Mysql/MySql%E4%B8%AD%E7%9A%84%E4%B8%80%E5%AF%B9%E5%A4%9A%E5%A4%9A%E5%AF%B9%E5%A4%9A/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lancersaber">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lancersaber">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/02/Mysql/MySql%E4%B8%AD%E7%9A%84%E4%B8%80%E5%AF%B9%E5%A4%9A%E5%A4%9A%E5%AF%B9%E5%A4%9A/" class="post-title-link" itemprop="url">Mysql中的一对多和多对多</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2019-11-02 23:26:29 / Modified: 23:46:32" itemprop="dateCreated datePublished" datetime="2019-11-02T23:26:29+08:00">2019-11-02</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Mysql/" itemprop="url" rel="index">
-                    <span itemprop="name">Mysql</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Mysql中的一对多和多对多"><a href="#Mysql中的一对多和多对多" class="headerlink" title="Mysql中的一对多和多对多"></a>Mysql中的一对多和多对多</h1><hr>
-<h2 id="关联映射：一对多-多对一"><a href="#关联映射：一对多-多对一" class="headerlink" title="关联映射：一对多/多对一"></a>关联映射：一对多/多对一</h2><p>存在最普遍的映射关系，简单来讲就如球员与球队的关系；<br>一对多：从球队角度来说一个球队拥有多个球员 即为一对多<br>多对一：从球员角度来说多个球员属于一个球队 即为多对一数据表间一对多关系如下图：<br><img src="https://i.loli.net/2019/11/02/7UbepvPs6gDkLtd.jpg" alt="15234704-7cacb7b37f794c0e91f92cae94f03753.jpg"></p>
-<p>sql语句:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE sockerteam(</span><br><span class="line">id INT PRIMARY KEY AUTO_INCREMENT,</span><br><span class="line">team_name VARCHAR(25)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">CREATE TABLE sockerplayer</span><br><span class="line">(</span><br><span class="line">id INT PRIMARY KEY auto_increment,</span><br><span class="line">`name` VARCHAR(25) NOT NULL, </span><br><span class="line">teamId INT,</span><br><span class="line">CONSTRAINT team_player FOREIGN KEY (teamId) REFERENCES sockerteam(id)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-
-<h2 id="关联映射：多对多"><a href="#关联映射：多对多" class="headerlink" title="关联映射：多对多"></a>关联映射：多对多</h2><p>多对多关系也很常见，例如学生与选修课之间的关系，一个学生可以选择多门选修课，而每个选修课又可以被多名学生选择。<br>数据库中的多对多关联关系一般需采用中间表的方式处理，将多对多转化为两个一对多。<br>数据表间多对多关系如下图：<br><img src="https://i.loli.net/2019/11/02/cDXvu3BKI5FVonM.jpg" alt="15235342-153ef6a865fb47f391eb66f443e21370.jpg"></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/02/Mysql/Mysql%E5%87%A0%E5%A4%A7%E7%BA%A6%E6%9D%9F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lancersaber">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lancersaber">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/02/Mysql/Mysql%E5%87%A0%E5%A4%A7%E7%BA%A6%E6%9D%9F/" class="post-title-link" itemprop="url">Mysql几大约束</a>
+            <a href="/2019/11/08/Spring2/%E8%AF%A6%E8%A7%A3WebMvcConfigurer%E6%8E%A5%E5%8F%A3/" class="post-title-link" itemprop="url">详解WebMvcConfigurer接口</a>
         </h1>
 
         <div class="post-meta">
@@ -695,14 +481,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2019-11-02 22:50:29" itemprop="dateCreated datePublished" datetime="2019-11-02T22:50:29+08:00">2019-11-02</time>
+              <time title="Created: 2019-11-08 21:41:18" itemprop="dateCreated datePublished" datetime="2019-11-08T21:41:18+08:00">2019-11-08</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-08 14:39:19" itemprop="dateModified" datetime="2019-11-08T14:39:19+08:00">2019-11-08</time>
+                <time title="Modified: 2019-11-09 13:11:18" itemprop="dateModified" datetime="2019-11-09T13:11:18+08:00">2019-11-09</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -710,8 +496,8 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Mysql/" itemprop="url" rel="index">
-                    <span itemprop="name">Mysql</span>
+                  <a href="/categories/springmvc/" itemprop="url" rel="index">
+                    <span itemprop="name">springmvc</span>
                   </a>
                 </span>
             </span>
@@ -727,28 +513,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Mysql几大约束"><a href="#Mysql几大约束" class="headerlink" title="Mysql几大约束"></a>Mysql几大约束</h1><hr>
-<h2 id="1、主键约束"><a href="#1、主键约束" class="headerlink" title="1、主键约束"></a>1、主键约束</h2><p>&emsp;&emsp;Mysql单个字段设为主键很简单，怎么设置两个及以上字段为主键呢？</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">create table test </span><br><span class="line">( </span><br><span class="line">   name varchar(19), </span><br><span class="line">   id number, </span><br><span class="line">   value varchar(10), </span><br><span class="line">   primary key (name,id) </span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-<p>这样设置的主键称为复合主键，也就由一个以上的字段构成的主键。</p>
-<h2 id="2、外键约束"><a href="#2、外键约束" class="headerlink" title="2、外键约束"></a>2、外键约束</h2><p>&emsp;&emsp;外键用来在两个表的数据之间建立链接，它可以是一列或者多列。一个表可以有一个或多个外键。外键对应的是参照完整性，一个表的外键可以是空值，若不为空值，则每个外键值必须等于另一个表中主键的某个值。<br>&emsp;&emsp;外键：外键的主要作用是保证数据引用的完整性，定义外键后，不允许删除在另一个表中的具有关联关系的行。</p>
-<ul>
-<li>主表(父表)：相关联字段中主键所在的表</li>
-<li>从表(子表)：相关联字段中外键所在的表<br>语法：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">创建外键：</span><br><span class="line">[constraint &lt;外键名&gt;] foreign key 字段名1[,字段名2,...] references &lt;主表名&gt; 主键列1【，主键列2,...]</span><br><span class="line"></span><br><span class="line">删除外键</span><br><span class="line">alter table tableName drop foreign key foreignKeyName;</span><br></pre></td></tr></table></figure>
-示例<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE sockerteam(</span><br><span class="line">id INT PRIMARY KEY AUTO_INCREMENT,</span><br><span class="line">team_name VARCHAR(25)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">CREATE TABLE sockerplayer</span><br><span class="line">(</span><br><span class="line">id INT PRIMARY KEY auto_increment,</span><br><span class="line">`name` VARCHAR(25) NOT NULL, </span><br><span class="line">teamId INT,</span><br><span class="line">CONSTRAINT team_player FOREIGN KEY (teamId) REFERENCES sockerteam(id)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+          <h1 id="详解WebMvcConfigurer接口"><a href="#详解WebMvcConfigurer接口" class="headerlink" title="详解WebMvcConfigurer接口"></a>详解WebMvcConfigurer接口</h1><hr>
+<p>SpringBoot 确实为我们做了很多事情， 但有时候我们想要自己定义一些Handler，Interceptor，ViewResolver，MessageConverter，该怎么做呢。在Spring Boot 1.5版本都是靠重写WebMvcConfigurerAdapter的方法来添加自定义拦截器，消息转换器等。SpringBoot 2.0 后，该类被标记为@Deprecated。因此我们只能靠实现WebMvcConfigurer接口来实现。接下来让我们来看看这个接口类吧！（列举下常用的方法供参考）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br></pre></td><td class="code"><pre><span class="line">package com.developlee.config;</span><br><span class="line"></span><br><span class="line">import com.alibaba.fastjson.serializer.SerializerFeature;</span><br><span class="line">import com.alibaba.fastjson.support.config.FastJsonConfig;</span><br><span class="line">import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;</span><br><span class="line">import com.developlee.configurer.USLocalDateFormatter;</span><br><span class="line">import org.springframework.format.FormatterRegistry;</span><br><span class="line">import org.springframework.http.MediaType;</span><br><span class="line">import org.springframework.http.converter.HttpMessageConverter;</span><br><span class="line">import org.springframework.http.converter.json.JsonbHttpMessageConverter;</span><br><span class="line">import org.springframework.web.bind.annotation.RequestMethod;</span><br><span class="line">import org.springframework.web.servlet.config.annotation.CorsRegistry;</span><br><span class="line">import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;</span><br><span class="line">import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;</span><br><span class="line">import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;</span><br><span class="line"></span><br><span class="line">import java.time.LocalDate;</span><br><span class="line">import java.util.ArrayList;</span><br><span class="line">import java.util.List;</span><br><span class="line">import java.util.Locale;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * @TODO //</span><br><span class="line"> * @Author Lensen</span><br><span class="line"> * @Date 2018/7/21</span><br><span class="line"> * @Description 实现WebMvcConfigurer接口，</span><br><span class="line"> */</span><br><span class="line"> @Configuration</span><br><span class="line">public class WebConfig implements WebMvcConfigurer &#123;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 添加类型转换器和格式化器</span><br><span class="line">     * @param registry</span><br><span class="line">     */</span><br><span class="line">    @Override</span><br><span class="line">    public void addFormatters(FormatterRegistry registry) &#123;</span><br><span class="line">        registry.addFormatterForFieldType(LocalDate.class, new USLocalDateFormatter());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 跨域支持</span><br><span class="line">     * @param registry</span><br><span class="line">     */</span><br><span class="line">    @Override</span><br><span class="line">    public void addCorsMappings(CorsRegistry registry) &#123;</span><br><span class="line">        registry.addMapping(&quot;/**&quot;)</span><br><span class="line">                .allowedOrigins(&quot;*&quot;)</span><br><span class="line">                .allowCredentials(true)</span><br><span class="line">                .allowedMethods(&quot;GET&quot;, &quot;POST&quot;, &quot;DELETE&quot;, &quot;PUT&quot;)</span><br><span class="line">                .maxAge(3600 * 24);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">     /**</span><br><span class="line">     * 添加静态资源--过滤swagger-api (开源的在线API文档)</span><br><span class="line">     * @param registry</span><br><span class="line">     */</span><br><span class="line">    @Override</span><br><span class="line">    public void addResourceHandlers(ResourceHandlerRegistry registry) &#123;</span><br><span class="line">        //过滤swagger</span><br><span class="line">        registry.addResourceHandler(&quot;swagger-ui.html&quot;)</span><br><span class="line">                .addResourceLocations(&quot;classpath:/META-INF/resources/&quot;);</span><br><span class="line"></span><br><span class="line">        registry.addResourceHandler(&quot;/webjars/**&quot;)</span><br><span class="line">                .addResourceLocations(&quot;classpath:/META-INF/resources/webjars/&quot;);</span><br><span class="line"></span><br><span class="line">        registry.addResourceHandler(&quot;/swagger-resources/**&quot;)</span><br><span class="line">                .addResourceLocations(&quot;classpath:/META-INF/resources/swagger-resources/&quot;);</span><br><span class="line"></span><br><span class="line">        registry.addResourceHandler(&quot;/swagger/**&quot;) .addResourceLocations(&quot;classpath:/META-INF/resources/swagger*&quot;);</span><br><span class="line"></span><br><span class="line">        registry.addResourceHandler(&quot;/v2/api-docs/**&quot;)</span><br><span class="line">                .addResourceLocations(&quot;classpath:/META-INF/resources/v2/api-docs/&quot;);</span><br><span class="line"></span><br><span class="line">       &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 配置消息转换器--这里我用的是alibaba 开源的 fastjson</span><br><span class="line">     * @param converters</span><br><span class="line">     */</span><br><span class="line">    @Override</span><br><span class="line">    public void configureMessageConverters(List&lt;HttpMessageConverter&lt;?&gt;&gt; converters) &#123;</span><br><span class="line">        //1.需要定义一个convert转换消息的对象;</span><br><span class="line">        FastJsonHttpMessageConverter fastJsonHttpMessageConverter = new FastJsonHttpMessageConverter();</span><br><span class="line">        //2.添加fastJson的配置信息，比如：是否要格式化返回的json数据;</span><br><span class="line">        FastJsonConfig fastJsonConfig = new FastJsonConfig();</span><br><span class="line">        fastJsonConfig.setSerializerFeatures(SerializerFeature.PrettyFormat,</span><br><span class="line">                SerializerFeature.WriteMapNullValue,</span><br><span class="line">                SerializerFeature.WriteNullStringAsEmpty,</span><br><span class="line">                SerializerFeature.DisableCircularReferenceDetect,</span><br><span class="line">                SerializerFeature.WriteNullListAsEmpty,</span><br><span class="line">                SerializerFeature.WriteDateUseDateFormat);</span><br><span class="line">        //3处理中文乱码问题</span><br><span class="line">        List&lt;MediaType&gt; fastMediaTypes = new ArrayList&lt;&gt;();</span><br><span class="line">        fastMediaTypes.add(MediaType.APPLICATION_JSON_UTF8);</span><br><span class="line">        //4.在convert中添加配置信息.</span><br><span class="line">        fastJsonHttpMessageConverter.setSupportedMediaTypes(fastMediaTypes);</span><br><span class="line">        fastJsonHttpMessageConverter.setFastJsonConfig(fastJsonConfig);</span><br><span class="line">        //5.将convert添加到converters当中.</span><br><span class="line">        converters.add(fastJsonHttpMessageConverter);</span><br><span class="line">    &#125;</span><br><span class="line">  @Override</span><br><span class="line">    public void addInterceptors(InterceptorRegistry registry) &#123;</span><br><span class="line">        registry.addInterceptor(new ReqInterceptor()).addPathPatterns(&quot;/**&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-</li>
-</ul>
-<h2 id="3、非空约束"><a href="#3、非空约束" class="headerlink" title="3、非空约束"></a>3、非空约束</h2><h2 id="4、唯一性约束"><a href="#4、唯一性约束" class="headerlink" title="4、唯一性约束"></a>4、唯一性约束</h2><p>&emsp;&emsp;唯一性约束(Unique Constraint)要求该列唯一，允许为空，但只能出现一个空值。<br>语法规则如下：<br>1、在定义完列之后直接指定唯一约束，语法如下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">字段名 数据类型 UNIQUE</span><br></pre></td></tr></table></figure>
-
-<p>2、在定义完所有列之后指定唯一约束</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[constraint &lt;约束名&gt;] UNIQUE (&lt;字段名&gt;)</span><br></pre></td></tr></table></figure>
-<h2 id="5、默认约束"><a href="#5、默认约束" class="headerlink" title="5、默认约束"></a>5、默认约束</h2><p>默认约束指定某列的默认值。<br>语法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">字段名数据类型 default 默认值</span><br></pre></td></tr></table></figure>
-
-<h2 id="6、设置表的属性值自动增加"><a href="#6、设置表的属性值自动增加" class="headerlink" title="6、设置表的属性值自动增加"></a>6、设置表的属性值自动增加</h2><p>默认的，在Mysql中AUTO_INCREMENT的初始值是1，每新增一条记录，字段值自动加1。一个表只能有一个字段使用AUTO_INCREMENT约束，且该字段必须为主键的一部分。<br>语法规则如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">字段名 数据类型 AUTO_INCREMENT</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -767,7 +535,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/02/Activiti/Activiti%20API/">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/08/JavaWeb/%E5%AE%9E%E7%8E%B0%E5%BF%85%E9%A1%BB%E5%85%88%E7%99%BB%E9%99%86%E5%90%8E%E6%89%8D%E8%83%BD%E8%AE%BF%E9%97%AE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -781,7 +549,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/11/02/Activiti/Activiti%20API/" class="post-title-link" itemprop="url">Activiti API</a>
+            <a href="/2019/11/08/JavaWeb/%E5%AE%9E%E7%8E%B0%E5%BF%85%E9%A1%BB%E5%85%88%E7%99%BB%E9%99%86%E5%90%8E%E6%89%8D%E8%83%BD%E8%AE%BF%E9%97%AE/" class="post-title-link" itemprop="url">实现先登陆后才能访问网站</a>
         </h1>
 
         <div class="post-meta">
@@ -791,14 +559,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2019-11-02 21:12:45" itemprop="dateCreated datePublished" datetime="2019-11-02T21:12:45+08:00">2019-11-02</time>
+              <time title="Created: 2019-11-08 21:22:43" itemprop="dateCreated datePublished" datetime="2019-11-08T21:22:43+08:00">2019-11-08</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-04 23:53:36" itemprop="dateModified" datetime="2019-11-04T23:53:36+08:00">2019-11-04</time>
+                <time title="Modified: 2019-11-09 13:11:19" itemprop="dateModified" datetime="2019-11-09T13:11:19+08:00">2019-11-09</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -806,8 +574,8 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Activiti/" itemprop="url" rel="index">
-                    <span itemprop="name">Activiti</span>
+                  <a href="/categories/Java-Web/" itemprop="url" rel="index">
+                    <span itemprop="name">Java Web</span>
                   </a>
                 </span>
             </span>
@@ -823,48 +591,16 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Activiti-API"><a href="#Activiti-API" class="headerlink" title="Activiti API"></a>Activiti API</h1><hr>
-<p>ProcessEngine API是与Activiti交互的最常见方式。中心起点是ProcessEngine，可以按照配置部分中所述的多种方式创建 。从ProcessEngine，您可以获取包含工作流/ BPM方法的各种服务。ProcessEngine和服务对象是线程安全的。因此，您可以为整个服务器保留对其中之一的引用。<br><img src="https://i.loli.net/2019/11/02/XmiH2ZJc5v3a8Sh.png" alt="api.services.png"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();</span><br><span class="line"></span><br><span class="line">RuntimeService runtimeService = processEngine.getRuntimeService();</span><br><span class="line">RepositoryService repositoryService = processEngine.getRepositoryService();</span><br><span class="line">TaskService taskService = processEngine.getTaskService();</span><br><span class="line">ManagementService managementService = processEngine.getManagementService();</span><br><span class="line">IdentityService identityService = processEngine.getIdentityService();</span><br><span class="line">HistoryService historyService = processEngine.getHistoryService();</span><br><span class="line">FormService formService = processEngine.getFormService();</span><br><span class="line">DynamicBpmnService dynamicBpmnService = processEngine.getDynamicBpmnService();</span><br></pre></td></tr></table></figure>
+          <h1 id="实现先登陆后才能访问网站"><a href="#实现先登陆后才能访问网站" class="headerlink" title="实现先登陆后才能访问网站"></a>实现先登陆后才能访问网站</h1><hr>
+<p>&emsp;&emsp;在开发网站时，可能会遇到必须让用户先登陆才能进入网站的情况。对于这种情况，有几种实现方式。</p>
+<h2 id="使用Filter"><a href="#使用Filter" class="headerlink" title="使用Filter"></a>使用Filter</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">@Component</span><br><span class="line">@WebFilter(urlPatterns = &#123;&quot;/*&quot;&#125;)</span><br><span class="line">public class MyFilter implements Filter &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void init(FilterConfig filterConfig) throws ServletException &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    @Override</span><br><span class="line">    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException &#123;</span><br><span class="line"></span><br><span class="line">        HttpServletRequest request=(HttpServletRequest) servletRequest;</span><br><span class="line">        HttpServletResponse response=(HttpServletResponse) servletResponse;</span><br><span class="line"></span><br><span class="line">        String requestURI = request.getRequestURI();</span><br><span class="line">        if (&quot;/login&quot;.equals(requestURI))&#123;</span><br><span class="line">            filterChain.doFilter(servletRequest,servletResponse);</span><br><span class="line">        &#125;else &#123;</span><br><span class="line">            String username = servletRequest.getParameter(&quot;username&quot;);</span><br><span class="line"></span><br><span class="line">            if (username!=null)&#123;</span><br><span class="line">                System.out.println(username);</span><br><span class="line">            &#125;else &#123;</span><br><span class="line"></span><br><span class="line">                response.sendRedirect(&quot;/login&quot;);</span><br><span class="line"></span><br><span class="line">                //注意这里需要直接return</span><br><span class="line">                return;</span><br><span class="line">            &#125;</span><br><span class="line">            filterChain.doFilter(servletRequest,servletResponse);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    @Override</span><br><span class="line">    public void destroy() &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>ProcessEngines.getDefaultProcessEngine()会在首次调用时初始化并构建一个流程引擎，此后始终返回相同的流程引擎。可以使用ProcessEngines.init() 和正确创建和关闭所有流程引擎ProcessEngines.destroy()。</p>
-<p>ProcessEngines类将扫描所有activiti.cfg.xml和activiti-context.xml文件。对于所有activiti.cfg.xml文件，将以典型的Activiti方式构建流程引擎：ProcessEngineConfiguration.createProcessEngineConfigurationFromInputStream(inputStream).buildProcessEngine()。对于所有activiti-context.xml文件，将以Spring方式构建流程引擎：首先创建Spring应用程序上下文，然后从该应用程序上下文中获取流程引擎。</p>
-<p>所有服务都是无状态的。这意味着您可以轻松地在群集中的多个节点上运行Activiti，每个节点都访问同一数据库，而不必担心哪台计算机实际执行了先前的调用。无论在何处执行，对任何服务的任何调用都是幂等的。</p>
-<h2 id="各个节点的Service"><a href="#各个节点的Service" class="headerlink" title="各个节点的Service"></a>各个节点的Service</h2><h3 id="RepositoryService"><a href="#RepositoryService" class="headerlink" title="RepositoryService"></a>RepositoryService</h3><p>当使用Activiti引擎时，RepositoryService可能是第一个需要的服务。这项服务提供运营管理和操纵deployments和process definitions。此处无需赘述，流程定义是BPMN 2.0流程的Java对应项。它代表了流程中每个步骤的结构和行为。A deployment是Activiti引擎中包装的单位。一个部署可以包含多个BPMN 2.0 xml文件和任何其他资源。一个部署中包含的内容的选择取决于开发人员。它的范围从单个流程BPMN 2.0 xml文件到整个流程包和相关资源（例如，部署hr-processes）可能包含与HR流程的一切）。在RepositoryService允许deploy这样的包。部署部署意味着将其上载到引擎，在这里将检查并解析所有进程，然后再将它们存储在数据库中。从那时起，系统便知道该部署，并且现在可以启动该部署中包括的任何过程。</p>
-<p>此外，这项服务还可以</p>
-<ul>
-<li><p>查询引擎已知的部署和流程定义。</p>
-</li>
-<li><p>挂起并激活整个部署或特定过程定义。挂起表示无法对其进行进一步的操作，而激活是相反的操作。</p>
-</li>
-<li><p>检索各种资源，例如部署中包含的文件或引擎自动生成的流程图。</p>
-</li>
-<li><p>检索流程定义的POJO版本，该版本可用于使用Java而不是xml自省流程。</p>
-</li>
-</ul>
-<h3 id="RuntimeService"><a href="#RuntimeService" class="headerlink" title="RuntimeService"></a>RuntimeService</h3><p>它处理启动流程定义的新流程实例。如上所述，a process definition定义了过程中不同步骤的结构和行为。流程实例是这种流程定义的一种执行。对于每个流程定义，通常会同时运行许多实例。这RuntimeService也是用于检索和存储的服务process variables。这是特定于给定流程实例的数据，并且可以由流程中的各种构造使用（例如，专用网关通常使用流程变量来确定选择哪个路径来继续该流程）。</p>
-<h2 id="使用Activiti服务"><a href="#使用Activiti服务" class="headerlink" title="使用Activiti服务"></a>使用Activiti服务</h2><p>如上所述，与Activiti引擎进行交互的方式是通过org.activiti.engine.ProcessEngine类实例公开的服务。以下代码段假定您具有有效的Activiti环境，即您可以访问有效的org.activiti.engine.ProcessEngine。如果您只想尝试下面的代码，则可以下载或克隆Activiti单元测试模板，将其导入IDE中，然后将testUserguideCode()方法添加到org.activiti.MyUnitTest单元测试中。</p>
-<p>这个小教程的最终目标是要有一个能正常工作的业务流程，该流程模仿公司中一个简单的假期请求流程：<br><img src="https://i.loli.net/2019/11/02/zswSxg3GMAHL5Iy.png" alt="api.vacationRequest.png"></p>
-<h3 id="部署流程"><a href="#部署流程" class="headerlink" title="部署流程"></a>部署流程</h3><p>与静态数据相关的所有内容（例如流程定义）都可以通过RepositoryService访问。从概念上讲，每个此类静态数据都是Activiti引擎存储库的内容。</p>
-<p>为了使Activiti引擎知道此过程，我们必须首先对其进行部署。部署意味着引擎将BPMN 2.0 xml解析为可执行文件，并为部署中包括的每个流程定义添加新的数据库记录。这样，当引擎重新启动时，它仍然会知道所有已部署的进程：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();</span><br><span class="line">RepositoryService repositoryService = processEngine.getRepositoryService();</span><br><span class="line">repositoryService.createDeployment()</span><br><span class="line">  .addClasspathResource(&quot;org/activiti/test/VacationRequest.bpmn20.xml&quot;)</span><br><span class="line">  .deploy();</span><br><span class="line"></span><br><span class="line">Log.info(&quot;Number of process definitions: &quot; + repositoryService.createProcessDefinitionQuery().count());</span><br></pre></td></tr></table></figure>
+<h2 id="使用HandlerInterceptorAdapter"><a href="#使用HandlerInterceptorAdapter" class="headerlink" title="使用HandlerInterceptorAdapter"></a>使用HandlerInterceptorAdapter</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">@Component</span><br><span class="line">public class MyHandlerInterceptor extends HandlerInterceptorAdapter &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception &#123;</span><br><span class="line">        System.out.println(&quot;preHandle()&quot;);</span><br><span class="line">//        String username = request.getParameter(&quot;username&quot;);</span><br><span class="line">//</span><br><span class="line">//        if (username==null||&quot;&quot;.equals(username))&#123;</span><br><span class="line">//            response.sendRedirect(&quot;/&quot;);</span><br><span class="line">//            return false;</span><br><span class="line">//        &#125;</span><br><span class="line">        HttpSession session = request.getSession();</span><br><span class="line">        User user =(User) session.getAttribute(&quot;user&quot;);</span><br><span class="line">        if (user==null)&#123;</span><br><span class="line">            response.sendRedirect(&quot;/&quot;);</span><br><span class="line">            return false;</span><br><span class="line">        &#125;else &#123;</span><br><span class="line">            System.out.println(user);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, @Nullable ModelAndView modelAndView) throws Exception &#123;</span><br><span class="line">//        String username=request.getParameter(&quot;username&quot;);</span><br><span class="line"></span><br><span class="line">        //System.out.println(&quot;postHandle&quot;);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, @Nullable Exception ex) throws Exception &#123;</span><br><span class="line">        System.out.println(&quot;afterCompletion()&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="启动流程实例"><a href="#启动流程实例" class="headerlink" title="启动流程实例"></a>启动流程实例</h3><p>将流程定义部署到Activiti引擎后，我们可以从中启动新流程实例。对于每个流程定义，通常都有许多流程实例。流程定义是蓝图，而流程实例是其运行时执行。<br>与进程的运行时状态相关的所有内容都可以在RuntimeService中找到。有多种启动新流程实例的方法。在以下代码段中，我们使用在流程定义xml中定义的键来启动流程实例。我们还在流程实例启动时提供了一些流程变量，因为第一个用户任务的描述将在其表达式中使用它们。通常使用过程变量，因为它们为特定过程定义的过程实例赋予了含义。通常，流程变量使流程实例彼此不同。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">//定义流程变量</span><br><span class="line">Map&lt;String, Object&gt; variables = new HashMap&lt;String, Object&gt;();</span><br><span class="line">variables.put(&quot;employeeName&quot;, &quot;Kermit&quot;);</span><br><span class="line">variables.put(&quot;numberOfDays&quot;, new Integer(4));</span><br><span class="line">variables.put(&quot;vacationMotivation&quot;, &quot;I&apos;m really tired!&quot;);</span><br><span class="line"></span><br><span class="line">RuntimeService runtimeService = processEngine.getRuntimeService();</span><br><span class="line">ProcessInstance processInstance = runtimeService.startProcessInstanceByKey(&quot;vacationRequest&quot;, variables);</span><br><span class="line"></span><br><span class="line">// Verify that we started a new process instance</span><br><span class="line">Log.info(&quot;Number of process instances: &quot; + runtimeService.createProcessInstanceQuery().count());</span><br></pre></td></tr></table></figure>
+<p>为了让这个HandlerInterceptorAdapter生效，必须进行一些配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">public class WebConfig implements WebMvcConfigurer &#123;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    private MyHandlerInterceptor handlerInterceptor;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void addInterceptors(InterceptorRegistry registry) &#123;</span><br><span class="line">        registry.addInterceptor(handlerInterceptor).addPathPatterns(&quot;/*&quot;).excludePathPatterns(&quot;/login&quot;,&quot;/&quot;,&quot;/static/**&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="完成任务"><a href="#完成任务" class="headerlink" title="完成任务"></a>完成任务</h3><p>该过程开始时，第一步将是用户任务。这是系统用户必须执行的步骤。通常，此类用户将拥有一个任务收件箱，其中列出了该用户需要完成的所有任务。以下代码段显示了如何执行这种查询：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// Fetch all tasks for the management group</span><br><span class="line">TaskService taskService = processEngine.getTaskService();</span><br><span class="line">List&lt;Task&gt; tasks = taskService.createTaskQuery().taskCandidateGroup(&quot;management&quot;).list();</span><br><span class="line">for (Task task : tasks) &#123;</span><br><span class="line">  Log.info(&quot;Task available: &quot; + task.getName());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>要继续该流程实例，我们需要完成此任务。对于Activiti引擎，这意味着您需要complete执行任务。以下片段显示了如何完成此操作：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Task task = tasks.get(0);</span><br><span class="line"></span><br><span class="line">Map&lt;String, Object&gt; taskVariables = new HashMap&lt;String, Object&gt;();</span><br><span class="line">taskVariables.put(&quot;vacationApproved&quot;, &quot;false&quot;);</span><br><span class="line">taskVariables.put(&quot;managerMotivation&quot;, &quot;We have a tight deadline!&quot;);</span><br><span class="line">taskService.complete(task.getId(), taskVariables);</span><br></pre></td></tr></table></figure>
-
-<p>现在，流程实例将继续进行下一步。在此示例中，下一步允许员工填写可调整其原始休假请求的表格。员工可以重新提交休假请求，这将导致流程循环回到启动任务。</p>
-<h3 id="暂停或激活流程"><a href="#暂停或激活流程" class="headerlink" title="暂停或激活流程"></a>暂停或激活流程</h3><p>可以暂停流程定义。流程定义被挂起时，无法创建新的流程实例（将引发异常）。可以通过以下方式暂停流程定义RepositoryService：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">repositoryService.suspendProcessDefinitionByKey(&quot;vacationRequest&quot;);</span><br><span class="line">try &#123;</span><br><span class="line">  runtimeService.startProcessInstanceByKey(&quot;vacationRequest&quot;);</span><br><span class="line">&#125; catch (ActivitiException e) &#123;</span><br><span class="line">  e.printStackTrace();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>要重新激活流程定义，只需调用其中一种repositoryService.activateProcessDefinitionXXX方法。<br>也可以挂起流程实例。暂停后，该过程将无法继续执行（例如，完成任务会引发异常），并且不会执行任何作业（例如计时器）。可以通过调用runtimeService.suspendProcessInstance方法来挂起流程实例。通过调用runtimeService.activateProcessInstanceXXX方法来再次激活流程实例。</p>
-<h2 id="查询API"><a href="#查询API" class="headerlink" title="查询API"></a>查询API</h2><p>…待写</p>
-<h2 id="流程变量"><a href="#流程变量" class="headerlink" title="流程变量"></a>流程变量</h2><p>=====待写</p>
-<h2 id="瞬态变量"><a href="#瞬态变量" class="headerlink" title="瞬态变量"></a>瞬态变量</h2>
       
     </div>
 
@@ -883,7 +619,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/02/Java%E5%9F%BA%E7%A1%80/%E5%AF%B9%E8%B1%A1%E5%BA%8F%E5%88%97%E5%8C%96/">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/08/Java%E5%9F%BA%E7%A1%80/Java%E6%9E%9A%E4%B8%BE%E7%B1%BB%E5%9E%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -897,7 +633,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/11/02/Java%E5%9F%BA%E7%A1%80/%E5%AF%B9%E8%B1%A1%E5%BA%8F%E5%88%97%E5%8C%96/" class="post-title-link" itemprop="url">对象序列化</a>
+            <a href="/2019/11/08/Java%E5%9F%BA%E7%A1%80/Java%E6%9E%9A%E4%B8%BE%E7%B1%BB%E5%9E%8B/" class="post-title-link" itemprop="url">Java枚举类型</a>
         </h1>
 
         <div class="post-meta">
@@ -907,7 +643,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2019-11-02 20:09:41" itemprop="dateCreated datePublished" datetime="2019-11-02T20:09:41+08:00">2019-11-02</time>
+              <time title="Created: 2019-11-08 19:36:30" itemprop="dateCreated datePublished" datetime="2019-11-08T19:36:30+08:00">2019-11-08</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -939,24 +675,18 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="对象序列化"><a href="#对象序列化" class="headerlink" title="对象序列化"></a>对象序列化</h1><hr>
-<h2 id="序列化是什么？"><a href="#序列化是什么？" class="headerlink" title="序列化是什么？"></a>序列化是什么？</h2><p>&emsp;&emsp;当你创建对象时，只要你需要，它就会一直存在，但是在程序终止时，无论如何它都不会继续存在。尽管这么做肯定是有意义的，但是仍旧存在某些情况，如果对象能够在程序不运行的情况下仍能存在并保存其信息，那将非常有用。这样，在下次运行程序时，该对象将被重建并且拥有的信息与在程序上次运行时它所拥有的信息相同。如果能够将一个对象声明为是“持久化”的，并为我们处理掉所有细节，那将会显得十分方便。<br>&emsp;&emsp;Java的对象序列化将那些实现了Serializable接口的对象转换成一个字节序列，并能够在以后将这个字节完全恢复为原来的对象。<br>对象序列化概念的加入是为了支持两种主要特性：</p>
+          <h1 id="Java枚举类型"><a href="#Java枚举类型" class="headerlink" title="Java枚举类型"></a>Java枚举类型</h1><hr>
+<p>&emsp;&emsp;关键字enum可以将一组具名的值的有限集合创建为一种新的类型，而这些具名的值可以作为常规的程序组件使用。这是一种非常有用的功能。</p>
+<h2 id="基本enum特性"><a href="#基本enum特性" class="headerlink" title="基本enum特性"></a>基本enum特性</h2><p>&emsp;&emsp;创建enum时，编译器会为你生成一个相关的类，这个类继承自java.lang.Enum.下面是这个类的一些功能</p>
 <ul>
-<li>Java的远程方法调用</li>
-<li>保存设计阶段的Bean的状态信息<br>只要对象实现了Serializable接口(标记接口，不包括任何方法)，对象的序列化处理就会非常简单。</li>
+<li>ordinal()：返回一个int值，这是每个enum实例在声明时的次序</li>
+<li>values():遍历enum实例的数组，而且该数组中的元素严格保持其在enum中声明时的顺序，</li>
+<li>Enum类实现了Comparable接口和Serializable接口</li>
 </ul>
-<h2 id="序列化的过程"><a href="#序列化的过程" class="headerlink" title="序列化的过程"></a>序列化的过程</h2><p>要序列化一个对象，首先要创建某些OutputStream对象，然后将其封装在一个ObjectOutputStream对象内。这时，只需要调用writeObject()即可将对象序列化，并将其发送给ObjectStream(对象化序列是基于字节的，因要使用InputStream和OutputStream继承层次结构)。要反向进行该过程(即将一个序列还原为一个对象)，需要将一个InputStream封装在ObjectinputStream内，然后调用readObjectt()。和往常一样，我们最后获得的是一个引用，它指向一个向上转型的Object，所以必须向下转型才能直接设置它们。</p>
-<p>示例：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line">package io;//: io/Worm.java</span><br><span class="line">// Demonstrates object serialization.</span><br><span class="line">import java.io.*;</span><br><span class="line">import java.util.*;</span><br><span class="line">import static net.mindview.util.Print.*;</span><br><span class="line"></span><br><span class="line">class Data implements Serializable &#123;</span><br><span class="line">  private int n;</span><br><span class="line">  public Data(int n) &#123; this.n = n; &#125;</span><br><span class="line">  public String toString() &#123; return Integer.toString(n); &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class Worm implements Serializable &#123;</span><br><span class="line">  private static Random rand = new Random(47);</span><br><span class="line">  private Data[] d = &#123;</span><br><span class="line">    new Data(rand.nextInt(10)),</span><br><span class="line">    new Data(rand.nextInt(10)),</span><br><span class="line">    new Data(rand.nextInt(10))</span><br><span class="line">  &#125;;</span><br><span class="line">  private Worm next;</span><br><span class="line">  private char c;</span><br><span class="line">  // Value of i == number of segments</span><br><span class="line">  public Worm(int i, char x) &#123;</span><br><span class="line">    print(&quot;Worm constructor: &quot; + i);</span><br><span class="line">    c = x;</span><br><span class="line">    if(--i &gt; 0)</span><br><span class="line">      next = new Worm(i, (char)(x + 1));</span><br><span class="line">  &#125;</span><br><span class="line">  public Worm() &#123;</span><br><span class="line">    print(&quot;Default constructor&quot;);</span><br><span class="line">  &#125;</span><br><span class="line">  public String toString() &#123;</span><br><span class="line">    StringBuilder result = new StringBuilder(&quot;:&quot;);</span><br><span class="line">    result.append(c);</span><br><span class="line">    result.append(&quot;(&quot;);</span><br><span class="line">    for(Data dat : d)</span><br><span class="line">      result.append(dat);</span><br><span class="line">    result.append(&quot;)&quot;);</span><br><span class="line">    if(next != null)</span><br><span class="line">      result.append(next);</span><br><span class="line">    return result.toString();</span><br><span class="line">  &#125;</span><br><span class="line">  public static void main(String[] args)</span><br><span class="line">  throws ClassNotFoundException, IOException &#123;</span><br><span class="line">    Worm w = new Worm(6, &apos;a&apos;);</span><br><span class="line">    print(&quot;w = &quot; + w);</span><br><span class="line">    ObjectOutputStream out = new ObjectOutputStream(</span><br><span class="line">      new FileOutputStream(&quot;worm.out&quot;));</span><br><span class="line">    out.writeObject(&quot;Worm storage\n&quot;);</span><br><span class="line">    out.writeObject(w);</span><br><span class="line">    out.close(); // Also flushes output</span><br><span class="line">    ObjectInputStream in = new ObjectInputStream(</span><br><span class="line">      new FileInputStream(&quot;worm.out&quot;));</span><br><span class="line">    String s = (String)in.readObject();</span><br><span class="line">    Worm w2 = (Worm)in.readObject();</span><br><span class="line">    print(s + &quot;w2 = &quot; + w2);</span><br><span class="line">    ByteArrayOutputStream bout =</span><br><span class="line">      new ByteArrayOutputStream();</span><br><span class="line">    ObjectOutputStream out2 = new ObjectOutputStream(bout);</span><br><span class="line">    out2.writeObject(&quot;Worm storage\n&quot;);</span><br><span class="line">    out2.writeObject(w);</span><br><span class="line">    out2.flush();</span><br><span class="line">    ObjectInputStream in2 = new ObjectInputStream(</span><br><span class="line">      new ByteArrayInputStream(bout.toByteArray()));</span><br><span class="line">    s = (String)in2.readObject();</span><br><span class="line">    Worm w3 = (Worm)in2.readObject();</span><br><span class="line">    print(s + &quot;w3 = &quot; + w3);</span><br><span class="line">  &#125;</span><br><span class="line">&#125; /* Output:</span><br><span class="line">Worm constructor: 6</span><br><span class="line">Worm constructor: 5</span><br><span class="line">Worm constructor: 4</span><br><span class="line">Worm constructor: 3</span><br><span class="line">Worm constructor: 2</span><br><span class="line">Worm constructor: 1</span><br><span class="line">w = :a(853):b(119):c(802):d(788):e(199):f(881)</span><br><span class="line">Worm storage</span><br><span class="line">w2 = :a(853):b(119):c(802):d(788):e(199):f(881)</span><br><span class="line">Worm storage</span><br><span class="line">w3 = :a(853):b(119):c(802):d(788):e(199):f(881)</span><br><span class="line">*///:~</span><br></pre></td></tr></table></figure>
+<h2 id="向enum中添加新方法"><a href="#向enum中添加新方法" class="headerlink" title="向enum中添加新方法"></a>向enum中添加新方法</h2><p>&emsp;&emsp;除了不能继承自一个enum之外，我们基本上可以将enum看作一个常规的类。也就是说，我们可以向enum中添加方法。enum甚至可以有main方法。<br>一般来说，我们希望每个枚举类型实例能够返回对自身的描述，而不仅仅只是默认的toString()实现，这只能返回枚举实例类型的名字。为此，你可以提供一个构造器，专门负责处理这个额外的信息，然后添加一个方法，返回这个描述信息。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">public enum OzWitch &#123;</span><br><span class="line">  // Instances must be defined first, before methods:</span><br><span class="line">  WEST(&quot;Miss Gulch, aka the Wicked Witch of the West&quot;),</span><br><span class="line">  NORTH(&quot;Glinda, the Good Witch of the North&quot;),</span><br><span class="line">  EAST(&quot;Wicked Witch of the East, wearer of the Ruby &quot; +</span><br><span class="line">    &quot;Slippers, crushed by Dorothy&apos;s house&quot;),</span><br><span class="line">  SOUTH(&quot;Good by inference, but missing&quot;);</span><br><span class="line"></span><br><span class="line">  private String description;</span><br><span class="line"></span><br><span class="line">  // Constructor must be package or private access:</span><br><span class="line">  private OzWitch(String description) &#123;</span><br><span class="line">    this.description = description;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public String getDescription() &#123; return description; &#125;</span><br><span class="line"></span><br><span class="line">  public static void main(String[] args) &#123;</span><br><span class="line">    for(OzWitch witch : OzWitch.values())</span><br><span class="line">      print(witch + &quot;: &quot; + witch.getDescription());</span><br><span class="line">  &#125;</span><br><span class="line">&#125; /* Output:</span><br><span class="line">WEST: Miss Gulch, aka the Wicked Witch of the West</span><br><span class="line">NORTH: Glinda, the Good Witch of the North</span><br><span class="line">EAST: Wicked Witch of the East, wearer of the Ruby Slippers, crushed by Dorothy&apos;s house</span><br><span class="line">SOUTH: Good by inference, but missing</span><br><span class="line">*///:~</span><br></pre></td></tr></table></figure>
 
-<h2 id="序列化中serialVersionUID作用"><a href="#序列化中serialVersionUID作用" class="headerlink" title="序列化中serialVersionUID作用"></a>序列化中serialVersionUID作用</h2><p>serialVersionUID适用于Java的序列化机制。简单来说，Java的序列化机制是通过判断类的serialVersionUID来验证版本一致性的。在进行反序列化时，JVM会把传来的字节流中的serialVersionUID与本地相应实体类的serialVersionUID进行比较，如果相同就认为是一致的，可以进行反序列化，否则就会出现序列化版本不一致的异常，即是InvalidCastException。</p>
-<p>serialVersionUID有两种显示的生成方式：<br>一是默认的1L，比如：private static final long serialVersionUID = 1L;<br>二是根据类名、接口名、成员方法及属性等来生成一个64位的哈希字段，比如：<br>private static final  long   serialVersionUID = xxxxL;</p>
-<p>当一个类实现了Serializable接口，如果没有显示的定义serialVersionUID，Eclipse会提供相应的提醒。面对这种情况，我们只需要在Eclipse中点击类中warning图标一下，Eclipse就会      自动给定两种生成的方式。如果不想定义，在Eclipse的设置中也可以把它关掉的，设置如下：<br>Window ==&gt; Preferences ==&gt; Java ==&gt; Compiler ==&gt; Error/Warnings ==&gt; Potential programming problems<br>将Serializable class without serialVersionUID的warning改成ignore即可。</p>
-<p>当实现java.io.Serializable接口的类没有显式地定义一个serialVersionUID变量时候，Java序列化机制会根据编译的Class自动生成一个serialVersionUID作序列化版本比较用，这种情况下，如果Class文件(类名，方法明等)没有发生变化(增加空格，换行，增加注释等等)，就算再编译多次，serialVersionUID也不会变化的。</p>
-<p>如果我们不希望通过编译来强制划分软件版本，即实现序列化接口的实体能够兼容先前版本，就需要显式地定义一个名为serialVersionUID，类型为long的变量，不修改这个变量值的序列化实体都可以相互进行串行化和反串行化。</p>
-<h2 id="寻找类"><a href="#寻找类" class="headerlink" title="寻找类"></a>寻找类</h2><p>&emsp;&emsp;将一个对象从它的序列化状态中恢复出来，必须保证Java虚拟机能找到相关的.class文件</p>
-<h2 id="序列化的控制"><a href="#序列化的控制" class="headerlink" title="序列化的控制"></a>序列化的控制</h2><p>&emsp;&emsp;默认的序列化机制并不难操作。然而，如果有特殊的需要那又该怎么办呢?</p>
-<h2 id="transient-瞬时-关键字"><a href="#transient-瞬时-关键字" class="headerlink" title="transient(瞬时)关键字"></a>transient(瞬时)关键字</h2><p>&emsp;&emsp;当我们对序列化进行控制时，可能某个字段字对象不想让Java的序列化机制自动保存与恢复。如果子对象表示的是我们不希望将其序列化的敏感信息(如密码)。然而，如果我们操作是一个Serializable对象，那么所有的序列化操作都会自动进行。为了能够予以控制，可以使用transient关键字逐个字段地关闭序列化，它的意思是“不用麻烦你保存或恢复数据–我自己处理”。</p>
+<p>后面还有更加高级的知识，见Java编程思想</p>
 
       
     </div>
@@ -976,7 +706,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/02/Activiti/Activiti%E5%85%A5%E9%97%A8/">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/08/Spring/Spring%E8%A1%A8%E5%8D%95%E6%A0%A1%E9%AA%8C/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -990,7 +720,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/11/02/Activiti/Activiti%E5%85%A5%E9%97%A8/" class="post-title-link" itemprop="url">Activiti入门</a>
+            <a href="/2019/11/08/Spring/Spring%E8%A1%A8%E5%8D%95%E6%A0%A1%E9%AA%8C/" class="post-title-link" itemprop="url">Spring表单校验</a>
         </h1>
 
         <div class="post-meta">
@@ -1001,7 +731,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2019-11-02 19:40:07 / Modified: 21:25:59" itemprop="dateCreated datePublished" datetime="2019-11-02T19:40:07+08:00">2019-11-02</time>
+              <time title="Created: 2019-11-08 18:10:35 / Modified: 19:29:48" itemprop="dateCreated datePublished" datetime="2019-11-08T18:10:35+08:00">2019-11-08</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1009,8 +739,8 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Activiti/" itemprop="url" rel="index">
-                    <span itemprop="name">Activiti</span>
+                  <a href="/categories/spring/" itemprop="url" rel="index">
+                    <span itemprop="name">spring</span>
                   </a>
                 </span>
             </span>
@@ -1026,92 +756,209 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Activiti入门"><a href="#Activiti入门" class="headerlink" title="Activiti入门"></a>Activiti入门</h1><hr>
-<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Activiti是领先的轻量级，以Java为中心的开源BPMN引擎，可满足现实世界中的流程自动化需求。Activiti Cloud现在是新一代的业务自动化平台，提供了一组旨在在分布式基础架构上运行的云原生模块。</p>
-<h2 id="引入Activiti的依赖"><a href="#引入Activiti的依赖" class="headerlink" title="引入Activiti的依赖"></a>引入Activiti的依赖</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.activiti&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;activiti-engine&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;7.1.0.M4&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.activiti&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;activiti-spring&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;7.1.0.M4&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+          <h1 id="Spring表单校验"><a href="#Spring表单校验" class="headerlink" title="Spring表单校验"></a>Spring表单校验</h1><hr>
+<p>从Spring 3.0开始，Spring对Java校验API（Java Validation API，又称JSR-303）提供了支持。在Spring MVC中要使用Java校验API的话，并不需要什么额外的配置。只要保证在类路径下包含这个Java API的实现即可，比如Hibernate Validator。</p>
+<p>引入hibernate-validator：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-validator --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.hibernate&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;hibernate-validator&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;5.2.4.Final&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
 
-<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><h3 id="配置一个ProcessEngine"><a href="#配置一个ProcessEngine" class="headerlink" title="配置一个ProcessEngine"></a>配置一个ProcessEngine</h3><p>Activiti流程引擎通过名为的XML文件进行配置activiti.cfg.xml。请注意，如果您使用的是Spring风格的流程引擎构建，则此方法不适用。</p>
-<p>获得的最简单方法ProcessEngine是使用org.activiti.engine.ProcessEngines类：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();</span><br></pre></td></tr></table></figure>
+<h2 id="校验注解"><a href="#校验注解" class="headerlink" title="校验注解"></a>校验注解</h2><p>所有的注解都位于javax.validation.constraints和org.hibernate.validator.constraints包中。下表列出了这些校验注解。</p>
+<table>
+<thead>
+<tr>
+<th>注解</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>@Null</td>
+<td>限制只能为null</td>
+</tr>
+<tr>
+<td>@NotNull</td>
+<td>限制必须不为null</td>
+</tr>
+<tr>
+<td>@AssertFalse</td>
+<td>限制必须为false</td>
+</tr>
+<tr>
+<td>@AssertTrue</td>
+<td>限制必须为true</td>
+</tr>
+<tr>
+<td>@DecimalMax(value)</td>
+<td>限制必须为一个不大于指定值的数字</td>
+</tr>
+<tr>
+<td>@DecimalMin(value)</td>
+<td>限制必须为一个不小于指定值的数字</td>
+</tr>
+<tr>
+<td>@Digits(integer,fraction)</td>
+<td>限制必须为一个小数，且整数部分的位数不能超过integer， 小数部分的位数不能超过fraction</td>
+</tr>
+<tr>
+<td>@Future</td>
+<td>限制必须是一个将来的日期</td>
+</tr>
+<tr>
+<td>@Past</td>
+<td>限制必须是一个过去的日期</td>
+</tr>
+<tr>
+<td>@Max(value)</td>
+<td>限制必须为一个不大于指定值的数字</td>
+</tr>
+<tr>
+<td>@Min(value)</td>
+<td>限制必须为一个不小于指定值的数字</td>
+</tr>
+<tr>
+<td>@Past</td>
+<td>限制必须是一个过去的日期</td>
+</tr>
+<tr>
+<td>@Pattern(value)</td>
+<td>限制必须符合指定的正则表达式</td>
+</tr>
+<tr>
+<td>@Size(max,min)</td>
+<td>限制字符长度必须在min到max之间</td>
+</tr>
+<tr>
+<td>@SafeHtml</td>
+<td>字符串是安全的html</td>
+</tr>
+<tr>
+<td>@URL</td>
+<td>字符串是合法的URL</td>
+</tr>
+<tr>
+<td>@NotBlank</td>
+<td>字符串必须有字符</td>
+</tr>
+<tr>
+<td>@NotEmpty</td>
+<td>字符串不为NULL，集合有字符</td>
+</tr>
+<tr>
+<td>@AssertFalse</td>
+<td>必须是false</td>
+</tr>
+<tr>
+<td>@AssertTrue</td>
+<td>必须是true</td>
+</tr>
+</tbody></table>
+<h2 id="使用校验注解配置实体类"><a href="#使用校验注解配置实体类" class="headerlink" title="使用校验注解配置实体类"></a>使用校验注解配置实体类</h2><p>新建一个表单实体类，并加上注解：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">import javax.validation.constraints.NotNull;</span><br><span class="line">import javax.validation.constraints.Size;</span><br><span class="line">import org.hibernate.validator.constraints.Email;</span><br><span class="line"> </span><br><span class="line">public class Form &#123;</span><br><span class="line">    @NotNull</span><br><span class="line">    @Size(min = 5, max = 16, message = &quot;&#123;name.msg&#125;&quot;)</span><br><span class="line">    private String name;</span><br><span class="line"></span><br><span class="line">    @NotNull()</span><br><span class="line">    @Email(message = &quot;&#123;email.msg&#125;&quot;)</span><br><span class="line">    private String email;</span><br><span class="line"></span><br><span class="line">    @NotNull</span><br><span class="line">    @Size(min = 5, max = 16, message = &quot;&#123;password.msg&#125;&quot;)</span><br><span class="line">    private String password;</span><br><span class="line"></span><br><span class="line">    public String getName() &#123;</span><br><span class="line">        return name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setName(String name) &#123;</span><br><span class="line">        this.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getEmail() &#123;</span><br><span class="line">        return email;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setEmail(String email) &#123;</span><br><span class="line">        this.email = email;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getPassword() &#123;</span><br><span class="line">        return password;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setPassword(String password) &#123;</span><br><span class="line">        this.password = password;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>这将activiti.cfg.xml在类路径上查找文件，并根据该文件中的配置构造一个引擎。以下代码段显示了示例配置。以下各节将详细介绍配置属性。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;</span><br><span class="line">       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><br><span class="line">       xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd&quot;&gt;</span><br><span class="line"></span><br><span class="line">  &lt;bean id=&quot;processEngineConfiguration&quot; class=&quot;org.activiti.engine.impl.cfg.StandaloneProcessEngineConfiguration&quot;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;property name=&quot;jdbcUrl&quot; value=&quot;jdbc:h2:mem:activiti;DB_CLOSE_DELAY=1000&quot; /&gt;</span><br><span class="line">    &lt;property name=&quot;jdbcDriver&quot; value=&quot;org.h2.Driver&quot; /&gt;</span><br><span class="line">    &lt;property name=&quot;jdbcUsername&quot; value=&quot;sa&quot; /&gt;</span><br><span class="line">    &lt;property name=&quot;jdbcPassword&quot; value=&quot;&quot; /&gt;</span><br><span class="line"></span><br><span class="line">    &lt;property name=&quot;databaseSchemaUpdate&quot; value=&quot;true&quot; /&gt;</span><br><span class="line"></span><br><span class="line">    &lt;property name=&quot;asyncExecutorActivate&quot; value=&quot;false&quot; /&gt;</span><br><span class="line"></span><br><span class="line">    &lt;property name=&quot;mailServerHost&quot; value=&quot;mail.my-corp.com&quot; /&gt;</span><br><span class="line">    &lt;property name=&quot;mailServerPort&quot; value=&quot;5025&quot; /&gt;</span><br><span class="line">  &lt;/bean&gt;</span><br><span class="line"></span><br><span class="line">&lt;/beans&gt;</span><br></pre></td></tr></table></figure>
-<p>请注意，配置XML实际上是Spring配置。<em>这并不意味着Activiti只能在Spring环境中使用！</em>我们只是在内部利用Spring的解析和依赖注入功能来构建引擎。</p>
-<p>也可以使用配置文件以编程方式创建ProcessEngineConfiguration对象。也可以使用其他bean id（例如，参见第3行）。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ProcessEngineConfiguration.createProcessEngineConfigurationFromResourceDefault();</span><br><span class="line">ProcessEngineConfiguration.createProcessEngineConfigurationFromResource(String resource);</span><br><span class="line">ProcessEngineConfiguration.createProcessEngineConfigurationFromResource(String resource, String beanName);</span><br><span class="line">ProcessEngineConfiguration.createProcessEngineConfigurationFromInputStream(InputStream inputStream);</span><br><span class="line">ProcessEngineConfiguration.createProcessEngineConfigurationFromInputStream(InputStream inputStream, String beanName);</span><br></pre></td></tr></table></figure>
+<h2 id="自定义校验规则"><a href="#自定义校验规则" class="headerlink" title="自定义校验规则"></a>自定义校验规则</h2><p>上面的注解都是较为简单的注解，实际编程中校验的规则可能五花八门。当自带的这些注解无法满足我们的需求时，我们也可以自定义校验注解。下面是一个自定义校验注解的基本格式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">import javax.validation.Constraint;</span><br><span class="line">import java.lang.annotation.ElementType;</span><br><span class="line">import java.lang.annotation.Retention;</span><br><span class="line">import java.lang.annotation.RetentionPolicy;</span><br><span class="line">import java.lang.annotation.Target</span><br><span class="line"></span><br><span class="line">@Target(&#123;ElementType.FIELD, ElementType.METHOD&#125;)</span><br><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">@Constraint(validatedBy = MyConstraintValidator.class)</span><br><span class="line">public @interface MyConstraint &#123;</span><br><span class="line"></span><br><span class="line">    String message();</span><br><span class="line"></span><br><span class="line">    Class&lt;?&gt;[] groups() default &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    Class&lt;? extends Payload&gt;[] payload() default &#123;&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>也可以不使用配置文件，并创建一个基于默认配置（见所支持的不同类的更多信息）。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ProcessEngineConfiguration.createStandaloneProcessEngineConfiguration();</span><br><span class="line">ProcessEngineConfiguration.createStandaloneInMemProcessEngineConfiguration();</span><br></pre></td></tr></table></figure>
+<p>其中@Constraint注解表明这个注解是用于规则校验的，validatedBy属性表明用什么去校验，这里我们指定的类为MyConstraintValidator。注解还包含了三个书属性，属性message指定当校验不通过的时候提示什么信息。</p>
+<p>接下来编写MyConstraintValidator，代码如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">import javax.validation.ConstraintValidator;</span><br><span class="line">import javax.validation.ConstraintValidatorContext;</span><br><span class="line"></span><br><span class="line">public class MyConstraintValidator implements ConstraintValidator&lt;MyConstraint, Object&gt; &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void initialize(MyConstraint myConstraint) &#123;</span><br><span class="line">        System.out.println(&quot;my validator init&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public boolean isValid(Object o, ConstraintValidatorContext constraintValidatorContext) &#123;</span><br><span class="line">        System.out.println(o);</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>所有这些ProcessEngineConfiguration.createXXX()方法都返回一个a ProcessEngineConfiguration，可以根据需要对其进行进一步调整。调用buildProcessEngine()操作后，将创建一个ProcessEngine：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ProcessEngine processEngine = ProcessEngineConfiguration.createStandaloneInMemProcessEngineConfiguration()</span><br><span class="line">  .setDatabaseSchemaUpdate(ProcessEngineConfiguration.DB_SCHEMA_UPDATE_FALSE)</span><br><span class="line">  .setJdbcUrl(&quot;jdbc:h2:mem:my-own-db;DB_CLOSE_DELAY=1000&quot;)</span><br><span class="line">  .setAsyncExecutorActivate(false)</span><br><span class="line">  .buildProcessEngine();</span><br></pre></td></tr></table></figure>
+<p>MyConstraintValidator实现了ConstraintValidator接口，该接口必须指定两个泛型，第一个泛型指的是上面定义的注解类型，第二个泛型表示校验对象的类型。MyConstraintValidator实现了ConstraintValidator接口的initialize方法和isValid方法。</p>
+<p>initialize方法用于该校验初始化的时候进行一些操作；isValid方法用于编写校验逻辑，第一个参数为需要校验的值，第二个参数为校验上下文。</p>
+<h2 id="编写controller"><a href="#编写controller" class="headerlink" title="编写controller"></a>编写controller</h2><p>Regester控制器如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">import javax.validation.Valid;</span><br><span class="line">import mrbird.mvc.entity.Form;</span><br><span class="line">import org.springframework.stereotype.Controller;</span><br><span class="line">import org.springframework.ui.Model;</span><br><span class="line">import org.springframework.validation.BindingResult;</span><br><span class="line">import org.springframework.web.bind.annotation.PathVariable;</span><br><span class="line">import org.springframework.web.bind.annotation.RequestMapping;</span><br><span class="line">import org.springframework.web.bind.annotation.RequestMethod;</span><br><span class="line"></span><br><span class="line">@Controller</span><br><span class="line">public class LeanoteController &#123;</span><br><span class="line">    @RequestMapping(value = &quot;/registerindex&quot;, method = RequestMethod.GET)</span><br><span class="line">    public String register(Model model) &#123;</span><br><span class="line">        //对应&lt;sf:form/&gt;标签的commandName属性值</span><br><span class="line">        model.addAttribute(new Form());</span><br><span class="line">        return &quot;register&quot;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @RequestMapping(value = &quot;/register&quot;, method = RequestMethod.POST)</span><br><span class="line">    //form参数添加了@Valid注解，这会告知Spring，需要确保这个对象满足校验限制。</span><br><span class="line">    //Errors参数要紧跟在带有@Valid注解的参数后面</span><br><span class="line">    public String submit(@Valid Form form, BindingResult result) &#123;</span><br><span class="line">        if (result.hasErrors()) &#123;</span><br><span class="line">            // 输出校验失败信息</span><br><span class="line">            result.getAllErrors().stream().forEach(e -&gt; &#123;</span><br><span class="line">                        FieldError fieldError = (FieldError) e;</span><br><span class="line">                        System.out.println(((FieldError) e).getField() + &quot; &quot; + e.getDefaultMessage());</span><br><span class="line">                    &#125;</span><br><span class="line">            );</span><br><span class="line">            //出错时回到注册页面，这里不能够用重定向，不然看不到错误提示信息</span><br><span class="line">            return &quot;register&quot;;</span><br><span class="line">        &#125;</span><br><span class="line">        //校验通过，重定向到/success/&#123;name&#125;</span><br><span class="line">        return &quot;redirect:/success/&quot; + form.getName();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @RequestMapping(value = &quot;/success/&#123;name&#125;&quot;, method = RequestMethod.GET)</span><br><span class="line">    public String success(@PathVariable String name, Model model) &#123;</span><br><span class="line">        model.addAttribute(name);</span><br><span class="line">        return &quot;success&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
 
-<h3 id="ProcessEngineConfiguration-bean"><a href="#ProcessEngineConfiguration-bean" class="headerlink" title="ProcessEngineConfiguration bean"></a>ProcessEngineConfiguration bean</h3><p>在activiti.cfg.xml必须包含有ID的Bean ‘processEngineConfiguration’。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;bean id=&quot;processEngineConfiguration&quot; class=&quot;org.activiti.engine.impl.cfg.StandaloneProcessEngineConfiguration&quot;&gt;</span><br></pre></td></tr></table></figure>
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
 
-<p>然后，此bean用于构造ProcessEngine。有多个可用的类可用于定义processEngineConfiguration。这些类表示不同的环境，并相应地设置默认值。最佳做法是选择与您的环境最匹配的类，以最大程度地减少配置引擎所需的属性数量。当前提供以下类（将来的版本中将有更多类）：</p>
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/08/shiro/Shiro%E4%B8%ADSubject%E7%B1%BB%E7%9A%84%E4%B8%80%E4%BA%9B%E5%87%BD%E6%95%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/08/shiro/Shiro%E4%B8%ADSubject%E7%B1%BB%E7%9A%84%E4%B8%80%E4%BA%9B%E5%87%BD%E6%95%B0/" class="post-title-link" itemprop="url">Shiro中Subject类的一些函数</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2019-11-08 16:19:53 / Modified: 16:32:29" itemprop="dateCreated datePublished" datetime="2019-11-08T16:19:53+08:00">2019-11-08</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/shiro/" itemprop="url" rel="index">
+                    <span itemprop="name">shiro</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Shiro中Subject类的一些函数"><a href="#Shiro中Subject类的一些函数" class="headerlink" title="Shiro中Subject类的一些函数"></a>Shiro中Subject类的一些函数</h1><hr>
 <ul>
-<li><p>org.activiti.engine.impl.cfg.StandaloneProcessEngineConfiguration：以独立方式使用流程引擎。Activiti将负责交易。默认情况下，仅在引擎启动时检查数据库（如果没有Activiti架构或架构版本不正确，则会引发异常）。</p>
+<li><p>boolean hasAllRoles(Collection<String> roleIdentifiers)<br>Returns true if this Subject has all of the specified roles, false otherwise.</p>
 </li>
-<li><p>org.activiti.engine.impl.cfg.StandaloneInMemProcessEngineConfiguration：这是用于单元测试的便捷类。Activiti将负责交易。默认情况下使用H2内存数据库。引擎启动和关闭时，将创建并删除数据库。使用此功能时，可能不需要其他配置（例如，使用作业执行程序或邮件功能时除外）。</p>
+<li><p>boolean hasRole(String roleIdentifier)<br>Returns true if this Subject has the specified role, false otherwise.</p>
 </li>
-<li><p>org.activiti.spring.SpringProcessEngineConfiguration：在Spring环境中使用流程引擎时使用。有关更多信息，请参见Spring集成部分。</p>
+<li><p>boolean isAuthenticated()<br>Returns true if this Subject/user proved their identity during their current session by providing valid credentials matching those known to the system, false otherwise.</p>
 </li>
-<li><p>org.activiti.engine.impl.cfg.JtaProcessEngineConfiguration：当引擎以JTA事务在独立模式下运行时使用。</p>
+<li><p>void    login(AuthenticationToken token)<br>Performs a login attempt for this Subject/user.</p>
+</li>
+<li><p>void     logout()<br>Logs out this Subject and invalidates and/or removes any associated entities, such as a Session and authorization data.</p>
+</li>
+<li><p>boolean[] isPermitted(List<Permission> permissions)<br>Checks if this Subject implies the given Permissions and returns a boolean array indicating which permissions are implied.</p>
+</li>
+<li><p>boolean     isPermitted(Permission permission)<br>Returns true if this Subject is permitted to perform an action or access a resource summarized by the specified permission.</p>
+</li>
+<li><p>boolean isPermitted(String permission)<br>Returns true if this Subject is permitted to perform an action or access a resource summarized by the specified permission string.</p>
+</li>
+<li><p>boolean     isRemembered()<br>Returns true if this Subject has an identity (it is not anonymous) and the identity (aka principals) is remembered from a successful authentication during a previous session.</p>
 </li>
 </ul>
-<h3 id="数据库配置"><a href="#数据库配置" class="headerlink" title="数据库配置"></a>数据库配置</h3><p>有两种方法可以配置Activiti引擎将使用的数据库。第一种选择是定义数据库的JDBC属性：</p>
+<h2 id="总结一下"><a href="#总结一下" class="headerlink" title="总结一下"></a>总结一下</h2><p>Subject接口中的函数主要是关于三个方面：</p>
 <ul>
-<li><p>jdbcUrl：数据库的JDBC URL。</p>
-</li>
-<li><p>jdbcDriver：针对特定数据库类型的驱动程序的实现。</p>
-</li>
-<li><p>jdbcUsername：用于连接数据库的用户名。</p>
-</li>
-<li><p>jdbcPassword：连接数据库的密码。</p>
-</li>
+<li>用户认证，及登陆，注销</li>
+<li>用户的角色是否匹配</li>
+<li>用户的权限是否匹配</li>
 </ul>
-<p>基于提供的JDBC属性构造的数据源将具有默认的MyBatis连接池设置。可以选择以下属性来调整该连接池（取自MyBatis文档）：</p>
-<ul>
-<li><p>jdbcMaxActiveConnections：连接池在任何时候最多可以包含的活动连接数。默认值是10。</p>
-</li>
-<li><p>jdbcMaxIdleConnections：连接池在任何时候最多可以包含的空闲连接数。</p>
-</li>
-<li><p>jdbcMaxCheckoutTime：在强制返回连接之前，可以从连接池中检出连接的时间（以毫秒为单位）。默认值为20000（20秒）。</p>
-</li>
-<li><p>jdbcMaxWaitTime：这是一个较低级别的设置，它使池有机会打印日志状态，并在连接花费异常长的情况下重新尝试获取连接（以避免在池配置错误时永久性地失败）。是20000（20秒）。</p>
-</li>
-</ul>
-<p>示例数据库配置：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;property name=&quot;jdbcUrl&quot; value=&quot;jdbc:h2:mem:activiti;DB_CLOSE_DELAY=1000&quot; /&gt;</span><br><span class="line">&lt;property name=&quot;jdbcDriver&quot; value=&quot;org.h2.Driver&quot; /&gt;</span><br><span class="line">&lt;property name=&quot;jdbcUsername&quot; value=&quot;sa&quot; /&gt;</span><br><span class="line">&lt;property name=&quot;jdbcPassword&quot; value=&quot;&quot; /&gt;</span><br></pre></td></tr></table></figure>
-
-<p>我们的基准测试表明，在处理大量并发请求时，MyBatis连接池不是最有效或弹性最大的连接池。因此，建议给我们一个javax.sql.DataSource实现并将其注入到流程引擎配置中（例如DBCP，C3P0，Hikari，Tomcat连接池等）：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;bean id=&quot;dataSource&quot; class=&quot;org.apache.commons.dbcp.BasicDataSource&quot; &gt;</span><br><span class="line">  &lt;property name=&quot;driverClassName&quot; value=&quot;com.mysql.jdbc.Driver&quot; /&gt;</span><br><span class="line">  &lt;property name=&quot;url&quot; value=&quot;jdbc:mysql://localhost:3306/activiti&quot; /&gt;</span><br><span class="line">  &lt;property name=&quot;username&quot; value=&quot;activiti&quot; /&gt;</span><br><span class="line">  &lt;property name=&quot;password&quot; value=&quot;activiti&quot; /&gt;</span><br><span class="line">  &lt;property name=&quot;defaultAutoCommit&quot; value=&quot;false&quot; /&gt;</span><br><span class="line">&lt;/bean&gt;</span><br><span class="line"></span><br><span class="line">&lt;bean id=&quot;processEngineConfiguration&quot; class=&quot;org.activiti.engine.impl.cfg.StandaloneProcessEngineConfiguration&quot;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot; /&gt;</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
-<p>请注意，Activiti并未附带允许定义此类数据源的库。因此，您必须确保这些库位于类路径中。<br>不管您使用的是JDBC还是数据源方法，都可以设置以下属性：</p>
-<p>databaseType：通常无需指定此属性，因为将从数据库连接元数据中自动分析该属性。仅在自动检测失败的情况下才应指定。可能的值：{h2，mysql，oracle，postgres，mssql，db2}。此设置将确定将使用哪些创建/删除脚本和查询。有关支持哪些类型的概述，请参见受支持的数据库部分。</p>
-<p>databaseSchemaUpdate：允许设置策略以在流程引擎启动和关闭时处理数据库架构。</p>
-<p>false （默认值）：在创建流程引擎时，对照库检查数据库模式的版本，如果版本不匹配，则引发异常。</p>
-<p>true：在构建流程引擎时，将执行检查并在必要时执行模式的更新。如果该模式不存在，则会创建它。</p>
-<p>create-drop：在创建流程引擎时创建架构，并在关闭流程引擎时删除架构。</p>
-<h3 id="数据库表的说明"><a href="#数据库表的说明" class="headerlink" title="数据库表的说明"></a>数据库表的说明</h3><ul>
-<li><p>ACT_RE_ *：RE代表repository。具有此前缀的表包含静态信息，例如流程定义和流程资源（图像，规则等）。</p>
-</li>
-<li><p>ACT_RU_ *：RU代表runtime。这些是运行时表，其中包含流程实例，用户任务，变量，作业等的运行时数据。Activiti仅在流程实例执行期间存储运行时数据，并在流程实例结束时删除记录。这样可以使运行时表较小而又快速。</p>
-</li>
-<li><p>ACT_ID_ *：ID代表identity。这些表包含身份信息，例如用户，组等。</p>
-</li>
-<li><p>ACT_HI_ *：HI代表history。这些表包含历史数据，例如过去的流程实例，变量，任务等。</p>
-</li>
-<li><p>ACT_GE_ *：general数据，用于各种用例中。</p>
-</li>
-</ul>
-<h3 id="数据库升级"><a href="#数据库升级" class="headerlink" title="数据库升级"></a>数据库升级</h3><p>在运行升级之前，请确保已使用数据库备份功能对数据库进行了备份。</p>
-<p>默认情况下，每次创建流程引擎时都会执行版本检查。这通常在应用程序或Activiti Web应用程序启动时发生一次。如果Activiti库注意到库版本与Activiti数据库表的版本之间存在差异，则将引发异常。</p>
-<p>要进行升级，必须首先将以下配置属性放入activiti.cfg.xml配置文件中：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;beans &gt;</span><br><span class="line"></span><br><span class="line">  &lt;bean id=&quot;processEngineConfiguration&quot; class=&quot;org.activiti.engine.impl.cfg.StandaloneProcessEngineConfiguration&quot;&gt;</span><br><span class="line">    &lt;!-- ... --&gt;</span><br><span class="line">    &lt;property name=&quot;databaseSchemaUpdate&quot; value=&quot;true&quot; /&gt;</span><br><span class="line">    &lt;!-- ... --&gt;</span><br><span class="line">  &lt;/bean&gt;</span><br><span class="line"></span><br><span class="line">&lt;/beans&gt;</span><br></pre></td></tr></table></figure>
-
-<p>另外，在类路径中包括适合您的数据库的数据库驱动程序。在应用程序中升级Activiti库。或启动新版本的Activiti并将其指向包含旧版本的数据库。随着databaseSchemaUpdate设置为true，Activiti的会自动将DB模式，当它注意到图书馆和数据库架构不同步的第一次升级到新版本。</p>
-<p>或者，您也可以运行升级DDL语句。也可以运行Activiti下载页面上的升级数据库脚本</p>
 
       
     </div>
@@ -1131,7 +978,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/02/Spring/Springboot%E7%83%AD%E9%83%A8%E7%BD%B2/">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/08/shiro/Shiro%20%E4%B8%AD%E7%9A%84%20AuthorizationInfo/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1145,7 +992,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/11/02/Spring/Springboot%E7%83%AD%E9%83%A8%E7%BD%B2/" class="post-title-link" itemprop="url">Spring/Springboot热部署</a>
+            <a href="/2019/11/08/shiro/Shiro%20%E4%B8%AD%E7%9A%84%20AuthorizationInfo/" class="post-title-link" itemprop="url">Shiro 中的 AuthorizationInfo</a>
         </h1>
 
         <div class="post-meta">
@@ -1156,7 +1003,18 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2019-11-02 19:22:25 / Modified: 21:25:59" itemprop="dateCreated datePublished" datetime="2019-11-02T19:22:25+08:00">2019-11-02</time>
+              <time title="Created: 2019-11-08 15:10:05 / Modified: 15:15:02" itemprop="dateCreated datePublished" datetime="2019-11-08T15:10:05+08:00">2019-11-08</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/shiro/" itemprop="url" rel="index">
+                    <span itemprop="name">shiro</span>
+                  </a>
+                </span>
             </span>
 
           
@@ -1170,18 +1028,78 @@
     <div class="post-body" itemprop="articleBody">
 
       
+          <h1 id="Shiro-中的-AuthorizationInfo"><a href="#Shiro-中的-AuthorizationInfo" class="headerlink" title="Shiro 中的 AuthorizationInfo"></a>Shiro 中的 AuthorizationInfo</h1><hr>
+<p>AuthorizationInfo 用于聚合授权信息的：<br><img src="https://i.loli.net/2019/11/08/MOqDFE5wt98hesy.png" alt="shiro12.PNG"></p>
+<p>AuthorizationInfo 源码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public interface AuthorizationInfo extends Serializable &#123;</span><br><span class="line">    Collection&lt;String&gt; getRoles(); //获取角色字符串信息</span><br><span class="line">    Collection&lt;String&gt; getStringPermissions(); //获取权限字符串信息</span><br><span class="line">    Collection&lt;Permission&gt; getObjectPermissions(); //获取 Permission 对象信息</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当我们使用 AuthorizingRealm 时，如果身份验证成功，在进行授权时就通过doGetAuthorizationInfo 方法获取角色/权限信息用于授权验证。Shiro 提供了一个实现 SimpleAuthorizationInfo，大多数时候使用这个即可。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/07/Spring/Springboot%E9%85%8D%E7%BD%AE%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/07/Spring/Springboot%E9%85%8D%E7%BD%AE%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90/" class="post-title-link" itemprop="url">Spring/Springboot配置多数据源</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-11-07 18:54:17" itemprop="dateCreated datePublished" datetime="2019-11-07T18:54:17+08:00">2019-11-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-11-08 14:39:19" itemprop="dateModified" datetime="2019-11-08T14:39:19+08:00">2019-11-08</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
           <hr>
-<p>title: Springboot Devtools热部署<br>平日里开发项目中，修改了Java代码或者配置文件的时候，必须手动重启项目才能生效。所谓的热部署就是在你修改了后端代码后不需要手动重启，工具会帮你快速的自动重启是修改生效。其深层原理是使用了两个ClassLoader，一个Classloader加载那些不会改变的类（第三方Jar包），另一个ClassLoader加载会更改的类，称为restart ClassLoader，这样在有代码更改的时候，原来的restart ClassLoader 被丢弃，重新创建一个restart ClassLoader，由于需要加载的类相比较少，所以实现了较快的重启时间。</p>
-<p>本文将介绍如何通过使用Spring-Boot-devtools来实现Spring Boot项目的热部署。IDE使用的是Eclipse Oxygen，并且使用Maven构建。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-boot-devtools&lt;/artifactId&gt;</span><br><span class="line">    &lt;optional&gt;true&lt;/optional&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<p>title: Springboot Mybatis配置多数据源<br>time: 2019-11-07<br>categories: Spring</p>
 
-<h2 id="测试热部署"><a href="#测试热部署" class="headerlink" title="测试热部署"></a>测试热部署</h2><p>在入口类中添加一个方法，用于热部署测试：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">import org.springframework.boot.SpringApplication;</span><br><span class="line">import org.springframework.boot.autoconfigure.SpringBootApplication;</span><br><span class="line">import org.springframework.web.bind.annotation.RequestMapping;</span><br><span class="line">import org.springframework.web.bind.annotation.RestController;</span><br><span class="line"></span><br><span class="line">@RestController</span><br><span class="line">@SpringBootApplication</span><br><span class="line">public class DemoApplication &#123;</span><br><span class="line">    @RequestMapping(&quot;/&quot;)</span><br><span class="line">    String index() &#123;</span><br><span class="line">        return &quot;hello spring boot&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        SpringApplication.run(DemoApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>启动项目访问<a href="http://localhost:8080/，页面输出hello" target="_blank" rel="noopener">http://localhost:8080/，页面输出hello</a> spring boot。</p>
-<p>将方法的返回值修改为hello world并在保存的瞬间，应用便重启好了，刷新页面，内容也将得到更改。</p>
-<h2 id="所有配置"><a href="#所有配置" class="headerlink" title="所有配置"></a>所有配置</h2><p>下面是所有Devtools在Spring Boot中的可选配置:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"># Whether to enable a livereload.com-compatible server.</span><br><span class="line">spring.devtools.livereload.enabled=true </span><br><span class="line"></span><br><span class="line"># Server port.</span><br><span class="line">spring.devtools.livereload.port=35729 </span><br><span class="line"></span><br><span class="line"># Additional patterns that should be excluded from triggering a full restart.</span><br><span class="line">spring.devtools.restart.additional-exclude= </span><br><span class="line"></span><br><span class="line"># Additional paths to watch for changes.</span><br><span class="line">spring.devtools.restart.additional-paths= </span><br><span class="line"></span><br><span class="line"># Whether to enable automatic restart.</span><br><span class="line">spring.devtools.restart.enabled=true</span><br><span class="line"></span><br><span class="line"># Patterns that should be excluded from triggering a full restart.</span><br><span class="line">spring.devtools.restart.exclude=META-INF/maven/**,META-INF/resources/**,resources/**,static/**,public/**,templates/**,**/*Test.class,**/*Tests.class,git.properties,META-INF/build-info.properties</span><br><span class="line"></span><br><span class="line"># Whether to log the condition evaluation delta upon restart.</span><br><span class="line">spring.devtools.restart.log-condition-evaluation-delta=true </span><br><span class="line"></span><br><span class="line"># Amount of time to wait between polling for classpath changes.</span><br><span class="line">spring.devtools.restart.poll-interval=1s </span><br><span class="line"></span><br><span class="line"># Amount of quiet time required without any classpath changes before a restart is triggered.</span><br><span class="line">spring.devtools.restart.quiet-period=400ms </span><br><span class="line"></span><br><span class="line"># Name of a specific file that, when changed, triggers the restart check. If not specified, any classpath file change triggers the restart.</span><br><span class="line">spring.devtools.restart.trigger-file=</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -1200,7 +1118,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/7/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/9/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/page/7/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/9/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1246,18 +1164,18 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">148</span>
+          <span class="site-state-item-count">185</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
-        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-count">43</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-count">56</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -1282,7 +1200,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2019</span>
+  <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

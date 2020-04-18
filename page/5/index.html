@@ -172,7 +172,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/08/shiro/Shiro%E4%B8%ADSubject%E7%B1%BB%E7%9A%84%E4%B8%80%E4%BA%9B%E5%87%BD%E6%95%B0/">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/16/%E9%AB%98%E5%B9%B6%E5%8F%91%E6%9E%B6%E6%9E%84/%E9%AB%98%E5%8F%AF%E7%94%A8%E6%9E%B6%E6%9E%84/Hystrix%E4%BB%8B%E7%BB%8D/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -186,7 +186,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/11/08/shiro/Shiro%E4%B8%ADSubject%E7%B1%BB%E7%9A%84%E4%B8%80%E4%BA%9B%E5%87%BD%E6%95%B0/" class="post-title-link" itemprop="url">Shiro中Subject类的一些函数</a>
+            <a href="/2019/11/16/%E9%AB%98%E5%B9%B6%E5%8F%91%E6%9E%B6%E6%9E%84/%E9%AB%98%E5%8F%AF%E7%94%A8%E6%9E%B6%E6%9E%84/Hystrix%E4%BB%8B%E7%BB%8D/" class="post-title-link" itemprop="url">Hystrix介绍</a>
         </h1>
 
         <div class="post-meta">
@@ -197,7 +197,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2019-11-08 16:19:53 / Modified: 16:32:29" itemprop="dateCreated datePublished" datetime="2019-11-08T16:19:53+08:00">2019-11-08</time>
+              <time title="Created: 2019-11-16 20:18:22 / Modified: 22:05:36" itemprop="dateCreated datePublished" datetime="2019-11-16T20:18:22+08:00">2019-11-16</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -205,8 +205,8 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/shiro/" itemprop="url" rel="index">
-                    <span itemprop="name">shiro</span>
+                  <a href="/categories/Hystrix/" itemprop="url" rel="index">
+                    <span itemprop="name">Hystrix</span>
                   </a>
                 </span>
             </span>
@@ -222,32 +222,31 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Shiro中Subject类的一些函数"><a href="#Shiro中Subject类的一些函数" class="headerlink" title="Shiro中Subject类的一些函数"></a>Shiro中Subject类的一些函数</h1><hr>
-<ul>
-<li><p>boolean hasAllRoles(Collection<String> roleIdentifiers)<br>Returns true if this Subject has all of the specified roles, false otherwise.</p>
-</li>
-<li><p>boolean hasRole(String roleIdentifier)<br>Returns true if this Subject has the specified role, false otherwise.</p>
-</li>
-<li><p>boolean isAuthenticated()<br>Returns true if this Subject/user proved their identity during their current session by providing valid credentials matching those known to the system, false otherwise.</p>
-</li>
-<li><p>void    login(AuthenticationToken token)<br>Performs a login attempt for this Subject/user.</p>
-</li>
-<li><p>void     logout()<br>Logs out this Subject and invalidates and/or removes any associated entities, such as a Session and authorization data.</p>
-</li>
-<li><p>boolean[] isPermitted(List<Permission> permissions)<br>Checks if this Subject implies the given Permissions and returns a boolean array indicating which permissions are implied.</p>
-</li>
-<li><p>boolean     isPermitted(Permission permission)<br>Returns true if this Subject is permitted to perform an action or access a resource summarized by the specified permission.</p>
-</li>
-<li><p>boolean isPermitted(String permission)<br>Returns true if this Subject is permitted to perform an action or access a resource summarized by the specified permission string.</p>
-</li>
-<li><p>boolean     isRemembered()<br>Returns true if this Subject has an identity (it is not anonymous) and the identity (aka principals) is remembered from a successful authentication during a previous session.</p>
-</li>
+          <h1 id="Hystrix介绍"><a href="#Hystrix介绍" class="headerlink" title="Hystrix介绍"></a>Hystrix介绍</h1><hr>
+<p>这是对Hystrix的详细介绍<a href="https://github.com/Netflix/Hystrix/wiki#what" target="_blank" rel="noopener">https://github.com/Netflix/Hystrix/wiki#what</a></p>
+<h2 id="Hystrix-是什么？"><a href="#Hystrix-是什么？" class="headerlink" title="Hystrix 是什么？"></a>Hystrix 是什么？</h2><p>在分布式系统中，每个服务都可能会调用很多其他服务，被调用的那些服务就是依赖服务，有的时候某些依赖服务出现故障也是很正常的。<br>Hystrix 可以让我们在分布式系统中对服务间的调用进行控制，加入一些调用延迟或者依赖故障的容错机制。<br>Hystrix 通过将依赖服务进行资源隔离，进而阻止某个依赖服务出现故障时在整个系统所有的依赖服务调用中进行蔓延；同时Hystrix 还提供故障时的 fallback 降级机制。<br>总而言之，Hystrix 通过这些方法帮助我们提升分布式系统的可用性和稳定性。</p>
+<h2 id="Hystrix-的历史"><a href="#Hystrix-的历史" class="headerlink" title="Hystrix 的历史"></a>Hystrix 的历史</h2><p>Hystrix 是高可用性保障的一个框架。Netflix（可以认为是国外的优酷或者爱奇艺之类的视频网站）的 API 团队从 2011 年开始做一些提升系统可用性和稳定性的工作，Hystrix 就是从那时候开始发展出来的。</p>
+<p>在 2012 年的时候，Hystrix 就变得比较成熟和稳定了，Netflix 中，除了 API 团队以外，很多其他的团队都开始使用 Hystrix。</p>
+<p>时至今日，Netflix 中每天都有数十亿次的服务间调用，通过 Hystrix 框架在进行，而 Hystrix 也帮助 Netflix 网站提升了整体的可用性和稳定性。</p>
+<p>2018 年 11 月，Hystrix 在其 Github 主页宣布，不再开放新功能，推荐开发者使用其他仍然活跃的开源项目。维护模式的转变绝不意味着 Hystrix 不再有价值。相反，Hystrix 激发了很多伟大的想法和项目，我们高可用的这一块知识还是会针对 Hystrix 进行讲解。</p>
+<h2 id="Hystrix-的设计原则"><a href="#Hystrix-的设计原则" class="headerlink" title="Hystrix 的设计原则"></a>Hystrix 的设计原则</h2><ul>
+<li>对依赖服务调用时出现的调用延迟和调用失败进行控制和容错保护。</li>
+<li>在复杂的分布式系统中，阻止某一个依赖服务的故障在整个系统中蔓延。比如某一个服务故障了，导致其它服务也跟着故障。</li>
+<li>提供 fail-fast（快速失败）和快速恢复的支持。</li>
+<li>提供 fallback 优雅降级的支持。</li>
+<li>支持近实时的监控、报警以及运维操作。</li>
 </ul>
-<h2 id="总结一下"><a href="#总结一下" class="headerlink" title="总结一下"></a>总结一下</h2><p>Subject接口中的函数主要是关于三个方面：</p>
-<ul>
-<li>用户认证，及登陆，注销</li>
-<li>用户的角色是否匹配</li>
-<li>用户的权限是否匹配</li>
+<p>举个栗子</p>
+<p>有这样一个分布式系统，服务 A 依赖于服务 B，服务 B 依赖于服务 C/D/E。在这样一个成熟的系统内，比如说最多可能只有 100 个线程资源。正常情况下，40 个线程并发调用服务 C，各 30 个线程并发调用 D/E。<br>调用服务 C，只需要 20ms，现在因为服务 C 故障了，比如延迟，或者挂了，此时线程会 hang 住 2s 左右。40 个线程全部被卡住，由于请求不断涌入，其它的线程也用来调用服务 C，同样也会被卡住。这样导致服务 B 的线程资源被耗尽，无法接收新的请求，甚至可能因为大量线程不断的运转，导致自己宕机。服务 A 也挂。</p>
+<p><img src="https://i.loli.net/2019/11/16/9RlDdi3nbPatIMB.png" alt="service-invoke-road.png"><br>Hystrix 可以对其进行资源隔离，比如限制服务 B 只有 40 个线程调用服务 C。当此 40 个线程被 hang 住时，其它 60 个线程依然能正常调用工作。从而确保整个系统不会被拖垮。</p>
+<h2 id="Hystrix-更加细节的设计原则"><a href="#Hystrix-更加细节的设计原则" class="headerlink" title="Hystrix 更加细节的设计原则"></a>Hystrix 更加细节的设计原则</h2><ul>
+<li>阻止任何一个依赖服务耗尽所有的资源，比如 tomcat 中的所有线程资源。</li>
+<li>避免请求排队和积压，采用限流和 fail fast 来控制故障</li>
+<li>提供 fallback 降级机制来应对故障。</li>
+<li>使用资源隔离技术，比如 bulkhead（舱壁隔离技术）、swimlane（泳道技术）、circuit breaker（断路技术）来限制任何一个依赖服务的故障的影响。</li>
+<li>通过近实时的统计/监控/报警功能，来提高故障发现的速度</li>
+<li>通过近实时的属性和配置热修改功能，来提高故障处理和恢复的速度。</li>
+<li>保护依赖服务调用的所有故障情况，而不仅仅只是网络故障情况。</li>
 </ul>
 
       
@@ -268,7 +267,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/08/shiro/Shiro%20%E4%B8%AD%E7%9A%84%20AuthorizationInfo/">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/16/%E9%AB%98%E5%B9%B6%E5%8F%91%E6%9E%B6%E6%9E%84/%E6%B6%88%E6%81%AF%E4%B8%AD%E9%97%B4%E4%BB%B6/%E4%BD%BF%E7%94%A8%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%9A%84%E5%A5%BD%E5%A4%84%E5%92%8C%E5%9D%8F%E5%A4%84/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -282,7 +281,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/11/08/shiro/Shiro%20%E4%B8%AD%E7%9A%84%20AuthorizationInfo/" class="post-title-link" itemprop="url">Shiro 中的 AuthorizationInfo</a>
+            <a href="/2019/11/16/%E9%AB%98%E5%B9%B6%E5%8F%91%E6%9E%B6%E6%9E%84/%E6%B6%88%E6%81%AF%E4%B8%AD%E9%97%B4%E4%BB%B6/%E4%BD%BF%E7%94%A8%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%9A%84%E5%A5%BD%E5%A4%84%E5%92%8C%E5%9D%8F%E5%A4%84/" class="post-title-link" itemprop="url">使用消息中间件的好处和坏处</a>
         </h1>
 
         <div class="post-meta">
@@ -293,7 +292,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2019-11-08 15:10:05 / Modified: 15:15:02" itemprop="dateCreated datePublished" datetime="2019-11-08T15:10:05+08:00">2019-11-08</time>
+              <time title="Created: 2019-11-16 19:42:16 / Modified: 22:05:36" itemprop="dateCreated datePublished" datetime="2019-11-16T19:42:16+08:00">2019-11-16</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -301,8 +300,8 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/shiro/" itemprop="url" rel="index">
-                    <span itemprop="name">shiro</span>
+                  <a href="/categories/MQ/" itemprop="url" rel="index">
+                    <span itemprop="name">MQ</span>
                   </a>
                 </span>
             </span>
@@ -318,11 +317,46 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Shiro-中的-AuthorizationInfo"><a href="#Shiro-中的-AuthorizationInfo" class="headerlink" title="Shiro 中的 AuthorizationInfo"></a>Shiro 中的 AuthorizationInfo</h1><hr>
-<p>AuthorizationInfo 用于聚合授权信息的：<br><img src="https://i.loli.net/2019/11/08/MOqDFE5wt98hesy.png" alt="shiro12.PNG"></p>
-<p>AuthorizationInfo 源码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public interface AuthorizationInfo extends Serializable &#123;</span><br><span class="line">    Collection&lt;String&gt; getRoles(); //获取角色字符串信息</span><br><span class="line">    Collection&lt;String&gt; getStringPermissions(); //获取权限字符串信息</span><br><span class="line">    Collection&lt;Permission&gt; getObjectPermissions(); //获取 Permission 对象信息</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>当我们使用 AuthorizingRealm 时，如果身份验证成功，在进行授权时就通过doGetAuthorizationInfo 方法获取角色/权限信息用于授权验证。Shiro 提供了一个实现 SimpleAuthorizationInfo，大多数时候使用这个即可。</p>
+          <h1 id="使用消息中间件的好处和坏处"><a href="#使用消息中间件的好处和坏处" class="headerlink" title="使用消息中间件的好处和坏处"></a>使用消息中间件的好处和坏处</h1><hr>
+<h2 id="面试题"><a href="#面试题" class="headerlink" title="面试题"></a>面试题</h2><ul>
+<li>为什么使用消息队列？</li>
+<li>消息队列有什么优点和缺点？</li>
+<li>Kafka、ActiveMQ、RabbitMQ、RocketMQ 都有什么区别，以及适合哪些场景？</li>
+</ul>
+<h2 id="面试官心理分析"><a href="#面试官心理分析" class="headerlink" title="面试官心理分析"></a>面试官心理分析</h2><p>其实面试官主要是想看看：</p>
+<ul>
+<li><p>第一，你知不知道你们系统里为什么要用消息队列这个东西？<br>不少候选人，说自己项目里用了 Redis、MQ，但是其实他并不知道自己为什么要用这个东西。其实说白了，就是为了用而用，或者是别人设计的架构，他从头到尾都没思考过。<br>没有对自己的架构问过为什么的人，一定是平时没有思考的人，面试官对这类候选人印象通常很不好。因为面试官担心你进了团队之后只会木头木脑的干呆活儿，不会自己思考。</p>
+</li>
+<li><p>第二，你既然用了消息队列这个东西，你知不知道用了有什么好处&amp;坏处？<br>你要是没考虑过这个，那你盲目弄个 MQ 进系统里，后面出了问题你是不是就自己溜了给公司留坑？你要是没考虑过引入一个技术可能存在的弊端和风险，面试官把这类候选人招进来了，基本可能就是挖坑型选手。就怕你干 1 年挖一堆坑，自己跳槽了，给公司留下无穷后患。</p>
+</li>
+<li><p>第三，既然你用了 MQ，可能是某一种 MQ，那么你当时做没做过调研？<br>你别傻乎乎的自己拍脑袋看个人喜好就瞎用了一个 MQ，比如 Kafka，甚至都从没调研过业界流行的 MQ 到底有哪几种。每一个 MQ 的优点和缺点是什么。每一个 MQ 没有绝对的好坏，但是就是看用在哪个场景可以扬长避短，利用其优势，规避其劣势。</p>
+</li>
+</ul>
+<p>如果是一个不考虑技术选型的候选人招进了团队，leader 交给他一个任务，去设计个什么系统，他在里面用一些技术，可能都没考虑过选型，最后选的技术可能并不一定合适，一样是留坑。</p>
+<h2 id="面试题剖析"><a href="#面试题剖析" class="headerlink" title="面试题剖析"></a>面试题剖析</h2><h3 id="为什么使用消息队列"><a href="#为什么使用消息队列" class="headerlink" title="为什么使用消息队列"></a>为什么使用消息队列</h3><p>其实就是问问你消息队列都有哪些使用场景，然后你项目里具体是什么场景，说说你在这个场景里用消息队列是什么？</p>
+<p>面试官问你这个问题，期望的一个回答是说，你们公司有个什么业务场景，这个业务场景有个什么技术挑战，如果不用 MQ 可能会很麻烦，但是你现在用了 MQ 之后带给了你很多的好处。</p>
+<p>先说一下消息队列常见的使用场景吧，其实场景有很多，但是比较核心的有 3 个：解耦、异步、削峰。</p>
+<h4 id="解耦"><a href="#解耦" class="headerlink" title="解耦"></a>解耦</h4><p>看这么个场景。A 系统发送数据到 BCD 三个系统，通过接口调用发送。如果 E 系统也要这个数据呢？那如果 C 系统现在不需要了呢？A 系统负责人几乎崩溃……<br><img src="https://i.loli.net/2019/11/16/j5WLmUb8tliYJsN.png" alt="mq-1.png"><br>在这个场景中，A 系统跟其它各种乱七八糟的系统严重耦合，A 系统产生一条比较关键的数据，很多系统都需要 A 系统将这个数据发送过来。A 系统要时时刻刻考虑 BCDE 四个系统如果挂了该咋办？要不要重发，要不要把消息存起来？头发都白了啊！<br>如果使用 MQ，A 系统产生一条数据，发送到 MQ 里面去，哪个系统需要数据自己去 MQ 里面消费。如果新系统需要数据，直接从 MQ 里消费即可；如果某个系统不需要这条数据了，就取消对 MQ 消息的消费即可。这样下来，A 系统压根儿不需要去考虑要给谁发送数据，不需要维护这个代码，也不需要考虑人家是否调用成功、失败超时等情况。</p>
+<p><img src="https://i.loli.net/2019/11/16/mi8XMp1PUL3kWJo.png" alt="mq-2.png"><br>总结：通过一个 MQ，Pub/Sub 发布订阅消息这么一个模型，A 系统就跟其它系统彻底解耦了。</p>
+<p>面试技巧：你需要去考虑一下你负责的系统中是否有类似的场景，就是一个系统或者一个模块，调用了多个系统或者模块，互相之间的调用很复杂，维护起来很麻烦。但是其实这个调用是不需要直接同步调用接口的，如果用 MQ 给它异步化解耦，也是可以的，你就需要去考虑在你的项目里，是不是可以运用这个 MQ 去进行系统的解耦。在简历中体现出来这块东西，用 MQ 作解耦。</p>
+<h4 id="异步"><a href="#异步" class="headerlink" title="异步"></a>异步</h4><p>再来看一个场景，A 系统接收一个请求，需要在自己本地写库，还需要在 BCD 三个系统写库，自己本地写库要 3ms，BCD 三个系统分别写库要 300ms、450ms、200ms。最终请求总延时是 3 + 300 + 450 + 200 = 953ms，接近 1s，用户感觉搞个什么东西，慢死了慢死了。用户通过浏览器发起请求，等待个 1s，这几乎是不可接受的。<br><img src="https://i.loli.net/2019/11/16/R4AOXqGc7aHv26P.png" alt="mq-3.png"></p>
+<p>一般互联网类的企业，对于用户直接的操作，一般要求是每个请求都必须在 200 ms 以内完成，对用户几乎是无感知的。</p>
+<p>如果使用 MQ，那么 A 系统连续发送 3 条消息到 MQ 队列中，假如耗时 5ms，A 系统从接受一个请求到返回响应给用户，总时长是 3 + 5 = 8ms，对于用户而言，其实感觉上就是点个按钮，8ms 以后就直接返回了，爽！网站做得真好，真快！<br><img src="https://i.loli.net/2019/11/16/RPMzil79JAKjfTC.png" alt="mq-4.png"></p>
+<h4 id="削峰"><a href="#削峰" class="headerlink" title="削峰"></a>削峰</h4><p>每天 0:00 到 12:00，A 系统风平浪静，每秒并发请求数量就 50 个。结果每次一到 12:00 ~ 13:00 ，每秒并发请求数量突然会暴增到 5k+ 条。但是系统是直接基于 MySQL 的，大量的请求涌入 MySQL，每秒钟对 MySQL 执行约 5k 条 SQL。<br>一般的 MySQL，扛到每秒 2k 个请求就差不多了，如果每秒请求到 5k 的话，可能就直接把 MySQL 给打死了，导致系统崩溃，用户也就没法再使用系统了。</p>
+<p>但是高峰期一过，到了下午的时候，就成了低峰期，可能也就 1w 的用户同时在网站上操作，每秒中的请求数量可能也就 50 个请求，对整个系统几乎没有任何的压力。<br><img src="https://i.loli.net/2019/11/16/e8yOMaHE6ckPFhd.png" alt="mq-5.png"></p>
+<p>如果使用 MQ，每秒 5k 个请求写入 MQ，A 系统每秒钟最多处理 2k 个请求，因为 MySQL 每秒钟最多处理 2k 个。A 系统从 MQ 中慢慢拉取请求，每秒钟就拉取 2k 个请求，不要超过自己每秒能处理的最大请求数量就 ok，这样下来，哪怕是高峰期的时候，A 系统也绝对不会挂掉。而 MQ 每秒钟 5k 个请求进来，就 2k 个请求出去，结果就导致在中午高峰期（1 个小时），可能有几十万甚至几百万的请求积压在 MQ 中。<br><img src="https://i.loli.net/2019/11/16/BfUtJzeobAIpynr.png" alt="mq-6.png"></p>
+<p>这个短暂的高峰期积压是 ok 的，因为高峰期过了之后，每秒钟就 50 个请求进 MQ，但是 A 系统依然会按照每秒 2k 个请求的速度在处理。所以说，只要高峰期一过，A 系统就会快速将积压的消息给解决掉。</p>
+<h3 id="消息队列有什么优缺点"><a href="#消息队列有什么优缺点" class="headerlink" title="消息队列有什么优缺点"></a>消息队列有什么优缺点</h3><p>优点上面已经说了，就是在特殊场景下有其对应的好处，解耦、异步、削峰。</p>
+<h4 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h4><ul>
+<li><p>系统可用性降低<br>系统引入的外部依赖越多，越容易挂掉。本来你就是 A 系统调用 BCD 三个系统的接口就好了，人 ABCD 四个系统好好的，没啥问题，你偏加个 MQ 进来，万一 MQ 挂了咋整，MQ 一挂，整套系统崩溃的，你不就完了？</p>
+</li>
+<li><p>系统复杂度提高<br>硬生生加个 MQ 进来，你怎么保证消息没有重复消费？怎么处理消息丢失的情况？怎么保证消息传递的顺序性？头大头大，问题一大堆，痛苦不已。</p>
+</li>
+<li><p>一致性问题<br>A 系统处理完了直接返回成功了，人都以为你这个请求就成功了；但是问题是，要是 BCD 三个系统那里，BD 两个系统写库成功了，结果 C 系统写库失败了，咋整？你这数据就不一致了。</p>
+</li>
+</ul>
+<p>所以消息队列实际是一种非常复杂的架构，你引入它有很多好处，但是也得针对它带来的坏处做各种额外的技术方案和架构来规避掉，做好之后，你会发现，妈呀，系统复杂度提升了一个数量级，也许是复杂了 10 倍。但是关键时刻，用，还是得用的。</p>
+<h3 id="Kafka、ActiveMQ、RabbitMQ、RocketMQ-有什么优缺点？"><a href="#Kafka、ActiveMQ、RabbitMQ、RocketMQ-有什么优缺点？" class="headerlink" title="Kafka、ActiveMQ、RabbitMQ、RocketMQ 有什么优缺点？"></a>Kafka、ActiveMQ、RabbitMQ、RocketMQ 有什么优缺点？</h3><p>见<a href="https://github.com/doocs/advanced-java/blob/master/docs/high-concurrency/why-mq.md" target="_blank" rel="noopener">https://github.com/doocs/advanced-java/blob/master/docs/high-concurrency/why-mq.md</a></p>
 
       
     </div>
@@ -342,7 +376,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/07/Spring/Springboot%E9%85%8D%E7%BD%AE%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90/">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/16/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/jdk/TreeMap/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -356,7 +390,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/11/07/Spring/Springboot%E9%85%8D%E7%BD%AE%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90/" class="post-title-link" itemprop="url">Spring/Springboot配置多数据源</a>
+            <a href="/2019/11/16/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/jdk/TreeMap/" class="post-title-link" itemprop="url">TreeMap</a>
         </h1>
 
         <div class="post-meta">
@@ -365,16 +399,21 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
+              
 
-              <time title="Created: 2019-11-07 18:54:17" itemprop="dateCreated datePublished" datetime="2019-11-07T18:54:17+08:00">2019-11-07</time>
+              <time title="Created: 2019-11-16 13:47:13 / Modified: 19:23:01" itemprop="dateCreated datePublished" datetime="2019-11-16T13:47:13+08:00">2019-11-16</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-08 14:39:19" itemprop="dateModified" datetime="2019-11-08T14:39:19+08:00">2019-11-08</time>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
               </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sourceread/" itemprop="url" rel="index">
+                    <span itemprop="name">sourceread</span>
+                  </a>
+                </span>
+            </span>
 
           
 
@@ -387,8 +426,83 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <hr>
-<p>title: Springboot Mybatis配置多数据源<br>time: 2019-11-07<br>categories: Spring</p>
+          <h1 id="TreeMap"><a href="#TreeMap" class="headerlink" title="TreeMap"></a>TreeMap</h1><hr>
+<h2 id="TreeMap简介"><a href="#TreeMap简介" class="headerlink" title="TreeMap简介"></a>TreeMap简介</h2><p>TreeMap是一个有序的key-value集合，基于红黑树（Red-Black tree）的 NavigableMap实现。该映射根据其键的自然顺序进行排序，或者根据创建映射时提供的 Comparator进行排序，具体取决于使用的构造方法。</p>
+<h2 id="TreeMap中的属性"><a href="#TreeMap中的属性" class="headerlink" title="TreeMap中的属性"></a>TreeMap中的属性</h2><ul>
+<li>private transient Entry&lt;K,V&gt; root:一个Treemap的根节点</li>
+<li>private final Comparator&lt;? super K&gt; comparator;比较器，由于treemap是有序的，所以需要有一个比较的规则</li>
+<li>private transient int size = 0;记录treemap中有多少个结点</li>
+<li>private transient int modCount = 0;记录treemap经过多少次修改</li>
+<li>private static final boolean RED   = false;treemap是基于红黑树这种数据结构的，定义这两个变量用于区分结点是红结点还是黑结点</li>
+<li>private static final boolean BLACK = true;</li>
+</ul>
+<h2 id="TreeMap中比较重要的点"><a href="#TreeMap中比较重要的点" class="headerlink" title="TreeMap中比较重要的点"></a>TreeMap中比较重要的点</h2><h3 id="1、Entry-lt-K-V-gt"><a href="#1、Entry-lt-K-V-gt" class="headerlink" title="1、Entry&lt;K,V&gt;"></a>1、Entry&lt;K,V&gt;</h3><p>TreeMap中传入key和value后，内部会将key，value封装为一个Entry,然后将该Entry放入到合适的位置</p>
+<p><img src="https://i.loli.net/2019/11/16/1GupYB8kfUQMPX4.png" alt="2019-11-16 14_01_13-HashMapRead _D__垃圾_HashMapRead_ - C__Program Files_Java_jdk1.8.0_144_src.zip!_ja.png"></p>
+<p>可以看到，在Entry中定义了上面几个属性，</p>
+<ul>
+<li>key:存储key值</li>
+<li>value：存储value值</li>
+<li>left：该结点的左结点</li>
+<li>right：该结点的右结点</li>
+<li>parent：该结点的父节点</li>
+<li>color：标识该结点是红结点还是黑结点，默认是黑结点</li>
+</ul>
+<p><img src="https://i.loli.net/2019/11/16/r61Dx8Y4iVfkuy9.png" alt="2019-11-16 14_08_10-HashMapRead _D__垃圾_HashMapRead_ - C__Program Files_Java_jdk1.8.0_144_src.zip!_ja.png"></p>
+<p>Entry中需要注意的是它的构造函数，它传入了parent结点，标识当前结点的parent结点，其他的函数没什么。</p>
+<h3 id="2、使用一个小程序进行debug"><a href="#2、使用一个小程序进行debug" class="headerlink" title="2、使用一个小程序进行debug"></a>2、使用一个小程序进行debug</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;Integer,String&gt; treemap=new TreeMap&lt;&gt;();</span><br><span class="line">        treemap.put(1,&quot;Mike&quot;);</span><br><span class="line">        treemap.put(2,&quot;Jack&quot;);</span><br><span class="line">        treemap.put(-99,&quot;hike&quot;);</span><br><span class="line">        System.out.println(treemap);</span><br></pre></td></tr></table></figure>
+
+<p>在第一行打上断点，进行调试<br><img src="https://i.loli.net/2019/11/16/xH3sIW16RXiVnDy.png" alt="2019-11-16 14_23_07-HashMapRead _D__垃圾_HashMapRead_ - C__Program Files_Java_jdk1.8.0_144_src.zip!_ja.png"></p>
+<p>可以看到初始化了比较器为null。其余的操作都未进行。下面一张图表示了treemap各个属性的初始值情况<br><img src="https://i.loli.net/2019/11/16/LFPdWT5VfUtGlD6.png" alt="2019-11-16 14_37_05-HashMapRead _D__垃圾_HashMapRead_ - C__Program Files_Java_jdk1.8.0_144_src.zip!_ja.png"></p>
+<p>继续往下看，进入put方法，在进入put方法之前，我们可以先预测几种情况</p>
+<ol>
+<li>treemap中root为null，这是第一个插入的值</li>
+<li>treemap中root不为null，那么需要从root开始根据比较器中的规则进行比较，根据比较结果是否大于0，等于0，小于0来判断该结点的走向<ul>
+<li>大于0，前往右边</li>
+<li>小于0，去往左边‘</li>
+<li>等于0，说明这是替换操作<br>下面我们来验证一下<br><img src="https://i.loli.net/2019/11/16/GFejvIiQh1roLtU.png" alt="2019-11-16 14_30_40-HashMapRead _D__垃圾_HashMapRead_ - C__Program Files_Java_jdk1.8.0_144_src.zip!_ja.png"></li>
+</ul>
+</li>
+</ol>
+<p>使用t来接收root值，防止更改root值造成混乱。可以看到，如果是第一次插入值，root为null，那么这个值就是root的初始值，注意高亮的部分调用了一个compare方法</p>
+<p><img src="https://i.loli.net/2019/11/16/3f8wIQLJz5XNHKu.png" alt="2019-11-16 14_38_27-HashMapRead _D__垃圾_HashMapRead_ - C__Program Files_Java_jdk1.8.0_144_src.zip!_ja.png"></p>
+<p>注意看画线的部分，是将传入的key转化为Comparable类型然后调用compareTo()方法，这表明如果没有传入可用的Comparator，那么传入的key值就必须实现了Comparable接口。否则会报下面的错误</p>
+<p><img src="https://i.loli.net/2019/11/16/7I1MOcjhPUmxrt4.png" alt="2019-11-16 14_42_43-HashMapRead _D__垃圾_HashMapRead_ - ..._src_com_lancer_package1_Test.java _HashMap.png"></p>
+<p>好，到现在我们已经验证了第一种情况，下面我们继续看put函数中后面的代码</p>
+<p><img src="https://i.loli.net/2019/11/16/RPX82WSwVZsQyzU.png" alt="2019-11-16 14_51_27-HashMapRead _D__垃圾_HashMapRead_ - C__Program Files_Java_jdk1.8.0_144_src.zip!_ja.png"></p>
+<p>如果root不为null，那么执行这段代码，首先定义了三个值，</p>
+<ol>
+<li>cmp：用于保存比较的结果</li>
+<li>parent：用于保存父节点</li>
+<li>cpr：用于保存比较器</li>
+</ol>
+<p>后面根据比较器是否使用默认的分为两种情况，如果使用自定义的比较器，则进入块1，使用默认的比较器就进入块2，显然我们没有显示地传入构造器，因此进入else块中。<br>首先判断key值是否为null，这也表明key不能为null。将key转成Comparable类型赋值给cpr，根据比较结果选择进入左子树遍历还是右子树遍历，一通循环后，退出循环时待插入的结点的父节点就是parent结点。</p>
+<p>来看最后的一点代码<br><img src="https://i.loli.net/2019/11/16/siRpFocXGfqC2Ij.png" alt="2019-11-16 15_03_15-HashMapRead _D__垃圾_HashMapRead_ - C__Program Files_Java_jdk1.8.0_144_src.zip!_ja.png"></p>
+<p>将待插入结点转换为一个Entry结点，与parent的key值进行比较，判断是插入到parent的左边还是右边。修改size和modCount的值，在这里面调用了fixAfterInsertion()函数，这个函数就是将修改后的tree转换化一棵红黑树，搞懂了这个函数，对treemap源码可以说就理解2/3了。</p>
+<h3 id="红黑树"><a href="#红黑树" class="headerlink" title="红黑树"></a>红黑树</h3><p>除了二叉树的基本要求外，红黑树必须满足以下几点性质。</p>
+<ul>
+<li>节点必须是红色或者黑色。</li>
+<li>根节点必须是黑色。</li>
+<li>叶节点(NIL)是黑色的。（NIL节点无数据，是空节点）</li>
+<li>红色节点必须有两个黑色儿子节点。</li>
+<li>从任一节点出发到其每个叶子节点的路径，黑色节点的数量是相等的。</li>
+</ul>
+<p>我们先来看一下平衡二叉树的旋转</p>
+<h4 id="平衡二叉树的旋转"><a href="#平衡二叉树的旋转" class="headerlink" title="平衡二叉树的旋转"></a>平衡二叉树的旋转</h4><p><img src="https://i.loli.net/2019/11/16/wZYeTvSs8PWIpEa.png" alt="20170429150914755.png"><br><img src="https://i.loli.net/2019/11/16/k1Iai9rnNyzuYcM.png" alt="20170429151109740.png"><br>注意在treemap中，第二种情况会先化为第一种情况<br><img src="https://i.loli.net/2019/11/16/YQTbPX4dSKHv1GB.png" alt="2019-11-16 16_40_58-未命名表单.drawio - draw.io.png"><br>然后再使用第一种情况来进行旋转</p>
+<p>我们来看一下再treemap中右旋转的代码<br><img src="https://i.loli.net/2019/11/16/HhgOPRkQVKE5CDl.png" alt="2019-11-16 16_43_35-HashMapRead _D__垃圾_HashMapRead_ - C__Program Files_Java_jdk1.8.0_144_src.zip!_ja.png"></p>
+<p>这个代码可以分为四部分<br>其中传入的参数为最上面的结点p(parent)，也就是上面40那个结点。</p>
+<ul>
+<li><p>第一部分获得传入结点的左子结点l(left)。</p>
+</li>
+<li><p>第二部分将r的右子结点赋予给p，作为p的左子结点，这是因为r最终的右子结点是p，这会导致原来的右子节点丢失，所以必须将它们转移至p的左子结点，因为它们只有小于p才会位于左侧。</p>
+</li>
+<li><p>第三部分设置r的parent为p的parent，并判断r是p.praent的左子结点还是右子结点。这个判断对应得模型为下面三种模型<br><img src="https://i.loli.net/2019/11/16/QF3TYaEqXZdzmny.png" alt="2019-11-16 16_58_16-未命名表单.drawio - draw.io.png"><br><img src="https://i.loli.net/2019/11/16/AIt4oev6bMdUqsK.png" alt="2019-11-16 17_01_35-未命名表单.drawio - draw.io.png"><br><img src="https://i.loli.net/2019/11/16/y9lACvc6tkbGo3U.png" alt="2019-11-16 18_30_50-未命名表单.drawio - draw.io.png"></p>
+</li>
+<li><p>第四部分将p设为r的右子结点，r设为p的父节点</p>
+</li>
+</ul>
+<p>左旋转代码类似</p>
+<p>回到fixAfterInsertinon()函数<br><img src="https://i.loli.net/2019/11/16/L9nY28csilbtM5a.png" alt="2019-11-16 18_41_28-HashMapRead _D__垃圾_HashMapRead_ - C__Program Files_Java_jdk1.8.0_144_src.zip!_ja.png"></p>
+<p>之所以先设置每个节点颜色的初始值为red，还是因为需要保证从根节点到每个叶子节点经过的黑节点数目必须相等，因此增加红色节点不影响，还有就是旋转时将x的parent设置为black，给x的parent的parent设置为red是为了到达旋转后黑节点下面挂着两个红节点，这样也不会破坏条件。后半部分代码类似，只不过是针对x的parent位于右子节点时的情况。</p>
 
       
     </div>
@@ -408,7 +522,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/07/Spring/Springboot%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1/">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/15/Java%E5%9F%BA%E7%A1%80/Java%E4%B8%AD%E7%9A%84%E6%B3%9B%E5%9E%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -422,7 +536,94 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/11/07/Spring/Springboot%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1/" class="post-title-link" itemprop="url">Springboot定时任务</a>
+            <a href="/2019/11/15/Java%E5%9F%BA%E7%A1%80/Java%E4%B8%AD%E7%9A%84%E6%B3%9B%E5%9E%8B/" class="post-title-link" itemprop="url">Java中泛型</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2019-11-15 15:59:42 / Modified: 16:49:48" itemprop="dateCreated datePublished" datetime="2019-11-15T15:59:42+08:00">2019-11-15</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Java中泛型"><a href="#Java中泛型" class="headerlink" title="Java中泛型"></a>Java中泛型</h1><hr>
+<p>一般的类和方法，只能使用具体的类型，要么是基本类型，要么是自定义的类。如果要编写可以应用于多种类型的代码，这种刻板的限制对代码的束缚就会很大。</p>
+<h2 id="泛型类"><a href="#泛型类" class="headerlink" title="泛型类"></a>泛型类</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">package generics;//: generics/Holder3.java</span><br><span class="line"></span><br><span class="line">public class Holder3&lt;T&gt; &#123;</span><br><span class="line">  private T a;</span><br><span class="line">  public Holder3(T a) &#123; this.a = a; &#125;</span><br><span class="line">  public void set(T a) &#123; this.a = a; &#125;</span><br><span class="line">  public T get() &#123; return a; &#125;</span><br><span class="line">  public static void main(String[] args) &#123;</span><br><span class="line">    Holder3&lt;Automobile&gt; h3 =</span><br><span class="line">      new Holder3&lt;Automobile&gt;(new Automobile());</span><br><span class="line">    Automobile a = h3.get(); // No cast needed</span><br><span class="line">    // h3.set(&quot;Not an Automobile&quot;); // Error</span><br><span class="line">    // h3.set(1); // Error</span><br><span class="line">  &#125;</span><br><span class="line">&#125; ///:~</span><br></pre></td></tr></table></figure>
+<p>当你创建Holder3对象时，必须指明持有什么类型的对象，将其置于尖括号中。然后，你就只能在Holder3中存入该类型(或其子类，因为多态与泛型不冲突)。并且在你从Holder3中取出它持有的对象时，自动就是正确的类型。</p>
+<p>这就是Java泛型的核心概念：告诉编译器想使用什么类型，然后编译器帮你处理一切细节。</p>
+<h2 id="泛型接口"><a href="#泛型接口" class="headerlink" title="泛型接口"></a>泛型接口</h2><p>泛型也可以应用于接口。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public interface Generator&lt;T&gt;&#123; T next();&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="泛型方法"><a href="#泛型方法" class="headerlink" title="泛型方法"></a>泛型方法</h2><p>泛型同样可以使用于方法上。注意泛型方法所在的类可以是泛型类，也可以不是。也就是说，是否拥有泛型方法，与其所在的类是否是泛型没有关系。<br>对于static的方法，无法访问泛型类的类型参数，所以，如果static方法需要使用泛型能力，就必须使其成为泛型方法。</p>
+<p>要成为泛型方法，只需将泛型参数列表置于返回值之前</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public class GenericMethods&#123;</span><br><span class="line">	public &lt;T&gt; void f(T x)&#123;</span><br><span class="line">		System.out.println(x.getClass().getName());</span><br><span class="line">	&#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="泛型的擦除"><a href="#泛型的擦除" class="headerlink" title="泛型的擦除"></a>泛型的擦除</h2><p>我们可以声明ArrayList.class，但是不能声明ArrayList<Integer>.class.看下面的代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public class ErasedTypeEquivalence &#123;</span><br><span class="line">  public static void main(String[] args) &#123;</span><br><span class="line">    Class c1 = new ArrayList&lt;String&gt;().getClass();</span><br><span class="line">    Class c2 = new ArrayList&lt;Integer&gt;().getClass();</span><br><span class="line">    System.out.println(c1 == c2);</span><br><span class="line">  &#125;</span><br><span class="line">&#125; /* Output:</span><br><span class="line">true</span><br><span class="line">*///:~</span><br></pre></td></tr></table></figure>
+
+<p>在泛型代码内部，无法获得任何有关泛型参数类型的信息。<br>Java泛型是使用擦除来实现的，这意味着当你在使用泛型时，任何具体的类型信息都被擦除了，你唯一知道的就是你在使用一个对象。因为List<Integer>和List<String>在运行时事实上是相同的类型。这两种类型都i被擦除成它们的”原生类型”，即List</p>
+<h2 id="泛型的边界"><a href="#泛型的边界" class="headerlink" title="泛型的边界"></a>泛型的边界</h2><p>因为擦除了类型信息，所以在无界泛型参数调用的方法只是那些可以用Object调用的方法。但是，如果能够将这个参数限制为某个类型子集，那么你就可以用这些子集来调用方法。为了执行这种限制，Java泛型重用了extends关键子。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">interface HasColor &#123; java.awt.Color getColor(); &#125;</span><br><span class="line"></span><br><span class="line">class Colored&lt;T extends HasColor&gt; &#123;</span><br><span class="line">  T item;</span><br><span class="line">  Colored(T item) &#123; this.item = item; &#125;</span><br><span class="line">  T getItem() &#123; return item; &#125;</span><br><span class="line">  // The bound allows you to call a method:</span><br><span class="line">  java.awt.Color color() &#123; return item.getColor(); &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/14/Java%E5%9F%BA%E7%A1%80/Java%E4%B8%AD%E7%9A%84%E4%BD%8D%E8%BF%90%E7%AE%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/14/Java%E5%9F%BA%E7%A1%80/Java%E4%B8%AD%E7%9A%84%E4%BD%8D%E8%BF%90%E7%AE%97/" class="post-title-link" itemprop="url">Java中的位运算</a>
         </h1>
 
         <div class="post-meta">
@@ -432,14 +633,474 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2019-11-07 18:43:02" itemprop="dateCreated datePublished" datetime="2019-11-07T18:43:02+08:00">2019-11-07</time>
+              <time title="Created: 2019-11-14 20:12:44" itemprop="dateCreated datePublished" datetime="2019-11-14T20:12:44+08:00">2019-11-14</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-08 14:39:18" itemprop="dateModified" datetime="2019-11-08T14:39:18+08:00">2019-11-08</time>
+                <time title="Modified: 2019-11-15 15:53:06" itemprop="dateModified" datetime="2019-11-15T15:53:06+08:00">2019-11-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Java中的位运算"><a href="#Java中的位运算" class="headerlink" title="Java中的位运算"></a>Java中的位运算</h1><hr>
+<p>Java提供的位运算符有：左移( &lt;&lt; )、右移( &gt;&gt; ) 、无符号右移( &gt;&gt;&gt; ) 、位与( &amp; ) 、位或( | )、位非( ~ )、位异或( ^ )，除了位非( ~ )是一元操作符外，其它的都是二元操作符。</p>
+<h2 id="1、左移-lt-lt"><a href="#1、左移-lt-lt" class="headerlink" title="1、左移( &lt;&lt; )"></a>1、左移( &lt;&lt; )</h2><p>Test1、将5左移2位：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">package com.xcy;</span><br><span class="line"> </span><br><span class="line">public class Test &#123;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		System.out.println(5&lt;&lt;2);//运行结果是20</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行结果是20，但是程序是怎样执行的呢？<br>首先会将5转为2进制表示形式(java中，整数默认就是int类型,也就是32位):</p>
+<p>0000 0000 0000 0000 0000 0000 0000 0101           然后左移2位后，低位补0：</p>
+<p>0000 0000 0000 0000 0000 0000 0001 0100           换算成10进制为20</p>
+<h2 id="2、右移-gt-gt-，右移同理，只是方向不一样罢了-感觉和没说一样"><a href="#2、右移-gt-gt-，右移同理，只是方向不一样罢了-感觉和没说一样" class="headerlink" title="2、右移( &gt;&gt; ) ，右移同理，只是方向不一样罢了(感觉和没说一样)"></a>2、右移( &gt;&gt; ) ，右移同理，只是方向不一样罢了(感觉和没说一样)</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(5&gt;&gt;2);//运行结果是1</span><br></pre></td></tr></table></figure>
+
+<p>还是先将5转为2进制表示形式：<br>0000 0000 0000 0000 0000 0000 0000 0101 然后右移2位，高位补0：</p>
+<p>0000 0000 0000 0000 0000 0000 0000 0001</p>
+<h2 id="3、无符号右移-gt-gt-gt"><a href="#3、无符号右移-gt-gt-gt" class="headerlink" title="3、无符号右移( &gt;&gt;&gt; )"></a>3、无符号右移( &gt;&gt;&gt; )</h2><p>我们知道在Java中int类型占32位，可以表示一个正数，也可以表示一个负数。正数换算成二进制后的最高位为0，负数的二进制最高为为1</p>
+<p>例如  -5换算成二进制后为：</p>
+<p>1111 1111 1111 1111 1111 1111 1111 1011   (刚开始接触二进制时，不知道最高位是用来表示正负之分的，当时就总想不通。。明明算起来得到的就是一个正数)</p>
+<p>我们分别对5进行右移3位、 -5进行右移3位和无符号右移3位：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">package com.xcy;</span><br><span class="line"> </span><br><span class="line">public class Test &#123;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		System.out.println(5&gt;&gt;3);//结果是0</span><br><span class="line">		System.out.println(-5&gt;&gt;3);//结果是-1</span><br><span class="line">		System.out.println(-5&gt;&gt;&gt;3);//结果是536870911</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="4、位与-amp"><a href="#4、位与-amp" class="headerlink" title="4、位与( &amp; )"></a>4、位与( &amp; )</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">package com.xcy;</span><br><span class="line"> </span><br><span class="line">public class Test &#123;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		System.out.println(5 &amp; 3);//结果为1</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>还是老套路，将2个操作数和结果都转换为二进制进行比较：<br>5转换为二进制：0000 0000 0000 0000 0000 0000 0000 0101</p>
+<p>3转换为二进制：0000 0000 0000 0000 0000 0000 0000 0011</p>
+<hr>
+<p>1转换为二进制：0000 0000 0000 0000 0000 0000 0000 0001</p>
+<p>位与：第一个操作数的的第n位于第二个操作数的第n位如果都是1，那么结果的第n为也为1，否则为0</p>
+<h2 id="5、位或"><a href="#5、位或" class="headerlink" title="5、位或( | )"></a>5、位或( | )</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">package com.xcy;</span><br><span class="line"> </span><br><span class="line">public class Test &#123;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		System.out.println(5 | 3);//结果为7</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>5转换为二进制：0000 0000 0000 0000 0000 0000 0000 0101</p>
+<p>3转换为二进制：0000 0000 0000 0000 0000 0000 0000 0011</p>
+<hr>
+<p>7转换为二进制：0000 0000 0000 0000 0000 0000 0000 0111<br>位或操作：第一个操作数的的第n位于第二个操作数的第n位 只要有一个是1，那么结果的第n为也为1，否则为0</p>
+<h2 id="6、位异或"><a href="#6、位异或" class="headerlink" title="6、位异或( ^ )"></a>6、位异或( ^ )</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">package com.xcy;</span><br><span class="line"> </span><br><span class="line">public class Test &#123;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		System.out.println(5 ^ 3);//结果为6</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>5转换为二进制：0000 0000 0000 0000 0000 0000 0000 0101</p>
+<p>3转换为二进制：0000 0000 0000 0000 0000 0000 0000 0011</p>
+<hr>
+<p>6转换为二进制：0000 0000 0000 0000 0000 0000 0000 0110<br>位异或：第一个操作数的的第n位于第二个操作数的第n位 相反，那么结果的第n为也为1，否则为0</p>
+<h2 id="7、位非-位非是一元操作符"><a href="#7、位非-位非是一元操作符" class="headerlink" title="7、位非( ~ )           位非是一元操作符"></a>7、位非( ~ )           位非是一元操作符</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">package com.xcy;</span><br><span class="line"> </span><br><span class="line">public class Test &#123;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		System.out.println(~5);//结果为-6</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="5转换为二进制：0000-0000-0000-0000-0000-0000-0000-0101"><a href="#5转换为二进制：0000-0000-0000-0000-0000-0000-0000-0101" class="headerlink" title="5转换为二进制：0000 0000 0000 0000 0000 0000 0000 0101"></a>5转换为二进制：0000 0000 0000 0000 0000 0000 0000 0101</h2><p>-6转换为二进制：1111 1111 1111 1111 1111 1111 1111 1010</p>
+<p>位非：操作数的第n位为1，那么结果的第n位为0，反之。</p>
+<p>由位运算操作符衍生而来的有：</p>
+<p>&amp;= 按位与赋值</p>
+<p>|=  按位或赋值</p>
+<p>^= 按位非赋值</p>
+<blockquote>
+<blockquote>
+<p>= 右移赋值</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>= 无符号右移赋值</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>&lt;&lt;= 赋值左移</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/14/Unknown/%E5%A4%A7%E5%9E%8B%E7%BD%91%E7%AB%99%E7%B3%BB%E7%BB%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/14/Unknown/%E5%A4%A7%E5%9E%8B%E7%BD%91%E7%AB%99%E7%B3%BB%E7%BB%9F/" class="post-title-link" itemprop="url">大型网站系统架构的演进</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-11-14 18:31:13" itemprop="dateCreated datePublished" datetime="2019-11-14T18:31:13+08:00">2019-11-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-11-15 15:53:06" itemprop="dateModified" datetime="2019-11-15T15:53:06+08:00">2019-11-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/unknow/" itemprop="url" rel="index">
+                    <span itemprop="name">unknow</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="大型网站系统架构的演进"><a href="#大型网站系统架构的演进" class="headerlink" title="大型网站系统架构的演进"></a>大型网站系统架构的演进</h1><hr>
+<p>为了更好的说明网站从小到大的演进过程，我们下面举个交易网站的例子。<br>作为一个交易网站，需要具备的最基本的三个功能有三部分：</p>
+<ul>
+<li>用户<ul>
+<li>用户注册</li>
+<li>用户管理</li>
+<li>信息维护</li>
+</ul>
+</li>
+<li>商品<ul>
+<li>商品展示</li>
+<li>商品管理</li>
+</ul>
+</li>
+<li>交易<ul>
+<li>创建交易</li>
+<li>交易管理</li>
+</ul>
+</li>
+</ul>
+<p>基于Java技术的网站大概是这样的<br><img src="https://i.loli.net/2019/11/14/D71oEpYGk5z2uCa.png" alt="web架构.PNG"></p>
+<p>这里需要注意两个地方</p>
+<ul>
+<li>各个功能模块之间是通过JVM内部的方法来进行交互的</li>
+<li>应用和数据库之间是通过JDBC进行访问的</li>
+</ul>
+<h2 id="单机负载告警，数据库与应用分离"><a href="#单机负载告警，数据库与应用分离" class="headerlink" title="单机负载告警，数据库与应用分离"></a>单机负载告警，数据库与应用分离</h2><p>当网站的访问量不断增大时，服务器的负载持续升高，必须采取一些方法来应对。首先我们可以做的是把数据库与应用从一台机器分别分到两台机器，那么我们的网站架构会变成这样<br><img src="https://i.loli.net/2019/11/14/OirqLbdHMukm9pz.png" alt="web.PNG"><br>我们只是在在应用的配置中把数据库的地址从本机改到了另外一台机器上而已。</p>
+<h2 id="应用服务器负载告警，如何让应用服务器走向集群"><a href="#应用服务器负载告警，如何让应用服务器走向集群" class="headerlink" title="应用服务器负载告警，如何让应用服务器走向集群"></a>应用服务器负载告警，如何让应用服务器走向集群</h2><p>应用服务器压力变大时，根据对应用的监测结果，可以有针对性地进行优化。<br>首先来看一下这个变化<br><img src="https://i.loli.net/2019/11/14/Nt2MzC1jA8dar3h.png" alt="web2.PNG"><br>应用服务器从一台变为两台。这两个服务器之间没有直接的交互，都是依赖数据库对外提供服务。但这样有两个问题需要解决：</p>
+<ol>
+<li>最终用户对两个应用服务器的选择问题</li>
+<li>Session的问题</li>
+</ol>
+<h3 id="引入负载均衡设备"><a href="#引入负载均衡设备" class="headerlink" title="引入负载均衡设备"></a>引入负载均衡设备</h3><p>采用了负载均衡设备后，系统的结构看起来如下：<br><img src="https://i.loli.net/2019/11/14/6rhQBkCKTW4e72s.png" alt="web3.PNG"></p>
+<h2 id="数据库压力变大，读写分离吧"><a href="#数据库压力变大，读写分离吧" class="headerlink" title="数据库压力变大，读写分离吧"></a>数据库压力变大，读写分离吧</h2><h3 id="采用数据库作为读库"><a href="#采用数据库作为读库" class="headerlink" title="采用数据库作为读库"></a>采用数据库作为读库</h3><p>随着业务的发展，数据量和访问量都在增长，对于大型网站来说，有不少业务是读多写少的，这个状况也会直接反应到数据库上。对于这种情况，我们可以考虑使用读写分离的方式。<br><img src="https://i.loli.net/2019/11/14/LAhKITyUusSHGFX.png" alt="web4.PNG"></p>
+<p>这个结构的变化会带来两个问题</p>
+<ul>
+<li>数据复制问题</li>
+<li>应用对于数据源的选择问题</li>
+</ul>
+<h3 id="加速数据读取的利器–缓存"><a href="#加速数据读取的利器–缓存" class="headerlink" title="加速数据读取的利器–缓存"></a>加速数据读取的利器–缓存</h3><p>在大型网站中，有许多地方都会用到缓存机制<br>1、 数据缓存<br>大型系统中的数据缓存主要用于分担数据库的读的压力。缓存系统一般是用来保存和查询键值对(Key-Value)对的。一般我们在缓存中放的是“热”数据而不是全部数据。</p>
+<p>2、页面缓存</p>
+<h3 id="弥补关系型数据库的不足，引入分布式存储系统"><a href="#弥补关系型数据库的不足，引入分布式存储系统" class="headerlink" title="弥补关系型数据库的不足，引入分布式存储系统"></a>弥补关系型数据库的不足，引入分布式存储系统</h3><h3 id="读写分离后，数据库又遇到瓶颈"><a href="#读写分离后，数据库又遇到瓶颈" class="headerlink" title="读写分离后，数据库又遇到瓶颈"></a>读写分离后，数据库又遇到瓶颈</h3><h4 id="专库专用，数据垂直拆分"><a href="#专库专用，数据垂直拆分" class="headerlink" title="专库专用，数据垂直拆分"></a>专库专用，数据垂直拆分</h4><h4 id="垂直拆分后的单机遇到瓶颈，数据水平拆分"><a href="#垂直拆分后的单机遇到瓶颈，数据水平拆分" class="headerlink" title="垂直拆分后的单机遇到瓶颈，数据水平拆分"></a>垂直拆分后的单机遇到瓶颈，数据水平拆分</h4><h2 id="数据库问题解决后，应用面对的新挑战"><a href="#数据库问题解决后，应用面对的新挑战" class="headerlink" title="数据库问题解决后，应用面对的新挑战"></a>数据库问题解决后，应用面对的新挑战</h2><h3 id="拆分应用"><a href="#拆分应用" class="headerlink" title="拆分应用"></a>拆分应用</h3>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/14/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/HashMap/HashMap%E4%B8%AD%E7%9A%84%E5%B1%9E%E6%80%A7%E5%92%8C%E7%B1%BB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/14/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/HashMap/HashMap%E4%B8%AD%E7%9A%84%E5%B1%9E%E6%80%A7%E5%92%8C%E7%B1%BB/" class="post-title-link" itemprop="url">HashMap源码阅读</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-11-14 13:53:12" itemprop="dateCreated datePublished" datetime="2019-11-14T13:53:12+08:00">2019-11-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-11-16 14:20:29" itemprop="dateModified" datetime="2019-11-16T14:20:29+08:00">2019-11-16</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sourceread/" itemprop="url" rel="index">
+                    <span itemprop="name">sourceread</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="HashMap源码阅读"><a href="#HashMap源码阅读" class="headerlink" title="HashMap源码阅读"></a>HashMap源码阅读</h1><hr>
+<p>在阅读源码前我们应该知道Hashmap的基本数据结构是数组加链表，可以使用下面的图解表示<br><img src="https://i.loli.net/2019/11/15/fGaU7TZo4vNhi1C.png" alt="2019-11-15 09_00_53-未命名表单.drawio - draw.io.png"><br>所以我们可以预测在Hashmap中应该定义了一个数组，</p>
+<h2 id="HashMap中的属性值"><a href="#HashMap中的属性值" class="headerlink" title="HashMap中的属性值"></a>HashMap中的属性值</h2><ul>
+<li>DEFAULT_INITIAL_CAPACITY：默认的容量大小</li>
+<li>MAXIMUM_CAPACITY：最大的容量大小，为2的30次方</li>
+<li>DEFAULT_LOAD_FACTOR：默认的加载因子，大小为0.75</li>
+<li>threshold(临界值)：哈希表内元素数量的阈值，当哈希表内元素数量超过阈值时，会发生扩容resize()。</li>
+<li>transient Node&lt;K,V&gt;[] table：哈希桶，存放链表。 长度是2的N次方，或者初始化时为0.</li>
+<li>TREEIFY_THRESHOLD:当每个节点挂载数超过了该变量时，就将链表这种数据结构该为使用红黑树</li>
+<li>UNTREEIFY_THRESHOLD：当每个节点挂载数少于该数时，就改为使用链表的形式进行存储</li>
+</ul>
+<h2 id="链表节点Node"><a href="#链表节点Node" class="headerlink" title="链表节点Node"></a>链表节点Node</h2><p>在开始之前，我们先看一下挂载在哈希表上的元素，链表的结构：<br>Map.Entry是在Map接口中内部定义的Entry接口</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">static class Node&lt;K,V&gt; implements Map.Entry&lt;K,V&gt; &#123;</span><br><span class="line">    final int hash;//哈希值</span><br><span class="line">    final K key;//key</span><br><span class="line">    V value;//value</span><br><span class="line">    Node&lt;K,V&gt; next;//链表后置节点</span><br><span class="line"></span><br><span class="line">    Node(int hash, K key, V value, Node&lt;K,V&gt; next) &#123;</span><br><span class="line">        this.hash = hash;</span><br><span class="line">        this.key = key;</span><br><span class="line">        this.value = value;</span><br><span class="line">        this.next = next;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public final K getKey()        &#123; return key; &#125;</span><br><span class="line">    public final V getValue()      &#123; return value; &#125;</span><br><span class="line">    public final String toString() &#123; return key + &quot;=&quot; + value; &#125;</span><br><span class="line"></span><br><span class="line">    //每一个节点的hash值，是将key的hashCode 和 value的hashCode 亦或得到的。</span><br><span class="line">    public final int hashCode() &#123;</span><br><span class="line">        return Objects.hashCode(key) ^ Objects.hashCode(value);</span><br><span class="line">    &#125;</span><br><span class="line">    //设置新的value 同时返回旧value</span><br><span class="line">    public final V setValue(V newValue) &#123;</span><br><span class="line">        V oldValue = value;</span><br><span class="line">        value = newValue;</span><br><span class="line">        return oldValue;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public final boolean equals(Object o) &#123;</span><br><span class="line">        if (o == this)</span><br><span class="line">            return true;</span><br><span class="line">        if (o instanceof Map.Entry) &#123;</span><br><span class="line">            Map.Entry&lt;?,?&gt; e = (Map.Entry&lt;?,?&gt;)o;</span><br><span class="line">            if (Objects.equals(key, e.getKey()) &amp;&amp;</span><br><span class="line">                Objects.equals(value, e.getValue()))</span><br><span class="line">                return true;</span><br><span class="line">        &#125;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="从头开始"><a href="#从头开始" class="headerlink" title="从头开始"></a>从头开始</h2><p>我们先写一个简单的使用hashmap的例子</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;String,String&gt; map=new HashMap&lt;&gt;();</span><br><span class="line">        map.put(&quot;s1&quot;,&quot;v1&quot;);</span><br><span class="line">        map.put(null,null);</span><br><span class="line">        map.put(&quot;name&quot;,&quot;mike&quot;);</span><br><span class="line">        System.out.println(map);</span><br></pre></td></tr></table></figure>
+
+<p>将断点设置第一行，进行debug，看看内部创建map对象的过程<br><img src="https://i.loli.net/2019/11/15/h81AraY6MbiB5dO.png" alt="2019-11-15 12_12_49-HashMapRead _D__垃圾_HashMapRead_ - C__Program Files_Java_jdk1.8.0_144_src.zip!_ja.png"><br>可以看到调用了一个无参构造器，设置了负载因子为默认定义的负载因子</p>
+<p>接下来进入put函数</p>
+<p>首先会进入下面这个函数<br><img src="https://i.loli.net/2019/11/15/fGkD4HpxwCSqVaY.png" alt="2019-11-15 12_22_30-HashMapRead _D__垃圾_HashMapRead_ - C__Program Files_Java_jdk1.8.0_144_src.zip!_ja.png"></p>
+<p>这个函数调用了另外的一个函数putVal<br>我们先来看这个函数的前几行<br><img src="https://i.loli.net/2019/11/15/5Umz8bHY7ygAC4Q.png" alt="2019-11-15 12_27_04-HashMapRead _D__垃圾_HashMapRead_ - C__Program Files_Java_jdk1.8.0_144_src.zip!_ja.png"></p>
+<p>可以看到，tab是用于接收table的临时变量，变量n是用来记录tab的长度的<br>由于刚开始table为null，所以需要进入resize()函数。可以确定，resize()函数中有初始化table数组的功能。</p>
+<p>下面进入resize()函数中看看<br><img src="https://i.loli.net/2019/11/15/KbgLeQZF3GE7HC1.png" alt="2019-11-15 12_42_18-HashMapRead _D__垃圾_HashMapRead_ - C__Program Files_Java_jdk1.8.0_144_src.zip!_ja.png"></p>
+<p>定义了下面三个变量</p>
+<ul>
+<li>oldTab：接收原来的table</li>
+<li>oldCap:原来table的容量大小,指数组的大小</li>
+<li>oldThr：原来table的阈值</li>
+</ul>
+<p>根据这几个判断条件我们可以总结出以下三种情况</p>
+<ol>
+<li>oldCap大于0</li>
+<li>oldCap=0但是oldThr大于0</li>
+<li>oldCap和oldThr都等于0<br>显然我们处于第三种情况，此时容量和阈值都使用了默认值。<br>在5号标记中对数组进行初始化，注意这里使用的是newCap，在6中将其赋值给table。这就完成了初始化操作。</li>
+</ol>
+<p>继续putVal()函数中查看<br><img src="https://i.loli.net/2019/11/15/wgVuxsjk7Yb8NZ9.png" alt="2019-11-15 13_17_54-HashMapRead _D__垃圾_HashMapRead_ - C__Program Files_Java_jdk1.8.0_144_src.zip!_ja.png"></p>
+<p>使用p来接收table[(n-1)&amp;hash]<br>现在我们来研究一下(n-1)&amp;hash的值<br>n默认为16，n-1为15，转换为二进制的话为0000 0000 0000 0000 0000 0000 0000 1111<br>&amp;操作是对应位置都为1结果才为1，所以前28位必定为0，所得结果值在0-15之间，正好符合数组下标的范围。</p>
+<p>这个判断表面可能有两种情况</p>
+<ol>
+<li>根据hash值得到的下标没有值</li>
+<li>根据hash值得到的下标有值</li>
+</ol>
+<p>第一种情况直接将传入的结点放入即可。<br>第二种情况又需要分以下几种情况</p>
+<ol>
+<li>table[(n-1)&amp;hash]有值且该值的hash值和要插入的结点hash值相同</li>
+<li>table[(n-1)&amp;hash]值是树的结点，表明待插入的结点需要作为树结点插入</li>
+<li>待插入结点以链表形式插入</li>
+</ol>
+<p>分别对应2，3，4 框中的代码</p>
+<p>现在来看后几行代码<br><img src="https://i.loli.net/2019/11/15/KhFMqYaT2n6OQVD.png" alt="2019-11-15 15_08_56-HashMapRead _D__垃圾_HashMapRead_ - C__Program Files_Java_jdk1.8.0_144_src.zip!_ja.png"></p>
+<p>if(e!=null)说明插入的位置原本是有值，现在只不过是将值进行了替换，，onlyIfAbsent这个参数的作用在于,如果我们传入的key已存在我们是否去替换，true:不替换，false：替换。<br>每对hashmap进行修改都会增加modcount的值，每插入一个值size都加1，判断hashmap中值的个数是否到达阈值，如果超过阈值则进行扩容。<br>至于高亮的那两行代码，并没有具体实现，<br><img src="https://i.loli.net/2019/11/15/YoxwaZ613umkUB4.png" alt="2019-11-15 15_20_48-HashMapRead _D__垃圾_HashMapRead_ - C__Program Files_Java_jdk1.8.0_144_src.zip!_ja.png"></p>
+<p>putVal()函数就算看完了，下面我们来研究resize()函数剩下的部分<br><img src="https://i.loli.net/2019/11/15/Sbgoj4WqhXid9CY.png" alt="2019-11-15 15_25_57-HashMapRead _D__垃圾_HashMapRead_ - C__Program Files_Java_jdk1.8.0_144_src.zip!_ja.png"></p>
+<p>如果oldTab不为null，那么我们就必须将oldTab中的Node都转移到新的newTab中，使用for循环来遍历oldTab数组，下面的1，2，3分别代表三种情况，（前提是e不为null，也就是table[j]!=null)</p>
+<ol>
+<li>该table[j]就只有一个值，它后面不挂着其它结点</li>
+<li>该table[j]后面有结点，且挂的结点是以红黑树的形式存在</li>
+<li>该table[j]后面有结点，且挂的结点是以链表的形式存在</li>
+</ol>
+<p>我们重点来看第三种形式<br>将table分为两部分，大小都为原本oldTab的大小，循环遍历该table[j]后面挂的结点，判断该结点是放在前0-oldCap-1的位置还是oldCap-newCap-1的位置。<br>判断的方式是(e.hash &amp; oldCap) == 0<br>以oldCap为16为例<br>16的二进制表示为0000 0000 0000 0000 0000 0000 0001 0000<br>只要e.hash值的二进制表示的第五位大于16，表示它一定处于oldCap-newCap-1的位置，因为处于0-oldCap-1位置的hash值第五位的值一定是0</p>
+<p>说明一下lohead和loTail的作用，lohead表示链表的头部，从代码中也可以看到，刚开始head和tail都指向e，后面由于tail!=null，所以不会修改head，最后设置tail.next=null也符合链表的形式。</p>
+<p>至此，HashMap的resize()和putVal()函数就分析完了。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/13/MQ/%E6%B6%88%E6%81%AF%E4%B8%AD%E9%97%B4%E4%BB%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/13/MQ/%E6%B6%88%E6%81%AF%E4%B8%AD%E9%97%B4%E4%BB%B6/" class="post-title-link" itemprop="url">消息中间件</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-11-13 15:57:54" itemprop="dateCreated datePublished" datetime="2019-11-13T15:57:54+08:00">2019-11-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-11-15 15:53:06" itemprop="dateModified" datetime="2019-11-15T15:53:06+08:00">2019-11-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/middleware/" itemprop="url" rel="index">
+                    <span itemprop="name">middleware</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="消息中间件"><a href="#消息中间件" class="headerlink" title="消息中间件"></a>消息中间件</h1><hr>
+<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>“Message-oriented middleware(MOM)” is software infrastructure focused on sending and receiving messages between distributed systems.</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/13/Spring2/%E7%94%9F%E6%88%90%E9%AA%8C%E8%AF%81%E7%A0%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/13/Spring2/%E7%94%9F%E6%88%90%E9%AA%8C%E8%AF%81%E7%A0%81/" class="post-title-link" itemprop="url">生成验证码并验证</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-11-13 15:37:40" itemprop="dateCreated datePublished" datetime="2019-11-13T15:37:40+08:00">2019-11-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-11-22 16:02:56" itemprop="dateModified" datetime="2019-11-22T16:02:56+08:00">2019-11-22</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -464,31 +1125,23 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Springboot定时任务"><a href="#Springboot定时任务" class="headerlink" title="Springboot定时任务"></a>Springboot定时任务</h1><hr>
-<p>在我们开发项目过程中，经常需要定时任务来帮助我们来做一些内容， Spring Boot 默认已经帮我们实行了，只需要添加相应的注解就可以实现</p>
-<h2 id="1、pom-包配置"><a href="#1、pom-包配置" class="headerlink" title="1、pom 包配置"></a>1、pom 包配置</h2><p>pom 包里面只需要引入 Spring Boot Starter 包即可</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependencies&gt;</span><br><span class="line">	&lt;dependency&gt;</span><br><span class="line">		&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">		&lt;artifactId&gt;spring-boot-starter&lt;/artifactId&gt;</span><br><span class="line">	&lt;/dependency&gt;</span><br><span class="line">	&lt;dependency&gt;</span><br><span class="line">		&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">		&lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;</span><br><span class="line">		&lt;scope&gt;test&lt;/scope&gt;</span><br><span class="line">	&lt;/dependency&gt;</span><br><span class="line">&lt;/dependencies&gt;</span><br></pre></td></tr></table></figure>
+          <h1 id="生成验证码"><a href="#生成验证码" class="headerlink" title="生成验证码"></a>生成验证码</h1><hr>
+<h2 id="引入依赖"><a href="#引入依赖" class="headerlink" title="引入依赖"></a>引入依赖</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"> &lt;!-- 验证码生成插件 --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;com.github.whvcse&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;easy-captcha&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.6.2&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- 验证码 --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;com.github.penggle&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;kaptcha&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;2.3.2&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
 
-<h2 id="2、启动类启用定时"><a href="#2、启动类启用定时" class="headerlink" title="2、启动类启用定时"></a>2、启动类启用定时</h2><p>在启动类上面加上@EnableScheduling即可开启定时</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@SpringBootApplication</span><br><span class="line">@EnableScheduling</span><br><span class="line">public class Application &#123;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		SpringApplication.run(Application.class, args);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="配置一个DefaultKaptcha"><a href="#配置一个DefaultKaptcha" class="headerlink" title="配置一个DefaultKaptcha"></a>配置一个DefaultKaptcha</h2><p>注入一个Properties，设置DefaultKaptcha的一些属性</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">public class CaptchaConfig &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    @Bean</span><br><span class="line">    public DefaultKaptcha getDefaultKaptcha()&#123;</span><br><span class="line">        DefaultKaptcha defaultKaptcha=new DefaultKaptcha();</span><br><span class="line">        defaultKaptcha.setConfig(getConfig());</span><br><span class="line">        return defaultKaptcha;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Bean</span><br><span class="line">    public Config getConfig()&#123;</span><br><span class="line">        Properties properties=new Properties();</span><br><span class="line">//        properties</span><br><span class="line">        properties.setProperty(&quot;kaptcha.border&quot;, &quot;yes&quot;);</span><br><span class="line">        properties.setProperty(&quot;kaptcha.border.color&quot;, &quot;105,179,90&quot;);</span><br><span class="line">        properties.setProperty(&quot;kaptcha.textproducer.font.color&quot;, &quot;blue&quot;);</span><br><span class="line">        properties.setProperty(&quot;kaptcha.image.width&quot;, &quot;110&quot;);</span><br><span class="line">        properties.setProperty(&quot;kaptcha.image.height&quot;, &quot;40&quot;);</span><br><span class="line">        properties.setProperty(&quot;kaptcha.textproducer.font.size&quot;, &quot;30&quot;);</span><br><span class="line">        properties.setProperty(&quot;kaptcha.session.key&quot;, &quot;code&quot;);</span><br><span class="line">        properties.setProperty(&quot;kaptcha.textproducer.char.length&quot;, &quot;4&quot;);</span><br><span class="line">//        properties.setProperty(&quot;kaptcha.textproducer.font.names&quot;, &quot;宋体,楷体,微软雅黑&quot;);</span><br><span class="line">        Config config=new Config(properties);</span><br><span class="line">        return config;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="3、创建定时任务实现类"><a href="#3、创建定时任务实现类" class="headerlink" title="3、创建定时任务实现类"></a>3、创建定时任务实现类</h2><p>定时任务1：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@Component</span><br><span class="line">public class SchedulerTask &#123;</span><br><span class="line"></span><br><span class="line">    private int count=0;</span><br><span class="line"></span><br><span class="line">    @Scheduled(cron=&quot;*/6 * * * * ?&quot;)</span><br><span class="line">    private void process()&#123;</span><br><span class="line">        System.out.println(&quot;this is scheduler task runing  &quot;+(count++));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="生成验证码-1"><a href="#生成验证码-1" class="headerlink" title="生成验证码"></a>生成验证码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">@Controller</span><br><span class="line">public class CodeController &#123;</span><br><span class="line">    @Autowired</span><br><span class="line">    private Producer captchaProducer = null;</span><br><span class="line"></span><br><span class="line">    @RequestMapping(&quot;/kaptcha&quot;)</span><br><span class="line">    public void getKaptchaImage(HttpServletRequest request, HttpServletResponse response) throws Exception &#123;</span><br><span class="line">        HttpSession session = request.getSession();</span><br><span class="line">        response.setDateHeader(&quot;Expires&quot;, 0);</span><br><span class="line">        response.setHeader(&quot;Cache-Control&quot;, &quot;no-store, no-cache, must-revalidate&quot;);</span><br><span class="line">        response.addHeader(&quot;Cache-Control&quot;, &quot;post-check=0, pre-check=0&quot;);</span><br><span class="line">        response.setHeader(&quot;Pragma&quot;, &quot;no-cache&quot;);</span><br><span class="line">        response.setContentType(&quot;image/jpeg&quot;);</span><br><span class="line">        //生成验证码</span><br><span class="line">        String capText = captchaProducer.createText();</span><br><span class="line">        System.out.println(&quot;验证码： &quot;+capText);</span><br><span class="line">        session.setAttribute(Constants.KAPTCHA_SESSION_KEY, capText);</span><br><span class="line">        //向客户端写出</span><br><span class="line">        BufferedImage bi = captchaProducer.createImage(capText);</span><br><span class="line">        ServletOutputStream out = response.getOutputStream();</span><br><span class="line"></span><br><span class="line">        ImageIO.write(bi, &quot;jpg&quot;, out);</span><br><span class="line"></span><br><span class="line">        try &#123;</span><br><span class="line">            out.flush();</span><br><span class="line">        &#125; finally &#123;</span><br><span class="line">            out.close();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>定时任务2：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@Component</span><br><span class="line">public class Scheduler2Task &#123;</span><br><span class="line"></span><br><span class="line">    private static final SimpleDateFormat dateFormat = new SimpleDateFormat(&quot;HH:mm:ss&quot;);</span><br><span class="line"></span><br><span class="line">    @Scheduled(fixedRate = 6000)</span><br><span class="line">    public void reportCurrentTime() &#123;</span><br><span class="line">        System.out.println(&quot;现在时间：&quot; + dateFormat.format(new Date()));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="接收验证码并校验"><a href="#接收验证码并校验" class="headerlink" title="接收验证码并校验"></a>接收验证码并校验</h2><p>首先设置一个工具类</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">public class CodeUtil &#123;</span><br><span class="line">    /**</span><br><span class="line">     * 将获取到的前端参数转为string类型</span><br><span class="line">     * @param request</span><br><span class="line">     * @param key</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    public static String getString(HttpServletRequest request,String key) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            String result = request.getParameter(key);</span><br><span class="line">            if(result != null) &#123;</span><br><span class="line">                result = result.trim();</span><br><span class="line">            &#125;</span><br><span class="line">            if(&quot;&quot;.equals(result)) &#123;</span><br><span class="line">                result = null;</span><br><span class="line">            &#125;</span><br><span class="line">            return result;</span><br><span class="line">        &#125;catch(Exception e) &#123;</span><br><span class="line">            return null;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    /**</span><br><span class="line">     * 验证码校验</span><br><span class="line">     * @param request</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    public static boolean checkVerifyCode(HttpServletRequest request) &#123;</span><br><span class="line">        //获取生成的验证码</span><br><span class="line">        String verifyCodeExpected = (String) request.getSession().getAttribute(com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY);</span><br><span class="line">        //获取用户输入的验证码</span><br><span class="line">        String verifyCodeActual = CodeUtil.getString(request, &quot;verifyCodeActual&quot;);</span><br><span class="line">        if(verifyCodeActual == null ||!verifyCodeActual.equals(verifyCodeExpected)) &#123;</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>结果如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">this is scheduler task runing  0</span><br><span class="line">现在时间：09:44:17</span><br><span class="line">this is scheduler task runing  1</span><br><span class="line">现在时间：09:44:23</span><br><span class="line">this is scheduler task runing  2</span><br><span class="line">现在时间：09:44:29</span><br><span class="line">this is scheduler task runing  3</span><br><span class="line">现在时间：09:44:35</span><br></pre></td></tr></table></figure>
+<p>开始验证</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">    @RequestMapping(&quot;/login&quot;)</span><br><span class="line">    public String login(@RequestParam(&quot;userName&quot;) String userName, @RequestParam(&quot;passWord&quot;) String passWord,</span><br><span class="line">                        HttpServletRequest request) &#123;</span><br><span class="line">//        boolean result = userService.login(userName, passWord);</span><br><span class="line">        if (!CodeUtil.checkVerifyCode(request)) &#123;</span><br><span class="line">            request.setAttribute(&quot;codeErr&quot;, &quot;验证码有误!&quot;);</span><br><span class="line">            return &quot;fail&quot;;</span><br><span class="line">        &#125;</span><br><span class="line">        return &quot;success&quot;;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 
-
-<h2 id="参数说明"><a href="#参数说明" class="headerlink" title="参数说明"></a>参数说明</h2><p>@Scheduled 参数可以接受两种定时的设置，一种是我们常用的cron=”*/6 * * * * ?”,一种是 fixedRate = 6000，两种都表示每隔六秒打印一下内容。</p>
-<p>fixedRate 说明<br>默认单位是毫秒</p>
-<ul>
-<li>@Scheduled(fixedRate = 6000) ：上一次开始执行时间点之后6秒再执行</li>
-<li>@Scheduled(fixedDelay = 6000) ：上一次执行完毕时间点之后6秒再执行</li>
-<li>@Scheduled(initialDelay=1000, fixedRate=6000) ：第一次延迟1秒后执行，之后按 fixedRate 的规则每6秒执行一次<br>文章内容已</li>
-</ul>
+<h2 id="在Html中设置生成验证码"><a href="#在Html中设置生成验证码" class="headerlink" title="在Html中设置生成验证码"></a>在Html中设置生成验证码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line"> &lt;html xmlns:th=&quot;http://www.thymeleaf.org&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;title&gt;Title&lt;/title&gt;</span><br><span class="line">    &lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">        function refresh() &#123;</span><br><span class="line">            document.getElementById(&apos;captcha_img&apos;).src=&quot;/kaptcha?&quot;+Math.random();</span><br><span class="line">        &#125;</span><br><span class="line">    &lt;/script&gt;</span><br><span class="line">    &lt;!--</span><br><span class="line">    &lt;img src=&quot;生成验证码的接口&quot; οnclick=&quot;this.src=this.src+&apos;?&apos;+Math.random()&quot; id=&quot;img&quot;&gt;&lt;a href=&quot;#&quot; οnclick=&quot;document.getElementById(&apos;img&apos;).onclick()&quot;&gt;换一张?&lt;/a&gt;&lt;br/&gt;</span><br><span class="line">    --&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;form action=&quot;/user/login&quot; method=&quot;post&quot;&gt;</span><br><span class="line">    userName:&lt;input type=&quot;text&quot; name=&quot;userName&quot; /&gt;&lt;br /&gt;</span><br><span class="line">    password:&lt;input type=&quot;password&quot; name=&quot;passWord&quot; /&gt;&lt;br /&gt;</span><br><span class="line">    验证码:  &lt;input type=&quot;text&quot; placeholder=&quot;请输入验证码&quot; name=&quot;verifyCodeActual&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;item-input&quot;&gt;</span><br><span class="line">        &lt;img id=&quot;captcha_img&quot; alt=&quot;点击更换&quot; title=&quot;点击更换&quot;</span><br><span class="line">             onclick=&quot;refresh()&quot; src=&quot;/kaptcha&quot; /&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;input type=&quot;submit&quot; value=&quot;登录&quot; /&gt;</span><br><span class="line">&lt;/form&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<p>注意在img中的src的值是生成验证码的请求</p>
+<p>onclick中接的函数是点击后产生不同的验证码。</p>
 
       
     </div>
@@ -508,7 +1161,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/07/JavaWeb/Servlet%20%E5%AE%A2%E6%88%B7%E7%AB%AF%20HTTP%20%E8%AF%B7%E6%B1%82/">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/13/Spring2/JUnit5%20@Before%20@After%20%E6%B3%A8%E8%A7%A3%E9%83%A8%E5%88%86%E4%B8%8D%E6%89%A7%E8%A1%8C/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -522,7 +1175,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/11/07/JavaWeb/Servlet%20%E5%AE%A2%E6%88%B7%E7%AB%AF%20HTTP%20%E8%AF%B7%E6%B1%82/" class="post-title-link" itemprop="url">Servlet 客户端 HTTP 请求</a>
+            <a href="/2019/11/13/Spring2/JUnit5%20@Before%20@After%20%E6%B3%A8%E8%A7%A3%E9%83%A8%E5%88%86%E4%B8%8D%E6%89%A7%E8%A1%8C/" class="post-title-link" itemprop="url">JUnit5 @Before @After 注解部分不执行</a>
         </h1>
 
         <div class="post-meta">
@@ -533,7 +1186,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2019-11-07 16:27:07 / Modified: 17:02:43" itemprop="dateCreated datePublished" datetime="2019-11-07T16:27:07+08:00">2019-11-07</time>
+              <time title="Created: 2019-11-13 10:33:02 / Modified: 10:37:19" itemprop="dateCreated datePublished" datetime="2019-11-13T10:33:02+08:00">2019-11-13</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -541,8 +1194,8 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Servlet/" itemprop="url" rel="index">
-                    <span itemprop="name">Servlet</span>
+                  <a href="/categories/junit/" itemprop="url" rel="index">
+                    <span itemprop="name">junit</span>
                   </a>
                 </span>
             </span>
@@ -558,445 +1211,13 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Servlet-客户端-HTTP-请求"><a href="#Servlet-客户端-HTTP-请求" class="headerlink" title="Servlet 客户端 HTTP 请求"></a>Servlet 客户端 HTTP 请求</h1><h2 id="读取-HTTP-头的方法"><a href="#读取-HTTP-头的方法" class="headerlink" title="读取 HTTP 头的方法"></a>读取 HTTP 头的方法</h2><p>下面的方法可用在 Servlet 程序中读取 HTTP 头。这些方法通过 HttpServletRequest 对象可用。</p>
-<table>
-<thead>
-<tr>
-<th>序号</th>
-<th>方法 &amp; 描述</th>
-</tr>
-</thead>
-</table>
+          <h1 id="JUnit5-Before-After-注解部分不执行"><a href="#JUnit5-Before-After-注解部分不执行" class="headerlink" title="JUnit5 @Before @After 注解部分不执行"></a>JUnit5 @Before @After 注解部分不执行</h1><hr>
+<p>单元测试使用@Before 初始化事务连接, @After 关闭事务连接.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">@Before</span><br><span class="line">public void init() &#123;</span><br><span class="line">	System.out.println(&quot;init&quot;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@After</span><br><span class="line">public void destroy()&#123;</span><br><span class="line">	System.err.println(&quot;destroy&quot;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@Test</span><br><span class="line">public void test() &#123;</span><br><span class="line">	System.out.println(&quot;test&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/07/JavaWeb/Servlet%E8%A1%A8%E5%8D%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lancersaber">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lancersaber">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/07/JavaWeb/Servlet%E8%A1%A8%E5%8D%95/" class="post-title-link" itemprop="url">Servlet表单数据</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2019-11-07 15:49:48 / Modified: 17:02:46" itemprop="dateCreated datePublished" datetime="2019-11-07T15:49:48+08:00">2019-11-07</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Servlet/" itemprop="url" rel="index">
-                    <span itemprop="name">Servlet</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Servlet表单数据"><a href="#Servlet表单数据" class="headerlink" title="Servlet表单数据"></a>Servlet表单数据</h1><hr>
-<p>很多情况下，需要传递一些信息，从浏览器到 Web 服务器，最终到后台程序。浏览器使用两种方法可将这些信息传递到 Web 服务器，分别为 GET 方法和 POST 方法。</p>
-<h2 id="GET-方法"><a href="#GET-方法" class="headerlink" title="GET 方法"></a>GET 方法</h2><p>GET 方法向页面请求发送已编码的用户信息。页面和已编码的信息中间用 ? 字符分隔，如下所示：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://www.test.com/hello?key1=value1&amp;key2=value2</span><br></pre></td></tr></table></figure>
-
-<p>GET 方法是默认的从浏览器向 Web 服务器传递信息的方法，它会产生一个很长的字符串，出现在浏览器的地址栏中。如果您要向服务器传递的是密码或其他的敏感信息，请不要使用 GET 方法。GET 方法有大小限制：请求字符串中最多只能有 1024 个字符。<br>这些信息使用 QUERY_STRING 头传递，并可以通过 QUERY_STRING 环境变量访问，Servlet 使用 doGet() 方法处理这种类型的请求。</p>
-<h2 id="POST-方法"><a href="#POST-方法" class="headerlink" title="POST 方法"></a>POST 方法</h2><p>另一个向后台程序传递信息的比较可靠的方法是 POST 方法。POST 方法打包信息的方式与 GET 方法基本相同，但是 POST 方法不是把信息作为 URL 中 ? 字符后的文本字符串进行发送，而是把这些信息作为一个单独的消息。消息以标准输出的形式传到后台程序，您可以解析和使用这些标准输出。Servlet 使用 doPost() 方法处理这种类型的请求。</p>
-<h2 id="使用-Servlet-读取表单数据"><a href="#使用-Servlet-读取表单数据" class="headerlink" title="使用 Servlet 读取表单数据"></a>使用 Servlet 读取表单数据</h2><p>Servlet 处理表单数据，这些数据会根据不同的情况使用不同的方法自动解析：</p>
-<ul>
-<li>getParameter()：您可以调用 request.getParameter() 方法来获取表单参数的值。</li>
-<li>getParameterValues()：如果参数出现一次以上，则调用该方法，并返回多个值，例如复选框。</li>
-<li>getParameterNames()：如果您想要得到当前请求中的所有参数的完整列表，则调用该方法。</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/07/JavaWeb/Servlet%E7%AE%80%E4%BB%8B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lancersaber">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lancersaber">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/07/JavaWeb/Servlet%E7%AE%80%E4%BB%8B/" class="post-title-link" itemprop="url">Servlet简介</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2019-11-07 14:23:43 / Modified: 17:02:46" itemprop="dateCreated datePublished" datetime="2019-11-07T14:23:43+08:00">2019-11-07</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Servlet/" itemprop="url" rel="index">
-                    <span itemprop="name">Servlet</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Servlet简介"><a href="#Servlet简介" class="headerlink" title="Servlet简介"></a>Servlet简介</h1><hr>
-<h2 id="Servlet是什么？"><a href="#Servlet是什么？" class="headerlink" title="Servlet是什么？"></a>Servlet是什么？</h2><p>Java Servlet 是运行在 Web 服务器或应用服务器上的程序，它是作为来自 Web 浏览器或其他 HTTP 客户端的请求和 HTTP 服务器上的数据库或应用程序之间的中间层。</p>
-<p>使用 Servlet，您可以收集来自网页表单的用户输入，呈现来自数据库或者其他源的记录，还可以动态创建网页。<br>Java Servlet 通常情况下与使用 CGI（Common Gateway Interface，公共网关接口）实现的程序可以达到异曲同工的效果。但是相比于 CGI，Servlet 有以下几点优势：</p>
-<ul>
-<li>性能明显更好。</li>
-<li>Servlet 在 Web 服务器的地址空间内执行。这样它就没有必要再创建一个单独的进程来处理每个客户端请求。</li>
-<li>Servlet 是独立于平台的，因为它们是用 Java 编写的。</li>
-<li>服务器上的 Java 安全管理器执行了一系列限制，以保护服务器计算机上的资源。因此，Servlet 是可信的。</li>
-<li>Java 类库的全部功能对 Servlet 来说都是可用的。它可以通过 sockets 和 RMI 机制与 applets、数据库或其他软件进行交互。</li>
-</ul>
-<h2 id="Servlet架构"><a href="#Servlet架构" class="headerlink" title="Servlet架构"></a>Servlet架构</h2><p>下图显示了 Servlet 在 Web 应用程序中的位置。<br><img src="https://i.loli.net/2019/11/07/y4XLSgaeMVrslY7.jpg" alt="servlet-arch.jpg"></p>
-<h2 id="Servlet-任务"><a href="#Servlet-任务" class="headerlink" title="Servlet 任务"></a>Servlet 任务</h2><p>Servlet 执行以下主要任务：</p>
-<ul>
-<li>读取客户端（浏览器）发送的显式的数据。这包括网页上的 HTML 表单，或者也可以是来自 applet 或自定义的 HTTP 客户端程序的表单。</li>
-<li>读取客户端（浏览器）发送的隐式的 HTTP 请求数据。这包括 cookies、媒体类型和浏览器能理解的压缩格式等等</li>
-<li>处理数据并生成结果。这个过程可能需要访问数据库，执行 RMI 或 CORBA 调用，调用 Web 服务，或者直接计算得出对应的响应。</li>
-<li>发送显式的数据（即文档）到客户端（浏览器）。该文档的格式可以是多种多样的，包括文本文件（HTML 或 XML）、二进制文件（GIF 图像）、Excel 等。</li>
-<li>发送隐式的 HTTP 响应到客户端（浏览器）。这包括告诉浏览器或其他客户端被返回的文档类型（例如 HTML），设置 cookies 和缓存参数，以及其他类似的任务。</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/07/IDEA/idea%E4%B8%AD%E7%9A%84%E5%BF%AB%E6%8D%B7%E9%94%AE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lancersaber">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lancersaber">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/07/IDEA/idea%E4%B8%AD%E7%9A%84%E5%BF%AB%E6%8D%B7%E9%94%AE/" class="post-title-link" itemprop="url">IDEA中的快捷键</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-11-07 13:37:41" itemprop="dateCreated datePublished" datetime="2019-11-07T13:37:41+08:00">2019-11-07</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-08 19:29:48" itemprop="dateModified" datetime="2019-11-08T19:29:48+08:00">2019-11-08</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/idea/" itemprop="url" rel="index">
-                    <span itemprop="name">idea</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="IDEA中的快捷键"><a href="#IDEA中的快捷键" class="headerlink" title="IDEA中的快捷键"></a>IDEA中的快捷键</h1><hr>
-<h2 id="查找"><a href="#查找" class="headerlink" title="查找"></a>查找</h2><p><img src="https://i.loli.net/2019/11/07/LRYfI3SaHm62iWK.png" alt="aHR0cHM6Ly93d3cuamF2YXpoaXlpbi5jb20vd3AtY29udGVudC91cGxvYWRzLzIwMTkvMTAvamF2YTMtMTU3MTE5MjM5OS5wbmc.jpg"></p>
-<h2 id="跳转切换"><a href="#跳转切换" class="headerlink" title="跳转切换"></a>跳转切换</h2><p><img src="https://i.loli.net/2019/11/08/khf9oHKvXdjBzRq.png" alt="aHR0cHM6Ly93d3cuamF2YXpoaXlpbi5jb20vd3AtY29udGVudC91cGxvYWRzLzIwMTkvMTAvamF2YTctMTU3MTE5MjM5OS5wbmc.jpg"></p>
-<h2 id="编码相关"><a href="#编码相关" class="headerlink" title="编码相关"></a>编码相关</h2><p><img src="https://i.loli.net/2019/11/08/dOBbpk87A41cJq6.png" alt="aHR0cHM6Ly93d3cuamF2YXpoaXlpbi5jb20vd3AtY29udGVudC91cGxvYWRzLzIwMTkvMTAvamF2YTYtMTU3MTE5MjM5OS5wbmc.jpg"></p>
-<h2 id="代码阅读相关"><a href="#代码阅读相关" class="headerlink" title="代码阅读相关"></a>代码阅读相关</h2><p><img src="https://i.loli.net/2019/11/08/eAkYp96xmcu5LhQ.png" alt="aHR0cHM6Ly93d3cuamF2YXpoaXlpbi5jb20vd3AtY29udGVudC91cGxvYWRzLzIwMTkvMTAvamF2YTgtMTU3MTE5MjM5OS5wbmc.jpg"></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/07/Jquery/Jquery%E6%8D%95%E8%8E%B7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lancersaber">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lancersaber">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/07/Jquery/Jquery%E6%8D%95%E8%8E%B7/" class="post-title-link" itemprop="url">Jquery捕获</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2019-11-07 12:58:39 / Modified: 13:54:09" itemprop="dateCreated datePublished" datetime="2019-11-07T12:58:39+08:00">2019-11-07</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Jquery/" itemprop="url" rel="index">
-                    <span itemprop="name">Jquery</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="jQuery-获取内容和属性"><a href="#jQuery-获取内容和属性" class="headerlink" title="jQuery - 获取内容和属性"></a>jQuery - 获取内容和属性</h1><hr>
-<p>jQuery 拥有可操作 HTML 元素和属性的强大方法。</p>
-<h2 id="jQuery-DOM-操作"><a href="#jQuery-DOM-操作" class="headerlink" title="jQuery DOM 操作"></a>jQuery DOM 操作</h2><p>jQuery 中非常重要的部分，就是操作 DOM 的能力。</p>
-<p>jQuery 提供一系列与 DOM 相关的方法，这使访问和操作元素和属性变得很容易。</p>
-<h3 id="获得内容-text-、html-以及-val"><a href="#获得内容-text-、html-以及-val" class="headerlink" title="获得内容 - text()、html() 以及 val()"></a>获得内容 - text()、html() 以及 val()</h3><p>三个简单实用的用于 DOM 操作的 jQuery 方法：</p>
-<ul>
-<li>text() - 设置或返回所选元素的文本内容</li>
-<li>html() - 设置或返回所选元素的内容（包括 HTML 标记）</li>
-<li>val() - 设置或返回表单字段的值</li>
-</ul>
-<p>下面的例子演示如何通过 jQuery text() 和 html() 方法来获得内容：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta charset=&quot;utf-8&quot;&gt;</span><br><span class="line">&lt;script src=&quot;https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js&quot;&gt;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">$(document).ready(function()&#123;</span><br><span class="line">  $(&quot;#btn1&quot;).click(function()&#123;</span><br><span class="line">    alert(&quot;Text: &quot; + $(&quot;#test&quot;).text());</span><br><span class="line">  &#125;);</span><br><span class="line">  $(&quot;#btn2&quot;).click(function()&#123;</span><br><span class="line">    alert(&quot;HTML: &quot; + $(&quot;#test&quot;).html());</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line"></span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;p id=&quot;test&quot;&gt;这是段落中的 &lt;b&gt;粗体&lt;/b&gt; 文本。&lt;/p&gt;</span><br><span class="line">&lt;button id=&quot;btn1&quot;&gt;显示文本&lt;/button&gt;</span><br><span class="line">&lt;button id=&quot;btn2&quot;&gt;显示 HTML&lt;/button&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
-
-<p>下面的例子演示如何通过 jQuery val() 方法获得输入字段的值：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;meta charset=&quot;utf-8&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;script src=&quot;https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js&quot;&gt;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">$(document).ready(function()&#123;</span><br><span class="line">  $(&quot;button&quot;).click(function()&#123;</span><br><span class="line">    alert(&quot;值为: &quot; + $(&quot;#test&quot;).val());</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line"></span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;p&gt;名称: &lt;input type=&quot;text&quot; id=&quot;test&quot; value=&quot;菜鸟教程&quot;&gt;&lt;/p&gt;</span><br><span class="line">&lt;button&gt;显示值&lt;/button&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
-
-<h3 id="获取属性-attr"><a href="#获取属性-attr" class="headerlink" title="获取属性 - attr()"></a>获取属性 - attr()</h3><p>jQuery attr() 方法用于获取属性值。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta charset=&quot;utf-8&quot;&gt;</span><br><span class="line">&lt;script src=&quot;https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js&quot;&gt;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">$(document).ready(function()&#123;</span><br><span class="line">  $(&quot;button&quot;).click(function()&#123;</span><br><span class="line">    alert($(&quot;#runoob&quot;).attr(&quot;href&quot;));</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line"></span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;p&gt;&lt;a href=&quot;//www.runoob.com&quot; id=&quot;runoob&quot;&gt;菜鸟教程&lt;/a&gt;&lt;/p&gt;</span><br><span class="line">&lt;button&gt;显示 href 属性的值&lt;/button&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/07/Jquery/Jquery%E8%AF%AD%E6%B3%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lancersaber">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lancersaber">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/07/Jquery/Jquery%E8%AF%AD%E6%B3%95/" class="post-title-link" itemprop="url">Jquery语法</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2019-11-07 12:39:47 / Modified: 12:55:09" itemprop="dateCreated datePublished" datetime="2019-11-07T12:39:47+08:00">2019-11-07</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Jquery/" itemprop="url" rel="index">
-                    <span itemprop="name">Jquery</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Jquery语法"><a href="#Jquery语法" class="headerlink" title="Jquery语法"></a>Jquery语法</h1><hr>
-<p>jQuery 语法是通过选取 HTML 元素，并对选取的元素执行某些操作。<br>基础语法： $(selector).action()</p>
-<ul>
-<li>美元符号定义 jQuery</li>
-<li>选择符（selector）”查询”和”查找” HTML 元素</li>
-<li>jQuery 的 action() 执行对元素的操作</li>
-</ul>
-<p>实例：</p>
-<ul>
-<li>$(this).hide() - 隐藏当前元素</li>
-<li>$(“p”).hide() - 隐藏所有 <p> 元素</li>
-<li>$(“p.test”).hide() - 隐藏所有 class=”test” 的 <p> 元素</li>
-<li>$(“#test”).hide() - 隐藏所有 id=”test” 的元素</li>
-</ul>
-<h2 id="文档就绪事件"><a href="#文档就绪事件" class="headerlink" title="文档就绪事件"></a>文档就绪事件</h2><p>您也许已经注意到在我们的实例中的所有 jQuery 函数位于一个 document ready 函数中：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$(document).ready(function()&#123;</span><br><span class="line"> </span><br><span class="line">   // 开始写 jQuery 代码...</span><br><span class="line"> </span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<p>这是为了防止文档在完全加载（就绪）之前运行 jQuery 代码，即在 DOM 加载完成后才可以对 DOM 进行操作。</p>
-<p>如果在文档没有完全加载之前就运行函数，操作可能失败。下面是两个具体的例子：</p>
-<ul>
-<li>试图隐藏一个不存在的元素</li>
-<li>获得未完全加载的图像的大小</li>
-</ul>
+<p>执行test() 方法时 输出只有test, 没有预想中的 init 以及 destory.</p>
+<p>Google了一波, 并没有找到有效的解决方案, 于是转向JUnit官网.<br>在官网中发现了这样一段话<br><img src="https://i.loli.net/2019/11/13/ihoH1WM4jGZup2S.png" alt="20180524185539562.png"></p>
+<p>原来是 @Before 和@After 被 @BeforeEach 和@AfterEach给替代了. 还有一些其他的的注解也被替代了.</p>
 
       
     </div>
@@ -1016,7 +1237,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1062,18 +1283,18 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">148</span>
+          <span class="site-state-item-count">185</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
-        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-count">43</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-count">56</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -1098,7 +1319,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2019</span>
+  <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
