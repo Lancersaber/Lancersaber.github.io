@@ -172,7 +172,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/11/Activiti/README/">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/13/Spring2/%E7%94%9F%E6%88%90%E9%AA%8C%E8%AF%81%E7%A0%81/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -186,457 +186,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/11/11/Activiti/README/" class="post-title-link" itemprop="url">wu</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2019-11-11 17:49:26 / Modified: 17:50:40" itemprop="dateCreated datePublished" datetime="2019-11-11T17:49:26+08:00">2019-11-11</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Activiti/" itemprop="url" rel="index">
-                    <span itemprop="name">Activiti</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="BootDo-面向学习型的开源框架"><a href="#BootDo-面向学习型的开源框架" class="headerlink" title="BootDo 面向学习型的开源框架"></a>BootDo 面向学习型的开源框架</h1><h2 id="平台简介"><a href="#平台简介" class="headerlink" title="平台简介"></a>平台简介</h2><p>一群[]<a target="_blank" href="https://jq.qq.com/?_wv=1027&k=5ojKYFG"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="BootDo交流群" title="BootDo交流群"></a><br>二群<a target="_blank" href="https://jq.qq.com/?_wv=1027&k=54UlM7d"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="BootDo交流群" title="BootDo交流群"></a><br>三群:<a target="_blank" href="https://jq.qq.com/?_wv=1027&k=5rB9i8M"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="BootDo交流群" title="BootDo交流群"></a></p>
-<p>BootDo是高效率，低封装，面向学习型，面向微服的<strong>开源</strong>Java EE开发框架。</p>
-<p>BootDo是在SpringBoot基础上搭建的一个Java基础开发平台，MyBatis为数据访问层，ApacheShiro为权限授权层，Ehcahe对常用数据进行缓存。</p>
-<p>BootDo主要定位于后台管理系统学习交流，已内置后台管理系统的基础功能和高效的<strong>代码生成</strong>工具，<br>包括：系统权限组件、数据权限组件、数据字典组件、核心工具组件、视图操作组件、工作流组件、代码生成等。<br>前端界面风格采用了结构简单、性能优良、页面美观大气的Twitter Bootstrap页面展示框架。<br>采用分层设计、双重验证、提交数据安全编码、密码加密、访问验证、数据权限验证。<br>使用Maven做项目管理，提高项目的易开发性、扩展性。</p>
-<p>BootDo目前包括以下四大模块，系统管理（SYS）模块、<br>内容管理（CMS）模块、在线办公（OA）模块、代码生成（GEN）模块。 <strong>系统管理模块</strong> ，包括企业组织架构（用户管理、机构管理、区域管理）、<br>菜单管理、角色权限管理、字典管理等功能； <strong>内容管理模块</strong> ，包括内容管理（文章、链接），栏目管理、站点管理、<br>公共留言、文件管理、前端网站展示等功能； <strong>在线办公模块</strong> ，提供简单的请假流程实例；<strong>代码生成模块</strong> ，完成重复的工作。</p>
-<p>BootDo 提供了常用工具进行封装，包括日志工具、缓存工具、服务器端验证、数据字典、当前组织机构数据<br>（用户、机构、区域）以及其它常用小工具等。另外还提供一个强大的在线 <strong>代码生成</strong> 工具。</p>
-<h2 id="内置功能"><a href="#内置功能" class="headerlink" title="内置功能"></a>内置功能</h2><ol>
-<li>用户管理：用户是系统操作者，该功能主要完成系统用户配置。</li>
-<li>机构管理：配置系统组织机构（公司、部门、小组），树结构展现，可随意调整上下级。</li>
-<li>区域管理：系统城市区域模型，如：国家、省市、地市、区县的维护。</li>
-<li>菜单管理：配置系统菜单，操作权限，按钮权限标识等。</li>
-<li>角色管理：角色菜单权限分配、设置角色按机构进行数据范围权限划分。</li>
-<li>字典管理：对系统中经常使用的一些较为固定的数据进行维护，如：是否、男女、类别、级别等。</li>
-<li>操作日志：系统正常操作日志记录和查询；系统异常信息日志记录和查询。</li>
-<li>连接池监视：监视当期系统数据库连接池状态，可进行分析SQL找出系统性能瓶颈。</li>
-<li>工作流引擎：实现业务工单流转、在线流程设计器。</li>
-</ol>
-<h2 id="技术选型"><a href="#技术选型" class="headerlink" title="技术选型"></a>技术选型</h2><p>1、后端</p>
-<ul>
-<li>核心框架：Spring Boot</li>
-<li>安全框架：Apache Shiro </li>
-<li>模板引擎：Thymeleaf</li>
-<li>持久层框架：MyBatis</li>
-<li>数据库连接池：Alibaba Druid </li>
-<li>缓存框架：Ehcache 、Redis</li>
-<li>日志管理：SLF4J </li>
-<li>工具类：Apache Commons、Jackson </li>
-</ul>
-<p>2、前端</p>
-<ul>
-<li>JS框架：jQuery</li>
-<li>客户端验证：JQuery Validation </li>
-<li>富文本在线编辑：summernote</li>
-<li>数据表格：bootstrapTable</li>
-<li>弹出层：layer</li>
-<li>树结构控件：jsTree</li>
-</ul>
-<p>4、平台</p>
-<ul>
-<li>服务器中间件：SpringBoot内置</li>
-<li>数据库支持：目前仅提供MySql数据库的支持，但不限于数据库</li>
-<li>开发环境：Java、Eclipse Java EE 、Maven 、Git</li>
-</ul>
-<h2 id="安全考虑"><a href="#安全考虑" class="headerlink" title="安全考虑"></a>安全考虑</h2><ol>
-<li>开发语言：系统采用Java 语言开发，具有卓越的通用性、高效性、平台移植性和安全性。</li>
-<li>分层设计：（数据库层，数据访问层，业务逻辑层，展示层）层次清楚，低耦合，各层必须通过接口才能接入并进行参数校验（如：在展示层不可直接操作数据库），保证数据操作的安全。</li>
-<li>双重验证：用户表单提交双验证：包括服务器端验证及客户端验证，防止用户通过浏览器恶意修改（如不可写文本域、隐藏变量篡改、上传非法文件等），跳过客户端验证操作数据库。</li>
-<li>安全编码：用户表单提交所有数据，在服务器端都进行安全编码，防止用户提交非法脚本及SQL注入获取敏感数据等，确保数据安全。</li>
-<li>密码加密：登录用户密码进行SHA1散列加密，此加密方法是不可逆的。保证密文泄露后的安全问题。</li>
-<li>强制访问：系统对所有管理端链接都进行用户身份权限验证，防止用户直接填写url进行访问。</li>
-</ol>
-<h2 id="演示地址"><a href="#演示地址" class="headerlink" title="演示地址"></a>演示地址</h2><h2 id="www-bootdo-com"><a href="#www-bootdo-com" class="headerlink" title="www.bootdo.com"></a><a href="http://www.bootdo.com" target="_blank" rel="noopener">www.bootdo.com</a></h2><h2 id="交流反馈"><a href="#交流反馈" class="headerlink" title="交流反馈"></a>交流反馈</h2><h2 id="QQ群-669039323（满），614726589"><a href="#QQ群-669039323（满），614726589" class="headerlink" title="QQ群 669039323（满），614726589"></a>QQ群 669039323（满），614726589<a target="_blank" href="https://jq.qq.com/?_wv=1027&k=54UlM7d"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="BootDo交流群" title="BootDo交流群"></a></h2><h2 id="版权声明"><a href="#版权声明" class="headerlink" title="版权声明"></a>版权声明</h2><p>本软件使用 <a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank" rel="noopener">Apache License 2.0</a> 协议，请严格遵照协议内容</p>
-<ul>
-<li><input checked="" disabled="" type="checkbox"> 注：已上内容为整体规化，部分功能还在实现中</li>
-</ul>
-<p>如果感觉对您有帮助，请作者喝杯咖啡吧，请注明您的名字或者昵称，方便作者感谢o(<em>￣︶￣</em>)o<br><img src="https://gitee.com/uploads/images/2018/0228/172207_751b45c4_1204498.jpeg" alt="输入图片说明" title="843167056429717736.jpg"><img src="https://gitee.com/uploads/images/2018/0228/172216_fbcc5c30_1204498.jpeg" alt="输入图片说明" title="12959670678378076.jpg"></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/11/Spring2/%E4%BB%80%E4%B9%88%E6%98%AF%E5%93%8D%E5%BA%94%E5%BC%8F%E7%BC%96%E7%A8%8B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lancersaber">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lancersaber">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/11/Spring2/%E4%BB%80%E4%B9%88%E6%98%AF%E5%93%8D%E5%BA%94%E5%BC%8F%E7%BC%96%E7%A8%8B/" class="post-title-link" itemprop="url">什么是响应式编程</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2019-11-11 13:06:10 / Modified: 13:21:47" itemprop="dateCreated datePublished" datetime="2019-11-11T13:06:10+08:00">2019-11-11</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/springweb/" itemprop="url" rel="index">
-                    <span itemprop="name">springweb</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="什么是响应式编程"><a href="#什么是响应式编程" class="headerlink" title="什么是响应式编程"></a>什么是响应式编程</h1><hr>
-<p>许多人都听过异步编程，同步编程，但是好像对响应式编程这个新名称感到很陌生，即使我们在实际项目中已经在使用这种编程方式。<br>这篇文章就是来介绍响应式编程（Reactive Progamming）到底是怎么回事。<br>如果我们在 Google 中输入 Reactive Programming，试图了解这到底是怎样的一种编程模式，我们很快会发现大量的文章，但是看完我们就会迷糊，概念还是不是那么清晰。这可能是因为许多介绍文章对领域的强关联导致的。比如最常见的一种介绍是用一种数据流（data stream）的方式来展现，还有就是前端领域的控件事件流，虽然这些场景是响应式编程适合的，但是对我来说，总觉得还是不够直观。因为我面对的是分布式系统的编程场景。</p>
-<p>其实响应式编程没必要跟具体的应用领域关联，它是一个可以普遍适用的概念和编程模型。</p>
-<h2 id="同步与异步"><a href="#同步与异步" class="headerlink" title="同步与异步"></a>同步与异步</h2><p>分布式网络系统中，各个参与方节点的运行是相互独立的，没有共享内存，没有全局时钟。各节点通过消息来进行沟通。在传统的理念中，我们会把这样的网络根据他们通信方式描述成同步和异步的。简单来说，同步网络是对消息的到达时间有限定要求（time bounded），以便保证网络活动的确定性。而异步的网络，则对消息的到达没有任何限制。即使发出的消息丢失了，也不会损害网络的活性。用一个具体的例子来理解就是，节点 A 发送了一个消息给节点 B，期待得到 B 的回复，以便通过某个决议或者完成某件后续事情，这个依赖等待的要求，就是同步网络。因为他依赖一个答复才能进行后续动作。换句话说，如果一个节点发送消息之后，不依赖另一个节点的答复也能正常运行，那么就是异步网络。</p>
-<p>在同步网络中，如果 B 由于网络原因（掉线，或者CPU繁忙，等等）没有在限定时间内回复，A 既不能确定消息已经发送给 B，也无法确定后续步骤什么时候才能开始，因此，网络活动变得不可预测，无法结束，也就是没有了确定性。业界已经证明了，在实际的网络中，如果不对网络条件施加任何限制，那么网络确定性是永远无法达到的。因此，为了保证网络活动的确定性，我们通常会网络条件施加一些限制，比如，最典型的就是消息到达的时间限制。</p>
-<p>解释了同步网络和异步网络的区别，我们再来看同步编程和异步编程，其实我们接触这两个编程模式很久了。同步编程简单来说就是，发出一个任务，然后等待执行。而异步编程就是，发出一个任务，不等待结果，就继续发出下一个任务。至于上一个任务的执行结果，我们可以通过两种方式获得，一个是主动的轮训，另一个是被动的接收反馈。由于在异步编程中，我们从不等待执行结果，就可以进行其他任务（前提是这个任务本身不依赖上一个任务的结果）。如果要执行的某个其他任务依赖于上一个任务的结果，那么我们可以每隔一段时间轮训一次，或者另外开一个线程去等待接收任务结果。无论哪种情况，我们的网络都不会阻塞在某一个单独的任务上。</p>
-<h2 id="响应式编程"><a href="#响应式编程" class="headerlink" title="响应式编程"></a>响应式编程</h2><p>现在，我们很自然的过渡到响应式编程（Reactive Programming）这个概念上，它是一种基于事件模式的模型。在上面的异步编程模式中，我们描述了两种获得上一个任务执行结果的方式，一个就是主动轮训，我们把它称为 Proactive 方式。另一个就是被动接收反馈，我们称为 Reactive。</p>
-<p><em>简单来说，在 Reactive 方式中，上一个任务执行结果的反馈就是一个事件，这个事件的到来将会触发下一个任务的执行。</em>这也就是 Reactive 的内涵！我们把处理和发出事件的主体称为 Reactor，它可以接受事件并处理，也可以在处理完事件后，发出下一个事件给其他 Reactor。两个 Reactors 之间没有必然的强耦合，他们之间通过消息管道来传递消息。Reactor 可以定义一些事件处理函数，根据接收到的事件不同类型来进行不同的处理。如果我们的系统复杂，我们还可以专门定义不同功能类别的 Reactors，分别处理不同类型的事件。而在每个 Reactor 中对事件又进行细分处理。<br>需要强调的是，实现 Reactive 模型最核心的是线程和消息管道。线程用于侦听事件，消息管道用于 Reactor 之间通信不同的消息。与他们相关的是事件管理器用于注册、注销事件，而消息分配器则会根据消息类型分发。</p>
-<p>下面是一个 Reactive 模型的示意图：<br><img src="https://i.loli.net/2019/11/11/wvtBorkp4H6Qalc.png" alt="xysbc.PNG"></p>
-<h2 id="术语理解"><a href="#术语理解" class="headerlink" title="术语理解"></a>术语理解</h2><p>在了解了上述异步编程模型的本质之后，我们再来看一些我们常见的术语，就会发现一切都变得清晰明了了。<br>比如，依赖链（Dependency chain），假定我们有一个事件依赖链是这样：睡觉 -&gt; 吃饭 -&gt; 饿了，很直觉的是，在这个依赖链中，只有满足了后面的条件，前面的才会执行。<br>这种依赖链是这个世界普遍的一种场景，一种正向的处理模式是，每隔一段时间就轮训检测是否满足睡觉的条件，在检查是否能睡觉的时候，会先检查是否已经吃饭，检查是否已经吃饭的时候，又会先检查是否饿了。那么这就是 Proactive 模式！而 Reactive 模式则反过来，先有事件的触发，然后事件来到响应方，响应方进行处理，这种方式也叫 Pub/Sub 模式。我们在 OOP 语言中，也会用到同样的概念和逻辑，我们把之叫做 Observer 模式，而在 Funcaitonal Programming 中，也有同样的概念，它可以用 monads 来实现。</p>
-<p>比如，我们有一个 Publisher ，会产生 “饿” 事件，同时还有一个或多个 Subscriber，在收到 “饿” 事件的发生之后，进行响应（比如更新状态或者作出其他预先注册好的行为）。</p>
-<p>总的来说，Reactive Programming 就是编写关于怎么响应事件的编程模式，这些事件包括：用户输入，数据流，系统状态的变化等等。</p>
-<p>总结一下，响应式编程通常会用在一个事件流相关的场景中，在一个事件流中，一旦触发第一个事件，后续的事件会被依次触发，就像一个 Pipeline 系统，不断有输入和输出。</p>
-<h2 id="响应式编程的设计与实现"><a href="#响应式编程的设计与实现" class="headerlink" title="响应式编程的设计与实现"></a>响应式编程的设计与实现</h2><p>接下来，讲一下实现上的架构设计与实现。<br>通常 Reactor 的数量可以是预先定义的，因为一个系统，我们通常可以约束它处理哪些预定义的事件，比如有处理网络连接的 Reactor，处理日志收集的 Reactor，处理数据存储的 Reactor 等等，各司其职。而错误（未定义）事件则可以单独放在一个专门处理 Error/Exception 的 Reactor 中。通过事件管理器，每个 Reactor 可以根据要发出或者接收的消息，即时地创建一个线程/协程去执行响应的操作。发出和接收消息可以根据业务的复杂度，分开单独线程，也可以放在一个线程。这样的设计架构简单而清晰。</p>
-<p>下面是一个简单的示意图：<br><img src="https://i.loli.net/2019/11/11/c21rgHYqsawhtuX.png" alt="xysbc2.PNG"></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/11/Spring2/Spring%20Security%E6%B7%BB%E5%8A%A0%E5%9B%BE%E5%BD%A2%E9%AA%8C%E8%AF%81%E7%A0%81/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lancersaber">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lancersaber">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/11/Spring2/Spring%20Security%E6%B7%BB%E5%8A%A0%E5%9B%BE%E5%BD%A2%E9%AA%8C%E8%AF%81%E7%A0%81/" class="post-title-link" itemprop="url">Spring Security添加图形验证码</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2019-11-11 11:57:55 / Modified: 13:12:00" itemprop="dateCreated datePublished" datetime="2019-11-11T11:57:55+08:00">2019-11-11</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/springsecurity/" itemprop="url" rel="index">
-                    <span itemprop="name">springsecurity</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Spring-Security添加图形验证码"><a href="#Spring-Security添加图形验证码" class="headerlink" title="Spring Security添加图形验证码"></a>Spring Security添加图形验证码</h1><hr>
-<p>添加验证码大致可以分为三个步骤：根据随机数生成验证码图片；将验证码图片显示到登录页面；认证流程中加入验证码校验。Spring Security的认证校验是由UsernamePasswordAuthenticationFilter过滤器完成的，所以我们的验证码校验逻辑应该在这个过滤器之前。下面一起学习下如何在上一节Spring Security自定义用户认证的基础上加入验证码校验功能。</p>
-<h2 id="生成图形验证码"><a href="#生成图形验证码" class="headerlink" title="生成图形验证码"></a>生成图形验证码</h2><p>验证码功能需要用到spring-social-config依赖：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.social&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-social-config&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
-
-<p>首先定义一个验证码对象ImageCode：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">public class ImageCode &#123;</span><br><span class="line"></span><br><span class="line">    private BufferedImage image;</span><br><span class="line"></span><br><span class="line">    private String code;</span><br><span class="line"></span><br><span class="line">    private LocalDateTime expireTime;</span><br><span class="line"></span><br><span class="line">    public ImageCode(BufferedImage image, String code, int expireIn) &#123;</span><br><span class="line">        this.image = image;</span><br><span class="line">        this.code = code;</span><br><span class="line">        this.expireTime = LocalDateTime.now().plusSeconds(expireIn);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public ImageCode(BufferedImage image, String code, LocalDateTime expireTime) &#123;</span><br><span class="line">        this.image = image;</span><br><span class="line">        this.code = code;</span><br><span class="line">        this.expireTime = expireTime;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    boolean isExpire() &#123;</span><br><span class="line">        return LocalDateTime.now().isAfter(expireTime);</span><br><span class="line">    &#125;</span><br><span class="line">    // get,set 略</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>ImageCode对象包含了三个属性：image图片，code验证码和expireTime过期时间。isExpire方法用于判断验证码是否已过期。</p>
-<p>接着定义一个ValidateCodeController，用于处理生成验证码请求：</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/11/Spring/Spring%20Security%E8%87%AA%E5%AE%9A%E4%B9%89%E7%94%A8%E6%88%B7%E8%AE%A4%E8%AF%81/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lancersaber">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lancersaber">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/11/Spring/Spring%20Security%E8%87%AA%E5%AE%9A%E4%B9%89%E7%94%A8%E6%88%B7%E8%AE%A4%E8%AF%81/" class="post-title-link" itemprop="url">Spring Security自定义用户认证</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2019-11-11 09:52:18 / Modified: 10:52:42" itemprop="dateCreated datePublished" datetime="2019-11-11T09:52:18+08:00">2019-11-11</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/springsecurity/" itemprop="url" rel="index">
-                    <span itemprop="name">springsecurity</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Spring-Security自定义用户认证"><a href="#Spring-Security自定义用户认证" class="headerlink" title="Spring Security自定义用户认证"></a>Spring Security自定义用户认证</h1><hr>
-<p>在Spring Boot中开启Spring Security一节中我们简单搭建了个Spring Boot + Spring Security的项目，认证的用户名和密码都是由Spring Security生成。Spring Security支持我们自定义认证的过程，如处理用户信息获取逻辑，使用我们自定义的登录页面替换Spring Security默认的登录页及自定义登录成功或失败后的处理逻辑等。这里将在上一节的源码基础上进行改造。</p>
-<h2 id="自定义认证过程"><a href="#自定义认证过程" class="headerlink" title="自定义认证过程"></a>自定义认证过程</h2><p>自定义认证的过程需要实现Spring Security提供的UserDetailService接口，该接口只有一个抽象方法loadUserByUsername，源码如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public interface UserDetailsService &#123;</span><br><span class="line">    UserDetails loadUserByUsername(String username) throws UsernameNotFoundException;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>loadUserByUsername方法返回一个UserDetail对象，该对象也是一个接口，包含一些用于描述用户信息的方法，源码如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">public interface UserDetails extends Serializable &#123;</span><br><span class="line"></span><br><span class="line">    Collection&lt;? extends GrantedAuthority&gt; getAuthorities();</span><br><span class="line"></span><br><span class="line">    String getPassword();</span><br><span class="line"></span><br><span class="line">    String getUsername();</span><br><span class="line"></span><br><span class="line">    boolean isAccountNonExpired();</span><br><span class="line"></span><br><span class="line">    boolean isAccountNonLocked();</span><br><span class="line"></span><br><span class="line">    boolean isCredentialsNonExpired();</span><br><span class="line"></span><br><span class="line">    boolean isEnabled();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这些方法的含义如下：</p>
-<ul>
-<li><p>getAuthorities获取用户包含的权限，返回权限集合，权限是一个继承了GrantedAuthority的对象；</p>
-</li>
-<li><p>getPassword和getUsername用于获取密码和用户名；</p>
-</li>
-<li><p>isAccountNonExpired方法返回boolean类型，用于判断账户是否未过期，未过期返回true反之返回false；</p>
-</li>
-<li><p>isAccountNonLocked方法用于判断账户是否未锁定；</p>
-</li>
-<li><p>isCredentialsNonExpired用于判断用户凭证是否没过期，即密码是否未过期；</p>
-</li>
-<li><p>isEnabled方法用于判断用户是否可用。</p>
-</li>
-</ul>
-<p>实际中我们可以自定义UserDetails接口的实现类，也可以直接使用Spring Security提供的UserDetails接口实现类org.springframework.security.core.userdetails.User。</p>
-<p>说了那么多，下面我们来开始实现UserDetailService接口的loadUserByUsername方法。</p>
-<p>首先创建一个MyUser对象，用于存放模拟的用户数据（实际中一般从数据库获取，这里为了方便直接模拟）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">public class MyUser implements Serializable &#123;</span><br><span class="line">    private static final long serialVersionUID = 3497935890426858541L;</span><br><span class="line"></span><br><span class="line">    private String userName;</span><br><span class="line"></span><br><span class="line">    private String password;</span><br><span class="line"></span><br><span class="line">    private boolean accountNonExpired = true;</span><br><span class="line"></span><br><span class="line">    private boolean accountNonLocked= true;</span><br><span class="line"></span><br><span class="line">    private boolean credentialsNonExpired= true;</span><br><span class="line"></span><br><span class="line">    private boolean enabled= true;</span><br><span class="line"></span><br><span class="line">    // get,set略</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>接着创建MyUserDetailService实现UserDetailService：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">public class UserDetailService implements UserDetailsService &#123;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    private PasswordEncoder passwordEncoder;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException &#123;</span><br><span class="line">        // 模拟一个用户，替代数据库获取逻辑</span><br><span class="line">        MyUser user = new MyUser();</span><br><span class="line">        user.setUserName(username);</span><br><span class="line">        user.setPassword(this.passwordEncoder.encode(&quot;123456&quot;));</span><br><span class="line">        // 输出加密后的密码</span><br><span class="line">        System.out.println(user.getPassword());</span><br><span class="line"></span><br><span class="line">        return new User(username, user.getPassword(), user.isEnabled(),</span><br><span class="line">                user.isAccountNonExpired(), user.isCredentialsNonExpired(),</span><br><span class="line">                user.isAccountNonLocked(), AuthorityUtils.commaSeparatedStringToAuthorityList(&quot;admin&quot;));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这里我们使用了org.springframework.security.core.userdetails.User类包含7个参数的构造器，其还包含一个三个参数的构造器User(String username, String password,Collection&lt;? extends GrantedAuthority&gt; authorities)，由于权限参数不能为空，所以这里先使用AuthorityUtils.commaSeparatedStringToAuthorityList方法模拟一个admin的权限，该方法可以将逗号分隔的字符串转换为权限集合。</p>
-<p>此外我们还注入了PasswordEncoder对象，该对象用于密码加密，注入前需要手动配置。我们在BrowserSecurityConfig中配置它：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter &#123;</span><br><span class="line"></span><br><span class="line">    @Bean</span><br><span class="line">    public PasswordEncoder passwordEncoder() &#123;</span><br><span class="line">        return new BCryptPasswordEncoder();</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>PasswordEncoder是一个密码加密接口，而BCryptPasswordEncoder是Spring Security提供的一个实现方法，我们也可以自己实现PasswordEncoder。不过Spring Security实现的BCryptPasswordEncoder已经足够强大，它对相同的密码进行加密后可以生成不同的结果。<br>这时候重启项目，访问<a href="http://localhost:8080/login，便可以使用任意用户名以及123456作为密码登录系统。我们多次进行登录操作，可以看到控制台输出的加密后的密码如下：" target="_blank" rel="noopener">http://localhost:8080/login，便可以使用任意用户名以及123456作为密码登录系统。我们多次进行登录操作，可以看到控制台输出的加密后的密码如下：</a><br><img src="https://i.loli.net/2019/11/11/sCfgt2Ea1ZkYcM6.png" alt="3ieuqei349h39.png"><br>可以看到，BCryptPasswordEncoder对相同的密码生成的结果每次都是不一样的。</p>
-<h2 id="替换默认登录页"><a href="#替换默认登录页" class="headerlink" title="替换默认登录页"></a>替换默认登录页</h2><p>默认的登录页面过于简陋，我们可以自己定义一个登录页面。为了方便起见，我们直接在src/main/resources/resources目录下定义一个login.html（不需要Controller跳转）：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;title&gt;登录&lt;/title&gt;</span><br><span class="line">    &lt;link rel=&quot;stylesheet&quot; href=&quot;css/login.css&quot; type=&quot;text/css&quot;&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;form class=&quot;login-page&quot; action=&quot;/login&quot; method=&quot;post&quot;&gt;</span><br><span class="line">        &lt;div class=&quot;form&quot;&gt;</span><br><span class="line">            &lt;h3&gt;账户登录&lt;/h3&gt;</span><br><span class="line">            &lt;input type=&quot;text&quot; placeholder=&quot;用户名&quot; name=&quot;username&quot; required=&quot;required&quot; /&gt;</span><br><span class="line">            &lt;input type=&quot;password&quot; placeholder=&quot;密码&quot; name=&quot;password&quot; required=&quot;required&quot; /&gt;</span><br><span class="line">            &lt;button type=&quot;submit&quot;&gt;登录&lt;/button&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    &lt;/form&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
-
-<p>要怎么做才能让Spring Security跳转到我们自己定义的登录页面呢？很简单，只需要在BrowserSecurityConfig的configure中添加一些配置：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">protected void configure(HttpSecurity http) throws Exception &#123;</span><br><span class="line">    http.formLogin() // 表单登录</span><br><span class="line">            // http.httpBasic() // HTTP Basic</span><br><span class="line">            .loginPage(&quot;/login.html&quot;) </span><br><span class="line">            .loginProcessingUrl(&quot;/login&quot;)</span><br><span class="line">            .and()</span><br><span class="line">            .authorizeRequests() // 授权配置</span><br><span class="line">            .antMatchers(&quot;/login.html&quot;).permitAll()</span><br><span class="line">            .anyRequest()  // 所有请求</span><br><span class="line">            .authenticated(); // 都需要认证</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>上面代码中.loginPage(“/login.html”)指定了跳转到登录页面的请求URL，.loginProcessingUrl(“/login”)对应登录页面form表单的action=”/login”，.antMatchers(“/login.html”).permitAll()表示跳转到登录页面的请求不被拦截，否则会进入无限循环。</p>
-<p>这时候启动系统，访问<a href="http://localhost:8080/hello，会看到页面已经被重定向到了http://localhost:8080/login.html：" target="_blank" rel="noopener">http://localhost:8080/hello，会看到页面已经被重定向到了http://localhost:8080/login.html：</a><br><img src="https://i.loli.net/2019/11/11/njpG1ZKc8iLHAzs.png" alt="QQ截图20180713211112.png"></p>
-<p>输入用户名和密码发现页面报错：<br><img src="https://i.loli.net/2019/11/11/cfvinZMNw4hy1Oz.png" alt="QQ截图20180713212002.png"><br>我们先把CSRF攻击防御关了，修改BrowserSecurityConfig的configure：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Override</span><br><span class="line">protected void configure(HttpSecurity http) throws Exception &#123;</span><br><span class="line">    http.formLogin() // 表单登录</span><br><span class="line">            // http.httpBasic() // HTTP Basic</span><br><span class="line">            .loginPage(&quot;/login.html&quot;) // 登录跳转 URL</span><br><span class="line">            .loginProcessingUrl(&quot;/login&quot;) // 处理表单登录 URL</span><br><span class="line">            .and()</span><br><span class="line">            .authorizeRequests() // 授权配置</span><br><span class="line">            .antMatchers(&quot;/login.html&quot;).permitAll() // 登录跳转 URL 无需认证</span><br><span class="line">            .anyRequest()  // 所有请求</span><br><span class="line">            .authenticated() // 都需要认证</span><br><span class="line">            .and().csrf().disable();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>重启项目便可正常登录。</p>
-<p>假如现在有这样一个需求：在未登录的情况下，当用户访问html资源的时候跳转到登录页，否则返回JSON格式数据，状态码为401。</p>
-<p>要实现这个功能我们将loginPage的URL改为/authentication/require，并且在antMatchers方法中加入该URL，让其免拦截:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">protected void configure(HttpSecurity http) throws Exception &#123;</span><br><span class="line">    http.formLogin() // 表单登录</span><br><span class="line">            // http.httpBasic() // HTTP Basic</span><br><span class="line">            .loginPage(&quot;/authentication/require&quot;) // 登录跳转 URL</span><br><span class="line">            .loginProcessingUrl(&quot;/login&quot;) // 处理表单登录 URL</span><br><span class="line">            .and()</span><br><span class="line">            .authorizeRequests() // 授权配置</span><br><span class="line">            .antMatchers(&quot;/authentication/require&quot;, &quot;/login.html&quot;).permitAll() // 登录跳转 URL 无需认证</span><br><span class="line">            .anyRequest()  // 所有请求</span><br><span class="line">            .authenticated() // 都需要认证</span><br><span class="line">            .and().csrf().disable();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>然后定义一个控制器BrowserSecurityController，处理这个请求：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">@RestController</span><br><span class="line">public class BrowserSecurityController &#123;</span><br><span class="line">    private RequestCache requestCache = new HttpSessionRequestCache();</span><br><span class="line">    private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();</span><br><span class="line"></span><br><span class="line">    @GetMapping(&quot;/authentication/require&quot;)</span><br><span class="line">    @ResponseStatus(HttpStatus.UNAUTHORIZED)</span><br><span class="line">    public String requireAuthentication(HttpServletRequest request, HttpServletResponse response) throws IOException &#123;</span><br><span class="line">        SavedRequest savedRequest = requestCache.getRequest(request, response);</span><br><span class="line">        if (savedRequest != null) &#123;</span><br><span class="line">            String targetUrl = savedRequest.getRedirectUrl();</span><br><span class="line">            if (StringUtils.endsWithIgnoreCase(targetUrl, &quot;.html&quot;))</span><br><span class="line">                redirectStrategy.sendRedirect(request, response, &quot;/login.html&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">        return &quot;访问的资源需要身份认证！&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>其中HttpSessionRequestCache为Spring Security提供的用于缓存请求的对象，通过调用它的getRequest方法可以获取到本次请求的HTTP信息。DefaultRedirectStrategy的sendRedirect为Spring Security提供的用于处理重定向的方法。</p>
-<p>上面代码获取了引发跳转的请求，根据请求是否以.html为结尾来对应不同的处理方法。如果是以.html结尾，那么重定向到登录页面，否则返回”访问的资源需要身份认证！”信息，并且HTTP状态码为401（HttpStatus.UNAUTHORIZED）。</p>
-<p>这样当我们访问<a href="http://localhost:8080/hello的时候页面便会跳转到http://localhost:8080/authentication/require，并且输出”访问的资源需要身份认证！”，当我们访问http://localhost:8080/hello.html的时候，页面将会跳转到登录页面。" target="_blank" rel="noopener">http://localhost:8080/hello的时候页面便会跳转到http://localhost:8080/authentication/require，并且输出”访问的资源需要身份认证！”，当我们访问http://localhost:8080/hello.html的时候，页面将会跳转到登录页面。</a></p>
-<h2 id="处理成功和失败"><a href="#处理成功和失败" class="headerlink" title="处理成功和失败"></a>处理成功和失败</h2><p>Spring Security有一套默认的处理登录成功和失败的方法：当用户登录成功时，页面会跳转会引发登录的请求，比如在未登录的情况下访问<a href="http://localhost:8080/hello，页面会跳转到登录页，登录成功后再跳转回来；登录失败时则是跳转到Spring" target="_blank" rel="noopener">http://localhost:8080/hello，页面会跳转到登录页，登录成功后再跳转回来；登录失败时则是跳转到Spring</a> Security默认的错误提示页面。下面我们通过一些自定义配置来替换这套默认的处理机制。</p>
-<h3 id="自定义登录成功逻辑"><a href="#自定义登录成功逻辑" class="headerlink" title="自定义登录成功逻辑"></a>自定义登录成功逻辑</h3><p>要改变默认的处理成功逻辑很简单，只需要实现org.springframework.security.web.authentication.AuthenticationSuccessHandler接口的onAuthenticationSuccess方法即可：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@Component</span><br><span class="line">public class MyAuthenticationSucessHandler implements AuthenticationSuccessHandler &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,</span><br><span class="line">                                        Authentication authentication) throws IOException, ServletException &#123;</span><br><span class="line">        response.setContentType(&quot;application/json;charset=utf-8&quot;);</span><br><span class="line">        response.getWriter().write(mapper.writeValueAsString(authentication));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>其中Authentication参数既包含了认证请求的一些信息，比如IP，请求的SessionId等，也包含了用户信息，即前面提到的User对象。通过上面这个配置，用户登录成功后页面将打印出Authentication对象的信息。</p>
-<p>要使这个配置生效，我们还的在BrowserSecurityConfig的configure中配置它：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter &#123;</span><br><span class="line">    @Autowired</span><br><span class="line">    private MyAuthenticationSucessHandler authenticationSucessHandler;</span><br><span class="line"></span><br><span class="line">    @Bean</span><br><span class="line">    public PasswordEncoder passwordEncoder() &#123;</span><br><span class="line">        return new BCryptPasswordEncoder();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void configure(HttpSecurity http) throws Exception &#123;</span><br><span class="line">        http.formLogin() // 表单登录</span><br><span class="line">                // http.httpBasic() // HTTP Basic</span><br><span class="line">                .loginPage(&quot;/authentication/require&quot;) // 登录跳转 URL</span><br><span class="line">                .loginProcessingUrl(&quot;/login&quot;) // 处理表单登录 URL</span><br><span class="line">                .successHandler(authenticationSucessHandler) // 处理登录成功</span><br><span class="line">                .and()</span><br><span class="line">                .authorizeRequests() // 授权配置</span><br><span class="line">                .antMatchers(&quot;/authentication/require&quot;, &quot;/login.html&quot;).permitAll() // 登录跳转 URL 无需认证</span><br><span class="line">                .anyRequest()  // 所有请求</span><br><span class="line">                .authenticated() // 都需要认证</span><br><span class="line">                .and().csrf().disable();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>我们将MyAuthenticationSucessHandler注入进来，并通过successHandler方法进行配置。</p>
-<p>这时候重启项目登录后页面将会输出如下JSON信息：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;authorities&quot;: [</span><br><span class="line">    &#123;</span><br><span class="line">      &quot;authority&quot;: &quot;admin&quot;</span><br><span class="line">    &#125;</span><br><span class="line">  ],</span><br><span class="line">  &quot;details&quot;: &#123;</span><br><span class="line">    &quot;remoteAddress&quot;: &quot;0:0:0:0:0:0:0:1&quot;,</span><br><span class="line">    &quot;sessionId&quot;: &quot;8D50BAF811891F4397E21B4B537F0544&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;authenticated&quot;: true,</span><br><span class="line">  &quot;principal&quot;: &#123;</span><br><span class="line">    &quot;password&quot;: null,</span><br><span class="line">    &quot;username&quot;: &quot;mrbird&quot;,</span><br><span class="line">    &quot;authorities&quot;: [</span><br><span class="line">      &#123;</span><br><span class="line">        &quot;authority&quot;: &quot;admin&quot;</span><br><span class="line">      &#125;</span><br><span class="line">    ],</span><br><span class="line">    &quot;accountNonExpired&quot;: true,</span><br><span class="line">    &quot;accountNonLocked&quot;: true,</span><br><span class="line">    &quot;credentialsNonExpired&quot;: true,</span><br><span class="line">    &quot;enabled&quot;: true</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;credentials&quot;: null,</span><br><span class="line">  &quot;name&quot;: &quot;mrbird&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>像password，credentials这些敏感信息，Spring Security已经将其屏蔽。</p>
-<p>除此之外，我们也可以在登录成功后做页面的跳转，修改MyAuthenticationSucessHandler：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">@Component</span><br><span class="line">public class MyAuthenticationSucessHandler implements AuthenticationSuccessHandler &#123;</span><br><span class="line">    private RequestCache requestCache = new HttpSessionRequestCache();</span><br><span class="line">    private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    private ObjectMapper mapper;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,</span><br><span class="line">                                        Authentication authentication) throws IOException &#123;</span><br><span class="line">        SavedRequest savedRequest = requestCache.getRequest(request, response);</span><br><span class="line">        redirectStrategy.sendRedirect(request, response, savedRequest.getRedirectUrl());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>通过上面配置，登录成功后页面将跳转回引发跳转的页面。如果想指定跳转的页面，比如跳转到/index，可以将savedRequest.getRedirectUrl()修改为/index：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@Component</span><br><span class="line">public class MyAuthenticationSucessHandler implements AuthenticationSuccessHandler &#123;</span><br><span class="line">    private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,</span><br><span class="line">                                        Authentication authentication) throws IOException &#123;</span><br><span class="line">        redirectStrategy.sendRedirect(request, response, &quot;/index&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>然后在TestController中定义一个处理该请求的方法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@RestController</span><br><span class="line">public class TestController &#123;</span><br><span class="line">    @GetMapping(&quot;index&quot;)</span><br><span class="line">    public Object index()&#123;</span><br><span class="line">        return SecurityContextHolder.getContext().getAuthentication();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>登录成功后，便可以使用SecurityContextHolder.getContext().getAuthentication()获取到Authentication对象信息。除了通过这种方式获取Authentication对象信息外，也可以使用下面这种方式:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@RestController</span><br><span class="line">public class TestController &#123;</span><br><span class="line">    @GetMapping(&quot;index&quot;)</span><br><span class="line">    public Object index(Authentication authentication) &#123;</span><br><span class="line">        return authentication;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>重启项目，登录成功后，页面将跳转到<a href="http://localhost:8080/index：" target="_blank" rel="noopener">http://localhost:8080/index：</a><br><img src="https://i.loli.net/2019/11/11/emui752YFqN1P9U.png" alt="QQ截图20180714103649.png"></p>
-<h3 id="自定义登录失败逻辑"><a href="#自定义登录失败逻辑" class="headerlink" title="自定义登录失败逻辑"></a>自定义登录失败逻辑</h3><p>和自定义登录成功处理逻辑类似，自定义登录失败处理逻辑需要实现org.springframework.security.web.authentication.<br>AuthenticationFailureHandler的onAuthenticationFailure方法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@Component</span><br><span class="line">public class MyAuthenticationFailureHandler implements AuthenticationFailureHandler &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,</span><br><span class="line">                                        AuthenticationException exception) throws IOException &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>onAuthenticationFailure方法的AuthenticationException参数是一个抽象类，Spring Security根据登录失败的原因封装了许多对应的实现类，查看AuthenticationException的Hierarchy：<br><img src="https://i.loli.net/2019/11/11/tWf9F5EPaBSKbp7.png" alt="QQ截图20180714104551.png"></p>
-<p>不同的失败原因对应不同的异常，比如用户名或密码错误对应的是BadCredentialsException，用户不存在对应的是UsernameNotFoundException，用户被锁定对应的是LockedException等。</p>
-<p>假如我们需要在登录失败的时候返回失败信息，可以这样处理：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">@Component</span><br><span class="line">public class MyAuthenticationFailureHandler implements AuthenticationFailureHandler &#123;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    private ObjectMapper mapper;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,</span><br><span class="line">                                        AuthenticationException exception) throws IOException &#123;</span><br><span class="line">        response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());</span><br><span class="line">        response.setContentType(&quot;application/json;charset=utf-8&quot;);</span><br><span class="line">        response.getWriter().write(mapper.writeValueAsString(exception.getMessage()));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>状态码定义为500（HttpStatus.INTERNAL_SERVER_ERROR.value()），即系统内部异常。</p>
-<p>同样的，我们需要在BrowserSecurityConfig的configure中配置它：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter &#123;</span><br><span class="line">    @Autowired</span><br><span class="line">    private MyAuthenticationSucessHandler authenticationSucessHandler;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    private MyAuthenticationFailureHandler authenticationFailureHandler;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void configure(HttpSecurity http) throws Exception &#123;</span><br><span class="line">        http.formLogin() // 表单登录</span><br><span class="line">                // http.httpBasic() // HTTP Basic</span><br><span class="line">                .loginPage(&quot;/authentication/require&quot;) // 登录跳转 URL</span><br><span class="line">                .loginProcessingUrl(&quot;/login&quot;) // 处理表单登录 URL</span><br><span class="line">                .successHandler(authenticationSucessHandler) // 处理登录成功</span><br><span class="line">                .failureHandler(authenticationFailureHandler) // 处理登录失败</span><br><span class="line">                .and()</span><br><span class="line">                .authorizeRequests() // 授权配置</span><br><span class="line">                .antMatchers(&quot;/authentication/require&quot;, &quot;/login.html&quot;).permitAll() // 登录跳转 URL 无需认证</span><br><span class="line">                .anyRequest()  // 所有请求</span><br><span class="line">                .authenticated() // 都需要认证</span><br><span class="line">                .and().csrf().disable();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>重启项目，当输入错误的密码时，页面输出如下：<br><img src="https://i.loli.net/2019/11/11/5bo8mrBfUWeyPzs.png" alt="QQ截图20180714105620.png"></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/10/Spring2/%E4%BD%BF%E7%94%A8Actuator%E7%9B%91%E6%8E%A7Spring%20Boot%E5%BA%94%E7%94%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lancersaber">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lancersaber">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/10/Spring2/%E4%BD%BF%E7%94%A8Actuator%E7%9B%91%E6%8E%A7Spring%20Boot%E5%BA%94%E7%94%A8/" class="post-title-link" itemprop="url">使用Actuator监控Spring Boot应用</a>
+            <a href="/2019/11/13/Spring2/%E7%94%9F%E6%88%90%E9%AA%8C%E8%AF%81%E7%A0%81/" class="post-title-link" itemprop="url">生成验证码并验证</a>
         </h1>
 
         <div class="post-meta">
@@ -646,14 +196,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2019-11-10 15:42:59" itemprop="dateCreated datePublished" datetime="2019-11-10T15:42:59+08:00">2019-11-10</time>
+              <time title="Created: 2019-11-13 15:37:40" itemprop="dateCreated datePublished" datetime="2019-11-13T15:37:40+08:00">2019-11-13</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-11 10:52:42" itemprop="dateModified" datetime="2019-11-11T10:52:42+08:00">2019-11-11</time>
+                <time title="Modified: 2019-11-22 16:02:56" itemprop="dateModified" datetime="2019-11-22T16:02:56+08:00">2019-11-22</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -678,10 +228,23 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="使用Actuator监控Spring-Boot应用"><a href="#使用Actuator监控Spring-Boot应用" class="headerlink" title="使用Actuator监控Spring Boot应用"></a>使用Actuator监控Spring Boot应用</h1><hr>
-<p>我们都知道Spring Boot是一个用于快速开发Java Web的框架，不需要太多的配置即可使用Spring的大量功能。Spring Boot遵循着“约定大于配置”的原则，许多功能使用默认的配置即可。这样的做法好处在于我们不需要像使用Spring那样编写一大堆的XML配置代码，但过于简单的配置过程会让我们在了解各种依赖，配置之间的关系过程上带来一些困难。不过没关系，在Spring Boot中，我们可以使用Actuator来监控应用，Actuator提供了一系列的RESTful API让我们可以更为细致的了解各种信息。</p>
-<h2 id="引入Actuator"><a href="#引入Actuator" class="headerlink" title="引入Actuator"></a>引入Actuator</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-boot-starter-actuator&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+          <h1 id="生成验证码"><a href="#生成验证码" class="headerlink" title="生成验证码"></a>生成验证码</h1><hr>
+<h2 id="引入依赖"><a href="#引入依赖" class="headerlink" title="引入依赖"></a>引入依赖</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"> &lt;!-- 验证码生成插件 --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;com.github.whvcse&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;easy-captcha&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.6.2&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- 验证码 --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;com.github.penggle&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;kaptcha&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;2.3.2&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
 
+<h2 id="配置一个DefaultKaptcha"><a href="#配置一个DefaultKaptcha" class="headerlink" title="配置一个DefaultKaptcha"></a>配置一个DefaultKaptcha</h2><p>注入一个Properties，设置DefaultKaptcha的一些属性</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">public class CaptchaConfig &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    @Bean</span><br><span class="line">    public DefaultKaptcha getDefaultKaptcha()&#123;</span><br><span class="line">        DefaultKaptcha defaultKaptcha=new DefaultKaptcha();</span><br><span class="line">        defaultKaptcha.setConfig(getConfig());</span><br><span class="line">        return defaultKaptcha;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Bean</span><br><span class="line">    public Config getConfig()&#123;</span><br><span class="line">        Properties properties=new Properties();</span><br><span class="line">//        properties</span><br><span class="line">        properties.setProperty(&quot;kaptcha.border&quot;, &quot;yes&quot;);</span><br><span class="line">        properties.setProperty(&quot;kaptcha.border.color&quot;, &quot;105,179,90&quot;);</span><br><span class="line">        properties.setProperty(&quot;kaptcha.textproducer.font.color&quot;, &quot;blue&quot;);</span><br><span class="line">        properties.setProperty(&quot;kaptcha.image.width&quot;, &quot;110&quot;);</span><br><span class="line">        properties.setProperty(&quot;kaptcha.image.height&quot;, &quot;40&quot;);</span><br><span class="line">        properties.setProperty(&quot;kaptcha.textproducer.font.size&quot;, &quot;30&quot;);</span><br><span class="line">        properties.setProperty(&quot;kaptcha.session.key&quot;, &quot;code&quot;);</span><br><span class="line">        properties.setProperty(&quot;kaptcha.textproducer.char.length&quot;, &quot;4&quot;);</span><br><span class="line">//        properties.setProperty(&quot;kaptcha.textproducer.font.names&quot;, &quot;宋体,楷体,微软雅黑&quot;);</span><br><span class="line">        Config config=new Config(properties);</span><br><span class="line">        return config;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="生成验证码-1"><a href="#生成验证码-1" class="headerlink" title="生成验证码"></a>生成验证码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">@Controller</span><br><span class="line">public class CodeController &#123;</span><br><span class="line">    @Autowired</span><br><span class="line">    private Producer captchaProducer = null;</span><br><span class="line"></span><br><span class="line">    @RequestMapping(&quot;/kaptcha&quot;)</span><br><span class="line">    public void getKaptchaImage(HttpServletRequest request, HttpServletResponse response) throws Exception &#123;</span><br><span class="line">        HttpSession session = request.getSession();</span><br><span class="line">        response.setDateHeader(&quot;Expires&quot;, 0);</span><br><span class="line">        response.setHeader(&quot;Cache-Control&quot;, &quot;no-store, no-cache, must-revalidate&quot;);</span><br><span class="line">        response.addHeader(&quot;Cache-Control&quot;, &quot;post-check=0, pre-check=0&quot;);</span><br><span class="line">        response.setHeader(&quot;Pragma&quot;, &quot;no-cache&quot;);</span><br><span class="line">        response.setContentType(&quot;image/jpeg&quot;);</span><br><span class="line">        //生成验证码</span><br><span class="line">        String capText = captchaProducer.createText();</span><br><span class="line">        System.out.println(&quot;验证码： &quot;+capText);</span><br><span class="line">        session.setAttribute(Constants.KAPTCHA_SESSION_KEY, capText);</span><br><span class="line">        //向客户端写出</span><br><span class="line">        BufferedImage bi = captchaProducer.createImage(capText);</span><br><span class="line">        ServletOutputStream out = response.getOutputStream();</span><br><span class="line"></span><br><span class="line">        ImageIO.write(bi, &quot;jpg&quot;, out);</span><br><span class="line"></span><br><span class="line">        try &#123;</span><br><span class="line">            out.flush();</span><br><span class="line">        &#125; finally &#123;</span><br><span class="line">            out.close();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="接收验证码并校验"><a href="#接收验证码并校验" class="headerlink" title="接收验证码并校验"></a>接收验证码并校验</h2><p>首先设置一个工具类</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">public class CodeUtil &#123;</span><br><span class="line">    /**</span><br><span class="line">     * 将获取到的前端参数转为string类型</span><br><span class="line">     * @param request</span><br><span class="line">     * @param key</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    public static String getString(HttpServletRequest request,String key) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            String result = request.getParameter(key);</span><br><span class="line">            if(result != null) &#123;</span><br><span class="line">                result = result.trim();</span><br><span class="line">            &#125;</span><br><span class="line">            if(&quot;&quot;.equals(result)) &#123;</span><br><span class="line">                result = null;</span><br><span class="line">            &#125;</span><br><span class="line">            return result;</span><br><span class="line">        &#125;catch(Exception e) &#123;</span><br><span class="line">            return null;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    /**</span><br><span class="line">     * 验证码校验</span><br><span class="line">     * @param request</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    public static boolean checkVerifyCode(HttpServletRequest request) &#123;</span><br><span class="line">        //获取生成的验证码</span><br><span class="line">        String verifyCodeExpected = (String) request.getSession().getAttribute(com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY);</span><br><span class="line">        //获取用户输入的验证码</span><br><span class="line">        String verifyCodeActual = CodeUtil.getString(request, &quot;verifyCodeActual&quot;);</span><br><span class="line">        if(verifyCodeActual == null ||!verifyCodeActual.equals(verifyCodeExpected)) &#123;</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>开始验证</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">    @RequestMapping(&quot;/login&quot;)</span><br><span class="line">    public String login(@RequestParam(&quot;userName&quot;) String userName, @RequestParam(&quot;passWord&quot;) String passWord,</span><br><span class="line">                        HttpServletRequest request) &#123;</span><br><span class="line">//        boolean result = userService.login(userName, passWord);</span><br><span class="line">        if (!CodeUtil.checkVerifyCode(request)) &#123;</span><br><span class="line">            request.setAttribute(&quot;codeErr&quot;, &quot;验证码有误!&quot;);</span><br><span class="line">            return &quot;fail&quot;;</span><br><span class="line">        &#125;</span><br><span class="line">        return &quot;success&quot;;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="在Html中设置生成验证码"><a href="#在Html中设置生成验证码" class="headerlink" title="在Html中设置生成验证码"></a>在Html中设置生成验证码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line"> &lt;html xmlns:th=&quot;http://www.thymeleaf.org&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;title&gt;Title&lt;/title&gt;</span><br><span class="line">    &lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">        function refresh() &#123;</span><br><span class="line">            document.getElementById(&apos;captcha_img&apos;).src=&quot;/kaptcha?&quot;+Math.random();</span><br><span class="line">        &#125;</span><br><span class="line">    &lt;/script&gt;</span><br><span class="line">    &lt;!--</span><br><span class="line">    &lt;img src=&quot;生成验证码的接口&quot; οnclick=&quot;this.src=this.src+&apos;?&apos;+Math.random()&quot; id=&quot;img&quot;&gt;&lt;a href=&quot;#&quot; οnclick=&quot;document.getElementById(&apos;img&apos;).onclick()&quot;&gt;换一张?&lt;/a&gt;&lt;br/&gt;</span><br><span class="line">    --&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;form action=&quot;/user/login&quot; method=&quot;post&quot;&gt;</span><br><span class="line">    userName:&lt;input type=&quot;text&quot; name=&quot;userName&quot; /&gt;&lt;br /&gt;</span><br><span class="line">    password:&lt;input type=&quot;password&quot; name=&quot;passWord&quot; /&gt;&lt;br /&gt;</span><br><span class="line">    验证码:  &lt;input type=&quot;text&quot; placeholder=&quot;请输入验证码&quot; name=&quot;verifyCodeActual&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;item-input&quot;&gt;</span><br><span class="line">        &lt;img id=&quot;captcha_img&quot; alt=&quot;点击更换&quot; title=&quot;点击更换&quot;</span><br><span class="line">             onclick=&quot;refresh()&quot; src=&quot;/kaptcha&quot; /&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;input type=&quot;submit&quot; value=&quot;登录&quot; /&gt;</span><br><span class="line">&lt;/form&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<p>注意在img中的src的值是生成验证码的请求</p>
+<p>onclick中接的函数是点击后产生不同的验证码。</p>
 
       
     </div>
@@ -701,7 +264,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/10/Spring2/%E4%BD%BF%E7%94%A8Spring%20Boot%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6/">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/13/Spring2/JUnit5%20@Before%20@After%20%E6%B3%A8%E8%A7%A3%E9%83%A8%E5%88%86%E4%B8%8D%E6%89%A7%E8%A1%8C/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -715,7 +278,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/11/10/Spring2/%E4%BD%BF%E7%94%A8Spring%20Boot%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6/" class="post-title-link" itemprop="url">使用Spring Boot发送邮件</a>
+            <a href="/2019/11/13/Spring2/JUnit5%20@Before%20@After%20%E6%B3%A8%E8%A7%A3%E9%83%A8%E5%88%86%E4%B8%8D%E6%89%A7%E8%A1%8C/" class="post-title-link" itemprop="url">JUnit5 @Before @After 注解部分不执行</a>
         </h1>
 
         <div class="post-meta">
@@ -726,7 +289,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2019-11-10 15:04:23 / Modified: 15:40:21" itemprop="dateCreated datePublished" datetime="2019-11-10T15:04:23+08:00">2019-11-10</time>
+              <time title="Created: 2019-11-13 10:33:02 / Modified: 10:37:19" itemprop="dateCreated datePublished" datetime="2019-11-13T10:33:02+08:00">2019-11-13</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -734,8 +297,8 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/spring/" itemprop="url" rel="index">
-                    <span itemprop="name">spring</span>
+                  <a href="/categories/junit/" itemprop="url" rel="index">
+                    <span itemprop="name">junit</span>
                   </a>
                 </span>
             </span>
@@ -751,19 +314,14 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="使用Spring-Boot发送邮件"><a href="#使用Spring-Boot发送邮件" class="headerlink" title="使用Spring Boot发送邮件"></a>使用Spring Boot发送邮件</h1><hr>
-<p>在项目的维护过程中，我们通常会在应用中加入短信或者邮件预警功能，比如当应用出现异常宕机时应该及时地将预警信息发送给运维或者开发人员，本文将介绍如何在Spring Boot中发送邮件。在Spring Boot中发送邮件使用的是Spring提供的org.springframework.mail.javamail.JavaMailSender，其提供了许多简单易用的方法，可发送简单的邮件、HTML格式的邮件、带附件的邮件，并且可以创建邮件模板。</p>
-<h2 id="引入依赖"><a href="#引入依赖" class="headerlink" title="引入依赖"></a>引入依赖</h2><p>在Spring Boot中发送邮件，需要用到spring-boot-starter-mail，引入spring-boot-starter-mail：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-boot-starter-mail&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+          <h1 id="JUnit5-Before-After-注解部分不执行"><a href="#JUnit5-Before-After-注解部分不执行" class="headerlink" title="JUnit5 @Before @After 注解部分不执行"></a>JUnit5 @Before @After 注解部分不执行</h1><hr>
+<p>单元测试使用@Before 初始化事务连接, @After 关闭事务连接.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">@Before</span><br><span class="line">public void init() &#123;</span><br><span class="line">	System.out.println(&quot;init&quot;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@After</span><br><span class="line">public void destroy()&#123;</span><br><span class="line">	System.err.println(&quot;destroy&quot;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@Test</span><br><span class="line">public void test() &#123;</span><br><span class="line">	System.out.println(&quot;test&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="邮件配置"><a href="#邮件配置" class="headerlink" title="邮件配置"></a>邮件配置</h2><p>在application.yml中进行简单的配置（以163邮件为例）：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">server:</span><br><span class="line">  port: 80</span><br><span class="line"></span><br><span class="line">spring:</span><br><span class="line">  mail:</span><br><span class="line">    host: smtp.163.com</span><br><span class="line">    username: 你的账号</span><br><span class="line">    password: 你的密码</span><br><span class="line">    properties:</span><br><span class="line">      mail:</span><br><span class="line">        smtp:</span><br><span class="line">          auth: true</span><br><span class="line">          starttls:</span><br><span class="line">            enable: true</span><br><span class="line">            required: true</span><br></pre></td></tr></table></figure>
+<p>执行test() 方法时 输出只有test, 没有预想中的 init 以及 destory.</p>
+<p>Google了一波, 并没有找到有效的解决方案, 于是转向JUnit官网.<br>在官网中发现了这样一段话<br><img src="https://i.loli.net/2019/11/13/ihoH1WM4jGZup2S.png" alt="20180524185539562.png"></p>
+<p>原来是 @Before 和@After 被 @BeforeEach 和@AfterEach给替代了. 还有一些其他的的注解也被替代了.</p>
 
-<h2 id="发送简单的邮件"><a href="#发送简单的邮件" class="headerlink" title="发送简单的邮件"></a>发送简单的邮件</h2><p>编写EmailController，注入JavaMailSender:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">import org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line">import org.springframework.beans.factory.annotation.Value;</span><br><span class="line">import org.springframework.mail.SimpleMailMessage;</span><br><span class="line">import org.springframework.mail.javamail.JavaMailSender;</span><br><span class="line">import org.springframework.web.bind.annotation.RequestMapping;</span><br><span class="line">import org.springframework.web.bind.annotation.RestController;</span><br><span class="line"></span><br><span class="line">@RestController</span><br><span class="line">@RequestMapping(&quot;/email&quot;)</span><br><span class="line">public class EmailController &#123;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    private JavaMailSender jms;</span><br><span class="line">    </span><br><span class="line">    @Value(&quot;$&#123;spring.mail.username&#125;&quot;)</span><br><span class="line">    private String from;</span><br><span class="line">    </span><br><span class="line">    @RequestMapping(&quot;sendSimpleEmail&quot;)</span><br><span class="line">    public String sendSimpleEmail() &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            SimpleMailMessage message = new SimpleMailMessage();</span><br><span class="line">            message.setFrom(from);</span><br><span class="line">            message.setTo(&quot;888888@qq.com&quot;); // 接收地址</span><br><span class="line">            message.setSubject(&quot;一封简单的邮件&quot;); // 标题</span><br><span class="line">            message.setText(&quot;使用Spring Boot发送简单邮件。&quot;); // 内容</span><br><span class="line">            jms.send(message);</span><br><span class="line">            return &quot;发送成功&quot;;</span><br><span class="line">        &#125; catch (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            return e.getMessage();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>启动项目访问<a href="http://localhost/email/sendSimpleEmail，提示发送成功：" target="_blank" rel="noopener">http://localhost/email/sendSimpleEmail，提示发送成功：</a></p>
-<h2 id="发送带附件的邮件"><a href="#发送带附件的邮件" class="headerlink" title="发送带附件的邮件"></a>发送带附件的邮件</h2><p>发送带附件的邮件和普通邮件相比，其实就只是多了个传入附件的过程。不过使用的仍是MimeMessage：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">package com.springboot.demo.controller;</span><br><span class="line"></span><br><span class="line">import java.io.File;</span><br><span class="line"></span><br><span class="line">import javax.mail.internet.MimeMessage;</span><br><span class="line"></span><br><span class="line">import org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line">import org.springframework.beans.factory.annotation.Value;</span><br><span class="line">import org.springframework.core.io.FileSystemResource;</span><br><span class="line">import org.springframework.mail.SimpleMailMessage;</span><br><span class="line">import org.springframework.mail.javamail.JavaMailSender;</span><br><span class="line">import org.springframework.mail.javamail.MimeMessageHelper;</span><br><span class="line">import org.springframework.web.bind.annotation.RequestMapping;</span><br><span class="line">import org.springframework.web.bind.annotation.RestController;</span><br><span class="line"></span><br><span class="line">@RestController</span><br><span class="line">@RequestMapping(&quot;/email&quot;)</span><br><span class="line">public class EmailController &#123;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    private JavaMailSender jms;</span><br><span class="line">    </span><br><span class="line">    @Value(&quot;$&#123;spring.mail.username&#125;&quot;)</span><br><span class="line">    private String from;</span><br><span class="line">	</span><br><span class="line">    @RequestMapping(&quot;sendAttachmentsMail&quot;)</span><br><span class="line">    public String sendAttachmentsMail() &#123;</span><br><span class="line">        MimeMessage message = null;</span><br><span class="line">        try &#123;</span><br><span class="line">            message = jms.createMimeMessage();</span><br><span class="line">            MimeMessageHelper helper = new MimeMessageHelper(message, true);</span><br><span class="line">            helper.setFrom(from); </span><br><span class="line">            helper.setTo(&quot;888888@qq.com&quot;); // 接收地址</span><br><span class="line">            helper.setSubject(&quot;一封带附件的邮件&quot;); // 标题</span><br><span class="line">            helper.setText(&quot;详情参见附件内容！&quot;); // 内容</span><br><span class="line">            // 传入附件</span><br><span class="line">            FileSystemResource file = new FileSystemResource(new File(&quot;src/main/resources/static/file/项目文档.docx&quot;));</span><br><span class="line">            helper.addAttachment(&quot;项目文档.docx&quot;, file);</span><br><span class="line">            jms.send(message);</span><br><span class="line">            return &quot;发送成功&quot;;</span><br><span class="line">        &#125; catch (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            return e.getMessage();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -782,7 +340,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/09/Spring2/Spring%20Boot%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E8%AF%A6%E8%A7%A3/">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/13/Redis/redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -796,7 +354,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/11/09/Spring2/Spring%20Boot%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E8%AF%A6%E8%A7%A3/" class="post-title-link" itemprop="url">Spring Boot异常处理详解</a>
+            <a href="/2019/11/13/Redis/redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" class="post-title-link" itemprop="url">redis数据类型</a>
         </h1>
 
         <div class="post-meta">
@@ -806,14 +364,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2019-11-09 18:33:26" itemprop="dateCreated datePublished" datetime="2019-11-09T18:33:26+08:00">2019-11-09</time>
+              <time title="Created: 2019-11-13 10:12:00" itemprop="dateCreated datePublished" datetime="2019-11-13T10:12:00+08:00">2019-11-13</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-10 13:54:21" itemprop="dateModified" datetime="2019-11-10T13:54:21+08:00">2019-11-10</time>
+                <time title="Modified: 2019-11-15 15:53:06" itemprop="dateModified" datetime="2019-11-15T15:53:06+08:00">2019-11-15</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -821,8 +379,8 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/spring/" itemprop="url" rel="index">
-                    <span itemprop="name">spring</span>
+                  <a href="/categories/redis/" itemprop="url" rel="index">
+                    <span itemprop="name">redis</span>
                   </a>
                 </span>
             </span>
@@ -838,260 +396,13 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Spring-Boot异常处理详解"><a href="#Spring-Boot异常处理详解" class="headerlink" title="Spring Boot异常处理详解"></a>Spring Boot异常处理详解</h1><hr>
-<p>在Spring MVC异常处理详解中，介绍了Spring MVC的异常处理体系，本文将讲解在此基础上Spring Boot为我们做了哪些工作。下图列出了Spring Boot中跟MVC异常处理相关的类。</p>
-<p><img src="https://i.loli.net/2019/11/09/NBiAebnwZcoRQuO.png" alt="SpringBootWebExceptionResolver.png"></p>
-<p>Spring Boot在启动过程中会根据当前环境进行AutoConfiguration，其中跟MVC错误处理相关的配置内容，在ErrorMvcAutoConfiguration这个类中。以下会分块介绍这个类里面的配置。</p>
-<h2 id="在Servlet容器中添加了一个默认的错误页面"><a href="#在Servlet容器中添加了一个默认的错误页面" class="headerlink" title="在Servlet容器中添加了一个默认的错误页面"></a>在Servlet容器中添加了一个默认的错误页面</h2><p>因为ErrorMvcAutoConfiguration类实现了EmbeddedServletContainerCustomizer接口，所以可以通过override customize方法来定制Servlet容器。以下代码摘自ErrorMvcAutoConfiguration：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@Value(&quot;$&#123;error.path:/error&#125;&quot;)</span><br><span class="line">private String errorPath = &quot;/error&quot;;</span><br><span class="line"></span><br><span class="line">@Override</span><br><span class="line">public void customize(ConfigurableEmbeddedServletContainer container) &#123;</span><br><span class="line">    container.addErrorPages(new ErrorPage(this.properties.getServletPrefix()</span><br><span class="line">        + this.errorPath));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>可以看到ErrorMvcAutoConfiguration在容器中，添加了一个错误页面/error。因为这项配置的存在，如果Spring MVC在处理过程抛出异常到Servlet容器，容器会定向到这个错误页面/error。</p>
-<p>那么我们有什么可以配置的呢？</p>
-<ul>
-<li>我们可以配置错误页面的url，/error是默认值，我们可以再application.properties中通过设置error.path的值来配置该页面的url；</li>
-<li>我们可以提供一个自定义的EmbeddedServletContainerCustomizer，添加更多的错误页面，比如对不同的http status code，使用不同的错误处理页面。就像下面这段代码一样：</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@Bean</span><br><span class="line">public EmbeddedServletContainerCustomizer containerCustomizer() &#123;</span><br><span class="line">    return new EmbeddedServletContainerCustomizer() &#123;</span><br><span class="line">        @Override</span><br><span class="line">        public void customize(ConfigurableEmbeddedServletContainer container) &#123;</span><br><span class="line">            container.addErrorPages(new ErrorPage(HttpStatus.NOT_FOUND, &quot;/404&quot;));</span><br><span class="line">            container.addErrorPages(new ErrorPage(HttpStatus.INTERNAL_SERVER_ERROR, &quot;/500&quot;));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/09/Spring2/Spring%20Boot%20%E2%80%93%E5%A6%82%E4%BD%95%E7%9F%A5%E9%81%93%E4%BD%BF%E7%94%A8%E5%93%AA%E4%B8%AA%E8%BF%9E%E6%8E%A5%E6%B1%A0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lancersaber">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lancersaber">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/09/Spring2/Spring%20Boot%20%E2%80%93%E5%A6%82%E4%BD%95%E7%9F%A5%E9%81%93%E4%BD%BF%E7%94%A8%E5%93%AA%E4%B8%AA%E8%BF%9E%E6%8E%A5%E6%B1%A0/" class="post-title-link" itemprop="url">Spring Boot –如何知道使用哪个连接池</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2019-11-09 18:09:00 / Modified: 18:11:42" itemprop="dateCreated datePublished" datetime="2019-11-09T18:09:00+08:00">2019-11-09</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/spring/" itemprop="url" rel="index">
-                    <span itemprop="name">spring</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Spring-Boot-–如何知道使用哪个连接池？"><a href="#Spring-Boot-–如何知道使用哪个连接池？" class="headerlink" title="Spring Boot –如何知道使用哪个连接池？"></a>Spring Boot –如何知道使用哪个连接池？</h1><hr>
-<p>在Spring Boot中，@Autowired一个javax.sql.DataSource，您将知道当前正在运行的应用程序正在使用哪个数据库连接池。</p>
-<h2 id="1-测试默认"><a href="#1-测试默认" class="headerlink" title="1.测试默认"></a>1.测试默认</h2><p>Spring Boot示例打印一个 javax.sql.DataSource</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">package com.mkyong;</span><br><span class="line"></span><br><span class="line">import org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line">import org.springframework.boot.CommandLineRunner;</span><br><span class="line">import org.springframework.boot.SpringApplication;</span><br><span class="line">import org.springframework.boot.autoconfigure.SpringBootApplication;</span><br><span class="line"></span><br><span class="line">import javax.sql.DataSource;</span><br><span class="line"></span><br><span class="line">@SpringBootApplication</span><br><span class="line">public class SpringBootConsoleApplication implements CommandLineRunner &#123;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    DataSource dataSource;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) throws Exception &#123;</span><br><span class="line">        SpringApplication.run(SpringBootConsoleApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void run(String... args) throws Exception &#123;</span><br><span class="line"></span><br><span class="line">        System.out.println(&quot;DATASOURCE = &quot; + dataSource);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>输出，Spring Boot默认使用Tomcat池。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DATASOURCE = org.apache.tomcat.jdbc.pool.DataSource@7c541c15...</span><br></pre></td></tr></table></figure>
-
-<h2 id="2-测试HikariCP"><a href="#2-测试HikariCP" class="headerlink" title="2.测试HikariCP"></a>2.测试HikariCP</h2><p>要切换到另一个连接池，例如HikariCP，只需排除默认值，并将HikariCP包含在类路径中即可。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">         &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">         &lt;artifactId&gt;spring-boot-starter-jdbc&lt;/artifactId&gt;</span><br><span class="line">         &lt;exclusions&gt;</span><br><span class="line">             &lt;exclusion&gt;</span><br><span class="line">                 &lt;groupId&gt;org.apache.tomcat&lt;/groupId&gt;</span><br><span class="line">                 &lt;artifactId&gt;tomcat-jdbc&lt;/artifactId&gt;</span><br><span class="line">             &lt;/exclusion&gt;</span><br><span class="line">         &lt;/exclusions&gt;</span><br><span class="line">     &lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">     &lt;!-- connection pools --&gt;</span><br><span class="line">     &lt;dependency&gt;</span><br><span class="line">         &lt;groupId&gt;com.zaxxer&lt;/groupId&gt;</span><br><span class="line">         &lt;artifactId&gt;HikariCP&lt;/artifactId&gt;</span><br><span class="line">         &lt;version&gt;2.6.0&lt;/version&gt;</span><br><span class="line">     &lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
-
-<p>输出值</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DATASOURCE = HikariDataSource (HikariPool-1)</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/09/Java%E5%9F%BA%E7%A1%80/%E5%BC%95%E5%85%A5%E6%B5%81/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lancersaber">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lancersaber">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/09/Java%E5%9F%BA%E7%A1%80/%E5%BC%95%E5%85%A5%E6%B5%81/" class="post-title-link" itemprop="url">引入流</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2019-11-09 15:56:20 / Modified: 18:04:25" itemprop="dateCreated datePublished" datetime="2019-11-09T15:56:20+08:00">2019-11-09</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="引入流"><a href="#引入流" class="headerlink" title="引入流"></a>引入流</h1><hr>
-<h2 id="流是什么"><a href="#流是什么" class="headerlink" title="流是什么?"></a>流是什么?</h2><p>流是Java Api的新成员，它允许你以声明性方式处理数据集合。简短的定义就是”从支持数据处理操作的源生成的元素序列”。</p>
-<p>流的两大特点</p>
-<ul>
-<li>流水线：很多流操作本身会返回一个流，这样多个操作就可以链接起来，形成一个大的流水线。</li>
-<li>内部迭代：与使用迭代器显式迭代的集合不同，流的迭代操作是在背后进行的。</li>
-</ul>
-<p>一个流只能访问一次，想要访问多次只能重新获取流进行访问。</p>
-<h2 id="流操作"><a href="#流操作" class="headerlink" title="流操作"></a>流操作</h2><h3 id="中间操作"><a href="#中间操作" class="headerlink" title="中间操作"></a>中间操作</h3><p>诸如filter或sorted等中间操作会返回另一个流。这让多个操作可以连接起来形成一个查询。重要的是，除非流水线上触发一个终端操作，否则中间操作不会执行任何处理—它们很懒。这是因为中间操作一般都可以合并起来，在终端操作时一次性全部处理。</p>
-<p>中间操作</p>
-<table>
-<thead>
-<tr>
-<th>操作</th>
-<th>类型</th>
-<th>返回类型</th>
-<th>操作参数</th>
-<th>函数描述符</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>filter</td>
-<td>中间</td>
-<td>Stream<T></td>
-<td>Predicate<T></td>
-<td>T-&gt;boolean</td>
-</tr>
-<tr>
-<td>map</td>
-<td>中间</td>
-<td>Stream<T></td>
-<td>Function&lt;T,R&gt;</td>
-<td>T-&gt;R</td>
-</tr>
-<tr>
-<td>limit</td>
-<td>中间</td>
-<td>Stream<T></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>sorted</td>
-<td>中间</td>
-<td>Stream<T></td>
-<td>Comparator<T></td>
-<td>(T,T)-&gt;int</td>
-</tr>
-<tr>
-<td>distinct</td>
-<td>中间</td>
-<td>Stream<T></td>
-<td></td>
-<td></td>
-</tr>
-</tbody></table>
-<p>终端操作</p>
-<table>
-<thead>
-<tr>
-<th>操作</th>
-<th>类型</th>
-<th>目的</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>foreach</td>
-<td>终端</td>
-<td>消费流中的每个元素并对其应用Lamada。这一操作一般返回void</td>
-</tr>
-<tr>
-<td>count</td>
-<td>终端</td>
-<td>返回流中的个数，返回long</td>
-</tr>
-<tr>
-<td>collect</td>
-<td>终端</td>
-<td>把流归约成一个集合，比如List,Map,甚至是Integer</td>
-</tr>
-</tbody></table>
-<h2 id="使用流"><a href="#使用流" class="headerlink" title="使用流"></a>使用流</h2><h3 id="筛选和切片"><a href="#筛选和切片" class="headerlink" title="筛选和切片"></a>筛选和切片</h3><h3 id="筛选各异的元素"><a href="#筛选各异的元素" class="headerlink" title="筛选各异的元素"></a>筛选各异的元素</h3><p>使用distinct方法，它会去除重复的元素</p>
-<h3 id="截短流"><a href="#截短流" class="headerlink" title="截短流"></a>截短流</h3><p>使用limit(n)方法，会返回一个不超过给定长度的流。</p>
-<h3 id="跳过元素"><a href="#跳过元素" class="headerlink" title="跳过元素"></a>跳过元素</h3><p>使用skip(n)方法，该方法会扔掉前n个元素的流。如果流中的元素不足n个，则返回一个空流</p>
-<h2 id="映射"><a href="#映射" class="headerlink" title="映射"></a>映射</h2><h3 id="对流中的每一个元素应用函数"><a href="#对流中的每一个元素应用函数" class="headerlink" title="对流中的每一个元素应用函数"></a>对流中的每一个元素应用函数</h3><p>流支持map方法，它会接受一个函数作为参数。这个函数会被应用到每个元素上，并将其映射成一个新的元素。<em>流中的类型会发生改变</em>。</p>
-<h2 id="查找和匹配"><a href="#查找和匹配" class="headerlink" title="查找和匹配"></a>查找和匹配</h2><p>另一个常见的数据处理套路是看看数据集中的某些元素是否匹配一个给定的属性。</p>
-<h3 id="检查谓词是否至少匹配一个元素"><a href="#检查谓词是否至少匹配一个元素" class="headerlink" title="检查谓词是否至少匹配一个元素"></a>检查谓词是否至少匹配一个元素</h3><p>anyMatch方法可以回答”流中是否有一个元素能匹配给定的谓词”。</p>
-<h3 id="检查谓词是否匹配所有元素"><a href="#检查谓词是否匹配所有元素" class="headerlink" title="检查谓词是否匹配所有元素"></a>检查谓词是否匹配所有元素</h3><p>allMatch方法</p>
-<p>对立方法：noneMatch()</p>
-<h3 id="查找元素"><a href="#查找元素" class="headerlink" title="查找元素"></a>查找元素</h3><p>findAny方法将返回当前流中的任意元素。</p>
-<h3 id="查找第一个元素"><a href="#查找第一个元素" class="headerlink" title="查找第一个元素"></a>查找第一个元素</h3><p>findFirst()</p>
+          <h1 id="redis数据类型"><a href="#redis数据类型" class="headerlink" title="redis数据类型"></a>redis数据类型</h1><hr>
+<p>Redis支持五种数据类型：string（字符串），hash（哈希），list（列表），set（集合）及zset(sorted set：有序集合)。</p>
+<h2 id="String（字符串）"><a href="#String（字符串）" class="headerlink" title="String（字符串）"></a>String（字符串）</h2><p>string 是 redis 最基本的类型，你可以理解成与 Memcached 一模一样的类型，一个 key 对应一个 value。<br>string 类型是二进制安全的。意思是 redis 的 string 可以包含任何数据。比如jpg图片或者序列化的对象。<br>string 类型是 Redis 最基本的数据类型，string 类型的值最大能存储 512MB。</p>
+<p>实例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">redis 127.0.0.1:6379&gt; SET runoob &quot;菜鸟教程&quot;</span><br><span class="line">OK</span><br><span class="line">redis 127.0.0.1:6379&gt; GET runoob</span><br><span class="line">&quot;菜鸟教程&quot;</span><br></pre></td></tr></table></figure>
+<p>在以上实例中我们使用了 Redis 的 SET 和 GET 命令。键为 runoob，对应的值为 菜鸟教程。</p>
+<p>注意：一个键最大能存储 512MB。</p>
 
       
     </div>
@@ -1111,7 +422,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/09/Java%E5%9F%BA%E7%A1%80/Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/12/shiro/Shiro%E5%8A%A0%E5%AF%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1125,7 +436,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/11/09/Java%E5%9F%BA%E7%A1%80/Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/" class="post-title-link" itemprop="url">lambda表达式</a>
+            <a href="/2019/11/12/shiro/Shiro%E5%8A%A0%E5%AF%86/" class="post-title-link" itemprop="url">shiro加密</a>
         </h1>
 
         <div class="post-meta">
@@ -1136,7 +447,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2019-11-09 14:57:20 / Modified: 15:57:41" itemprop="dateCreated datePublished" datetime="2019-11-09T14:57:20+08:00">2019-11-09</time>
+              <time title="Created: 2019-11-12 22:56:35 / Modified: 23:09:52" itemprop="dateCreated datePublished" datetime="2019-11-12T22:56:35+08:00">2019-11-12</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1144,8 +455,8 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
+                  <a href="/categories/shiro/" itemprop="url" rel="index">
+                    <span itemprop="name">shiro</span>
                   </a>
                 </span>
             </span>
@@ -1161,23 +472,658 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="lambda表达式"><a href="#lambda表达式" class="headerlink" title="lambda表达式"></a>lambda表达式</h1><p>可以把lambda表达式理解为简洁地表示可传递的匿名函数的一种方式：它没有名称，但它有参数列表、函数主体、返回类型，可能还有一个可以抛出的异常列表。这个定义够大的，让我们慢慢道来。</p>
+          <h1 id="shiro加密"><a href="#shiro加密" class="headerlink" title="shiro加密"></a>shiro加密</h1><hr>
+<p>在这里主要讲如何利用md5散列算法对密码进行加密与校验，md5是一种不可逆的散列算法，因此广泛应用与密码的加密，以及文件的md5校验等。</p>
+<h2 id="SimpleHash生成密码散列值："><a href="#SimpleHash生成密码散列值：" class="headerlink" title="SimpleHash生成密码散列值："></a>SimpleHash生成密码散列值：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">package cc.mrbird.febs.common.utils;</span><br><span class="line"></span><br><span class="line">import org.apache.commons.lang3.StringUtils;</span><br><span class="line">import org.apache.shiro.crypto.hash.SimpleHash;</span><br><span class="line">import org.apache.shiro.util.ByteSource;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * @author MrBird</span><br><span class="line"> */</span><br><span class="line">public class MD5Util &#123;</span><br><span class="line"></span><br><span class="line">    protected MD5Util() &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //表明使用散列算法</span><br><span class="line">    private static final String ALGORITH_NAME = &quot;md5&quot;;</span><br><span class="line"></span><br><span class="line">    //hash的次数</span><br><span class="line">    private static final int HASH_ITERATIONS = 5;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public static String encrypt(String username, String password) &#123;</span><br><span class="line">        String source = StringUtils.lowerCase(username);</span><br><span class="line">        password = StringUtils.lowerCase(password);</span><br><span class="line">        return new SimpleHash(ALGORITH_NAME, password, ByteSource.Util.bytes(source), HASH_ITERATIONS).toHex();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>SimpleHash类</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">public SimpleHash(String algorithmName, Object source, Object salt, int hashIterations) throws CodecException, UnknownAlgorithmException &#123;</span><br><span class="line">      this.hexEncoded = null;</span><br><span class="line">      this.base64Encoded = null;</span><br><span class="line">      if (!StringUtils.hasText(algorithmName)) &#123;</span><br><span class="line">          throw new NullPointerException(&quot;algorithmName argument cannot be null or empty.&quot;);</span><br><span class="line">      &#125; else &#123;</span><br><span class="line">          this.algorithmName = algorithmName;</span><br><span class="line">          this.iterations = Math.max(1, hashIterations);</span><br><span class="line">          ByteSource saltBytes = null;</span><br><span class="line">          if (salt != null) &#123;</span><br><span class="line">              saltBytes = this.convertSaltToBytes(salt);</span><br><span class="line">              this.salt = saltBytes;</span><br><span class="line">          &#125;</span><br><span class="line"></span><br><span class="line">          ByteSource sourceBytes = this.convertSourceToBytes(source);</span><br><span class="line">          this.hash(sourceBytes, saltBytes, hashIterations);</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>自定义类设置了散列算法与散列次数，还对加密算法随机加盐处理，这样即使用户设置了相同的密码，在数据库生成的密码散列值也不一样，增加了用户的安全级别。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/12/JavaWeb/%E6%B5%85%E8%B0%88Session%E4%B8%8ECookie%E7%9A%84%E5%8C%BA%E5%88%AB%E4%B8%8E%E8%81%94%E7%B3%BB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/12/JavaWeb/%E6%B5%85%E8%B0%88Session%E4%B8%8ECookie%E7%9A%84%E5%8C%BA%E5%88%AB%E4%B8%8E%E8%81%94%E7%B3%BB/" class="post-title-link" itemprop="url">浅谈Session与Cookie的区别与联系</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2019-11-12 20:17:09 / Modified: 20:33:38" itemprop="dateCreated datePublished" datetime="2019-11-12T20:17:09+08:00">2019-11-12</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java-Web/" itemprop="url" rel="index">
+                    <span itemprop="name">Java Web</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="浅谈Session与Cookie的区别与联系"><a href="#浅谈Session与Cookie的区别与联系" class="headerlink" title="浅谈Session与Cookie的区别与联系"></a>浅谈Session与Cookie的区别与联系</h1><hr>
+<h2 id="Session的概念"><a href="#Session的概念" class="headerlink" title="Session的概念"></a>Session的概念</h2><p>Session 是存放在服务器端的，类似于Session结构来存放用户数据，当浏览器 第一次发送请求时，服务器自动生成了一个Session和一个Session ID用来唯一标识这个Session，并将其通过响应发送到浏览器。当浏览器第二次发送请求，会将前一次服务器响应中的Session ID放在请求中一并发送到服务器上，服务器从请求中提取出Session ID，并和保存的所有Session ID进行对比，找到这个用户对应的Session。</p>
+<p>一般情况下，服务器会在一定时间内（默认30分钟）保存这个 Session，过了时间限制，就会销毁这个Session。在销毁之前，程序员可以将用户的一些数据以Key和Value的形式暂时存放在这个 Session中。当然，也有使用数据库将这个Session序列化后保存起来的，这样的好处是没了时间的限制，坏处是随着时间的增加，这个数据 库会急速膨胀，特别是访问量增加的时候。一般还是采取前一种方式，以减轻服务器压力。</p>
+<h2 id="Session的客户端实现形式（即Session-ID的保存方法）"><a href="#Session的客户端实现形式（即Session-ID的保存方法）" class="headerlink" title="Session的客户端实现形式（即Session ID的保存方法）"></a>Session的客户端实现形式（即Session ID的保存方法）</h2><p>[1] 一般浏览器提供了两种方式来保存，还有一种是程序员使用html隐藏域的方式自定义实现：<br>使用Cookie来保存，这是最常见的方法，本文“记住我的登录状态”功能的实现正式基于这种方式的。服务器通过设置Cookie的方式将Session ID发送到浏览器。如果我们不设置这个过期时间，那么这个Cookie将不存放在硬盘上，当浏览器关闭的时候，Cookie就消失了，这个Session ID就丢失了。如果我们设置这个时间为若干天之后，那么这个Cookie会保存在客户端硬盘中，即使浏览器关闭，这个值仍然存在，下次访问相应网站时，同 样会发送到服务器上。<br>[2] 使用URL附加信息的方式，也就是像我们经常看到JSP网站会有aaa.jsp?JSESSIONID=*一样的。这种方式和第一种方式里面不设置Cookie过期时间是一样的。</p>
+<p>[3] 第三种方式是在页面表单里面增加隐藏域，这种方式实际上和第二种方式一样，只不过前者通过GET方式发送数据，后者使用POST方式发送数据。但是明显后者比较麻烦。</p>
+<p>cookie与session的区别：<br>cookie数据保存在客户端，session数据保存在服务器端。<br>简 单的说，当你登录一个网站的时候，如果web服务器端使用的是session,那么所有的数据都保存在服务器上面，客户端每次请求服务器的时候会发送 当前会话的sessionid，服务器根据当前sessionid判断相应的用户数据标志，以确定用户是否登录，或具有某种权限。由于数据是存储在服务器 上面，所以你不能伪造，但是如果你能够获取某个登录用户的sessionid，用特殊的浏览器伪造该用户的请求也是能够成功的。sessionid是服务 器和客户端链接时候随机分配的，一般来说是不会有重复，但如果有大量的并发请求，也不是没有重复的可能性，我曾经就遇到过一次。登录某个网站，开始显示的 是自己的信息，等一段时间超时了，一刷新，居然显示了别人的信息。</p>
+<p>如果浏览器使用的是 cookie，那么所有的数据都保存在浏览器端，比如你登录以后，服务器设置了 cookie用户名(username),那么，当你再次请求服务器的时候，浏览器会将username一块发送给服务器，这些变量有一定的特殊标记。服 务器会解释为 cookie变量。所以只要不关闭浏览器，那么 cookie变量便一直是有效的，所以能够保证长时间不掉线。<br>如果你能够截获某个用户的 cookie变量，然后伪造一个数据包发送过去，那么服务器还是认为你是合法的。所以，使用 cookie被攻击的可能性比较大。如果设置了的有效时间，那么它会将 cookie保存在客户端的硬盘上，下次再访问该网站的时候，浏览器先检查有没有 cookie，如果有的话，就读取该 cookie，然后发送给服务器。如果你在机器上面保存了某个论坛 cookie，有效期是一年，如果有人入侵你的机器，将你的 cookie拷走，然后放在他的浏览器的目录下面，那么他登录该网站的时候就是用你的的身份登录的。所以 cookie是可以伪造的。当然，伪造的时候需要主意，直接copy cookie文件到 cookie目录，浏览器是不认的，他有一个index.dat文件，存储了 cookie文件的建立时间，以及是否有修改，所以你必须先要有该网站的 cookie文件，并且要从保证时间上骗过浏览器，曾经在学校的vbb论坛上面做过试验，copy别人的 cookie登录，冒用了别人的名义发帖子，完全没有问题。<br>Session是由应用服务器维持的一个服务器端的存储空间，用户在连接服务器时，会由服务器生成一个唯一的SessionID,用该SessionID 为标识符来存取服务器端的Session存储空间。而SessionID这一数据则是保存到客户端，用Cookie保存的，用户提交页面时，会将这一 SessionID提交到服务器端，来存取Session数据。这一过程，是不用开发人员干预的。所以一旦客户端禁用Cookie，那么Session也会失效。</p>
+<p>服务器也可以通过URL重写的方式来传递SessionID的值，因此不是完全依赖Cookie。如果客户端Cookie禁用，则服务器可以自动通过重写URL的方式来保存Session的值，并且这个过程对程序员透明。</p>
+<p>可以试一下，即使不写Cookie，在使用request.getCookies();取出的Cookie数组的长度也是1，而这个Cookie的名字就是JSESSIONID，还有一个很长的二进制的字符串，是SessionID的值。</p>
+<h2 id="Session与Cookie区别和联系："><a href="#Session与Cookie区别和联系：" class="headerlink" title="Session与Cookie区别和联系："></a>Session与Cookie区别和联系：</h2><p>Cookies是属于Session对象的一种。但有不同，Cookies不会占服务器资源，是存在客服端内存或者一个cookie的文本文件中；而“Session”则会占用服务器资源。所以，尽量不要使用Session，而使用Cookies。但是我们一般认为cookie是不可靠的，session是可靠地，但是目前很多著名的站点也都以来cookie。有时候为了解决禁用cookie后的页面处理，通常采用url重写技术，调用session中大量有用的方法从session中获取数据后置入页面。</p>
+<p>Cookies与Session的应用场景：<br>Cookies的安全性能一直是倍受争议的。虽然Cookies是保存在本机上的，但是其信息的完全可见性且易于本地编辑性，往往可以引起很多的安全问题。所以Cookies到底该不该用，到底该怎样用，就有了一个需要给定的底线。<br>先来看看，网站的敏感数据有哪些。</p>
+<p>登陆验证信息。一般采用Session(“Logon”)＝true or false的形式。<br>用户的各种私人信息，比如姓名等，某种情况下，需要保存在Session里<br>需要在页面间传递的内容信息，比如调查工作需要分好几步。每一步的信息都保存在Session里，最后在统一更新到数据库。</p>
+<h2 id="cookie最典型的应用是："><a href="#cookie最典型的应用是：" class="headerlink" title="cookie最典型的应用是："></a>cookie最典型的应用是：</h2><ol>
+<li>判断用户是否登陆过网站，以便下次登录时能够直接登录。如果我们删除cookie，则每次登录必须从新填写登录的相关信息。</li>
+<li>另一个重要的应用是“购物车”中类的处理和设计。用户可能在一段时间内在同一家网站的不同页面选择不同的商品，可以将这些信息都写入cookie，在最后付款时从cookie中提取这些信息，当然这里面有了安全和性能问题需要我们考虑了。</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/12/Database/CAP%20%E5%AE%9A%E7%90%86%E7%9A%84%E5%90%AB%E4%B9%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/12/Database/CAP%20%E5%AE%9A%E7%90%86%E7%9A%84%E5%90%AB%E4%B9%89/" class="post-title-link" itemprop="url">CAP 定理的含义</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2019-11-12 19:48:38 / Modified: 20:09:49" itemprop="dateCreated datePublished" datetime="2019-11-12T19:48:38+08:00">2019-11-12</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/database/" itemprop="url" rel="index">
+                    <span itemprop="name">database</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="CAP-定理的含义"><a href="#CAP-定理的含义" class="headerlink" title="CAP 定理的含义"></a>CAP 定理的含义</h1><hr>
+<p>分布式系统（distributed system）正变得越来越重要，大型网站几乎都是分布式的。</p>
+<p>分布式系统的最大难点，就是各个节点的状态如何同步。CAP 定理是这方面的基本定理，也是理解分布式系统的起点。</p>
+<h2 id="一、分布式系统的三个指标"><a href="#一、分布式系统的三个指标" class="headerlink" title="一、分布式系统的三个指标"></a>一、分布式系统的三个指标</h2><p><img src="https://i.loli.net/2019/11/12/6bJutBV8iXWIPlp.jpg" alt="bg2018071607.jpg"></p>
 <ul>
-<li>匿名—我们说匿名，是因为它不像普通的方法那样有一个明确的名称</li>
-<li>函数—我们说它是函数，是因为Lambda函数不像方法那样属于某个特定的类，但和方法一样，Lambda有参数列表、函数主体、返回类型</li>
-<li>传递—Lambda表达式可以作为参数传递给方法或存储在变量中</li>
-<li>简洁—无需像匿名类那样写很多模板代码</li>
+<li>Consistency</li>
+<li>Availability</li>
+<li>Partition tolerance</li>
 </ul>
-<p>Lambda表达式有三个部分</p>
+<p>它们的第一个字母分别是 C、A、P。</p>
+<p>Eric Brewer 说，这三个指标不可能同时做到。这个结论就叫做 CAP 定理。</p>
+<h3 id="Partition-tolerance"><a href="#Partition-tolerance" class="headerlink" title="Partition tolerance"></a>Partition tolerance</h3><p>先看 Partition tolerance，中文叫做”分区容错”。</p>
+<p>大多数分布式系统都分布在多个子网络。每个子网络就叫做一个区（partition）。分区容错的意思是，区间通信可能失败。比如，一台服务器放在中国，另一台服务器放在美国，这就是两个区，它们之间可能无法通信。<br><img src="https://i.loli.net/2019/11/12/qWoXd6vtiYV5O1a.png" alt="bg2018071601.png"><br>上图中，G1 和 G2 是两台跨区的服务器。G1 向 G2 发送一条消息，G2 可能无法收到。系统设计的时候，必须考虑到这种情况。</p>
+<p>一般来说，分区容错无法避免，因此可以认为 CAP 的 P 总是成立。CAP 定理告诉我们，剩下的 C 和 A 无法同时做到。</p>
+<h3 id="Consistency"><a href="#Consistency" class="headerlink" title="Consistency"></a>Consistency</h3><p>Consistency 中文叫做”一致性”。意思是，写操作之后的读操作，必须返回该值。举例来说，某条记录是 v0，用户向 G1 发起一个写操作，将其改为 v1。<br><img src="https://i.loli.net/2019/11/12/aDGsi7JkuRnp153.png" alt="bg2018071602.png"><br>接下来，用户的读操作就会得到 v1。这就叫一致性。<br><img src="https://i.loli.net/2019/11/12/ganYXNsQV4tH5K1.png" alt="bg2018071603.png"></p>
+<p>问题是，用户有可能向 G2 发起读操作，由于 G2 的值没有发生变化，因此返回的是 v0。G1 和 G2 读操作的结果不一致，这就不满足一致性了。<br><img src="https://i.loli.net/2019/11/12/iAETndvc8JHFx5D.png" alt="bg2018071604.png"></p>
+<p>为了让 G2 也能变为 v1，就要在 G1 写操作的时候，让 G1 向 G2 发送一条消息，要求 G2 也改成 v1。<br><img src="https://i.loli.net/2019/11/12/OlkJyYaIUQhbPEx.png" alt="bg2018071605.png"><br>这样的话，用户向 G2 发起读操作，也能得到 v1。<br><img src="https://i.loli.net/2019/11/12/R5D7bTp9JBEarIn.png" alt="bg2018071606.png"></p>
+<h3 id="Availability"><a href="#Availability" class="headerlink" title="Availability"></a>Availability</h3><p>Availability 中文叫做”可用性”，意思是只要收到用户的请求，服务器就必须给出回应。</p>
+<p>用户可以选择向 G1 或 G2 发起读操作。不管是哪台服务器，只要收到请求，就必须告诉用户，到底是 v0 还是 v1，否则就不满足可用性。</p>
+<h3 id="Consistency-和-Availability-的矛盾"><a href="#Consistency-和-Availability-的矛盾" class="headerlink" title="Consistency 和 Availability 的矛盾"></a>Consistency 和 Availability 的矛盾</h3><p>一致性和可用性，为什么不可能同时成立？答案很简单，因为可能通信失败（即出现分区容错）<br>如果保证 G2 的一致性，那么 G1 必须在写操作时，锁定 G2 的读操作和写操作。只有数据同步后，才能重新开放读写。锁定期间，G2 不能读写，没有可用性不。<br>如果保证 G2 的可用性，那么势必不能锁定 G2，所以一致性不成立。<br>综上所述，G2 无法同时做到一致性和可用性。系统设计时只能选择一个目标。如果追求一致性，那么无法保证所有节点的可用性；如果追求所有节点的可用性，那就没法做到一致性。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/12/Database/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%9E%82%E7%9B%B4%E6%8B%86%E5%88%86%E5%92%8C%E6%B0%B4%E5%B9%B3%E6%8B%86%E5%88%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/12/Database/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%9E%82%E7%9B%B4%E6%8B%86%E5%88%86%E5%92%8C%E6%B0%B4%E5%B9%B3%E6%8B%86%E5%88%86/" class="post-title-link" itemprop="url">数据库的垂直拆分和水平拆分</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2019-11-12 19:15:52 / Modified: 20:09:49" itemprop="dateCreated datePublished" datetime="2019-11-12T19:15:52+08:00">2019-11-12</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/database/" itemprop="url" rel="index">
+                    <span itemprop="name">database</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="数据库的垂直拆分和水平拆分"><a href="#数据库的垂直拆分和水平拆分" class="headerlink" title="数据库的垂直拆分和水平拆分"></a>数据库的垂直拆分和水平拆分</h1><hr>
+<p>当我们使用读写分离、缓存后，数据库的压力还是很大的时候，这就需要使用到数据库拆分了。<br>数据库拆分简单来说，就是指通过某种特定的条件，按照某个维度，将我们存放在同一个数据库中的数据分散存放到多个数据库（主机）上面以达到分散单库（主机）负载的效果。 </p>
+<p>切分模式： 垂直（纵向）拆分、水平拆分。</p>
+<h2 id="垂直拆分"><a href="#垂直拆分" class="headerlink" title="垂直拆分"></a>垂直拆分</h2><p> 一个数据库由很多表的构成，每个表对应着不同的业务，垂直切分是指按照业务将表进行分类，分布到不同的数据库上面，这样也就将数据或者说压力分担到不同的库上面，如下图：<br><img src="https://i.loli.net/2019/11/12/1Iwcd5eFkqrzCbS.png" alt="11111.PNG"><br> 优点：</p>
+<ol>
+<li>拆分后业务清晰，拆分规则明确。</li>
+<li>系统之间整合或扩展容易。</li>
+<li>数据维护简单。</li>
+</ol>
+<p>缺点：</p>
+<ol>
+<li>单机的ACID保证被打破了。数据到了多机后，原来在单机通过事务来进行的处理逻辑会受很大的影响。我们面临的选择是，要么放弃原来的单机事务，修改事务，要么引入分布式事务</li>
+<li>一些join操作会变得比较困难，因为数据可能已经在两个数据库中了，所以不能很方便地利用数据自身的join了。需要应用或者其他方式来解决，</li>
+<li>靠外键去进行约束的场景会受到影响</li>
+</ol>
+<h2 id="水平拆分"><a href="#水平拆分" class="headerlink" title="水平拆分"></a>水平拆分</h2><p> 垂直拆分后遇到单机瓶颈，可以使用水平拆分。相对于垂直拆分的区别是：垂直拆分是把不同的表拆到不同的数据库中，而水平拆分是把同一个表拆到不同的数据库中。</p>
+<p> 相对于垂直拆分，水平拆分不是将表的数据做分类，而是按照某个字段的某种规则来分散到多个库之中，每个表中包含一部分数据。简单来说，我们可以将数据的水平切分理解为是按照数据行的切分，就是将表中 的某些行切分到一个数据库，而另外的某些行又切分到其他的数据库中，主要有分表，分库两种模式，如图：<br><img src="https://i.loli.net/2019/11/12/ZpXLBiVybFOswJ7.png" alt="20160910084749776.png"><br><img src="https://i.loli.net/2019/11/12/u4a8O7RCLz1UJKI.png" alt="20160910084811416.png"></p>
+<p>优点：</p>
+<ol>
+<li>不存在单库大数据，高并发的性能瓶颈。</li>
+<li>对应用透明，应用端改造较少。     </li>
+<li>按照合理拆分规则拆分，join操作基本避免跨库。</li>
+<li>提高了系统的稳定性跟负载能力。</li>
+</ol>
+<p>缺点：</p>
+<ol>
+<li>拆分规则难以抽象。</li>
+<li>分片事务一致性难以解决。</li>
+<li>数据多次扩展难度跟维护量极大。</li>
+<li>跨库join性能较差。</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/12/Mybatis/mybatis%E4%B8%AD%E7%9A%84#%7B%7D%E5%92%8C$%7B%7D%E5%8C%BA%E5%88%AB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/12/Mybatis/mybatis%E4%B8%AD%E7%9A%84#%7B%7D%E5%92%8C$%7B%7D%E5%8C%BA%E5%88%AB/" class="post-title-link" itemprop="url">mybatis中的#{}和${}区别</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2019-11-12 13:06:57 / Modified: 13:09:54" itemprop="dateCreated datePublished" datetime="2019-11-12T13:06:57+08:00">2019-11-12</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/mybatis/" itemprop="url" rel="index">
+                    <span itemprop="name">mybatis</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="mybatis中的-和-区别"><a href="#mybatis中的-和-区别" class="headerlink" title="mybatis中的#{}和${}区别"></a>mybatis中的#{}和${}区别</h1><hr>
+<ol>
+<li><p>#将传入的数据都当成一个字符串，会对自动传入的数据加一个双引号。如：order by #user_id#，如果传入的值是111,那么解析成sql时的值为order by “111”, 如果传入的值是id，则解析成的sql为order by “id”.</p>
+</li>
+<li><p>$将传入的数据直接显示生成在sql中。如：order by $user_id$，如果传入的值是111,那么解析成sql时的值为order by user_id,  如果传入的值是id，则解析成的sql为order by id.</p>
+</li>
+<li><p>#方式能够很大程度防止sql注入。</p>
+</li>
+<li><p>$方式无法防止Sql注入。</p>
+</li>
+<li><p>$方式一般用于传入数据库对象，例如传入表名.</p>
+</li>
+<li><p>一般能用#的就别用$.</p>
+</li>
+</ol>
+<p>字符串替换<br>默认情况下，使用#{}格式的语法会导致MyBatis创建预处理语句属性并以它为背景设置安全的值（比如?）。这样做很安全，很迅速也是首选做法，有时你只是想直接在SQL语句中插入一个不改变的字符串。比如，像ORDER BY，你可以这样来使用：<br>ORDER BY ${columnName}<br>这里MyBatis不会修改或转义字符串。</p>
+<p>重要：接受从用户输出的内容并提供给语句中不变的字符串，这样做是不安全的。这会导致潜在的SQL注入攻击，因此你不应该允许用户输入这些字段，或者通常自行转义并检查。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/12/Mybatis/%E4%BB%80%E4%B9%88%E6%98%AFsql%E6%B3%A8%E5%85%A5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/12/Mybatis/%E4%BB%80%E4%B9%88%E6%98%AFsql%E6%B3%A8%E5%85%A5/" class="post-title-link" itemprop="url">什么是sql注入</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2019-11-12 13:04:22 / Modified: 13:25:48" itemprop="dateCreated datePublished" datetime="2019-11-12T13:04:22+08:00">2019-11-12</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/mybatis/" itemprop="url" rel="index">
+                    <span itemprop="name">mybatis</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="什么是sql注入"><a href="#什么是sql注入" class="headerlink" title="什么是sql注入"></a>什么是sql注入</h1><p>直接举个例子说明一下这个sql注入的全过程吧~</p>
+<h2 id="初步注入–绕过验证，直接登录"><a href="#初步注入–绕过验证，直接登录" class="headerlink" title="初步注入–绕过验证，直接登录"></a>初步注入–绕过验证，直接登录</h2><p>公司网站登陆框如下：<br><img src="https://i.loli.net/2019/11/12/AXGMZOKdBJgetFn.png" alt="20180321110526347.png"></p>
+<p>可以看到除了账号密码之外，还有一个公司名的输入框，根据输入框的形式不难推出SQL的写法如下：<br>SELECT * From Table WHERE Name=’XX’ andPassword=’YY’ and Corp=’ZZ’<br>我发现前两者都做一些检查，而第三个输入框却疏忽了，漏洞就在这里！注入开始，在输入框中输入以下内容：</p>
+<p><img src="https://i.loli.net/2019/11/12/sdRHXfmVbouYkKJ.png" alt="20180321110534421.png"></p>
+<p>用户名乱填，密码留空，这种情况下点击登录按钮后竟然成功登录了。我们看一下最终的SQL就会找到原因：<br>SELECT * FromTable WHERE Name=’SQL inject’ and Password=” and Corp=” or 1=1–’<br>从代码可以看出，前一半单引号被闭合，后一半单引号被 “–”给注释掉，中间多了一个永远成立的条件“1=1”，这就造成任何字符都能成功登录的结果。而Sql注入的危害却不仅仅是匿名登录。</p>
+<h2 id="中级注入–借助异常获取信息。"><a href="#中级注入–借助异常获取信息。" class="headerlink" title="中级注入–借助异常获取信息。"></a>中级注入–借助异常获取信息。</h2><p>现在我们在第三个输入框中写入：“‘ or 1=(SELECT@@version) –”。如下：<br><img src="https://i.loli.net/2019/11/12/COzlpAoHNe83BDY.png" alt="20180321110545134.png"></p>
+<p>后台的SQL变成了这样：</p>
+<p>SELECT * FromTable WHERE Name=’SQL inject’ and Password=” and Corp=” or 1=(SELECT@@VERSION)–’</p>
+<p>判断条件变成了 1=(SELECT@@VERSION),这个写法肯定会导致错误，但出错正是我们想要的。点击登录后，页面出现以下信息：<br>Conversion failedwhen converting the nvarchar value ‘Microsoft SQL Server 2008 (SP3) -10.0.5500.0 (X64) Sep 21 2011 22:45:45 Copyright (c) 1988-2008 MicrosoftCorporation Developer Edition (64-bit) on Windows NT 6.1 <X64> (Build7601: Service Pack 1) ’ to data type int.</p>
+<p>可怕的事情出现了，服务器的操作系统和SQL Server版本信息竟然通过错误显示出来。</p>
+<h2 id="危害扩大–获取服务器所有的库名、表名、字段名"><a href="#危害扩大–获取服务器所有的库名、表名、字段名" class="headerlink" title="危害扩大–获取服务器所有的库名、表名、字段名"></a>危害扩大–获取服务器所有的库名、表名、字段名</h2><p>接着，我们在输入框中输入如下信息：“t’ or 1=(SELECTtop 1 name FROM master..sysdatabases where name not in (SELECT top 0 name FROMmaster..sysdatabases))–”，此时发现第三个输入框有字数长度的限制，然而这种客户端的限制形同虚设，直接通过Google浏览器就能去除。</p>
+<p>点击登录，返回的信息如下：</p>
+<p>Conversion failedwhen converting the nvarchar value ‘master’ to data type int.</p>
+<p>数据库名称“master”通过异常被显示出来！依次改变上面SQL语句中的序号，就能得到服务器上所有数据库的名称。</p>
+<p>接着，输入信息如下：“b’ or 1=(SELECTtop 1 name FROM master..sysobjects where xtype=’U’ and name not in (SELECT top1 name FROM master..sysobjects where xtype=’U’))–”</p>
+<p>得到返回信息如下：</p>
+<p>Conversion failedwhen converting the nvarchar value ‘spt_fallback_db’ to data type int.</p>
+<p>我们得到了master数据库中的第一张表名：“spt_fallback_db”，同上，依次改变序号，可得到该库全部表名。<br>于是，得到错误提示如下：</p>
+<p>“Conversionfailed when converting the nvarchar value ‘xserver_name’ to data typeint.”;</p>
+<p>这样第一个字段名“xserver_name”就出来了，依次改变序号，就能遍历出所有的字段名。</p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>关于安全性，本文可总结出一下几点：</p>
+<ol>
+<li><p>对用户输入的内容要时刻保持警惕。</p>
+</li>
+<li><p>只有客户端的验证等于没有验证。</p>
+</li>
+<li><p>永远不要把服务器错误信息暴露给用户。</p>
+</li>
+</ol>
+<p>除此之外，我还要补充几点：</p>
+<ol>
+<li><p>SQL注入不仅能通过输入框，还能通过Url达到目的。</p>
+</li>
+<li><p>除了服务器错误页面，还有其他办法获取到数据库信息。</p>
+</li>
+<li><p>可通过软件模拟注入行为，这种方式盗取信息的速度要比你想象中快的多。</p>
+</li>
+<li><p>漏洞跟语言平台无关，并非asp才有注入漏洞而asp.net就没有注入漏洞，一切要看设计者是否用心。</p>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/12/Fastjson/Fastjson%20%E7%AE%80%E6%98%8E%E6%95%99%E7%A8%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/12/Fastjson/Fastjson%20%E7%AE%80%E6%98%8E%E6%95%99%E7%A8%8B/" class="post-title-link" itemprop="url">Fastjson 简明教程</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2019-11-12 10:13:52 / Modified: 13:09:59" itemprop="dateCreated datePublished" datetime="2019-11-12T10:13:52+08:00">2019-11-12</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/fastjson/" itemprop="url" rel="index">
+                    <span itemprop="name">fastjson</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Fastjson-简明教程"><a href="#Fastjson-简明教程" class="headerlink" title="Fastjson 简明教程"></a>Fastjson 简明教程</h1><hr>
+<h2 id="Fastjson-简介"><a href="#Fastjson-简介" class="headerlink" title="Fastjson 简介"></a>Fastjson 简介</h2><p>Fastjson 是一个 Java 库，可以将 Java 对象转换为 JSON 格式，当然它也可以将 JSON 字符串转换为 Java 对象。</p>
+<p>Fastjson 可以操作任何 Java 对象，即使是一些预先存在的没有源码的对象。</p>
+<p>Fastjson 源码地址：<a href="https://github.com/alibaba/fastjson" target="_blank" rel="noopener">https://github.com/alibaba/fastjson</a></p>
+<p>Fastjson 中文 Wiki：<a href="https://github.com/alibaba/fastjson/wiki/Quick-Start-CN" target="_blank" rel="noopener">https://github.com/alibaba/fastjson/wiki/Quick-Start-CN</a></p>
+<h2 id="Fastjson-特性"><a href="#Fastjson-特性" class="headerlink" title="Fastjson 特性"></a>Fastjson 特性</h2><ul>
+<li>提供服务器端、安卓客户端两种解析工具，性能表现较好。</li>
+<li>提供了 toJSONString() 和 parseObject() 方法来将 Java 对象与 JSON 相互转换。调用toJSONString方 法即可将对象转换成 JSON 字符串，parseObject 方法则反过来将 JSON 字符串转换成对象。</li>
+<li>允许转换预先存在的无法修改的对象（只有class、无源代码）。</li>
+<li>Java泛型的广泛支持。</li>
+<li>允许对象的自定义表示、允许自定义序列化类。</li>
+<li>支持任意复杂对象（具有深厚的继承层次和广泛使用的泛型类型）。</li>
+</ul>
+<h2 id="下载和使用"><a href="#下载和使用" class="headerlink" title="下载和使用"></a>下载和使用</h2><p> maven 依赖:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;com.alibaba&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;fastjson&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;x.x.x&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="将-Java-对象转换为-JSON-格式"><a href="#将-Java-对象转换为-JSON-格式" class="headerlink" title="将 Java 对象转换为 JSON 格式"></a>将 Java 对象转换为 JSON 格式</h2><p>定义以下 Person JavaBean:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">public class Person &#123;</span><br><span class="line">     </span><br><span class="line">    @JSONField(name = &quot;AGE&quot;)</span><br><span class="line">    private int age;</span><br><span class="line"> </span><br><span class="line">    @JSONField(name = &quot;FULL NAME&quot;)</span><br><span class="line">    private String fullName;</span><br><span class="line"> </span><br><span class="line">    @JSONField(name = &quot;DATE OF BIRTH&quot;)</span><br><span class="line">    private Date dateOfBirth;</span><br><span class="line"> </span><br><span class="line">    public Person(int age, String fullName, Date dateOfBirth) &#123;</span><br><span class="line">        super();</span><br><span class="line">        this.age = age;</span><br><span class="line">        this.fullName= fullName;</span><br><span class="line">        this.dateOfBirth = dateOfBirth;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    // 标准 getters &amp; setters</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">注意必须要有getter和setter方法</span><br></pre></td></tr></table></figure>
+
+<p>可以使用 JSON.toJSONString() 将 Java 对象转换换为 JSON 对象：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">private List&lt;Person&gt; listOfPersons = new ArrayList&lt;Person&gt;();</span><br><span class="line"> </span><br><span class="line">@Before</span><br><span class="line">public void setUp() &#123;</span><br><span class="line">    listOfPersons.add(new Person(15, &quot;John Doe&quot;, new Date()));</span><br><span class="line">    listOfPersons.add(new Person(20, &quot;Janette Doe&quot;, new Date()));</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">@Test</span><br><span class="line">public void whenJavaList_thanConvertToJsonCorrect() &#123;</span><br><span class="line">    String jsonOutput= JSON.toJSONString(listOfPersons);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出结果为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[  </span><br><span class="line">    &#123;  </span><br><span class="line">        &quot;AGE&quot;:15,</span><br><span class="line">        &quot;DATE OF BIRTH&quot;:1468962431394,</span><br><span class="line">        &quot;FULL NAME&quot;:&quot;John Doe&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;  </span><br><span class="line">        &quot;AGE&quot;:20,</span><br><span class="line">        &quot;DATE OF BIRTH&quot;:1468962431394,</span><br><span class="line">        &quot;FULL NAME&quot;:&quot;Janette Doe&quot;</span><br><span class="line">    &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<p>我们还可以自定义输出，并控制字段的排序，日期显示格式，序列化标记等。</p>
+<p>接下来我们更新 bean 并添加几个字段：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@JSONField(name=&quot;AGE&quot;, serialize=false)</span><br><span class="line">private int age;</span><br><span class="line"> </span><br><span class="line">@JSONField(name=&quot;LAST NAME&quot;, ordinal = 2)</span><br><span class="line">private String lastName;</span><br><span class="line"> </span><br><span class="line">@JSONField(name=&quot;FIRST NAME&quot;, ordinal = 1)</span><br><span class="line">private String firstName;</span><br><span class="line"> </span><br><span class="line">@JSONField(name=&quot;DATE OF BIRTH&quot;, format=&quot;dd/MM/yyyy&quot;, ordinal = 3)</span><br><span class="line">private Date dateOfBirth;</span><br></pre></td></tr></table></figure>
+
+<p>以上代码中我们列出了基本参数类别，并使用 @JSONField 注解，以便实现自定义转换：</p>
 <ul>
-<li>参数列表</li>
-<li>箭头</li>
-<li>Lambda主体<br>几个有效的Lambda表达式<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">(String s)-&gt;s.length</span><br><span class="line">(Apple a) -&gt; a.getWeight()&gt;150</span><br><span class="line">(int x,int y) -&gt;&#123;</span><br><span class="line">	System.out.println(x+y);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">() -&gt; 42</span><br></pre></td></tr></table></figure>
+<li>format 参数用于格式化 date 属性。</li>
+<li>默认情况下， FastJson 库可以序列化 Java bean 实体， 但我们可以使用 serialize 指定字段不序列化。</li>
+<li>使用 ordinal 参数指定字段的顺序</li>
+</ul>
+<p>这样，以上输出结果为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">    &#123;</span><br><span class="line">        &quot;FIRST NAME&quot;:&quot;Doe&quot;,</span><br><span class="line">        &quot;LAST NAME&quot;:&quot;Jhon&quot;,</span><br><span class="line">        &quot;DATE OF BIRTH&quot;:&quot;19/07/2016&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        &quot;FIRST NAME&quot;:&quot;Doe&quot;,</span><br><span class="line">        &quot;LAST NAME&quot;:&quot;Janette&quot;,</span><br><span class="line">        &quot;DATE OF BIRTH&quot;:&quot;19/07/2016&quot;</span><br><span class="line">    &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<h2 id="JSONField"><a href="#JSONField" class="headerlink" title="@JSONField"></a>@JSONField</h2><p>@JSONField 的作用对象:</p>
+<ol>
+<li>Field</li>
+<li>Setter 和 Getter 方法</li>
+</ol>
+<p>注意：FastJson 在进行操作时，是根据 getter 和 setter 的方法进行的，并不是依据 Field 进行。</p>
+<p>注意：若属性是私有的，必须有 set 方法。否则无法反序列化。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">span style=&quot;color: #000000; font-weight: bold;&quot;&gt;package com.alibaba.fastjson.annotation;</span><br><span class="line"></span><br><span class="line">public @interface JSONField &#123;</span><br><span class="line">    // 配置序列化和反序列化的顺序，1.1.42版本之后才支持</span><br><span class="line">    int ordinal() default 0;</span><br><span class="line"></span><br><span class="line">     // 指定字段的名称</span><br><span class="line">    String name() default &quot;&quot;;</span><br><span class="line"></span><br><span class="line">    // 指定字段的格式，对日期格式有用</span><br><span class="line">    String format() default &quot;&quot;;</span><br><span class="line"></span><br><span class="line">    // 是否序列化</span><br><span class="line">    boolean serialize() default true;</span><br><span class="line"></span><br><span class="line">    // 是否反序列化</span><br><span class="line">    boolean deserialize() default true;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-JSONField-配置方式"><a href="#2-JSONField-配置方式" class="headerlink" title="2. JSONField 配置方式"></a>2. JSONField 配置方式</h3><p>FieldInfo 可以配置在 getter/setter 方法或者字段上。例如：</p>
+<p>2.1 配置在 getter/setter 上</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public class A &#123;</span><br><span class="line">      private int id;</span><br><span class="line"> </span><br><span class="line">      @JSONField(name=&quot;ID&quot;)</span><br><span class="line">      public int getId() &#123;return id;&#125;</span><br><span class="line">      @JSONField(name=&quot;ID&quot;)</span><br><span class="line">      public void setId(int value) &#123;this.id = id;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>2.2 配置在 field 上</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public class A &#123;</span><br><span class="line">      @JSONField(name=&quot;ID&quot;)</span><br><span class="line">      private int id;</span><br><span class="line"> </span><br><span class="line">      public int getId() &#123;return id;&#125;</span><br><span class="line">      public void setId(int value) &#123;this.id = id;&#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li><p>使用format配置日期格式化</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">span style=&quot;color: #000000; font-weight: bold;&quot;&gt;public class A &#123;</span><br><span class="line">      // 配置date序列化和反序列使用yyyyMMdd日期格式</span><br><span class="line">      @JSONField(format=&quot;yyyyMMdd&quot;)</span><br><span class="line">      public Date date;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用 serialize/deserialize 指定字段不序列化</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">span style=&quot;color: #000000; font-weight: bold;&quot;&gt;public class A &#123;</span><br><span class="line">      @JSONField(serialize=false)</span><br><span class="line">      public Date date;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> public class A &#123;</span><br><span class="line">      @JSONField(deserialize=false)</span><br><span class="line">      public Date date;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用 ordinal 指定字段的顺序<br>默认 fastjson 序列化一个 java bean，是根据 fieldName 的字母序进行序列化的，你可以通过 ordinal 指定字段的顺序。这个特性需要 1.1.42 以上版本。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">span style=&quot;color: #000000; font-weight: bold;&quot;&gt;public static class VO &#123;</span><br><span class="line">    @JSONField(ordinal = 3)</span><br><span class="line">    private int f0;</span><br><span class="line"></span><br><span class="line">    @JSONField(ordinal = 2)</span><br><span class="line">    private int f1;</span><br><span class="line"></span><br><span class="line">    @JSONField(ordinal = 1)</span><br><span class="line">    private int f2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 </li>
-</ul>
-<h2 id="在哪里使用Lambda表达式"><a href="#在哪里使用Lambda表达式" class="headerlink" title="在哪里使用Lambda表达式"></a>在哪里使用Lambda表达式</h2><p>可以在函数式接口上使用Lambda表达式。什么是函数式接口？简单来说，就是只含有一个方法的接口。</p>
+</ol>
+<h2 id="FastJson-还支持-BeanToArray-序列化功能："><a href="#FastJson-还支持-BeanToArray-序列化功能：" class="headerlink" title="FastJson 还支持 BeanToArray 序列化功能："></a>FastJson 还支持 BeanToArray 序列化功能：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String jsonOutput= JSON.toJSONString(listOfPersons, SerializerFeature.BeanToArray);</span><br></pre></td></tr></table></figure>
 
+<p>输出结果为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">    [</span><br><span class="line">        15,</span><br><span class="line">        1469003271063,</span><br><span class="line">        &quot;John Doe&quot;</span><br><span class="line">    ],</span><br><span class="line">    [</span><br><span class="line">        20,</span><br><span class="line">        1469003271063,</span><br><span class="line">        &quot;Janette Doe&quot;</span><br><span class="line">    ]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<h2 id="创建-JSON-对象"><a href="#创建-JSON-对象" class="headerlink" title="创建 JSON 对象"></a>创建 JSON 对象</h2><p>创建 JSON 对象非常简单，只需使用 JSONObject（fastJson提供的json对象） 和 JSONArray（fastJson提供json数组对象） 对象即可。<br>我们可以把JSONObject 当成一个 Map&lt;String,Object&gt; 来看，只是 JSONObject 提供了更为丰富便捷的方法，方便我们对于对象属性的操作。我们看一下源码。<br><img src="https://i.loli.net/2019/11/12/nfSd9uI3GezW4Xo.png" alt="1536049333-5924-20170702123831164-204043901.png"></p>
+<p>同样我们可以把 JSONArray 当做一个 List<Object>，可以把 JSONArray 看成 JSONObject 对象的一个集合。<br><img src="https://i.loli.net/2019/11/12/vLYiZpz53JmyUs1.png" alt="1536049334-5514-20170702124211524-639489808.png"></p>
+<p>此外，由于 JSONObject 和 JSONArray 继承了 JSON，所以说也可以直接使用两者对 JSON 格式字符串与 JSON 对象及 javaBean 之间做转换，不过为了避免混淆我们还是使用 JSON。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">@Test</span><br><span class="line">public void whenGenerateJson_thanGenerationCorrect() throws ParseException &#123;</span><br><span class="line">    JSONArray jsonArray = new JSONArray();</span><br><span class="line">    for (int i = 0; i &lt; 2; i++) &#123;</span><br><span class="line">        JSONObject jsonObject = new JSONObject();</span><br><span class="line">        jsonObject.put(&quot;AGE&quot;, 10);</span><br><span class="line">        jsonObject.put(&quot;FULL NAME&quot;, &quot;Doe &quot; + i);</span><br><span class="line">        jsonObject.put(&quot;DATE OF BIRTH&quot;, &quot;2016/12/12 12:12:12&quot;);</span><br><span class="line">        jsonArray.add(jsonObject);</span><br><span class="line">    &#125;</span><br><span class="line">    String jsonOutput = jsonArray.toJSONString();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出结果为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">   &#123;</span><br><span class="line">      &quot;AGE&quot;:&quot;10&quot;,</span><br><span class="line">      &quot;DATE OF BIRTH&quot;:&quot;2016/12/12 12:12:12&quot;,</span><br><span class="line">      &quot;FULL NAME&quot;:&quot;Doe 0&quot;</span><br><span class="line">   &#125;,</span><br><span class="line">   &#123;</span><br><span class="line">      &quot;AGE&quot;:&quot;10&quot;,</span><br><span class="line">      &quot;DATE OF BIRTH&quot;:&quot;2016/12/12 12:12:12&quot;,</span><br><span class="line">      &quot;FULL NAME&quot;:&quot;Doe 1&quot;</span><br><span class="line">   &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<h2 id="JSON-字符串转换为-Java-对象"><a href="#JSON-字符串转换为-Java-对象" class="headerlink" title="JSON 字符串转换为 Java 对象"></a>JSON 字符串转换为 Java 对象</h2><p>现在我们已经学会了如何创建 JSON 对象，以及如何将 Java 对象转换为 JSON 字符串，接下来我们就需要了解如何解析 JSON：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@Test</span><br><span class="line">public void whenJson_thanConvertToObjectCorrect() &#123;</span><br><span class="line">    Person person = new Person(20, &quot;John&quot;, &quot;Doe&quot;, new Date());</span><br><span class="line">    String jsonObject = JSON.toJSONString(person);</span><br><span class="line">    Person newPerson = JSON.parseObject(jsonObject, Person.class);</span><br><span class="line">     </span><br><span class="line">    assertEquals(newPerson.getAge(), 0); // 如果我们设置系列化为 false</span><br><span class="line">    assertEquals(newPerson.getFullName(), listOfPersons.get(0).getFullName());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们可以使用 JSON.parseObject() 将 JSON 字符串转换为 Java 对象。</p>
+<p>注意反序列化时为对象时，必须要有默认无参的构造函数，否则会报异常:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">com.alibaba.fastjson.JSONException: default constructor not found.</span><br></pre></td></tr></table></figure>
+
+<p>以下是简单的实例测试：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Person [age=20, fullName=John Doe, dateOfBirth=Wed Jul 20 08:51:12 WEST 2016]</span><br></pre></td></tr></table></figure>
+
+<p>@JSONField deserialize 可选项可以指定字段不反序列化。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@JSONField(name = &quot;DATE OF BIRTH&quot;, deserialize=false)</span><br><span class="line">private Date dateOfBirth;</span><br></pre></td></tr></table></figure>
+
+<p>输出结果为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Person [age=20, fullName=John Doe, dateOfBirth=null]</span><br></pre></td></tr></table></figure>
+
+<h2 id="使用-ContextValueFilter-配置-JSON-转换"><a href="#使用-ContextValueFilter-配置-JSON-转换" class="headerlink" title="使用 ContextValueFilter 配置 JSON 转换"></a>使用 ContextValueFilter 配置 JSON 转换</h2><p>在某些场景下，对Value做过滤，需要获得所属JavaBean的信息，包括类型、字段、方法等。在fastjson-1.2.9中，提供了ContextValueFilter，类似于之前版本提供的ValueFilter，只是多了BeanContext参数可用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">@Test</span><br><span class="line">public void givenContextFilter_whenJavaObject_thanJsonCorrect() &#123;</span><br><span class="line">    ContextValueFilter valueFilter = new ContextValueFilter () &#123;</span><br><span class="line">        public Object process(</span><br><span class="line">          BeanContext context, Object object, String name, Object value) &#123;</span><br><span class="line">            if (name.equals(&quot;DATE OF BIRTH&quot;)) &#123;</span><br><span class="line">                return &quot;NOT TO DISCLOSE&quot;;</span><br><span class="line">            &#125;</span><br><span class="line">            if (value.equals(&quot;John&quot;)) &#123;</span><br><span class="line">                return ((String) value).toUpperCase();</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                return null;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    String jsonOutput = JSON.toJSONString(listOfPersons, valueFilter);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="使用-NameFilter-和-SerializeConfig"><a href="#使用-NameFilter-和-SerializeConfig" class="headerlink" title="使用 NameFilter 和 SerializeConfig"></a>使用 NameFilter 和 SerializeConfig</h2><p>NameFilter: 序列化时修改 Key。</p>
+<p>SerializeConfig：内部是个map容器主要功能是配置并记录每种Java类型对应的序列化类。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">@Test</span><br><span class="line">public void givenSerializeConfig_whenJavaObject_thanJsonCorrect() &#123;</span><br><span class="line">    NameFilter formatName = new NameFilter() &#123;</span><br><span class="line">        public String process(Object object, String name, Object value) &#123;</span><br><span class="line">            return name.toLowerCase().replace(&quot; &quot;, &quot;_&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">     </span><br><span class="line">    SerializeConfig.getGlobalInstance().addFilter(Person.class,  formatName);</span><br><span class="line">    String jsonOutput =</span><br><span class="line">      JSON.toJSONStringWithDateFormat(listOfPersons, &quot;yyyy-MM-dd&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>实例中我们声明了 formatName 过滤器使用 NameFilter 匿名类来处理字段名称。 新创建的过滤器与 Person 类相关联，然后添加到全局实例，它是 SerializeConfig 类中的静态属性。</p>
+<p>现在我们可以轻松地将对象转换为JSON格式。</p>
+<p>注意我们使用的是 toJSONStringWithDateFormat() 而不是 toJSONString() ，它可以更快速的格式化日期。</p>
+<p>输出结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[  </span><br><span class="line">    &#123;  </span><br><span class="line">        &quot;full_name&quot;:&quot;John Doe&quot;,</span><br><span class="line">        &quot;date_of_birth&quot;:&quot;2016-07-21&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;  </span><br><span class="line">        &quot;full_name&quot;:&quot;Janette Doe&quot;,</span><br><span class="line">        &quot;date_of_birth&quot;:&quot;2016-07-21&quot;</span><br><span class="line">    &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -1196,7 +1142,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1242,18 +1188,18 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">185</span>
+          <span class="site-state-item-count">197</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
-        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-count">45</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">56</span>
+        <span class="site-state-item-count">60</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.2">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.2">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.2">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.2" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.2">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.4.2',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="JVM之堆内存 介绍  一个Jvm实例只存在一个堆内存，堆也是Java内存管理的核心区域 Java堆区在Jvm启动的时候即被创建，其空间大小页就确定。是Jvm管理的最大的一块内存空间。 堆内存的大小是可以调节的   堆空间不要求物理连续，但是逻辑上需要连续 所有线程共享Java堆，在这里还可以划分线程私有的缓冲区(Thread Local Allocation Buffer,TLAB) 所有的对象">
+<meta name="keywords" content="Jvm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JVM之堆内存">
+<meta property="og:url" content="https:&#x2F;&#x2F;lancersaber.github.io&#x2F;2020&#x2F;05&#x2F;20&#x2F;JVM&#x2F;JVM%E4%B9%8B%E5%A0%86%E5%86%85%E5%AD%98&#x2F;index.html">
+<meta property="og:site_name" content="Lancersaber">
+<meta property="og:description" content="JVM之堆内存 介绍  一个Jvm实例只存在一个堆内存，堆也是Java内存管理的核心区域 Java堆区在Jvm启动的时候即被创建，其空间大小页就确定。是Jvm管理的最大的一块内存空间。 堆内存的大小是可以调节的   堆空间不要求物理连续，但是逻辑上需要连续 所有线程共享Java堆，在这里还可以划分线程私有的缓冲区(Thread Local Allocation Buffer,TLAB) 所有的对象">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2020&#x2F;05&#x2F;20&#x2F;6CJtFDEwuqPH1bh.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2020&#x2F;05&#x2F;20&#x2F;fDneXAOusHJPBpj.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2020&#x2F;05&#x2F;20&#x2F;jrI2xAPDkXB6h9i.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2020&#x2F;05&#x2F;20&#x2F;7QuDMdImUFOR1VS.png">
+<meta property="og:updated_time" content="2020-05-20T03:48:33.673Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2020&#x2F;05&#x2F;20&#x2F;6CJtFDEwuqPH1bh.png">
+
+<link rel="canonical" href="https://lancersaber.github.io/2020/05/20/JVM/JVM%E4%B9%8B%E5%A0%86%E5%86%85%E5%AD%98/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>JVM之堆内存 | Lancersaber</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lancersaber</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2020/05/20/JVM/JVM%E4%B9%8B%E5%A0%86%E5%86%85%E5%AD%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          JVM之堆内存
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-05-20 08:46:37 / Modified: 11:48:33" itemprop="dateCreated datePublished" datetime="2020-05-20T08:46:37+08:00">2020-05-20</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Jvm/" itemprop="url" rel="index">
+                    <span itemprop="name">Jvm</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="JVM之堆内存"><a href="#JVM之堆内存" class="headerlink" title="JVM之堆内存"></a>JVM之堆内存</h1><hr>
+<p><strong>介绍</strong></p>
+<ol>
+<li>一个Jvm实例只存在一个堆内存，堆也是Java内存管理的核心区域</li>
+<li>Java堆区在Jvm启动的时候即被创建，其空间大小页就确定。是Jvm管理的最大的一块内存空间。<ul>
+<li>堆内存的大小是可以调节的</li>
+</ul>
+</li>
+<li>堆空间不要求物理连续，但是逻辑上需要连续</li>
+<li>所有线程共享Java堆，在这里还可以划分线程私有的缓冲区(Thread Local Allocation Buffer,TLAB)</li>
+<li>所有的对象实例以及数组都应该在运行时分配在堆上，数组和对象可能永远也不会存储在栈上，因为栈帧中保存引用，这个引用指向对象或者数组在堆中的位置</li>
+<li>在方法结束后，堆中的对象不会马上被移除，仅仅在垃圾收集的时候才会被移除</li>
+</ol>
+<p><strong>关于可使用的堆内存大小</strong><br>在计算可用堆内存空间时，只能算一份survival区的大小，因为总有一个survival区是空的。<br>如以下代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args)&#123;</span><br><span class="line">        //返回java虚拟机中的堆内存总量</span><br><span class="line">        long l = Runtime.getRuntime().totalMemory()/1024/1024;</span><br><span class="line"></span><br><span class="line">        //返回java虚拟机中视图使用的最大堆内存</span><br><span class="line">        long l1 = Runtime.getRuntime().maxMemory()/1024/1024;</span><br><span class="line"></span><br><span class="line">        System.out.println(&quot;堆内存总量：&quot;+l+&quot;m&quot;);</span><br><span class="line">        System.out.println(&quot;使用最大堆内存总量：&quot;+l1+&quot;m&quot;);</span><br><span class="line"></span><br><span class="line">        try &#123;</span><br><span class="line">            Thread.sleep(1000000);</span><br><span class="line">        &#125; catch (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://i.loli.net/2020/05/20/6CJtFDEwuqPH1bh.png" alt="image.png"><br><img src="https://i.loli.net/2020/05/20/fDneXAOusHJPBpj.png" alt="image.png"><br><img src="https://i.loli.net/2020/05/20/jrI2xAPDkXB6h9i.png" alt="image.png"></p>
+<h2 id="堆的内存细分"><a href="#堆的内存细分" class="headerlink" title="堆的内存细分"></a>堆的内存细分</h2><p>在整个JVM堆内存之中实际上将内存分为了三部分</p>
+<ul>
+<li>新生区(又被划分为下面的两部分)<ul>
+<li>Eden区</li>
+<li>Survivor区<ul>
+<li>Survivor0区</li>
+<li>Survivor1区</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>养老区</li>
+<li>元空间(1.8及以后称为元空间，1.8以前称为永久代)</li>
+</ul>
+<h3 id="对象分配过程"><a href="#对象分配过程" class="headerlink" title="对象分配过程"></a>对象分配过程</h3><ol>
+<li>new的对象先放Eden区，此处有大小限制</li>
+<li>在Eden区的空间填满时，程序又需要创建对象，JVM的垃圾回收器将对Eden区进行垃圾回收(Minor GC)，将Eden区中的不再被其他对象所引用的对象进行销毁。再加载新的对象放到Eden区中。</li>
+<li>然后将Eden中的剩余对象移动到survival0区。</li>
+<li>如果再次触发垃圾回收(注意也会对幸存区进行垃圾回收)，此时上次幸存下来的放到survival0区的，如果没有回收，就会放到survival1区。</li>
+<li>如果再次经历垃圾回收，此时会重新放回survival0区，接着再去survival1区</li>
+<li>啥时候能去养老区？可以社渚次数。默认15次<ul>
+<li>可以设置参数：-XX:MaxTenuringThreshold=<N>进行设置</li>
+</ul>
+</li>
+</ol>
+<p><strong>注意</strong></p>
+<ul>
+<li>只有当Eden区满了才会触发minor gc,survival区满了并不会触发gc</li>
+<li>针对s0，s1区：复制之后有交换，谁空谁是to</li>
+<li>关于垃圾回收：频繁在新生区收集，很少在养老区收集，几乎不再永久区/元空间收集。<br><img src="https://i.loli.net/2020/05/20/7QuDMdImUFOR1VS.png" alt="image.png"></li>
+</ul>
+<h2 id="堆内存空间的调整参数"><a href="#堆内存空间的调整参数" class="headerlink" title="堆内存空间的调整参数"></a>堆内存空间的调整参数</h2><ul>
+<li>-Xms：设置初始分配大小，默认为物理内存的1/64 </li>
+<li>-Xmx：最大分配内存，默认为物理内存的1/4</li>
+<li>-XX:+PrintGCDetails：输出详细的GC处理日志 </li>
+<li>-XX:+PrintGCTimeStamps：输出GC的时间戳信息 </li>
+<li>-XX:+PrintGCDateStamps：输出GC的时间戳信息（以日期的形式）</li>
+<li>-XX:+PrintHeapAtGC：在GC进行处理的前后打印堆内存信息 </li>
+<li>-Xloggc:(SavePath)：设置日志信息保存文件 </li>
+<li>在堆内存的调整策略中，基本上只要调整两个参数：-Xms和-Xmx</li>
+<li>-XX:NewRatio=2,表示新生代占1，老年代占2，新生代占整个堆的1/3(默认比例为2)</li>
+<li>-XX:SurvivorRatio=8(表示Eden空间和另外两个survival空间所占的比例为8：1：1，默认值也是8，但是由于自适应机制，所以结果可能不等于8)</li>
+<li>-Xmn:设置新生代的空间的大小</li>
+</ul>
+<p>设置堆的参数仅能影响年轻代和老年代，不影响元空间。 </p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Jvm/" rel="tag"># Jvm</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2020/05/19/Java%E5%9F%BA%E7%A1%80/Java%E5%B8%B8%E7%94%A8%E7%B1%BB%E5%BA%93-System%E7%B1%BB/" rel="next" title="Java常用类库——System类">
+                  <i class="fa fa-chevron-left"></i> Java常用类库——System类
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+                <a href="/2020/05/20/Redis/Redis%E7%9A%84%E6%85%A2%E6%9F%A5%E8%AF%A2%E5%88%86%E6%9E%90/" rel="prev" title="Redis的慢查询分析">
+                  Redis的慢查询分析 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JVM之堆内存"><span class="nav-number">1.</span> <span class="nav-text">JVM之堆内存</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#堆的内存细分"><span class="nav-number">1.1.</span> <span class="nav-text">堆的内存细分</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#对象分配过程"><span class="nav-number">1.1.1.</span> <span class="nav-text">对象分配过程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#堆内存空间的调整参数"><span class="nav-number">1.2.</span> <span class="nav-text">堆内存空间的调整参数</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="site-author-image" itemprop="image" alt="Lancersaber"
+    src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Lancersaber</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">197</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">45</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lancersaber</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.4.2
+  </div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.2"></script><script src="/js/motion.js?v=7.4.2"></script>
+<script src="/js/schemes/muse.js?v=7.4.2"></script>
+<script src="/js/next-boot.js?v=7.4.2"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

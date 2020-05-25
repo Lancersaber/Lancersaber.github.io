@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.2">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.2">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.2">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.2" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.2">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.4.2',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="System类介绍System类是一些与系统相关的属性和方法的集合，而且在System类中所有的属性都是静态的，要想引用这些属性和方法，直接使用System类调用即可。public static void exit(int status)  系统退出 ，如果status为0就表示退出。public static void gc()   运行垃圾收集机制，调用的是Runtime类中的gc方法。pub">
+<meta name="keywords" content="java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java常用类库——System类">
+<meta property="og:url" content="https:&#x2F;&#x2F;lancersaber.github.io&#x2F;2020&#x2F;05&#x2F;19&#x2F;Java%E5%9F%BA%E7%A1%80&#x2F;Java%E5%B8%B8%E7%94%A8%E7%B1%BB%E5%BA%93-System%E7%B1%BB&#x2F;index.html">
+<meta property="og:site_name" content="Lancersaber">
+<meta property="og:description" content="System类介绍System类是一些与系统相关的属性和方法的集合，而且在System类中所有的属性都是静态的，要想引用这些属性和方法，直接使用System类调用即可。public static void exit(int status)  系统退出 ，如果status为0就表示退出。public static void gc()   运行垃圾收集机制，调用的是Runtime类中的gc方法。pub">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-05-19T12:31:58.589Z">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://lancersaber.github.io/2020/05/19/Java%E5%9F%BA%E7%A1%80/Java%E5%B8%B8%E7%94%A8%E7%B1%BB%E5%BA%93-System%E7%B1%BB/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Java常用类库——System类 | Lancersaber</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lancersaber</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2020/05/19/Java%E5%9F%BA%E7%A1%80/Java%E5%B8%B8%E7%94%A8%E7%B1%BB%E5%BA%93-System%E7%B1%BB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Java常用类库——System类
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-05-19 20:19:48 / Modified: 20:31:58" itemprop="dateCreated datePublished" datetime="2020-05-19T20:19:48+08:00">2020-05-19</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java/" itemprop="url" rel="index">
+                    <span itemprop="name">java</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="System类"><a href="#System类" class="headerlink" title="System类"></a>System类</h1><p><strong>介绍</strong><br>System类是一些与系统相关的属性和方法的集合，而且在System类中所有的属性都是静态的，要想引用这些属性和方法，直接使用System类调用即可。<br>public static void exit(int status)  系统退出 ，如果status为0就表示退出。<br>public static void gc()   运行垃圾收集机制，调用的是Runtime类中的gc方法。<br>public static long currentTimeMillis()  返回以毫秒为单位的当前时间。<br>public static void arraycopy(Object src,int srcPos, Object dest,int desPos,int length) 数组拷贝操作<br><strong>public static Properties getProperties() 取得当前系统的全部属性。</strong><br><strong>public static String  getProperty(String key) 根据键值取得属性的具体内容。</strong></p>
+<p>System类除了可以进行内容的输出外，还可以通过方法取得一个操作的具体时间。如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public class SystemDemo01&#123;</span><br><span class="line">	public static void main(String args[])&#123;</span><br><span class="line">		long startTime = System.currentTimeMillis() ;	// 取得开始计算之前的时间</span><br><span class="line">		int sum = 0 ;			// 声明变量</span><br><span class="line">		for(int i=0;i&lt;30000000;i++)&#123;	// 执行累加操作</span><br><span class="line">			sum += i ;</span><br><span class="line">		&#125;</span><br><span class="line">		long endTime = System.currentTimeMillis() ;	// 取得计算之后的时间</span><br><span class="line">		// 结束时间减去开始时间</span><br><span class="line">		System.out.println(&quot;计算所花费的时间：&quot; + (endTime-startTime) +&quot;毫秒&quot;) ;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><strong>除了此功能外还可以列出本机的全部系统属性：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public class SystemDemo02&#123;</span><br><span class="line">	public static void main(String args[])&#123;</span><br><span class="line">		System.getProperties().list(System.out) ;	// 列出系统的全部属性</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>结果如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">java.runtime.name: Java(TM) SE Runtime Environment</span><br><span class="line">sun.boot.library.path: C:\Program Files\Java\jdk1.8.0_144\jre\bin</span><br><span class="line">java.vm.version: 25.144-b01</span><br><span class="line">java.vm.vendor: Oracle Corporation</span><br><span class="line">java.vendor.url: http://java.oracle.com/</span><br><span class="line">path.separator: ;</span><br><span class="line">java.vm.name: Java HotSpot(TM) 64-Bit Server VM</span><br><span class="line">file.encoding.pkg: sun.io</span><br><span class="line">user.country: CN</span><br><span class="line">user.script: </span><br><span class="line">sun.java.launcher: SUN_STANDARD</span><br><span class="line">sun.os.patch.level: </span><br><span class="line">PID: 18420</span><br><span class="line">java.vm.specification.name: Java Virtual Machine Specification</span><br><span class="line">user.dir: D:\Java编程代码\Springboot-redis1</span><br><span class="line">java.runtime.version: 1.8.0_144-b01</span><br><span class="line">java.awt.graphicsenv: sun.awt.Win32GraphicsEnvironment</span><br><span class="line">java.endorsed.dirs: C:\Program Files\Java\jdk1.8.0_144\jre\lib\endorsed</span><br><span class="line">os.arch: amd64</span><br><span class="line">java.io.tmpdir: C:\Users\34689\AppData\Local\Temp\</span><br><span class="line">line.separator: </span><br><span class="line">java.vm.specification.vendor: Oracle Corporation</span><br><span class="line">user.variant: </span><br><span class="line">os.name: Windows 10</span><br><span class="line">sun.jnu.encoding: GBK</span><br><span class="line">spring.beaninfo.ignore: true</span><br><span class="line">user.name: 34689</span><br><span class="line">java.vm.specification.version: 1.8</span><br><span class="line">sun.java.command: com.intellij.rt.junit.JUnitStarter -ideVersion5 -junit5 com.example.demo.DemoApplicationTests,contextLoads</span><br><span class="line">java.home: C:\Program Files\Java\jdk1.8.0_144\jre</span><br><span class="line">sun.arch.data.model: 64</span><br><span class="line">user.language: zh</span><br><span class="line">java.specification.vendor: Oracle Corporation</span><br><span class="line">awt.toolkit: sun.awt.windows.WToolkit</span><br><span class="line">java.vm.info: mixed mode</span><br><span class="line">java.version: 1.8.0_144</span><br><span class="line">java.ext.dirs: C:\Program Files\Java\jdk1.8.0_144\jre\lib\ext;C:\WINDOWS\Sun\Java\lib\ext</span><br><span class="line">sun.boot.class.path: C:\Program Files\Java\jdk1.8.0_144\jre\lib\resources.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\rt.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\sunrsasign.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\jsse.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\jce.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\charsets.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\jfr.jar;C:\Program Files\Java\jdk1.8.0_144\jre\classes</span><br><span class="line">java.awt.headless: true</span><br><span class="line">java.vendor: Oracle Corporation</span><br><span class="line">file.separator: \</span><br><span class="line">java.vendor.url.bug: http://bugreport.sun.com/bugreport/</span><br><span class="line">idea.test.cyclic.buffer.size: 1048576</span><br><span class="line">sun.io.unicode.encoding: UnicodeLittle</span><br><span class="line">sun.cpu.endian: little</span><br><span class="line">sun.desktop: windows</span><br><span class="line">sun.cpu.isalist: amd64</span><br></pre></td></tr></table></figure>
+
+<p><strong>此处取得的是全部的属性，如果现在只需要取几个固定属性的话，则就可以通过以下取得：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public class SystemDemo03&#123;</span><br><span class="line">	public static void main(String args[])&#123;</span><br><span class="line">		System.out.println(&quot;系统版本：&quot; + System.getProperty(&quot;os.name&quot;)</span><br><span class="line">			+ System.getProperty(&quot;os.version&quot;)</span><br><span class="line">			+ System.getProperty(&quot;os.arch&quot;)) ;</span><br><span class="line">		System.out.println(&quot;系统用户：&quot; + System.getProperty(&quot;user.name&quot;)) ;</span><br><span class="line">		System.out.println(&quot;当前用户目录：&quot; + System.getProperty(&quot;user.home&quot;)) ;</span><br><span class="line">		System.out.println(&quot;当前用户工作目录：&quot; + System.getProperty(&quot;user.dir&quot;)) ;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><strong>总结：</strong><br>System类本身提供的静态属性都是与IO操作有关的。在IO操作中还会有更多System类的使用，可以使用system类取得计算时间，以及通过gc()方法进行垃圾收集   此方法是包装了Runtime类中的gc()方法。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/java/" rel="tag"># java</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2020/05/19/Redis/%E5%88%9D%E8%AF%86Redis/" rel="next" title="初识Redis">
+                  <i class="fa fa-chevron-left"></i> 初识Redis
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+                <a href="/2020/05/20/JVM/JVM%E4%B9%8B%E5%A0%86%E5%86%85%E5%AD%98/" rel="prev" title="JVM之堆内存">
+                  JVM之堆内存 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#System类"><span class="nav-number">1.</span> <span class="nav-text">System类</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="site-author-image" itemprop="image" alt="Lancersaber"
+    src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Lancersaber</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">197</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">45</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lancersaber</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.4.2
+  </div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.2"></script><script src="/js/motion.js?v=7.4.2"></script>
+<script src="/js/schemes/muse.js?v=7.4.2"></script>
+<script src="/js/next-boot.js?v=7.4.2"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

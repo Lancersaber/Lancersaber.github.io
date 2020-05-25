@@ -50,15 +50,18 @@
   };
 </script>
 
-  <meta property="og:type" content="article">
-<meta property="og:title" content="源码阅读&#x2F;jdk&#x2F;ArrayList">
-<meta property="og:url" content="https:&#x2F;&#x2F;lancersaber.github.io&#x2F;2019&#x2F;11&#x2F;26&#x2F;%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB&#x2F;jdk&#x2F;ArrayList&#x2F;index.html">
+  <meta name="description" content="Iterator接口和Iterable接口详解1. Iterator接口 12迭代器（Iterator）主要用来操作java中的集合对象（Collection）,迭代器提供了统一的语法进行集合对象（Collection）遍历操作，无需关心集合对象内部的实现方式，java提供了一个迭代器接口Iterator，Iterator只能向前移，无法后退； iterator的声明如下: 12345public">
+<meta name="keywords" content="java,collections">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Iterator接口和Iterable接口详解">
+<meta property="og:url" content="https:&#x2F;&#x2F;lancersaber.github.io&#x2F;2020&#x2F;05&#x2F;22&#x2F;Java%E5%9F%BA%E7%A1%80&#x2F;Iterator%E6%8E%A5%E5%8F%A3%E5%92%8CIterable%E6%8E%A5%E5%8F%A3%E8%AF%A6%E8%A7%A3&#x2F;index.html">
 <meta property="og:site_name" content="Lancersaber">
+<meta property="og:description" content="Iterator接口和Iterable接口详解1. Iterator接口 12迭代器（Iterator）主要用来操作java中的集合对象（Collection）,迭代器提供了统一的语法进行集合对象（Collection）遍历操作，无需关心集合对象内部的实现方式，java提供了一个迭代器接口Iterator，Iterator只能向前移，无法后退； iterator的声明如下: 12345public">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-11-26T12:04:58.320Z">
+<meta property="og:updated_time" content="2020-05-22T10:04:11.464Z">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://lancersaber.github.io/2019/11/26/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/jdk/ArrayList/">
+<link rel="canonical" href="https://lancersaber.github.io/2020/05/22/Java%E5%9F%BA%E7%A1%80/Iterator%E6%8E%A5%E5%8F%A3%E5%92%8CIterable%E6%8E%A5%E5%8F%A3%E8%AF%A6%E8%A7%A3/">
 
 
 <script id="page-configurations">
@@ -72,7 +75,7 @@
   };
 </script>
 
-  <title>源码阅读/jdk/ArrayList | Lancersaber</title>
+  <title>Iterator接口和Iterable接口详解 | Lancersaber</title>
   
 
 
@@ -173,7 +176,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/26/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/jdk/ArrayList/">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2020/05/22/Java%E5%9F%BA%E7%A1%80/Iterator%E6%8E%A5%E5%8F%A3%E5%92%8CIterable%E6%8E%A5%E5%8F%A3%E8%AF%A6%E8%A7%A3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -186,7 +189,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          源码阅读/jdk/ArrayList
+          Iterator接口和Iterable接口详解
         </h1>
 
         <div class="post-meta">
@@ -195,8 +198,20 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
+              
 
-              <time title="Created: 2019-11-26 20:04:58" itemprop="dateCreated datePublished" datetime="2019-11-26T20:04:58+08:00">2019-11-26</time>
+              <time title="Created: 2020-05-22 17:31:29 / Modified: 18:04:11" itemprop="dateCreated datePublished" datetime="2020-05-22T17:31:29+08:00">2020-05-22</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java/" itemprop="url" rel="index">
+                    <span itemprop="name">java</span>
+                  </a>
+                </span>
             </span>
 
           
@@ -210,7 +225,21 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        
+        <h1 id="Iterator接口和Iterable接口详解"><a href="#Iterator接口和Iterable接口详解" class="headerlink" title="Iterator接口和Iterable接口详解"></a>Iterator接口和Iterable接口详解</h1><p><strong>1. Iterator接口</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">迭代器（Iterator）主要用来操作java中的集合对象（Collection）,迭代器提供了统一的语法进行集合对象（Collection）遍历操作，</span><br><span class="line">无需关心集合对象内部的实现方式，java提供了一个迭代器接口Iterator，Iterator只能向前移，无法后退；</span><br></pre></td></tr></table></figure>
+<p>iterator的声明如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public interface Iterator&lt;E&gt; &#123;</span><br><span class="line">    boolean hasNext();</span><br><span class="line">    E next();</span><br><span class="line">    void remove();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>从上面的接口可以看到Iterator迭代器接口只提供了三个无参数的方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hasNext --判断是否还有下一个对象，如果有，则返回true，否则false</span><br><span class="line">next --返回集合的下个值，此方法只能在hasNext方法返回true时调用</span><br><span class="line">remove --删除集合的当前值，此方法也只能在hasNext方法返回true时调用</span><br></pre></td></tr></table></figure>
+
+<p>Iterable的源码如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public interface Iterable&lt;T&gt; &#123;</span><br><span class="line">    Iterator&lt;T&gt; iterator();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在jdk1.8加入了forEach和spliterator方法。</p>
+<p>在集合中由于Collection继承了Iterable接口，因此jdk中所有的集合类都可以调用iterator()方法来获取到iterator实例，从而来对集合进行遍历。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public interface Collection&lt;E&gt; extends Iterable&lt;E&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>Iterable和Iterator的区别</strong><br>可以这样理解，只要实现Iterable接口就具备了迭代遍历的能力，也就是能够取得Iterator实例的唯一途径。</p>
+
     </div>
 
     
@@ -218,22 +247,23 @@
     
 
       <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/java/" rel="tag"># java</a>
+              <a href="/tags/collections/" rel="tag"># collections</a>
+          </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
-                <a href="/2019/11/25/ElasticSearch/%E8%8A%82%E7%82%B9%E4%B8%8E%E5%88%86%E7%89%87/" rel="next" title="ElasticSearch/节点与分片">
-                  <i class="fa fa-chevron-left"></i> ElasticSearch/节点与分片
+                <a href="/2020/05/22/JVM/%E6%96%B9%E6%B3%95%E5%8C%BA/" rel="next" title="方法区">
+                  <i class="fa fa-chevron-left"></i> 方法区
                 </a>
             </div>
 
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
-                <a href="/2019/11/26/Redis/Redis%E5%92%8Cmemcached%E7%9A%84%E5%8C%BA%E5%88%AB/" rel="prev" title="Redis/Redis和memcached的区别">
-                  Redis/Redis和memcached的区别 <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
       </footer>
@@ -272,6 +302,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Iterator接口和Iterable接口详解"><span class="nav-number">1.</span> <span class="nav-text">Iterator接口和Iterable接口详解</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -287,18 +318,18 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">185</span>
+          <span class="site-state-item-count">197</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
-        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-count">45</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">56</span>
+        <span class="site-state-item-count">60</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

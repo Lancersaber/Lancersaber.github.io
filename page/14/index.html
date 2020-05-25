@@ -172,7 +172,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/10/31/Spring/springboot%E4%B8%AD%E7%BC%96%E5%86%99%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/02/JavaScript/DOM%E4%BA%8B%E4%BB%B6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -186,7 +186,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/10/31/Spring/springboot%E4%B8%AD%E7%BC%96%E5%86%99%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/" class="post-title-link" itemprop="url">Springboot中编写单元测试</a>
+            <a href="/2019/11/02/JavaScript/DOM%E4%BA%8B%E4%BB%B6/" class="post-title-link" itemprop="url">DOM事件</a>
         </h1>
 
         <div class="post-meta">
@@ -197,7 +197,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2019-10-31 15:53:41 / Modified: 17:49:39" itemprop="dateCreated datePublished" datetime="2019-10-31T15:53:41+08:00">2019-10-31</time>
+              <time title="Created: 2019-11-02 17:43:02 / Modified: 19:06:42" itemprop="dateCreated datePublished" datetime="2019-11-02T17:43:02+08:00">2019-11-02</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -205,8 +205,8 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/spring/" itemprop="url" rel="index">
-                    <span itemprop="name">spring</span>
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
                   </a>
                 </span>
             </span>
@@ -222,192 +222,146 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Springboot中编写单元测试"><a href="#Springboot中编写单元测试" class="headerlink" title="Springboot中编写单元测试"></a>Springboot中编写单元测试</h1><hr>
-<p>编写单元测试可以帮助开发人员编写高质量的代码，提升代码质量，减少Bug，便于重构。Spring Boot提供了一些实用程序和注解，用来帮助我们测试应用程序，在Spring Boot中开启单元测试只需引入spring-boot-starter-test即可，其包含了一些主流的测试库。本文主要介绍基于 Service和Controller的单元测试。</p>
-<p>引入spring-boot-starter-test：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;</span><br><span class="line">    &lt;scope&gt;test&lt;/scope&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+          <h1 id="DOM事件"><a href="#DOM事件" class="headerlink" title="DOM事件"></a>DOM事件</h1><hr>
+<h2 id="鼠标事件"><a href="#鼠标事件" class="headerlink" title="鼠标事件"></a>鼠标事件</h2><table>
+<thead>
+<tr>
+<th align="center">属性</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">onclick</td>
+<td align="center">当用户点击某个对象时调用的事件句柄。</td>
+</tr>
+<tr>
+<td align="center">oncontextmenu</td>
+<td align="center">在用户点击鼠标右键打开上下文菜单时触发</td>
+</tr>
+<tr>
+<td align="center">ondblclick</td>
+<td align="center">当用户双击某个对象时调用的事件句柄。</td>
+</tr>
+<tr>
+<td align="center">onmousedown</td>
+<td align="center">鼠标按钮被按下。</td>
+</tr>
+<tr>
+<td align="center">onmouseenter</td>
+<td align="center">当鼠标指针移动到元素上时触发。</td>
+</tr>
+<tr>
+<td align="center">onmouseleave</td>
+<td align="center">当鼠标指针移出元素时触发</td>
+</tr>
+<tr>
+<td align="center">onmousemove</td>
+<td align="center">鼠标被移动。</td>
+</tr>
+<tr>
+<td align="center">onmouseover</td>
+<td align="center">鼠标移到某元素之上。</td>
+</tr>
+<tr>
+<td align="center">onmouseout</td>
+<td align="center">鼠标从某元素移开。</td>
+</tr>
+<tr>
+<td align="center">onmouseup</td>
+<td align="center">鼠标按键被松开。</td>
+</tr>
+</tbody></table>
 
-<h2 id="知识准备"><a href="#知识准备" class="headerlink" title="知识准备"></a>知识准备</h2><h3 id="Junit4注解"><a href="#Junit4注解" class="headerlink" title="Junit4注解"></a>Junit4注解</h3><p>JUnit4中包含了几个比较重要的注解：@BeforeClass、@AfterClass、@Before、@After和@Test。其中， @BeforeClass和@AfterClass在每个类加载的开始和结束时运行，必须为静态方法；而@Before和@After则在每个测试方法开始之前和结束之后运行。见如下例子：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">@RunWith(SpringRunner.class)</span><br><span class="line">@SpringBootTest</span><br><span class="line">public class TestApplicationTests &#123;</span><br><span class="line"></span><br><span class="line">    @BeforeClass</span><br><span class="line">    public static void beforeClassTest() &#123;</span><br><span class="line">        System.out.println(&quot;before class test&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    @Before</span><br><span class="line">    public void beforeTest() &#123;</span><br><span class="line">        System.out.println(&quot;before test&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    @Test</span><br><span class="line">    public void Test1() &#123;</span><br><span class="line">        System.out.println(&quot;test 1+1=2&quot;);</span><br><span class="line">        Assert.assertEquals(2, 1 + 1);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    @Test</span><br><span class="line">    public void Test2() &#123;</span><br><span class="line">        System.out.println(&quot;test 2+2=4&quot;);</span><br><span class="line">        Assert.assertEquals(4, 2 + 2);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    @After</span><br><span class="line">    public void afterTest() &#123;</span><br><span class="line">        System.out.println(&quot;after test&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    @AfterClass</span><br><span class="line">    public static void afterClassTest() &#123;</span><br><span class="line">        System.out.println(&quot;after class test&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
 
-<p>运行输出如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">before class test</span><br><span class="line">before test</span><br><span class="line">test 1+1=2</span><br><span class="line">after test</span><br><span class="line">before test</span><br><span class="line">test 2+2=4</span><br><span class="line">after test</span><br><span class="line">after class test</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
 
-<p>从上面的输出可以看出各个注解的运行时机。</p>
-<h3 id="Assert"><a href="#Assert" class="headerlink" title="Assert"></a>Assert</h3><p>上面代码中，我们使用了Assert类提供的assert口方法，下面列出了一些常用的assert方法：</p>
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/02/Refactor/%E9%87%8D%E6%96%B0%E7%BB%84%E7%BB%87%E5%87%BD%E6%95%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/02/Refactor/%E9%87%8D%E6%96%B0%E7%BB%84%E7%BB%87%E5%87%BD%E6%95%B0/" class="post-title-link" itemprop="url">重新组织函数</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-11-02 13:54:27" itemprop="dateCreated datePublished" datetime="2019-11-02T13:54:27+08:00">2019-11-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-11-16 14:20:29" itemprop="dateModified" datetime="2019-11-16T14:20:29+08:00">2019-11-16</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%87%8D%E6%9E%84/" itemprop="url" rel="index">
+                    <span itemprop="name">重构</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="重新组织函数"><a href="#重新组织函数" class="headerlink" title="重新组织函数"></a>重新组织函数</h1><hr>
+<h2 id="1-Extract-Method-提炼函数"><a href="#1-Extract-Method-提炼函数" class="headerlink" title="1.Extract Method(提炼函数)"></a>1.Extract Method(提炼函数)</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>将一段代码放进一个独立函数中，并让函数名称解释该函数的作用</p>
+<h3 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h3><p>有下面几个原因造成我喜欢简短而命名良好的函数</p>
 <ul>
-<li><p>assertEquals(“message”,A,B)，判断A对象和B对象是否相等，这个判断在比较两个对象时调用了equals()方法。</p>
-</li>
-<li><p>assertSame(“message”,A,B)，判断A对象与B对象是否相同，使用的是==操作符。</p>
-</li>
-<li><p>assertTrue(“message”,A)，判断A条件是否为真。</p>
-</li>
-<li><p>assertFalse(“message”,A)，判断A条件是否不为真。</p>
-</li>
-<li><p>assertNotNull(“message”,A)，判断A对象是否不为null。</p>
-</li>
-<li><p>assertArrayEquals(“message”,A,B)，判断A数组与B数组是否相等。</p>
-</li>
+<li>如果每个函数的粒度都很小，那么函数被复用的机会就更大</li>
+<li>这会使高层函数读起来就像一系列注释</li>
+<li>如果函数都是细粒度，那么函数的覆写也会更容易</li>
 </ul>
-<h3 id="MockMvc"><a href="#MockMvc" class="headerlink" title="MockMvc"></a>MockMvc</h3><p>下文中，对Controller的测试需要用到MockMvc技术。MockMvc，从字面上来看指的是模拟的MVC，即其可以模拟一个MVC环境，向Controller发送请求然后得到响应。</p>
-<p>在单元测试中，使用MockMvc前需要进行初始化，如下所示：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">private MockMvc mockMvc;</span><br><span class="line"></span><br><span class="line">@Autowired</span><br><span class="line">private WebApplicationContext wac;</span><br><span class="line"></span><br><span class="line">@Before</span><br><span class="line">public void setupMockMvc()&#123;</span><br><span class="line">    mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/10/31/Spring/Springboot%E4%B8%AD%E7%9A%84json%E6%8A%80%E6%9C%AF/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lancersaber">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lancersaber">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/10/31/Spring/Springboot%E4%B8%AD%E7%9A%84json%E6%8A%80%E6%9C%AF/" class="post-title-link" itemprop="url">Springboot中的json技术</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2019-10-31 14:27:58 / Modified: 15:51:35" itemprop="dateCreated datePublished" datetime="2019-10-31T14:27:58+08:00">2019-10-31</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/spring/" itemprop="url" rel="index">
-                    <span itemprop="name">spring</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Springboot中的json技术"><a href="#Springboot中的json技术" class="headerlink" title="Springboot中的json技术"></a>Springboot中的json技术</h1><hr>
-<p>平日里在项目中处理JSON一般用的都是阿里巴巴的Fastjson，后来发现使用Spring Boot内置的Jackson来完成JSON的序列化和反序列化操作也挺方便。Jackson不但可以完成简单的序列化和反序列化操作，也能实现复杂的个性化的序列化和反序列化操作。</p>
-<h2 id="自定义ObjectMapper"><a href="#自定义ObjectMapper" class="headerlink" title="自定义ObjectMapper"></a>自定义ObjectMapper</h2><p>我们都知道，在Spring中使用@ResponseBody注解可以将方法返回的对象序列化成JSON，比如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@RequestMapping(&quot;getuser&quot;)</span><br><span class="line">@ResponseBody</span><br><span class="line">public User getUser() &#123;</span><br><span class="line">    User user = new User();</span><br><span class="line">    user.setUserName(&quot;mrbird&quot;);</span><br><span class="line">    user.setBirthday(new Date());</span><br><span class="line">    return user;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>User类：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public class User implements Serializable &#123;</span><br><span class="line">    private static final long serialVersionUID = 6222176558369919436L;</span><br><span class="line">    </span><br><span class="line">    private String userName;</span><br><span class="line">    private int age;</span><br><span class="line">    private String password;</span><br><span class="line">    private Date birthday;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>访问getuser页面输出：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&quot;userName&quot;:&quot;mrbird&quot;,&quot;age&quot;:0,&quot;password&quot;:null,&quot;birthday&quot;:1522634892365&#125;</span><br></pre></td></tr></table></figure>
-
-<p>可看到时间默认以时间戳的形式输出，如果想要改变这个默认行为，我们可以自定义一个ObjectMapper来替代：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">import java.text.SimpleDateFormat;</span><br><span class="line"></span><br><span class="line">import org.springframework.context.annotation.Bean;</span><br><span class="line">import org.springframework.context.annotation.Configuration;</span><br><span class="line"></span><br><span class="line">import com.fasterxml.jackson.databind.ObjectMapper;</span><br><span class="line"></span><br><span class="line">@Configuration</span><br><span class="line">public class JacksonConfig &#123;</span><br><span class="line">    @Bean</span><br><span class="line">    public ObjectMapper getObjectMapper()&#123;</span><br><span class="line">        ObjectMapper mapper = new ObjectMapper();</span><br><span class="line">        mapper.setDateFormat(new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss&quot;));</span><br><span class="line">        return mapper;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>上面配置获取了ObjectMapper对象，并且设置了时间格式。再次访问getuser，页面输出：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&quot;userName&quot;:&quot;mrbird&quot;,&quot;age&quot;:0,&quot;password&quot;:null,&quot;birthday&quot;:&quot;2018-04-02 10:14:24&quot;&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="序列化"><a href="#序列化" class="headerlink" title="序列化"></a>序列化</h2><p>Jackson通过使用mapper的writeValueAsString方法将Java对象序列化为JSON格式字符串：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">@Autowired</span><br><span class="line">ObjectMapper mapper;</span><br><span class="line"></span><br><span class="line">@RequestMapping(&quot;serialization&quot;)</span><br><span class="line">@ResponseBody</span><br><span class="line">public String serialization() &#123;</span><br><span class="line">    try &#123;</span><br><span class="line">        User user = new User();</span><br><span class="line">        user.setUserName(&quot;mrbird&quot;);</span><br><span class="line">        user.setBirthday(new Date());</span><br><span class="line">        String str = mapper.writeValueAsString(user);</span><br><span class="line">        return str;</span><br><span class="line">    &#125; catch (Exception e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">    return null;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="反序列化"><a href="#反序列化" class="headerlink" title="反序列化"></a>反序列化</h2><p>使用@ResponseBody注解可以使对象序列化为JSON格式字符串，除此之外，Jackson也提供了反序列化方法。</p>
-<h3 id="树遍历"><a href="#树遍历" class="headerlink" title="树遍历"></a>树遍历</h3><p>当采用树遍历的方式时，JSON被读入到JsonNode对象中，可以像操作XML DOM那样读取JSON。比如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">@Autowired</span><br><span class="line">ObjectMapper mapper;</span><br><span class="line"></span><br><span class="line">@RequestMapping(&quot;readjsonstring&quot;)</span><br><span class="line">@ResponseBody</span><br><span class="line">public String readJsonString() &#123;</span><br><span class="line">    try &#123;</span><br><span class="line">        String json = &quot;&#123;\&quot;name\&quot;:\&quot;mrbird\&quot;,\&quot;age\&quot;:26&#125;&quot;;</span><br><span class="line">        JsonNode node = this.mapper.readTree(json);</span><br><span class="line">        String name = node.get(&quot;name&quot;).asText();</span><br><span class="line">        int age = node.get(&quot;age&quot;).asInt();</span><br><span class="line">        return name + &quot; &quot; + age;</span><br><span class="line">    &#125; catch (Exception e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">    return null;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>readTree方法可以接受一个字符串或者字节数组、文件、InputStream等， 返回JsonNode作为根节点，你可以像操作XML DOM那样操作遍历JsonNode以获取数据。</p>
-<p>解析多级JSON例子：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">String json = &quot;&#123;\&quot;name\&quot;:\&quot;mrbird\&quot;,\&quot;hobby\&quot;:&#123;\&quot;first\&quot;:\&quot;sleep\&quot;,\&quot;second\&quot;:\&quot;eat\&quot;&#125;&#125;&quot;;;</span><br><span class="line">JsonNode node = this.mapper.readTree(json);</span><br><span class="line">JsonNode hobby = node.get(&quot;hobby&quot;);</span><br><span class="line">String first = hobby.get(&quot;first&quot;).asText();</span><br></pre></td></tr></table></figure>
-
-<h3 id="绑定对象"><a href="#绑定对象" class="headerlink" title="绑定对象"></a>绑定对象</h3><p>我们也可以将Java对象和JSON数据进行绑定，如下所示：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">@Autowired</span><br><span class="line">ObjectMapper mapper;</span><br><span class="line"></span><br><span class="line">@RequestMapping(&quot;readjsonasobject&quot;)</span><br><span class="line">@ResponseBody</span><br><span class="line">public String readJsonAsObject() &#123;</span><br><span class="line">    try &#123;</span><br><span class="line">        String json = &quot;&#123;\&quot;name\&quot;:\&quot;mrbird\&quot;,\&quot;age\&quot;:26&#125;&quot;;</span><br><span class="line">        User user = mapper.readValue(json, User.class);</span><br><span class="line">        String name = user.getUserName();</span><br><span class="line">        int age = user.getAge();</span><br><span class="line">        return name + &quot; &quot; + age;</span><br><span class="line">    &#125; catch (Exception e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">    return null;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Jackson注解"><a href="#Jackson注解" class="headerlink" title="Jackson注解"></a>Jackson注解</h2><p>Jackson包含了一些实用的注解：</p>
-<h3 id="JsonProperty"><a href="#JsonProperty" class="headerlink" title="@JsonProperty"></a>@JsonProperty</h3><p>@JsonProperty，作用在属性上，用来为JSON Key指定一个别名。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@JsonProperty(&quot;bth&quot;)</span><br><span class="line">private Date birthday;</span><br></pre></td></tr></table></figure>
-<p>再次访问getuser页面输出：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&quot;userName&quot;:&quot;mrbird&quot;,&quot;age&quot;:0,&quot;password&quot;:null,&quot;bth&quot;:&quot;2018-04-02 10:38:37&quot;&#125;</span><br></pre></td></tr></table></figure>
-<p>key birthday已经被替换为了bth。</p>
-<h3 id="Jsonlgnore"><a href="#Jsonlgnore" class="headerlink" title="@Jsonlgnore"></a>@Jsonlgnore</h3><p>@Jsonlgnore，作用在属性上，用来忽略此属性。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@JsonIgnore</span><br><span class="line">private String password;</span><br></pre></td></tr></table></figure>
-
-<p>再次访问getuser页面输出：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&quot;userName&quot;:&quot;mrbird&quot;,&quot;age&quot;:0,&quot;bth&quot;:&quot;2018-04-02 10:40:45&quot;&#125;</span><br></pre></td></tr></table></figure>
-<p>password属性已被忽略。</p>
-<h3 id="JsonIgnoreProperties"><a href="#JsonIgnoreProperties" class="headerlink" title="@JsonIgnoreProperties"></a>@JsonIgnoreProperties</h3><p>@JsonIgnoreProperties，忽略一组属性，作用于类上，比如JsonIgnoreProperties({ “password”, “age” })。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@JsonIgnoreProperties(&#123; &quot;password&quot;, &quot;age&quot; &#125;)</span><br><span class="line">public class User implements Serializable &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>再次访问getuser页面输出：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&quot;userName&quot;:&quot;mrbird&quot;,&quot;bth&quot;:&quot;2018-04-02 10:45:34&quot;&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="JsonFormat"><a href="#JsonFormat" class="headerlink" title="@JsonFormat"></a>@JsonFormat</h3><p>@JsonFormat，用于日期格式化，如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@JsonFormat(pattern = &quot;yyyy-MM-dd HH:mm:ss&quot;)</span><br><span class="line">private Date birthday;</span><br></pre></td></tr></table></figure>
-
-<h3 id="JsonNaming"><a href="#JsonNaming" class="headerlink" title="@JsonNaming"></a>@JsonNaming</h3><p>@JsonNaming，用于指定一个命名策略，作用于类或者属性上。Jackson自带了多种命名策略，你可以实现自己的命名策略，比如输出的key 由Java命名方式转为下面线命名方法 —— userName转化为user-name。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@JsonNaming(PropertyNamingStrategy.LowerCaseWithUnderscoresStrategy.class)</span><br><span class="line">public class User implements Serializable &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>再次访问getuser页面输出：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&quot;user_name&quot;:&quot;mrbird&quot;,&quot;bth&quot;:&quot;2018-04-02 10:52:12&quot;&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="JsonSerialize"><a href="#JsonSerialize" class="headerlink" title="@JsonSerialize"></a>@JsonSerialize</h3><p>@JsonSerialize，指定一个实现类来自定义序列化。类必须实现JsonSerializer接口，代码如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">import java.io.IOException;</span><br><span class="line"></span><br><span class="line">import com.example.pojo.User;</span><br><span class="line">import com.fasterxml.jackson.core.JsonGenerator;</span><br><span class="line">import com.fasterxml.jackson.core.JsonProcessingException;</span><br><span class="line">import com.fasterxml.jackson.databind.JsonSerializer;</span><br><span class="line">import com.fasterxml.jackson.databind.SerializerProvider;</span><br><span class="line"></span><br><span class="line">public class UserSerializer extends JsonSerializer&lt;User&gt; &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void serialize(User user, JsonGenerator generator, SerializerProvider provider)</span><br><span class="line">            throws IOException, JsonProcessingException &#123;</span><br><span class="line">        generator.writeStartObject();</span><br><span class="line">        generator.writeStringField(&quot;user-name&quot;, user.getUserName());</span><br><span class="line">        generator.writeEndObject();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>上面的代码中我们仅仅序列化userName属性，且输出的key是user-name。 使用注解@JsonSerialize来指定User对象的序列化方式：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@JsonSerialize(using = UserSerializer.class)</span><br><span class="line">public class User implements Serializable &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>再次访问getuser页面输出：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&quot;user-name&quot;:&quot;mrbird&quot;&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="JsonDeserialize"><a href="#JsonDeserialize" class="headerlink" title="@JsonDeserialize"></a>@JsonDeserialize</h3><p>@JsonDeserialize，用户自定义反序列化，同@JsonSerialize ，类需要实现JsonDeserializer接口。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">import java.io.IOException;</span><br><span class="line"></span><br><span class="line">import com.example.pojo.User;</span><br><span class="line">import com.fasterxml.jackson.core.JsonParser;</span><br><span class="line">import com.fasterxml.jackson.core.JsonProcessingException;</span><br><span class="line">import com.fasterxml.jackson.databind.DeserializationContext;</span><br><span class="line">import com.fasterxml.jackson.databind.JsonDeserializer;</span><br><span class="line">import com.fasterxml.jackson.databind.JsonNode;</span><br><span class="line"></span><br><span class="line">public class UserDeserializer extends JsonDeserializer&lt;User&gt; &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public User deserialize(JsonParser parser, DeserializationContext context)</span><br><span class="line">            throws IOException, JsonProcessingException &#123;</span><br><span class="line">        JsonNode node = parser.getCodec().readTree(parser);</span><br><span class="line">        String userName = node.get(&quot;user-name&quot;).asText();</span><br><span class="line">        User user = new User();</span><br><span class="line">        user.setUserName(userName);</span><br><span class="line">        return user;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>使用注解@JsonDeserialize来指定User对象的反序列化方式：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@JsonDeserialize (using = UserDeserializer.class)</span><br><span class="line">public class User implements Serializable &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>测试</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">@Autowired</span><br><span class="line">ObjectMapper mapper;</span><br><span class="line"></span><br><span class="line">@RequestMapping(&quot;readjsonasobject&quot;)</span><br><span class="line">@ResponseBody</span><br><span class="line">public String readJsonAsObject() &#123;</span><br><span class="line">    try &#123;</span><br><span class="line">        String json = &quot;&#123;\&quot;user-name\&quot;:\&quot;mrbird\&quot;&#125;&quot;;</span><br><span class="line">        User user = mapper.readValue(json, User.class);</span><br><span class="line">        String name = user.getUserName();</span><br><span class="line">        return name;</span><br><span class="line">    &#125; catch (Exception e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">    return null;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>访问readjsonasobject，页面输出：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mrbird</span><br></pre></td></tr></table></figure>
-
-<h3 id="JsonView"><a href="#JsonView" class="headerlink" title="@JsonView"></a>@JsonView</h3><p>@JsonView，作用在类或者属性上，用来定义一个序列化组。 比如对于User对象，某些情况下只返回userName属性就行，而某些情况下需要返回全部属性。 因此User对象可以定义成如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">public class User implements Serializable &#123;</span><br><span class="line">    private static final long serialVersionUID = 6222176558369919436L;</span><br><span class="line">    </span><br><span class="line">    public interface UserNameView &#123;&#125;;</span><br><span class="line">    public interface AllUserFieldView extends UserNameView &#123;&#125;;</span><br><span class="line">    </span><br><span class="line">    @JsonView(UserNameView.class)</span><br><span class="line">    private String userName;</span><br><span class="line">    </span><br><span class="line">    @JsonView(AllUserFieldView.class)</span><br><span class="line">    private int age;</span><br><span class="line">    </span><br><span class="line">    @JsonView(AllUserFieldView.class)</span><br><span class="line">    private String password;</span><br><span class="line">    </span><br><span class="line">    @JsonView(AllUserFieldView.class)</span><br><span class="line">    private Date birthday;</span><br><span class="line">    ...	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>User定义了两个接口类，一个为userNameView，另外一个为AllUserFieldView继承了userNameView接口。这两个接口代表了两个序列化组的名称。属性userName使用了@JsonView(UserNameView.class)，而剩下属性使用了@JsonView(AllUserFieldView.class)。</p>
-<p>Spring中Controller方法允许使用@JsonView指定一个组名，被序列化的对象只有在这个组的属性才会被序列化，代码如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@JsonView(User.UserNameView.class)</span><br><span class="line">@RequestMapping(&quot;getuser&quot;)</span><br><span class="line">@ResponseBody</span><br><span class="line">public User getUser() &#123;</span><br><span class="line">    User user = new User();</span><br><span class="line">    user.setUserName(&quot;mrbird&quot;);</span><br><span class="line">    user.setAge(26);</span><br><span class="line">    user.setPassword(&quot;123456&quot;);</span><br><span class="line">    user.setBirthday(new Date());</span><br><span class="line">    return user;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>访问getuser页面输出：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&quot;userName&quot;:&quot;mrbird&quot;&#125;</span><br></pre></td></tr></table></figure>
-
-<p>如果将@JsonView(User.UserNameView.class)替换为@JsonView(User.AllUserFieldView.class)，输出：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&quot;userName&quot;:&quot;mrbird&quot;,&quot;age&quot;:26,&quot;password&quot;:&quot;123456&quot;,&quot;birthday&quot;:&quot;2018-04-02 11:24:00&quot;&#125;</span><br></pre></td></tr></table></figure>
-
-<p>因为接口AllUserFieldView继承了接口UserNameView所以userName也会被输出。</p>
+<h3 id="做法"><a href="#做法" class="headerlink" title="做法"></a>做法</h3><ol>
+<li>创造一个新函数，根据这个函数的意图来对它命名</li>
+<li>将提炼出的代码从源函数复制到新建的目标函数中</li>
+<li>仔细检查提炼的代码，看看其中是否引用了局部变量被它修改</li>
+<li>将被提炼的代码段中需要读取的局部变量，当作参数传给目标函数</li>
+<li>处理完所有局部变量之后，进行编译</li>
+<li>编译，测试</li>
+</ol>
 
       
     </div>
@@ -427,7 +381,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/10/31/Refactor/%E9%87%8D%E6%9E%84%E5%8E%9F%E5%88%99/">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/02/Refactor/%E4%BB%A3%E7%A0%81%E7%9A%84%E5%9D%8F%E5%91%B3%E9%81%93/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -441,7 +395,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/10/31/Refactor/%E9%87%8D%E6%9E%84%E5%8E%9F%E5%88%99/" class="post-title-link" itemprop="url">重构原则</a>
+            <a href="/2019/11/02/Refactor/%E4%BB%A3%E7%A0%81%E7%9A%84%E5%9D%8F%E5%91%B3%E9%81%93/" class="post-title-link" itemprop="url">代码的坏味道</a>
         </h1>
 
         <div class="post-meta">
@@ -452,7 +406,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2019-10-31 13:18:35 / Modified: 15:51:35" itemprop="dateCreated datePublished" datetime="2019-10-31T13:18:35+08:00">2019-10-31</time>
+              <time title="Created: 2019-11-02 13:09:47 / Modified: 19:06:42" itemprop="dateCreated datePublished" datetime="2019-11-02T13:09:47+08:00">2019-11-02</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -477,11 +431,17 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="重构原则"><a href="#重构原则" class="headerlink" title="重构原则"></a>重构原则</h1><hr>
-<h2 id="何谓重构？"><a href="#何谓重构？" class="headerlink" title="何谓重构？"></a>何谓重构？</h2><p>第一类定义名词形式的定义：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">重构(名词)：对软件内部结构的一种调整，目的是在不改变软件可观察行为的前提下，提高其可理解性，降低其修改成本。</span><br></pre></td></tr></table></figure>
-<p>一般而言，重构都是对软件的小改动。<br>重构的另一个用法是动词形式</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">重构(动词)：使用一系列重构手法，在不改变软件可观察行为的前提下。调整其结构。</span><br></pre></td></tr></table></figure>
+          <h1 id="代码的坏味道"><a href="#代码的坏味道" class="headerlink" title="代码的坏味道"></a>代码的坏味道</h1><hr>
+<h2 id="Duplicated-Code-重复代码"><a href="#Duplicated-Code-重复代码" class="headerlink" title="Duplicated Code(重复代码)"></a>Duplicated Code(重复代码)</h2><p>&emsp;&emsp;坏味道代码中首当其冲的就是Duplicateed Code。如果你在一个以上的地点看到相同的程序结构，那么可以肯定：设法将它们合而为一，程序会变得更好。<br>Duplicateed Code有以下几种情况：</p>
+<ul>
+<li>同一个类的两个函数含有相同的表达式<br>s:采用Extract Method提炼出重复的代码，然后让两个地点都调用被提炼出来的那一段代码</li>
+<li>两个互为兄弟的子类内含相同的表达式</li>
+</ul>
+<h2 id="Long-Method-过长函数"><a href="#Long-Method-过长函数" class="headerlink" title="Long Method(过长函数)"></a>Long Method(过长函数)</h2><h2 id="Large-Class-过大的类"><a href="#Large-Class-过大的类" class="headerlink" title="Large Class(过大的类)"></a>Large Class(过大的类)</h2><h2 id="Long-Parameter-List-过长参数列"><a href="#Long-Parameter-List-过长参数列" class="headerlink" title="Long Parameter List(过长参数列)"></a>Long Parameter List(过长参数列)</h2><h2 id="Divergent-Change-发散式变化"><a href="#Divergent-Change-发散式变化" class="headerlink" title="Divergent Change(发散式变化)"></a>Divergent Change(发散式变化)</h2><p>&emsp;&emsp;我们希望软件能够更容易被修改。一旦需要修改，我们希望能够跳到系统的某一点，只在此处做修改。如果不能做到这点，你就嗅出两种紧密相关的刺鼻味道中的一种了。<br>&emsp;&emsp;如果某个类经常因为不同的原因在不同的方向上发生变化，Divergent Change就出现了。举个例子，当你看着一个类说，“呃，如果新加入一个数据库，我必须修改这三个函数”，那么此时也许将这个对象分成两个会更好，这么一来每个对象就可以只因一种变化而需要修改。</p>
+<h2 id="Shutgun-Surgery-霰弹式修改"><a href="#Shutgun-Surgery-霰弹式修改" class="headerlink" title="Shutgun Surgery(霰弹式修改)"></a>Shutgun Surgery(霰弹式修改)</h2><p>&emsp;&emsp;如果每遇到某种变化，你都必须在许多不同的类内做许多小修改，你所面临的坏味道就是Shotgun Surgery。如果需要修改的代码散步四处，你不但很难找到它们，也很容易忘记某个重要的修改。<br>&emsp;&emsp;这种情况下，你应该使用Move Method和Move Field把所有需要修改的代码放进同一个类中。如果眼下没有合适的类可以安置这些代码，就创造一个。通常可以运用Inline Class把一些列相关行为放进同一个类。</p>
+<h2 id="Feature-Envy-依恋情结"><a href="#Feature-Envy-依恋情结" class="headerlink" title="Feature Envy(依恋情结)"></a>Feature Envy(依恋情结)</h2><p>&emsp;&emsp;</p>
+<h2 id="Comments-过多的注释"><a href="#Comments-过多的注释" class="headerlink" title="Comments(过多的注释)"></a>Comments(过多的注释)</h2><p>&emsp;&emsp;</p>
+
       
     </div>
 
@@ -500,7 +460,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/10/31/ElasticSearch/ElasticSearch%E6%90%9C%E7%B4%A2%E6%B7%B1%E5%85%A5/">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/02/Spring/Springboot%E6%95%B4%E5%92%8CSwagger2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -514,7 +474,248 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/10/31/ElasticSearch/ElasticSearch%E6%90%9C%E7%B4%A2%E6%B7%B1%E5%85%A5/" class="post-title-link" itemprop="url">ElasticSearch/ElasticSearch搜索深入</a>
+            <a href="/2019/11/02/Spring/Springboot%E6%95%B4%E5%92%8CSwagger2/" class="post-title-link" itemprop="url">Spring Boot整合Swagger2构建RESTful API</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2019-11-02 10:40:00 / Modified: 19:13:14" itemprop="dateCreated datePublished" datetime="2019-11-02T10:40:00+08:00">2019-11-02</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/spring/" itemprop="url" rel="index">
+                    <span itemprop="name">spring</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Spring-Boot整合Swagger2构建RESTful-API"><a href="#Spring-Boot整合Swagger2构建RESTful-API" class="headerlink" title="Spring Boot整合Swagger2构建RESTful API"></a>Spring Boot整合Swagger2构建RESTful API</h1><hr>
+<p>Swagger是一款可以快速生成符合RESTful风格API并进行在线调试的插件。本文将介绍如何在Spring Boot中整合Swagger。</p>
+<p>在此之前，我们先聊聊什么是REST。REST实际上为Representational State Transfer的缩写，翻译为“表现层状态转化” 。如果一个架构符合REST 原则，就称它为RESTful架构。<br>实际上，“表现层状态转化”省略了主语，完整的说应该是“资源表现层状态转化”。什么是资源（Resource）？资源指的是网络中信息的表现形式，比如一段文本，一首歌，一个视频文件等等；什么是表现层（Reresentational）？表现层即资源的展现在你面前的形式，比如文本可以是JSON格式的，也可以是XML形式的，甚至为二进制形式的。图片可以是gif，也可以是PNG；什么是状态转换（State Transfer）？用户可使用URL通过HTTP协议来获取各种资源，HTTP协议包含了一些操作资源的方法，比如：GET 用来获取资源， POST 用来新建资源 , PUT 用来更新资源， DELETE 用来删除资源， PATCH 用来更新资源的部分属性。通过这些HTTP协议的方法来操作资源的过程即为状态转换。<br>下面对比下传统URL请求和RESTful风格请求的区别：</p>
+<table>
+<thead>
+<tr>
+<th align="left">描述</th>
+<th align="left">传统请求方法</th>
+<th align="left">RESTful请求</th>
+<th align="left">方法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">查询</td>
+<td align="left">/user/query?name=mrbird</td>
+<td align="left">GET/user?name=mrbird</td>
+<td align="left">GET</td>
+</tr>
+<tr>
+<td align="left">详情</td>
+<td align="left">/user/getInfo?id=1</td>
+<td align="left">GET/user/1</td>
+<td align="left">GET</td>
+</tr>
+<tr>
+<td align="left">创建</td>
+<td align="left">/user/create?name=mrbird</td>
+<td align="left">POST    /user</td>
+<td align="left">POST</td>
+</tr>
+<tr>
+<td align="left">修改</td>
+<td align="left">/user/update?name=mrbird&amp;id=1</td>
+<td align="left">POST/user/1</td>
+<td align="left">PUT</td>
+</tr>
+<tr>
+<td align="left">删除</td>
+<td align="left">/user/delete?id=1</td>
+<td align="left">GET/user/1</td>
+<td align="left">DELETE</td>
+</tr>
+</tbody></table>
+<p>从上面这张表，我们大致可以总结下传统请求和RESTful请求的几个区别：</p>
+<p>1、传统请求通过URL来描述行为，如create，delete等；RESTful请求通过URL来描述资源。</p>
+<p>2、RESTful请求通过HTTP请求的方法来描述行为，比如DELETE，POST，PUT等，并且使用HTTP状态码来表示不同的结果。</p>
+<p>3、RESTful请求通过JSON来交换数据。</p>
+<p>tips：RESTful只是一种风格，并不是一种强制性的标准。</p>
+<h2 id="引入Swagger依赖"><a href="#引入Swagger依赖" class="headerlink" title="引入Swagger依赖"></a>引入Swagger依赖</h2><p>本文使用的Swagger版本为2.6.1：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;io.springfox&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;springfox-swagger2&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;2.6.1&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;io.springfox&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;springfox-swagger-ui&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;2.6.1&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="配置SwaggerConfig"><a href="#配置SwaggerConfig" class="headerlink" title="配置SwaggerConfig"></a>配置SwaggerConfig</h2><p>使用JavaConfig的形式配置Swagger：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">import org.springframework.context.annotation.Bean;</span><br><span class="line">import org.springframework.context.annotation.Configuration;</span><br><span class="line"></span><br><span class="line">import springfox.documentation.builders.ApiInfoBuilder;</span><br><span class="line">import springfox.documentation.builders.PathSelectors;</span><br><span class="line">import springfox.documentation.builders.RequestHandlerSelectors;</span><br><span class="line">import springfox.documentation.service.ApiInfo;</span><br><span class="line">import springfox.documentation.service.Contact;</span><br><span class="line">import springfox.documentation.spi.DocumentationType;</span><br><span class="line">import springfox.documentation.spring.web.plugins.Docket;</span><br><span class="line">import springfox.documentation.swagger2.annotations.EnableSwagger2;</span><br><span class="line"></span><br><span class="line">@Configuration</span><br><span class="line">@EnableSwagger2</span><br><span class="line">public class SwaggerConfig &#123;</span><br><span class="line">    @Bean</span><br><span class="line">    public Docket buildDocket() &#123;</span><br><span class="line">        return new Docket(DocumentationType.SWAGGER_2)</span><br><span class="line">            .apiInfo(buildApiInf())</span><br><span class="line">            .select()</span><br><span class="line">            .apis(RequestHandlerSelectors.basePackage(&quot;com.example.demo.controller&quot;))</span><br><span class="line">            .paths(PathSelectors.any())</span><br><span class="line">            .build();</span><br><span class="line">    &#125;</span><br><span class="line">    private ApiInfo buildApiInf() &#123;</span><br><span class="line">        return new ApiInfoBuilder()</span><br><span class="line">            .title(&quot;系统RESTful API文档&quot;)</span><br><span class="line">            .contact(new Contact(&quot;mrbird&quot;, &quot;https://mrbird.cc&quot;, &quot;852252810@qq.com&quot;))</span><br><span class="line">            .version(&quot;1.0&quot;)</span><br><span class="line">            .build();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在配置类中添加@EnableSwagger2注解来启用Swagger2，apis()定义了扫描的包路径。配置较为简单，其他不做过多说明。</p>
+<h2 id="Swagger常用注解"><a href="#Swagger常用注解" class="headerlink" title="Swagger常用注解"></a>Swagger常用注解</h2><p>@Api：修饰整个类，描述Controller的作用；</p>
+<p>@ApiOperation：描述一个类的一个方法，或者说一个接口；</p>
+<p>@ApiParam：单个参数描述；</p>
+<p>@ApiModel：用对象来接收参数；</p>
+<p>@ApiProperty：用对象接收参数时，描述对象的一个字段；</p>
+<p>@ApiResponse：HTTP响应其中1个描述；</p>
+<p>@ApiResponses：HTTP响应整体描述；</p>
+<p>@ApiIgnore：使用该注解忽略这个API；</p>
+<p>@ApiError ：发生错误返回的信息；</p>
+<p>@ApiImplicitParam：一个请求参数；</p>
+<p>@ApiImplicitParams：多个请求参数。</p>
+<h2 id="编写RESTful-API接口"><a href="#编写RESTful-API接口" class="headerlink" title="编写RESTful API接口"></a>编写RESTful API接口</h2><p>Spring Boot中包含了一些注解，对应于HTTP协议中的方法：<br>@GetMapping对应HTTP中的GET方法；</p>
+<p>@PostMapping对应HTTP中的POST方法；</p>
+<p>@PutMapping对应HTTP中的PUT方法；</p>
+<p>@DeleteMapping对应HTTP中的DELETE方法；</p>
+<p>@PatchMapping对应HTTP中的PATCH方法。</p>
+<p>我们使用这些注解来编写一个RESTful测试Controller：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><span class="line">import java.util.ArrayList;</span><br><span class="line">import java.util.HashMap;</span><br><span class="line">import java.util.List;</span><br><span class="line">import java.util.Map;</span><br><span class="line"></span><br><span class="line">import org.springframework.stereotype.Controller;</span><br><span class="line">import org.springframework.web.bind.annotation.DeleteMapping;</span><br><span class="line">import org.springframework.web.bind.annotation.GetMapping;</span><br><span class="line">import org.springframework.web.bind.annotation.PathVariable;</span><br><span class="line">import org.springframework.web.bind.annotation.PostMapping;</span><br><span class="line">import org.springframework.web.bind.annotation.PutMapping;</span><br><span class="line">import org.springframework.web.bind.annotation.RequestBody;</span><br><span class="line">import org.springframework.web.bind.annotation.RequestMapping;</span><br><span class="line">import org.springframework.web.bind.annotation.ResponseBody;</span><br><span class="line"></span><br><span class="line">import com.example.demo.domain.User;</span><br><span class="line"></span><br><span class="line">import io.swagger.annotations.Api;</span><br><span class="line">import io.swagger.annotations.ApiImplicitParam;</span><br><span class="line">import io.swagger.annotations.ApiImplicitParams;</span><br><span class="line">import io.swagger.annotations.ApiOperation;</span><br><span class="line">import springfox.documentation.annotations.ApiIgnore;</span><br><span class="line"></span><br><span class="line">@Api(value = &quot;用户Controller&quot;)</span><br><span class="line">@Controller</span><br><span class="line">@RequestMapping(&quot;user&quot;)</span><br><span class="line">public class UserController &#123;</span><br><span class="line"></span><br><span class="line">    @ApiIgnore</span><br><span class="line">    @GetMapping(&quot;hello&quot;)</span><br><span class="line">    public @ResponseBody String hello() &#123;</span><br><span class="line">        return &quot;hello&quot;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @ApiOperation(value = &quot;获取用户信息&quot;, notes = &quot;根据用户id获取用户信息&quot;)</span><br><span class="line">    @ApiImplicitParam(name = &quot;id&quot;, value = &quot;用户id&quot;, required = true, dataType = &quot;Long&quot;, paramType = &quot;path&quot;)</span><br><span class="line">    @GetMapping(&quot;/&#123;id&#125;&quot;)</span><br><span class="line">    public @ResponseBody User getUserById(@PathVariable(value = &quot;id&quot;) Long id) &#123;</span><br><span class="line">        User user = new User();</span><br><span class="line">        user.setId(id);</span><br><span class="line">        user.setName(&quot;mrbird&quot;);</span><br><span class="line">        user.setAge(25);</span><br><span class="line">        return user;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @ApiOperation(value = &quot;获取用户列表&quot;, notes = &quot;获取用户列表&quot;)</span><br><span class="line">    @GetMapping(&quot;/list&quot;)</span><br><span class="line">    public @ResponseBody List&lt;User&gt; getUserList() &#123;</span><br><span class="line">        List&lt;User&gt; list = new ArrayList&lt;&gt;();</span><br><span class="line">        User user1 = new User();</span><br><span class="line">        user1.setId(1l);</span><br><span class="line">        user1.setName(&quot;mrbird&quot;);</span><br><span class="line">        user1.setAge(25);</span><br><span class="line">        list.add(user1);</span><br><span class="line">        User user2 = new User();</span><br><span class="line">        user2.setId(2l);</span><br><span class="line">        user2.setName(&quot;scott&quot;);</span><br><span class="line">        user2.setAge(29);</span><br><span class="line">        list.add(user2);</span><br><span class="line">        return list;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @ApiOperation(value = &quot;新增用户&quot;, notes = &quot;根据用户实体创建用户&quot;)</span><br><span class="line">    @ApiImplicitParam(name = &quot;user&quot;, value = &quot;用户实体&quot;, required = true, dataType = &quot;User&quot;)</span><br><span class="line">    @PostMapping(&quot;/add&quot;)</span><br><span class="line">    public @ResponseBody Map&lt;String, Object&gt; addUser(@RequestBody User user) &#123;</span><br><span class="line">        Map&lt;String, Object&gt; map = new HashMap&lt;&gt;();</span><br><span class="line">        map.put(&quot;result&quot;, &quot;success&quot;);</span><br><span class="line">        return map;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @ApiOperation(value = &quot;删除用户&quot;, notes = &quot;根据用户id删除用户&quot;)</span><br><span class="line">    @ApiImplicitParam(name = &quot;id&quot;, value = &quot;用户id&quot;, required = true, dataType = &quot;Long&quot;, paramType = &quot;path&quot;)</span><br><span class="line">    @DeleteMapping(&quot;/&#123;id&#125;&quot;)</span><br><span class="line">    public @ResponseBody Map&lt;String, Object&gt; deleteUser(@PathVariable(value = &quot;id&quot;) Long id) &#123;</span><br><span class="line">        Map&lt;String, Object&gt; map = new HashMap&lt;&gt;();</span><br><span class="line">        map.put(&quot;result&quot;, &quot;success&quot;);</span><br><span class="line">        return map;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @ApiOperation(value = &quot;更新用户&quot;, notes = &quot;根据用户id更新用户&quot;)</span><br><span class="line">    @ApiImplicitParams(&#123;</span><br><span class="line">        @ApiImplicitParam(name = &quot;id&quot;, value = &quot;用户id&quot;, required = true, dataType = &quot;Long&quot;, paramType = &quot;path&quot;),</span><br><span class="line">        @ApiImplicitParam(name = &quot;user&quot;, value = &quot;用户实体&quot;, required = true, dataType = &quot;User&quot;) &#125;)</span><br><span class="line">    @PutMapping(&quot;/&#123;id&#125;&quot;)</span><br><span class="line">    public @ResponseBody Map&lt;String, Object&gt; updateUser(@PathVariable(value = &quot;id&quot;) Long id, @RequestBody User user) &#123;</span><br><span class="line">        Map&lt;String, Object&gt; map = new HashMap&lt;&gt;();</span><br><span class="line">        map.put(&quot;result&quot;, &quot;success&quot;);</span><br><span class="line">        return map;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>对于不需要生成API的方法或者类，只需要在上面添加@ApiIgnore注解即可</p>
+<h2 id="启动-amp-测试"><a href="#启动-amp-测试" class="headerlink" title="启动&amp;测试"></a>启动&amp;测试</h2><p>启动项目，访问<a href="http://localhost:8080/swagger-ui.html即可看到Swagger给我们生成的API页面：" target="_blank" rel="noopener">http://localhost:8080/swagger-ui.html即可看到Swagger给我们生成的API页面：</a><br><img src="https://i.loli.net/2019/11/02/PTyqbOwZMxXQvca.png" alt="swagger.PNG"><br>点击接口下的“Try it out”Swagger会用curl命令发送请求，并且返回响应信息，如下所示:<br><img src="https://i.loli.net/2019/11/02/iAUYSur5E2ODLkt.png" alt="swagger2.PNG"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/02/Spring/Springboot%E9%80%9A%E7%94%A8Mapper%E5%92%8CPageHelper/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/02/Spring/Springboot%E9%80%9A%E7%94%A8Mapper%E5%92%8CPageHelper/" class="post-title-link" itemprop="url">Springboot通用Mapper和PageHelper</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2019-11-02 10:17:04 / Modified: 10:59:28" itemprop="dateCreated datePublished" datetime="2019-11-02T10:17:04+08:00">2019-11-02</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/spring/" itemprop="url" rel="index">
+                    <span itemprop="name">spring</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Springboot通用Mapper和PageHelper"><a href="#Springboot通用Mapper和PageHelper" class="headerlink" title="Springboot通用Mapper和PageHelper"></a>Springboot通用Mapper和PageHelper</h1><hr>
+<p>如果项目中使用到了MyBatis框架，那么使用通用Mapper和PageHelper分页插件将极大的简化我们的操作。通用Mapper可以简化对单表的CRUD操作，PageHelper分页插件可以帮我们自动拼接分页SQL，并且可以使用MyBatis Geneator来自动生成实体类，Mapper接口和Mapper xml代码，非常的方便。插件地址及作者链接<a href="https://gitee.com/free。" target="_blank" rel="noopener">https://gitee.com/free。</a></p>
+<h2 id="引入依赖"><a href="#引入依赖" class="headerlink" title="引入依赖"></a>引入依赖</h2><p>这里使用Spring Boot来构建，可参考Spring-Boot中使用Mybatis.html搭建一个Spring boot + MyBatis的框架，然后在pom中引入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- mybatis --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.mybatis.spring.boot&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;mybatis-spring-boot-starter&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.3.1&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;!-- 通用mapper --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;tk.mybatis&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;mapper-spring-boot-starter&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.1.5&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;!-- pagehelper 分页插件 --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;com.github.pagehelper&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;pagehelper-spring-boot-starter&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.2.3&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<p>接着在pom中配置MyBatis Geneator：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">&lt;build&gt;</span><br><span class="line">    &lt;plugins&gt;</span><br><span class="line">        &lt;plugin&gt;</span><br><span class="line">            &lt;groupId&gt;org.mybatis.generator&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;mybatis-generator-maven-plugin&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;1.3.5&lt;/version&gt;</span><br><span class="line">            &lt;dependencies&gt;</span><br><span class="line">                &lt;dependency&gt;</span><br><span class="line">                    &lt;!-- 数据库连接驱动 --&gt;</span><br><span class="line">                    &lt;groupId&gt;com.oracle&lt;/groupId&gt;</span><br><span class="line">                    &lt;artifactId&gt;ojdbc6&lt;/artifactId&gt;</span><br><span class="line">                    &lt;version&gt;6.0&lt;/version&gt;</span><br><span class="line">                &lt;/dependency&gt;</span><br><span class="line">                &lt;dependency&gt;</span><br><span class="line">                    &lt;groupId&gt;tk.mybatis&lt;/groupId&gt;</span><br><span class="line">                    &lt;artifactId&gt;mapper&lt;/artifactId&gt;</span><br><span class="line">                    &lt;version&gt;3.4.0&lt;/version&gt;</span><br><span class="line">                &lt;/dependency&gt;</span><br><span class="line">            &lt;/dependencies&gt;</span><br><span class="line">            &lt;executions&gt;</span><br><span class="line">                &lt;execution&gt;</span><br><span class="line">                    &lt;id&gt;Generate MyBatis Artifacts&lt;/id&gt;</span><br><span class="line">                    &lt;phase&gt;package&lt;/phase&gt;</span><br><span class="line">                    &lt;goals&gt;</span><br><span class="line">                        &lt;goal&gt;generate&lt;/goal&gt;</span><br><span class="line">                    &lt;/goals&gt;</span><br><span class="line">                &lt;/execution&gt;</span><br><span class="line">            &lt;/executions&gt;</span><br><span class="line">            &lt;configuration&gt;</span><br><span class="line">                &lt;!--允许移动生成的文件 --&gt;</span><br><span class="line">                &lt;verbose&gt;true&lt;/verbose&gt;</span><br><span class="line">                &lt;!-- 是否覆盖 --&gt;</span><br><span class="line">                &lt;overwrite&gt;true&lt;/overwrite&gt;</span><br><span class="line">                &lt;!-- 自动生成的配置 --&gt;</span><br><span class="line">                &lt;configurationFile&gt;src/main/resources/mybatis-generator.xml&lt;/configurationFile&gt;</span><br><span class="line">            &lt;/configuration&gt;</span><br><span class="line">        &lt;/plugin&gt;</span><br><span class="line">    &lt;/plugins&gt;</span><br><span class="line">&lt;/build&gt;</span><br></pre></td></tr></table></figure>
+<p>src/main/resources/mybatis-generator.xml为生成器的配置，下文会介绍到。</p>
+<h2 id="配置插件"><a href="#配置插件" class="headerlink" title="配置插件"></a>配置插件</h2><p>在Spring Boot配置文件application.yml中配置MyBatis：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mybatis:</span><br><span class="line">  # type-aliases扫描路径</span><br><span class="line">  type-aliases-package: com.springboot.bean</span><br><span class="line">  # mapper xml实现扫描路径</span><br><span class="line">  mapper-locations: classpath:mapper/*.xml</span><br><span class="line">  property:</span><br><span class="line">    order: BEFORE</span><br></pre></td></tr></table></figure>
+
+<p>接下来开始配置插件。</p>
+<h3 id="配置通用Mapper"><a href="#配置通用Mapper" class="headerlink" title="配置通用Mapper"></a>配置通用Mapper</h3><p>在Spring Boot配置文件application.yml中配置通用Mapper：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#mappers 多个接口时逗号隔开</span><br><span class="line">mapper:</span><br><span class="line">  mappers: com.springboot.config.MyMapper</span><br><span class="line">  not-empty: false</span><br><span class="line">  identity: oracle</span><br></pre></td></tr></table></figure>
+
+<p>关于参数的说明，参考<a href="https://gitee.com/free/Mapper/blob/master/wiki/mapper3/2.Integration.md中的可配参数介绍。" target="_blank" rel="noopener">https://gitee.com/free/Mapper/blob/master/wiki/mapper3/2.Integration.md中的可配参数介绍。</a></p>
+<p>除此之外，我们需要定义一个MyMapper接口：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">import tk.mybatis.mapper.common.Mapper;</span><br><span class="line">import tk.mybatis.mapper.common.MySqlMapper;</span><br><span class="line"></span><br><span class="line">public interface MyMapper&lt;T&gt; extends Mapper&lt;T&gt;, MySqlMapper&lt;T&gt; &#123;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>值得注意的是，该接口不能被扫描到，应该和自己定义的Mapper分开。自己定义的Mapper都需要继承这个接口。</p>
+<h3 id="配置PageHelper"><a href="#配置PageHelper" class="headerlink" title="配置PageHelper"></a>配置PageHelper</h3><p>在Spring Boot配置文件application.yml中配置通用配置PageHelper：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#pagehelper</span><br><span class="line">pagehelper: </span><br><span class="line">  helperDialect: oracle</span><br><span class="line">  reasonable: true</span><br><span class="line">  supportMethodsArguments: true</span><br><span class="line">  params: count=countSql</span><br></pre></td></tr></table></figure>
+
+<p>参数相关说明参考<a href="https://github.com/pagehelper/Mybatis-PageHelper/blob/master/wikis/zh/HowToUse.md中的分页插件参数介绍" target="_blank" rel="noopener">https://github.com/pagehelper/Mybatis-PageHelper/blob/master/wikis/zh/HowToUse.md中的分页插件参数介绍</a></p>
+<h3 id="配置Geneator"><a href="#配置Geneator" class="headerlink" title="配置Geneator*"></a>配置Geneator*</h3><p>在路径src/main/resources/下新建mybatis-generator.xml：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;!DOCTYPE generatorConfiguration</span><br><span class="line">    PUBLIC &quot;-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN&quot;</span><br><span class="line">    &quot;http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd&quot;&gt;</span><br><span class="line">&lt;generatorConfiguration&gt;</span><br><span class="line">    &lt;context id=&quot;oracle&quot; targetRuntime=&quot;MyBatis3Simple&quot; defaultModelType=&quot;flat&quot;&gt;</span><br><span class="line"></span><br><span class="line">        &lt;plugin type=&quot;tk.mybatis.mapper.generator.MapperPlugin&quot;&gt;</span><br><span class="line">            &lt;!-- 该配置会使生产的Mapper自动继承MyMapper --&gt;</span><br><span class="line">            &lt;property name=&quot;mappers&quot; value=&quot;com.springboot.config.MyMapper&quot; /&gt;</span><br><span class="line">            &lt;!-- caseSensitive默认false，当数据库表名区分大小写时，可以将该属性设置为true --&gt;</span><br><span class="line">            &lt;property name=&quot;caseSensitive&quot; value=&quot;false&quot;/&gt;</span><br><span class="line">        &lt;/plugin&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!-- 阻止生成自动注释 --&gt;</span><br><span class="line">        &lt;commentGenerator&gt;</span><br><span class="line">            &lt;property name=&quot;javaFileEncoding&quot; value=&quot;UTF-8&quot;/&gt;</span><br><span class="line">            &lt;property name=&quot;suppressDate&quot; value=&quot;true&quot;/&gt;</span><br><span class="line">            &lt;property name=&quot;suppressAllComments&quot; value=&quot;true&quot;/&gt;</span><br><span class="line">        &lt;/commentGenerator&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!-- 数据库链接地址账号密码 --&gt;</span><br><span class="line">        &lt;jdbcConnection </span><br><span class="line">            driverClass=&quot;oracle.jdbc.driver.OracleDriver&quot;</span><br><span class="line">            connectionURL=&quot;jdbc:oracle:thin:@localhost:1521:ORCL&quot;</span><br><span class="line">            userId=&quot;scott&quot;</span><br><span class="line">            password=&quot;6742530&quot;&gt;</span><br><span class="line">        &lt;/jdbcConnection&gt;</span><br><span class="line"></span><br><span class="line">        &lt;javaTypeResolver&gt;</span><br><span class="line">            &lt;property name=&quot;forceBigDecimals&quot; value=&quot;false&quot;/&gt;</span><br><span class="line">        &lt;/javaTypeResolver&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!-- 生成Model类存放位置 --&gt;</span><br><span class="line">        &lt;javaModelGenerator targetPackage=&quot;com.springboot.bean&quot; targetProject=&quot;src/main/java&quot;&gt;</span><br><span class="line">            &lt;property name=&quot;enableSubPackages&quot; value=&quot;true&quot;/&gt;</span><br><span class="line">            &lt;property name=&quot;trimStrings&quot; value=&quot;true&quot;/&gt;</span><br><span class="line">        &lt;/javaModelGenerator&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!-- 生成映射文件存放位置 --&gt;</span><br><span class="line">        &lt;sqlMapGenerator targetPackage=&quot;mapper&quot; targetProject=&quot;src/main/resources&quot;&gt;</span><br><span class="line">            &lt;property name=&quot;enableSubPackages&quot; value=&quot;true&quot;/&gt;</span><br><span class="line">        &lt;/sqlMapGenerator&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!-- 生成Dao类存放位置 --&gt;</span><br><span class="line">        &lt;!-- 客户端代码，生成易于使用的针对Model对象和XML配置文件的代码</span><br><span class="line">            type=&quot;ANNOTATEDMAPPER&quot;,生成Java Model 和基于注解的Mapper对象</span><br><span class="line">            type=&quot;XMLMAPPER&quot;,生成SQLMap XML文件和独立的Mapper接口 --&gt;</span><br><span class="line">        &lt;javaClientGenerator type=&quot;XMLMAPPER&quot; targetPackage=&quot;com.springboot.mapper&quot; targetProject=&quot;src/main/java&quot;&gt;</span><br><span class="line">            &lt;property name=&quot;enableSubPackages&quot; value=&quot;true&quot;/&gt;</span><br><span class="line">        &lt;/javaClientGenerator&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!-- 配置需要生成的表 --&gt;</span><br><span class="line">        &lt;table tableName=&quot;T_USER&quot; domainObjectName=&quot;User&quot; enableCountByExample=&quot;false&quot; enableUpdateByExample=&quot;false&quot; enableDeleteByExample=&quot;false&quot; enableSelectByExample=&quot;false&quot; selectByExampleQueryId=&quot;false&quot;&gt;</span><br><span class="line">            &lt;generatedKey column=&quot;id&quot; sqlStatement=&quot;oralce&quot; identity=&quot;true&quot;/&gt;</span><br><span class="line">        &lt;/table&gt;</span><br><span class="line">    &lt;/context&gt;</span><br><span class="line">&lt;/generatorConfiguration&gt;</span><br></pre></td></tr></table></figure>
+
+<p>更详细的说明可参考链接：<a href="http://blog.csdn.net/isea533/article/details/42102297。" target="_blank" rel="noopener">http://blog.csdn.net/isea533/article/details/42102297。</a></p>
+<h2 id="代码生成"><a href="#代码生成" class="headerlink" title="代码生成"></a>代码生成</h2><p>配置好MyBatis Geneator后，在eclipse中运行命令mybatis-generator:generate：</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/02/Spring/Springboot%E4%B8%AD%E4%BD%BF%E7%94%A8%E8%BF%87%E6%BB%A4%E5%99%A8%E5%92%8C%E6%8B%A6%E6%88%AA%E5%99%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/02/Spring/Springboot%E4%B8%AD%E4%BD%BF%E7%94%A8%E8%BF%87%E6%BB%A4%E5%99%A8%E5%92%8C%E6%8B%A6%E6%88%AA%E5%99%A8/" class="post-title-link" itemprop="url">springboot中使用过滤器和拦截器</a>
         </h1>
 
         <div class="post-meta">
@@ -524,71 +725,25 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2019-10-31 11:11:44" itemprop="dateCreated datePublished" datetime="2019-10-31T11:11:44+08:00">2019-10-31</time>
+              <time title="Created: 2019-11-02 09:33:42" itemprop="dateCreated datePublished" datetime="2019-11-02T09:33:42+08:00">2019-11-02</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-30 12:06:36" itemprop="dateModified" datetime="2019-11-30T12:06:36+08:00">2019-11-30</time>
+                <time title="Modified: 2019-11-08 21:36:14" itemprop="dateModified" datetime="2019-11-08T21:36:14+08:00">2019-11-08</time>
               </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/10/30/Mybatis/Mybatis%E4%B8%AD%E7%9A%84%E4%B8%80%E4%BA%9B%E7%BB%86%E8%8A%82/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lancersaber">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lancersaber">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/10/30/Mybatis/Mybatis%E4%B8%AD%E7%9A%84%E4%B8%80%E4%BA%9B%E7%BB%86%E8%8A%82/" class="post-title-link" itemprop="url">Mybatis/Mybatis中的一些细节</a>
-        </h1>
-
-        <div class="post-meta">
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
+                <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-10-30 22:08:35" itemprop="dateCreated datePublished" datetime="2019-10-30T22:08:35+08:00">2019-10-30</time>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/spring/" itemprop="url" rel="index">
+                    <span itemprop="name">spring</span>
+                  </a>
+                </span>
             </span>
 
           
@@ -602,7 +757,54 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          
+          <h1 id="springboot中使用过滤器和拦截器"><a href="#springboot中使用过滤器和拦截器" class="headerlink" title="springboot中使用过滤器和拦截器"></a>springboot中使用过滤器和拦截器</h1><hr>
+<p>过滤器（Filter）和拦截器（Interceptor）是Web项目中常用的两个功能，本文将简单介绍在Spring Boot中使用过滤器和拦截器来计算Controller中方法的执行时长，并且简单对比两者的区别。</p>
+<p>现有如下Controller：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@RestController</span><br><span class="line">@RequestMapping(&quot;user&quot;)</span><br><span class="line">public class UserController &#123;</span><br><span class="line"></span><br><span class="line">    @GetMapping(&quot;/&#123;id:\\d+&#125;&quot;)</span><br><span class="line">    public void get(@PathVariable String id) &#123;</span><br><span class="line">        System.out.println(id);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>下面通过配置过滤器和拦截器来实现对get方法执行时间计算的功能</p>
+<h2 id="过滤器"><a href="#过滤器" class="headerlink" title="过滤器"></a>过滤器</h2><p>定义一个TimeFilter类，实现javax.servlet.Filter</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">public class TimeFilter implements Filter&#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void init(FilterConfig filterConfig) throws ServletException &#123;</span><br><span class="line">        System.out.println(&quot;过滤器初始化&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException &#123;</span><br><span class="line">        System.out.println(&quot;开始执行过滤器&quot;);</span><br><span class="line">        Long start = new Date().getTime();</span><br><span class="line">        filterChain.doFilter(servletRequest, servletResponse);</span><br><span class="line">        System.out.println(&quot;【过滤器】耗时 &quot; + (new Date().getTime() - start));</span><br><span class="line">        System.out.println(&quot;结束执行过滤器&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void destroy() &#123;</span><br><span class="line">        System.out.println(&quot;过滤器销毁&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>TimeFilter重写了Filter的三个方法，方法名称已经很直白的描述了其作用，这里不再赘述。</p>
+<p>要使该过滤器在Spring Boot中生效，还需要一些配置。这里主要有两种配置方式。</p>
+<h3 id="配置方式一"><a href="#配置方式一" class="headerlink" title="配置方式一"></a>配置方式一</h3><p>可通过在TimeFilter上加上如下注解：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@Component</span><br><span class="line">@WebFilter(urlPatterns = &#123;&quot;/*&quot;&#125;)</span><br><span class="line">public class TimeFilter implements Filter &#123;</span><br><span class="line">   ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>@Component注解让TimeFilter成为Spring上下文中的一个Bean，@WebFilter注解的urlPatterns属性配置了哪些请求可以进入该过滤器，/*表示所有请求。<br>启动项目时可以看到控制台输出了过滤器初始化，启动后访问<a href="http://localhost:8080/user/1，控制台输出如下" target="_blank" rel="noopener">http://localhost:8080/user/1，控制台输出如下</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">开始执行过滤器</span><br><span class="line">1</span><br><span class="line">【过滤器】耗时 31</span><br><span class="line">结束执行过滤器</span><br></pre></td></tr></table></figure>
+
+<h3 id="配置方式二"><a href="#配置方式二" class="headerlink" title="配置方式二"></a>配置方式二</h3><p>除了在过滤器类上加注解外，我们也可以通过FilterRegistrationBean来注册过滤器。<br>定义一个WebConfig类，加上@Configuration注解表明其为配置类，然后通过FilterRegistrationBean来注册过滤器:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">public class WebConfig &#123;</span><br><span class="line">    @Bean</span><br><span class="line">    public FilterRegistrationBean timeFilter() &#123;</span><br><span class="line">        FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();</span><br><span class="line">        TimeFilter timeFilter = new TimeFilter();</span><br><span class="line">        filterRegistrationBean.setFilter(timeFilter);</span><br><span class="line"></span><br><span class="line">        List&lt;String&gt; urlList = new ArrayList&lt;&gt;();</span><br><span class="line">        urlList.add(&quot;/*&quot;);</span><br><span class="line"></span><br><span class="line">        filterRegistrationBean.setUrlPatterns(urlList);</span><br><span class="line">        return filterRegistrationBean;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>FilterRegistrationBean除了注册过滤器TimeFilter外还通过setUrlPatterns方法配置了URL匹配规则。重启项目访问<a href="http://localhost:8080/user/1，我们可以看到和上面一样的效果。" target="_blank" rel="noopener">http://localhost:8080/user/1，我们可以看到和上面一样的效果。</a></p>
+<pre><code>注意：通过过滤器我们只可以获取到servletRequest对象，所以并不能获取到方法的名称，所属类，参数等额外的信息。</code></pre><h2 id="拦截器"><a href="#拦截器" class="headerlink" title="拦截器"></a>拦截器</h2><p>定义一个TimeInterceptor类，实现org.springframework.web.servlet.HandlerInterceptor接口:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">public class TimeInterceptor implements HandlerInterceptor &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception &#123;</span><br><span class="line">        System.out.println(&quot;处理拦截之前&quot;);</span><br><span class="line">        httpServletRequest.setAttribute(&quot;startTime&quot;, new Date().getTime());</span><br><span class="line">        System.out.println(((HandlerMethod) o).getBean().getClass().getName());</span><br><span class="line">        System.out.println(((HandlerMethod) o).getMethod().getName());</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, ModelAndView modelAndView) throws Exception &#123;</span><br><span class="line">        System.out.println(&quot;开始处理拦截&quot;);</span><br><span class="line">        Long start = (Long) httpServletRequest.getAttribute(&quot;startTime&quot;);</span><br><span class="line">        System.out.println(&quot;【拦截器】耗时 &quot; + (new Date().getTime() - start));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void afterCompletion(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, Exception e) throws Exception &#123;</span><br><span class="line">        System.out.println(&quot;处理拦截之后&quot;);</span><br><span class="line">        Long start = (Long) httpServletRequest.getAttribute(&quot;startTime&quot;);</span><br><span class="line">        System.out.println(&quot;【拦截器】耗时 &quot; + (new Date().getTime() - start));</span><br><span class="line">        System.out.println(&quot;异常信息 &quot; + e);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>TimeInterceptor实现了HandlerInterceptor接口的三个方法。preHandle方法在处理拦截之前执行，postHandle只有当被拦截的方法没有抛出异常成功时才会处理，afterCompletion方法无论被拦截的方法抛出异常与否都会执行。</p>
+<p>通过这三个方法的参数可以看到，相较于过滤器，拦截器多了Object和Exception对象，所以可以获取的信息比过滤器要多的多。但过滤器仍无法获取到方法的参数等信息，我们可以通过切面编程来实现这个目的，具体可参考<a href="https://mrbird.cc/Spring-Boot-AOP%20log.html。" target="_blank" rel="noopener">https://mrbird.cc/Spring-Boot-AOP%20log.html。</a></p>
+<p>要使拦截器在Spring Boot中生效，还需要如下两步配置：</p>
+<p>1.在拦截器类上加入@Component注解；</p>
+<p>2.在WebConfig中通过InterceptorRegistry注册过滤器:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">public class WebConfig extends WebMvcConfigurerAdapter &#123;</span><br><span class="line">    @Autowired</span><br><span class="line">    private TimeInterceptor timeInterceptor;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void addInterceptors(InterceptorRegistry registry) &#123;</span><br><span class="line">        registry.addInterceptor(timeInterceptor);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意现在WebMvcConfigurerAdapter类已经过时了，官方在spring5弃用了</p>
+<p>WebMvcConfigurerAdapter，因为springboot2.0使用的spring5，所以会出现过时。</p>
+<p>但是这个问题也很好解决，我们只需要实现 WebMvcConfigurer接口就可以了。</p>
+<p>启动项目，访问<a href="http://localhost:8080/user/1，控制台输出如下：" target="_blank" rel="noopener">http://localhost:8080/user/1，控制台输出如下：</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">处理拦截之前</span><br><span class="line">cc.mrbird.controller.UserController</span><br><span class="line">get</span><br><span class="line">1</span><br><span class="line">开始处理拦截</span><br><span class="line">【拦截器】耗时 24</span><br><span class="line">处理拦截之后</span><br><span class="line">【拦截器】耗时 24</span><br><span class="line">异常信息 null</span><br></pre></td></tr></table></figure>
+
+<p>从输出中我们可以了解到三个方法的执行顺序，并且三个方法都被执行了。</p>
+<p>我们在UserController的get方法中手动抛出一个异常：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> @GetMapping(&quot;/&#123;id:\\d+&#125;&quot;)</span><br><span class="line">public void get(@PathVariable String id) &#123;</span><br><span class="line">    System.out.println(id);</span><br><span class="line">    throw new RuntimeException(&quot;user not exist&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>重启项目后，访问<a href="http://localhost:8080/user/1，控制台输出如下：" target="_blank" rel="noopener">http://localhost:8080/user/1，控制台输出如下：</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">处理拦截之前</span><br><span class="line">cc.mrbird.controller.UserController</span><br><span class="line">get</span><br><span class="line">1</span><br><span class="line">处理拦截之后</span><br><span class="line">【拦截器】耗时 0</span><br><span class="line">异常信息 java.lang.RuntimeException: user not exist</span><br></pre></td></tr></table></figure>
+
+<p>可看到，postHandle方法并没有被执行。</p>
+<h2 id="执行时机的对比"><a href="#执行时机的对比" class="headerlink" title="执行时机的对比"></a>执行时机的对比</h2><p>我们将过滤器和拦截器都配置上，然后启动项目访问<a href="http://localhost:8080/user/1：" target="_blank" rel="noopener">http://localhost:8080/user/1：</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">开始执行过滤器</span><br><span class="line">处理拦截之前</span><br><span class="line">cc.mrbird.controller.UserController</span><br><span class="line">get</span><br><span class="line">1</span><br><span class="line">开始处理拦截</span><br><span class="line">【拦截器】耗时 25</span><br><span class="line">处理拦截之后</span><br><span class="line">【拦截器】耗时 25</span><br><span class="line">异常信息 null</span><br><span class="line">【过滤器】耗时 34</span><br><span class="line">结束执行过滤器</span><br></pre></td></tr></table></figure>
+
+<p>可看到过滤器要先于拦截器执行，晚于拦截器结束。下图很好的描述了它们的执行时间区别：<br><img src="https://i.loli.net/2019/11/02/tb8CHxd7R2ypu9W.png" alt="filter.PNG"></p>
+
       
     </div>
 
@@ -621,7 +823,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/10/30/ElasticSearch/%E6%95%B0%E6%8D%AE%E7%AE%80%E4%BB%8B/">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/02/Spring/Spring%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -635,7 +837,101 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/10/30/ElasticSearch/%E6%95%B0%E6%8D%AE%E7%AE%80%E4%BB%8B/" class="post-title-link" itemprop="url">ElasticSearch中的数据</a>
+            <a href="/2019/11/02/Spring/Spring%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/" class="post-title-link" itemprop="url">Springboot异常处理</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2019-11-02 09:16:13 / Modified: 09:33:23" itemprop="dateCreated datePublished" datetime="2019-11-02T09:16:13+08:00">2019-11-02</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/spring/" itemprop="url" rel="index">
+                    <span itemprop="name">spring</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Springboot异常处理"><a href="#Springboot异常处理" class="headerlink" title="Springboot异常处理"></a>Springboot异常处理</h1><hr>
+<p>Spring Boot对异常的处理有一套默认的机制：当应用中产生异常时，Spring Boot根据发送请求头中的accept是否包含text/html来分别返回不同的响应信息。当从浏览器地址栏中访问应用接口时，请求头中的accept便会包含text/html信息，产生异常时，Spring Boot通过org.springframework.web.servlet.ModelAndView对象来装载异常信息，并以HTML的格式返回；而当从客户端访问应用接口产生异常时（客户端访问时，请求头中的accept不包含text/html），Spring Boot则以JSON的格式返回异常信息。下面来验证一下。</p>
+<h2 id="默认异常处理机制"><a href="#默认异常处理机制" class="headerlink" title="默认异常处理机制"></a>默认异常处理机制</h2><p>假设应用中有如下一个Controller：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@RestController</span><br><span class="line">@RequestMapping(&quot;user&quot;)</span><br><span class="line">public class UserController &#123;</span><br><span class="line"></span><br><span class="line">    @GetMapping(&quot;/&#123;id:\\d+&#125;&quot;)</span><br><span class="line">    public void get(@PathVariable String id) &#123;</span><br><span class="line">        throw new RuntimeException(&quot;user not exist&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在代码中我们主动的抛出了一个RuntimeException，使用浏览器访问<a href="http://localhost:8080/user/1：" target="_blank" rel="noopener">http://localhost:8080/user/1：</a><br><img src="https://i.loli.net/2019/11/02/udscfAS2bY7oBJq.png" alt="springbootError1.PNG"></p>
+<p>可看到页面返回了一些异常描述，并且请求头的accpet包含了text/html片段。<br>接着使用模拟发送REST请求的Chrome插件Restlet Client发送<a href="http://localhost:8080/user/1：" target="_blank" rel="noopener">http://localhost:8080/user/1：</a><br><img src="https://i.loli.net/2019/11/02/yh6AuolHnT94Xs5.png" alt="springbootError2.PNG"><br>可以看到请求头的accept值为<em>/</em>，并且返回一段JSON格式的信息。</p>
+<p>查看Spring Boot的BasicErrorController类便可看到这一默认机制的具体实现：<br><img src="https://i.loli.net/2019/11/02/3T2iFt5Aaful9yx.png" alt="springbootError3.PNG"><br>可看到errorHtml和error方法的请求地址和方法是一样的，唯一的区别就是errorHtml通过produces = {“text/html”}判断请求头的accpet属性中是否包含text/html，如果包含，便走该方法。</p>
+<h2 id="自定义html异常页面"><a href="#自定义html异常页面" class="headerlink" title="自定义html异常页面"></a>自定义html异常页面</h2><p>我们可以通过在src/main/resources/resources/error路径下定义友好的异常页面，比如定义一个500.html页面：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;title&gt;500&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    系统内部异常</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<p>然后再次通过浏览器访问:<a href="http://localhost:8080/user/1：" target="_blank" rel="noopener">http://localhost:8080/user/1：</a><br><img src="https://i.loli.net/2019/11/02/iN3V6zaBPJSyebq.png" alt="spring bootError4.PNG"><br>同样的，我们也可以定义404.html等常见的HTTP状态码对应的异常页面。</p>
+<p>通过自定义html异常页面并不会影响客户端发送请求异常返回的结果。</p>
+<h2 id="自定义异常处理"><a href="#自定义异常处理" class="headerlink" title="自定义异常处理"></a>自定义异常处理</h2><p>除了可以通过自定义html异常页面来改变浏览器访问接口时产生的异常信息，我们也可以自定义异常处理来改表默认的客户端访问接口产生的异常信息。</p>
+<p>我们手动定义一个UserNotExistException，继承RuntimeException。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">public class UserNotExistException extends RuntimeException&#123;</span><br><span class="line"></span><br><span class="line">    private static final long serialVersionUID = -1574716826948451793L;</span><br><span class="line"></span><br><span class="line">    private String id;</span><br><span class="line"></span><br><span class="line">    public UserNotExistException(String id)&#123;</span><br><span class="line">        super(&quot;user not exist&quot;);</span><br><span class="line">        this.id = id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getId() &#123;</span><br><span class="line">        return id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setId(String id) &#123;</span><br><span class="line">        this.id = id;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后定义一个Controller异常处理类ControllerExceptionHandler：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">@ControllerAdvice</span><br><span class="line">public class ControllerExceptionHandler &#123;</span><br><span class="line"></span><br><span class="line">    @ExceptionHandler(UserNotExistException.class)</span><br><span class="line">    @ResponseBody</span><br><span class="line">    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)</span><br><span class="line">    public Map&lt;String, Object&gt; handleUserNotExistsException(UserNotExistException e) &#123;</span><br><span class="line">        Map&lt;String, Object&gt; map = new HashMap&lt;&gt;();</span><br><span class="line">        map.put(&quot;id&quot;, e.getId());</span><br><span class="line">        map.put(&quot;message&quot;, e.getMessage());</span><br><span class="line">        return map;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其中注解@ExceptionHandler指定了要处理的异常类型，注解@ResponseStatus指定异常处理方法返回的HTTP状态码为HttpStatus.INTERNAL_SERVER_ERROR，即500。HttpStatus是一个spring自带的枚举类型，封装了常见的HTTP状态码及描述：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line">public enum HttpStatus &#123;</span><br><span class="line">    CONTINUE(100, &quot;Continue&quot;),</span><br><span class="line">    SWITCHING_PROTOCOLS(101, &quot;Switching Protocols&quot;),</span><br><span class="line">    PROCESSING(102, &quot;Processing&quot;),</span><br><span class="line">    CHECKPOINT(103, &quot;Checkpoint&quot;),</span><br><span class="line">    OK(200, &quot;OK&quot;),</span><br><span class="line">    CREATED(201, &quot;Created&quot;),</span><br><span class="line">    ACCEPTED(202, &quot;Accepted&quot;),</span><br><span class="line">    NON_AUTHORITATIVE_INFORMATION(203, &quot;Non-Authoritative Information&quot;),</span><br><span class="line">    NO_CONTENT(204, &quot;No Content&quot;),</span><br><span class="line">    RESET_CONTENT(205, &quot;Reset Content&quot;),</span><br><span class="line">    PARTIAL_CONTENT(206, &quot;Partial Content&quot;),</span><br><span class="line">    MULTI_STATUS(207, &quot;Multi-Status&quot;),</span><br><span class="line">    ALREADY_REPORTED(208, &quot;Already Reported&quot;),</span><br><span class="line">    IM_USED(226, &quot;IM Used&quot;),</span><br><span class="line">    MULTIPLE_CHOICES(300, &quot;Multiple Choices&quot;),</span><br><span class="line">    MOVED_PERMANENTLY(301, &quot;Moved Permanently&quot;),</span><br><span class="line">    FOUND(302, &quot;Found&quot;),</span><br><span class="line">    /** @deprecated */</span><br><span class="line">    @Deprecated</span><br><span class="line">    MOVED_TEMPORARILY(302, &quot;Moved Temporarily&quot;),</span><br><span class="line">    SEE_OTHER(303, &quot;See Other&quot;),</span><br><span class="line">    NOT_MODIFIED(304, &quot;Not Modified&quot;),</span><br><span class="line">    /** @deprecated */</span><br><span class="line">    @Deprecated</span><br><span class="line">    USE_PROXY(305, &quot;Use Proxy&quot;),</span><br><span class="line">    TEMPORARY_REDIRECT(307, &quot;Temporary Redirect&quot;),</span><br><span class="line">    PERMANENT_REDIRECT(308, &quot;Permanent Redirect&quot;),</span><br><span class="line">    BAD_REQUEST(400, &quot;Bad Request&quot;),</span><br><span class="line">    UNAUTHORIZED(401, &quot;Unauthorized&quot;),</span><br><span class="line">    PAYMENT_REQUIRED(402, &quot;Payment Required&quot;),</span><br><span class="line">    FORBIDDEN(403, &quot;Forbidden&quot;),</span><br><span class="line">    NOT_FOUND(404, &quot;Not Found&quot;),</span><br><span class="line">    METHOD_NOT_ALLOWED(405, &quot;Method Not Allowed&quot;),</span><br><span class="line">    NOT_ACCEPTABLE(406, &quot;Not Acceptable&quot;),</span><br><span class="line">    PROXY_AUTHENTICATION_REQUIRED(407, &quot;Proxy Authentication Required&quot;),</span><br><span class="line">    REQUEST_TIMEOUT(408, &quot;Request Timeout&quot;),</span><br><span class="line">    CONFLICT(409, &quot;Conflict&quot;),</span><br><span class="line">    GONE(410, &quot;Gone&quot;),</span><br><span class="line">    LENGTH_REQUIRED(411, &quot;Length Required&quot;),</span><br><span class="line">    PRECONDITION_FAILED(412, &quot;Precondition Failed&quot;),</span><br><span class="line">    PAYLOAD_TOO_LARGE(413, &quot;Payload Too Large&quot;),</span><br><span class="line">    /** @deprecated */</span><br><span class="line">    @Deprecated</span><br><span class="line">    REQUEST_ENTITY_TOO_LARGE(413, &quot;Request Entity Too Large&quot;),</span><br><span class="line">    URI_TOO_LONG(414, &quot;URI Too Long&quot;),</span><br><span class="line">    /** @deprecated */</span><br><span class="line">    @Deprecated</span><br><span class="line">    REQUEST_URI_TOO_LONG(414, &quot;Request-URI Too Long&quot;),</span><br><span class="line">    UNSUPPORTED_MEDIA_TYPE(415, &quot;Unsupported Media Type&quot;),</span><br><span class="line">    REQUESTED_RANGE_NOT_SATISFIABLE(416, &quot;Requested range not satisfiable&quot;),</span><br><span class="line">    EXPECTATION_FAILED(417, &quot;Expectation Failed&quot;),</span><br><span class="line">    I_AM_A_TEAPOT(418, &quot;I&apos;m a teapot&quot;),</span><br><span class="line">    /** @deprecated */</span><br><span class="line">    @Deprecated</span><br><span class="line">    INSUFFICIENT_SPACE_ON_RESOURCE(419, &quot;Insufficient Space On Resource&quot;),</span><br><span class="line">    /** @deprecated */</span><br><span class="line">    @Deprecated</span><br><span class="line">    METHOD_FAILURE(420, &quot;Method Failure&quot;),</span><br><span class="line">    /** @deprecated */</span><br><span class="line">    @Deprecated</span><br><span class="line">    DESTINATION_LOCKED(421, &quot;Destination Locked&quot;),</span><br><span class="line">    UNPROCESSABLE_ENTITY(422, &quot;Unprocessable Entity&quot;),</span><br><span class="line">    LOCKED(423, &quot;Locked&quot;),</span><br><span class="line">    FAILED_DEPENDENCY(424, &quot;Failed Dependency&quot;),</span><br><span class="line">    UPGRADE_REQUIRED(426, &quot;Upgrade Required&quot;),</span><br><span class="line">    PRECONDITION_REQUIRED(428, &quot;Precondition Required&quot;),</span><br><span class="line">    TOO_MANY_REQUESTS(429, &quot;Too Many Requests&quot;),</span><br><span class="line">    REQUEST_HEADER_FIELDS_TOO_LARGE(431, &quot;Request Header Fields Too Large&quot;),</span><br><span class="line">    UNAVAILABLE_FOR_LEGAL_REASONS(451, &quot;Unavailable For Legal Reasons&quot;),</span><br><span class="line">    INTERNAL_SERVER_ERROR(500, &quot;Internal Server Error&quot;),</span><br><span class="line">    NOT_IMPLEMENTED(501, &quot;Not Implemented&quot;),</span><br><span class="line">    BAD_GATEWAY(502, &quot;Bad Gateway&quot;),</span><br><span class="line">    SERVICE_UNAVAILABLE(503, &quot;Service Unavailable&quot;),</span><br><span class="line">    GATEWAY_TIMEOUT(504, &quot;Gateway Timeout&quot;),</span><br><span class="line">    HTTP_VERSION_NOT_SUPPORTED(505, &quot;HTTP Version not supported&quot;),</span><br><span class="line">    VARIANT_ALSO_NEGOTIATES(506, &quot;Variant Also Negotiates&quot;),</span><br><span class="line">    INSUFFICIENT_STORAGE(507, &quot;Insufficient Storage&quot;),</span><br><span class="line">    LOOP_DETECTED(508, &quot;Loop Detected&quot;),</span><br><span class="line">    BANDWIDTH_LIMIT_EXCEEDED(509, &quot;Bandwidth Limit Exceeded&quot;),</span><br><span class="line">    NOT_EXTENDED(510, &quot;Not Extended&quot;),</span><br><span class="line">    NETWORK_AUTHENTICATION_REQUIRED(511, &quot;Network Authentication Required&quot;);</span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>编写完自定义异常处理逻辑后，我们将UserController中的方法抛出的异常改为UserNotExistException：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> @GetMapping(&quot;/&#123;id:\\d+&#125;&quot;)</span><br><span class="line">public void get(@PathVariable String id) &#123;</span><br><span class="line">    throw new UserNotExistException(id);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>重启项目，使用Restlet Client再次访问<a href="http://localhost:8080/user/1，响应如下：" target="_blank" rel="noopener">http://localhost:8080/user/1，响应如下：</a><br><img src="https://i.loli.net/2019/11/02/uDaL6OnkE5wmeZF.png" alt="springbootError5.PNG"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/01/Canvas/canvas%E7%9A%84%E8%BD%AC%E6%8D%A2%E5%87%BD%E6%95%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/01/Canvas/canvas%E7%9A%84%E8%BD%AC%E6%8D%A2%E5%87%BD%E6%95%B0/" class="post-title-link" itemprop="url">canvas中的转换函数</a>
         </h1>
 
         <div class="post-meta">
@@ -645,14 +941,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2019-10-30 22:06:24" itemprop="dateCreated datePublished" datetime="2019-10-30T22:06:24+08:00">2019-10-30</time>
+              <time title="Created: 2019-11-01 13:50:02" itemprop="dateCreated datePublished" datetime="2019-11-01T13:50:02+08:00">2019-11-01</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-31 15:51:35" itemprop="dateModified" datetime="2019-10-31T15:51:35+08:00">2019-10-31</time>
+                <time title="Modified: 2019-11-02 19:06:42" itemprop="dateModified" datetime="2019-11-02T19:06:42+08:00">2019-11-02</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -660,8 +956,8 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/ElasticSearch/" itemprop="url" rel="index">
-                    <span itemprop="name">ElasticSearch</span>
+                  <a href="/categories/canvas/" itemprop="url" rel="index">
+                    <span itemprop="name">canvas</span>
                   </a>
                 </span>
             </span>
@@ -677,255 +973,35 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="ElasticSearch中的数据简介"><a href="#ElasticSearch中的数据简介" class="headerlink" title="ElasticSearch中的数据简介"></a>ElasticSearch中的数据简介</h1><hr>
-<h2 id="数据吞吐"><a href="#数据吞吐" class="headerlink" title="数据吞吐"></a>数据吞吐</h2><p>无论程序怎么写，意图是一样的：组织数据为我们的目标所服务。但数据并不只是由随机比特和字节组成，我们在数据节点间建立关联来表示现实世界中的实体或者“某些东西”。属于同一个人的名字和Email地址会有更多的意义。<br>在现实世界中，并不是所有相同类型的实体看起来都是一样的。一个人可能有一个家庭电话号码，另一个人可能只有一个手机号码，有些人可能两者都有。一个人可能有三个Email地址，其他人可能没有。西班牙人可能有两个姓氏，但是英国人（英语系国家的人）可能只有一个。<br>面向对象编程语言流行的原因之一，是我们可以用对象来表示和处理现实生活中那些有着潜在关系和复杂结构的实体。到目前为止，这种方式还不错。<br>但当我们想存储这些实体时问题便来了。传统上，我们以行和列的形式把数据存储在关系型数据库中，相当于使用电子表格。这种固定的存储方式导致对象的灵活性不复存在了。<br>但是如何能以对象的形式存储对象呢？相对于围绕表格去为我们的程序去建模，我们可以专注于使用数据，把对象本来的灵活性找回来。<br>对象(object)是一种语言相关，记录在内存中的的数据结构。为了在网络间发送，或者存储它，我们需要一些标准的格式来表示它。JSON (JavaScript Object Notation)是一种可读的以文本来表示对象的方式。它已经成为NoSQL世界中数据交换的一种事实标准。当对象被序列化为JSON，它就成为JSON文档(JSON document)了。</p>
-<p>重点在下面这段话<br><em>Elasticsearch是一个分布式的文档(document)存储引擎。它可以实时存储并检索复杂数据结构——序列化的JSON文档。换言说，一旦文档被存储在Elasticsearch中，它就可以在集群的任一节点上被检索。<br>当然，我们不仅需要存储数据，还要快速的批量查询。虽然已经有很多NoSQL的解决方案允许我们以文档的形式存储对象，但它们依旧需要考虑如何查询这些数据，以及哪些字段需要被索引以便检索时更加快速。<br>在Elasticsearch中，每一个字段的数据都是默认被索引的。也就是说，每个字段专门有一个反向索引用于快速检索。而且，与其它数据库不同，它可以在同一个查询中利用所有的这些反向索引，以惊人的速度返回结果。<br>在这一章我们将探讨如何使用API来创建、检索、更新和删除文档。目前，我们并不关心数据如何在文档中以及如何查询他们。所有我们关心的是文档如何安全在Elasticsearch中存储，以及如何让它们返回。</em></p>
-<h2 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h2><h3 id="什么是文档？"><a href="#什么是文档？" class="headerlink" title="什么是文档？"></a>什么是文档？</h3><p>程序中大多的实体或对象能够被序列化为包含键值对的JSON对象，键(key)是字段(field)或属性(property)的名字，值(value)可以是字符串、数字、布尔类型、另一个对象、值数组或者其他特殊类型，比如表示日期的字符串或者表示地理位置的对象。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;name&quot;:         &quot;John Smith&quot;,</span><br><span class="line">    &quot;age&quot;:          42,</span><br><span class="line">    &quot;confirmed&quot;:    true,</span><br><span class="line">    &quot;join_date&quot;:    &quot;2014-06-01&quot;,</span><br><span class="line">    &quot;home&quot;: &#123;</span><br><span class="line">        &quot;lat&quot;:      51.5,</span><br><span class="line">        &quot;lon&quot;:      0.1</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;accounts&quot;: [</span><br><span class="line">        &#123;</span><br><span class="line">            &quot;type&quot;: &quot;facebook&quot;,</span><br><span class="line">            &quot;id&quot;:   &quot;johnsmith&quot;</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">            &quot;type&quot;: &quot;twitter&quot;,</span><br><span class="line">            &quot;id&quot;:   &quot;johnsmith&quot;</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>通常，我们可以认为对象(object)和文档(document)是等价相通的。不过，他们还是有所差别：对象(Object)是一个JSON结构体——类似于哈希、hashmap、字典或者关联数组；对象(Object)中还可能包含其他对象(Object)。 在Elasticsearch中，文档(document)这个术语有着特殊含义。它特指最顶层结构或者根对象(root object)序列化成的JSON数据（以唯一ID标识并存储于Elasticsearch中）。</p>
-<h3 id="文档元数据"><a href="#文档元数据" class="headerlink" title="文档元数据"></a>文档元数据</h3><p>一个文档不只有数据。它还包含了元数据(metadata)——关于文档的信息。三个必须的元数据节点是：<br>|节点|说明|<br>|—|—|<br>| <em>index</em>|文档存储的地方|<br>| <em>type</em>|文档代表的对象的类|<br>|<em>id</em>|文档的唯一标识|</p>
-<h4 id="index"><a href="#index" class="headerlink" title="index"></a><em>index</em></h4><p>索引(index)类似于关系型数据库里的“数据库”——它是我们存储和索引关联数据的地方</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">提示：</span><br><span class="line"></span><br><span class="line">事实上，我们的数据被存储和索引在分片(shards)中，索引只是一个把一个或多个分片分组在一起的逻辑空间。然而，这只是一些内部细节——我们的程序完全不用关心分片。对于我们的程序而言，文档存储在索引(index)中。剩下的细节由Elasticsearch关心既可。</span><br></pre></td></tr></table></figure>
-
-<h4 id="type"><a href="#type" class="headerlink" title="type"></a><em>type</em></h4><p>在应用中，我们使用对象表示一些“事物”，例如一个用户、一篇博客、一个评论，或者一封邮件。每个对象都属于一个类(class)，这个类定义了属性或与对象关联的数据。user类的对象可能包含姓名、性别、年龄和Email地址。</p>
-<p>在关系型数据库中，我们经常将相同类的对象存储在一个表里，因为它们有着相同的结构。同理，在Elasticsearch中，我们使用相同类型(type)的文档表示相同的“事物”，因为他们的数据结构也是相同的。<br>每个类型(type)都有自己的映射(mapping)或者结构定义，就像传统数据库表中的列一样。所有类型下的文档被存储在同一个索引下，但是类型的映射(mapping)会告诉Elasticsearch不同的文档如何被索引。 我们将会在《映射》章节探讨如何定义和管理映射，但是现在我们将依赖Elasticsearch去自动处理数据结构。<br><em>type</em> 的名字可以是大写或小写，不能包含下划线或逗号。我们将使用blog做为类型名。</p>
-<h4 id="id"><a href="#id" class="headerlink" title="id"></a><em>id</em></h4><p>id仅仅是一个字符串，它与_index和_type组合时，就可以在Elasticsearch中唯一标识一个文档。当创建一个文档，你可以自定义_id，也可以让Elasticsearch帮你自动生成。</p>
-<h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><h3 id="索引一个文档"><a href="#索引一个文档" class="headerlink" title="索引一个文档"></a>索引一个文档</h3><p>文档通过index API被索引——使数据可以被存储和搜索。但是首先我们需要决定文档所在。正如我们讨论的，文档通过其_index、_type、_id_唯一确定。们可以自己提供一个_id_，或者也使用index API 为我们生成一个。</p>
-<h3 id="使用自己的ID"><a href="#使用自己的ID" class="headerlink" title="使用自己的ID"></a>使用自己的ID</h3><p>如果你的文档有自然的标识符（例如user_account字段或者其他值表示文档），你就可以提供自己的_id，使用这种形式的index API：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">PUT /&#123;index&#125;/&#123;type&#125;/&#123;id&#125;</span><br><span class="line">&#123;</span><br><span class="line">  &quot;field&quot;: &quot;value&quot;,</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>例如我们的索引叫做“website”，类型叫做“blog”，我们选择的ID是“123”，那么这个索引请求就像这样：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">PUT /website/blog/123</span><br><span class="line">&#123;</span><br><span class="line">  &quot;title&quot;: &quot;My first blog entry&quot;,</span><br><span class="line">  &quot;text&quot;:  &quot;Just trying this out...&quot;,</span><br><span class="line">  &quot;date&quot;:  &quot;2014/01/01&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Elasticsearch的响应：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">   &quot;_index&quot;:    &quot;website&quot;,</span><br><span class="line">   &quot;_type&quot;:     &quot;blog&quot;,</span><br><span class="line">   &quot;_id&quot;:       &quot;123&quot;,</span><br><span class="line">   &quot;_version&quot;:  1,</span><br><span class="line">   &quot;created&quot;:   true</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>响应指出请求的索引已经被成功创建，这个索引中包含<em>index、_type和_id元数据，以及一个新元素：_version</em><br>Elasticsearch中每个文档都有版本号，每当文档变化（包括删除）都会使_version增加。在《版本控制》章节中我们将探讨如何使用_version号确保你程序的一部分不会覆盖掉另一部分所做的更改。</p>
-<h3 id="自增id"><a href="#自增id" class="headerlink" title="自增id"></a>自增id</h3><p>如果我们的数据没有自然ID，我们可以让Elasticsearch自动为我们生成。请求结构发生了变化：PUT方法——“在这个URL中存储文档”变成了POST方法——“在这个类型下存储文档”。（译者注：原来是把文档存储到某个ID对应的空间，现在是把这个文档添加到某个_type下）。</p>
-<p>URL现在只包含_index和_type两个字段：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">POST /website/blog/</span><br><span class="line">&#123;</span><br><span class="line">  &quot;title&quot;: &quot;My second blog entry&quot;,</span><br><span class="line">  &quot;text&quot;:  &quot;Still trying this out...&quot;,</span><br><span class="line">  &quot;date&quot;:  &quot;2014/01/01&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>响应内容与刚才类似，只有_id字段变成了自动生成的值：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">   &quot;_index&quot;:    &quot;website&quot;,</span><br><span class="line">   &quot;_type&quot;:     &quot;blog&quot;,</span><br><span class="line">   &quot;_id&quot;:       &quot;wM0OSFhDQXGZAWDf0-drSA&quot;,</span><br><span class="line">   &quot;_version&quot;:  1,</span><br><span class="line">   &quot;created&quot;:   true</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>自动生成的ID有22个字符长，URL-safe, Base64-encoded string universally unique identifiers, 或者叫 UUIDs。</p>
-<h2 id="3-3-获取"><a href="#3-3-获取" class="headerlink" title="3.3 获取"></a>3.3 获取</h2><h3 id="检索文档"><a href="#检索文档" class="headerlink" title="检索文档"></a>检索文档</h3><p>想要从Elasticsearch中获取文档，我们使用同样的_index、_type、_id_，但是HTTP方法改为GET：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET /website/blog/123?pretty</span><br></pre></td></tr></table></figure>
-<p>响应包含了现在熟悉的元数据节点，增加了_source字段，它包含了在创建索引时我们发送给Elasticsearch的原始文档。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;_index&quot; :   &quot;website&quot;,</span><br><span class="line">  &quot;_type&quot; :    &quot;blog&quot;,</span><br><span class="line">  &quot;_id&quot; :      &quot;123&quot;,</span><br><span class="line">  &quot;_version&quot; : 1,</span><br><span class="line">  &quot;found&quot; :    true,</span><br><span class="line">  &quot;_source&quot; :  &#123;</span><br><span class="line">      &quot;title&quot;: &quot;My first blog entry&quot;,</span><br><span class="line">      &quot;text&quot;:  &quot;Just trying this out...&quot;,</span><br><span class="line">      &quot;date&quot;:  &quot;2014/01/01&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>提示</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pretty</span><br><span class="line">在任意的查询字符串中增加pretty参数，类似于上面的例子。会让Elasticsearch美化输出(pretty-print)JSON响应以便更加容易阅读。_source字段不会被美化，它的样子与我们输入的一致。</span><br></pre></td></tr></table></figure>
-
-<p>GET请求返回的响应内容包括{“found”: true}。这意味着文档已经找到。如果我们请求一个不存在的文档，依旧会得到一个JSON，不过found值变成了false。</p>
-<p>此外，HTTP响应状态码也会变成’404 Not Found’代替’200 OK’。我们可以在curl后加-i参数得到响应头：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -i -XGET http://localhost:9200/website/blog/124?pretty</span><br></pre></td></tr></table></figure>
-
-<p>现在响应类似于这样：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 404 Not Found</span><br><span class="line">Content-Type: application/json; charset=UTF-8</span><br><span class="line">Content-Length: 83</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  &quot;_index&quot; : &quot;website&quot;,</span><br><span class="line">  &quot;_type&quot; :  &quot;blog&quot;,</span><br><span class="line">  &quot;_id&quot; :    &quot;124&quot;,</span><br><span class="line">  &quot;found&quot; :  false</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="检索文档的一部分"><a href="#检索文档的一部分" class="headerlink" title="检索文档的一部分"></a>检索文档的一部分</h3><p>通常，GET请求将返回文档的全部，存储在_source参数中。但是可能你感兴趣的字段只是title。请求个别字段可以使用_source参数。多个字段可以使用逗号分隔：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET /website/blog/123?_source=title,text</span><br></pre></td></tr></table></figure>
-<p><em>source</em> 字段现在只包含我们请求的字段，而且过滤了date字段：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;_index&quot; :   &quot;website&quot;,</span><br><span class="line">  &quot;_type&quot; :    &quot;blog&quot;,</span><br><span class="line">  &quot;_id&quot; :      &quot;123&quot;,</span><br><span class="line">  &quot;_version&quot; : 1,</span><br><span class="line">  &quot;exists&quot; :   true,</span><br><span class="line">  &quot;_source&quot; : &#123;</span><br><span class="line">      &quot;title&quot;: &quot;My first blog entry&quot; ,</span><br><span class="line">      &quot;text&quot;:  &quot;Just trying this out...&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>或者你只想得到_source字段而不要其他的元数据，你可以这样请求：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET /website/blog/123/_source</span><br></pre></td></tr></table></figure>
-<p>它仅仅返回</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">   &quot;title&quot;: &quot;My first blog entry&quot;,</span><br><span class="line">   &quot;text&quot;:  &quot;Just trying this out...&quot;,</span><br><span class="line">   &quot;date&quot;:  &quot;2014/01/01&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="存在"><a href="#存在" class="headerlink" title="存在"></a>存在</h2><h3 id="检查文档是否存在"><a href="#检查文档是否存在" class="headerlink" title="检查文档是否存在"></a>检查文档是否存在</h3><p>如果你想做的只是检查文档是否存在——你对内容完全不感兴趣——使用HEAD方法来代替GET。HEAD请求不会返回响应体，只有HTTP头：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -i -XHEAD http://localhost:9200/website/blog/123</span><br></pre></td></tr></table></figure>
-<p>Elasticsearch将会返回200 OK状态如果你的文档存在：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 200 OK</span><br><span class="line">Content-Type: text/plain; charset=UTF-8</span><br><span class="line">Content-Length: 0</span><br></pre></td></tr></table></figure>
-<p>如果不存在返回404 Not Found：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -i -XHEAD http://localhost:9200/website/blog/124</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 404 Not Found</span><br><span class="line">Content-Type: text/plain; charset=UTF-8</span><br><span class="line">Content-Length: 0</span><br></pre></td></tr></table></figure>
-<p>当然，这只表示你在查询的那一刻文档不存在，但并不表示几毫秒后依旧不存在。另一个进程在这期间可能创建新文档。</p>
-<h2 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h2><h3 id="更新整个文档"><a href="#更新整个文档" class="headerlink" title="更新整个文档"></a>更新整个文档</h3><p>文档在Elasticsearch中是不可变的——我们不能修改他们。如果需要更新已存在的文档，我们可以使用《索引文档》章节提到的index API 重建索引(reindex) 或者替换掉它。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">PUT /website/blog/123</span><br><span class="line">&#123;</span><br><span class="line">  &quot;title&quot;: &quot;My first blog entry&quot;,</span><br><span class="line">  &quot;text&quot;:  &quot;I am starting to get the hang of this...&quot;,</span><br><span class="line">  &quot;date&quot;:  &quot;2014/01/02&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在响应中，我们可以看到Elasticsearch把_version增加了。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;_index&quot; :   &quot;website&quot;,</span><br><span class="line">  &quot;_type&quot; :    &quot;blog&quot;,</span><br><span class="line">  &quot;_id&quot; :      &quot;123&quot;,</span><br><span class="line">  &quot;_version&quot; : 2,</span><br><span class="line">  &quot;created&quot;:   false &lt;1&gt;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+          <h1 id="canvas中的转换函数"><a href="#canvas中的转换函数" class="headerlink" title="canvas中的转换函数"></a>canvas中的转换函数</h1><hr>
+<h2 id="保存和还原状态"><a href="#保存和还原状态" class="headerlink" title="保存和还原状态"></a>保存和还原状态</h2><p>在介绍转换方法之前，让我们看一下另外两种方法，一旦开始生成更复杂的图形，这些方法必不可少。</p>
 <ul>
-<li>&lt;1&gt; created标识为false因为同索引、同类型下已经存在同ID的文档。<br>在内部，Elasticsearch已经标记旧文档为删除并添加了一个完整的新文档。旧版本文档不会立即消失，但你也不能去访问它。Elasticsearch会在你继续索引更多数据时清理被删除的文档。</li>
+<li>save()<br>保存画布的整个状态。</li>
+<li>restore()<br>恢复最近保存的画布状态</li>
 </ul>
-<p>在本章的后面，我们将会在《局部更新》中探讨update API。这个API 似乎 允许你修改文档的局部，但事实上Elasticsearch遵循与之前所说完全相同的过程，这个过程如下：</p>
+<p>画布状态存储在堆栈中。每次save()调用该方法时，当前的绘图状态都会被压入堆栈。绘图状态包括</p>
 <ul>
-<li>从旧文档中检索JSON</li>
-<li>修改它</li>
-<li>删除旧文档</li>
-<li>索引新文档<br>唯一的不同是update API完成这一过程只需要一个客户端请求既可，不再需要get和index请求了。</li>
+<li>已应用转换（即translate，rotate和scale-见下文）。</li>
+<li>以下属性的当前值：strokeStyle，fillStyle，globalAlpha，lineWidth，lineCap，lineJoin，miterLimit，lineDashOffset，shadowOffsetX，shadowOffsetY，shadowBlur，shadowColor，globalCompositeOperation，font，textAlign，textBaseline，direction，imageSmoothingEnabled。</li>
+<li>当前的剪切路径，我们将在下一部分中看到。</li>
 </ul>
-<h2 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h2><h3 id="创建一个新文档"><a href="#创建一个新文档" class="headerlink" title="创建一个新文档"></a>创建一个新文档</h3><p>当索引一个文档，我们如何确定是完全创建了一个新的还是覆盖了一个已经存在的呢？</p>
-<p>请记住<em>index、_type、_id</em> 三者唯一确定一个文档。所以要想保证文档是新加入的，最简单的方式是使用POST方法让Elasticsearch自动生成唯一_id：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">POST /website/blog/</span><br><span class="line">&#123; ... &#125;</span><br></pre></td></tr></table></figure>
-<p>然而，如果想使用自定义的<em>id，我们必须告诉Elasticsearch应该在_index、_type、_id</em> 三者都不同时才接受请求。为了做到这点有两种方法，它们其实做的是同一件事情。你可以选择适合自己的方式：</p>
-<p>第一种方法使用op_type查询参数：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">PUT /website/blog/123?op_type=create</span><br><span class="line">&#123; ... &#125;</span><br></pre></td></tr></table></figure>
-<p>或者第二种方法是在URL后加/<em>create</em> 做为端点：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">PUT /website/blog/123/_create</span><br><span class="line">&#123; ... &#125;</span><br></pre></td></tr></table></figure>
-
-<p>如果请求成功的创建了一个新文档，Elasticsearch将返回正常的元数据且响应状态码是201 Created。<br>另一方面，如果包含相同的<em>index、_type和_id</em> 的文档已经存在，Elasticsearch将返回409 Conflict响应状态码，错误信息类似如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;error&quot; : &quot;DocumentAlreadyExistsException[[website][4] [blog][123]:</span><br><span class="line">             document already exists]&quot;,</span><br><span class="line">  &quot;status&quot; : 409</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h2><h3 id="删除文档"><a href="#删除文档" class="headerlink" title="删除文档"></a>删除文档</h3><p>删除文档的语法模式与之前基本一致，只不过要使用DELETE方法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DELETE /website/blog/123</span><br></pre></td></tr></table></figure>
-<p>如果文档被找到，Elasticsearch将返回200 OK状态码和以下响应体。注意_version数字已经增加了。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;found&quot; :    true,</span><br><span class="line">  &quot;_index&quot; :   &quot;website&quot;,</span><br><span class="line">  &quot;_type&quot; :    &quot;blog&quot;,</span><br><span class="line">  &quot;_id&quot; :      &quot;123&quot;,</span><br><span class="line">  &quot;_version&quot; : 3</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>如果文档未找到，我们将得到一个404 Not Found状态码，响应体是这样的：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;found&quot; :    false,</span><br><span class="line">  &quot;_index&quot; :   &quot;website&quot;,</span><br><span class="line">  &quot;_type&quot; :    &quot;blog&quot;,</span><br><span class="line">  &quot;_id&quot; :      &quot;123&quot;,</span><br><span class="line">  &quot;_version&quot; : 4</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>尽管文档不存在——“found”的值是false——<em>version</em> 依旧增加了。这是内部记录的一部分，它确保在多节点间不同操作可以有正确的顺序。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">正如在《更新文档》一章中提到的，删除一个文档也不会立即从磁盘上移除，它只是被标记成已删除。Elasticsearch将会在你之后添加更多索引的时候才会在后台进行删除内容的清理。</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/10/30/ElasticSearch/ElasticSearch%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lancersaber">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lancersaber">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/10/30/ElasticSearch/ElasticSearch%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/" class="post-title-link" itemprop="url">ElasticSearch分布式集群</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2019-10-30 22:00:25 / Modified: 22:03:03" itemprop="dateCreated datePublished" datetime="2019-10-30T22:00:25+08:00">2019-10-30</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/ElasticSearch/" itemprop="url" rel="index">
-                    <span itemprop="name">ElasticSearch</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="ElasticSearch分布式集群简介"><a href="#ElasticSearch分布式集群简介" class="headerlink" title="ElasticSearch分布式集群简介"></a>ElasticSearch分布式集群简介</h1><hr>
-<h2 id="集群内部工作方式"><a href="#集群内部工作方式" class="headerlink" title="集群内部工作方式"></a>集群内部工作方式</h2><p>Elasticsearch用于构建高可用和可扩展的系统。扩展的方式可以是购买更好的服务器(纵向扩展(vertical scale or scaling up))或者购买更多的服务器（横向扩展(horizontal scale or scaling out)）。</p>
-<p>Elasticsearch虽然能从更强大的硬件中获得更好的性能，但是纵向扩展有它的局限性。真正的扩展应该是横向的，它通过增加节点来均摊负载和增加可靠性。<br>对于大多数数据库而言，横向扩展意味着你的程序将做非常大的改动才能利用这些新添加的设备。对比来说，Elasticsearch天生就是分布式的：它知道如何管理节点来提供高扩展和高可用。这意味着你的程序不需要关心这些。<br>在这章我们将探索如何创建你的集群(cluster)、节点(node)和分片(shards)，使其按照你的需求进行扩展，并保证在硬件故障时数据依旧安全。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/10/30/Nginx/%E6%AD%A3%E5%90%91%E4%BB%A3%E7%90%86%E5%92%8C%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lancersaber">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lancersaber">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/10/30/Nginx/%E6%AD%A3%E5%90%91%E4%BB%A3%E7%90%86%E5%92%8C%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/" class="post-title-link" itemprop="url">正向代理和反向代理</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2019-10-30 21:23:29 / Modified: 22:08:11" itemprop="dateCreated datePublished" datetime="2019-10-30T21:23:29+08:00">2019-10-30</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Nginx/" itemprop="url" rel="index">
-                    <span itemprop="name">Nginx</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="正向代理和反向代理"><a href="#正向代理和反向代理" class="headerlink" title="正向代理和反向代理"></a>正向代理和反向代理</h1><hr>
-<h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>正向代理是一个位于客户端和目标服务器之间的代理服务器(中间服务器)。为了从原始服务器取得内容，客户端向代理服务器发送一个请求，并且指定目标服务器，之后代理向目标服务器转交并且将获得的内容返回给客户端。正向代理的情况下客户端必须要进行一些特别的设置才能使用。</p>
-<p>  反向代理正好相反。对于客户端来说，反向代理就好像目标服务器。并且客户端不需要进行任何设置。客户端向反向代理发送请求，接着反向代理判断请求走向何处，并将请求转交给客户端，使得这些内容就好似他自己一样，一次客户端并不会感知到反向代理后面的服务，也因此不需要客户端做任何设置，只需要把反向代理服务器当成真正的服务器就好了。</p>
-<h2 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h2><p> 正向代理需要你主动设置代理服务器ip或者域名进行访问，由设置的服务器ip或者域名去获取访问内容并返回；而反向代理不需要你做任何设置，直接访问服务器真实ip或者域名，但是服务器内部会自动根据访问内容进行跳转及内容返回，你不知道它最终访问的是哪些机器。</p>
-<p>正向代理是代理客户端，为客户端收发请求，使真实客户端对服务器不可见；而反向代理是代理服务器端，为服务器收发请求，使真实服务器对客户端不可见。<br>从上面的描述也能看得出来正向代理和反向代理最关键的两点区别：</p>
+<p>您可以save()根据需要多次调用该方法。每次restore()调用该方法时，都会从堆栈中弹出最后一个保存的状态，并还原所有保存的设置。</p>
+<h2 id="平移"><a href="#平移" class="headerlink" title="平移"></a>平移</h2><p>我们将介绍的第一种转换方法是translate()。此方法用于将画布及其原点移动到网格中的其他点。</p>
 <ul>
-<li>是否指定目标服务器</li>
-<li>客户端是否要做设置<br>下面用一张图来表示两者的差异：<br><img src="https://i.loli.net/2019/10/30/GPH5oTDQAeKvRru.png" alt="12.PNG"><br>正向代理中，proxy和client同属一个LAN，对server透明； 反向代理中，proxy和server同属一个LAN，对client透明。 实际上proxy在两种代理中做的事都是代为收发请求和响应，不过从结构上来看正好左右互换了下，所以把前者那种代理方式叫做正向代理，后者叫做反向代理。<br>从用途区分</li>
-<li>正向代理：正向代理用途是为了在防火墙内的局域网提供访问internet的途径。另外还可以使用缓冲特性减少网络使用率</li>
-<li>反向代理：反向代理的用途是将防火墙后面的服务器提供给internet用户访问。同时还可以完成诸如负载均衡等功能<br> 从安全性来讲：</li>
-<li>正向代理：正向代理允许客户端通过它访问任意网站并且隐蔽客户端自身，因此你必须采取安全措施来确保仅为经过授权的客户端提供服务</li>
-<li>反向代理：对外是透明的，访问者并不知道自己访问的是代理。对访问者而言，他以为访问的就是原始服务器</li>
+<li>translate(x, y)<br>在画布上移动画布及其原点。x指示要移动的水平距离，并y指示垂直移动网格的距离。</li>
 </ul>
+<h2 id="旋转"><a href="#旋转" class="headerlink" title="旋转"></a>旋转</h2><p>第二种转换方法是rotate()。我们使用它来围绕当前原点旋转画布。</p>
+<ul>
+<li>rotate(angle)<br>按angle弧度数围绕当前原点<em>顺时针</em>旋转画布。</li>
+</ul>
+<p>旋转中心点始终是画布原点。要更改中心点，我们需要使用translate()方法移动画布。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">提醒：角度以弧度而不是度为单位。要进行转换，我们使用：radians = (Math.PI/180)*degrees。</span><br></pre></td></tr></table></figure>
+
+<h2 id="缩放"><a href="#缩放" class="headerlink" title="缩放"></a>缩放</h2><p>下一个转换方法是缩放。我们使用它来增加或减少画布网格中的单位。这可用于绘制按比例缩小或放大的形状和位图。</p>
+<ul>
+<li>scale(x, y)<br>水平按x缩放画布单位，垂直按y缩放画布单位。这两个参数都是实数。小于1.0的值将减小单位大小，而大于1.0的值将增大单位大小。值1.0会使单位保持相同大小。<br>使用负数可以进行轴镜像（例如，使用translate(0,canvas.height); scale(1,-1);会具有众所周知的笛卡尔坐标系，其原点位于左下角）。</li>
+</ul>
+<p>默认情况下，画布上的一个单位正好是一个像素。例如，如果我们应用比例因子0.5，则结果单位将变为0.5像素，因此将以一半大小绘制形状。以类似的方式将缩放因子设置为2.0将增加单位大小，并且一个单位现在变为两个像素。这将导致绘制两倍大的形状。</p>
 
       
     </div>
@@ -945,7 +1021,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/10/30/Dubbo/Dubbo%E5%85%A5%E9%97%A8%E9%A1%B9%E7%9B%AE/">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/01/Canvas/canvas%E7%9A%84%E4%B8%80%E4%BA%9B%E7%BB%98%E5%9B%BE%E6%A0%B7%E5%BC%8F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -959,7 +1035,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/10/30/Dubbo/Dubbo%E5%85%A5%E9%97%A8%E9%A1%B9%E7%9B%AE/" class="post-title-link" itemprop="url">Dubbo 入门项目</a>
+            <a href="/2019/11/01/Canvas/canvas%E7%9A%84%E4%B8%80%E4%BA%9B%E7%BB%98%E5%9B%BE%E6%A0%B7%E5%BC%8F/" class="post-title-link" itemprop="url">canvas的绘图样式</a>
         </h1>
 
         <div class="post-meta">
@@ -968,18 +1044,24 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2019-10-30 19:05:08 / Modified: 22:08:11" itemprop="dateCreated datePublished" datetime="2019-10-30T19:05:08+08:00">2019-10-30</time>
+              <time title="Created: 2019-11-01 13:49:41" itemprop="dateCreated datePublished" datetime="2019-11-01T13:49:41+08:00">2019-11-01</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-11-02 19:06:42" itemprop="dateModified" datetime="2019-11-02T19:06:42+08:00">2019-11-02</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Dubbo/" itemprop="url" rel="index">
-                    <span itemprop="name">Dubbo</span>
+                  <a href="/categories/canvas/" itemprop="url" rel="index">
+                    <span itemprop="name">canvas</span>
                   </a>
                 </span>
             </span>
@@ -995,7 +1077,43 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Dubbo入门项目"><a href="#Dubbo入门项目" class="headerlink" title="Dubbo入门项目"></a>Dubbo入门项目</h1><hr>
+          <h1 id="Canvas的绘图样式"><a href="#Canvas的绘图样式" class="headerlink" title="Canvas的绘图样式"></a>Canvas的绘图样式</h1><hr>
+<h2 id="色彩"><a href="#色彩" class="headerlink" title="色彩"></a>色彩</h2><p>到目前为止，我们只看到了绘图上下文的方法。如果要对形状应用颜色，可以使用两个重要的属性：fillStyle和strokeStyle。</p>
+<ul>
+<li>fillStyle = color<br>设置填充形状时使用的样式。</li>
+<li>strokeStyle = color<br>设置形状轮廓的样式。</li>
+</ul>
+<p>color是表示CSS <color>，渐变对象或图案对象的字符串。稍后我们将介绍渐变和图案对象。默认情况下，笔触和填充颜色设置为黑色（CSS颜色值#000000）。<br>tips：注意：设置strokeStyleand / or fillStyle属性时，新值将成为从此以后绘制的所有形状的默认值。对于您要使用不同颜色的每个形状，都需要重新分配fillStyle或strokeStyle属性。</p>
+<p>根据规范，您可以输入的有效字符串应为CSS <color>值。下面的每个示例描述相同的颜色</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// these all set the fillStyle to &apos;orange&apos;</span><br><span class="line"></span><br><span class="line">ctx.fillStyle = &apos;orange&apos;;</span><br><span class="line">ctx.fillStyle = &apos;#FFA500&apos;;</span><br><span class="line">ctx.fillStyle = &apos;rgb(255, 165, 0)&apos;;</span><br><span class="line">ctx.fillStyle = &apos;rgba(255, 165, 0, 1)&apos;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="透明度"><a href="#透明度" class="headerlink" title="透明度"></a>透明度</h2><p>除了在画布上绘制不透明形状外，我们还可以绘制半透明（或半透明）形状。这可以通过设置globalAlpha属性或为笔触和/或填充样式分配半透明颜色来完成。</p>
+<ul>
+<li>globalAlpha = transparencyValue<br>将指定的透明度值应用于画布上绘制的所有将来形状。该值必须介于0.0（完全透明）到1.0（完全不透明）之间。默认情况下，此值为1.0（完全不透明）。</li>
+</ul>
+<p>globalAlpha如果要在画布上绘制许多具有相似透明度的形状，则此属性很有用，但是通常在设置单个形状的颜色时设置其透明度通常会更有用。<br>由于strokeStyleand fillStyle属性接受CSS rgba颜色值，因此我们可以使用以下符号为它们分配透明颜色。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// Assigning transparent colors to stroke and fill style</span><br><span class="line"></span><br><span class="line">ctx.strokeStyle = &apos;rgba(255, 0, 0, 0.5)&apos;;</span><br><span class="line">ctx.fillStyle = &apos;rgba(255, 0, 0, 0.5)&apos;;</span><br></pre></td></tr></table></figure>
+
+<p>该rgba()功能与该功能相似，rgb()但是有一个额外的参数。最后一个参数设置此特定颜色的透明度值。有效范围还是介于0.0（完全透明）和1.0（完全不透明）之间。</p>
+<h2 id="线型"><a href="#线型" class="headerlink" title="线型"></a>线型</h2><p>有几个属性使我们可以设置线条样式。</p>
+<ul>
+<li>lineWidth = value<br>设置将来绘制的线条的宽度。</li>
+<li>lineCap = type<br>设置行尾的外观。</li>
+<li>lineJoin = type<br>设置线条相交处的“角”的外观。</li>
+<li>miterLimit = value<br>当两条直线以锐角连接时，对斜接进行限制，以使您可以控制接合处的厚度。</li>
+<li>getLineDash()<br>返回包含偶数个非负数的当前行虚线图案阵列。</li>
+<li>setLineDash(segments)<br>设置当前线的虚线图案。</li>
+<li>lineDashOffset = value<br>指定在一行上从何处开始破折号数组。</li>
+</ul>
+<h2 id="渐变色"><a href="#渐变色" class="headerlink" title="渐变色"></a>渐变色</h2><p>就像任何普通的绘图程序一样，我们可以使用线性和径向渐变来填充和描边形状。我们CanvasGradient使用以下方法之一创建对象。然后，我们可以将此对象分配给fillStyle或strokeStyle属性。</p>
+<ul>
+<li>createLinearGradient(x1, y1, x2, y2)<br>创建一个线性渐变对象，其起点为（x1，y1），终点为（x2，y2）。</li>
+<li>createRadialGradient(x1, y1, r1, x2, y2, r2)<br>创建一个径向渐变。参数代表两个圆，一个圆的中心为（x1，y1），半径为r1，另一个圆的中心为（x2，y2），半径为r2。<br>例：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var lineargradient = ctx.createLinearGradient(0, 0, 150, 150);</span><br><span class="line">var radialgradient = ctx.createRadialGradient(75, 75, 0, 75, 75, 100);</span><br></pre></td></tr></table></figure>
+创建CanvasGradient对象后，可以使用addColorStop()方法为对象分配颜色</li>
+<li>gradient.addColorStop(position, color)<br>在gradient对象上创建一个新的色标。position是在0.0和1.0之间的数，并且限定在渐变中的颜色的相对位置，并且所述color参数必须是表示CSS一个字符串color，表示颜色的梯度应该偏移处的过渡达到。</li>
+</ul>
+<p>您可以根据需要向渐变添加尽可能多的色标。下面是一个非常简单的从白色到黑色的线性渐变。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var lineargradient = ctx.createLinearGradient(0, 0, 150, 150);</span><br><span class="line">lineargradient.addColorStop(0, &apos;white&apos;);</span><br><span class="line">lineargradient.addColorStop(1, &apos;black&apos;);</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -1015,7 +1133,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/10/30/Dubbo/Dubbo%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/01/Spring/Springboot%E6%97%A5%E5%BF%97%E9%85%8D%E7%BD%AE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1029,7 +1147,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/10/30/Dubbo/Dubbo%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" class="post-title-link" itemprop="url">Dubbo环境搭建</a>
+            <a href="/2019/11/01/Spring/Springboot%E6%97%A5%E5%BF%97%E9%85%8D%E7%BD%AE/" class="post-title-link" itemprop="url">springboot日志配置</a>
         </h1>
 
         <div class="post-meta">
@@ -1038,18 +1156,24 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2019-10-30 18:52:59 / Modified: 22:08:11" itemprop="dateCreated datePublished" datetime="2019-10-30T18:52:59+08:00">2019-10-30</time>
+              <time title="Created: 2019-11-01 12:18:10" itemprop="dateCreated datePublished" datetime="2019-11-01T12:18:10+08:00">2019-11-01</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-11-02 09:13:12" itemprop="dateModified" datetime="2019-11-02T09:13:12+08:00">2019-11-02</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Dubbo/" itemprop="url" rel="index">
-                    <span itemprop="name">Dubbo</span>
+                  <a href="/categories/spring/" itemprop="url" rel="index">
+                    <span itemprop="name">spring</span>
                   </a>
                 </span>
             </span>
@@ -1065,9 +1189,83 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Dubbo环境搭建"><a href="#Dubbo环境搭建" class="headerlink" title="Dubbo环境搭建"></a>Dubbo环境搭建</h1><hr>
-<h2 id="安装注册中心"><a href="#安装注册中心" class="headerlink" title="安装注册中心"></a>安装注册中心</h2><p>注册中心有多种，官网推荐使用zookeeper。我们在windows安装，供学习使用。下载zookeeper的zip包后，启动bin目录下的zkServer.cmd即可。</p>
-<h2 id="安装监控中心"><a href="#安装监控中心" class="headerlink" title="安装监控中心"></a>安装监控中心</h2><p>去dubbo的github地址下载incubator-dubbo-ops-master这个项目，将这个项目使用maven打成jar包并运行。注意需要在配置文件中将zookeeper的地址更改为正确的地址。然后运行打包好的jar文件即可。最后可以访问localhost:7001,默认账号和密码都是root。（zookeeper服务器必须处于启动状态）</p>
+          <h1 id="springboot日志配置"><a href="#springboot日志配置" class="headerlink" title="springboot日志配置"></a>springboot日志配置</h1><hr>
+<p>Spring Boot在所有内部日志中使用Commons Logging，但是默认配置也提供了对常用日志的支持，如：Java Util Logging，Log4J, Log4J2和Logback。每种Logger都可以通过配置使用控制台或者文件输出日志内容。</p>
+<p>SLF4J —— Simple Logging Facade For Java，它是一个针对于各类Java日志框架的统一Facade抽象。Java日志框架众多——常用的有java.util.logging, log4j, logback，commons-logging, Spring框架使用的是Jakarta Commons Logging API（JCL）。而SLF4J定义了统一的日志抽象接口，而真正的日志实现则是在运行时决定的——它提供了各类日志框架的绑定。</p>
+<p>Logback是log4j框架的作者开发的新一代日志框架，它效率更高、能够适应诸多的运行环境，同时天然支持SLF4J。</p>
+<p>默认情况下，Spring Boot会用Logback来记录日志，并用INFO级别输出到控制台。在运行应用程序和其他例子时，你应该已经看到很多INFO级别的日志了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">  _   _   _   _   _   _  </span><br><span class="line"> / \ / \ / \ / \ / \ / \ </span><br><span class="line">( m | r | b | i | r | d )</span><br><span class="line"> \_/ \_/ \_/ \_/ \_/ \_/ </span><br><span class="line">2018-02-08 15:05:03.368  INFO 14404 --- [ main] cc.mrbird.Application                    : Starting Application on SC-201802012049 with PID 14404 (D:\neonWorkspace\mrbird\target\classes started by Administrator in D:\neonWorkspace\mrbird)</span><br><span class="line">2018-02-08 15:05:03.375  INFO 14404 --- [ main] cc.mrbird.Application                    : No active profile set, falling back to default profiles: default</span><br><span class="line">2018-02-08 15:05:03.777  INFO 14404 --- [ main] ationConfigEmbeddedWebApplicationContext : Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@31321838: startup date [Thu Feb 08 15:05:03 CST 2018]; root of context hierarchy</span><br><span class="line">2018-02-08 15:05:05.083  INFO 14404 --- [ main] o.s.b.f.s.DefaultListableBeanFactory     : Overriding bean definition for bean &apos;advisorAutoProxyCreator&apos; with a different definition: replacing [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=shiroConfig; factoryMethodName=advisorAutoProxyCreator; initMethodName=null; destroyMethodName=(inferred); defined in class path resource [cc/mrbird/config/ShiroConfig.class]] with [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=com.alibaba.druid.spring.boot.autoconfigure.stat.DruidSpringAopConfiguration; factoryMethodName=advisorAutoProxyCreator; initMethodName=null; destroyMethodName=(inferred); defined in class path resource [com/alibaba/druid/spring/boot/autoconfigure/stat/DruidSpringAopConfiguration.class]]</span><br><span class="line">2018-02-08 15:05:05.554  INFO 14404 --- [ main] trationDelegate$BeanPostProcessorChecker : Bean &apos;shiroConfig&apos; of type [cc.mrbird.config.ShiroConfig$$EnhancerBySpringCGLIB$$b7e43ac8] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)</span><br><span class="line">2018-02-08 15:05:05.600  INFO 14404 --- [ main] trationDelegate$BeanPostProcessorChecker : Bean &apos;com.alibaba.druid.spring.boot.autoconfigure.stat.DruidSpringAopConfiguration&apos; of type [com.alibaba.druid.spring.boot.autoconfigure.stat.DruidSpringAopConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)</span><br><span class="line">2018-02-08 15:05:06.231  INFO 14404 --- [ main] trationDelegate$BeanPostProcessorChecker : Bean &apos;mybatis-org.mybatis.spring.boot.autoconfigure.MybatisProperties&apos; of type [org.mybatis.spring.boot.autoconfigure.MybatisProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>从上面可以看到，日志输出内容元素具体如下：<br>1、时间日期：精确到毫秒；</p>
+<p>2、日志级别：ERROR, WARN, INFO, DEBUG or TRACE；</p>
+<p>3、进程ID；</p>
+<p>4、分隔符：—标识实际日志的开始；</p>
+<p>5、线程名：方括号括起来（可能会截断控制台输出）；</p>
+<p>6、Logger名：通常使用源代码的类名；</p>
+<p>7、日志内容。</p>
+<h2 id="添加日志依赖"><a href="#添加日志依赖" class="headerlink" title="添加日志依赖"></a>添加日志依赖</h2><p>假如maven依赖中添加了spring-boot-starter-logging：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-boot-starter-logging&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<p>那么，我们的Spring Boot应用将自动使用logback作为应用日志框架，Spring Boot启动的时候，由org.springframework.boot.logging.Logging-Application-Listener根据情况初始化并使用。</p>
+<h2 id="默认配置属性支持"><a href="#默认配置属性支持" class="headerlink" title="默认配置属性支持"></a>默认配置属性支持</h2><p>Spring Boot为我们提供了很多默认的日志配置，所以，只要将spring-boot-starter-logging作为依赖加入到当前应用的classpath，则“开箱即用”。 下面介绍几种在application.properties就可以配置的日志相关属性。</p>
+<h2 id="控制台输出"><a href="#控制台输出" class="headerlink" title="控制台输出"></a>控制台输出</h2><p>日志级别从低到高分为TRACE &lt; DEBUG &lt; INFO &lt; WARN &lt; ERROR &lt; FATAL，如果设置为WARN，则低于WARN的信息都不会输出。 Spring Boot中默认配置ERROR、WARN和INFO级别的日志输出到控制台。您还可以通过启动您的应用程序–debug标志来启用“调试”模式（开发的时候推荐开启）,以下两种方式皆可：</p>
+<ul>
+<li><p>在运行命令后加入–debug标志，如：$ java -jar springTest.jar –debug。</p>
+</li>
+<li><p>在application.properties中配置debug=true，该属性置为true的时候，核心Logger（包含嵌入式容器、hibernate、spring）会输出更多内容，但是你自己应用的日志并不会输出为DEBUG级别。</p>
+</li>
+</ul>
+<h2 id="文件输出"><a href="#文件输出" class="headerlink" title="文件输出"></a>文件输出</h2><p>默认情况下，Spring Boot将日志输出到控制台，不会写到日志文件。如果要编写除控制台输出之外的日志文件，则需在application.properties中设置logging.file或logging.path属性。</p>
+<ul>
+<li><p>logging.file，设置文件，可以是绝对路径，也可以是相对路径。如：logging.file=my.log。</p>
+</li>
+<li><p>logging.path，设置目录，会在该目录下创建spring.log文件，并写入日志内容，如：logging.path=/var/log。<br>如果只配置 logging.file，会在项目的当前路径下生成一个 xxx.log 日志文件。</p>
+</li>
+</ul>
+<p>如果只配置 logging.path，在 /var/log文件夹生成一个日志文件为 spring.log。</p>
+<h2 id="级别控制"><a href="#级别控制" class="headerlink" title="级别控制"></a>级别控制</h2><p>所有支持的日志记录系统都可以在Spring环境中设置记录级别（例如在application.properties中） 格式为：’logging.level.* = LEVEL’</p>
+<ul>
+<li><p>logging.level：日志级别控制前缀，*为包名或Logger名</p>
+</li>
+<li><p>LEVEL：选项TRACE, DEBUG, INFO, WARN, ERROR, FATAL, OFF<br>举例：</p>
+</li>
+<li><p>logging.level.com.mrbird=DEBUG：com.mrbird包下所有class以DEBUG级别输出。</p>
+</li>
+<li><p>logging.level.root=WARN：root日志以WARN级别输出。</p>
+</li>
+</ul>
+<h2 id="自定义日志配置"><a href="#自定义日志配置" class="headerlink" title="自定义日志配置"></a>自定义日志配置</h2><p>由于日志服务一般都在ApplicationContext创建前就初始化了，它并不是必须通过Spring的配置文件控制。因此通过系统属性和传统的Spring Boot外部配置文件依然可以很好的支持日志控制和管理。</p>
+<p>根据不同的日志系统，你可以按如下规则组织配置文件名，就能被正确加载：</p>
+<ul>
+<li><p>Logback：logback-spring.xml, logback-spring.groovy, logback.xml, logback.groovy</p>
+</li>
+<li><p>Log4j：log4j-spring.properties, log4j-spring.xml, log4j.properties, log4j.xml</p>
+</li>
+<li><p>Log4j2：log4j2-spring.xml, log4j2.xml</p>
+</li>
+<li><p>JDK (Java Util Logging)：logging.properties</p>
+</li>
+</ul>
+<p>Spring Boot官方推荐优先使用带有-spring的文件名作为你的日志配置（如使用logback-spring.xml，而不是logback.xml），命名为logback-spring.xml的日志配置文件，spring boot可以为它添加一些spring boot特有的配置项（下面会提到）。</p>
+<p>上面是默认的命名规则，并且放在src/main/resources下面即可。<br>如果你即想完全掌控日志配置，但又不想用logback.xml作为Logback配置的名字，可以在application.properties配置文件里面通过logging.config属性指定自定义的名字：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">logging.config=classpath:logging-config.xml</span><br></pre></td></tr></table></figure>
+
+<p>日志输出的格式有以下几个选项</p>
+<ul>
+<li><p>%d{HH: mm:ss.SSS}——日志输出时间。</p>
+</li>
+<li><p>%thread——输出日志的进程名字，这在Web应用以及异步任务处理中很有用。</p>
+</li>
+<li><p>%-5level——日志级别，并且使用5个字符靠左对齐。</p>
+</li>
+<li><p>%logger{36}——日志输出者的名字。</p>
+</li>
+<li><p>%msg——日志消息。</p>
+</li>
+<li><p>%n——平台的换行符。</p>
+</li>
+</ul>
+<h2 id="logger在实际使用的时候有两种情况："><a href="#logger在实际使用的时候有两种情况：" class="headerlink" title="logger在实际使用的时候有两种情况："></a>logger在实际使用的时候有两种情况：</h2><p>先来看一看代码中如何使用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">package com.mrbird.controller;</span><br><span class="line"></span><br><span class="line">@Controller</span><br><span class="line">public class LearnController &#123;</span><br><span class="line">    private Logger logger = LoggerFactory.getLogger(this.getClass());</span><br><span class="line"></span><br><span class="line">    @RequestMapping(value = &quot;/login&quot;,method = RequestMethod.POST)</span><br><span class="line">    @ResponseBody</span><br><span class="line">    public Map&lt;String,Object&gt; login(HttpServletRequest request, HttpServletResponse response)&#123;</span><br><span class="line">        //日志级别从低到高分为TRACE &lt; DEBUG &lt; INFO &lt; WARN &lt; ERROR &lt; FATAL，如果设置为WARN，则低于WARN的信息都不会输出。</span><br><span class="line">        logger.trace(&quot;日志输出 trace&quot;);</span><br><span class="line">        logger.debug(&quot;日志输出 debug&quot;);</span><br><span class="line">        logger.info(&quot;日志输出 info&quot;);</span><br><span class="line">        logger.warn(&quot;日志输出 warn&quot;);</span><br><span class="line">        logger.error(&quot;日志输出 error&quot;);</span><br><span class="line">        Map&lt;String,Object&gt; map =new HashMap&lt;String,Object&gt;();</span><br><span class="line">        String userName=request.getParameter(&quot;userName&quot;);</span><br><span class="line">        String password=request.getParameter(&quot;password&quot;);</span><br><span class="line">        if(!userName.equals(&quot;&quot;) &amp;&amp; password!=&quot;&quot;)&#123;</span><br><span class="line">            User user =new User(userName,password);</span><br><span class="line">            request.getSession().setAttribute(&quot;user&quot;,user);</span><br><span class="line">            map.put(&quot;result&quot;,&quot;1&quot;);</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            map.put(&quot;result&quot;,&quot;0&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">        return map;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 
       
     </div>
@@ -1087,7 +1285,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/13/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><span class="page-number current">14</span><a class="page-number" href="/page/15/">15</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/15/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/page/13/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><span class="page-number current">14</span><a class="page-number" href="/page/15/">15</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/15/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1133,18 +1331,18 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">185</span>
+          <span class="site-state-item-count">197</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
-        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-count">45</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">56</span>
+        <span class="site-state-item-count">60</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
