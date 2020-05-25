@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.2">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.2">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.2">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.2" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.2">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.4.2',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="ArrayList源码分析 简介ArrayList是一种以数组实现的List，与数组相比，它具有动态扩展的能力，因此也可称之为动态数组。 继承体系ArrayList实现了List, RandomAccess, Cloneable, java.io.Serializable等接口。ArrayList实现了List，提供了基础的添加、删除、遍历等操作。ArrayList实现了RandomAccess，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ArrayList源码分析">
+<meta property="og:url" content="https:&#x2F;&#x2F;lancersaber.github.io&#x2F;2020&#x2F;05&#x2F;23&#x2F;%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB&#x2F;jdk&#x2F;ArrayList%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90&#x2F;index.html">
+<meta property="og:site_name" content="Lancersaber">
+<meta property="og:description" content="ArrayList源码分析 简介ArrayList是一种以数组实现的List，与数组相比，它具有动态扩展的能力，因此也可称之为动态数组。 继承体系ArrayList实现了List, RandomAccess, Cloneable, java.io.Serializable等接口。ArrayList实现了List，提供了基础的添加、删除、遍历等操作。ArrayList实现了RandomAccess，">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2020&#x2F;05&#x2F;23&#x2F;x5GdFIzicShLUZM.png">
+<meta property="og:updated_time" content="2020-05-25T15:55:50.129Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2020&#x2F;05&#x2F;23&#x2F;x5GdFIzicShLUZM.png">
+
+<link rel="canonical" href="https://lancersaber.github.io/2020/05/23/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/jdk/ArrayList%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>ArrayList源码分析 | Lancersaber</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lancersaber</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2020/05/23/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/jdk/ArrayList%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          ArrayList源码分析
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-05-23 10:25:53" itemprop="dateCreated datePublished" datetime="2020-05-23T10:25:53+08:00">2020-05-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-05-25 23:55:50" itemprop="dateModified" datetime="2020-05-25T23:55:50+08:00">2020-05-25</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sourceread/" itemprop="url" rel="index">
+                    <span itemprop="name">sourceread</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="ArrayList源码分析"><a href="#ArrayList源码分析" class="headerlink" title="ArrayList源码分析"></a><em>ArrayList源码分析</em></h1><hr>
+<h6 id="简介"><a href="#简介" class="headerlink" title="简介"></a><strong><code>简介</code></strong></h6><p>ArrayList是一种以数组实现的List，与数组相比，它具有动态扩展的能力，因此也可称之为动态数组。</p>
+<h6 id="继承体系"><a href="#继承体系" class="headerlink" title="继承体系"></a><strong><code>继承体系</code></strong></h6><p><img src="https://i.loli.net/2020/05/23/x5GdFIzicShLUZM.png" alt="ArrayList.png"><br>ArrayList实现了List, RandomAccess, Cloneable, java.io.Serializable等接口。<br>ArrayList实现了List，提供了基础的添加、删除、遍历等操作。<br>ArrayList实现了RandomAccess，提供了随机访问的能力。<br>ArrayList实现了Cloneable，可以被克隆。<br>ArrayList实现了Serializable，可以被序列化。</p>
+<h6 id="源码解析"><a href="#源码解析" class="headerlink" title="源码解析"></a><em><code>源码解析</code></em></h6><p><strong><code>属性</code></strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 默认容量</span><br><span class="line"> */</span><br><span class="line">private static final int DEFAULT_CAPACITY = 10;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 空数组，如果传入的容量为0时使用</span><br><span class="line"> */</span><br><span class="line">private static final Object[] EMPTY_ELEMENTDATA = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 空数组，未传入容量时使用，添加第一个元素的时候会重新初始为默认容量大小</span><br><span class="line"> */</span><br><span class="line">private static final Object[] DEFAULTCAPACITY_EMPTY_ELEMENTDATA = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 存储元素的数组</span><br><span class="line"> */</span><br><span class="line">transient Object[] elementData; // non-private to simplify nested class access</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 集合中元素的个数</span><br><span class="line"> */</span><br><span class="line">private int size;</span><br></pre></td></tr></table></figure>
+<p>（1）DEFAULT_CAPACITY<br>默认容量为10，也就是通过new ArrayList()创建时的默认容量。</p>
+<p>（2）EMPTY_ELEMENTDATA<br>空的数组，这种是通过new ArrayList(0)创建时用的是这个空数组。</p>
+<p>（3）DEFAULTCAPACITY_EMPTY_ELEMENTDATA<br>也是空数组，这种是通过new ArrayList()创建时用的是这个空数组，与EMPTY_ELEMENTDATA的区别是在添加第一个元素时使用这个空数组的会初始化为DEFAULT_CAPACITY（10）个元素。</p>
+<p>（4）elementData<br>真正存放元素的地方，使用transient是为了不序列化这个字段。<br>至于没有使用private修饰，后面注释是写的“为了简化嵌套类的访问”，但是楼主实测加了private嵌套类一样可以访问。<br>private表示是类私有的属性，只要是在这个类内部都可以访问，嵌套类或者内部类也是在类的内部，所以也可以访问类的私有成员。</p>
+<p>（5）size<br>真正存储元素的个数，而不是elementData数组的长度。</p>
+<p><strong><code>ArrayList(int initialCapacity)构造方法</code></strong><br>传入初始容量，如果大于0就初始化elementData为对应大小，如果等于0就使用EMPTY_ELEMENTDATA空数组，如果小于0抛出异常。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public ArrayList(int initialCapacity) &#123;</span><br><span class="line">    if (initialCapacity &gt; 0) &#123;</span><br><span class="line">        // 如果传入的初始容量大于0，就新建一个数组存储元素</span><br><span class="line">        this.elementData = new Object[initialCapacity];</span><br><span class="line">    &#125; else if (initialCapacity == 0) &#123;</span><br><span class="line">        // 如果传入的初始容量等于0，使用空数组EMPTY_ELEMENTDATA</span><br><span class="line">        this.elementData = EMPTY_ELEMENTDATA;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        // 如果传入的初始容量小于0，抛出异常</span><br><span class="line">        throw new IllegalArgumentException(&quot;Illegal Capacity: &quot; + initialCapacity);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong><code>ArrayList()构造方法</code></strong><br>不传初始容量，初始化为DEFAULTCAPACITY_EMPTY_ELEMENTDATA空数组，会在添加第一个元素的时候扩容为默认的大小，即10。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public ArrayList() &#123;</span><br><span class="line">    // 如果没有传入初始容量，则使用空数组DEFAULTCAPACITY_EMPTY_ELEMENTDATA</span><br><span class="line">    // 使用这个数组是在添加第一个元素的时候会扩容到默认大小10</span><br><span class="line">    this.elementData = DEFAULTCAPACITY_EMPTY_ELEMENTDATA;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong><code>ArrayList 构造方法</code></strong><br>传入集合并初始化elementData，这里会使用拷贝把传入集合的元素拷贝到elementData数组中，如果元素个数为0，则初始化为EMPTY_ELEMENTDATA空数组。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">* 把传入集合的元素初始化到ArrayList中</span><br><span class="line">*/</span><br><span class="line">public ArrayList(Collection&lt;? extends E&gt; c) &#123;</span><br><span class="line">    // 集合转数组</span><br><span class="line">    elementData = c.toArray();</span><br><span class="line">    if ((size = elementData.length) != 0) &#123;</span><br><span class="line">        // 检查c.toArray()返回的是不是Object[]类型，如果不是，重新拷贝成Object[].class类型</span><br><span class="line">        if (elementData.getClass() != Object[].class)</span><br><span class="line">            elementData = Arrays.copyOf(elementData, size, Object[].class);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        // 如果c的空集合，则初始化为空数组EMPTY_ELEMENTDATA</span><br><span class="line">        this.elementData = EMPTY_ELEMENTDATA;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong><code>add(E e)方法</code></strong><br>添加元素到末尾，平均时间复杂度为O(1)。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">public boolean add(E e) &#123;</span><br><span class="line">    // 检查是否需要扩容</span><br><span class="line">    ensureCapacityInternal(size + 1);</span><br><span class="line">    // 把元素插入到最后一位</span><br><span class="line">    elementData[size++] = e;</span><br><span class="line">    return true;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private void ensureCapacityInternal(int minCapacity) &#123;</span><br><span class="line">    ensureExplicitCapacity(calculateCapacity(elementData, minCapacity));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private static int calculateCapacity(Object[] elementData, int minCapacity) &#123;</span><br><span class="line">    // 如果是空数组DEFAULTCAPACITY_EMPTY_ELEMENTDATA，就初始化为默认大小10</span><br><span class="line">    if (elementData == DEFAULTCAPACITY_EMPTY_ELEMENTDATA) &#123;</span><br><span class="line">        return Math.max(DEFAULT_CAPACITY, minCapacity);</span><br><span class="line">    &#125;</span><br><span class="line">    return minCapacity;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private void ensureExplicitCapacity(int minCapacity) &#123;</span><br><span class="line">    modCount++;</span><br><span class="line"></span><br><span class="line">    if (minCapacity - elementData.length &gt; 0)</span><br><span class="line">        // 扩容</span><br><span class="line">        grow(minCapacity);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private void grow(int minCapacity) &#123;</span><br><span class="line">    int oldCapacity = elementData.length;</span><br><span class="line">    // 新容量为旧容量的1.5倍</span><br><span class="line">    int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);</span><br><span class="line">    // 如果新容量发现比需要的容量还小，则以需要的容量为准</span><br><span class="line">    if (newCapacity - minCapacity &lt; 0)</span><br><span class="line">        newCapacity = minCapacity;</span><br><span class="line">    // 如果新容量已经超过最大容量了，则使用最大容量</span><br><span class="line">    if (newCapacity - MAX_ARRAY_SIZE &gt; 0)</span><br><span class="line">        newCapacity = hugeCapacity(minCapacity);</span><br><span class="line">    // 以新容量拷贝出来一个新数组</span><br><span class="line">    elementData = Arrays.copyOf(elementData, newCapacity);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>（1）检查是否需要扩容；</p>
+<p>（2）如果elementData等于DEFAULTCAPACITY_EMPTY_ELEMENTDATA则初始化容量大小为DEFAULT_CAPACITY；</p>
+<p>（3）新容量是老容量的1.5倍（oldCapacity + (oldCapacity &gt;&gt; 1)），如果加了这么多容量发现比需要的容量还小，则以需要的容量为准；</p>
+<p>（4）创建新容量的数组并把老数组拷贝到新数组；</p>
+<p><strong><code>add(int index, E element)方法</code></strong><br>添加元素到指定位置，平均时间复杂度为O(n)。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">public void add(int index, E element) &#123;</span><br><span class="line">    // 检查是否越界</span><br><span class="line">    rangeCheckForAdd(index);</span><br><span class="line">    // 检查是否需要扩容</span><br><span class="line">    ensureCapacityInternal(size + 1);</span><br><span class="line">    // 将inex及其之后的元素往后挪一位，则index位置处就空出来了</span><br><span class="line">    System.arraycopy(elementData, index, elementData, index + 1,</span><br><span class="line">                     size - index);</span><br><span class="line">    // 将元素插入到index的位置</span><br><span class="line">    elementData[index] = element;</span><br><span class="line">    // 大小增1</span><br><span class="line">    size++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private void rangeCheckForAdd(int index) &#123;</span><br><span class="line">    if (index &gt; size || index &lt; 0)</span><br><span class="line">        throw new IndexOutOfBoundsException(outOfBoundsMsg(index));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>（1）检查索引是否越界；</p>
+<p>（2）检查是否需要扩容；</p>
+<p>（3）把插入索引位置后的元素都往后挪一位；</p>
+<p>（4）在插入索引位置放置插入的元素；</p>
+<p>（5）大小加1；</p>
+<p><strong><code>addAll 方法</code></strong></p>
+<p>求两个集合的并集。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">* 将集合c中所有元素添加到当前ArrayList中</span><br><span class="line">*/</span><br><span class="line">public boolean addAll(Collection&lt;? extends E&gt; c) &#123;</span><br><span class="line">    // 将集合c转为数组</span><br><span class="line">    Object[] a = c.toArray();</span><br><span class="line">    int numNew = a.length;</span><br><span class="line">    // 检查是否需要扩容</span><br><span class="line">    ensureCapacityInternal(size + numNew);</span><br><span class="line">    // 将c中元素全部拷贝到数组的最后</span><br><span class="line">    System.arraycopy(a, 0, elementData, size, numNew);</span><br><span class="line">    // 大小增加c的大小</span><br><span class="line">    size += numNew;</span><br><span class="line">    // 如果c不为空就返回true，否则返回false</span><br><span class="line">    return numNew != 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>（1）拷贝c中的元素到数组a中；</p>
+<p>（2）检查是否需要扩容；</p>
+<p>（3）把数组a中的元素拷贝到elementData的尾部；</p>
+<p><strong><code>get(int index)方法</code></strong></p>
+<p>获取指定索引位置的元素，时间复杂度为O(1)。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public E get(int index) &#123;</span><br><span class="line">    // 检查是否越界</span><br><span class="line">    rangeCheck(index);</span><br><span class="line">    // 返回数组index位置的元素</span><br><span class="line">    return elementData(index);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private void rangeCheck(int index) &#123;</span><br><span class="line">    if (index &gt;= size)</span><br><span class="line">        throw new IndexOutOfBoundsException(outOfBoundsMsg(index));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">E elementData(int index) &#123;</span><br><span class="line">    return (E) elementData[index];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>（1）检查索引是否越界，这里只检查是否越上界，如果越上界抛出IndexOutOfBoundsException异常，如果越下界抛出的是ArrayIndexOutOfBoundsException异常。</p>
+<p>（2）返回索引位置处的元素；</p>
+<p><strong><code>remove(int index)方法</code></strong></p>
+<p>删除指定索引位置的元素，时间复杂度为O(n)。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">public E remove(int index) &#123;</span><br><span class="line">    // 检查是否越界</span><br><span class="line">    rangeCheck(index);</span><br><span class="line"></span><br><span class="line">    modCount++;</span><br><span class="line">    // 获取index位置的元素</span><br><span class="line">    E oldValue = elementData(index);</span><br><span class="line"></span><br><span class="line">    // 如果index不是最后一位，则将index之后的元素往前挪一位</span><br><span class="line">    int numMoved = size - index - 1;</span><br><span class="line">    if (numMoved &gt; 0)</span><br><span class="line">        System.arraycopy(elementData, index+1, elementData, index, numMoved);</span><br><span class="line"></span><br><span class="line">    // 将最后一个元素删除，帮助GC</span><br><span class="line">    elementData[--size] = null; // clear to let GC do its work</span><br><span class="line"></span><br><span class="line">    // 返回旧值</span><br><span class="line">    return oldValue;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>（1）检查索引是否越界；</p>
+<p>（2）获取指定索引位置的元素；</p>
+<p>（3）如果删除的不是最后一位，则其它元素往前移一位；</p>
+<p>（4）将最后一位置为null，方便GC回收；</p>
+<p>（5）返回删除的元素。</p>
+<p><em>可以看到，ArrayList删除元素的时候并没有缩容。</em></p>
+<p><strong><code>remove(Object o)方法</code></strong></p>
+<p>删除指定元素值的元素，时间复杂度为O(n)。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">public boolean remove(Object o) &#123;</span><br><span class="line">    if (o == null) &#123;</span><br><span class="line">        // 遍历整个数组，找到元素第一次出现的位置，并将其快速删除</span><br><span class="line">        for (int index = 0; index &lt; size; index++)</span><br><span class="line">            // 如果要删除的元素为null，则以null进行比较，使用==</span><br><span class="line">            if (elementData[index] == null) &#123;</span><br><span class="line">                fastRemove(index);</span><br><span class="line">                return true;</span><br><span class="line">            &#125;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        // 遍历整个数组，找到元素第一次出现的位置，并将其快速删除</span><br><span class="line">        for (int index = 0; index &lt; size; index++)</span><br><span class="line">            // 如果要删除的元素不为null，则进行比较，使用equals()方法</span><br><span class="line">            if (o.equals(elementData[index])) &#123;</span><br><span class="line">                fastRemove(index);</span><br><span class="line">                return true;</span><br><span class="line">            &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return false;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private void fastRemove(int index) &#123;</span><br><span class="line">    // 少了一个越界的检查</span><br><span class="line">    modCount++;</span><br><span class="line">    // 如果index不是最后一位，则将index之后的元素往前挪一位</span><br><span class="line">    int numMoved = size - index - 1;</span><br><span class="line">    if (numMoved &gt; 0)</span><br><span class="line">        System.arraycopy(elementData, index+1, elementData, index, numMoved);</span><br><span class="line">    // 将最后一个元素删除，帮助GC</span><br><span class="line">    elementData[--size] = null; // clear to let GC do its work</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>（1）找到第一个等于指定元素值的元素；</p>
+<p>（2）快速删除；<br><em>fastRemove(int index)相对于remove(int index)少了检查索引越界的操作，可见jdk将性能优化到极致。</em></p>
+<p><strong><em><code>retainAll方法</code></em></strong></p>
+<p>求两个集合的交集。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">public boolean retainAll(Collection&lt;?&gt; c) &#123;</span><br><span class="line">    // 集合c不能为null</span><br><span class="line">    Objects.requireNonNull(c);</span><br><span class="line">    // 调用批量删除方法，这时complement传入true，表示删除不包含在c中的元素</span><br><span class="line">    return batchRemove(c, true);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line">* 批量删除元素</span><br><span class="line">* complement为true表示删除c中不包含的元素</span><br><span class="line">* complement为false表示删除c中包含的元素</span><br><span class="line">*/</span><br><span class="line">private boolean batchRemove(Collection&lt;?&gt; c, boolean complement) &#123;</span><br><span class="line">    final Object[] elementData = this.elementData;</span><br><span class="line">    // 使用读写两个指针同时遍历数组</span><br><span class="line">    // 读指针每次自增1，写指针放入元素的时候才加1</span><br><span class="line">    // 这样不需要额外的空间，只需要在原有的数组上操作就可以了</span><br><span class="line">    int r = 0, w = 0;</span><br><span class="line">    boolean modified = false;</span><br><span class="line">    try &#123;</span><br><span class="line">        // 遍历整个数组，如果c中包含该元素，则把该元素放到写指针的位置（以complement为准）</span><br><span class="line">        for (; r &lt; size; r++)</span><br><span class="line">            if (c.contains(elementData[r]) == complement)</span><br><span class="line">                elementData[w++] = elementData[r];</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">        // 正常来说r最后是等于size的，除非c.contains()抛出了异常</span><br><span class="line">        if (r != size) &#123;</span><br><span class="line">            // 如果c.contains()抛出了异常，则把未读的元素都拷贝到写指针之后</span><br><span class="line">            System.arraycopy(elementData, r,</span><br><span class="line">                             elementData, w,</span><br><span class="line">                             size - r);</span><br><span class="line">            w += size - r;</span><br><span class="line">        &#125;</span><br><span class="line">        if (w != size) &#123;</span><br><span class="line">            // 将写指针之后的元素置为空，帮助GC</span><br><span class="line">            for (int i = w; i &lt; size; i++)</span><br><span class="line">                elementData[i] = null;</span><br><span class="line">            modCount += size - w;</span><br><span class="line">            // 新大小等于写指针的位置（因为每写一次写指针就加1，所以新大小正好等于写指针的位置）</span><br><span class="line">            size = w;</span><br><span class="line">            modified = true;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    // 有修改返回true</span><br><span class="line">    return modified;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>（1）遍历elementData数组；</p>
+<p>（2）如果元素在c中，则把这个元素添加到elementData数组的w位置并将w位置往后移一位；</p>
+<p>（3）遍历完之后，w之前的元素都是两者共有的，w之后（包含）的元素不是两者共有的；</p>
+<p>（4）将w之后（包含）的元素置为null，方便GC回收；</p>
+<p><strong><em><code>removeAll</code></em></strong></p>
+<p>求两个集合的单方向差集，只保留当前集合中不在c中的元素，不保留在c中不在当前集体中的元素。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public boolean removeAll(Collection&lt;?&gt; c) &#123;</span><br><span class="line">    // 集合c不能为空</span><br><span class="line">    Objects.requireNonNull(c);</span><br><span class="line">    // 同样调用批量删除方法，这时complement传入false，表示删除包含在c中的元素</span><br><span class="line">    return batchRemove(c, false);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>与retainAll(Collection&lt;?&gt; c)方法类似，只是这里保留的是不在c中的元素。</p>
+<h6 id="总结"><a href="#总结" class="headerlink" title="总结"></a><strong><em><code>总结</code></em></strong></h6><p>（1）ArrayList内部使用数组存储元素，当数组长度不够时进行扩容，每次加一半的空间，ArrayList不会进行缩容；</p>
+<p>（2）ArrayList支持随机访问，通过索引访问元素极快，时间复杂度为O(1)；</p>
+<p>（3）ArrayList添加元素到尾部极快，平均时间复杂度为O(1)；</p>
+<p>（4）ArrayList添加元素到中间比较慢，因为要搬移元素，平均时间复杂度为O(n)；</p>
+<p>（5）ArrayList从尾部删除元素极快，时间复杂度为O(1)；</p>
+<p>（6）ArrayList从中间删除元素比较慢，因为要搬移元素，平均时间复杂度为O(n)；</p>
+<p>（7）ArrayList支持求并集，调用addAll(Collection&lt;? extends E&gt; c)方法即可；</p>
+<p>（8）ArrayList支持求交集，调用retainAll(Collection&lt;? extends E&gt; c)方法即可；</p>
+<p>（7）ArrayList支持求单向差集，调用removeAll(Collection&lt;? extends E&gt; c)方法即可；</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2020/05/22/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/jdk/LinkedList%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" rel="next" title="LinkedList源码分析">
+                  <i class="fa fa-chevron-left"></i> LinkedList源码分析
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+                <a href="/2020/05/23/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/shiro/Shiro%E5%8E%9F%E7%A0%81%E5%88%86%E6%9E%90(1)-Shiro%E5%BC%80%E7%AF%87/" rel="prev" title="Shiro源码分析(1)-Shiro开篇">
+                  Shiro源码分析(1)-Shiro开篇 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ArrayList源码分析"><span class="nav-number">1.</span> <span class="nav-text">ArrayList源码分析</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#简介"><span class="nav-number">1.0.0.0.0.1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#继承体系"><span class="nav-number">1.0.0.0.0.2.</span> <span class="nav-text">继承体系</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#源码解析"><span class="nav-number">1.0.0.0.0.3.</span> <span class="nav-text">源码解析</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#总结"><span class="nav-number">1.0.0.0.0.4.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="site-author-image" itemprop="image" alt="Lancersaber"
+    src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Lancersaber</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">202</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">46</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lancersaber</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.4.2
+  </div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.2"></script><script src="/js/motion.js?v=7.4.2"></script>
+<script src="/js/schemes/muse.js?v=7.4.2"></script>
+<script src="/js/next-boot.js?v=7.4.2"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

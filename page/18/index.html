@@ -172,7 +172,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/10/24/Linux/Linux%E5%88%87%E6%8D%A2%E7%95%8C%E9%9D%A2/">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/10/26/Spring/Spring%20AOP/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -186,7 +186,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/10/24/Linux/Linux%E5%88%87%E6%8D%A2%E7%95%8C%E9%9D%A2/" class="post-title-link" itemprop="url">Linux切换界面</a>
+            <a href="/2019/10/26/Spring/Spring%20AOP/" class="post-title-link" itemprop="url">Spring aop</a>
         </h1>
 
         <div class="post-meta">
@@ -196,14 +196,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2019-10-24 23:15:15" itemprop="dateCreated datePublished" datetime="2019-10-24T23:15:15+08:00">2019-10-24</time>
+              <time title="Created: 2019-10-26 19:01:48" itemprop="dateCreated datePublished" datetime="2019-10-26T19:01:48+08:00">2019-10-26</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-25 22:21:05" itemprop="dateModified" datetime="2019-10-25T22:21:05+08:00">2019-10-25</time>
+                <time title="Modified: 2019-10-30 22:08:11" itemprop="dateModified" datetime="2019-10-30T22:08:11+08:00">2019-10-30</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -211,8 +211,8 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
+                  <a href="/categories/spring/" itemprop="url" rel="index">
+                    <span itemprop="name">spring</span>
                   </a>
                 </span>
             </span>
@@ -228,9 +228,52 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Linux切换工作模式"><a href="#Linux切换工作模式" class="headerlink" title="Linux切换工作模式"></a>Linux切换工作模式</h1><hr>
-<p>进入/etc目录下，打开inittab文件，这个文件包含设置用户界面和控制台界面的设置方式。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"># inittab is no longer used when using systemd.</span><br><span class="line">#</span><br><span class="line"># ADDING CONFIGURATION HERE WILL HAVE NO EFFECT ON YOUR SYSTEM.</span><br><span class="line">#</span><br><span class="line"># Ctrl-Alt-Delete is handled by /usr/lib/systemd/system/ctrl-alt-del.target</span><br><span class="line">#</span><br><span class="line"># systemd uses &apos;targets&apos; instead of runlevels. By default, there are two main targets:</span><br><span class="line">#</span><br><span class="line"># multi-user.target: analogous to runlevel 3</span><br><span class="line"># graphical.target: analogous to runlevel 5</span><br><span class="line">#</span><br><span class="line"># To view current default target, run:</span><br><span class="line"># systemctl get-default</span><br><span class="line">#</span><br><span class="line"># To set a default target, run:</span><br><span class="line"># systemctl set-default TARGET.target</span><br><span class="line">#</span><br><span class="line"></span><br><span class="line">systemctl set-default graphical.target //默认启用图形化界面</span><br><span class="line">init 5;切换图形界面</span><br><span class="line">init 3;切换控制台</span><br></pre></td></tr></table></figure>
+          <h1 id="Spring-AOP"><a href="#Spring-AOP" class="headerlink" title="Spring AOP"></a>Spring AOP</h1><hr>
+<h2 id="AOP概念"><a href="#AOP概念" class="headerlink" title="AOP概念"></a>AOP概念</h2><h3 id="Aspect"><a href="#Aspect" class="headerlink" title="Aspect"></a>Aspect</h3><p>A modularization of a concern that cuts across multiple classes. Transaction management is a good example of a crosscutting concern in enterprise Java applications. In Spring AOP, aspects are implemented by using regular classes (the schema-based approach) or regular classes annotated with the @Aspect annotation (the @AspectJ style).<br>这段话讲解了切面的意义。在某个类上使用@Aspect注解表示这个类是一个切面类。</p>
+<h3 id="连接点-Join-point"><a href="#连接点-Join-point" class="headerlink" title="连接点(Join point)"></a>连接点(Join point)</h3><p>程序执行过程中某个特定的点，比如，调用方法或者处理异常。作用是指定在执行哪些方法时进行额外操作。</p>
+<h3 id="通知-Advice"><a href="#通知-Advice" class="headerlink" title="通知(Advice)"></a>通知(Advice)</h3><p>Action taken by an aspect at a particular join point. Different types of advice include “around”, “before” and “after” advice. (Advice types are discussed later.) Many AOP frameworks, including Spring, model an advice as an interceptor and maintain a chain of interceptors around the join point.<br>重点在第一句话–<em>Action taken by an aspect at a particular join point.</em>，指在切面的某个特定的连接点上执行的动作。Different types of advice include “around”, “before” and “after” advice.这句话表示Advice包含几种类型，环绕通知，前置通知和后置通知。</p>
+<h3 id="切入点-Pointcut"><a href="#切入点-Pointcut" class="headerlink" title="切入点(Pointcut)"></a>切入点(Pointcut)</h3><p>A predicate that matches join points. Advice is associated with a pointcut expression and runs at any join point matched by the pointcut (for example, the execution of a method with a certain name). The concept of join points as matched by pointcut expressions is central to AOP, and Spring uses the AspectJ pointcut expression language by default.<br><em>Advice is associated with a pointcut expression and runs at any join point matched by the pointcut</em>这句话表示Advice和一个切入点表达式是关联的，它会对所有符合这个切入点表达式的函数生效。Spring使用AspectJ 切入点表达式作为默认方式。</p>
+<h3 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h3><h3 id="Target-object"><a href="#Target-object" class="headerlink" title="Target object"></a>Target object</h3><h3 id="AOP-proxy"><a href="#AOP-proxy" class="headerlink" title="AOP proxy"></a>AOP proxy</h3><p> An object created by the AOP framework in order to implement the aspect contracts (advise method executions and so on). In the Spring Framework, an AOP proxy is a JDK dynamic proxy or a CGLIB proxy.<br> 由aop框架为我们创建的代理对象。在spring框架中，这个aop代理对象是一个jdk的动态代理对象或者一个CGLIB代理对象。</p>
+<h3 id="Weaving"><a href="#Weaving" class="headerlink" title="Weaving"></a>Weaving</h3><h2 id="SpringAop涉及到的注解"><a href="#SpringAop涉及到的注解" class="headerlink" title="SpringAop涉及到的注解"></a>SpringAop涉及到的注解</h2><table>
+<thead>
+<tr>
+<th align="center">注解名</th>
+<th align="center">功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">@Aspect</td>
+<td align="center">声明该类是一个切面类</td>
+</tr>
+<tr>
+<td align="center">@After</td>
+<td align="center">通知方法会在目标方法返回或抛出异常后调用</td>
+</tr>
+<tr>
+<td align="center">@AfterRetruening</td>
+<td align="center">通常方法会在目标方法返回后调用</td>
+</tr>
+<tr>
+<td align="center">@AfterThrowing</td>
+<td align="center">通知方法会在目标方法抛出异常后调用</td>
+</tr>
+<tr>
+<td align="center">@Around</td>
+<td align="center">通知方法将目标方法封装起来</td>
+</tr>
+<tr>
+<td align="center">@Before</td>
+<td align="center">通知方法会在目标方法执行之前执行</td>
+</tr>
+<tr>
+<td align="center">@Pointcut</td>
+<td align="center">注解声明一个通用的切点</td>
+</tr>
+</tbody></table>
+<h3 id="PointCut注解的表达式"><a href="#PointCut注解的表达式" class="headerlink" title="@PointCut注解的表达式"></a>@PointCut注解的表达式</h3><p>标准的Aspectj Aop的pointcut的表达式类型是很丰富的，但是Spring Aop只支持其中的9种，外加Spring Aop自己扩充的一种一共是10种类型的表达式，分别如下。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">execution：一般用于指定方法的执行，用的最多。</span><br><span class="line">within：指定某些类型的全部方法执行，也可用来指定一个包。</span><br><span class="line">this：Spring Aop是基于代理的，生成的bean也是一个代理对象，this就是这个代理对象，当这个对象可以转换为指定的类型时，对应的切入点就是它了，Spring Aop将生效。</span><br><span class="line">target：当被代理的对象可以转换为指定的类型时，对应的切入点就是它了，Spring Aop将生效。</span><br><span class="line">args：当执行的方法的参数是指定类型时生效。</span><br><span class="line">@target：当代理的目标对象上拥有指定的注解时生效。</span><br><span class="line">@args：当执行的方法参数类型上拥有指定的注解时生效。</span><br><span class="line">@within：与@target类似，看官方文档和网上的说法都是@within只需要目标对象的类或者父类上有指定的注解，则@within会生效，而@target则是必须是目标对象的类上有指定的注解。而根据笔者的测试这两者都是只要目标类或父类上有指定的注解即可。</span><br><span class="line">@annotation：当执行的方法上拥有指定的注解时生效。</span><br><span class="line">bean：当调用的方法是指定的bean的方法时生效。</span><br></pre></td></tr></table></figure>
+
+<h4 id="execution表达式"><a href="#execution表达式" class="headerlink" title="execution表达式"></a>execution表达式</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -249,7 +292,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/10/24/Docker/Docker%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/10/26/Spring/SpringbootAop%E8%AE%B0%E5%BD%95%E7%94%A8%E6%88%B7%E6%93%8D%E4%BD%9C%E6%97%A5%E5%BF%97/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -263,127 +306,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/10/24/Docker/Docker%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="post-title-link" itemprop="url">Docker常用命令</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-10-24 23:15:15" itemprop="dateCreated datePublished" datetime="2019-10-24T23:15:15+08:00">2019-10-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-31 10:51:33" itemprop="dateModified" datetime="2019-10-31T10:51:33+08:00">2019-10-31</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/docker/" itemprop="url" rel="index">
-                    <span itemprop="name">docker</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Docker常用命令"><a href="#Docker常用命令" class="headerlink" title="Docker常用命令"></a>Docker常用命令</h1><hr>
-<p>##Docker帮助命令</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker version</span><br><span class="line">docker info</span><br><span class="line">docker --help：docker帮助手册，列出docker的一些常用指令</span><br></pre></td></tr></table></figure>
-
-<p>##镜像命令</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker images:列出本地镜像</span><br><span class="line">docker search 镜像名:列出仓库中所有可用的镜像</span><br><span class="line">docker pull 镜像名[:tag]：下载镜像,如果不带版本号，默认下载的是latest</span><br><span class="line">docker rmi [-f 强制删除] 唯一镜像名or镜像id:删除目标镜像</span><br></pre></td></tr></table></figure>
-
-<h2 id="容器命令"><a href="#容器命令" class="headerlink" title="容器命令"></a>容器命令</h2><p>启动容器</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">docker run [options] image [command] [arg..]</span><br><span class="line">--name:&quot;容器的新名字&quot;，为容器指定一个名字</span><br><span class="line">-d: 后台运行容器，并返回容器ID，也即启动守护式容器</span><br><span class="line">-i: 以交互模式运行容器，通常与-t同时使用</span><br><span class="line">-t: 为容器重新分配一个伪终端，</span><br><span class="line">-P(大P): 随机端口映射</span><br><span class="line">-p:	指定端口映射，有以下四种格式</span><br><span class="line">	ip：hostPort:containerPort</span><br><span class="line">	ip::containerPort</span><br><span class="line">	hostPort:containerPort(常用)</span><br><span class="line">	containerPort</span><br></pre></td></tr></table></figure>
-
-<p>列出当前所有正在运行的容器</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">docker ps [options]</span><br><span class="line">-a:列出当前正在运行的容器+历史上运行过的</span><br><span class="line">-l:显示最近创建的容器</span><br><span class="line">-n：显示最近n个创建的容器</span><br><span class="line">-q：静默模式，只显示容器编号</span><br></pre></td></tr></table></figure>
-
-<p>启动容器</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker start 容器ID或者容器名</span><br></pre></td></tr></table></figure>
-
-<p>停止容器</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker stop 容器ID或者容器名</span><br></pre></td></tr></table></figure>
-
-<p>强制关闭</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker kill 容器ID或者容器名</span><br></pre></td></tr></table></figure>
-
-<p>删除已停止的容器</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rm 容器ID</span><br></pre></td></tr></table></figure>
-
-<p>查看容器日志</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker logs -f -t --tail 容器ID</span><br><span class="line">-t: 加入时间戳</span><br><span class="line">-f：跟随最新的日志打印</span><br><span class="line">--tail：数字 显示最后多少条</span><br></pre></td></tr></table></figure>
-
-<p>查看容器内运行的进程</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker top 容器ID</span><br></pre></td></tr></table></figure>
-
-<p>查看容器内部细节</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker inspect 容器ID</span><br></pre></td></tr></table></figure>
-
-<p>进入正在运行的容器并以命令行交互</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it 容器ID bashShell</span><br><span class="line">重新进入docker attach 容器ID</span><br></pre></td></tr></table></figure>
-<p>这两种方式的区别</p>
-<ul>
-<li>attach: 直接进入容器启动命令的终端，不会启动新的进程</li>
-<li>exec：是在容器中打开新的终端，并且可以启动新的进程</li>
-</ul>
-<p>从容器中拷贝文件到主机上</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker cp 容器ID:容器内路径 目的主机路径</span><br></pre></td></tr></table></figure>
-
-<p>提交容器副本使之成为一个新的镜像</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker commit -m=&quot;提交的描述信息&quot; -a=&quot;作者&quot; 容器ID 要创建的目标镜像名:[标签名]</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/10/24/Canvas/BasicKnowledge/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lancersaber">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lancersaber">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/10/24/Canvas/BasicKnowledge/" class="post-title-link" itemprop="url">基本知识</a>
+            <a href="/2019/10/26/Spring/SpringbootAop%E8%AE%B0%E5%BD%95%E7%94%A8%E6%88%B7%E6%93%8D%E4%BD%9C%E6%97%A5%E5%BF%97/" class="post-title-link" itemprop="url">Springboot aop记录用户操作日志</a>
         </h1>
 
         <div class="post-meta">
@@ -394,7 +317,80 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2019-10-24 23:15:15 / Modified: 23:35:04" itemprop="dateCreated datePublished" datetime="2019-10-24T23:15:15+08:00">2019-10-24</time>
+              <time title="Created: 2019-10-26 18:40:07 / Modified: 19:02:01" itemprop="dateCreated datePublished" datetime="2019-10-26T18:40:07+08:00">2019-10-26</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/spring/" itemprop="url" rel="index">
+                    <span itemprop="name">spring</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Springboot-aop记录用户操作日志"><a href="#Springboot-aop记录用户操作日志" class="headerlink" title="#Springboot aop记录用户操作日志"></a>#Springboot aop记录用户操作日志</h2><p>在Spring框架中，使用AOP配合自定义注解可以方便的实现用户操作的监控。首先搭建一个基本的Spring Boot Web环境开启Spring Boot，然后引入必要依赖：</p>
+<h2 id="自定义注解"><a href="#自定义注解" class="headerlink" title="自定义注解"></a>自定义注解</h2><p>定义一个方法级别的@Log注解，用于标注需要监控的方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@Target(ElementType.METHOD)</span><br><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">public @interface Log &#123;</span><br><span class="line">    String value() default &quot;&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/10/25/Canvas/%E5%8A%A8%E7%94%BB%E4%B8%AD%E7%9A%84%E4%B8%89%E8%A7%92%E5%AD%A6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/10/25/Canvas/%E5%8A%A8%E7%94%BB%E4%B8%AD%E7%9A%84%E4%B8%89%E8%A7%92%E5%AD%A6/" class="post-title-link" itemprop="url">动画中的三角学</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2019-10-25 16:22:10 / Modified: 18:35:26" itemprop="dateCreated datePublished" datetime="2019-10-25T16:22:10+08:00">2019-10-25</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -419,9 +415,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Canvas的基本知识"><a href="#Canvas的基本知识" class="headerlink" title="Canvas的基本知识"></a>Canvas的基本知识</h1><hr>
-<h2 id="canvas元素"><a href="#canvas元素" class="headerlink" title="canvas元素"></a>canvas元素</h2><p>定义：是HTML5提供的一种新标签, ie9才开始支持的，Canvas是一个矩形区域的画布，可以用JS控制每一个像素在上面绘画。canvas 标签使用 JavaScript 在网页上绘制图像，本身不具备绘图功能。canvas 拥有多种绘制路径、矩形、圆形、字符以及添加图像的方法。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;title&gt;Title&lt;/title&gt;</span><br><span class="line"></span><br><span class="line">    &lt;style&gt;</span><br><span class="line">        body&#123;</span><br><span class="line">            background: #dddddd;</span><br><span class="line">        &#125;</span><br><span class="line">        #canvas&#123;</span><br><span class="line">            margin: 10px;</span><br><span class="line">            padding: 10px;</span><br><span class="line">            background: #ffffff;</span><br><span class="line">            border: thin inset #aaaaaa;</span><br><span class="line">        &#125;</span><br><span class="line">    &lt;/style&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;canvas id=&quot;canvas&quot; width=&quot;600&quot; height=&quot;300&quot;&gt;</span><br><span class="line"></span><br><span class="line">&lt;/canvas&gt;</span><br><span class="line">&lt;script  src=&quot;example.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+          <h1 id="动画中的三角学"><a href="#动画中的三角学" class="headerlink" title="动画中的三角学"></a>动画中的三角学</h1><p>三角学在动画技术中广泛使用。</p>
+<h2 id="角"><a href="#角" class="headerlink" title="角"></a>角</h2><h3 id="弧度和角度"><a href="#弧度和角度" class="headerlink" title="弧度和角度"></a>弧度和角度</h3><p>当你在canvas元素上旋转一副图像时，你会用到context.rotate(angle)方法，其中参数angle的大小由弧度表示。下面是弧度与角度的转换公式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">radians=degrees*Math.PI/180;</span><br><span class="line">degrees=radians*180/Math.PI</span><br></pre></td></tr></table></figure>
+
+<h3 id="Canvas的坐标系"><a href="#Canvas的坐标系" class="headerlink" title="Canvas的坐标系"></a>Canvas的坐标系</h3><p>在大多数系统中，角度的测量是以逆时针为正值的，0°表示一条线沿着x轴正向沿伸。在canvas中，顺时针的角度才是正值，逆时针的角度反而成了负值。在这种情况下，需要适应这个系统在每次的计算中反转角度。</p>
+<h3 id="三角形的边"><a href="#三角形的边" class="headerlink" title="三角形的边"></a>三角形的边</h3><h3 id="三角函数"><a href="#三角函数" class="headerlink" title="三角函数"></a>三角函数</h3><h4 id="正弦"><a href="#正弦" class="headerlink" title="正弦"></a>正弦</h4><p>一个角的正弦表示与该角相对的直角边与斜边的比例。在Js中，可以使用Math.sin(angle)函数。</p>
+<h4 id="余弦"><a href="#余弦" class="headerlink" title="余弦"></a>余弦</h4><p>通过Math.cos(angle)函数在Js中实现余弦。<br>tips：Js换行时，因为要被html识别使用，不能用转移字符\n  ，要使用br标签，（”X”+”</br>“）;</p>
+<h4 id="正切"><a href="#正切" class="headerlink" title="正切"></a>正切</h4><p>通过Math.tan(angle)来表示。</p>
+<h2 id="旋转"><a href="#旋转" class="headerlink" title="旋转"></a>旋转</h2>
       
     </div>
 
@@ -440,7 +442,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/10/24/Docker/Docker%E5%AE%89%E8%A3%85/">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/10/25/Canvas/canvas%E7%9A%84%E4%B8%80%E4%BA%9B%E5%87%BD%E6%95%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -454,7 +456,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/10/24/Docker/Docker%E5%AE%89%E8%A3%85/" class="post-title-link" itemprop="url">Docker安装</a>
+            <a href="/2019/10/25/Canvas/canvas%E7%9A%84%E4%B8%80%E4%BA%9B%E5%87%BD%E6%95%B0/" class="post-title-link" itemprop="url">canvas的一些函数</a>
         </h1>
 
         <div class="post-meta">
@@ -464,14 +466,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2019-10-24 23:15:15" itemprop="dateCreated datePublished" datetime="2019-10-24T23:15:15+08:00">2019-10-24</time>
+              <time title="Created: 2019-10-25 16:22:10" itemprop="dateCreated datePublished" datetime="2019-10-25T16:22:10+08:00">2019-10-25</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-30 22:08:11" itemprop="dateModified" datetime="2019-10-30T22:08:11+08:00">2019-10-30</time>
+                <time title="Modified: 2019-11-02 09:13:12" itemprop="dateModified" datetime="2019-11-02T09:13:12+08:00">2019-11-02</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -479,8 +481,8 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/docker/" itemprop="url" rel="index">
-                    <span itemprop="name">docker</span>
+                  <a href="/categories/canvas/" itemprop="url" rel="index">
+                    <span itemprop="name">canvas</span>
                   </a>
                 </span>
             </span>
@@ -496,97 +498,60 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Docker安装"><a href="#Docker安装" class="headerlink" title="Docker安装"></a>Docker安装</h1><hr>
-<p>##Docker的组成</p>
-<h3 id="镜像"><a href="#镜像" class="headerlink" title="镜像"></a>镜像</h3><p>Docker镜像(Image)就是一个只读的模板，镜像可以用来创建Docker容器，一个镜像可以创建多个容器。可以把Docker中的镜像类比为Java中的类。</p>
-<h3 id="容器"><a href="#容器" class="headerlink" title="容器"></a>容器</h3><p>Docker 利用容器(Container)独立运行的一个或一组应用。容器是用镜像创建的运行实例。它可以被启动、开始、停止、删除。每个容器都是相互隔离的、保证安全的平台。可以把容器看作一个简易版的Linux环境和运行在其中的应用程序。容器的定义和镜像几乎一模一样，也是一堆层的统一视角，唯一的区别在于容器的最上面的那一层是可读可写的。</p>
-<h3 id="仓库"><a href="#仓库" class="headerlink" title="仓库"></a>仓库</h3><p>仓库(Repository)是集中存放镜像的地方。<br>仓库和仓库注册服务器(Registry)。仓库注册服务器上往往存放着多个仓库，每个仓库又包含了多个镜像，每个镜像有不同的标签(tag)。<br>仓库分为公开仓库和私有仓库。</p>
-<h3 id="Docker的运行流程"><a href="#Docker的运行流程" class="headerlink" title="Docker的运行流程"></a>Docker的运行流程</h3><p>Docker本身是一个容器运行载体或称之为管理引擎。我们把应用程序和配置依赖打包形成的一个可交付的运行环境，这个打包好的运行环境就是image镜像文件。只有通过这个镜像文件才能生成Docker容器。image文件可以看做是容器的模板。Docker根据image文件生成容器的实例。</p>
-<h3 id="安装指令"><a href="#安装指令" class="headerlink" title="安装指令"></a>安装指令</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum update</span><br><span class="line">yum install docker</span><br></pre></td></tr></table></figure>
+          <h1 id="canvas的一些函数"><a href="#canvas的一些函数" class="headerlink" title="canvas的一些函数"></a>canvas的一些函数</h1><hr>
+<p>canvas元素并未提供很多api，实际上，它只提供了两个属性与三个方法。</p>
+<ul>
+<li>width: canvas元素绘图表面的宽度。在默认状况下，浏览器会将canvas元素的大小设定成与绘图表面大小一致。</li>
+<li>height: canvas元素绘图表面的高度</li>
+<li>getContext():返回与该canvas元素相关的绘图环境对象。每个canvas元素均有一个这样的环境对象，而且每个环境对象均与一个canvas元素相关联。</li>
+</ul>
+<h2 id="canvas状态的保存和恢复"><a href="#canvas状态的保存和恢复" class="headerlink" title="canvas状态的保存和恢复"></a>canvas状态的保存和恢复</h2><p>很多时候我们只是想临时性的改变某个canvas的绘图属性。</p>
+<ul>
+<li>save():保存当前canvas绘图环境的所有属性</li>
+<li>restore()：恢复当前canvas绘图环境的所有属性</li>
+</ul>
+<h2 id="canvas-原点-x-水平方向、原点-y-垂直方向，添加平移变换的方法。"><a href="#canvas-原点-x-水平方向、原点-y-垂直方向，添加平移变换的方法。" class="headerlink" title="canvas 原点 x 水平方向、原点 y 垂直方向，添加平移变换的方法。"></a>canvas 原点 x 水平方向、原点 y 垂直方向，添加平移变换的方法。</h2><p>void ctx.translate(x, y);<br>x：水平方向的移动距离。<br>y：垂直方向的移动距离。</p>
+<h2 id="绘制矩形"><a href="#绘制矩形" class="headerlink" title="绘制矩形"></a>绘制矩形</h2><p>与SVG不同，它canvas仅支持两种基本形状：矩形和路径（由线连接的点的列表）。所有其他形状必须通过组合一个或多个路径来创建。幸运的是，我们有各种各样的路径绘制功能，它们可以组成非常复杂的形状。</p>
+<p>首先让我们看一下矩形。可以在画布上绘制矩形的三个函数：</p>
+<p>fillRect(x, y, width, height)<br>绘制一个填充的矩形。<br>strokeRect(x, y, width, height)<br>绘制矩形轮廓。<br>clearRect(x, y, width, height)<br>清除指定的矩形区域，使其完全透明。<br>这三个函数中的每一个都具有相同的参数。x并y指定矩形左上角在画布上的位置（相对于原点）。width并height提供矩形的大小。</p>
+<h2 id="绘制路径"><a href="#绘制路径" class="headerlink" title="绘制路径"></a>绘制路径</h2><p>现在让我们看一下路径。路径是由线段连接的点的列表，这些线段可以具有不同的形状（弯曲或不弯曲），不同的宽度和不同的颜色。路径甚至子路径都可以关闭。为了使用路径制作形状，我们采取了一些额外的步骤：<br>1、 首先，创建路径。<br>2、 然后，您可以使用绘图命令来绘制路径。<br>3、 创建路径后，您可以描画或填充路径以进行渲染。</p>
+<p>以下是用于执行这些步骤的功能：</p>
+<ul>
+<li>beginPath()<br>创建一个新路径。创建之后，将来的绘图命令将直接进入路径并用于构建路径。</li>
+<li>路径方法<br>为对象设置不同路径的方法。</li>
+<li>closePath()<br>向路径添加一条直线，转到当前子路径的起点。</li>
+<li>stroke()<br>通过抚摸轮廓来绘制形状。</li>
+<li>fill()<br>通过填充路径的内容区域绘制实体形状。<br>创建路径的第一步是调用beginPath()。在内部，路径存储为一起形成形状的子路径（线，弧等）的列表。每次调用此方法时，列表都会重置，我们可以开始绘制新形状。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">注意：当当前路径为空时，例如在调用之后beginPath()，或在新创建的画布上moveTo()，无论实际是什么，第一个路径构造命令始终被视为a 。因此，您几乎总是希望在重置路径后专门设置起始位置。</span><br></pre></td></tr></table></figure>
+第二步是调用实际指定要绘制路径的方法。我们很快就会看到这些。</li>
+</ul>
+<p>第三步（也是可选步骤）是closePath()。此方法尝试通过绘制从当前点到起点的直线来闭合形状。如果形状已经关闭或列表中只有一个点，则此功能不执行任何操作。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">注意：调用时fill()，所有打开的形状都会自动关闭，因此您不必调用closePath()。这不，当你打电话的情况stroke()。</span><br></pre></td></tr></table></figure>
 
-<h3 id="阿里云镜像加速"><a href="#阿里云镜像加速" class="headerlink" title="阿里云镜像加速"></a>阿里云镜像加速</h3><p>1、登陆<a href="https://cr.console.aliyun.com/cn-hangzhou/instances/repositories" target="_blank" rel="noopener">https://cr.console.aliyun.com/cn-hangzhou/instances/repositories</a><br>2、注册一个账号后进入控制台，然后搜索镜像容器服务，找到镜像加速器<br>3、根据自己的系统找到对应的文件(/etc/docker/daemon.json)，将文件中的内容修改即可。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;registry-mirrors&quot;: [&quot;https://lg0skm2p.mirror.aliyuncs.com&quot;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>配置完成后，还需重启应用</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl daemon-reload</span><br><span class="line">sudo systemctl restart docker</span><br></pre></td></tr></table></figure>
+<p>示例：画一个三角形</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">function draw() &#123;</span><br><span class="line">  var canvas = document.getElementById(&apos;canvas&apos;);</span><br><span class="line">  if (canvas.getContext) &#123;</span><br><span class="line">    var ctx = canvas.getContext(&apos;2d&apos;);</span><br><span class="line"></span><br><span class="line">    ctx.beginPath();</span><br><span class="line">    ctx.moveTo(75, 50);</span><br><span class="line">    ctx.lineTo(100, 75);</span><br><span class="line">    ctx.lineTo(100, 25);</span><br><span class="line">    ctx.fill();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="利用docker-run-hello-world-指令进行测试"><a href="#利用docker-run-hello-world-指令进行测试" class="headerlink" title="利用docker run hello-world 指令进行测试"></a>利用docker run hello-world 指令进行测试</h3><p>docker run 镜像名：这个指令先从远程仓库中拉取镜像，然后运行这个镜像的一个实例。</p>
+<h2 id="移动笔"><a href="#移动笔" class="headerlink" title="移动笔"></a>移动笔</h2><p>该功能是一个非常有用的功能，它实际上不会绘制任何内容，但会成为上述路径列表的一部分moveTo()。您可能最能想到的是将笔或铅笔从一张纸上的一个地方提起，然后放在另一张纸上。</p>
+<ul>
+<li>moveTo(x, y)<br>移动笔由指定的坐标x和y。</li>
+</ul>
+<p>初始化或beginPath()调用画布时，通常将需要使用该moveTo()函数将起点放置在其他位置。我们还可以moveTo()用来绘制未连接的路径。看看下面的笑脸。</p>
+<p>要自己尝试，可以使用下面的代码片段。只需将其粘贴到draw()我们之前看到的函数中即可。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">function draw() &#123;</span><br><span class="line">  var canvas = document.getElementById(&apos;canvas&apos;);</span><br><span class="line">  if (canvas.getContext) &#123;</span><br><span class="line">     var ctx = canvas.getContext(&apos;2d&apos;);</span><br><span class="line"></span><br><span class="line">    ctx.beginPath();</span><br><span class="line">    ctx.arc(75, 75, 50, 0, Math.PI * 2, true); // Outer circle</span><br><span class="line">    ctx.moveTo(110, 75);</span><br><span class="line">    ctx.arc(75, 75, 35, 0, Math.PI, false);  // Mouth (clockwise)</span><br><span class="line">    ctx.moveTo(65, 65);</span><br><span class="line">    ctx.arc(60, 65, 5, 0, Math.PI * 2, true);  // Left eye</span><br><span class="line">    ctx.moveTo(95, 65);</span><br><span class="line">    ctx.arc(90, 65, 5, 0, Math.PI * 2, true);  // Right eye</span><br><span class="line">    ctx.stroke();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-      
-    </div>
+<h2 id="绘制直线"><a href="#绘制直线" class="headerlink" title="绘制直线"></a>绘制直线</h2><p>要绘制直线，请使用lineTo()方法。</p>
+<ul>
+<li>lineTo(x, y)<br>绘制一条从当前绘图位置到所指定的位置的线x和y。</li>
+</ul>
+<p>此方法有两个参数x和y，它们是直线终点的坐标。起点取决于先前绘制的路径，其中先前路径的终点是后续路径的起点，依此类推。也可以使用该moveTo()方法更改起点。</p>
+<p>下面的示例绘制两个三角形，一个三角形填充，一个轮廓绘制。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">function draw() &#123;</span><br><span class="line">  var canvas = document.getElementById(&apos;canvas&apos;);</span><br><span class="line">  if (canvas.getContext) &#123;</span><br><span class="line">    var ctx = canvas.getContext(&apos;2d&apos;);</span><br><span class="line"></span><br><span class="line">    // Filled triangle</span><br><span class="line">    ctx.beginPath();</span><br><span class="line">    ctx.moveTo(25, 25);</span><br><span class="line">    ctx.lineTo(105, 25);</span><br><span class="line">    ctx.lineTo(25, 105);</span><br><span class="line">    ctx.fill();</span><br><span class="line"></span><br><span class="line">    // Stroked triangle</span><br><span class="line">    ctx.beginPath();</span><br><span class="line">    ctx.moveTo(125, 125);</span><br><span class="line">    ctx.lineTo(125, 45);</span><br><span class="line">    ctx.lineTo(45, 125);</span><br><span class="line">    ctx.closePath();</span><br><span class="line">    ctx.stroke();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/10/24/Docker/DockerFile%E8%A7%A3%E6%9E%90/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lancersaber">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lancersaber">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/10/24/Docker/DockerFile%E8%A7%A3%E6%9E%90/" class="post-title-link" itemprop="url">DockerFile解析</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-10-24 23:15:15" itemprop="dateCreated datePublished" datetime="2019-10-24T23:15:15+08:00">2019-10-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-26 18:40:46" itemprop="dateModified" datetime="2019-10-26T18:40:46+08:00">2019-10-26</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/docker/" itemprop="url" rel="index">
-                    <span itemprop="name">docker</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="DockerFile解析"><a href="#DockerFile解析" class="headerlink" title="DockerFile解析"></a>DockerFile解析</h1><hr>
-<h2 id="DockerFile是什么"><a href="#DockerFile是什么" class="headerlink" title="DockerFile是什么"></a>DockerFile是什么</h2><p>DockerFile是用来构建镜像的构建文件，是由一系列命令和参数构成的脚本</p>
+<h2 id="绘制弧线"><a href="#绘制弧线" class="headerlink" title="绘制弧线"></a>绘制弧线</h2><p>要绘制圆弧或圆，我们使用arc()或arcTo()方法。</p>
+<ul>
+<li>arc(x, y, radius, startAngle, endAngle, anticlockwise)<br>绘制一个以（x，y）位置为中心的圆弧，其半径r从startAngle开始，到endAngle为止，沿逆时针指示的给定方向（默认为顺时针方向）移动。</li>
+<li>arcTo(x1, y1, x2, y2, radius)<br>用给定的控制点和半径绘制一条弧，并通过一条直线将其连接到上一个点。<br>让我们更详细地看一下该arc方法，该方法有六个参数：x和y是应在其上绘制圆弧的圆心的坐标。radius是不言自明的。的startAngle和endAngle以弧度为单位的参数定义弧的起点和终点，沿该圆的曲线。这些是从x轴测量的。所述anticlockwise参数是一个布尔值，当true，得出弧逆时针; 否则，将顺时针绘制圆弧。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">注意：arc功能中的角度以弧度而不是度为单位。要将度数转换为弧度，可以使用以下JavaScript表达式：radians = (Math.PI/180)*degrees。</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
 
       
     </div>
@@ -672,184 +637,6 @@
 
 <h2 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">文件或目录：指定要打包的文件或目录列表。</span><br></pre></td></tr></table></figure>
 
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/10/24/Linux/%E5%9C%A8Linux%E4%B8%8A%E9%85%8D%E7%BD%AEjava%E7%8E%AF%E5%A2%83/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lancersaber">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lancersaber">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/10/24/Linux/%E5%9C%A8Linux%E4%B8%8A%E9%85%8D%E7%BD%AEjava%E7%8E%AF%E5%A2%83/" class="post-title-link" itemprop="url">在Linux上配置java环境</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-10-24 23:15:15" itemprop="dateCreated datePublished" datetime="2019-10-24T23:15:15+08:00">2019-10-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-28 08:24:00" itemprop="dateModified" datetime="2019-10-28T08:24:00+08:00">2019-10-28</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="在Linux上配置java环境"><a href="#在Linux上配置java环境" class="headerlink" title="在Linux上配置java环境"></a>在Linux上配置java环境</h1><hr>
-<h2 id="下载jdk1-8"><a href="#下载jdk1-8" class="headerlink" title="下载jdk1.8"></a>下载jdk1.8</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># wget --no-check-certificate --no-cookies --header &quot;Cookie: oraclelicense=accept-securebackup-cookie&quot;  http://download.oracle.com/otn-pub/java/jdk/8u131-b11/d54c1d3a095b4ff2b6607d096fa80163/jdk-8u131-linux-x64.tar.gz</span><br></pre></td></tr></table></figure>
-
-<h2 id="解压"><a href="#解压" class="headerlink" title="解压"></a>解压</h2><p>1.用tar命令解压后，会生成jdk1.8.0_131目录；</p>
-<p>2.为了方便用mv把jdk1.8.0_131更名为jdk1.8；</p>
-<p>3.把jdk1.8移动到/usr/local目录下(当然也可以移动到别的目录下，后面配置环境变量修改为自己的jdk路径即可)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># tar -zxvf jdk-8u131-linux-x64.tar.gz</span><br><span class="line"># mv jdk1.8.0_131 jdk1.8</span><br><span class="line"># mv jdk1.8 /usr/local</span><br></pre></td></tr></table></figure>
-
-<h2 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h2><p>1.修改/etc/profile文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># vim /etc/profile</span><br></pre></td></tr></table></figure>
-<p>在profile文件中配置jdk环境</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">export JAVA_HOME=/usr/local/jdk1.8</span><br><span class="line">export JRE_HOME=$&#123;JAVA_HOME&#125;/jre</span><br><span class="line">export CLASSPATH=.:$&#123;JAVA_HOME&#125;/lib:$&#123;JRE_HOME&#125;/lib:$CLASSPATH</span><br><span class="line">export JAVA_PATH=$&#123;JAVA_HOME&#125;/bin:$&#123;JRE_HOME&#125;/bin</span><br><span class="line">export PATH=$PATH:$&#123;JAVA_PATH&#125;</span><br></pre></td></tr></table></figure>
-
-<p>2.使profile生效</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># source /etc/profie</span><br></pre></td></tr></table></figure>
-
-<h2 id="查看配置环境是否成功"><a href="#查看配置环境是否成功" class="headerlink" title="查看配置环境是否成功"></a>查看配置环境是否成功</h2><p>java -version命令查看jdk版本</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># java -version</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/10/24/Linux/systemctl%E6%8C%87%E4%BB%A4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lancersaber">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lancersaber">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/10/24/Linux/systemctl%E6%8C%87%E4%BB%A4/" class="post-title-link" itemprop="url">每天一个Linux指令-systemctl</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-10-24 23:15:15" itemprop="dateCreated datePublished" datetime="2019-10-24T23:15:15+08:00">2019-10-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-28 12:40:58" itemprop="dateModified" datetime="2019-10-28T12:40:58+08:00">2019-10-28</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="每天一个Linux指令-systemctl"><a href="#每天一个Linux指令-systemctl" class="headerlink" title="每天一个Linux指令-systemctl"></a>每天一个Linux指令-systemctl</h1><hr>
-<p>一般来说，服务的启动有两个阶段，一个是<em>开机的时候设定要不要启动这个服务</em>，以及<em>你现在要不要启动这个服务</em>。</p>
-<h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl [command] [unit]</span><br></pre></td></tr></table></figure>
-
-<h2 id="command"><a href="#command" class="headerlink" title="command"></a>command</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">start:立刻启动后面接的unit</span><br><span class="line">stop：立刻关闭后面接的unit</span><br><span class="line">restart：立刻关闭后重启后面接的unit，亦即执行stop再start的意思</span><br><span class="line">reload:不关闭后面接的unit的情况下，重载配置文件，让设定生效</span><br><span class="line">enable：设定下次开机时，后面接的unit会被启动</span><br><span class="line">disable：设定下次开机时，后面接的unit不会被启动</span><br><span class="line">status：目前后面接的这个unit的状态，会列出有没有正在执行、开机预设执行否、登录等信息</span><br><span class="line">is-active:目前有没有正在运行中</span><br><span class="line">is-enable:开机有没有预设要启用这个unit</span><br></pre></td></tr></table></figure>
-
-<h2 id="透过systemctl观察系统上所有的服务"><a href="#透过systemctl观察系统上所有的服务" class="headerlink" title="透过systemctl观察系统上所有的服务"></a>透过systemctl观察系统上所有的服务</h2><hr>
-<h3 id="语法-1"><a href="#语法-1" class="headerlink" title="语法"></a>语法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">systemctl [command] [--type=TYPE] [--all]</span><br><span class="line"></span><br><span class="line">command:</span><br><span class="line">	list-units	:依据unit列出目前有启动的unit，若加上--all才会列出没启动的</span><br><span class="line">	list-unit-files:</span><br><span class="line">--type=TYPE:就是unit type，主要有service，socket，target</span><br></pre></td></tr></table></figure>
-
-<h2 id="systemctl指令的几个应用"><a href="#systemctl指令的几个应用" class="headerlink" title="systemctl指令的几个应用"></a>systemctl指令的几个应用</h2><h3 id="设置Target"><a href="#设置Target" class="headerlink" title="设置Target"></a>设置Target</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">systemctl [command] [unit.target]</span><br><span class="line">选项与参数</span><br><span class="line">command:</span><br><span class="line">	get-default:取得目前的target</span><br><span class="line">	set-default:设定后面接的target成为默认的target</span><br><span class="line">	isolate	   :切换到后面接的模式</span><br></pre></td></tr></table></figure>
-
-<h3 id="设置模式"><a href="#设置模式" class="headerlink" title="设置模式"></a>设置模式</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">systemctl poweroff:系统关机</span><br><span class="line">systemctl reboot  ：重新启动</span><br><span class="line">systemctl suspend ：进入暂停模式</span><br><span class="line">systemctl hibernate：进入休眠模式</span><br><span class="line">systemctl rescue	：强制进入救援模式</span><br><span class="line">systemctl emergency：强制进入紧急救援模式</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -1003,6 +790,207 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/10/24/Docker/Docker%E9%95%9C%E5%83%8F%E5%8E%9F%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/10/24/Docker/Docker%E9%95%9C%E5%83%8F%E5%8E%9F%E7%90%86/" class="post-title-link" itemprop="url">Docker镜像原理</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-10-24 23:15:15" itemprop="dateCreated datePublished" datetime="2019-10-24T23:15:15+08:00">2019-10-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-10-31 10:51:33" itemprop="dateModified" datetime="2019-10-31T10:51:33+08:00">2019-10-31</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/docker/" itemprop="url" rel="index">
+                    <span itemprop="name">docker</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Docker镜像原理"><a href="#Docker镜像原理" class="headerlink" title="Docker镜像原理"></a>Docker镜像原理</h1><hr>
+<h2 id="Docker镜像是什么？"><a href="#Docker镜像是什么？" class="headerlink" title="Docker镜像是什么？"></a>Docker镜像是什么？</h2><p>镜像是一种轻量级的、可执行的独立软件包，用来打包软件运行环境和基于环境开发的软件，它包含运行某个软件所需的所有内容，包阔代码、运行时、库、环境变量等等配置文件</p>
+<h2 id="UnionFS-联合文件系统"><a href="#UnionFS-联合文件系统" class="headerlink" title="UnionFS(联合文件系统)"></a>UnionFS(联合文件系统)</h2><p>UnionFS是一种分层、轻量级并且高性能的文件系统，它支持对文件系统的修改作为一次提交来一层层的叠加，同时可以将不同目录挂载到同一个虚拟文件系统下。Union文件系统是Docker镜像的基础。<em>镜像可以通过分层来进行继承，基于基础镜像，可以制作各种具体的应用镜像</em></p>
+<h2 id="Dockers镜像加载原理"><a href="#Dockers镜像加载原理" class="headerlink" title="Dockers镜像加载原理"></a>Dockers镜像加载原理</h2><p>docker的镜像实际上由一层一层的文件系统组成，这种层级的文件系统为UnionFS。</p>
+<h2 id="分层的镜像"><a href="#分层的镜像" class="headerlink" title="分层的镜像"></a>分层的镜像</h2><p>以我们的pul为例，在下载的过程中我们可以看到docker的镜像是一层一层在下载的</p>
+<p>##为什么Docker镜像要采用这种分层结构？<br>最大的好处是-共享资源。<br>比如：有多个镜像都从相同的base镜像构建而来，那么宿主主机只需在磁盘上保留一份base镜像，同时内存中也只需加载一份base镜像，就可以为所有容器服务了。而且镜像的每一层都可以共享。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/10/24/Docker/Docker%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/10/24/Docker/Docker%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="post-title-link" itemprop="url">Docker常用命令</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-10-24 23:15:15" itemprop="dateCreated datePublished" datetime="2019-10-24T23:15:15+08:00">2019-10-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-10-31 10:51:33" itemprop="dateModified" datetime="2019-10-31T10:51:33+08:00">2019-10-31</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/docker/" itemprop="url" rel="index">
+                    <span itemprop="name">docker</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Docker常用命令"><a href="#Docker常用命令" class="headerlink" title="Docker常用命令"></a>Docker常用命令</h1><hr>
+<p>##Docker帮助命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker version</span><br><span class="line">docker info</span><br><span class="line">docker --help：docker帮助手册，列出docker的一些常用指令</span><br></pre></td></tr></table></figure>
+
+<p>##镜像命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker images:列出本地镜像</span><br><span class="line">docker search 镜像名:列出仓库中所有可用的镜像</span><br><span class="line">docker pull 镜像名[:tag]：下载镜像,如果不带版本号，默认下载的是latest</span><br><span class="line">docker rmi [-f 强制删除] 唯一镜像名or镜像id:删除目标镜像</span><br></pre></td></tr></table></figure>
+
+<h2 id="容器命令"><a href="#容器命令" class="headerlink" title="容器命令"></a>容器命令</h2><p>启动容器</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">docker run [options] image [command] [arg..]</span><br><span class="line">--name:&quot;容器的新名字&quot;，为容器指定一个名字</span><br><span class="line">-d: 后台运行容器，并返回容器ID，也即启动守护式容器</span><br><span class="line">-i: 以交互模式运行容器，通常与-t同时使用</span><br><span class="line">-t: 为容器重新分配一个伪终端，</span><br><span class="line">-P(大P): 随机端口映射</span><br><span class="line">-p:	指定端口映射，有以下四种格式</span><br><span class="line">	ip：hostPort:containerPort</span><br><span class="line">	ip::containerPort</span><br><span class="line">	hostPort:containerPort(常用)</span><br><span class="line">	containerPort</span><br></pre></td></tr></table></figure>
+
+<p>列出当前所有正在运行的容器</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">docker ps [options]</span><br><span class="line">-a:列出当前正在运行的容器+历史上运行过的</span><br><span class="line">-l:显示最近创建的容器</span><br><span class="line">-n：显示最近n个创建的容器</span><br><span class="line">-q：静默模式，只显示容器编号</span><br></pre></td></tr></table></figure>
+
+<p>启动容器</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker start 容器ID或者容器名</span><br></pre></td></tr></table></figure>
+
+<p>停止容器</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker stop 容器ID或者容器名</span><br></pre></td></tr></table></figure>
+
+<p>强制关闭</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker kill 容器ID或者容器名</span><br></pre></td></tr></table></figure>
+
+<p>删除已停止的容器</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rm 容器ID</span><br></pre></td></tr></table></figure>
+
+<p>查看容器日志</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker logs -f -t --tail 容器ID</span><br><span class="line">-t: 加入时间戳</span><br><span class="line">-f：跟随最新的日志打印</span><br><span class="line">--tail：数字 显示最后多少条</span><br></pre></td></tr></table></figure>
+
+<p>查看容器内运行的进程</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker top 容器ID</span><br></pre></td></tr></table></figure>
+
+<p>查看容器内部细节</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker inspect 容器ID</span><br></pre></td></tr></table></figure>
+
+<p>进入正在运行的容器并以命令行交互</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it 容器ID bashShell</span><br><span class="line">重新进入docker attach 容器ID</span><br></pre></td></tr></table></figure>
+<p>这两种方式的区别</p>
+<ul>
+<li>attach: 直接进入容器启动命令的终端，不会启动新的进程</li>
+<li>exec：是在容器中打开新的终端，并且可以启动新的进程</li>
+</ul>
+<p>从容器中拷贝文件到主机上</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker cp 容器ID:容器内路径 目的主机路径</span><br></pre></td></tr></table></figure>
+
+<p>提交容器副本使之成为一个新的镜像</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker commit -m=&quot;提交的描述信息&quot; -a=&quot;作者&quot; 容器ID 要创建的目标镜像名:[标签名]</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
     <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/10/24/Docker/Docker%E6%A6%82%E5%BF%B5%E6%80%A7%E7%9F%A5%E8%AF%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1078,11 +1066,100 @@
   
   
 
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/10/24/Docker/Docker%E5%AE%89%E8%A3%85/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/10/24/Docker/Docker%E5%AE%89%E8%A3%85/" class="post-title-link" itemprop="url">Docker安装</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-10-24 23:15:15" itemprop="dateCreated datePublished" datetime="2019-10-24T23:15:15+08:00">2019-10-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-10-30 22:08:11" itemprop="dateModified" datetime="2019-10-30T22:08:11+08:00">2019-10-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/docker/" itemprop="url" rel="index">
+                    <span itemprop="name">docker</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Docker安装"><a href="#Docker安装" class="headerlink" title="Docker安装"></a>Docker安装</h1><hr>
+<p>##Docker的组成</p>
+<h3 id="镜像"><a href="#镜像" class="headerlink" title="镜像"></a>镜像</h3><p>Docker镜像(Image)就是一个只读的模板，镜像可以用来创建Docker容器，一个镜像可以创建多个容器。可以把Docker中的镜像类比为Java中的类。</p>
+<h3 id="容器"><a href="#容器" class="headerlink" title="容器"></a>容器</h3><p>Docker 利用容器(Container)独立运行的一个或一组应用。容器是用镜像创建的运行实例。它可以被启动、开始、停止、删除。每个容器都是相互隔离的、保证安全的平台。可以把容器看作一个简易版的Linux环境和运行在其中的应用程序。容器的定义和镜像几乎一模一样，也是一堆层的统一视角，唯一的区别在于容器的最上面的那一层是可读可写的。</p>
+<h3 id="仓库"><a href="#仓库" class="headerlink" title="仓库"></a>仓库</h3><p>仓库(Repository)是集中存放镜像的地方。<br>仓库和仓库注册服务器(Registry)。仓库注册服务器上往往存放着多个仓库，每个仓库又包含了多个镜像，每个镜像有不同的标签(tag)。<br>仓库分为公开仓库和私有仓库。</p>
+<h3 id="Docker的运行流程"><a href="#Docker的运行流程" class="headerlink" title="Docker的运行流程"></a>Docker的运行流程</h3><p>Docker本身是一个容器运行载体或称之为管理引擎。我们把应用程序和配置依赖打包形成的一个可交付的运行环境，这个打包好的运行环境就是image镜像文件。只有通过这个镜像文件才能生成Docker容器。image文件可以看做是容器的模板。Docker根据image文件生成容器的实例。</p>
+<h3 id="安装指令"><a href="#安装指令" class="headerlink" title="安装指令"></a>安装指令</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum update</span><br><span class="line">yum install docker</span><br></pre></td></tr></table></figure>
+
+<h3 id="阿里云镜像加速"><a href="#阿里云镜像加速" class="headerlink" title="阿里云镜像加速"></a>阿里云镜像加速</h3><p>1、登陆<a href="https://cr.console.aliyun.com/cn-hangzhou/instances/repositories" target="_blank" rel="noopener">https://cr.console.aliyun.com/cn-hangzhou/instances/repositories</a><br>2、注册一个账号后进入控制台，然后搜索镜像容器服务，找到镜像加速器<br>3、根据自己的系统找到对应的文件(/etc/docker/daemon.json)，将文件中的内容修改即可。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;registry-mirrors&quot;: [&quot;https://lg0skm2p.mirror.aliyuncs.com&quot;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>配置完成后，还需重启应用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl daemon-reload</span><br><span class="line">sudo systemctl restart docker</span><br></pre></td></tr></table></figure>
+
+<h3 id="利用docker-run-hello-world-指令进行测试"><a href="#利用docker-run-hello-world-指令进行测试" class="headerlink" title="利用docker run hello-world 指令进行测试"></a>利用docker run hello-world 指令进行测试</h3><p>docker run 镜像名：这个指令先从远程仓库中拉取镜像，然后运行这个镜像的一个实例。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
   </div>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/17/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><span class="page-number current">18</span><a class="page-number" href="/page/19/">19</a><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/19/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/page/17/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><span class="page-number current">18</span><a class="page-number" href="/page/19/">19</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><a class="extend next" rel="next" href="/page/19/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1128,18 +1205,18 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">197</span>
+          <span class="site-state-item-count">202</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
-        <span class="site-state-item-count">45</span>
+        <span class="site-state-item-count">46</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-count">59</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

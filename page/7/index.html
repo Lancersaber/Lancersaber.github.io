@@ -172,6 +172,553 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/15/Java%E5%9F%BA%E7%A1%80/Java%E4%B8%AD%E7%9A%84%E6%B3%9B%E5%9E%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/15/Java%E5%9F%BA%E7%A1%80/Java%E4%B8%AD%E7%9A%84%E6%B3%9B%E5%9E%8B/" class="post-title-link" itemprop="url">Java中泛型</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2019-11-15 15:59:42 / Modified: 16:49:48" itemprop="dateCreated datePublished" datetime="2019-11-15T15:59:42+08:00">2019-11-15</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Java中泛型"><a href="#Java中泛型" class="headerlink" title="Java中泛型"></a>Java中泛型</h1><hr>
+<p>一般的类和方法，只能使用具体的类型，要么是基本类型，要么是自定义的类。如果要编写可以应用于多种类型的代码，这种刻板的限制对代码的束缚就会很大。</p>
+<h2 id="泛型类"><a href="#泛型类" class="headerlink" title="泛型类"></a>泛型类</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">package generics;//: generics/Holder3.java</span><br><span class="line"></span><br><span class="line">public class Holder3&lt;T&gt; &#123;</span><br><span class="line">  private T a;</span><br><span class="line">  public Holder3(T a) &#123; this.a = a; &#125;</span><br><span class="line">  public void set(T a) &#123; this.a = a; &#125;</span><br><span class="line">  public T get() &#123; return a; &#125;</span><br><span class="line">  public static void main(String[] args) &#123;</span><br><span class="line">    Holder3&lt;Automobile&gt; h3 =</span><br><span class="line">      new Holder3&lt;Automobile&gt;(new Automobile());</span><br><span class="line">    Automobile a = h3.get(); // No cast needed</span><br><span class="line">    // h3.set(&quot;Not an Automobile&quot;); // Error</span><br><span class="line">    // h3.set(1); // Error</span><br><span class="line">  &#125;</span><br><span class="line">&#125; ///:~</span><br></pre></td></tr></table></figure>
+<p>当你创建Holder3对象时，必须指明持有什么类型的对象，将其置于尖括号中。然后，你就只能在Holder3中存入该类型(或其子类，因为多态与泛型不冲突)。并且在你从Holder3中取出它持有的对象时，自动就是正确的类型。</p>
+<p>这就是Java泛型的核心概念：告诉编译器想使用什么类型，然后编译器帮你处理一切细节。</p>
+<h2 id="泛型接口"><a href="#泛型接口" class="headerlink" title="泛型接口"></a>泛型接口</h2><p>泛型也可以应用于接口。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public interface Generator&lt;T&gt;&#123; T next();&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="泛型方法"><a href="#泛型方法" class="headerlink" title="泛型方法"></a>泛型方法</h2><p>泛型同样可以使用于方法上。注意泛型方法所在的类可以是泛型类，也可以不是。也就是说，是否拥有泛型方法，与其所在的类是否是泛型没有关系。<br>对于static的方法，无法访问泛型类的类型参数，所以，如果static方法需要使用泛型能力，就必须使其成为泛型方法。</p>
+<p>要成为泛型方法，只需将泛型参数列表置于返回值之前</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public class GenericMethods&#123;</span><br><span class="line">	public &lt;T&gt; void f(T x)&#123;</span><br><span class="line">		System.out.println(x.getClass().getName());</span><br><span class="line">	&#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="泛型的擦除"><a href="#泛型的擦除" class="headerlink" title="泛型的擦除"></a>泛型的擦除</h2><p>我们可以声明ArrayList.class，但是不能声明ArrayList<Integer>.class.看下面的代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public class ErasedTypeEquivalence &#123;</span><br><span class="line">  public static void main(String[] args) &#123;</span><br><span class="line">    Class c1 = new ArrayList&lt;String&gt;().getClass();</span><br><span class="line">    Class c2 = new ArrayList&lt;Integer&gt;().getClass();</span><br><span class="line">    System.out.println(c1 == c2);</span><br><span class="line">  &#125;</span><br><span class="line">&#125; /* Output:</span><br><span class="line">true</span><br><span class="line">*///:~</span><br></pre></td></tr></table></figure>
+
+<p>在泛型代码内部，无法获得任何有关泛型参数类型的信息。<br>Java泛型是使用擦除来实现的，这意味着当你在使用泛型时，任何具体的类型信息都被擦除了，你唯一知道的就是你在使用一个对象。因为List<Integer>和List<String>在运行时事实上是相同的类型。这两种类型都i被擦除成它们的”原生类型”，即List</p>
+<h2 id="泛型的边界"><a href="#泛型的边界" class="headerlink" title="泛型的边界"></a>泛型的边界</h2><p>因为擦除了类型信息，所以在无界泛型参数调用的方法只是那些可以用Object调用的方法。但是，如果能够将这个参数限制为某个类型子集，那么你就可以用这些子集来调用方法。为了执行这种限制，Java泛型重用了extends关键子。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">interface HasColor &#123; java.awt.Color getColor(); &#125;</span><br><span class="line"></span><br><span class="line">class Colored&lt;T extends HasColor&gt; &#123;</span><br><span class="line">  T item;</span><br><span class="line">  Colored(T item) &#123; this.item = item; &#125;</span><br><span class="line">  T getItem() &#123; return item; &#125;</span><br><span class="line">  // The bound allows you to call a method:</span><br><span class="line">  java.awt.Color color() &#123; return item.getColor(); &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/14/Java%E5%9F%BA%E7%A1%80/Java%E4%B8%AD%E7%9A%84%E4%BD%8D%E8%BF%90%E7%AE%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/14/Java%E5%9F%BA%E7%A1%80/Java%E4%B8%AD%E7%9A%84%E4%BD%8D%E8%BF%90%E7%AE%97/" class="post-title-link" itemprop="url">Java中的位运算</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-11-14 20:12:44" itemprop="dateCreated datePublished" datetime="2019-11-14T20:12:44+08:00">2019-11-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-05-18 13:07:04" itemprop="dateModified" datetime="2020-05-18T13:07:04+08:00">2020-05-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Java中的位运算"><a href="#Java中的位运算" class="headerlink" title="Java中的位运算"></a>Java中的位运算</h1><hr>
+<p>Java提供的位运算符有：左移( &lt;&lt; )、右移( &gt;&gt; ) 、无符号右移( &gt;&gt;&gt; ) 、位与( &amp; ) 、位或( | )、位非( ~ )、位异或( ^ )，除了位非( ~ )是一元操作符外，其它的都是二元操作符。</p>
+<h2 id="1、左移-lt-lt"><a href="#1、左移-lt-lt" class="headerlink" title="1、左移( &lt;&lt; )"></a>1、左移( &lt;&lt; )</h2><p>Test1、将5左移2位：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">package com.xcy;</span><br><span class="line"> </span><br><span class="line">public class Test &#123;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		System.out.println(5&lt;&lt;2);//运行结果是20</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行结果是20，但是程序是怎样执行的呢？<br>首先会将5转为2进制表示形式(java中，整数默认就是int类型,也就是32位):</p>
+<p>0000 0000 0000 0000 0000 0000 0000 0101           然后左移2位后，低位补0：</p>
+<p>0000 0000 0000 0000 0000 0000 0001 0100           换算成10进制为20</p>
+<h2 id="2、右移-gt-gt-，右移同理，只是方向不一样罢了-感觉和没说一样"><a href="#2、右移-gt-gt-，右移同理，只是方向不一样罢了-感觉和没说一样" class="headerlink" title="2、右移( &gt;&gt; ) ，右移同理，只是方向不一样罢了(感觉和没说一样)"></a>2、右移( &gt;&gt; ) ，右移同理，只是方向不一样罢了(感觉和没说一样)</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(5&gt;&gt;2);//运行结果是1</span><br></pre></td></tr></table></figure>
+
+<p>还是先将5转为2进制表示形式：<br>0000 0000 0000 0000 0000 0000 0000 0101 然后右移2位，高位补0：</p>
+<p>0000 0000 0000 0000 0000 0000 0000 0001</p>
+<h2 id="3、无符号右移-gt-gt-gt"><a href="#3、无符号右移-gt-gt-gt" class="headerlink" title="3、无符号右移( &gt;&gt;&gt; )"></a>3、无符号右移( &gt;&gt;&gt; )</h2><p>我们知道在Java中int类型占32位，可以表示一个正数，也可以表示一个负数。正数换算成二进制后的最高位为0，负数的二进制最高为为1</p>
+<p>例如  -5换算成二进制后为：</p>
+<p>1111 1111 1111 1111 1111 1111 1111 1011   (刚开始接触二进制时，不知道最高位是用来表示正负之分的，当时就总想不通。。明明算起来得到的就是一个正数)</p>
+<p>我们分别对5进行右移3位、 -5进行右移3位和无符号右移3位：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">package com.xcy;</span><br><span class="line"> </span><br><span class="line">public class Test &#123;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		System.out.println(5&gt;&gt;3);//结果是0</span><br><span class="line">		System.out.println(-5&gt;&gt;3);//结果是-1</span><br><span class="line">		System.out.println(-5&gt;&gt;&gt;3);//结果是536870911</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="4、位与-amp"><a href="#4、位与-amp" class="headerlink" title="4、位与( &amp; )"></a>4、位与( &amp; )</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">package com.xcy;</span><br><span class="line"> </span><br><span class="line">public class Test &#123;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		System.out.println(5 &amp; 3);//结果为1</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>还是老套路，将2个操作数和结果都转换为二进制进行比较：<br>5转换为二进制：0000 0000 0000 0000 0000 0000 0000 0101</p>
+<p>3转换为二进制：0000 0000 0000 0000 0000 0000 0000 0011</p>
+<hr>
+<p>1转换为二进制：0000 0000 0000 0000 0000 0000 0000 0001</p>
+<p>位与：第一个操作数的的第n位于第二个操作数的第n位如果都是1，那么结果的第n为也为1，否则为0</p>
+<h2 id="5、位或"><a href="#5、位或" class="headerlink" title="5、位或( | )"></a>5、位或( | )</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">package com.xcy;</span><br><span class="line"> </span><br><span class="line">public class Test &#123;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		System.out.println(5 | 3);//结果为7</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>5转换为二进制：0000 0000 0000 0000 0000 0000 0000 0101</p>
+<p>3转换为二进制：0000 0000 0000 0000 0000 0000 0000 0011</p>
+<hr>
+<p>7转换为二进制：0000 0000 0000 0000 0000 0000 0000 0111<br>位或操作：第一个操作数的的第n位于第二个操作数的第n位 只要有一个是1，那么结果的第n为也为1，否则为0</p>
+<h2 id="6、位异或"><a href="#6、位异或" class="headerlink" title="6、位异或( ^ )"></a>6、位异或( ^ )</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">package com.xcy;</span><br><span class="line"> </span><br><span class="line">public class Test &#123;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		System.out.println(5 ^ 3);//结果为6</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>5转换为二进制：0000 0000 0000 0000 0000 0000 0000 0101</p>
+<p>3转换为二进制：0000 0000 0000 0000 0000 0000 0000 0011</p>
+<hr>
+<p>6转换为二进制：0000 0000 0000 0000 0000 0000 0000 0110<br>位异或：第一个操作数的的第n位于第二个操作数的第n位 相反，那么结果的第n为也为1，否则为0</p>
+<h2 id="7、位非-位非是一元操作符"><a href="#7、位非-位非是一元操作符" class="headerlink" title="7、位非( ~ )           位非是一元操作符"></a>7、位非( ~ )           位非是一元操作符</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">package com.xcy;</span><br><span class="line"> </span><br><span class="line">public class Test &#123;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		System.out.println(~5);//结果为-6</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="5转换为二进制：0000-0000-0000-0000-0000-0000-0000-0101"><a href="#5转换为二进制：0000-0000-0000-0000-0000-0000-0000-0101" class="headerlink" title="5转换为二进制：0000 0000 0000 0000 0000 0000 0000 0101"></a>5转换为二进制：0000 0000 0000 0000 0000 0000 0000 0101</h2><p>-6转换为二进制：1111 1111 1111 1111 1111 1111 1111 1010</p>
+<p>位非：操作数的第n位为1，那么结果的第n位为0，反之。</p>
+<p>由位运算操作符衍生而来的有：</p>
+<p>&amp;= 按位与赋值</p>
+<p>|=  按位或赋值</p>
+<p>^= 按位非赋值</p>
+<blockquote>
+<blockquote>
+<p>= 右移赋值</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>= 无符号右移赋值</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>&lt;&lt;= 赋值左移</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/14/Unknown/%E5%A4%A7%E5%9E%8B%E7%BD%91%E7%AB%99%E7%B3%BB%E7%BB%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/14/Unknown/%E5%A4%A7%E5%9E%8B%E7%BD%91%E7%AB%99%E7%B3%BB%E7%BB%9F/" class="post-title-link" itemprop="url">大型网站系统架构的演进</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-11-14 18:31:13" itemprop="dateCreated datePublished" datetime="2019-11-14T18:31:13+08:00">2019-11-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-11-15 15:53:06" itemprop="dateModified" datetime="2019-11-15T15:53:06+08:00">2019-11-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/unknow/" itemprop="url" rel="index">
+                    <span itemprop="name">unknow</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="大型网站系统架构的演进"><a href="#大型网站系统架构的演进" class="headerlink" title="大型网站系统架构的演进"></a>大型网站系统架构的演进</h1><hr>
+<p>为了更好的说明网站从小到大的演进过程，我们下面举个交易网站的例子。<br>作为一个交易网站，需要具备的最基本的三个功能有三部分：</p>
+<ul>
+<li>用户<ul>
+<li>用户注册</li>
+<li>用户管理</li>
+<li>信息维护</li>
+</ul>
+</li>
+<li>商品<ul>
+<li>商品展示</li>
+<li>商品管理</li>
+</ul>
+</li>
+<li>交易<ul>
+<li>创建交易</li>
+<li>交易管理</li>
+</ul>
+</li>
+</ul>
+<p>基于Java技术的网站大概是这样的<br><img src="https://i.loli.net/2019/11/14/D71oEpYGk5z2uCa.png" alt="web架构.PNG"></p>
+<p>这里需要注意两个地方</p>
+<ul>
+<li>各个功能模块之间是通过JVM内部的方法来进行交互的</li>
+<li>应用和数据库之间是通过JDBC进行访问的</li>
+</ul>
+<h2 id="单机负载告警，数据库与应用分离"><a href="#单机负载告警，数据库与应用分离" class="headerlink" title="单机负载告警，数据库与应用分离"></a>单机负载告警，数据库与应用分离</h2><p>当网站的访问量不断增大时，服务器的负载持续升高，必须采取一些方法来应对。首先我们可以做的是把数据库与应用从一台机器分别分到两台机器，那么我们的网站架构会变成这样<br><img src="https://i.loli.net/2019/11/14/OirqLbdHMukm9pz.png" alt="web.PNG"><br>我们只是在在应用的配置中把数据库的地址从本机改到了另外一台机器上而已。</p>
+<h2 id="应用服务器负载告警，如何让应用服务器走向集群"><a href="#应用服务器负载告警，如何让应用服务器走向集群" class="headerlink" title="应用服务器负载告警，如何让应用服务器走向集群"></a>应用服务器负载告警，如何让应用服务器走向集群</h2><p>应用服务器压力变大时，根据对应用的监测结果，可以有针对性地进行优化。<br>首先来看一下这个变化<br><img src="https://i.loli.net/2019/11/14/Nt2MzC1jA8dar3h.png" alt="web2.PNG"><br>应用服务器从一台变为两台。这两个服务器之间没有直接的交互，都是依赖数据库对外提供服务。但这样有两个问题需要解决：</p>
+<ol>
+<li>最终用户对两个应用服务器的选择问题</li>
+<li>Session的问题</li>
+</ol>
+<h3 id="引入负载均衡设备"><a href="#引入负载均衡设备" class="headerlink" title="引入负载均衡设备"></a>引入负载均衡设备</h3><p>采用了负载均衡设备后，系统的结构看起来如下：<br><img src="https://i.loli.net/2019/11/14/6rhQBkCKTW4e72s.png" alt="web3.PNG"></p>
+<h2 id="数据库压力变大，读写分离吧"><a href="#数据库压力变大，读写分离吧" class="headerlink" title="数据库压力变大，读写分离吧"></a>数据库压力变大，读写分离吧</h2><h3 id="采用数据库作为读库"><a href="#采用数据库作为读库" class="headerlink" title="采用数据库作为读库"></a>采用数据库作为读库</h3><p>随着业务的发展，数据量和访问量都在增长，对于大型网站来说，有不少业务是读多写少的，这个状况也会直接反应到数据库上。对于这种情况，我们可以考虑使用读写分离的方式。<br><img src="https://i.loli.net/2019/11/14/LAhKITyUusSHGFX.png" alt="web4.PNG"></p>
+<p>这个结构的变化会带来两个问题</p>
+<ul>
+<li>数据复制问题</li>
+<li>应用对于数据源的选择问题</li>
+</ul>
+<h3 id="加速数据读取的利器–缓存"><a href="#加速数据读取的利器–缓存" class="headerlink" title="加速数据读取的利器–缓存"></a>加速数据读取的利器–缓存</h3><p>在大型网站中，有许多地方都会用到缓存机制<br>1、 数据缓存<br>大型系统中的数据缓存主要用于分担数据库的读的压力。缓存系统一般是用来保存和查询键值对(Key-Value)对的。一般我们在缓存中放的是“热”数据而不是全部数据。</p>
+<p>2、页面缓存</p>
+<h3 id="弥补关系型数据库的不足，引入分布式存储系统"><a href="#弥补关系型数据库的不足，引入分布式存储系统" class="headerlink" title="弥补关系型数据库的不足，引入分布式存储系统"></a>弥补关系型数据库的不足，引入分布式存储系统</h3><h3 id="读写分离后，数据库又遇到瓶颈"><a href="#读写分离后，数据库又遇到瓶颈" class="headerlink" title="读写分离后，数据库又遇到瓶颈"></a>读写分离后，数据库又遇到瓶颈</h3><h4 id="专库专用，数据垂直拆分"><a href="#专库专用，数据垂直拆分" class="headerlink" title="专库专用，数据垂直拆分"></a>专库专用，数据垂直拆分</h4><h4 id="垂直拆分后的单机遇到瓶颈，数据水平拆分"><a href="#垂直拆分后的单机遇到瓶颈，数据水平拆分" class="headerlink" title="垂直拆分后的单机遇到瓶颈，数据水平拆分"></a>垂直拆分后的单机遇到瓶颈，数据水平拆分</h4><h2 id="数据库问题解决后，应用面对的新挑战"><a href="#数据库问题解决后，应用面对的新挑战" class="headerlink" title="数据库问题解决后，应用面对的新挑战"></a>数据库问题解决后，应用面对的新挑战</h2><h3 id="拆分应用"><a href="#拆分应用" class="headerlink" title="拆分应用"></a>拆分应用</h3>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/14/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/HashMap/HashMap%E4%B8%AD%E7%9A%84%E5%B1%9E%E6%80%A7%E5%92%8C%E7%B1%BB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/14/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/HashMap/HashMap%E4%B8%AD%E7%9A%84%E5%B1%9E%E6%80%A7%E5%92%8C%E7%B1%BB/" class="post-title-link" itemprop="url">HashMap源码阅读</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-11-14 13:53:12" itemprop="dateCreated datePublished" datetime="2019-11-14T13:53:12+08:00">2019-11-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-11-16 14:20:29" itemprop="dateModified" datetime="2019-11-16T14:20:29+08:00">2019-11-16</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sourceread/" itemprop="url" rel="index">
+                    <span itemprop="name">sourceread</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="HashMap源码阅读"><a href="#HashMap源码阅读" class="headerlink" title="HashMap源码阅读"></a>HashMap源码阅读</h1><hr>
+<p>在阅读源码前我们应该知道Hashmap的基本数据结构是数组加链表，可以使用下面的图解表示<br><img src="https://i.loli.net/2019/11/15/fGaU7TZo4vNhi1C.png" alt="2019-11-15 09_00_53-未命名表单.drawio - draw.io.png"><br>所以我们可以预测在Hashmap中应该定义了一个数组，</p>
+<h2 id="HashMap中的属性值"><a href="#HashMap中的属性值" class="headerlink" title="HashMap中的属性值"></a>HashMap中的属性值</h2><ul>
+<li>DEFAULT_INITIAL_CAPACITY：默认的容量大小</li>
+<li>MAXIMUM_CAPACITY：最大的容量大小，为2的30次方</li>
+<li>DEFAULT_LOAD_FACTOR：默认的加载因子，大小为0.75</li>
+<li>threshold(临界值)：哈希表内元素数量的阈值，当哈希表内元素数量超过阈值时，会发生扩容resize()。</li>
+<li>transient Node&lt;K,V&gt;[] table：哈希桶，存放链表。 长度是2的N次方，或者初始化时为0.</li>
+<li>TREEIFY_THRESHOLD:当每个节点挂载数超过了该变量时，就将链表这种数据结构该为使用红黑树</li>
+<li>UNTREEIFY_THRESHOLD：当每个节点挂载数少于该数时，就改为使用链表的形式进行存储</li>
+</ul>
+<h2 id="链表节点Node"><a href="#链表节点Node" class="headerlink" title="链表节点Node"></a>链表节点Node</h2><p>在开始之前，我们先看一下挂载在哈希表上的元素，链表的结构：<br>Map.Entry是在Map接口中内部定义的Entry接口</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">static class Node&lt;K,V&gt; implements Map.Entry&lt;K,V&gt; &#123;</span><br><span class="line">    final int hash;//哈希值</span><br><span class="line">    final K key;//key</span><br><span class="line">    V value;//value</span><br><span class="line">    Node&lt;K,V&gt; next;//链表后置节点</span><br><span class="line"></span><br><span class="line">    Node(int hash, K key, V value, Node&lt;K,V&gt; next) &#123;</span><br><span class="line">        this.hash = hash;</span><br><span class="line">        this.key = key;</span><br><span class="line">        this.value = value;</span><br><span class="line">        this.next = next;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public final K getKey()        &#123; return key; &#125;</span><br><span class="line">    public final V getValue()      &#123; return value; &#125;</span><br><span class="line">    public final String toString() &#123; return key + &quot;=&quot; + value; &#125;</span><br><span class="line"></span><br><span class="line">    //每一个节点的hash值，是将key的hashCode 和 value的hashCode 亦或得到的。</span><br><span class="line">    public final int hashCode() &#123;</span><br><span class="line">        return Objects.hashCode(key) ^ Objects.hashCode(value);</span><br><span class="line">    &#125;</span><br><span class="line">    //设置新的value 同时返回旧value</span><br><span class="line">    public final V setValue(V newValue) &#123;</span><br><span class="line">        V oldValue = value;</span><br><span class="line">        value = newValue;</span><br><span class="line">        return oldValue;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public final boolean equals(Object o) &#123;</span><br><span class="line">        if (o == this)</span><br><span class="line">            return true;</span><br><span class="line">        if (o instanceof Map.Entry) &#123;</span><br><span class="line">            Map.Entry&lt;?,?&gt; e = (Map.Entry&lt;?,?&gt;)o;</span><br><span class="line">            if (Objects.equals(key, e.getKey()) &amp;&amp;</span><br><span class="line">                Objects.equals(value, e.getValue()))</span><br><span class="line">                return true;</span><br><span class="line">        &#125;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="从头开始"><a href="#从头开始" class="headerlink" title="从头开始"></a>从头开始</h2><p>我们先写一个简单的使用hashmap的例子</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;String,String&gt; map=new HashMap&lt;&gt;();</span><br><span class="line">        map.put(&quot;s1&quot;,&quot;v1&quot;);</span><br><span class="line">        map.put(null,null);</span><br><span class="line">        map.put(&quot;name&quot;,&quot;mike&quot;);</span><br><span class="line">        System.out.println(map);</span><br></pre></td></tr></table></figure>
+
+<p>将断点设置第一行，进行debug，看看内部创建map对象的过程<br><img src="https://i.loli.net/2019/11/15/h81AraY6MbiB5dO.png" alt="2019-11-15 12_12_49-HashMapRead _D__垃圾_HashMapRead_ - C__Program Files_Java_jdk1.8.0_144_src.zip!_ja.png"><br>可以看到调用了一个无参构造器，设置了负载因子为默认定义的负载因子</p>
+<p>接下来进入put函数</p>
+<p>首先会进入下面这个函数<br><img src="https://i.loli.net/2019/11/15/fGkD4HpxwCSqVaY.png" alt="2019-11-15 12_22_30-HashMapRead _D__垃圾_HashMapRead_ - C__Program Files_Java_jdk1.8.0_144_src.zip!_ja.png"></p>
+<p>这个函数调用了另外的一个函数putVal<br>我们先来看这个函数的前几行<br><img src="https://i.loli.net/2019/11/15/5Umz8bHY7ygAC4Q.png" alt="2019-11-15 12_27_04-HashMapRead _D__垃圾_HashMapRead_ - C__Program Files_Java_jdk1.8.0_144_src.zip!_ja.png"></p>
+<p>可以看到，tab是用于接收table的临时变量，变量n是用来记录tab的长度的<br>由于刚开始table为null，所以需要进入resize()函数。可以确定，resize()函数中有初始化table数组的功能。</p>
+<p>下面进入resize()函数中看看<br><img src="https://i.loli.net/2019/11/15/KbgLeQZF3GE7HC1.png" alt="2019-11-15 12_42_18-HashMapRead _D__垃圾_HashMapRead_ - C__Program Files_Java_jdk1.8.0_144_src.zip!_ja.png"></p>
+<p>定义了下面三个变量</p>
+<ul>
+<li>oldTab：接收原来的table</li>
+<li>oldCap:原来table的容量大小,指数组的大小</li>
+<li>oldThr：原来table的阈值</li>
+</ul>
+<p>根据这几个判断条件我们可以总结出以下三种情况</p>
+<ol>
+<li>oldCap大于0</li>
+<li>oldCap=0但是oldThr大于0</li>
+<li>oldCap和oldThr都等于0<br>显然我们处于第三种情况，此时容量和阈值都使用了默认值。<br>在5号标记中对数组进行初始化，注意这里使用的是newCap，在6中将其赋值给table。这就完成了初始化操作。</li>
+</ol>
+<p>继续putVal()函数中查看<br><img src="https://i.loli.net/2019/11/15/wgVuxsjk7Yb8NZ9.png" alt="2019-11-15 13_17_54-HashMapRead _D__垃圾_HashMapRead_ - C__Program Files_Java_jdk1.8.0_144_src.zip!_ja.png"></p>
+<p>使用p来接收table[(n-1)&amp;hash]<br>现在我们来研究一下(n-1)&amp;hash的值<br>n默认为16，n-1为15，转换为二进制的话为0000 0000 0000 0000 0000 0000 0000 1111<br>&amp;操作是对应位置都为1结果才为1，所以前28位必定为0，所得结果值在0-15之间，正好符合数组下标的范围。</p>
+<p>这个判断表面可能有两种情况</p>
+<ol>
+<li>根据hash值得到的下标没有值</li>
+<li>根据hash值得到的下标有值</li>
+</ol>
+<p>第一种情况直接将传入的结点放入即可。<br>第二种情况又需要分以下几种情况</p>
+<ol>
+<li>table[(n-1)&amp;hash]有值且该值的hash值和要插入的结点hash值相同</li>
+<li>table[(n-1)&amp;hash]值是树的结点，表明待插入的结点需要作为树结点插入</li>
+<li>待插入结点以链表形式插入</li>
+</ol>
+<p>分别对应2，3，4 框中的代码</p>
+<p>现在来看后几行代码<br><img src="https://i.loli.net/2019/11/15/KhFMqYaT2n6OQVD.png" alt="2019-11-15 15_08_56-HashMapRead _D__垃圾_HashMapRead_ - C__Program Files_Java_jdk1.8.0_144_src.zip!_ja.png"></p>
+<p>if(e!=null)说明插入的位置原本是有值，现在只不过是将值进行了替换，，onlyIfAbsent这个参数的作用在于,如果我们传入的key已存在我们是否去替换，true:不替换，false：替换。<br>每对hashmap进行修改都会增加modcount的值，每插入一个值size都加1，判断hashmap中值的个数是否到达阈值，如果超过阈值则进行扩容。<br>至于高亮的那两行代码，并没有具体实现，<br><img src="https://i.loli.net/2019/11/15/YoxwaZ613umkUB4.png" alt="2019-11-15 15_20_48-HashMapRead _D__垃圾_HashMapRead_ - C__Program Files_Java_jdk1.8.0_144_src.zip!_ja.png"></p>
+<p>putVal()函数就算看完了，下面我们来研究resize()函数剩下的部分<br><img src="https://i.loli.net/2019/11/15/Sbgoj4WqhXid9CY.png" alt="2019-11-15 15_25_57-HashMapRead _D__垃圾_HashMapRead_ - C__Program Files_Java_jdk1.8.0_144_src.zip!_ja.png"></p>
+<p>如果oldTab不为null，那么我们就必须将oldTab中的Node都转移到新的newTab中，使用for循环来遍历oldTab数组，下面的1，2，3分别代表三种情况，（前提是e不为null，也就是table[j]!=null)</p>
+<ol>
+<li>该table[j]就只有一个值，它后面不挂着其它结点</li>
+<li>该table[j]后面有结点，且挂的结点是以红黑树的形式存在</li>
+<li>该table[j]后面有结点，且挂的结点是以链表的形式存在</li>
+</ol>
+<p>我们重点来看第三种形式<br>将table分为两部分，大小都为原本oldTab的大小，循环遍历该table[j]后面挂的结点，判断该结点是放在前0-oldCap-1的位置还是oldCap-newCap-1的位置。<br>判断的方式是(e.hash &amp; oldCap) == 0<br>以oldCap为16为例<br>16的二进制表示为0000 0000 0000 0000 0000 0000 0001 0000<br>只要e.hash值的二进制表示的第五位大于16，表示它一定处于oldCap-newCap-1的位置，因为处于0-oldCap-1位置的hash值第五位的值一定是0</p>
+<p>说明一下lohead和loTail的作用，lohead表示链表的头部，从代码中也可以看到，刚开始head和tail都指向e，后面由于tail!=null，所以不会修改head，最后设置tail.next=null也符合链表的形式。</p>
+<p>至此，HashMap的resize()和putVal()函数就分析完了。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/13/MQ/%E6%B6%88%E6%81%AF%E4%B8%AD%E9%97%B4%E4%BB%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/13/MQ/%E6%B6%88%E6%81%AF%E4%B8%AD%E9%97%B4%E4%BB%B6/" class="post-title-link" itemprop="url">消息中间件</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-11-13 15:57:54" itemprop="dateCreated datePublished" datetime="2019-11-13T15:57:54+08:00">2019-11-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-11-15 15:53:06" itemprop="dateModified" datetime="2019-11-15T15:53:06+08:00">2019-11-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/middleware/" itemprop="url" rel="index">
+                    <span itemprop="name">middleware</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="消息中间件"><a href="#消息中间件" class="headerlink" title="消息中间件"></a>消息中间件</h1><hr>
+<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>“Message-oriented middleware(MOM)” is software infrastructure focused on sending and receiving messages between distributed systems.</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
     <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/13/Spring2/%E7%94%9F%E6%88%90%E9%AA%8C%E8%AF%81%E7%A0%81/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -579,570 +1126,11 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/12/Database/CAP%20%E5%AE%9A%E7%90%86%E7%9A%84%E5%90%AB%E4%B9%89/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lancersaber">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lancersaber">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/12/Database/CAP%20%E5%AE%9A%E7%90%86%E7%9A%84%E5%90%AB%E4%B9%89/" class="post-title-link" itemprop="url">CAP 定理的含义</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2019-11-12 19:48:38 / Modified: 20:09:49" itemprop="dateCreated datePublished" datetime="2019-11-12T19:48:38+08:00">2019-11-12</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/database/" itemprop="url" rel="index">
-                    <span itemprop="name">database</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="CAP-定理的含义"><a href="#CAP-定理的含义" class="headerlink" title="CAP 定理的含义"></a>CAP 定理的含义</h1><hr>
-<p>分布式系统（distributed system）正变得越来越重要，大型网站几乎都是分布式的。</p>
-<p>分布式系统的最大难点，就是各个节点的状态如何同步。CAP 定理是这方面的基本定理，也是理解分布式系统的起点。</p>
-<h2 id="一、分布式系统的三个指标"><a href="#一、分布式系统的三个指标" class="headerlink" title="一、分布式系统的三个指标"></a>一、分布式系统的三个指标</h2><p><img src="https://i.loli.net/2019/11/12/6bJutBV8iXWIPlp.jpg" alt="bg2018071607.jpg"></p>
-<ul>
-<li>Consistency</li>
-<li>Availability</li>
-<li>Partition tolerance</li>
-</ul>
-<p>它们的第一个字母分别是 C、A、P。</p>
-<p>Eric Brewer 说，这三个指标不可能同时做到。这个结论就叫做 CAP 定理。</p>
-<h3 id="Partition-tolerance"><a href="#Partition-tolerance" class="headerlink" title="Partition tolerance"></a>Partition tolerance</h3><p>先看 Partition tolerance，中文叫做”分区容错”。</p>
-<p>大多数分布式系统都分布在多个子网络。每个子网络就叫做一个区（partition）。分区容错的意思是，区间通信可能失败。比如，一台服务器放在中国，另一台服务器放在美国，这就是两个区，它们之间可能无法通信。<br><img src="https://i.loli.net/2019/11/12/qWoXd6vtiYV5O1a.png" alt="bg2018071601.png"><br>上图中，G1 和 G2 是两台跨区的服务器。G1 向 G2 发送一条消息，G2 可能无法收到。系统设计的时候，必须考虑到这种情况。</p>
-<p>一般来说，分区容错无法避免，因此可以认为 CAP 的 P 总是成立。CAP 定理告诉我们，剩下的 C 和 A 无法同时做到。</p>
-<h3 id="Consistency"><a href="#Consistency" class="headerlink" title="Consistency"></a>Consistency</h3><p>Consistency 中文叫做”一致性”。意思是，写操作之后的读操作，必须返回该值。举例来说，某条记录是 v0，用户向 G1 发起一个写操作，将其改为 v1。<br><img src="https://i.loli.net/2019/11/12/aDGsi7JkuRnp153.png" alt="bg2018071602.png"><br>接下来，用户的读操作就会得到 v1。这就叫一致性。<br><img src="https://i.loli.net/2019/11/12/ganYXNsQV4tH5K1.png" alt="bg2018071603.png"></p>
-<p>问题是，用户有可能向 G2 发起读操作，由于 G2 的值没有发生变化，因此返回的是 v0。G1 和 G2 读操作的结果不一致，这就不满足一致性了。<br><img src="https://i.loli.net/2019/11/12/iAETndvc8JHFx5D.png" alt="bg2018071604.png"></p>
-<p>为了让 G2 也能变为 v1，就要在 G1 写操作的时候，让 G1 向 G2 发送一条消息，要求 G2 也改成 v1。<br><img src="https://i.loli.net/2019/11/12/OlkJyYaIUQhbPEx.png" alt="bg2018071605.png"><br>这样的话，用户向 G2 发起读操作，也能得到 v1。<br><img src="https://i.loli.net/2019/11/12/R5D7bTp9JBEarIn.png" alt="bg2018071606.png"></p>
-<h3 id="Availability"><a href="#Availability" class="headerlink" title="Availability"></a>Availability</h3><p>Availability 中文叫做”可用性”，意思是只要收到用户的请求，服务器就必须给出回应。</p>
-<p>用户可以选择向 G1 或 G2 发起读操作。不管是哪台服务器，只要收到请求，就必须告诉用户，到底是 v0 还是 v1，否则就不满足可用性。</p>
-<h3 id="Consistency-和-Availability-的矛盾"><a href="#Consistency-和-Availability-的矛盾" class="headerlink" title="Consistency 和 Availability 的矛盾"></a>Consistency 和 Availability 的矛盾</h3><p>一致性和可用性，为什么不可能同时成立？答案很简单，因为可能通信失败（即出现分区容错）<br>如果保证 G2 的一致性，那么 G1 必须在写操作时，锁定 G2 的读操作和写操作。只有数据同步后，才能重新开放读写。锁定期间，G2 不能读写，没有可用性不。<br>如果保证 G2 的可用性，那么势必不能锁定 G2，所以一致性不成立。<br>综上所述，G2 无法同时做到一致性和可用性。系统设计时只能选择一个目标。如果追求一致性，那么无法保证所有节点的可用性；如果追求所有节点的可用性，那就没法做到一致性。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/12/Database/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%9E%82%E7%9B%B4%E6%8B%86%E5%88%86%E5%92%8C%E6%B0%B4%E5%B9%B3%E6%8B%86%E5%88%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lancersaber">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lancersaber">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/12/Database/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%9E%82%E7%9B%B4%E6%8B%86%E5%88%86%E5%92%8C%E6%B0%B4%E5%B9%B3%E6%8B%86%E5%88%86/" class="post-title-link" itemprop="url">数据库的垂直拆分和水平拆分</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2019-11-12 19:15:52 / Modified: 20:09:49" itemprop="dateCreated datePublished" datetime="2019-11-12T19:15:52+08:00">2019-11-12</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/database/" itemprop="url" rel="index">
-                    <span itemprop="name">database</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="数据库的垂直拆分和水平拆分"><a href="#数据库的垂直拆分和水平拆分" class="headerlink" title="数据库的垂直拆分和水平拆分"></a>数据库的垂直拆分和水平拆分</h1><hr>
-<p>当我们使用读写分离、缓存后，数据库的压力还是很大的时候，这就需要使用到数据库拆分了。<br>数据库拆分简单来说，就是指通过某种特定的条件，按照某个维度，将我们存放在同一个数据库中的数据分散存放到多个数据库（主机）上面以达到分散单库（主机）负载的效果。 </p>
-<p>切分模式： 垂直（纵向）拆分、水平拆分。</p>
-<h2 id="垂直拆分"><a href="#垂直拆分" class="headerlink" title="垂直拆分"></a>垂直拆分</h2><p> 一个数据库由很多表的构成，每个表对应着不同的业务，垂直切分是指按照业务将表进行分类，分布到不同的数据库上面，这样也就将数据或者说压力分担到不同的库上面，如下图：<br><img src="https://i.loli.net/2019/11/12/1Iwcd5eFkqrzCbS.png" alt="11111.PNG"><br> 优点：</p>
-<ol>
-<li>拆分后业务清晰，拆分规则明确。</li>
-<li>系统之间整合或扩展容易。</li>
-<li>数据维护简单。</li>
-</ol>
-<p>缺点：</p>
-<ol>
-<li>单机的ACID保证被打破了。数据到了多机后，原来在单机通过事务来进行的处理逻辑会受很大的影响。我们面临的选择是，要么放弃原来的单机事务，修改事务，要么引入分布式事务</li>
-<li>一些join操作会变得比较困难，因为数据可能已经在两个数据库中了，所以不能很方便地利用数据自身的join了。需要应用或者其他方式来解决，</li>
-<li>靠外键去进行约束的场景会受到影响</li>
-</ol>
-<h2 id="水平拆分"><a href="#水平拆分" class="headerlink" title="水平拆分"></a>水平拆分</h2><p> 垂直拆分后遇到单机瓶颈，可以使用水平拆分。相对于垂直拆分的区别是：垂直拆分是把不同的表拆到不同的数据库中，而水平拆分是把同一个表拆到不同的数据库中。</p>
-<p> 相对于垂直拆分，水平拆分不是将表的数据做分类，而是按照某个字段的某种规则来分散到多个库之中，每个表中包含一部分数据。简单来说，我们可以将数据的水平切分理解为是按照数据行的切分，就是将表中 的某些行切分到一个数据库，而另外的某些行又切分到其他的数据库中，主要有分表，分库两种模式，如图：<br><img src="https://i.loli.net/2019/11/12/ZpXLBiVybFOswJ7.png" alt="20160910084749776.png"><br><img src="https://i.loli.net/2019/11/12/u4a8O7RCLz1UJKI.png" alt="20160910084811416.png"></p>
-<p>优点：</p>
-<ol>
-<li>不存在单库大数据，高并发的性能瓶颈。</li>
-<li>对应用透明，应用端改造较少。     </li>
-<li>按照合理拆分规则拆分，join操作基本避免跨库。</li>
-<li>提高了系统的稳定性跟负载能力。</li>
-</ol>
-<p>缺点：</p>
-<ol>
-<li>拆分规则难以抽象。</li>
-<li>分片事务一致性难以解决。</li>
-<li>数据多次扩展难度跟维护量极大。</li>
-<li>跨库join性能较差。</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/12/Mybatis/mybatis%E4%B8%AD%E7%9A%84#%7B%7D%E5%92%8C$%7B%7D%E5%8C%BA%E5%88%AB/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lancersaber">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lancersaber">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/12/Mybatis/mybatis%E4%B8%AD%E7%9A%84#%7B%7D%E5%92%8C$%7B%7D%E5%8C%BA%E5%88%AB/" class="post-title-link" itemprop="url">mybatis中的#{}和${}区别</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2019-11-12 13:06:57 / Modified: 13:09:54" itemprop="dateCreated datePublished" datetime="2019-11-12T13:06:57+08:00">2019-11-12</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/mybatis/" itemprop="url" rel="index">
-                    <span itemprop="name">mybatis</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="mybatis中的-和-区别"><a href="#mybatis中的-和-区别" class="headerlink" title="mybatis中的#{}和${}区别"></a>mybatis中的#{}和${}区别</h1><hr>
-<ol>
-<li><p>#将传入的数据都当成一个字符串，会对自动传入的数据加一个双引号。如：order by #user_id#，如果传入的值是111,那么解析成sql时的值为order by “111”, 如果传入的值是id，则解析成的sql为order by “id”.</p>
-</li>
-<li><p>$将传入的数据直接显示生成在sql中。如：order by $user_id$，如果传入的值是111,那么解析成sql时的值为order by user_id,  如果传入的值是id，则解析成的sql为order by id.</p>
-</li>
-<li><p>#方式能够很大程度防止sql注入。</p>
-</li>
-<li><p>$方式无法防止Sql注入。</p>
-</li>
-<li><p>$方式一般用于传入数据库对象，例如传入表名.</p>
-</li>
-<li><p>一般能用#的就别用$.</p>
-</li>
-</ol>
-<p>字符串替换<br>默认情况下，使用#{}格式的语法会导致MyBatis创建预处理语句属性并以它为背景设置安全的值（比如?）。这样做很安全，很迅速也是首选做法，有时你只是想直接在SQL语句中插入一个不改变的字符串。比如，像ORDER BY，你可以这样来使用：<br>ORDER BY ${columnName}<br>这里MyBatis不会修改或转义字符串。</p>
-<p>重要：接受从用户输出的内容并提供给语句中不变的字符串，这样做是不安全的。这会导致潜在的SQL注入攻击，因此你不应该允许用户输入这些字段，或者通常自行转义并检查。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/12/Mybatis/%E4%BB%80%E4%B9%88%E6%98%AFsql%E6%B3%A8%E5%85%A5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lancersaber">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lancersaber">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/12/Mybatis/%E4%BB%80%E4%B9%88%E6%98%AFsql%E6%B3%A8%E5%85%A5/" class="post-title-link" itemprop="url">什么是sql注入</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2019-11-12 13:04:22 / Modified: 13:25:48" itemprop="dateCreated datePublished" datetime="2019-11-12T13:04:22+08:00">2019-11-12</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/mybatis/" itemprop="url" rel="index">
-                    <span itemprop="name">mybatis</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="什么是sql注入"><a href="#什么是sql注入" class="headerlink" title="什么是sql注入"></a>什么是sql注入</h1><p>直接举个例子说明一下这个sql注入的全过程吧~</p>
-<h2 id="初步注入–绕过验证，直接登录"><a href="#初步注入–绕过验证，直接登录" class="headerlink" title="初步注入–绕过验证，直接登录"></a>初步注入–绕过验证，直接登录</h2><p>公司网站登陆框如下：<br><img src="https://i.loli.net/2019/11/12/AXGMZOKdBJgetFn.png" alt="20180321110526347.png"></p>
-<p>可以看到除了账号密码之外，还有一个公司名的输入框，根据输入框的形式不难推出SQL的写法如下：<br>SELECT * From Table WHERE Name=’XX’ andPassword=’YY’ and Corp=’ZZ’<br>我发现前两者都做一些检查，而第三个输入框却疏忽了，漏洞就在这里！注入开始，在输入框中输入以下内容：</p>
-<p><img src="https://i.loli.net/2019/11/12/sdRHXfmVbouYkKJ.png" alt="20180321110534421.png"></p>
-<p>用户名乱填，密码留空，这种情况下点击登录按钮后竟然成功登录了。我们看一下最终的SQL就会找到原因：<br>SELECT * FromTable WHERE Name=’SQL inject’ and Password=” and Corp=” or 1=1–’<br>从代码可以看出，前一半单引号被闭合，后一半单引号被 “–”给注释掉，中间多了一个永远成立的条件“1=1”，这就造成任何字符都能成功登录的结果。而Sql注入的危害却不仅仅是匿名登录。</p>
-<h2 id="中级注入–借助异常获取信息。"><a href="#中级注入–借助异常获取信息。" class="headerlink" title="中级注入–借助异常获取信息。"></a>中级注入–借助异常获取信息。</h2><p>现在我们在第三个输入框中写入：“‘ or 1=(SELECT@@version) –”。如下：<br><img src="https://i.loli.net/2019/11/12/COzlpAoHNe83BDY.png" alt="20180321110545134.png"></p>
-<p>后台的SQL变成了这样：</p>
-<p>SELECT * FromTable WHERE Name=’SQL inject’ and Password=” and Corp=” or 1=(SELECT@@VERSION)–’</p>
-<p>判断条件变成了 1=(SELECT@@VERSION),这个写法肯定会导致错误，但出错正是我们想要的。点击登录后，页面出现以下信息：<br>Conversion failedwhen converting the nvarchar value ‘Microsoft SQL Server 2008 (SP3) -10.0.5500.0 (X64) Sep 21 2011 22:45:45 Copyright (c) 1988-2008 MicrosoftCorporation Developer Edition (64-bit) on Windows NT 6.1 <X64> (Build7601: Service Pack 1) ’ to data type int.</p>
-<p>可怕的事情出现了，服务器的操作系统和SQL Server版本信息竟然通过错误显示出来。</p>
-<h2 id="危害扩大–获取服务器所有的库名、表名、字段名"><a href="#危害扩大–获取服务器所有的库名、表名、字段名" class="headerlink" title="危害扩大–获取服务器所有的库名、表名、字段名"></a>危害扩大–获取服务器所有的库名、表名、字段名</h2><p>接着，我们在输入框中输入如下信息：“t’ or 1=(SELECTtop 1 name FROM master..sysdatabases where name not in (SELECT top 0 name FROMmaster..sysdatabases))–”，此时发现第三个输入框有字数长度的限制，然而这种客户端的限制形同虚设，直接通过Google浏览器就能去除。</p>
-<p>点击登录，返回的信息如下：</p>
-<p>Conversion failedwhen converting the nvarchar value ‘master’ to data type int.</p>
-<p>数据库名称“master”通过异常被显示出来！依次改变上面SQL语句中的序号，就能得到服务器上所有数据库的名称。</p>
-<p>接着，输入信息如下：“b’ or 1=(SELECTtop 1 name FROM master..sysobjects where xtype=’U’ and name not in (SELECT top1 name FROM master..sysobjects where xtype=’U’))–”</p>
-<p>得到返回信息如下：</p>
-<p>Conversion failedwhen converting the nvarchar value ‘spt_fallback_db’ to data type int.</p>
-<p>我们得到了master数据库中的第一张表名：“spt_fallback_db”，同上，依次改变序号，可得到该库全部表名。<br>于是，得到错误提示如下：</p>
-<p>“Conversionfailed when converting the nvarchar value ‘xserver_name’ to data typeint.”;</p>
-<p>这样第一个字段名“xserver_name”就出来了，依次改变序号，就能遍历出所有的字段名。</p>
-<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>关于安全性，本文可总结出一下几点：</p>
-<ol>
-<li><p>对用户输入的内容要时刻保持警惕。</p>
-</li>
-<li><p>只有客户端的验证等于没有验证。</p>
-</li>
-<li><p>永远不要把服务器错误信息暴露给用户。</p>
-</li>
-</ol>
-<p>除此之外，我还要补充几点：</p>
-<ol>
-<li><p>SQL注入不仅能通过输入框，还能通过Url达到目的。</p>
-</li>
-<li><p>除了服务器错误页面，还有其他办法获取到数据库信息。</p>
-</li>
-<li><p>可通过软件模拟注入行为，这种方式盗取信息的速度要比你想象中快的多。</p>
-</li>
-<li><p>漏洞跟语言平台无关，并非asp才有注入漏洞而asp.net就没有注入漏洞，一切要看设计者是否用心。</p>
-</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/12/Fastjson/Fastjson%20%E7%AE%80%E6%98%8E%E6%95%99%E7%A8%8B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lancersaber">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lancersaber">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/12/Fastjson/Fastjson%20%E7%AE%80%E6%98%8E%E6%95%99%E7%A8%8B/" class="post-title-link" itemprop="url">Fastjson 简明教程</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2019-11-12 10:13:52 / Modified: 13:09:59" itemprop="dateCreated datePublished" datetime="2019-11-12T10:13:52+08:00">2019-11-12</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/fastjson/" itemprop="url" rel="index">
-                    <span itemprop="name">fastjson</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Fastjson-简明教程"><a href="#Fastjson-简明教程" class="headerlink" title="Fastjson 简明教程"></a>Fastjson 简明教程</h1><hr>
-<h2 id="Fastjson-简介"><a href="#Fastjson-简介" class="headerlink" title="Fastjson 简介"></a>Fastjson 简介</h2><p>Fastjson 是一个 Java 库，可以将 Java 对象转换为 JSON 格式，当然它也可以将 JSON 字符串转换为 Java 对象。</p>
-<p>Fastjson 可以操作任何 Java 对象，即使是一些预先存在的没有源码的对象。</p>
-<p>Fastjson 源码地址：<a href="https://github.com/alibaba/fastjson" target="_blank" rel="noopener">https://github.com/alibaba/fastjson</a></p>
-<p>Fastjson 中文 Wiki：<a href="https://github.com/alibaba/fastjson/wiki/Quick-Start-CN" target="_blank" rel="noopener">https://github.com/alibaba/fastjson/wiki/Quick-Start-CN</a></p>
-<h2 id="Fastjson-特性"><a href="#Fastjson-特性" class="headerlink" title="Fastjson 特性"></a>Fastjson 特性</h2><ul>
-<li>提供服务器端、安卓客户端两种解析工具，性能表现较好。</li>
-<li>提供了 toJSONString() 和 parseObject() 方法来将 Java 对象与 JSON 相互转换。调用toJSONString方 法即可将对象转换成 JSON 字符串，parseObject 方法则反过来将 JSON 字符串转换成对象。</li>
-<li>允许转换预先存在的无法修改的对象（只有class、无源代码）。</li>
-<li>Java泛型的广泛支持。</li>
-<li>允许对象的自定义表示、允许自定义序列化类。</li>
-<li>支持任意复杂对象（具有深厚的继承层次和广泛使用的泛型类型）。</li>
-</ul>
-<h2 id="下载和使用"><a href="#下载和使用" class="headerlink" title="下载和使用"></a>下载和使用</h2><p> maven 依赖:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;com.alibaba&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;fastjson&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;x.x.x&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
-
-<h2 id="将-Java-对象转换为-JSON-格式"><a href="#将-Java-对象转换为-JSON-格式" class="headerlink" title="将 Java 对象转换为 JSON 格式"></a>将 Java 对象转换为 JSON 格式</h2><p>定义以下 Person JavaBean:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">public class Person &#123;</span><br><span class="line">     </span><br><span class="line">    @JSONField(name = &quot;AGE&quot;)</span><br><span class="line">    private int age;</span><br><span class="line"> </span><br><span class="line">    @JSONField(name = &quot;FULL NAME&quot;)</span><br><span class="line">    private String fullName;</span><br><span class="line"> </span><br><span class="line">    @JSONField(name = &quot;DATE OF BIRTH&quot;)</span><br><span class="line">    private Date dateOfBirth;</span><br><span class="line"> </span><br><span class="line">    public Person(int age, String fullName, Date dateOfBirth) &#123;</span><br><span class="line">        super();</span><br><span class="line">        this.age = age;</span><br><span class="line">        this.fullName= fullName;</span><br><span class="line">        this.dateOfBirth = dateOfBirth;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    // 标准 getters &amp; setters</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">注意必须要有getter和setter方法</span><br></pre></td></tr></table></figure>
-
-<p>可以使用 JSON.toJSONString() 将 Java 对象转换换为 JSON 对象：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">private List&lt;Person&gt; listOfPersons = new ArrayList&lt;Person&gt;();</span><br><span class="line"> </span><br><span class="line">@Before</span><br><span class="line">public void setUp() &#123;</span><br><span class="line">    listOfPersons.add(new Person(15, &quot;John Doe&quot;, new Date()));</span><br><span class="line">    listOfPersons.add(new Person(20, &quot;Janette Doe&quot;, new Date()));</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">@Test</span><br><span class="line">public void whenJavaList_thanConvertToJsonCorrect() &#123;</span><br><span class="line">    String jsonOutput= JSON.toJSONString(listOfPersons);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>输出结果为：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[  </span><br><span class="line">    &#123;  </span><br><span class="line">        &quot;AGE&quot;:15,</span><br><span class="line">        &quot;DATE OF BIRTH&quot;:1468962431394,</span><br><span class="line">        &quot;FULL NAME&quot;:&quot;John Doe&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;  </span><br><span class="line">        &quot;AGE&quot;:20,</span><br><span class="line">        &quot;DATE OF BIRTH&quot;:1468962431394,</span><br><span class="line">        &quot;FULL NAME&quot;:&quot;Janette Doe&quot;</span><br><span class="line">    &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-
-<p>我们还可以自定义输出，并控制字段的排序，日期显示格式，序列化标记等。</p>
-<p>接下来我们更新 bean 并添加几个字段：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@JSONField(name=&quot;AGE&quot;, serialize=false)</span><br><span class="line">private int age;</span><br><span class="line"> </span><br><span class="line">@JSONField(name=&quot;LAST NAME&quot;, ordinal = 2)</span><br><span class="line">private String lastName;</span><br><span class="line"> </span><br><span class="line">@JSONField(name=&quot;FIRST NAME&quot;, ordinal = 1)</span><br><span class="line">private String firstName;</span><br><span class="line"> </span><br><span class="line">@JSONField(name=&quot;DATE OF BIRTH&quot;, format=&quot;dd/MM/yyyy&quot;, ordinal = 3)</span><br><span class="line">private Date dateOfBirth;</span><br></pre></td></tr></table></figure>
-
-<p>以上代码中我们列出了基本参数类别，并使用 @JSONField 注解，以便实现自定义转换：</p>
-<ul>
-<li>format 参数用于格式化 date 属性。</li>
-<li>默认情况下， FastJson 库可以序列化 Java bean 实体， 但我们可以使用 serialize 指定字段不序列化。</li>
-<li>使用 ordinal 参数指定字段的顺序</li>
-</ul>
-<p>这样，以上输出结果为：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">    &#123;</span><br><span class="line">        &quot;FIRST NAME&quot;:&quot;Doe&quot;,</span><br><span class="line">        &quot;LAST NAME&quot;:&quot;Jhon&quot;,</span><br><span class="line">        &quot;DATE OF BIRTH&quot;:&quot;19/07/2016&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        &quot;FIRST NAME&quot;:&quot;Doe&quot;,</span><br><span class="line">        &quot;LAST NAME&quot;:&quot;Janette&quot;,</span><br><span class="line">        &quot;DATE OF BIRTH&quot;:&quot;19/07/2016&quot;</span><br><span class="line">    &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-
-<h2 id="JSONField"><a href="#JSONField" class="headerlink" title="@JSONField"></a>@JSONField</h2><p>@JSONField 的作用对象:</p>
-<ol>
-<li>Field</li>
-<li>Setter 和 Getter 方法</li>
-</ol>
-<p>注意：FastJson 在进行操作时，是根据 getter 和 setter 的方法进行的，并不是依据 Field 进行。</p>
-<p>注意：若属性是私有的，必须有 set 方法。否则无法反序列化。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">span style=&quot;color: #000000; font-weight: bold;&quot;&gt;package com.alibaba.fastjson.annotation;</span><br><span class="line"></span><br><span class="line">public @interface JSONField &#123;</span><br><span class="line">    // 配置序列化和反序列化的顺序，1.1.42版本之后才支持</span><br><span class="line">    int ordinal() default 0;</span><br><span class="line"></span><br><span class="line">     // 指定字段的名称</span><br><span class="line">    String name() default &quot;&quot;;</span><br><span class="line"></span><br><span class="line">    // 指定字段的格式，对日期格式有用</span><br><span class="line">    String format() default &quot;&quot;;</span><br><span class="line"></span><br><span class="line">    // 是否序列化</span><br><span class="line">    boolean serialize() default true;</span><br><span class="line"></span><br><span class="line">    // 是否反序列化</span><br><span class="line">    boolean deserialize() default true;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-JSONField-配置方式"><a href="#2-JSONField-配置方式" class="headerlink" title="2. JSONField 配置方式"></a>2. JSONField 配置方式</h3><p>FieldInfo 可以配置在 getter/setter 方法或者字段上。例如：</p>
-<p>2.1 配置在 getter/setter 上</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public class A &#123;</span><br><span class="line">      private int id;</span><br><span class="line"> </span><br><span class="line">      @JSONField(name=&quot;ID&quot;)</span><br><span class="line">      public int getId() &#123;return id;&#125;</span><br><span class="line">      @JSONField(name=&quot;ID&quot;)</span><br><span class="line">      public void setId(int value) &#123;this.id = id;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>2.2 配置在 field 上</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public class A &#123;</span><br><span class="line">      @JSONField(name=&quot;ID&quot;)</span><br><span class="line">      private int id;</span><br><span class="line"> </span><br><span class="line">      public int getId() &#123;return id;&#125;</span><br><span class="line">      public void setId(int value) &#123;this.id = id;&#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-
-<ol start="3">
-<li><p>使用format配置日期格式化</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">span style=&quot;color: #000000; font-weight: bold;&quot;&gt;public class A &#123;</span><br><span class="line">      // 配置date序列化和反序列使用yyyyMMdd日期格式</span><br><span class="line">      @JSONField(format=&quot;yyyyMMdd&quot;)</span><br><span class="line">      public Date date;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>使用 serialize/deserialize 指定字段不序列化</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">span style=&quot;color: #000000; font-weight: bold;&quot;&gt;public class A &#123;</span><br><span class="line">      @JSONField(serialize=false)</span><br><span class="line">      public Date date;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> public class A &#123;</span><br><span class="line">      @JSONField(deserialize=false)</span><br><span class="line">      public Date date;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>使用 ordinal 指定字段的顺序<br>默认 fastjson 序列化一个 java bean，是根据 fieldName 的字母序进行序列化的，你可以通过 ordinal 指定字段的顺序。这个特性需要 1.1.42 以上版本。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">span style=&quot;color: #000000; font-weight: bold;&quot;&gt;public static class VO &#123;</span><br><span class="line">    @JSONField(ordinal = 3)</span><br><span class="line">    private int f0;</span><br><span class="line"></span><br><span class="line">    @JSONField(ordinal = 2)</span><br><span class="line">    private int f1;</span><br><span class="line"></span><br><span class="line">    @JSONField(ordinal = 1)</span><br><span class="line">    private int f2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<h2 id="FastJson-还支持-BeanToArray-序列化功能："><a href="#FastJson-还支持-BeanToArray-序列化功能：" class="headerlink" title="FastJson 还支持 BeanToArray 序列化功能："></a>FastJson 还支持 BeanToArray 序列化功能：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String jsonOutput= JSON.toJSONString(listOfPersons, SerializerFeature.BeanToArray);</span><br></pre></td></tr></table></figure>
-
-<p>输出结果为</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">    [</span><br><span class="line">        15,</span><br><span class="line">        1469003271063,</span><br><span class="line">        &quot;John Doe&quot;</span><br><span class="line">    ],</span><br><span class="line">    [</span><br><span class="line">        20,</span><br><span class="line">        1469003271063,</span><br><span class="line">        &quot;Janette Doe&quot;</span><br><span class="line">    ]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-
-<h2 id="创建-JSON-对象"><a href="#创建-JSON-对象" class="headerlink" title="创建 JSON 对象"></a>创建 JSON 对象</h2><p>创建 JSON 对象非常简单，只需使用 JSONObject（fastJson提供的json对象） 和 JSONArray（fastJson提供json数组对象） 对象即可。<br>我们可以把JSONObject 当成一个 Map&lt;String,Object&gt; 来看，只是 JSONObject 提供了更为丰富便捷的方法，方便我们对于对象属性的操作。我们看一下源码。<br><img src="https://i.loli.net/2019/11/12/nfSd9uI3GezW4Xo.png" alt="1536049333-5924-20170702123831164-204043901.png"></p>
-<p>同样我们可以把 JSONArray 当做一个 List<Object>，可以把 JSONArray 看成 JSONObject 对象的一个集合。<br><img src="https://i.loli.net/2019/11/12/vLYiZpz53JmyUs1.png" alt="1536049334-5514-20170702124211524-639489808.png"></p>
-<p>此外，由于 JSONObject 和 JSONArray 继承了 JSON，所以说也可以直接使用两者对 JSON 格式字符串与 JSON 对象及 javaBean 之间做转换，不过为了避免混淆我们还是使用 JSON。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">@Test</span><br><span class="line">public void whenGenerateJson_thanGenerationCorrect() throws ParseException &#123;</span><br><span class="line">    JSONArray jsonArray = new JSONArray();</span><br><span class="line">    for (int i = 0; i &lt; 2; i++) &#123;</span><br><span class="line">        JSONObject jsonObject = new JSONObject();</span><br><span class="line">        jsonObject.put(&quot;AGE&quot;, 10);</span><br><span class="line">        jsonObject.put(&quot;FULL NAME&quot;, &quot;Doe &quot; + i);</span><br><span class="line">        jsonObject.put(&quot;DATE OF BIRTH&quot;, &quot;2016/12/12 12:12:12&quot;);</span><br><span class="line">        jsonArray.add(jsonObject);</span><br><span class="line">    &#125;</span><br><span class="line">    String jsonOutput = jsonArray.toJSONString();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>输出结果为</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">   &#123;</span><br><span class="line">      &quot;AGE&quot;:&quot;10&quot;,</span><br><span class="line">      &quot;DATE OF BIRTH&quot;:&quot;2016/12/12 12:12:12&quot;,</span><br><span class="line">      &quot;FULL NAME&quot;:&quot;Doe 0&quot;</span><br><span class="line">   &#125;,</span><br><span class="line">   &#123;</span><br><span class="line">      &quot;AGE&quot;:&quot;10&quot;,</span><br><span class="line">      &quot;DATE OF BIRTH&quot;:&quot;2016/12/12 12:12:12&quot;,</span><br><span class="line">      &quot;FULL NAME&quot;:&quot;Doe 1&quot;</span><br><span class="line">   &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-
-<h2 id="JSON-字符串转换为-Java-对象"><a href="#JSON-字符串转换为-Java-对象" class="headerlink" title="JSON 字符串转换为 Java 对象"></a>JSON 字符串转换为 Java 对象</h2><p>现在我们已经学会了如何创建 JSON 对象，以及如何将 Java 对象转换为 JSON 字符串，接下来我们就需要了解如何解析 JSON：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@Test</span><br><span class="line">public void whenJson_thanConvertToObjectCorrect() &#123;</span><br><span class="line">    Person person = new Person(20, &quot;John&quot;, &quot;Doe&quot;, new Date());</span><br><span class="line">    String jsonObject = JSON.toJSONString(person);</span><br><span class="line">    Person newPerson = JSON.parseObject(jsonObject, Person.class);</span><br><span class="line">     </span><br><span class="line">    assertEquals(newPerson.getAge(), 0); // 如果我们设置系列化为 false</span><br><span class="line">    assertEquals(newPerson.getFullName(), listOfPersons.get(0).getFullName());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>我们可以使用 JSON.parseObject() 将 JSON 字符串转换为 Java 对象。</p>
-<p>注意反序列化时为对象时，必须要有默认无参的构造函数，否则会报异常:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">com.alibaba.fastjson.JSONException: default constructor not found.</span><br></pre></td></tr></table></figure>
-
-<p>以下是简单的实例测试：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Person [age=20, fullName=John Doe, dateOfBirth=Wed Jul 20 08:51:12 WEST 2016]</span><br></pre></td></tr></table></figure>
-
-<p>@JSONField deserialize 可选项可以指定字段不反序列化。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@JSONField(name = &quot;DATE OF BIRTH&quot;, deserialize=false)</span><br><span class="line">private Date dateOfBirth;</span><br></pre></td></tr></table></figure>
-
-<p>输出结果为：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Person [age=20, fullName=John Doe, dateOfBirth=null]</span><br></pre></td></tr></table></figure>
-
-<h2 id="使用-ContextValueFilter-配置-JSON-转换"><a href="#使用-ContextValueFilter-配置-JSON-转换" class="headerlink" title="使用 ContextValueFilter 配置 JSON 转换"></a>使用 ContextValueFilter 配置 JSON 转换</h2><p>在某些场景下，对Value做过滤，需要获得所属JavaBean的信息，包括类型、字段、方法等。在fastjson-1.2.9中，提供了ContextValueFilter，类似于之前版本提供的ValueFilter，只是多了BeanContext参数可用。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">@Test</span><br><span class="line">public void givenContextFilter_whenJavaObject_thanJsonCorrect() &#123;</span><br><span class="line">    ContextValueFilter valueFilter = new ContextValueFilter () &#123;</span><br><span class="line">        public Object process(</span><br><span class="line">          BeanContext context, Object object, String name, Object value) &#123;</span><br><span class="line">            if (name.equals(&quot;DATE OF BIRTH&quot;)) &#123;</span><br><span class="line">                return &quot;NOT TO DISCLOSE&quot;;</span><br><span class="line">            &#125;</span><br><span class="line">            if (value.equals(&quot;John&quot;)) &#123;</span><br><span class="line">                return ((String) value).toUpperCase();</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                return null;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    String jsonOutput = JSON.toJSONString(listOfPersons, valueFilter);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="使用-NameFilter-和-SerializeConfig"><a href="#使用-NameFilter-和-SerializeConfig" class="headerlink" title="使用 NameFilter 和 SerializeConfig"></a>使用 NameFilter 和 SerializeConfig</h2><p>NameFilter: 序列化时修改 Key。</p>
-<p>SerializeConfig：内部是个map容器主要功能是配置并记录每种Java类型对应的序列化类。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">@Test</span><br><span class="line">public void givenSerializeConfig_whenJavaObject_thanJsonCorrect() &#123;</span><br><span class="line">    NameFilter formatName = new NameFilter() &#123;</span><br><span class="line">        public String process(Object object, String name, Object value) &#123;</span><br><span class="line">            return name.toLowerCase().replace(&quot; &quot;, &quot;_&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">     </span><br><span class="line">    SerializeConfig.getGlobalInstance().addFilter(Person.class,  formatName);</span><br><span class="line">    String jsonOutput =</span><br><span class="line">      JSON.toJSONStringWithDateFormat(listOfPersons, &quot;yyyy-MM-dd&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>实例中我们声明了 formatName 过滤器使用 NameFilter 匿名类来处理字段名称。 新创建的过滤器与 Person 类相关联，然后添加到全局实例，它是 SerializeConfig 类中的静态属性。</p>
-<p>现在我们可以轻松地将对象转换为JSON格式。</p>
-<p>注意我们使用的是 toJSONStringWithDateFormat() 而不是 toJSONString() ，它可以更快速的格式化日期。</p>
-<p>输出结果：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[  </span><br><span class="line">    &#123;  </span><br><span class="line">        &quot;full_name&quot;:&quot;John Doe&quot;,</span><br><span class="line">        &quot;date_of_birth&quot;:&quot;2016-07-21&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;  </span><br><span class="line">        &quot;full_name&quot;:&quot;Janette Doe&quot;,</span><br><span class="line">        &quot;date_of_birth&quot;:&quot;2016-07-21&quot;</span><br><span class="line">    &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1188,18 +1176,18 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">197</span>
+          <span class="site-state-item-count">202</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
-        <span class="site-state-item-count">45</span>
+        <span class="site-state-item-count">46</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-count">59</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

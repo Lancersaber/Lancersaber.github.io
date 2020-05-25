@@ -172,6 +172,547 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2020/05/25/Android/zuoye/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/25/Android/zuoye/" class="post-title-link" itemprop="url">百度地图</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-05-25 23:27:45 / Modified: 23:55:50" itemprop="dateCreated datePublished" datetime="2020-05-25T23:27:45+08:00">2020-05-25</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="百度地图"><a href="#百度地图" class="headerlink" title="百度地图"></a>百度地图</h1><hr>
+<h2 id="配置环境和权限"><a href="#配置环境和权限" class="headerlink" title="配置环境和权限"></a>配置环境和权限</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&lt;manifest xmlns:android=<span class="string">"http://schemas.android.com/apk/res/android"</span></span><br><span class="line">    package=<span class="string">"com.example.mybaidulcoate"</span>&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!--</span><br><span class="line">         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use</span><br><span class="line">         Google Maps Android API v2, but you must specify either coarse or fine</span><br><span class="line">         location permissions <span class="keyword">for</span> the <span class="string">'MyLocation'</span> functionality.</span><br><span class="line">    --&gt;</span><br><span class="line">    &lt;!-- 这个权限用于进行网络定位--&gt;</span><br><span class="line">    &lt;uses-permission android:name=<span class="string">"android.permission.ACCESS_COARSE_LOCATION"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">uses-permission</span>&gt;</span></span></span><br><span class="line">    &lt;!-- 这个权限用于访问GPS定位--&gt;</span><br><span class="line">    &lt;uses-permission android:name=<span class="string">"android.permission.ACCESS_FINE_LOCATION"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">uses-permission</span>&gt;</span></span></span><br><span class="line">    &lt;!-- 用于访问wifi网络信息，wifi信息会用于进行网络定位--&gt;</span><br><span class="line">    &lt;uses-permission android:name=<span class="string">"android.permission.ACCESS_WIFI_STATE"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">uses-permission</span>&gt;</span></span></span><br><span class="line">    &lt;!-- 获取运营商信息，用于支持提供运营商信息相关的接口--&gt;</span><br><span class="line">    &lt;uses-permission android:name=<span class="string">"android.permission.ACCESS_NETWORK_STATE"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">uses-permission</span>&gt;</span></span></span><br><span class="line">    &lt;!-- 这个权限用于获取wifi的获取权限，wifi信息会用来进行网络定位--&gt;</span><br><span class="line">    &lt;uses-permission android:name=<span class="string">"android.permission.CHANGE_WIFI_STATE"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">uses-permission</span>&gt;</span></span></span><br><span class="line">    &lt;!-- 用于读取手机当前的状态--&gt;</span><br><span class="line">    &lt;uses-permission android:name=<span class="string">"android.permission.READ_PHONE_STATE"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">uses-permission</span>&gt;</span></span></span><br><span class="line">    &lt;!-- 写入扩展存储，向扩展卡写入数据，用于写入离线定位数据--&gt;</span><br><span class="line">    &lt;uses-permission android:name=<span class="string">"android.permission.WRITE_EXTERNAL_STORAGE"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">uses-permission</span>&gt;</span></span></span><br><span class="line">    &lt;!-- 访问网络，网络定位需要上网--&gt;</span><br><span class="line">    &lt;uses-permission android:name=<span class="string">"android.permission.INTERNET"</span> /&gt;</span><br><span class="line">    &lt;!-- SD卡读取权限，用户写入离线定位数据--&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//配置定位SDK参数</span></span><br><span class="line">    private <span class="keyword">void</span> initLocation() &#123;</span><br><span class="line">        LocationClientOption option = <span class="keyword">new</span> LocationClientOption();</span><br><span class="line">        option.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy</span><br><span class="line">        );<span class="comment">//可选，默认高精度，设置定位模式，高精度，低功耗，仅设备</span></span><br><span class="line">        option.setCoorType(<span class="string">"bd09ll"</span>);<span class="comment">//可选，默认gcj02，设置返回的定位结果坐标系</span></span><br><span class="line">        int span = <span class="number">1000</span>;</span><br><span class="line">        option.setScanSpan(span);<span class="comment">//可选，默认0，即仅定位一次，设置发起定位请求的间隔需要大于等于1000ms才是有效的</span></span><br><span class="line">        option.setIsNeedAddress(<span class="literal">true</span>);<span class="comment">//可选，设置是否需要地址信息，默认不需要</span></span><br><span class="line">        option.setOpenGps(<span class="literal">true</span>);<span class="comment">//可选，默认false,设置是否使用gps</span></span><br><span class="line">        option.setLocationNotify(<span class="literal">true</span>);<span class="comment">//可选，默认false，设置是否当GPS有效时按照1S/1次频率输出GPS结果</span></span><br><span class="line">        option.setIsNeedLocationDescribe(<span class="literal">true</span>);<span class="comment">//可选，默认false，设置是否需要位置语义化结果，可以在BDLocation</span></span><br><span class="line">        <span class="comment">// .getLocationDescribe里得到，结果类似于“在北京天安门附近”</span></span><br><span class="line">        option.setIsNeedLocationPoiList(<span class="literal">true</span>);<span class="comment">//可选，默认false，设置是否需要POI结果，可以在BDLocation.getPoiList里得到</span></span><br><span class="line">        option.setIgnoreKillProcess(<span class="literal">false</span>);</span><br><span class="line">        option.setOpenGps(<span class="literal">true</span>); <span class="comment">// 打开gps</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//可选，默认true，定位SDK内部是一个SERVICE，并放到了独立进程，设置是否在stop的时候杀死这个进程，默认不杀死</span></span><br><span class="line">        option.SetIgnoreCacheException(<span class="literal">false</span>);<span class="comment">//可选，默认false，设置是否收集CRASH信息，默认收集</span></span><br><span class="line">        option.setEnableSimulateGps(<span class="literal">false</span>);<span class="comment">//可选，默认false，设置是否需要过滤GPS仿真结果，默认需要</span></span><br><span class="line">        mLocationClient.setLocOption(option);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//实现BDLocationListener接口,BDLocationListener为结果监听接口，异步获取定位结果</span></span><br><span class="line">    public <span class="class"><span class="keyword">class</span> <span class="title">MyLocationListener</span> <span class="title">implements</span> <span class="title">BDLocationListener</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        @Override</span><br><span class="line">        public <span class="keyword">void</span> onReceiveLocation(BDLocation location) &#123;</span><br><span class="line">            latLng = <span class="keyword">new</span> LatLng(location.getLatitude(),location.getLongitude());</span><br><span class="line">            <span class="comment">// 构造定位数据</span></span><br><span class="line">            MyLocationData locData = <span class="keyword">new</span> MyLocationData.Builder()</span><br><span class="line">                    .accuracy(location.getRadius())</span><br><span class="line">                    <span class="comment">// 此处设置开发者获取到的方向信息，顺时针0-360</span></span><br><span class="line">                    .direction(<span class="number">100</span>).latitude(location.getLatitude())</span><br><span class="line">                    .longitude(location.getLongitude()).build();</span><br><span class="line">            <span class="comment">// 设置定位数据</span></span><br><span class="line">            mBaiduMap.setMyLocationData(locData);</span><br><span class="line">            <span class="comment">// 当不需要定位图层时关闭定位图层</span></span><br><span class="line">            <span class="comment">//mBaiduMap.setMyLocationEnabled(false);</span></span><br><span class="line">            <span class="keyword">if</span> (isFirstLoc) &#123;</span><br><span class="line">                isFirstLoc = <span class="literal">false</span>;</span><br><span class="line">                LatLng ll = <span class="keyword">new</span> LatLng(location.getLatitude(),</span><br><span class="line">                        location.getLongitude());</span><br><span class="line">                MapStatus.Builder builder = <span class="keyword">new</span> MapStatus.Builder();</span><br><span class="line">                builder.target(ll).zoom(<span class="number">18.0</span>f);</span><br><span class="line">                mBaiduMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> (location.getLocType() == BDLocation.TypeGpsLocation) &#123;</span><br><span class="line">                    <span class="comment">// GPS定位结果</span></span><br><span class="line">                    Toast.makeText(MainActivity.this, location.getAddrStr(), Toast.LENGTH_SHORT).show();</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (location.getLocType() == BDLocation.TypeNetWorkLocation) &#123;</span><br><span class="line">                    <span class="comment">// 网络定位结果</span></span><br><span class="line">                    Toast.makeText(MainActivity.this, location.getAddrStr(), Toast.LENGTH_SHORT).show();</span><br><span class="line"></span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (location.getLocType() == BDLocation.TypeOffLineLocation) &#123;</span><br><span class="line">                    <span class="comment">// 离线定位结果</span></span><br><span class="line">                    Toast.makeText(MainActivity.this, location.getAddrStr(), Toast.LENGTH_SHORT).show();</span><br><span class="line"></span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (location.getLocType() == BDLocation.TypeServerError) &#123;</span><br><span class="line">                    Toast.makeText(MainActivity.this, <span class="string">"服务器错误，请检查"</span>, Toast.LENGTH_SHORT).show();</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (location.getLocType() == BDLocation.TypeNetWorkException) &#123;</span><br><span class="line">                    Toast.makeText(MainActivity.this, <span class="string">"网络错误，请检查"</span>, Toast.LENGTH_SHORT).show();</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (location.getLocType() == BDLocation.TypeCriteriaException) &#123;</span><br><span class="line">                    Toast.makeText(MainActivity.this, <span class="string">"手机模式错误，请检查是否飞行"</span>, Toast.LENGTH_SHORT).show();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后修改build.gradle文件，类似于：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">apply plugin: <span class="string">'com.android.application'</span></span><br><span class="line"></span><br><span class="line">android &#123;</span><br><span class="line">    compileSdkVersion <span class="number">25</span></span><br><span class="line">    buildToolsVersion <span class="string">"25.0.0"</span></span><br><span class="line"></span><br><span class="line">    defaultConfig &#123;</span><br><span class="line">        applicationId <span class="string">"stark.a.is.zhang.maptest"</span></span><br><span class="line">        minSdkVersion <span class="number">16</span></span><br><span class="line">        targetSdkVersion <span class="number">25</span></span><br><span class="line">        versionCode <span class="number">1</span></span><br><span class="line">        versionName <span class="string">"1.0"</span></span><br><span class="line"></span><br><span class="line">        testInstrumentationRunner <span class="string">"android.support.test.runner.AndroidJUnitRunner"</span></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    buildTypes &#123;</span><br><span class="line">        release &#123;</span><br><span class="line">            minifyEnabled <span class="literal">false</span></span><br><span class="line">            proguardFiles getDefaultProguardFile(<span class="string">'proguard-android.txt'</span>), <span class="string">'proguard-rules.pro'</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//增加jniLibs的描述，这样APK才知道so库的路径</span></span><br><span class="line">    sourceSets &#123;</span><br><span class="line">        main &#123;</span><br><span class="line">            jniLibs.srcDirs = [<span class="string">'libs'</span>]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">dependencies &#123;</span><br><span class="line">    compile fileTree(include: [<span class="string">'*.jar'</span>], <span class="attr">dir</span>: <span class="string">'libs'</span>)</span><br><span class="line">    androidTestCompile(<span class="string">'com.android.support.test.espresso:espresso-core:2.2.2'</span>, &#123;</span><br><span class="line">        exclude group: <span class="string">'com.android.support'</span>, <span class="attr">module</span>: <span class="string">'support-annotations'</span></span><br><span class="line">    &#125;)</span><br><span class="line">    compile <span class="string">'com.android.support:appcompat-v7:25.1.0'</span></span><br><span class="line">    testCompile <span class="string">'junit:junit:4.12'</span></span><br><span class="line">    <span class="comment">//这个是自己为了方便，定义的库</span></span><br><span class="line">    compile project(<span class="string">':activityLib'</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">//主要是这里，需要添加百度SDK jar包路径</span></span><br><span class="line">    compile files(<span class="string">'libs/BaiduLBS_Android.jar'</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>5、视图及初始化</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=<span class="string">"1.0"</span> encoding=<span class="string">"utf-8"</span>?&gt;</span><br><span class="line">&lt;RelativeLayout</span><br><span class="line">    xmlns:android=<span class="string">"http://schemas.android.com/apk/res/android"</span></span><br><span class="line">    android:layout_width=<span class="string">"match_parent"</span></span><br><span class="line">    android:layout_height=<span class="string">"match_parent"</span>&gt;</span><br><span class="line"></span><br><span class="line">    &lt;LinearLayout</span><br><span class="line">        android:id=<span class="string">"@+id/linear_layout"</span></span><br><span class="line">        android:layout_width=<span class="string">"match_parent"</span></span><br><span class="line">        android:layout_height=<span class="string">"wrap_content"</span>&gt;</span><br><span class="line"></span><br><span class="line">        &lt;Button</span><br><span class="line">            android:id=<span class="string">"@+id/show_location"</span></span><br><span class="line">            android:layout_width=<span class="string">"wrap_content"</span></span><br><span class="line">            android:layout_height=<span class="string">"wrap_content"</span></span><br><span class="line">            android:layout_weight=<span class="string">"0.5"</span></span><br><span class="line">            android:text=<span class="string">"@string/show_location"</span></span><br><span class="line">            android:layout_marginLeft=<span class="string">"16dp"</span>/&gt;</span><br><span class="line"></span><br><span class="line">        &lt;Button</span><br><span class="line">            android:id=<span class="string">"@+id/clear_location"</span></span><br><span class="line">            android:layout_width=<span class="string">"wrap_content"</span></span><br><span class="line">            android:layout_height=<span class="string">"wrap_content"</span></span><br><span class="line">            android:layout_weight=<span class="string">"0.5"</span></span><br><span class="line">            android:text=<span class="string">"@string/clear_location"</span></span><br><span class="line">            android:layout_marginRight=<span class="string">"16dp"</span>/&gt;</span><br><span class="line">    &lt;<span class="regexp">/LinearLayout&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">    &lt;!--主要是这里，与使用自定义视图的方法类似 --&gt;</span></span><br><span class="line"><span class="regexp">    &lt;com.baidu.mapapi.map.MapView</span></span><br><span class="line"><span class="regexp">        android:id="@+id/</span>bmapView<span class="string">"</span></span><br><span class="line"><span class="string">        android:layout_width="</span>match_parent<span class="string">"</span></span><br><span class="line"><span class="string">        android:layout_height="</span>match_parent<span class="string">"</span></span><br><span class="line"><span class="string">        android:layout_below="</span>@id/linear_layout<span class="string">"</span></span><br><span class="line"><span class="string">        android:clickable="</span><span class="literal">true</span><span class="string">" /&gt;</span></span><br><span class="line"><span class="string">&lt;/RelativeLayout&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>6、基本接口的使用<br>6.1、视图显示和生命周期的管理<br>我们首先看看加载百度地图的视图及其生命周期管理相关的代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">MapTestFragment</span> <span class="keyword">extends</span> <span class="title">Fragment</span></span>&#123;</span><br><span class="line">    MapView mMapView = <span class="literal">null</span>;</span><br><span class="line">    BaiduMap mBaiduMap = <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">    ...................</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public View onCreateView(LayoutInflater inflater, ViewGroup container,</span><br><span class="line">            Bundle savedInstanceState) &#123;</span><br><span class="line">        View v = inflater.inflate(R.layout.fragment_map_test, container, <span class="literal">false</span>);</span><br><span class="line">        ...................</span><br><span class="line">        <span class="comment">//加载视图后，获取MapView</span></span><br><span class="line">        mMapView = (MapView) v.findViewById(R.id.bmapView);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//得到BaiduMap的实例</span></span><br><span class="line">        mBaiduMap = mMapView.getMap();</span><br><span class="line">        <span class="comment">//设置Baidu的地图类型，具有MAP_TYPE_NONE、MAP_TYPE_NORMAL和MAP_TYPE_SATELLITE</span></span><br><span class="line">        mBaiduMap.setMapType(BaiduMap.MAP_TYPE_NORMAL);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> v;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//MapView与Activity、Fragment的生命周期匹配</span></span><br><span class="line">    @Override</span><br><span class="line">    public <span class="keyword">void</span> onResume() &#123;</span><br><span class="line">        <span class="keyword">super</span>.onResume();</span><br><span class="line">        mMapView.onResume();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public <span class="keyword">void</span> onPause() &#123;</span><br><span class="line">        <span class="keyword">super</span>.onPause();</span><br><span class="line">        mMapView.onPause();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public <span class="keyword">void</span> onDestroy() &#123;</span><br><span class="line">        <span class="keyword">super</span>.onDestroy();</span><br><span class="line">        mMapView.onDestroy();</span><br><span class="line">    &#125;</span><br><span class="line">    ..................</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2020/05/25/Lx4OUqK9Bzn2ZkX.jpg" alt="20170301170901166.jpg"></p>
+<p>总结<br>实际上，最初自己是想以Google地图为例，记录一下地图的基本使用方法。<br>不过Google地图的一些功能依赖于Google Play相关的服务，不管怎么讲，翻墙多少还是有些麻烦的，<br>于是退而求其次，决定利用百度地图作为例子。</p>
+<p>自己主要是做Framework的，系统应用接触的比较多，还是初次在APK中使用地图。<br>从自己的使用感受来讲，不吹不黑，百度SDK做的还是很用心的，文档和demo写的都不错。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2020/05/23/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/shiro/Shiro%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90(2)-SessionManager/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/23/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/shiro/Shiro%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90(2)-SessionManager/" class="post-title-link" itemprop="url">Shiro源码分析(2)-SessionManager</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-05-23 18:59:31" itemprop="dateCreated datePublished" datetime="2020-05-23T18:59:31+08:00">2020-05-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-05-25 23:55:50" itemprop="dateModified" datetime="2020-05-25T23:55:50+08:00">2020-05-25</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sourceread/" itemprop="url" rel="index">
+                    <span itemprop="name">sourceread</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Shiro源码分析-2-SessionManager"><a href="#Shiro源码分析-2-SessionManager" class="headerlink" title="Shiro源码分析(2)-SessionManager"></a>Shiro源码分析(2)-SessionManager</h1><hr>
+<p>本文对Shiro中的SessionManager进行分析，SessionManager用于管理Shiro中的Session信息。Session也就是我们通常说的会话，会话是用户在使用应用程序一段时间内携带的数据。传统的会话一般是基于Web容器(如:Tomcat、EJB环境等)。Shiro提供的Session可以在任何环境中使用，不再依赖于其他容器。</p>
+<p>Shiro还提供了一些其他的特性：</p>
+<p>待写</p>
+<h2 id="Session接口定义"><a href="#Session接口定义" class="headerlink" title="Session接口定义"></a>Session接口定义</h2><p>Shiro提供的Session和Servlet中的Session其实是一样的作用，只是Shiro中的Sesion不需要再依赖于WEB容器存在。下面是Session接口提供的方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 返回表示Session的唯一ID</span><br><span class="line"> */</span><br><span class="line">Serializable getId();</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 返回Session的开始时间</span><br><span class="line"> */</span><br><span class="line">Date getStartTimestamp();</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 返回最近使用的时间</span><br><span class="line"> */</span><br><span class="line">Date getLastAccessTime();</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 返回还有多久Session过期(毫秒)</span><br><span class="line"> */</span><br><span class="line">long getTimeout() throws InvalidSessionException;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 设置超时时间(毫秒)</span><br><span class="line"> */</span><br><span class="line">void setTimeout(long maxIdleTimeInMillis) throws InvalidSessionException;    </span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 返回Session创建时的主机名或地址</span><br><span class="line"> */</span><br><span class="line">String getHost();</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 更新最近访问时间，确保Session不会过期</span><br><span class="line"> */</span><br><span class="line">void touch() throws InvalidSessionException;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 设置Session停止使用，并释放相关资源</span><br><span class="line"> */</span><br><span class="line">void stop() throws InvalidSessionException;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 返回该Session存储的所有属性键</span><br><span class="line"> */</span><br><span class="line">Collection&lt;Object&gt; getAttributeKeys() throws InvalidSessionException;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 获取Session属性</span><br><span class="line"> */</span><br><span class="line">Object getAttribute(Object key) throws InvalidSessionException;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 设置Session属性</span><br><span class="line"> */</span><br><span class="line">void setAttribute(Object key, Object value) throws InvalidSessionException;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 删除Session属性</span><br><span class="line"> */</span><br><span class="line">Object removeAttribute(Object key) throws InvalidSessionException;</span><br></pre></td></tr></table></figure>
+
+<p>从接口中我们可以看出。Session有一个唯一ID，开始时间，最近活动时间等属性，另外提供了两个相对应的方法touch()和stop()，其他方法就是对属性的操作了。Session接口还是相当简单清晰的，下面我们看看接口的实现类。</p>
+<p>Session有一些实现类，包括SimpleSession、HttpServletSession和DelegatingSession等。SimpleSession是Shiro提供的一种简单实现，HttpServletSession是基于Sevlet中Session来实现的，DelegatingSession是一种委托机制，委托给SessionManager来实现。下面，我们主要以SimpleSession和DelegatingSession来分析。</p>
+<h2 id="SimpleSession实现"><a href="#SimpleSession实现" class="headerlink" title="SimpleSession实现"></a>SimpleSession实现</h2><p>SimpleSession从Session接口继承过来的方法实现非常简单，就不过多分析了。我们主要分析一下属性，通过属性就可以了解到SimpleSession中功能的实现了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">// Session唯一ID</span><br><span class="line">private transient Serializable id;</span><br><span class="line">// 开始时间</span><br><span class="line">private transient Date startTimestamp;</span><br><span class="line">// 结束时间</span><br><span class="line">private transient Date stopTimestamp;</span><br><span class="line">// 最近访问时间</span><br><span class="line">private transient Date lastAccessTime;</span><br><span class="line">// 还有多久过期</span><br><span class="line">private transient long timeout;</span><br><span class="line">// 是否过期</span><br><span class="line">private transient boolean expired;</span><br><span class="line">// Session创建时的主机名</span><br><span class="line">private transient String host;</span><br><span class="line">// Session存储的属性值</span><br><span class="line">private transient Map&lt;Object, Object&gt; attributes;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2020/05/23/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/shiro/Shiro%E5%8E%9F%E7%A0%81%E5%88%86%E6%9E%90(1)-Shiro%E5%BC%80%E7%AF%87/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/23/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/shiro/Shiro%E5%8E%9F%E7%A0%81%E5%88%86%E6%9E%90(1)-Shiro%E5%BC%80%E7%AF%87/" class="post-title-link" itemprop="url">Shiro源码分析(1)-Shiro开篇</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-05-23 15:58:34" itemprop="dateCreated datePublished" datetime="2020-05-23T15:58:34+08:00">2020-05-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-05-25 23:55:49" itemprop="dateModified" datetime="2020-05-25T23:55:49+08:00">2020-05-25</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sourceread/" itemprop="url" rel="index">
+                    <span itemprop="name">sourceread</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Shiro源码分析-1-Shiro开篇"><a href="#Shiro源码分析-1-Shiro开篇" class="headerlink" title="Shiro源码分析(1)-Shiro开篇"></a>Shiro源码分析(1)-Shiro开篇</h1><hr>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a><strong><code>简介</code></strong></h2><ul>
+<li>SecurityManager：安全管理器，Shiro最核心组件。Shiro通过SecurityManager来管理内部组件实例，并通过它来提供安全管理的各种服务。</li>
+<li>Authenticator：认证器，认证AuthenticationToken是否有效。</li>
+<li>Authorizer：授权器，处理角色和权限。</li>
+<li>SessionManager：Session管理器，管理Session。</li>
+<li>Subject：当前操作主体，表示当前操作用户。</li>
+<li>SubjectContext：Subject上下文数据对象。</li>
+<li>AuthenticationToken：认证的token信息(用户名、密码等)。</li>
+<li>ThreadContext：线程上下文对象，负责绑定对象到当前线程。</li>
+</ul>
+<p>在学习和使用Shiro过程中，我们都知道SecurityManager接口在Shiro中是最为核心的接口。我们就沿着这个接口进行分析。</p>
+<p>下面的代码是SecurityManager接口的定义：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">public interface SecurityManager extends Authenticator, Authorizer, SessionManager &#123;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 登录</span><br><span class="line">     */</span><br><span class="line">    Subject login(Subject subject, AuthenticationToken authenticationToken) throws AuthenticationException;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 登出</span><br><span class="line">     */</span><br><span class="line">    void logout(Subject subject);</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 创建Subject</span><br><span class="line">     */</span><br><span class="line">    Subject createSubject(SubjectContext context);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在SecurityManager 中定义了三个方法，分别是登录、登出和创建Subject。通常我们在使用的时候是这样使用的。首先创建Subject对象，然后通过调用login方法传入认证信息token对登录进行认证。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Subject subject = SecurityUtils.getSubject();</span><br><span class="line">UsernamePasswordToken token = new UsernamePasswordToken(&quot;zhang&quot;, &quot;123&quot;);</span><br><span class="line">subject.login(token);</span><br></pre></td></tr></table></figure>
+
+<h2 id="SecurityUtils分析"><a href="#SecurityUtils分析" class="headerlink" title="SecurityUtils分析"></a><strong><code>SecurityUtils分析</code></strong></h2><p>在Shiro中提供了一个方便使用的工具类SecurityUtils，SecurityUtils核心功能是获取SecurityManager以及Subject。这两个接口是Shiro提供的外围接口，供开发时使用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public abstract class SecurityUtils &#123;</span><br><span class="line"></span><br><span class="line">    private static SecurityManager securityManager;</span><br><span class="line"></span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>###1. <strong><code>获取SecurityManager</code></strong></p>
+<p>首先从ThreadContext中获取，如果没有，则从SecurityUtils属性securityManager中获取。一定要存在一个SecurityManager实例对象，否则抛异常。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public <span class="keyword">static</span> SecurityManager getSecurityManager() throws UnavailableSecurityManagerException &#123;</span><br><span class="line">       SecurityManager securityManager = ThreadContext.getSecurityManager();</span><br><span class="line">       <span class="keyword">if</span> (securityManager == <span class="literal">null</span>) &#123;</span><br><span class="line">           securityManager = SecurityUtils.securityManager;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">if</span> (securityManager == <span class="literal">null</span>) &#123;</span><br><span class="line">           <span class="built_in">String</span> msg = <span class="string">"No SecurityManager accessible to the calling code, either bound to the "</span> +</span><br><span class="line">                   ThreadContext.class.getName() + <span class="string">" or as a vm static singleton.  This is an invalid application "</span> +</span><br><span class="line">                   <span class="string">"configuration."</span>;</span><br><span class="line">           <span class="keyword">throw</span> <span class="keyword">new</span> UnavailableSecurityManagerException(msg);</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> securityManager;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<p>###2. 获取Subject</p>
+<p>首先从ThreadContext中获取，如果不存在，则创建新的Subject，再存放到ThreadContext中，以便下次可以获取。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public static Subject getSubject() &#123;</span><br><span class="line">	Subject subject = ThreadContext.getSubject();</span><br><span class="line">	if (subject == null) &#123;</span><br><span class="line">		subject = (new Subject.Builder()).buildSubject();</span><br><span class="line">		ThreadContext.bind(subject);</span><br><span class="line">	&#125;</span><br><span class="line">	return subject;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2020/05/23/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/jdk/ArrayList%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/23/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/jdk/ArrayList%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" class="post-title-link" itemprop="url">ArrayList源码分析</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-05-23 10:25:53" itemprop="dateCreated datePublished" datetime="2020-05-23T10:25:53+08:00">2020-05-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-05-25 23:55:50" itemprop="dateModified" datetime="2020-05-25T23:55:50+08:00">2020-05-25</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sourceread/" itemprop="url" rel="index">
+                    <span itemprop="name">sourceread</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="ArrayList源码分析"><a href="#ArrayList源码分析" class="headerlink" title="ArrayList源码分析"></a><em>ArrayList源码分析</em></h1><hr>
+<h6 id="简介"><a href="#简介" class="headerlink" title="简介"></a><strong><code>简介</code></strong></h6><p>ArrayList是一种以数组实现的List，与数组相比，它具有动态扩展的能力，因此也可称之为动态数组。</p>
+<h6 id="继承体系"><a href="#继承体系" class="headerlink" title="继承体系"></a><strong><code>继承体系</code></strong></h6><p><img src="https://i.loli.net/2020/05/23/x5GdFIzicShLUZM.png" alt="ArrayList.png"><br>ArrayList实现了List, RandomAccess, Cloneable, java.io.Serializable等接口。<br>ArrayList实现了List，提供了基础的添加、删除、遍历等操作。<br>ArrayList实现了RandomAccess，提供了随机访问的能力。<br>ArrayList实现了Cloneable，可以被克隆。<br>ArrayList实现了Serializable，可以被序列化。</p>
+<h6 id="源码解析"><a href="#源码解析" class="headerlink" title="源码解析"></a><em><code>源码解析</code></em></h6><p><strong><code>属性</code></strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 默认容量</span><br><span class="line"> */</span><br><span class="line">private static final int DEFAULT_CAPACITY = 10;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 空数组，如果传入的容量为0时使用</span><br><span class="line"> */</span><br><span class="line">private static final Object[] EMPTY_ELEMENTDATA = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 空数组，未传入容量时使用，添加第一个元素的时候会重新初始为默认容量大小</span><br><span class="line"> */</span><br><span class="line">private static final Object[] DEFAULTCAPACITY_EMPTY_ELEMENTDATA = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 存储元素的数组</span><br><span class="line"> */</span><br><span class="line">transient Object[] elementData; // non-private to simplify nested class access</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 集合中元素的个数</span><br><span class="line"> */</span><br><span class="line">private int size;</span><br></pre></td></tr></table></figure>
+<p>（1）DEFAULT_CAPACITY<br>默认容量为10，也就是通过new ArrayList()创建时的默认容量。</p>
+<p>（2）EMPTY_ELEMENTDATA<br>空的数组，这种是通过new ArrayList(0)创建时用的是这个空数组。</p>
+<p>（3）DEFAULTCAPACITY_EMPTY_ELEMENTDATA<br>也是空数组，这种是通过new ArrayList()创建时用的是这个空数组，与EMPTY_ELEMENTDATA的区别是在添加第一个元素时使用这个空数组的会初始化为DEFAULT_CAPACITY（10）个元素。</p>
+<p>（4）elementData<br>真正存放元素的地方，使用transient是为了不序列化这个字段。<br>至于没有使用private修饰，后面注释是写的“为了简化嵌套类的访问”，但是楼主实测加了private嵌套类一样可以访问。<br>private表示是类私有的属性，只要是在这个类内部都可以访问，嵌套类或者内部类也是在类的内部，所以也可以访问类的私有成员。</p>
+<p>（5）size<br>真正存储元素的个数，而不是elementData数组的长度。</p>
+<p><strong><code>ArrayList(int initialCapacity)构造方法</code></strong><br>传入初始容量，如果大于0就初始化elementData为对应大小，如果等于0就使用EMPTY_ELEMENTDATA空数组，如果小于0抛出异常。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public ArrayList(int initialCapacity) &#123;</span><br><span class="line">    if (initialCapacity &gt; 0) &#123;</span><br><span class="line">        // 如果传入的初始容量大于0，就新建一个数组存储元素</span><br><span class="line">        this.elementData = new Object[initialCapacity];</span><br><span class="line">    &#125; else if (initialCapacity == 0) &#123;</span><br><span class="line">        // 如果传入的初始容量等于0，使用空数组EMPTY_ELEMENTDATA</span><br><span class="line">        this.elementData = EMPTY_ELEMENTDATA;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        // 如果传入的初始容量小于0，抛出异常</span><br><span class="line">        throw new IllegalArgumentException(&quot;Illegal Capacity: &quot; + initialCapacity);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong><code>ArrayList()构造方法</code></strong><br>不传初始容量，初始化为DEFAULTCAPACITY_EMPTY_ELEMENTDATA空数组，会在添加第一个元素的时候扩容为默认的大小，即10。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public ArrayList() &#123;</span><br><span class="line">    // 如果没有传入初始容量，则使用空数组DEFAULTCAPACITY_EMPTY_ELEMENTDATA</span><br><span class="line">    // 使用这个数组是在添加第一个元素的时候会扩容到默认大小10</span><br><span class="line">    this.elementData = DEFAULTCAPACITY_EMPTY_ELEMENTDATA;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong><code>ArrayList 构造方法</code></strong><br>传入集合并初始化elementData，这里会使用拷贝把传入集合的元素拷贝到elementData数组中，如果元素个数为0，则初始化为EMPTY_ELEMENTDATA空数组。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">* 把传入集合的元素初始化到ArrayList中</span><br><span class="line">*/</span><br><span class="line">public ArrayList(Collection&lt;? extends E&gt; c) &#123;</span><br><span class="line">    // 集合转数组</span><br><span class="line">    elementData = c.toArray();</span><br><span class="line">    if ((size = elementData.length) != 0) &#123;</span><br><span class="line">        // 检查c.toArray()返回的是不是Object[]类型，如果不是，重新拷贝成Object[].class类型</span><br><span class="line">        if (elementData.getClass() != Object[].class)</span><br><span class="line">            elementData = Arrays.copyOf(elementData, size, Object[].class);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        // 如果c的空集合，则初始化为空数组EMPTY_ELEMENTDATA</span><br><span class="line">        this.elementData = EMPTY_ELEMENTDATA;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong><code>add(E e)方法</code></strong><br>添加元素到末尾，平均时间复杂度为O(1)。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">public boolean add(E e) &#123;</span><br><span class="line">    // 检查是否需要扩容</span><br><span class="line">    ensureCapacityInternal(size + 1);</span><br><span class="line">    // 把元素插入到最后一位</span><br><span class="line">    elementData[size++] = e;</span><br><span class="line">    return true;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private void ensureCapacityInternal(int minCapacity) &#123;</span><br><span class="line">    ensureExplicitCapacity(calculateCapacity(elementData, minCapacity));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private static int calculateCapacity(Object[] elementData, int minCapacity) &#123;</span><br><span class="line">    // 如果是空数组DEFAULTCAPACITY_EMPTY_ELEMENTDATA，就初始化为默认大小10</span><br><span class="line">    if (elementData == DEFAULTCAPACITY_EMPTY_ELEMENTDATA) &#123;</span><br><span class="line">        return Math.max(DEFAULT_CAPACITY, minCapacity);</span><br><span class="line">    &#125;</span><br><span class="line">    return minCapacity;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private void ensureExplicitCapacity(int minCapacity) &#123;</span><br><span class="line">    modCount++;</span><br><span class="line"></span><br><span class="line">    if (minCapacity - elementData.length &gt; 0)</span><br><span class="line">        // 扩容</span><br><span class="line">        grow(minCapacity);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private void grow(int minCapacity) &#123;</span><br><span class="line">    int oldCapacity = elementData.length;</span><br><span class="line">    // 新容量为旧容量的1.5倍</span><br><span class="line">    int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);</span><br><span class="line">    // 如果新容量发现比需要的容量还小，则以需要的容量为准</span><br><span class="line">    if (newCapacity - minCapacity &lt; 0)</span><br><span class="line">        newCapacity = minCapacity;</span><br><span class="line">    // 如果新容量已经超过最大容量了，则使用最大容量</span><br><span class="line">    if (newCapacity - MAX_ARRAY_SIZE &gt; 0)</span><br><span class="line">        newCapacity = hugeCapacity(minCapacity);</span><br><span class="line">    // 以新容量拷贝出来一个新数组</span><br><span class="line">    elementData = Arrays.copyOf(elementData, newCapacity);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>（1）检查是否需要扩容；</p>
+<p>（2）如果elementData等于DEFAULTCAPACITY_EMPTY_ELEMENTDATA则初始化容量大小为DEFAULT_CAPACITY；</p>
+<p>（3）新容量是老容量的1.5倍（oldCapacity + (oldCapacity &gt;&gt; 1)），如果加了这么多容量发现比需要的容量还小，则以需要的容量为准；</p>
+<p>（4）创建新容量的数组并把老数组拷贝到新数组；</p>
+<p><strong><code>add(int index, E element)方法</code></strong><br>添加元素到指定位置，平均时间复杂度为O(n)。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">public void add(int index, E element) &#123;</span><br><span class="line">    // 检查是否越界</span><br><span class="line">    rangeCheckForAdd(index);</span><br><span class="line">    // 检查是否需要扩容</span><br><span class="line">    ensureCapacityInternal(size + 1);</span><br><span class="line">    // 将inex及其之后的元素往后挪一位，则index位置处就空出来了</span><br><span class="line">    System.arraycopy(elementData, index, elementData, index + 1,</span><br><span class="line">                     size - index);</span><br><span class="line">    // 将元素插入到index的位置</span><br><span class="line">    elementData[index] = element;</span><br><span class="line">    // 大小增1</span><br><span class="line">    size++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private void rangeCheckForAdd(int index) &#123;</span><br><span class="line">    if (index &gt; size || index &lt; 0)</span><br><span class="line">        throw new IndexOutOfBoundsException(outOfBoundsMsg(index));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>（1）检查索引是否越界；</p>
+<p>（2）检查是否需要扩容；</p>
+<p>（3）把插入索引位置后的元素都往后挪一位；</p>
+<p>（4）在插入索引位置放置插入的元素；</p>
+<p>（5）大小加1；</p>
+<p><strong><code>addAll 方法</code></strong></p>
+<p>求两个集合的并集。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">* 将集合c中所有元素添加到当前ArrayList中</span><br><span class="line">*/</span><br><span class="line">public boolean addAll(Collection&lt;? extends E&gt; c) &#123;</span><br><span class="line">    // 将集合c转为数组</span><br><span class="line">    Object[] a = c.toArray();</span><br><span class="line">    int numNew = a.length;</span><br><span class="line">    // 检查是否需要扩容</span><br><span class="line">    ensureCapacityInternal(size + numNew);</span><br><span class="line">    // 将c中元素全部拷贝到数组的最后</span><br><span class="line">    System.arraycopy(a, 0, elementData, size, numNew);</span><br><span class="line">    // 大小增加c的大小</span><br><span class="line">    size += numNew;</span><br><span class="line">    // 如果c不为空就返回true，否则返回false</span><br><span class="line">    return numNew != 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>（1）拷贝c中的元素到数组a中；</p>
+<p>（2）检查是否需要扩容；</p>
+<p>（3）把数组a中的元素拷贝到elementData的尾部；</p>
+<p><strong><code>get(int index)方法</code></strong></p>
+<p>获取指定索引位置的元素，时间复杂度为O(1)。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public E get(int index) &#123;</span><br><span class="line">    // 检查是否越界</span><br><span class="line">    rangeCheck(index);</span><br><span class="line">    // 返回数组index位置的元素</span><br><span class="line">    return elementData(index);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private void rangeCheck(int index) &#123;</span><br><span class="line">    if (index &gt;= size)</span><br><span class="line">        throw new IndexOutOfBoundsException(outOfBoundsMsg(index));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">E elementData(int index) &#123;</span><br><span class="line">    return (E) elementData[index];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>（1）检查索引是否越界，这里只检查是否越上界，如果越上界抛出IndexOutOfBoundsException异常，如果越下界抛出的是ArrayIndexOutOfBoundsException异常。</p>
+<p>（2）返回索引位置处的元素；</p>
+<p><strong><code>remove(int index)方法</code></strong></p>
+<p>删除指定索引位置的元素，时间复杂度为O(n)。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">public E remove(int index) &#123;</span><br><span class="line">    // 检查是否越界</span><br><span class="line">    rangeCheck(index);</span><br><span class="line"></span><br><span class="line">    modCount++;</span><br><span class="line">    // 获取index位置的元素</span><br><span class="line">    E oldValue = elementData(index);</span><br><span class="line"></span><br><span class="line">    // 如果index不是最后一位，则将index之后的元素往前挪一位</span><br><span class="line">    int numMoved = size - index - 1;</span><br><span class="line">    if (numMoved &gt; 0)</span><br><span class="line">        System.arraycopy(elementData, index+1, elementData, index, numMoved);</span><br><span class="line"></span><br><span class="line">    // 将最后一个元素删除，帮助GC</span><br><span class="line">    elementData[--size] = null; // clear to let GC do its work</span><br><span class="line"></span><br><span class="line">    // 返回旧值</span><br><span class="line">    return oldValue;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>（1）检查索引是否越界；</p>
+<p>（2）获取指定索引位置的元素；</p>
+<p>（3）如果删除的不是最后一位，则其它元素往前移一位；</p>
+<p>（4）将最后一位置为null，方便GC回收；</p>
+<p>（5）返回删除的元素。</p>
+<p><em>可以看到，ArrayList删除元素的时候并没有缩容。</em></p>
+<p><strong><code>remove(Object o)方法</code></strong></p>
+<p>删除指定元素值的元素，时间复杂度为O(n)。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">public boolean remove(Object o) &#123;</span><br><span class="line">    if (o == null) &#123;</span><br><span class="line">        // 遍历整个数组，找到元素第一次出现的位置，并将其快速删除</span><br><span class="line">        for (int index = 0; index &lt; size; index++)</span><br><span class="line">            // 如果要删除的元素为null，则以null进行比较，使用==</span><br><span class="line">            if (elementData[index] == null) &#123;</span><br><span class="line">                fastRemove(index);</span><br><span class="line">                return true;</span><br><span class="line">            &#125;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        // 遍历整个数组，找到元素第一次出现的位置，并将其快速删除</span><br><span class="line">        for (int index = 0; index &lt; size; index++)</span><br><span class="line">            // 如果要删除的元素不为null，则进行比较，使用equals()方法</span><br><span class="line">            if (o.equals(elementData[index])) &#123;</span><br><span class="line">                fastRemove(index);</span><br><span class="line">                return true;</span><br><span class="line">            &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return false;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private void fastRemove(int index) &#123;</span><br><span class="line">    // 少了一个越界的检查</span><br><span class="line">    modCount++;</span><br><span class="line">    // 如果index不是最后一位，则将index之后的元素往前挪一位</span><br><span class="line">    int numMoved = size - index - 1;</span><br><span class="line">    if (numMoved &gt; 0)</span><br><span class="line">        System.arraycopy(elementData, index+1, elementData, index, numMoved);</span><br><span class="line">    // 将最后一个元素删除，帮助GC</span><br><span class="line">    elementData[--size] = null; // clear to let GC do its work</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>（1）找到第一个等于指定元素值的元素；</p>
+<p>（2）快速删除；<br><em>fastRemove(int index)相对于remove(int index)少了检查索引越界的操作，可见jdk将性能优化到极致。</em></p>
+<p><strong><em><code>retainAll方法</code></em></strong></p>
+<p>求两个集合的交集。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">public boolean retainAll(Collection&lt;?&gt; c) &#123;</span><br><span class="line">    // 集合c不能为null</span><br><span class="line">    Objects.requireNonNull(c);</span><br><span class="line">    // 调用批量删除方法，这时complement传入true，表示删除不包含在c中的元素</span><br><span class="line">    return batchRemove(c, true);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line">* 批量删除元素</span><br><span class="line">* complement为true表示删除c中不包含的元素</span><br><span class="line">* complement为false表示删除c中包含的元素</span><br><span class="line">*/</span><br><span class="line">private boolean batchRemove(Collection&lt;?&gt; c, boolean complement) &#123;</span><br><span class="line">    final Object[] elementData = this.elementData;</span><br><span class="line">    // 使用读写两个指针同时遍历数组</span><br><span class="line">    // 读指针每次自增1，写指针放入元素的时候才加1</span><br><span class="line">    // 这样不需要额外的空间，只需要在原有的数组上操作就可以了</span><br><span class="line">    int r = 0, w = 0;</span><br><span class="line">    boolean modified = false;</span><br><span class="line">    try &#123;</span><br><span class="line">        // 遍历整个数组，如果c中包含该元素，则把该元素放到写指针的位置（以complement为准）</span><br><span class="line">        for (; r &lt; size; r++)</span><br><span class="line">            if (c.contains(elementData[r]) == complement)</span><br><span class="line">                elementData[w++] = elementData[r];</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">        // 正常来说r最后是等于size的，除非c.contains()抛出了异常</span><br><span class="line">        if (r != size) &#123;</span><br><span class="line">            // 如果c.contains()抛出了异常，则把未读的元素都拷贝到写指针之后</span><br><span class="line">            System.arraycopy(elementData, r,</span><br><span class="line">                             elementData, w,</span><br><span class="line">                             size - r);</span><br><span class="line">            w += size - r;</span><br><span class="line">        &#125;</span><br><span class="line">        if (w != size) &#123;</span><br><span class="line">            // 将写指针之后的元素置为空，帮助GC</span><br><span class="line">            for (int i = w; i &lt; size; i++)</span><br><span class="line">                elementData[i] = null;</span><br><span class="line">            modCount += size - w;</span><br><span class="line">            // 新大小等于写指针的位置（因为每写一次写指针就加1，所以新大小正好等于写指针的位置）</span><br><span class="line">            size = w;</span><br><span class="line">            modified = true;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    // 有修改返回true</span><br><span class="line">    return modified;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>（1）遍历elementData数组；</p>
+<p>（2）如果元素在c中，则把这个元素添加到elementData数组的w位置并将w位置往后移一位；</p>
+<p>（3）遍历完之后，w之前的元素都是两者共有的，w之后（包含）的元素不是两者共有的；</p>
+<p>（4）将w之后（包含）的元素置为null，方便GC回收；</p>
+<p><strong><em><code>removeAll</code></em></strong></p>
+<p>求两个集合的单方向差集，只保留当前集合中不在c中的元素，不保留在c中不在当前集体中的元素。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public boolean removeAll(Collection&lt;?&gt; c) &#123;</span><br><span class="line">    // 集合c不能为空</span><br><span class="line">    Objects.requireNonNull(c);</span><br><span class="line">    // 同样调用批量删除方法，这时complement传入false，表示删除包含在c中的元素</span><br><span class="line">    return batchRemove(c, false);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>与retainAll(Collection&lt;?&gt; c)方法类似，只是这里保留的是不在c中的元素。</p>
+<h6 id="总结"><a href="#总结" class="headerlink" title="总结"></a><strong><em><code>总结</code></em></strong></h6><p>（1）ArrayList内部使用数组存储元素，当数组长度不够时进行扩容，每次加一半的空间，ArrayList不会进行缩容；</p>
+<p>（2）ArrayList支持随机访问，通过索引访问元素极快，时间复杂度为O(1)；</p>
+<p>（3）ArrayList添加元素到尾部极快，平均时间复杂度为O(1)；</p>
+<p>（4）ArrayList添加元素到中间比较慢，因为要搬移元素，平均时间复杂度为O(n)；</p>
+<p>（5）ArrayList从尾部删除元素极快，时间复杂度为O(1)；</p>
+<p>（6）ArrayList从中间删除元素比较慢，因为要搬移元素，平均时间复杂度为O(n)；</p>
+<p>（7）ArrayList支持求并集，调用addAll(Collection&lt;? extends E&gt; c)方法即可；</p>
+<p>（8）ArrayList支持求交集，调用retainAll(Collection&lt;? extends E&gt; c)方法即可；</p>
+<p>（7）ArrayList支持求单向差集，调用removeAll(Collection&lt;? extends E&gt; c)方法即可；</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2020/05/22/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/jdk/LinkedList%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/22/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/jdk/LinkedList%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" class="post-title-link" itemprop="url">LinkedList源码分析</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-05-22 19:03:16" itemprop="dateCreated datePublished" datetime="2020-05-22T19:03:16+08:00">2020-05-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-05-25 23:52:38" itemprop="dateModified" datetime="2020-05-25T23:52:38+08:00">2020-05-25</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sourceread/" itemprop="url" rel="index">
+                    <span itemprop="name">sourceread</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="LinkedList源码分析"><a href="#LinkedList源码分析" class="headerlink" title="LinkedList源码分析"></a>LinkedList源码分析</h1><h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><ol>
+<li>LinkedList只是一个List吗？</li>
+<li>LinkedList还有其它什么特性吗？</li>
+<li>LinkedList为啥经常拿出来跟ArrayList比较？</li>
+</ol>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>LinkedList是一个以双向链表实现的list，它除了作为list使用，还可以作为队列或栈来使用。</p>
+<h2 id="继承体系"><a href="#继承体系" class="headerlink" title="继承体系"></a>继承体系</h2><p><img src="https://i.loli.net/2020/05/22/oBAwRi9CDHyqJEs.png" alt="LinkedList.png"><br>通过继承体系，我们可以看到LinkedList不仅实现了List接口，还实现了Queue和Deque接口，所以它既能作为List使用，也能作为双端队列使用，当然也可以作为栈使用。</p>
+<h2 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h2><p><strong>主要属性</strong><br><img src="https://i.loli.net/2020/05/22/Nftk3GcHQJ1XyY2.png" alt="image.png"><br>属性很简单，定义了元素个数size和链表的首尾节点。</p>
+<p><strong>主要内部类</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">private static class Node&lt;E&gt; &#123;</span><br><span class="line">    E item;</span><br><span class="line">    Node&lt;E&gt; next;</span><br><span class="line">    Node&lt;E&gt; prev;</span><br><span class="line"></span><br><span class="line">    Node(Node&lt;E&gt; prev, E element, Node&lt;E&gt; next) &#123;</span><br><span class="line">        this.item = element;</span><br><span class="line">        this.next = next;</span><br><span class="line">        this.prev = prev;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>主要构造方法</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public LinkedList() &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public LinkedList(Collection&lt;? extends E&gt; c) &#123;</span><br><span class="line">    this();</span><br><span class="line">    addAll(c);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>两个构造方法也很简单，可以看出是一个无界的队列。</p>
+<p><strong>添加元素</strong><br>作为一个双端队列，添加元素主要有两种，一种是在队列尾部添加元素，一种是在队列首部添加元素，这两种形式在LinkedList中主要是通过下面两个方法来实现的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">public void addFirst(E e) &#123;</span><br><span class="line">    linkFirst(e);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public void addLast(E e) &#123;</span><br><span class="line">    linkLast(e);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private void linkFirst(E e) &#123;</span><br><span class="line">    //保存首节点</span><br><span class="line">    final Node&lt;E&gt; f = first;</span><br><span class="line"></span><br><span class="line">    //创建新节点，新节点的next是null</span><br><span class="line">    final Node&lt;E&gt; newNode = new Node&lt;&gt;(null, e, f);</span><br><span class="line"></span><br><span class="line">    //将first指向newNode</span><br><span class="line">    first = newNode;</span><br><span class="line"></span><br><span class="line">    //如果整个链表为空，则首节点和尾节点都是newNode，否则将之前的首节点的前驱节点设置为新的首节点</span><br><span class="line">    if (f == null)</span><br><span class="line">        last = newNode;</span><br><span class="line">    else</span><br><span class="line">        f.prev = newNode;</span><br><span class="line">    size++;</span><br><span class="line">    //修改次数</span><br><span class="line">    modCount++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 从队列尾添加元素</span><br><span class="line">void linkLast(E e) &#123;</span><br><span class="line">    // 队列尾节点</span><br><span class="line">    final Node&lt;E&gt; l = last;</span><br><span class="line">    // 创建新节点，新节点的prev是尾节点</span><br><span class="line">    final Node&lt;E&gt; newNode = new Node&lt;&gt;(l, e, null);</span><br><span class="line">    // 让新节点成为新的尾节点</span><br><span class="line">    last = newNode;</span><br><span class="line">    // 判断是不是第一个添加的元素</span><br><span class="line">    // 如果是就把first也置为新节点</span><br><span class="line">    // 否则把原尾节点的next指针置为新节点</span><br><span class="line">    if (l == null)</span><br><span class="line">        first = newNode;</span><br><span class="line">    else</span><br><span class="line">        l.next = newNode;</span><br><span class="line">    // 元素个数加1</span><br><span class="line">    size++;</span><br><span class="line">    // 修改次数加1</span><br><span class="line">    modCount++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 作为无界队列，添加元素总是会成功的</span><br><span class="line">public boolean offerFirst(E e) &#123;</span><br><span class="line">    addFirst(e);</span><br><span class="line">    return true;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public boolean offerLast(E e) &#123;</span><br><span class="line">    addLast(e);</span><br><span class="line">    return true;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>典型的双链表在首尾添加元素的方法，代码比较简单，这里不作详细描述了。</p>
+<p>上面是作为双端队列来看，它的添加元素分为首尾添加元素，那么，作为List呢？</p>
+<p>作为List，是要支持在中间添加元素的，主要是通过下面这个方法实现的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">// 在节点succ之前添加元素</span><br><span class="line">void linkBefore(E e, Node&lt;E&gt; succ) &#123;</span><br><span class="line">    // succ是待添加节点的后继节点</span><br><span class="line">    // 找到待添加节点的前置节点</span><br><span class="line">    final Node&lt;E&gt; pred = succ.prev;</span><br><span class="line">    // 在其前置节点和后继节点之间创建一个新节点</span><br><span class="line">    final Node&lt;E&gt; newNode = new Node&lt;&gt;(pred, e, succ);</span><br><span class="line">    // 修改后继节点的前置指针指向新节点</span><br><span class="line">    succ.prev = newNode;</span><br><span class="line">    // 判断前置节点是否为空</span><br><span class="line">    // 如果为空，说明是第一个添加的元素，修改first指针</span><br><span class="line">    // 否则修改前置节点的next为新节点</span><br><span class="line">    if (pred == null)</span><br><span class="line">        first = newNode;</span><br><span class="line">    else</span><br><span class="line">        pred.next = newNode;</span><br><span class="line">    // 修改元素个数</span><br><span class="line">    size++;</span><br><span class="line">    // 修改次数加1</span><br><span class="line">    modCount++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 寻找index位置的节点</span><br><span class="line">Node&lt;E&gt; node(int index) &#123;</span><br><span class="line">    // 因为是双链表</span><br><span class="line">    // 所以根据index是在前半段还是后半段决定从前遍历还是从后遍历</span><br><span class="line">    // 这样index在后半段的时候可以少遍历一半的元素</span><br><span class="line">    if (index &lt; (size &gt;&gt; 1)) &#123;</span><br><span class="line">        // 如果是在前半段</span><br><span class="line">        // 就从前遍历</span><br><span class="line">        Node&lt;E&gt; x = first;</span><br><span class="line">        for (int i = 0; i &lt; index; i++)</span><br><span class="line">            x = x.next;</span><br><span class="line">        return x;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        // 如果是在后半段</span><br><span class="line">        // 就从后遍历</span><br><span class="line">        Node&lt;E&gt; x = last;</span><br><span class="line">        for (int i = size - 1; i &gt; index; i--)</span><br><span class="line">            x = x.prev;</span><br><span class="line">        return x;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 在指定index位置处添加元素</span><br><span class="line">public void add(int index, E element) &#123;</span><br><span class="line">    // 判断是否越界</span><br><span class="line">    checkPositionIndex(index);</span><br><span class="line">    // 如果index是在队列尾节点之后的一个位置</span><br><span class="line">    // 把新节点直接添加到尾节点之后</span><br><span class="line">    // 否则调用linkBefore()方法在中间添加节点</span><br><span class="line">    if (index == size)</span><br><span class="line">        linkLast(element);</span><br><span class="line">    else</span><br><span class="line">        linkBefore(element, node(index));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在中间添加元素的方法也很简单，典型的双链表在中间添加元素的方法。</p>
+<p>在队列首尾添加元素很高效，时间复杂度为O(1)。</p>
+<p>在中间添加元素比较低效，首先要先找到插入位置的节点，再修改前后节点的指针，时间复杂度为O(n)。</p>
+<p><strong>删除元素</strong><br>作为双端队列，删除元素也有两种方式，一种是队列首删除元素，一种是队列尾删除元素。</p>
+<p>作为List，又要支持中间删除元素，所以删除元素一个有三个方法，分别如下。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line">//删除链表的首节点</span><br><span class="line">private E unlinkFirst(Node&lt;E&gt; f) &#123;</span><br><span class="line">    // assert f == first &amp;&amp; f != null;</span><br><span class="line">    //获得首节点的值</span><br><span class="line">    final E element = f.item;</span><br><span class="line">    //获得首节点的下一个节点</span><br><span class="line">    final Node&lt;E&gt; next = f.next;</span><br><span class="line">    //将f所引用的指针全部置空，防止内存泄漏</span><br><span class="line">    f.item = null;</span><br><span class="line">    f.next = null; // help GC</span><br><span class="line">    </span><br><span class="line">    //将first指向next，成功删除next</span><br><span class="line">    first = next;</span><br><span class="line">    </span><br><span class="line">    //根据next是否为空来进行处理</span><br><span class="line">    if (next == null)</span><br><span class="line">        last = null;</span><br><span class="line">    else</span><br><span class="line">        next.prev = null;</span><br><span class="line">    </span><br><span class="line">    size--;</span><br><span class="line">    modCount++;</span><br><span class="line">    return element;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//删除链表的尾节点</span><br><span class="line">private E unlinkLast(Node&lt;E&gt; l) &#123;</span><br><span class="line">    // assert l == last &amp;&amp; l != null;</span><br><span class="line">    final E element = l.item;</span><br><span class="line">    final Node&lt;E&gt; prev = l.prev;</span><br><span class="line">    l.item = null;</span><br><span class="line">    l.prev = null; // help GC</span><br><span class="line">    last = prev;</span><br><span class="line">    if (prev == null)</span><br><span class="line">        first = null;</span><br><span class="line">    else</span><br><span class="line">        prev.next = null;</span><br><span class="line">    size--;</span><br><span class="line">    modCount++;</span><br><span class="line">    return element;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 删除指定节点x</span><br><span class="line">E unlink(Node&lt;E&gt; x) &#123;</span><br><span class="line">    // x的元素值</span><br><span class="line">    final E element = x.item;</span><br><span class="line">    // x的前置节点</span><br><span class="line">    final Node&lt;E&gt; next = x.next;</span><br><span class="line">    // x的后置节点</span><br><span class="line">    final Node&lt;E&gt; prev = x.prev;</span><br><span class="line"></span><br><span class="line">    // 如果前置节点为空</span><br><span class="line">    // 说明是首节点，让first指向x的后置节点</span><br><span class="line">    // 否则修改前置节点的next为x的后置节点</span><br><span class="line">    if (prev == null) &#123;</span><br><span class="line">        first = next;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        prev.next = next;</span><br><span class="line">        x.prev = null;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 如果后置节点为空</span><br><span class="line">    // 说明是尾节点，让last指向x的前置节点</span><br><span class="line">    // 否则修改后置节点的prev为x的前置节点</span><br><span class="line">    if (next == null) &#123;</span><br><span class="line">        last = prev;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        next.prev = prev;</span><br><span class="line">        x.next = null;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 清空x的元素值，协助GC</span><br><span class="line">    x.item = null;</span><br><span class="line">    // 元素个数减1</span><br><span class="line">    size--;</span><br><span class="line">    // 修改次数加1</span><br><span class="line">    modCount++;</span><br><span class="line">    // 返回删除的元素</span><br><span class="line">    return element;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="LinkedList作为栈使用"><a href="#LinkedList作为栈使用" class="headerlink" title="LinkedList作为栈使用"></a>LinkedList作为栈使用</h2><p>前面我们说了，LinkedList是双端队列，还记得双端队列可以作为栈使用吗？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public void push(E e) &#123;</span><br><span class="line">    addFirst(e);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public E pop() &#123;</span><br><span class="line">    return removeFirst();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>栈的特性是LIFO(Last In First Out)，所以作为栈使用也很简单，添加删除元素都只操作队列首节点即可。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>（1）LinkedList是一个以双链表实现的List；</p>
+<p>（2）LinkedList还是一个双端队列，具有队列、双端队列、栈的特性；</p>
+<p>（3）LinkedList在队列首尾添加、删除元素非常高效，时间复杂度为O(1)；</p>
+<p>（4）LinkedList在中间添加、删除元素比较低效，时间复杂度为O(n)；</p>
+<p>（5）LinkedList不支持随机访问，所以访问非队列首尾的元素比较低效；</p>
+<p>（6）LinkedList在功能上等于ArrayList + ArrayDeque；</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
     <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2020/05/22/Java%E5%9F%BA%E7%A1%80/Iterator%E6%8E%A5%E5%8F%A3%E5%92%8CIterable%E6%8E%A5%E5%8F%A3%E8%AF%A6%E8%A7%A3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -611,546 +1152,11 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2020/05/20/Redis/Redis%E7%9A%84%E6%85%A2%E6%9F%A5%E8%AF%A2%E5%88%86%E6%9E%90/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lancersaber">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lancersaber">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/20/Redis/Redis%E7%9A%84%E6%85%A2%E6%9F%A5%E8%AF%A2%E5%88%86%E6%9E%90/" class="post-title-link" itemprop="url">Redis的慢查询分析</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-05-20 13:06:32" itemprop="dateCreated datePublished" datetime="2020-05-20T13:06:32+08:00">2020-05-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-05-23 13:36:02" itemprop="dateModified" datetime="2020-05-23T13:36:02+08:00">2020-05-23</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/redis/" itemprop="url" rel="index">
-                    <span itemprop="name">redis</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Redis的慢查询分析"><a href="#Redis的慢查询分析" class="headerlink" title="Redis的慢查询分析"></a>Redis的慢查询分析</h1><hr>
-<blockquote>
-<p><strong>介绍</strong></p>
-</blockquote>
-<p>我们知道 MySQL 提供了慢查询日志帮助我们定位系统存在的慢操作，同样在 Redis 里面也提供了类似的功能。所谓慢查询日志就是系统记录那些执行时间超过预设阀值的命令，包括发生时间、耗时、命令的详细信息等相关信息都记录下来。</p>
-<p>慢查询的作用：<strong><em>通过慢查询分析，找到有问题的命令进行优化</em></strong>。</p>
-<p>Redis 执行命令分为四个步骤：<strong>发送命令、命令排队、执行命令、返回结果</strong>。需要注意的是，慢查询只统计步骤 3 的时间,所以没有慢查询并不代表客户端没有超时问题。</p>
-<p><strong><code>慢查询的两个配置参数</code></strong></p>
-<ul>
-<li>slowlog-log-slower-than：设置慢查询预设的超时阈值，单位是微秒</li>
-<li>slowlog-max-len：表示慢查询日志存储的条数</li>
-</ul>
-<p><strong><code>slowlog-log-slower-than</code></strong></p>
-<p>slowlog-log-slower-than 表示的是慢查询预设的超时阈值。它所阐述的意思是如果某条命令（如 key *） 执行”很慢“，执行时间超过了设置的阈值，那么这条命令将会被记录到慢查询日志中。</p>
-<ul>
-<li>若设置 slowlog-log-slower-than = 0，则会记录所有命令</li>
-<li>若设置 slowlog-log-slower-than &lt; 0，则不会记录任何命令</li>
-</ul>
-<p><strong><code>slowlog-max-len</code></strong></p>
-<p>Redis 会记录慢查询日志，但是会存储在哪里呢？实际上 Redis 会使用一个列表来存储慢查询日志，slowlog-max-len 就是该列表的最大长度。一个命令如果满足慢查询阈值条件则会加入到该列表来，但是如果该列表已经处于最大长度时，那么会删除最开始的一条记录，然后将最新的命令插入到末尾，所以慢查询日志列表是一个有限的先进先出列表。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2020/05/20/JVM/JVM%E4%B9%8B%E5%A0%86%E5%86%85%E5%AD%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lancersaber">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lancersaber">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/20/JVM/JVM%E4%B9%8B%E5%A0%86%E5%86%85%E5%AD%98/" class="post-title-link" itemprop="url">JVM之堆内存</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2020-05-20 08:46:37 / Modified: 11:48:33" itemprop="dateCreated datePublished" datetime="2020-05-20T08:46:37+08:00">2020-05-20</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Jvm/" itemprop="url" rel="index">
-                    <span itemprop="name">Jvm</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="JVM之堆内存"><a href="#JVM之堆内存" class="headerlink" title="JVM之堆内存"></a>JVM之堆内存</h1><hr>
-<p><strong>介绍</strong></p>
-<ol>
-<li>一个Jvm实例只存在一个堆内存，堆也是Java内存管理的核心区域</li>
-<li>Java堆区在Jvm启动的时候即被创建，其空间大小页就确定。是Jvm管理的最大的一块内存空间。<ul>
-<li>堆内存的大小是可以调节的</li>
-</ul>
-</li>
-<li>堆空间不要求物理连续，但是逻辑上需要连续</li>
-<li>所有线程共享Java堆，在这里还可以划分线程私有的缓冲区(Thread Local Allocation Buffer,TLAB)</li>
-<li>所有的对象实例以及数组都应该在运行时分配在堆上，数组和对象可能永远也不会存储在栈上，因为栈帧中保存引用，这个引用指向对象或者数组在堆中的位置</li>
-<li>在方法结束后，堆中的对象不会马上被移除，仅仅在垃圾收集的时候才会被移除</li>
-</ol>
-<p><strong>关于可使用的堆内存大小</strong><br>在计算可用堆内存空间时，只能算一份survival区的大小，因为总有一个survival区是空的。<br>如以下代码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args)&#123;</span><br><span class="line">        //返回java虚拟机中的堆内存总量</span><br><span class="line">        long l = Runtime.getRuntime().totalMemory()/1024/1024;</span><br><span class="line"></span><br><span class="line">        //返回java虚拟机中视图使用的最大堆内存</span><br><span class="line">        long l1 = Runtime.getRuntime().maxMemory()/1024/1024;</span><br><span class="line"></span><br><span class="line">        System.out.println(&quot;堆内存总量：&quot;+l+&quot;m&quot;);</span><br><span class="line">        System.out.println(&quot;使用最大堆内存总量：&quot;+l1+&quot;m&quot;);</span><br><span class="line"></span><br><span class="line">        try &#123;</span><br><span class="line">            Thread.sleep(1000000);</span><br><span class="line">        &#125; catch (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p><img src="https://i.loli.net/2020/05/20/6CJtFDEwuqPH1bh.png" alt="image.png"><br><img src="https://i.loli.net/2020/05/20/fDneXAOusHJPBpj.png" alt="image.png"><br><img src="https://i.loli.net/2020/05/20/jrI2xAPDkXB6h9i.png" alt="image.png"></p>
-<h2 id="堆的内存细分"><a href="#堆的内存细分" class="headerlink" title="堆的内存细分"></a>堆的内存细分</h2><p>在整个JVM堆内存之中实际上将内存分为了三部分</p>
-<ul>
-<li>新生区(又被划分为下面的两部分)<ul>
-<li>Eden区</li>
-<li>Survivor区<ul>
-<li>Survivor0区</li>
-<li>Survivor1区</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>养老区</li>
-<li>元空间(1.8及以后称为元空间，1.8以前称为永久代)</li>
-</ul>
-<h3 id="对象分配过程"><a href="#对象分配过程" class="headerlink" title="对象分配过程"></a>对象分配过程</h3><ol>
-<li>new的对象先放Eden区，此处有大小限制</li>
-<li>在Eden区的空间填满时，程序又需要创建对象，JVM的垃圾回收器将对Eden区进行垃圾回收(Minor GC)，将Eden区中的不再被其他对象所引用的对象进行销毁。再加载新的对象放到Eden区中。</li>
-<li>然后将Eden中的剩余对象移动到survival0区。</li>
-<li>如果再次触发垃圾回收(注意也会对幸存区进行垃圾回收)，此时上次幸存下来的放到survival0区的，如果没有回收，就会放到survival1区。</li>
-<li>如果再次经历垃圾回收，此时会重新放回survival0区，接着再去survival1区</li>
-<li>啥时候能去养老区？可以社渚次数。默认15次<ul>
-<li>可以设置参数：-XX:MaxTenuringThreshold=<N>进行设置</li>
-</ul>
-</li>
-</ol>
-<p><strong>注意</strong></p>
-<ul>
-<li>只有当Eden区满了才会触发minor gc,survival区满了并不会触发gc</li>
-<li>针对s0，s1区：复制之后有交换，谁空谁是to</li>
-<li>关于垃圾回收：频繁在新生区收集，很少在养老区收集，几乎不再永久区/元空间收集。<br><img src="https://i.loli.net/2020/05/20/7QuDMdImUFOR1VS.png" alt="image.png"></li>
-</ul>
-<h2 id="堆内存空间的调整参数"><a href="#堆内存空间的调整参数" class="headerlink" title="堆内存空间的调整参数"></a>堆内存空间的调整参数</h2><ul>
-<li>-Xms：设置初始分配大小，默认为物理内存的1/64 </li>
-<li>-Xmx：最大分配内存，默认为物理内存的1/4</li>
-<li>-XX:+PrintGCDetails：输出详细的GC处理日志 </li>
-<li>-XX:+PrintGCTimeStamps：输出GC的时间戳信息 </li>
-<li>-XX:+PrintGCDateStamps：输出GC的时间戳信息（以日期的形式）</li>
-<li>-XX:+PrintHeapAtGC：在GC进行处理的前后打印堆内存信息 </li>
-<li>-Xloggc:(SavePath)：设置日志信息保存文件 </li>
-<li>在堆内存的调整策略中，基本上只要调整两个参数：-Xms和-Xmx</li>
-<li>-XX:NewRatio=2,表示新生代占1，老年代占2，新生代占整个堆的1/3(默认比例为2)</li>
-<li>-XX:SurvivorRatio=8(表示Eden空间和另外两个survival空间所占的比例为8：1：1，默认值也是8，但是由于自适应机制，所以结果可能不等于8)</li>
-<li>-Xmn:设置新生代的空间的大小</li>
-</ul>
-<p>设置堆的参数仅能影响年轻代和老年代，不影响元空间。 </p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2020/05/19/Java%E5%9F%BA%E7%A1%80/Java%E5%B8%B8%E7%94%A8%E7%B1%BB%E5%BA%93-System%E7%B1%BB/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lancersaber">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lancersaber">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/19/Java%E5%9F%BA%E7%A1%80/Java%E5%B8%B8%E7%94%A8%E7%B1%BB%E5%BA%93-System%E7%B1%BB/" class="post-title-link" itemprop="url">Java常用类库——System类</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2020-05-19 20:19:48 / Modified: 20:31:58" itemprop="dateCreated datePublished" datetime="2020-05-19T20:19:48+08:00">2020-05-19</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java/" itemprop="url" rel="index">
-                    <span itemprop="name">java</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="System类"><a href="#System类" class="headerlink" title="System类"></a>System类</h1><p><strong>介绍</strong><br>System类是一些与系统相关的属性和方法的集合，而且在System类中所有的属性都是静态的，要想引用这些属性和方法，直接使用System类调用即可。<br>public static void exit(int status)  系统退出 ，如果status为0就表示退出。<br>public static void gc()   运行垃圾收集机制，调用的是Runtime类中的gc方法。<br>public static long currentTimeMillis()  返回以毫秒为单位的当前时间。<br>public static void arraycopy(Object src,int srcPos, Object dest,int desPos,int length) 数组拷贝操作<br><strong>public static Properties getProperties() 取得当前系统的全部属性。</strong><br><strong>public static String  getProperty(String key) 根据键值取得属性的具体内容。</strong></p>
-<p>System类除了可以进行内容的输出外，还可以通过方法取得一个操作的具体时间。如下所示：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public class SystemDemo01&#123;</span><br><span class="line">	public static void main(String args[])&#123;</span><br><span class="line">		long startTime = System.currentTimeMillis() ;	// 取得开始计算之前的时间</span><br><span class="line">		int sum = 0 ;			// 声明变量</span><br><span class="line">		for(int i=0;i&lt;30000000;i++)&#123;	// 执行累加操作</span><br><span class="line">			sum += i ;</span><br><span class="line">		&#125;</span><br><span class="line">		long endTime = System.currentTimeMillis() ;	// 取得计算之后的时间</span><br><span class="line">		// 结束时间减去开始时间</span><br><span class="line">		System.out.println(&quot;计算所花费的时间：&quot; + (endTime-startTime) +&quot;毫秒&quot;) ;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p><strong>除了此功能外还可以列出本机的全部系统属性：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public class SystemDemo02&#123;</span><br><span class="line">	public static void main(String args[])&#123;</span><br><span class="line">		System.getProperties().list(System.out) ;	// 列出系统的全部属性</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>结果如下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">java.runtime.name: Java(TM) SE Runtime Environment</span><br><span class="line">sun.boot.library.path: C:\Program Files\Java\jdk1.8.0_144\jre\bin</span><br><span class="line">java.vm.version: 25.144-b01</span><br><span class="line">java.vm.vendor: Oracle Corporation</span><br><span class="line">java.vendor.url: http://java.oracle.com/</span><br><span class="line">path.separator: ;</span><br><span class="line">java.vm.name: Java HotSpot(TM) 64-Bit Server VM</span><br><span class="line">file.encoding.pkg: sun.io</span><br><span class="line">user.country: CN</span><br><span class="line">user.script: </span><br><span class="line">sun.java.launcher: SUN_STANDARD</span><br><span class="line">sun.os.patch.level: </span><br><span class="line">PID: 18420</span><br><span class="line">java.vm.specification.name: Java Virtual Machine Specification</span><br><span class="line">user.dir: D:\Java编程代码\Springboot-redis1</span><br><span class="line">java.runtime.version: 1.8.0_144-b01</span><br><span class="line">java.awt.graphicsenv: sun.awt.Win32GraphicsEnvironment</span><br><span class="line">java.endorsed.dirs: C:\Program Files\Java\jdk1.8.0_144\jre\lib\endorsed</span><br><span class="line">os.arch: amd64</span><br><span class="line">java.io.tmpdir: C:\Users\34689\AppData\Local\Temp\</span><br><span class="line">line.separator: </span><br><span class="line">java.vm.specification.vendor: Oracle Corporation</span><br><span class="line">user.variant: </span><br><span class="line">os.name: Windows 10</span><br><span class="line">sun.jnu.encoding: GBK</span><br><span class="line">spring.beaninfo.ignore: true</span><br><span class="line">user.name: 34689</span><br><span class="line">java.vm.specification.version: 1.8</span><br><span class="line">sun.java.command: com.intellij.rt.junit.JUnitStarter -ideVersion5 -junit5 com.example.demo.DemoApplicationTests,contextLoads</span><br><span class="line">java.home: C:\Program Files\Java\jdk1.8.0_144\jre</span><br><span class="line">sun.arch.data.model: 64</span><br><span class="line">user.language: zh</span><br><span class="line">java.specification.vendor: Oracle Corporation</span><br><span class="line">awt.toolkit: sun.awt.windows.WToolkit</span><br><span class="line">java.vm.info: mixed mode</span><br><span class="line">java.version: 1.8.0_144</span><br><span class="line">java.ext.dirs: C:\Program Files\Java\jdk1.8.0_144\jre\lib\ext;C:\WINDOWS\Sun\Java\lib\ext</span><br><span class="line">sun.boot.class.path: C:\Program Files\Java\jdk1.8.0_144\jre\lib\resources.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\rt.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\sunrsasign.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\jsse.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\jce.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\charsets.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\jfr.jar;C:\Program Files\Java\jdk1.8.0_144\jre\classes</span><br><span class="line">java.awt.headless: true</span><br><span class="line">java.vendor: Oracle Corporation</span><br><span class="line">file.separator: \</span><br><span class="line">java.vendor.url.bug: http://bugreport.sun.com/bugreport/</span><br><span class="line">idea.test.cyclic.buffer.size: 1048576</span><br><span class="line">sun.io.unicode.encoding: UnicodeLittle</span><br><span class="line">sun.cpu.endian: little</span><br><span class="line">sun.desktop: windows</span><br><span class="line">sun.cpu.isalist: amd64</span><br></pre></td></tr></table></figure>
-
-<p><strong>此处取得的是全部的属性，如果现在只需要取几个固定属性的话，则就可以通过以下取得：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public class SystemDemo03&#123;</span><br><span class="line">	public static void main(String args[])&#123;</span><br><span class="line">		System.out.println(&quot;系统版本：&quot; + System.getProperty(&quot;os.name&quot;)</span><br><span class="line">			+ System.getProperty(&quot;os.version&quot;)</span><br><span class="line">			+ System.getProperty(&quot;os.arch&quot;)) ;</span><br><span class="line">		System.out.println(&quot;系统用户：&quot; + System.getProperty(&quot;user.name&quot;)) ;</span><br><span class="line">		System.out.println(&quot;当前用户目录：&quot; + System.getProperty(&quot;user.home&quot;)) ;</span><br><span class="line">		System.out.println(&quot;当前用户工作目录：&quot; + System.getProperty(&quot;user.dir&quot;)) ;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p><strong>总结：</strong><br>System类本身提供的静态属性都是与IO操作有关的。在IO操作中还会有更多System类的使用，可以使用system类取得计算时间，以及通过gc()方法进行垃圾收集   此方法是包装了Runtime类中的gc()方法。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2020/05/19/Redis/%E5%88%9D%E8%AF%86Redis/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lancersaber">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lancersaber">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/19/Redis/%E5%88%9D%E8%AF%86Redis/" class="post-title-link" itemprop="url">初识Redis</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-05-19 14:55:52" itemprop="dateCreated datePublished" datetime="2020-05-19T14:55:52+08:00">2020-05-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-05-22 17:33:08" itemprop="dateModified" datetime="2020-05-22T17:33:08+08:00">2020-05-22</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/redis/" itemprop="url" rel="index">
-                    <span itemprop="name">redis</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="初识Redis"><a href="#初识Redis" class="headerlink" title="初识Redis"></a>初识Redis</h1><hr>
-<h2 id="Redis特性"><a href="#Redis特性" class="headerlink" title="Redis特性"></a>Redis特性</h2><h3 id="1、速度快"><a href="#1、速度快" class="headerlink" title="1、速度快"></a>1、速度快</h3><p>原因：</p>
-<ul>
-<li>Redis中的所有数据都是存放在内存中的</li>
-<li>Redis是使用C语言实现的，更接近底层</li>
-<li>Redis使用了单线程架构，预防了多线程可能产生的问题</li>
-</ul>
-<h3 id="2、基于键值对的数据结构服务器"><a href="#2、基于键值对的数据结构服务器" class="headerlink" title="2、基于键值对的数据结构服务器"></a>2、基于键值对的数据结构服务器</h3><h3 id="3、丰富的"><a href="#3、丰富的" class="headerlink" title="3、丰富的"></a>3、丰富的</h3>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2020/05/19/JVM/JVM%E4%B9%8B%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lancersaber">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lancersaber">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/19/JVM/JVM%E4%B9%8B%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88/" class="post-title-link" itemprop="url">JVM之虚拟机栈</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-05-19 13:07:21" itemprop="dateCreated datePublished" datetime="2020-05-19T13:07:21+08:00">2020-05-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-05-22 17:33:20" itemprop="dateModified" datetime="2020-05-22T17:33:20+08:00">2020-05-22</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Jvm/" itemprop="url" rel="index">
-                    <span itemprop="name">Jvm</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="JVM之虚拟机栈"><a href="#JVM之虚拟机栈" class="headerlink" title="JVM之虚拟机栈"></a>JVM之虚拟机栈</h1><hr>
-<h2 id="简介："><a href="#简介：" class="headerlink" title="简介："></a>简介：</h2><p>java虚拟机栈是线程私有的，他与线程的声明周期同步。虚拟机栈描述的是java方法执行的内存模型，每个方法执行都会创建一个栈帧，栈帧包含局部变量表、操作数栈、动态连接、方法出口等。</p>
-<p>栈是运行时的单位，而堆是存储的单位。<br>即：栈解决程序的运行问题，即程序如何执行，或者说如何处理数据。堆解决的是数据存储的问题，即数据怎么放，放在哪。</p>
-<h2 id="栈与栈帧"><a href="#栈与栈帧" class="headerlink" title="栈与栈帧"></a>栈与栈帧</h2><p>栈帧是栈存储的基本单元。每一个方法的执行到执行完成，对应着一个栈帧在虚拟机中从入栈到出栈的过程。java虚拟机栈栈顶的栈帧就是当前执行方法的栈帧。PC寄存器会指向该地址。当这个方法调用其他方法的时候久会创建一个新的栈帧，这个新的栈帧会被方法Java虚拟机栈的栈顶，变为当前的活动栈，在当前只有当前活动栈的本地变量才能被使用，当这个栈帧所有指令都完成的时候，这个栈帧被移除，之前的栈帧变为活动栈，前面移除栈帧的返回值变为这个栈帧的一个操作数。</p>
-<h2 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h2><p>栈的生命周期与线程的生命周期一样。</p>
-<blockquote>
-<h2 id="栈帧"><a href="#栈帧" class="headerlink" title="栈帧"></a>栈帧</h2><p>栈帧(Stack Frame)是用于支持虚拟机进行方法调用和方法执行的数据结构，它是虚拟机运行时数据区的虚拟机栈(Virtual Machine Stack)的栈元素。<br>栈帧存储了以下内容：</p>
-</blockquote>
-<ul>
-<li>局部变量表</li>
-<li>操作数栈</li>
-<li>动态链接(指向运行时常量池的方法引用)</li>
-<li>方法返回地址</li>
-<li>一些附加信息</li>
-</ul>
-<p>在编译代码的时候，栈帧中需要多大的局部变量表，多深的操作数栈都已经完全确定了，并且写入到了方法表的Code属性中，因此一个栈帧需要分配多少内存，不会受到程序运行期变量数据的影响，而仅仅取决于具体虚拟机的实现。</p>
-<p>Java方法有两种返回函数的方式，一种是正常的函数返回，使用return指令；另外一种是抛出异常。不管是哪种方式，都会导致栈帧被弹出。</p>
-<blockquote>
-<blockquote>
-<h3 id="局部变量表"><a href="#局部变量表" class="headerlink" title="局部变量表"></a>局部变量表</h3><p>局部变量表定义为一个数字数组，主要用于存储方法参数和定义在方法体内的局部变量，这些数据类型包括各类</p>
-</blockquote>
-</blockquote>
-<ul>
-<li>基本数据类型</li>
-<li>对象引用</li>
-<li>returnAddress类型(返回值类型)</li>
-</ul>
-<p>局部变量表所需的容量大小是在编译期确定下来的，并保存在方法的Code属性的maximum local variables数据项中。在方法运行期间是不会修改局部变量表大小的。<br><img src="https://i.loli.net/2020/05/19/xXmEPLjIwpGKn5B.png" alt="image.png"></p>
-<p><strong>补充说明</strong></p>
-<ul>
-<li>在栈帧中，与性能调优关系最为密切的部分就是局部变量表。在方法执行时，虚拟机使用局部变量表完成方法的传递。</li>
-<li><strong>局部变量表中的变量也是重要的垃圾回收根节点，只要被局部变量表中直接或间接引用的对象都不会被回收。</strong></li>
-<li>如果方法不是静态方法，那么局部变量表的第一个位置存储的this变量，这也就解释了为什么在static方法中不能使用this,而非静态方法可以</li>
-</ul>
-<blockquote>
-<blockquote>
-<h3 id="操作数栈"><a href="#操作数栈" class="headerlink" title="操作数栈"></a>操作数栈</h3><p>每一个独立的栈帧中除了包含局部变量表以外，还包含一个后进先出（Last-In-First-Out）的操作数栈，也可以称之为表达式栈（Expression Stack）。<br><strong>操作数栈，在方法执行过程中，根据字节码指令，在栈中写入数据或提取数据，即入栈(push)/出栈(pop)</strong></p>
-</blockquote>
-</blockquote>
-<ul>
-<li>某些字节码指令将值压入操作数栈，其余的字节码指令将操作数取出栈。使用它们后再将结果压入栈<blockquote>
-<blockquote>
-<blockquote>
-<p>作用</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</li>
-<li><em>主要用于保存计算过程的中间结果，同时作为计算过程中变量临时的存储空间*</em>。</li>
-</ul>
-<p>当一个方法刚执行的时候，一个新得栈帧也会随之创建出来，这个方法的操作数栈是空的。<br>每一个新的操作数栈都会有一个明确的栈深度用于存储数值，其所需的最大深度在编译期就定义好了，保存在方法的code属性中，为max_stack的值。<br>看下面的代码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">    byte i=15;</span><br><span class="line">    int j=8;</span><br><span class="line">    int k=i+j;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="https://i.loli.net/2020/05/20/9H2PJkuE6U5ginA.png" alt="image.png"><br>这里的stack=2表示栈的深度为2.</p>
-<h2 id="栈的特点"><a href="#栈的特点" class="headerlink" title="栈的特点"></a>栈的特点</h2><ul>
-<li>栈是一种快速有效的分配存储方式，访问速度仅次于程序计数器</li>
-<li>JVM直接对Java栈的操作只有两个：<ul>
-<li>每个方法执行，伴随着进栈</li>
-<li>执行结束后的出栈问题</li>
-</ul>
-</li>
-<li>对于栈来说不存在垃圾回收(GC),但是栈可能会出现OOM和SOF(StackOverflow)</li>
-</ul>
-<h2 id="设置栈的大小"><a href="#设置栈的大小" class="headerlink" title="设置栈的大小"></a>设置栈的大小</h2><ul>
-<li>-Xss：设置栈的最大空间，栈的大小直接决定了函数调用的最大可达数。<ul>
-<li>-Xss1024k</li>
-<li>-Xss1M/1m(不区分大小写)</li>
-<li>-xx1024*1024(以字节为单位)<br>注意不需要空格。</li>
-</ul>
-</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1196,18 +1202,18 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">197</span>
+          <span class="site-state-item-count">202</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
-        <span class="site-state-item-count">45</span>
+        <span class="site-state-item-count">46</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-count">59</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

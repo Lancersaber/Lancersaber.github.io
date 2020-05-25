@@ -172,6 +172,575 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/06/shiro/Shiro%20%E4%B8%AD%E7%9A%84%20AuthenticationToken/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/06/shiro/Shiro%20%E4%B8%AD%E7%9A%84%20AuthenticationToken/" class="post-title-link" itemprop="url">Shiro 中的 AuthenticationToken</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2019-11-06 19:17:16 / Modified: 19:29:41" itemprop="dateCreated datePublished" datetime="2019-11-06T19:17:16+08:00">2019-11-06</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/shiro/" itemprop="url" rel="index">
+                    <span itemprop="name">shiro</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Shiro-中的-AuthenticationToken"><a href="#Shiro-中的-AuthenticationToken" class="headerlink" title="Shiro 中的 AuthenticationToken"></a>Shiro 中的 AuthenticationToken</h1><hr>
+<p>AuthenticationToken 用于收集用户提交的身份（如用户名）及凭据（如密码）。Shiro会调用CredentialsMatcher对象的doCredentialsMatch方法对AuthenticationInfo对象和AuthenticationToken进行匹配。匹配成功则表示主体（Subject）认证成功，否则表示认证失败。<br><img src="https://i.loli.net/2019/11/06/dxCujFRki79Uw6N.png" alt="shiro10.PNG"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public interface AuthenticationToken extends Serializable &#123;</span><br><span class="line">    Object getPrincipal(); //身份</span><br><span class="line">    Object getCredentials(); //凭据</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public interface HostAuthenticationToken extends AuthenticationToken &#123;</span><br><span class="line">    String getHost();// 获取用户“主机”</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public interface RememberMeAuthenticationToken extends AuthenticationToken &#123;</span><br><span class="line">    boolean isRememberMe();// 记住我</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Shiro 仅提供了一个可以直接使用的 UsernamePasswordToken，用于实现基于用户名/密码主体（Subject）身份认证。UsernamePasswordToken实现了 RememberMeAuthenticationToken 和 HostAuthenticationToken，可以实现“记住我”及“主机验证”的支持。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>一般情况下UsernamePasswordToken已经可以满足我们的大我数需求。当我们遇到需要声明自己的Token类时，可以根据需求来实现AuthenticationToken，HostAuthenticationToken或RememberMeAuthenticationToken。</p>
+<p>1、如果不需要“记住我”，也不需要“主机验证”，则可以实现AuthenticationToken；<br>2、如果需要“记住我”，则可以实现RememberMeAuthenticationToken；<br>3、如果需要“主机验证”功能，则可以实现HostAuthenticationToken；<br>4、如果需要“记住我”，且需要“主机验证”，则可以像UsernamePasswordToken一样，同时实现RememberMeAuthenticationToken和HostAuthenticationToken。<br>5、如果需要其他自定义功能，则需要自己实现。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/06/Spring/Spring%20Boot%20Shiro%E7%94%A8%E6%88%B7%E8%AE%A4%E8%AF%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/06/Spring/Spring%20Boot%20Shiro%E7%94%A8%E6%88%B7%E8%AE%A4%E8%AF%81/" class="post-title-link" itemprop="url">Spring Boot Shiro用户认证</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2019-11-06 18:06:49 / Modified: 20:31:04" itemprop="dateCreated datePublished" datetime="2019-11-06T18:06:49+08:00">2019-11-06</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/spring/" itemprop="url" rel="index">
+                    <span itemprop="name">spring</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Spring-Boot-Shiro用户认证"><a href="#Spring-Boot-Shiro用户认证" class="headerlink" title="Spring Boot Shiro用户认证"></a>Spring Boot Shiro用户认证</h1><hr>
+<p>在Spring Boot中集成Shiro进行用户的认证过程主要可以归纳为以下三点</p>
+<ul>
+<li><p>1、定义一个ShiroConfig，然后配置SecurityManager Bean，SecurityManager为Shiro的安全管理器，管理着所有Subject；</p>
+</li>
+<li><p>2、在ShiroConfig中配置ShiroFilterFactoryBean，其为Shiro过滤器工厂类，依赖于SecurityManager；</p>
+</li>
+<li><p>3、自定义Realm实现，Realm包含doGetAuthorizationInfo()和doGetAuthenticationInfo()方法，因为本文只涉及用户认证，所以只实现doGetAuthenticationInfo()方法。</p>
+</li>
+</ul>
+<h2 id="引入依赖"><a href="#引入依赖" class="headerlink" title="引入依赖"></a>引入依赖</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spring-boot-starter-jdbc&lt;/artifactId&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spring-boot-starter-thymeleaf&lt;/artifactId&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.mybatis.spring.boot&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;mybatis-spring-boot-starter&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;2.1.1&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;mysql&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;</span><br><span class="line">            &lt;scope&gt;runtime&lt;/scope&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.projectlombok&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;lombok&lt;/artifactId&gt;</span><br><span class="line">            &lt;optional&gt;true&lt;/optional&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.apache.shiro&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;shiro-spring&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;1.4.0&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!-- https://mvnrepository.com/artifact/org.apache.shiro/shiro-cas --&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.apache.shiro&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;shiro-cas&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;1.4.0&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;</span><br><span class="line">            &lt;scope&gt;test&lt;/scope&gt;</span><br><span class="line">            &lt;exclusions&gt;</span><br><span class="line">                &lt;exclusion&gt;</span><br><span class="line">                    &lt;groupId&gt;org.junit.vintage&lt;/groupId&gt;</span><br><span class="line">                    &lt;artifactId&gt;junit-vintage-engine&lt;/artifactId&gt;</span><br><span class="line">                &lt;/exclusion&gt;</span><br><span class="line">            &lt;/exclusions&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">    &lt;/dependencies&gt;</span><br><span class="line"></span><br><span class="line">    &lt;build&gt;</span><br><span class="line">        &lt;plugins&gt;</span><br><span class="line">            &lt;plugin&gt;</span><br><span class="line">                &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">                &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;</span><br><span class="line">            &lt;/plugin&gt;</span><br><span class="line">        &lt;/plugins&gt;</span><br><span class="line">    &lt;/build&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="ShiroConfig"><a href="#ShiroConfig" class="headerlink" title="ShiroConfig"></a>ShiroConfig</h2><p>定义一个Shiro配置类，名称为ShiroConfig：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">public class ShiroConfig &#123;</span><br><span class="line">    @Bean</span><br><span class="line">    public ShiroFilterFactoryBean shiroFilterFactoryBean(SecurityManager securityManager) &#123;</span><br><span class="line">        ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();</span><br><span class="line">        // 设置securityManager</span><br><span class="line">        shiroFilterFactoryBean.setSecurityManager(securityManager);</span><br><span class="line">        // 登录的url</span><br><span class="line">        shiroFilterFactoryBean.setLoginUrl(&quot;/login&quot;);</span><br><span class="line">        // 登录成功后跳转的url</span><br><span class="line">        shiroFilterFactoryBean.setSuccessUrl(&quot;/index&quot;);</span><br><span class="line">        // 未授权url</span><br><span class="line">        shiroFilterFactoryBean.setUnauthorizedUrl(&quot;/403&quot;);</span><br><span class="line">        </span><br><span class="line">        LinkedHashMap&lt;String, String&gt; filterChainDefinitionMap = new LinkedHashMap&lt;&gt;();</span><br><span class="line">        </span><br><span class="line">        // 定义filterChain，静态资源不拦截</span><br><span class="line">        filterChainDefinitionMap.put(&quot;/css/**&quot;, &quot;anon&quot;);</span><br><span class="line">        filterChainDefinitionMap.put(&quot;/js/**&quot;, &quot;anon&quot;);</span><br><span class="line">        filterChainDefinitionMap.put(&quot;/fonts/**&quot;, &quot;anon&quot;);</span><br><span class="line">        filterChainDefinitionMap.put(&quot;/img/**&quot;, &quot;anon&quot;);</span><br><span class="line">        // druid数据源监控页面不拦截</span><br><span class="line">        filterChainDefinitionMap.put(&quot;/druid/**&quot;, &quot;anon&quot;);</span><br><span class="line">        // 配置退出过滤器，其中具体的退出代码Shiro已经替我们实现了 </span><br><span class="line">        filterChainDefinitionMap.put(&quot;/logout&quot;, &quot;logout&quot;);</span><br><span class="line">        filterChainDefinitionMap.put(&quot;/&quot;, &quot;anon&quot;);</span><br><span class="line">        // 除上以外所有url都必须认证通过才可以访问，未通过认证自动访问LoginUrl</span><br><span class="line">        filterChainDefinitionMap.put(&quot;/**&quot;, &quot;authc&quot;);</span><br><span class="line">        </span><br><span class="line">        shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);</span><br><span class="line">        return shiroFilterFactoryBean;</span><br><span class="line">    &#125;</span><br><span class="line">	</span><br><span class="line">    @Bean  </span><br><span class="line">    public SecurityManager securityManager()&#123;  </span><br><span class="line">        // 配置SecurityManager，并注入shiroRealm</span><br><span class="line">        DefaultWebSecurityManager securityManager =  new DefaultWebSecurityManager();</span><br><span class="line">        securityManager.setRealm(shiroRealm());</span><br><span class="line">        return securityManager;  </span><br><span class="line">    &#125; </span><br><span class="line">	</span><br><span class="line">    @Bean  </span><br><span class="line">    public ShiroRealm shiroRealm()&#123;  </span><br><span class="line">        // 配置Realm，需自己实现</span><br><span class="line">        ShiroRealm shiroRealm = new ShiroRealm();  </span><br><span class="line">        return shiroRealm;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>需要注意的是filterChain基于短路机制，即最先匹配原则，如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/user/**=anon</span><br><span class="line">/user/aa=authc 永远不会执行</span><br></pre></td></tr></table></figure>
+
+<p>其中anon、authc等为Shiro为我们实现的过滤器，具体如下表所示：</p>
+<table>
+<thead>
+<tr>
+<th>Filter Name</th>
+<th>Class</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>anon</td>
+<td>org.apache.shiro.web.filter.authc.AnonymousFilter</td>
+<td>匿名拦截器，即不需要登录即可访问；一般用于静态资源过滤；示例/static/**=anon</td>
+</tr>
+<tr>
+<td>authc</td>
+<td>org.apache.shiro.web.filter.authc.FormAuthenticationFilter</td>
+<td>基于表单的拦截器；如/**=authc，如果没有登录会跳到相应的登录页面登录</td>
+</tr>
+<tr>
+<td>authcBasic</td>
+<td>org.apache.shiro.web.filter.authc.BasicHttpAuthenticationFilter</td>
+<td>Basic HTTP身份验证拦截器</td>
+</tr>
+<tr>
+<td>logout</td>
+<td>org.apache.shiro.web.filter.authc.LogoutFilter</td>
+<td>退出拦截器，主要属性：redirectUrl：退出成功后重定向的地址（/），示例/logout=logout</td>
+</tr>
+<tr>
+<td>noSessionCreation</td>
+<td>org.apache.shiro.web.filter.session.NoSessionCreationFilter</td>
+<td>不创建会话拦截器，调用subject.getSession(false)不会有什么问题，但是如果subject.getSession(true)将抛出DisabledSessionException异常</td>
+</tr>
+<tr>
+<td>perms</td>
+<td>org.apache.shiro.web.filter.authz.PermissionsAuthorizationFilter</td>
+<td>权限授权拦截器，验证用户是否拥有所有权限；属性和roles一样；示例/user/**=perms[“user:create”]</td>
+</tr>
+<tr>
+<td>port</td>
+<td>org.apache.shiro.web.filter.authz.PortFilter</td>
+<td>端口拦截器，主要属性port(80)：可以通过的端口；示例/test= port[80]，如果用户访问该页面是非80，将自动将请求端口改为80并重定向到该80端口，其他路径/参数等都一样</td>
+</tr>
+<tr>
+<td>rest</td>
+<td>org.apache.shiro.web.filter.authz.HttpMethodPermissionFilter</td>
+<td>rest风格拦截器，自动根据请求方法构建权限字符串；示例/users=rest[user]，会自动拼出user:read,user:create,user:update,user:delete权限字符串进行权限匹配（所有都得匹配，isPermittedAll）</td>
+</tr>
+<tr>
+<td>roles</td>
+<td>org.apache.shiro.web.filter.authz.RolesAuthorizationFilter</td>
+<td>角色授权拦截器，验证用户是否拥有所有角色；示例/admin/**=roles[admin]</td>
+</tr>
+<tr>
+<td>ssl</td>
+<td>org.apache.shiro.web.filter.authz.SslFilter</td>
+<td>SSL拦截器，只有请求协议是https才能通过；否则自动跳转会https端口443；其他和port拦截器一样；</td>
+</tr>
+<tr>
+<td>user</td>
+<td>org.apache.shiro.web.filter.authc.UserFilter</td>
+<td>用户拦截器，用户已经身份验证/记住我登录的都可；示例/**=user</td>
+</tr>
+</tbody></table>
+<p>配置完ShiroConfig后，接下来对Realm进行实现，然后注入到SecurityManager中。</p>
+<h2 id="Realm"><a href="#Realm" class="headerlink" title="Realm"></a>Realm</h2><p>自定义Realm实现只需继承AuthorizingRealm类，然后实现doGetAuthorizationInfo()和doGetAuthenticationInfo()方法即可。这两个方法名乍看有点像，authorization发音[ˌɔ:θəraɪˈzeɪʃn]，为授权，批准的意思，即获取用户的角色和权限等信息；authentication发音[ɔ:ˌθentɪ’keɪʃn]，认证，身份验证的意思，即登录时验证用户的合法性，比如验证用户名和密码。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">public class ShiroRealm extends AuthorizingRealm &#123;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    private UserMapper userMapper;</span><br><span class="line">    </span><br><span class="line">    /**</span><br><span class="line">    * 获取用户角色和权限</span><br><span class="line">    */</span><br><span class="line">    @Override</span><br><span class="line">    protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principal) &#123;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 登录认证</span><br><span class="line">     */</span><br><span class="line">    @Override</span><br><span class="line">    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException &#123;</span><br><span class="line"></span><br><span class="line">    	// 获取用户输入的用户名和密码</span><br><span class="line">        String userName = (String) token.getPrincipal();</span><br><span class="line">        String password = new String((char[]) token.getCredentials());</span><br><span class="line">        </span><br><span class="line">        System.out.println(&quot;用户&quot; + userName + &quot;认证-----ShiroRealm.doGetAuthenticationInfo&quot;);</span><br><span class="line"></span><br><span class="line">        // 通过用户名到数据库查询用户信息</span><br><span class="line">        User user = userMapper.findByUserName(userName);</span><br><span class="line">        </span><br><span class="line">        if (user == null) &#123;</span><br><span class="line">            throw new UnknownAccountException(&quot;用户名或密码错误！&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">        if (!password.equals(user.getPassword())) &#123;</span><br><span class="line">            throw new IncorrectCredentialsException(&quot;用户名或密码错误！&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">        if (user.getStatus().equals(&quot;0&quot;)) &#123;</span><br><span class="line">            throw new LockedAccountException(&quot;账号已被锁定,请联系管理员！&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">        SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(user, password, getName());</span><br><span class="line">        return info;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>因为本节只讲述用户认证，所以doGetAuthorizationInfo()方法先不进行实现。</p>
+<p>其中UnknownAccountException等异常为Shiro自带异常，Shiro具有丰富的运行时AuthenticationException层次结构，可以准确指出尝试失败的原因。你可以包装在一个try/catch块，并捕捉任何你希望的异常，并作出相应的反应。例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">try &#123;</span><br><span class="line">    currentUser.login(token);</span><br><span class="line">&#125; catch ( UnknownAccountException uae ) &#123; ...</span><br><span class="line">&#125; catch ( IncorrectCredentialsException ice ) &#123; ...</span><br><span class="line">&#125; catch ( LockedAccountException lae ) &#123; ...</span><br><span class="line">&#125; catch ( ExcessiveAttemptsException eae ) &#123; ...</span><br><span class="line">&#125; ... catch your own ...</span><br><span class="line">&#125; catch ( AuthenticationException ae ) &#123;</span><br><span class="line">    //unexpected error?</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="数据层"><a href="#数据层" class="headerlink" title="数据层"></a>数据层</h2><p>首先创建一张用户表，用于存储用户的基本信息（基于Mysql）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE user(</span><br><span class="line">	ID INT PRIMARY KEY auto_increment,</span><br><span class="line">   USERNAME VARCHAR(20) NOT NULL ,</span><br><span class="line">   PASSWD VARCHAR(128) NOT NULL ,</span><br><span class="line">   CREATE_TIME date ,</span><br><span class="line">   STATUS CHAR(1) NOT NULL </span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">insert into user VALUES (2, &apos;test&apos;, &apos;7a38c13ec5e9310aed731de58bbc4214&apos;,&apos;2017-11-19 17:20:21&apos;, &apos;0&apos;);</span><br><span class="line">insert into user VALUES (1, &apos;mrbird&apos;, &apos;42ee25d1e43e9f57119a00d0a39e5250&apos;, &apos;2017-11-19 10:52:48&apos;, &apos;1&apos;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="Controller"><a href="#Controller" class="headerlink" title="Controller"></a>Controller</h2><p>LoginController代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">@Controller</span><br><span class="line">public class LoginController &#123;</span><br><span class="line"></span><br><span class="line">    @GetMapping(&quot;/login&quot;)</span><br><span class="line">    public String login() &#123;</span><br><span class="line">        return &quot;login&quot;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @PostMapping(&quot;/login&quot;)</span><br><span class="line">    @ResponseBody</span><br><span class="line">    public ResponseBo login(String username, String password) &#123;</span><br><span class="line">    	// 密码MD5加密</span><br><span class="line">        password = MD5Utils.encrypt(username, password);</span><br><span class="line">        UsernamePasswordToken token = new UsernamePasswordToken(username, password);</span><br><span class="line">        // 获取Subject对象</span><br><span class="line">        Subject subject = SecurityUtils.getSubject();</span><br><span class="line">        try &#123;</span><br><span class="line">            subject.login(token);</span><br><span class="line">            return ResponseBo.ok();</span><br><span class="line">        &#125; catch (UnknownAccountException e) &#123;</span><br><span class="line">            return ResponseBo.error(e.getMessage());</span><br><span class="line">        &#125; catch (IncorrectCredentialsException e) &#123;</span><br><span class="line">            return ResponseBo.error(e.getMessage());</span><br><span class="line">        &#125; catch (LockedAccountException e) &#123;</span><br><span class="line">            return ResponseBo.error(e.getMessage());</span><br><span class="line">        &#125; catch (AuthenticationException e) &#123;</span><br><span class="line">            return ResponseBo.error(&quot;认证失败！&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @RequestMapping(&quot;/&quot;)</span><br><span class="line">    public String redirectIndex() &#123;</span><br><span class="line">        return &quot;redirect:/index&quot;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @RequestMapping(&quot;/index&quot;)</span><br><span class="line">    public String index(Model model) &#123;</span><br><span class="line">    	// 登录成后，即可通过Subject获取登录的用户信息</span><br><span class="line">        User user = (User) SecurityUtils.getSubject().getPrincipal();</span><br><span class="line">        model.addAttribute(&quot;user&quot;, user);</span><br><span class="line">        return &quot;index&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>登录成功后，根据之前在ShiroConfig中的配置shiroFilterFactoryBean.setSuccessUrl(“/index”)，页面会自动访问/index路径。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/06/Mybatis/Mybatis%E7%9A%84%E7%BC%93%E5%AD%98%E6%9C%BA%E5%88%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/06/Mybatis/Mybatis%E7%9A%84%E7%BC%93%E5%AD%98%E6%9C%BA%E5%88%B6/" class="post-title-link" itemprop="url">Mybatis缓存机制</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-11-06 10:05:57" itemprop="dateCreated datePublished" datetime="2019-11-06T10:05:57+08:00">2019-11-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-11-08 14:38:35" itemprop="dateModified" datetime="2019-11-08T14:38:35+08:00">2019-11-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/mybatis/" itemprop="url" rel="index">
+                    <span itemprop="name">mybatis</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Mybatis的缓存机制"><a href="#Mybatis的缓存机制" class="headerlink" title="Mybatis的缓存机制"></a>Mybatis的缓存机制</h1><hr>
+<h2 id="1、查询缓存"><a href="#1、查询缓存" class="headerlink" title="1、查询缓存"></a>1、查询缓存</h2><h3 id="什么是查询缓存？"><a href="#什么是查询缓存？" class="headerlink" title="什么是查询缓存？"></a>什么是查询缓存？</h3><p>mybatis提供查询缓存，用于减轻数据压力，提高数据库性能。</p>
+<p>mybaits提供一级缓存，和二级缓存。<br><img src="https://i.loli.net/2019/11/06/kDpf5uaFsi2XIJT.png" alt="20150726164148424.png"><br>一级缓存是SqlSession级别的缓存。在操作数据库时需要构造 sqlSession对象，在对象中有一个(内存区域)数据结构（HashMap）用于存储缓存数据。不同的sqlSession之间的缓存数据区域（HashMap）是互相不影响的。<br>一级缓存的作用域是同一个SqlSession，在同一个sqlSession中两次执行相同的sql语句，第一次执行完毕会将数据库中查询的数据写到缓存（内存），第二次会从缓存中获取数据将不再从数据库查询，从而提高查询效率。当一个sqlSession结束后该sqlSession中的一级缓存也就不存在了。Mybatis默认开启一级缓存。</p>
+<p>二级缓存是mapper级别的缓存，多个SqlSession去操作同一个Mapper的sql语句，多个SqlSession去操作数据库得到数据会存在二级缓存区域，多个SqlSession可以共用二级缓存，二级缓存是跨SqlSession的。</p>
+<p>二级缓存是多个SqlSession共享的，其作用域是mapper的同一个namespace，不同的sqlSession两次执行相同namespace下的sql语句且向sql中传递参数也相同即最终执行相同的sql语句，第一次执行完毕会将数据库中查询的数据写到缓存（内存），第二次会从缓存中获取数据将不再从数据库查询，从而提高查询效率。Mybatis默认没有开启二级缓存需要在setting全局参数中配置开启二级缓存。</p>
+<p>如果缓存中有数据就不用从数据库中获取，大大提高系统性能。</p>
+<h3 id="一级缓存"><a href="#一级缓存" class="headerlink" title="一级缓存"></a>一级缓存</h3><h4 id="一级缓存工作原理"><a href="#一级缓存工作原理" class="headerlink" title="一级缓存工作原理"></a>一级缓存工作原理</h4><p>下图是根据id查询用户的一级缓存图解<br><img src="https://i.loli.net/2019/11/06/xtQ1Okhenw74ArV.png" alt="20150726164134583.png"></p>
+<p>第一次发起查询用户id为1的用户信息，先去找缓存中是否有id为1的用户信息，如果没有，从数据库查询用户信息。</p>
+<p>得到用户信息，将用户信息存储到一级缓存中。</p>
+<p>如果sqlSession去执行commit操作（执行插入、更新、删除），清空SqlSession中的一级缓存，这样做的目的为了让缓存中存储的是最新的信息，避免脏读。</p>
+<p>第二次发起查询用户id为1的用户信息，先去找缓存中是否有id为1的用户信息，缓存中有，直接从缓存中获取用户信息。</p>
+<h4 id="一级缓存测试"><a href="#一级缓存测试" class="headerlink" title="一级缓存测试"></a>一级缓存测试</h4><p>mybatis默认支持一级缓存，不需要在配置文件去配置。</p>
+<p>按照上边一级缓存原理步骤去测试。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">@Test</span><br><span class="line"></span><br><span class="line">   public void testCache1() throws Exception&#123;</span><br><span class="line">      SqlSessionsqlSession = sqlSessionFactory.openSession();//创建代理对象</span><br><span class="line">      UserMapperuserMapper = sqlSession.getMapper(UserMapper.class);</span><br><span class="line">      //下边查询使用一个SqlSession</span><br><span class="line">      //第一次发起请求，查询id为1的用户</span><br><span class="line">      Useruser1 = userMapper.findUserById(1);</span><br><span class="line">      System.out.println(user1);</span><br><span class="line">//    如果sqlSession去执行commit操作（执行插入、更新、删除），清空SqlSession中的一级缓存，这样做的目的为了让缓存中存储的是最新的信息，避免脏读。    </span><br><span class="line">      //更新user1的信息</span><br><span class="line">      user1.setUsername(&quot;测试用户22&quot;);</span><br><span class="line">      userMapper.updateUser(user1);</span><br><span class="line">      //执行commit操作去清空缓存</span><br><span class="line">      sqlSession.commit(); </span><br><span class="line">      //第二次发起请求，查询id为1的用户</span><br><span class="line"></span><br><span class="line">      Useruser2 = userMapper.findUserById(1);</span><br><span class="line">      System.out.println(user2);</span><br><span class="line">      sqlSession.close();</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="一级缓存应用"><a href="#一级缓存应用" class="headerlink" title="一级缓存应用"></a>一级缓存应用</h4><p>正式开发，是将mybatis和spring进行整合开发，事务控制在service中。</p>
+<p>一个service方法中包括很多mapper方法调用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">service&#123;</span><br><span class="line"></span><br><span class="line">         //开始执行时，开启事务，创建SqlSession对象</span><br><span class="line"></span><br><span class="line">         //第一次调用mapper的方法findUserById(1)</span><br><span class="line"></span><br><span class="line">        </span><br><span class="line"></span><br><span class="line">         //第二次调用mapper的方法findUserById(1)，从一级缓存中取数据</span><br><span class="line"></span><br><span class="line">        </span><br><span class="line"></span><br><span class="line">//aop控制 只要方法结束，sqlSession关闭 sqlsession关闭后就销毁数据结构，清空缓存</span><br><span class="line"></span><br><span class="line">         Service结束sqlsession关闭</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果是执行两次service调用查询相同的用户信息，不走一级缓存，因为Service方法结束，sqlSession就关闭，一级缓存就清空。</p>
+<h2 id="二级缓存"><a href="#二级缓存" class="headerlink" title="二级缓存"></a>二级缓存</h2><h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p><img src="https://i.loli.net/2019/11/06/7ETSbwqtsj4JGFR.png" alt="20150726164234783.png"><br>首先开启mybatis的二级缓存。<br>sqlSession1去查询用户id为1的用户信息，查询到用户信息会将查询数据存储到二级缓存中。<br>如果SqlSession3去执行相同 mapper下sql，执行commit提交，清空该 mapper下的二级缓存区域的数据。<br>sqlSession2去查询用户id为1的用户信息，去缓存中找是否存在数据，如果存在直接从缓存中取出数据。<br>二级缓存与一级缓存区别，二级缓存的范围更大，多个sqlSession可以共享一个UserMapper的二级缓存区域。数据类型仍然为HashMap<br>UserMapper有一个二级缓存区域（按namespace分，如果namespace相同则使用同一个相同的二级缓存区），其它mapper也有自己的二级缓存区域（按namespace分）。<br>每一个namespace的mapper都有一个二缓存区域，两个mapper的namespace如果相同，这两个mapper执行sql查询到数据将存在相同的二级缓存区域中。</p>
+<h3 id="开启二级缓存"><a href="#开启二级缓存" class="headerlink" title="开启二级缓存"></a>开启二级缓存</h3><p>mybaits的二级缓存是mapper范围级别，除了在SqlMapConfig.xml设置二级缓存的总开关，还要在具体的mapper.xml中开启二级缓存。<br>在核心配置文件SqlMapConfig.xml中加入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;setting name=&quot;cacheEnabled&quot;value=&quot;true&quot;/&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- 全局配置参数，需要时再设置 --&gt;</span><br><span class="line"></span><br><span class="line">    &lt;settings&gt;</span><br><span class="line">       &lt;!-- 开启二级缓存  默认值为true --&gt;</span><br><span class="line">    &lt;setting name=&quot;cacheEnabled&quot; value=&quot;true&quot;/&gt;</span><br><span class="line">&lt;/settings&gt;</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line">cacheEnabled:对在此配置文件下的所有cache 进行全局性开/关设置。默认为false</span><br></pre></td></tr></table></figure>
+
+<p>在UserMapper.xml中开启二缓存，UserMapper.xml下的sql执行完成会存储到它的缓存区域（HashMap）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;mapper namespace=&quot;cn.hpu.mybatis.mapper.UserMapper&quot;&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- 开启本mapper namespace下的二级缓存 --&gt;</span><br><span class="line"></span><br><span class="line">&lt;cache&gt;&lt;/cache&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="调用pojo类实现序列化接口"><a href="#调用pojo类实现序列化接口" class="headerlink" title="调用pojo类实现序列化接口"></a>调用pojo类实现序列化接口</h2><p>二级缓存需要查询结果映射的pojo对象实现java.io.Serializable接口实现序列化和反序列化操作，注意如果存在父类、成员pojo都需要实现序列化接口。</p>
+<p>pojo类实现序列化接口是为了将缓存数据取出执行反序列化操作，因为二级缓存数据存储介质多种多样，不一定在内存有可能是硬盘或者远程服务器。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/05/Spring/Springboot%E4%BB%8E%E5%89%8D%E5%8F%B0%E8%8E%B7%E5%8F%96%E6%95%B0%E6%8D%AE%E7%9A%84%E6%96%B9%E5%BC%8F%E6%B1%87%E6%80%BB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/05/Spring/Springboot%E4%BB%8E%E5%89%8D%E5%8F%B0%E8%8E%B7%E5%8F%96%E6%95%B0%E6%8D%AE%E7%9A%84%E6%96%B9%E5%BC%8F%E6%B1%87%E6%80%BB/" class="post-title-link" itemprop="url">Springboot从前台获取数据的方式汇总</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2019-11-05 19:14:49 / Modified: 20:08:04" itemprop="dateCreated datePublished" datetime="2019-11-05T19:14:49+08:00">2019-11-05</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/spring/" itemprop="url" rel="index">
+                    <span itemprop="name">spring</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Springboot从前台获取数据的方式汇总"><a href="#Springboot从前台获取数据的方式汇总" class="headerlink" title="Springboot从前台获取数据的方式汇总"></a>Springboot从前台获取数据的方式汇总</h1><hr>
+<h2 id="1、自动注入"><a href="#1、自动注入" class="headerlink" title="1、自动注入"></a>1、自动注入</h2><p>直接将参数写在controller方法中的形参中，注意前后端名称需要保持一致，示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">后台函数</span><br><span class="line">@RequestMapping(&quot;/submit&quot;)</span><br><span class="line">@ResponseBody</span><br><span class="line">public String getAccount(String name,String password)&#123;</span><br><span class="line">    if (name!=null)&#123;</span><br><span class="line">        System.out.println(name);</span><br><span class="line">    &#125;</span><br><span class="line">    if (password!=null)&#123;</span><br><span class="line">        System.out.println(password);</span><br><span class="line">    &#125;</span><br><span class="line">    return &quot;get&quot;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">请求的URL</span><br><span class="line">http://localhost:8080/submit?name=1&amp;password=haha</span><br><span class="line"></span><br><span class="line">可以得到前台的数据</span><br></pre></td></tr></table></figure>
+
+<h2 id="2、-PathVariable获取路径中的参数"><a href="#2、-PathVariable获取路径中的参数" class="headerlink" title="2、@PathVariable获取路径中的参数"></a>2、@PathVariable获取路径中的参数</h2><p>可以通过@PathVariable获取路径上的参数，示例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">后台代码</span><br><span class="line">@RequestMapping(&quot;/submit/&#123;id&#125;&quot;)</span><br><span class="line">    @ResponseBody</span><br><span class="line">    public String getAccount(@PathVariable(&quot;id&quot;)Integer id)&#123;</span><br><span class="line">        System.out.println(id);</span><br><span class="line">        return &quot;get&quot;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">http://localhost:8080/submit/1</span><br></pre></td></tr></table></figure>
+
+<h2 id="RequestParam绑定请求参数"><a href="#RequestParam绑定请求参数" class="headerlink" title="@RequestParam绑定请求参数"></a>@RequestParam绑定请求参数</h2><p>前端页面,采用thymeleaf来传递参数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html xmlns:th=&quot;http://www.thymeleaf.org&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;title&gt;account&lt;/title&gt;</span><br><span class="line">    &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot; /&gt;</span><br><span class="line">    &lt;link rel=&quot;stylesheet&quot; th:href=&quot;@&#123;/css/style.css&#125;&quot; type=&quot;text/css&quot;&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;table&gt;</span><br><span class="line">    &lt;tr&gt;</span><br><span class="line">        &lt;th&gt;no&lt;/th&gt;</span><br><span class="line">        &lt;th&gt;account&lt;/th&gt;</span><br><span class="line">        &lt;th&gt;name&lt;/th&gt;</span><br><span class="line">        &lt;th&gt;password&lt;/th&gt;</span><br><span class="line">        &lt;th&gt;accountType&lt;/th&gt;</span><br><span class="line">        &lt;th&gt;tel&lt;/th&gt;</span><br><span class="line">    &lt;/tr&gt;</span><br><span class="line">    &lt;tr th:each=&quot;list,stat:$&#123;accountList&#125;&quot;&gt;</span><br><span class="line">        &lt;td th:text=&quot;$&#123;stat.count&#125;&quot;&gt;&lt;/td&gt;</span><br><span class="line">        &lt;td th:text=&quot;$&#123;list.name&#125;&quot;&gt;&lt;/td&gt;</span><br><span class="line">        &lt;td th:text=&quot;$&#123;list.address&#125;&quot;&gt;&lt;/td&gt;</span><br><span class="line">        &lt;td th:text=&quot;$&#123;list.password&#125;&quot;&gt;&lt;/td&gt;</span><br><span class="line">        &lt;td th:text=&quot;$&#123;list.role&#125;&quot;&gt;&lt;/td&gt;</span><br><span class="line">        &lt;td th:text=&quot;$&#123;list.id&#125;&quot;&gt;&lt;/td&gt;</span><br><span class="line">    &lt;/tr&gt;</span><br><span class="line">    &lt;form action=&quot;/submit&quot; method=&quot;post&quot;&gt;</span><br><span class="line">        请输入姓名:&lt;input type=&quot;text&quot; id=&quot;name&quot; name=&quot;name&quot;&gt;&lt;br/&gt;</span><br><span class="line">        请输入密码:&lt;input type=&quot;text&quot; id=&quot;password&quot; name=&quot;password&quot;&gt;&lt;br/&gt;</span><br><span class="line">        请输入地址:&lt;input type=&quot;text&quot; id=&quot;address&quot; name=&quot;address&quot;&gt;&lt;br/&gt;</span><br><span class="line">        请输入角色:&lt;input type=&quot;text&quot; id=&quot;role&quot; name=&quot;role&quot;&gt;&lt;br/&gt;</span><br><span class="line">        请输入id:&lt;input type=&quot;text&quot; id=&quot;id&quot; name=&quot;id&quot;&gt;&lt;br/&gt;</span><br><span class="line">        &lt;input type=&quot;submit&quot; value=&quot;提交&quot;&gt;&lt;br/&gt;</span><br><span class="line">    &lt;/form&gt;</span><br><span class="line">&lt;/table&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<p>注意，@RequestParam(“name”)是根据标签里的name属性来取值的，不是根据id来取值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@RequestMapping(&quot;/submit&quot;)</span><br><span class="line">@ResponseBody</span><br><span class="line">public String getAccount(@RequestParam(&quot;name&quot;)String name)&#123;</span><br><span class="line">    if (name!=null)&#123;</span><br><span class="line">        System.out.println(name);</span><br><span class="line">    &#125;</span><br><span class="line">    return &quot;get&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果前端没有传递属性名为name的值，那么将会报400错误，表示请求出错。</p>
+<h2 id="通过HttpServletRequest对象手动get-获取的值均为String型"><a href="#通过HttpServletRequest对象手动get-获取的值均为String型" class="headerlink" title="通过HttpServletRequest对象手动get , 获取的值均为String型"></a>通过HttpServletRequest对象手动get , 获取的值均为String型</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@RequestMapping(&quot;/submit&quot;)</span><br><span class="line">@ResponseBody</span><br><span class="line">public String getAccount(HttpServletRequest request)&#123;</span><br><span class="line">    String name=request.getParameter(&quot;name&quot;);</span><br><span class="line">    if (name!=null)&#123;</span><br><span class="line">        System.out.println(name);</span><br><span class="line">    &#125;</span><br><span class="line">    return &quot;get&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://i.loli.net/2019/11/05/nJ1HQN2kItaMZhv.png" alt="提交数据.PNG"></p>
+<h2 id="通过-ModelAttribute获取form中的参数"><a href="#通过-ModelAttribute获取form中的参数" class="headerlink" title="通过@ModelAttribute获取form中的参数"></a>通过@ModelAttribute获取form中的参数</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@RequestMapping(&quot;/submit&quot;)</span><br><span class="line">   @ResponseBody</span><br><span class="line">   public String getAccount(@ModelAttribute Account account)&#123;</span><br><span class="line">       if (account!=null)&#123;</span><br><span class="line">           System.out.println(account);</span><br><span class="line">       &#125;</span><br><span class="line">       return &quot;get&quot;;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p>account中的成员变量名称需要和前台form中的name值保持一致 , 且必须要有get/set 方法 , 否则无法注入<br><img src="https://i.loli.net/2019/11/05/8ngjPAfbWqVueaS.png" alt="获取数据2.PNG"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/05/Http/HTTP%E8%BF%94%E5%9B%9E%E7%9A%84%E5%90%84%E4%B8%AA%E7%8A%B6%E6%80%81%E7%A0%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/05/Http/HTTP%E8%BF%94%E5%9B%9E%E7%9A%84%E5%90%84%E4%B8%AA%E7%8A%B6%E6%80%81%E7%A0%81/" class="post-title-link" itemprop="url">HTTP各个状态码及含义</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2019-11-05 18:55:32 / Modified: 19:05:34" itemprop="dateCreated datePublished" datetime="2019-11-05T18:55:32+08:00">2019-11-05</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Http/" itemprop="url" rel="index">
+                    <span itemprop="name">Http</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="HTTP各个状态码及含义"><a href="#HTTP各个状态码及含义" class="headerlink" title="HTTP各个状态码及含义"></a>HTTP各个状态码及含义</h1><hr>
+<p>根据响应结果的类型，大致分为以下几类：</p>
+<h2 id="2-1-1XX（信息类）"><a href="#2-1-1XX（信息类）" class="headerlink" title="2.1 1XX（信息类）"></a>2.1 1XX（信息类）</h2><p>该类型状态码表示接收到请求并且继续处理。</p>
+<ul>
+<li>100，客户端必须继续发出请求。</li>
+<li>101，客户端要求服务器根据请求转换HTTP协议版本。</li>
+</ul>
+<h2 id="2-2-2XX（响应成功）"><a href="#2-2-2XX（响应成功）" class="headerlink" title="2.2 2XX（响应成功）"></a>2.2 2XX（响应成功）</h2><p>该类型状态码表示动作被成功接收、理解和接受。</p>
+<ul>
+<li>200，表明该请求被成功地完成，所请求的资源发送到客户端。</li>
+<li>201，提示知道新文件的URL。</li>
+<li>202，接受并处理，但处理未完成。</li>
+<li>203，返回信息不确定或不完整。</li>
+<li>204，收到请求，但返回信息为空。</li>
+<li>205，服务器完成了请求，用户必须复位当前已经浏览过的文件。</li>
+<li>206，服务器已经完成了部分用户的GET请求。</li>
+</ul>
+<h2 id="2-3-3XX（重定向类）"><a href="#2-3-3XX（重定向类）" class="headerlink" title="2.3 3XX（重定向类）"></a>2.3 3XX（重定向类）</h2><p>该类型状态码表示为了完成指定的动作，必须接受进一步处理。</p>
+<ul>
+<li>300，请求的资源可在多处获得。</li>
+<li>301，本网页被永久性转移到另一个URL。</li>
+<li>302，请求的网页被重定向到新的地址。</li>
+<li>303，建议用户访问其他URL或访问方式。</li>
+<li>304，自从上次请求后，请求的网页未修改过。</li>
+<li>305，请求的资源必须从服务器指定的地址获得。</li>
+<li>306，前一版本HTTP中使用的代码，现已不再使用。</li>
+<li>307，声明请求的资源临时性删除。</li>
+</ul>
+<h2 id="2-4-4XX（客户端错误类）"><a href="#2-4-4XX（客户端错误类）" class="headerlink" title="2.4 4XX（客户端错误类）"></a>2.4 4XX（客户端错误类）</h2><p>该类型状态码表示请求包含错误语法或不能正确执行。</p>
+<ul>
+<li>400，客户端请求有语法错误。</li>
+<li>401，请求未经授权。</li>
+<li>402，保留有效ChargeTo头响应。</li>
+<li>403，禁止访问，服务器收到请求，但拒绝提供服务。</li>
+<li>404，可连接服务器，但服务器无法取得所请求的网页，请求资源不存在。</li>
+<li>405，用户在Request-Line字段定义的方法不被允许。</li>
+<li>406，根据用户发送的Accept，请求资源不可访问。</li>
+<li>407，类似401，用户必须首先在代理服务器上取得授权。</li>
+<li>408，客户端没有在用户指定的时间内完成请求。</li>
+<li>409，对当前资源状态，请求不能完成。</li>
+<li>410，服务器上不再有此资源。</li>
+<li>411，服务器拒绝用户定义的Content-Length属性请求。</li>
+<li>412，一个或多个请求头字段在当前请求中错误。</li>
+<li>413，请求的资源大于服务器允许的大小。</li>
+<li>414，请求的资源URL长于服务器允许的长度。</li>
+<li>415，请求资源不支持请求项目格式。</li>
+<li>416，请求中包含Range请求头字段，在当前请求资源范围内没有range指示值。</li>
+<li>417，服务器不满足请求Expect头字段指定的期望值。</li>
+</ul>
+<h2 id="2-5-5XX（服务器错误类）"><a href="#2-5-5XX（服务器错误类）" class="headerlink" title="2.5 5XX（服务器错误类）"></a>2.5 5XX（服务器错误类）</h2><p>该类型状态码表示服务器或网关错误。</p>
+<ul>
+<li>500，服务器错误。</li>
+<li>501，服务器不支持请求的功能。</li>
+<li>502，网关错误。</li>
+<li>503，无法获得服务。</li>
+<li>504，网关超时。</li>
+<li>505，不支持的http版本。</li>
+</ul>
+<h2 id="3、响应头"><a href="#3、响应头" class="headerlink" title="3、响应头"></a>3、响应头</h2><p>是对响应的一种限定，包含很多属性。常用的属性有：</p>
+<ul>
+<li>Location，实现请求重定向。</li>
+<li>Server，服务器的基本信息。</li>
+<li>Content-Encoding，服务器发送数据时使用的压缩格式。</li>
+<li>Content-Language，发送的数据所用的语言。</li>
+<li>Content-Type，所发送的数据的类型。</li>
+<li>Content-Length，发送数据的大小。</li>
+<li>Set-Cookie，把cookie发送到客户端。</li>
+<li>Last-Modified，指示资源的最后修改日期和时间。   </li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
     <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/05/JavaScript/DOM/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -587,801 +1156,11 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/04/shiro/Shiro%E4%B8%AD%E7%9A%84%E6%9D%83%E9%99%90,/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lancersaber">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lancersaber">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/04/shiro/Shiro%E4%B8%AD%E7%9A%84%E6%9D%83%E9%99%90,/" class="post-title-link" itemprop="url">Shiro中的权限</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2019-11-04 18:29:07 / Modified: 20:18:26" itemprop="dateCreated datePublished" datetime="2019-11-04T18:29:07+08:00">2019-11-04</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/shiro/" itemprop="url" rel="index">
-                    <span itemprop="name">shiro</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Shiro中的权限"><a href="#Shiro中的权限" class="headerlink" title="Shiro中的权限"></a>Shiro中的权限</h1><hr>
-<p>Shiro将Permission定义为声明，该声明定义了明确的行为或动作。它是对应用程序中原始功能的声明，仅此而已。权限是安全策略中最底层的结构，它们明确定义仅应用程序可以执行的“操作”。</p>
-<p>他们根本没有描述“谁”能够执行这些动作。<br>权限的一些示例：</p>
-<ul>
-<li>开启档案</li>
-<li>查看“ /用户/列表”网页</li>
-<li>列印文件</li>
-<li>删除“ jsmith”用户</li>
-</ul>
-<p>定义允许“谁”（用户）执行“什么”（权限）是一种以某种方式向用户分配权限的练习。这始终由应用程序的数据模型完成，并且在不同应用程序之间可能会有很大差异。</p>
-<p>例如，权限可以分组在一个角色中，并且该角色可以与一个或多个用户对象相关联。或者某些应用程序可以具有一个用户组，并且可以为一个组分配一个角色，这通过传递关联将意味着该组中的所有用户都隐式地获得了该角色中的权限。</p>
-<p>如何授予用户权限有很多变体-应用程序根据应用程序需求确定如何对此建模。</p>
-<h2 id="通配符权限"><a href="#通配符权限" class="headerlink" title="通配符权限"></a>通配符权限</h2><p>上面的权限示例，“打开文件”，“查看’用户/列表’网页”等都是有效的权限声明。但是，在计算上解释这些自然语言字符串并确定是否允许用户执行该行为将非常困难。</p>
-<p>因此，为了启用易于处理但仍可读的权限声明，Shiro提供了强大而直观的权限语法，我们称之为WildcardPermission。</p>
-<h3 id="简单用法"><a href="#简单用法" class="headerlink" title="简单用法"></a>简单用法</h3><p>假设您要保护对公司打印机的访问权限，以便某些人可以打印到特定打印机，而其他人可以查询队列中当前有哪些作业。</p>
-<p>一种非常简单的方法是向用户授予“ queryPrinter”权限。然后，您可以通过调用以下命令来检查用户是否具有queryPrinter权限：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">subject.isPermitted(&quot;queryPrinter&quot;)</span><br></pre></td></tr></table></figure>
-
-<p>这（主要）相当于</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">subject.isPermitted( new WildcardPermission(&quot;queryPrinter&quot;) )</span><br></pre></td></tr></table></figure>
-<p>但以后会更多。</p>
-<p>简单权限字符串可能适用于简单应用程序，但是它要求您具有“ printPrinter”，“ queryPrinter”，“ managePrinter”等权限。您还可以使用通配符向用户授予“ *”权限（赋予此权限构造其名称），这意味着它们拥有整个应用程序的所有权限。</p>
-<p>但是，使用这种方法无法仅说用户具有“所有打印机权限”。因此，通配符权限支持多个级别的权限。</p>
-<h3 id="Multiple-Parts"><a href="#Multiple-Parts" class="headerlink" title="Multiple Parts"></a>Multiple Parts</h3><p>通配符权限支持多个级别或部分的概念。例如，您可以通过向用户授予权限来重组前面的简单示例</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">printer:query</span><br></pre></td></tr></table></figure>
-
-<p>在此示例中，冒号是一个特殊字符，用于分隔权限字符串中的下一部分。</p>
-<p>在此示例中，第一部分是正在（printer）上操作的域，第二部分是query正在执行的动作（）。上面的其他示例将更改为：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">printer:print</span><br><span class="line">printer:manage</span><br></pre></td></tr></table></figure>
-
-<p>可以使用的部件数量没有限制，因此可以在应用程序中使用的方式取决于您的想象。</p>
-<h3 id="多个值"><a href="#多个值" class="headerlink" title="多个值"></a>多个值</h3><p>每个部分可以包含多个值。因此，除了向用户授予“ printer：print”和“ printer：query”权限之外，您还可以向他们授予一个权限：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">printer:print,query</span><br></pre></td></tr></table></figure>
-
-<p>这使他们能够使用print和query打印机。由于这两个操作都被授予，因此您可以通过调用以下命令来检查用户是否具有查询打印机的能力：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">subject.isPermitted(&quot;printer:query&quot;)</span><br></pre></td></tr></table></figure>
-
-<h3 id="所有值"><a href="#所有值" class="headerlink" title="所有值"></a>所有值</h3><p>如果您想授予用户特定部分的所有值怎么办？这样做比手动列出每个值更方便。同样，基于通配符，我们可以执行此操作。如果printer域有3个可能的行动（query，print，和manage），这一点：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">printer:query,print,manage</span><br></pre></td></tr></table></figure>
-
-<p>变成这样：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">printer:*</span><br></pre></td></tr></table></figure>
-
-<p>然后，将返回对“ printer：XXX”的任何权限检查true。以这种方式使用通配符的扩展性比显式列出操作更好，因为如果以后在应用程序中添加了新操作，则无需更新在该部分中使用通配符的权限。</p>
-<p>最后，也可以在通配符权限字符串的任何部分中使用通配符。例如，如果您想授予用户跨所有域（而不仅仅是打印机）的“查看”操作，则可以授予此权限：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">*:view</span><br></pre></td></tr></table></figure>
-
-<p>然后，任何对“ foo：view”的权限检查都将返回 true</p>
-<h3 id="实例级访问控制"><a href="#实例级访问控制" class="headerlink" title="实例级访问控制"></a>实例级访问控制</h3><p>通配符权限的另一种常见用法是为实例级访问控制列表建模。在这种情况下，您使用三个部分-第一部分是domain(域)，第二部分是action(操作)，第三部分是要执行的instance(实例)。</p>
-<p>例如，您可能有</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">printer:query:lp7200</span><br><span class="line">printer:print:epsoncolor</span><br></pre></td></tr></table></figure>
-
-<p>第一个定义的行为，以query在printer与该ID lp7200。第二权限定义的行为，以print到printer用ID epsoncolor。如果您将这些权限授予用户，则他们可以在特定实例上执行特定行为。然后，您可以执行签入代码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">if ( SecurityUtils.getSubject().isPermitted(&quot;printer:query:lp7200&quot;) &#123;</span><br><span class="line">    // Return the current jobs on printer lp7200 &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这是表达权限的一种非常强大的方法。但是同样，必须为所有打印机定义多个实例ID不能很好地扩展，特别是在将新打印机添加到系统中时。您可以改用通配符:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">printer:print:*</span><br></pre></td></tr></table></figure>
-
-<p>这确实可以扩展，因为它也适用于所有新打印机。您甚至可以允许访问所有打印机上的所有操作：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">printer:*:*</span><br></pre></td></tr></table></figure>
-
-<p>或单个打印机上的所有操作：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">printer:*:lp7200</span><br></pre></td></tr></table></figure>
-
-<p>甚至特定的动作：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">printer:query,print:lp7200</span><br></pre></td></tr></table></figure>
-
-<p>许可的任何部分都可以使用“ *”通配符和“，”子部分分隔符。</p>
-<h3 id="缺少的部分"><a href="#缺少的部分" class="headerlink" title="缺少的部分"></a>缺少的部分</h3><p>关于权限分配要注意的最后一件事：缺少部分意味着用户可以访问与该部分相对应的所有值。换一种说法，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">printer:print</span><br></pre></td></tr></table></figure>
-
-<p>相当于</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">printer:print:*</span><br></pre></td></tr></table></figure>
-<p>和</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">printer</span><br></pre></td></tr></table></figure>
-
-<p>相当于</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">printer:*:*</span><br></pre></td></tr></table></figure>
-
-<p>但是，您只能从字符串末尾删除部分，因此：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">printer:lp7200</span><br></pre></td></tr></table></figure>
-
-<p>不等同于</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">printer:*:lp7200</span><br></pre></td></tr></table></figure>
-
-<h2 id="检查权限"><a href="#检查权限" class="headerlink" title="检查权限"></a>检查权限</h2><p>为了方便和可扩展性，权限分配大量使用通配符结构（“ printer：print：*” =可打印到任何打印机），但运行时的权限检查应始终基于最具体的权限字符串。</p>
-<p>例如，如果用户具有UI，并且他们想要将文档打印到lp7200打印机，则应通过执行以下代码来检查是否允许用户这样做：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">if ( SecurityUtils.getSubject().isPermitted(&quot;printer:print:lp7200&quot;) ) &#123;</span><br><span class="line">    //print the document to the lp7200 printer &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>该检查非常具体，并且明确反映了用户当时正在尝试执行的操作。</p>
-<p>但是，以下内容对于运行时检查不太理想</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">if ( SecurityUtils.getSubject().isPermitted(&quot;printer:print&quot;) ) &#123;</span><br><span class="line">    //print the document &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>为什么？因为第二个示例显示“您必须能够打印到任何打印机才能执行以下代码块”。但是请记住，“ printer：print”等同于“ printer：print：*”！</p>
-<p>因此，这是不正确的检查。如果当前用户没有能力打印到任何打印机，但是他们确实有能力打印说lp7200和epsoncolor打印机，该怎么办。然后，lp7200即使已被授予该功能，上面的第二个示例也将永远不允许它们打印到打印机上！</p>
-<p>因此，经验法则是在执行权限检查时，尽可能使用最具体的权限字符串。当然，如果您确实只想在允许用户使用任何打印机进行打印的情况下仅执行代码块，则上面的第二个块可能是应用程序中其他地方的有效检查（可疑，但可能）。您的应用程序将确定哪些检查有意义，但总的来说，检查越具体越好。</p>
-<h3 id="Implication-not-Equality"><a href="#Implication-not-Equality" class="headerlink" title="Implication, not Equality"></a>Implication, not Equality</h3><p>为什么运行时权限检查应尽可能具体，但权限分配却可能更通用？这是因为权限检查是通过隐含逻辑进行评估的，而不是相等性检查。</p>
-<p>也就是说，如果为用户分配了user:<em>权限，则意味着该用户可以执行该user:view操作。字符串“ user：\</em>”显然不等于“ user：view”，但是前者暗含后者。“用户：*”描述了“用户：视图”所定义功能的超集。</p>
-<p>为了支持隐含规则，所有权限都转换为实现该org.apache.shiro.authz.Permission接口的对象实例。这样，隐含逻辑可以在运行时执行，并且隐含逻辑通常比简单的字符串相等性检查更复杂。org.apache.shiro.authz.permission.WildcardPermission该类实现实际上使本文档中描述的所有通配符行为成为可能。以下是一些其他通配符权限字符串，这些字符串通过含义显示访问权限：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">user:*</span><br></pre></td></tr></table></figure>
-
-<p>意味着还可以删除用户：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">user:delete</span><br></pre></td></tr></table></figure>
-
-<p>同样，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">user:*:12345</span><br></pre></td></tr></table></figure>
-
-<p>表示还可以更新ID 12345的用户帐户：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">user:update:12345</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/04/shiro/Shiro%E9%85%8D%E7%BD%AE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lancersaber">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lancersaber">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/04/shiro/Shiro%E9%85%8D%E7%BD%AE/" class="post-title-link" itemprop="url">Shiro配置</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-11-04 13:34:38" itemprop="dateCreated datePublished" datetime="2019-11-04T13:34:38+08:00">2019-11-04</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-08 19:55:31" itemprop="dateModified" datetime="2019-11-08T19:55:31+08:00">2019-11-08</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/shiro/" itemprop="url" rel="index">
-                    <span itemprop="name">shiro</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Shiro配置"><a href="#Shiro配置" class="headerlink" title="Shiro配置"></a>Shiro配置</h1><hr>
-<h2 id="程序配置"><a href="#程序配置" class="headerlink" title="程序配置"></a>程序配置</h2><p>创建SecurityManager并将其提供给应用程序的最简单的绝对方法是创建一个org.apache.shiro.mgt.DefaultSecurityManager并将其连接到代码中。例如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Realm realm = //instantiate or acquire a Realm instance.  We&apos;ll discuss Realms later.</span><br><span class="line">SecurityManager securityManager = new DefaultSecurityManager(realm);</span><br><span class="line"></span><br><span class="line">//Make the SecurityManager instance available to the entire application via static memory: </span><br><span class="line">SecurityUtils.setSecurityManager(securityManager);</span><br></pre></td></tr></table></figure>
-
-<p>出乎意料的是，仅需三行代码，您便拥有了适用于许多应用程序的功能齐全的Shiro环境。那有多容易！！</p>
-<h2 id="INI配置"><a href="#INI配置" class="headerlink" title="INI配置"></a>INI配置</h2><p>相反，大多数应用程序受益于可以独立于源代码进行修改的基于文本的配置，对于不熟悉Shiro API的人来说，甚至可以使事情更容易理解。</p>
-<p>为了确保基于共同点的基于文本的配置机制可以在所有环境中以最少的第三方依赖性运行，Shiro支持INI格式来构建SecurityManager对象图及其支持组件。INI易于阅读，易于配置，设置简单，非常适合大多数应用。</p>
-<h3 id="从INI创建SecurityManager"><a href="#从INI创建SecurityManager" class="headerlink" title="从INI创建SecurityManager"></a>从INI创建SecurityManager</h3><p>这是两个如何基于INI配置构建SecurityManager的示例。</p>
-<h3 id="INI资源中的SecurityManager"><a href="#INI资源中的SecurityManager" class="headerlink" title="INI资源中的SecurityManager"></a>INI资源中的SecurityManager</h3><p>我们可以从INI资源路径创建SecurityManager实例。资源可以从文件系统，类路径，或者网址时前缀来获取file:，classpath:或url:分别。本示例使用a 从类路径的根Factory提取shiro.ini文件并返回SecurityManager实例：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">import org.apache.shiro.SecurityUtils;</span><br><span class="line">import org.apache.shiro.util.Factory;</span><br><span class="line">import org.apache.shiro.mgt.SecurityManager;</span><br><span class="line">import org.apache.shiro.config.IniSecurityManagerFactory;</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">Factory&lt;SecurityManager&gt; factory = new IniSecurityManagerFactory(&quot;classpath:shiro.ini&quot;);</span><br><span class="line">SecurityManager securityManager = factory.getInstance();</span><br><span class="line">SecurityUtils.setSecurityManager(securityManager);</span><br></pre></td></tr></table></figure>
-
-<h3 id="INI的各个节点"><a href="#INI的各个节点" class="headerlink" title="INI的各个节点"></a>INI的各个节点</h3><p>INI基本上是一种文本配置，由按唯一命名的部分组织的键/值对组成。键仅在每个部分中是唯一的，而不是在整个配置中都是唯一的（不同于JDK Properties）。但是，每个部分都可以视为一个单独的Properties定义。</p>
-<p>带注释的行可以以Octothorpe（＃-又名“哈希”，“英镑”或“数字”符号）或分号（’;’）开头。</p>
-<p>这是Shiro理解的部分示例：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"># =======================</span><br><span class="line"># Shiro INI configuration</span><br><span class="line"># =======================</span><br><span class="line"></span><br><span class="line">[main]</span><br><span class="line"># Objects and their properties are defined here,</span><br><span class="line"># Such as the securityManager, Realms and anything</span><br><span class="line"># else needed to build the SecurityManager</span><br><span class="line"></span><br><span class="line">[users]</span><br><span class="line"># The &apos;users&apos; section is for simple deployments</span><br><span class="line"># when you only need a small number of statically-defined</span><br><span class="line"># set of User accounts.</span><br><span class="line"></span><br><span class="line">[roles]</span><br><span class="line"># The &apos;roles&apos; section is for simple deployments</span><br><span class="line"># when you only need a small number of statically-defined</span><br><span class="line"># roles.</span><br><span class="line"></span><br><span class="line">[urls]</span><br><span class="line"># The &apos;urls&apos; section is used for url-based security</span><br><span class="line"># in web applications.  We&apos;ll discuss this section in the</span><br><span class="line"># Web documentation</span><br></pre></td></tr></table></figure>
-<h4 id="main"><a href="#main" class="headerlink" title="main"></a>main</h4><p>在此[main]部分中，您可以配置应用程序的SecurityManager实例及其任何依赖项，例如Realm。</p>
-<p>配置对象实例（如SecurityManager或其任何依赖项）听起来很难使用INI，因为在INI中，我们只能使用名称/值对。但是通过一些约定和对对象图的了解，您会发现您可以做很多事情。Shiro使用这些假设来启用简单但相当简洁的配置机制。</p>
-<p>我们经常喜欢将这种方法称为“穷人”依赖注入，尽管它不如成熟的Spring / Guice / JBoss XML文件强大，但是您会发现它可以完成很多工作而没有太多复杂性。当然，这些其他配置机制也可用，但是使用Shiro并不是必需的。</p>
-<p>只是为了激发您的胃口，这里有一个有效的[main]配置示例。我们将在下面详细介绍它，但是您可能会发现，仅凭直觉就已经了解了很多事情：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[main]</span><br><span class="line">sha256Matcher = org.apache.shiro.authc.credential.Sha256CredentialsMatcher</span><br><span class="line"></span><br><span class="line">myRealm = com.company.security.shiro.DatabaseRealm</span><br><span class="line">myRealm.connectionTimeout = 30000</span><br><span class="line">myRealm.username = jsmith</span><br><span class="line">myRealm.password = secret</span><br><span class="line">myRealm.credentialsMatcher = $sha256Matcher</span><br><span class="line"></span><br><span class="line">securityManager.sessionManager.globalSessionTimeout = 1800000</span><br></pre></td></tr></table></figure>
-
-<h5 id="定义对象"><a href="#定义对象" class="headerlink" title="定义对象"></a>定义对象</h5><p>请考虑以下[main]部分代码片段：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[main]</span><br><span class="line">myRealm = com.company.shiro.realm.MyRealm</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-
-<p>该行实例化一个类型为的新对象实例，com.company.shiro.realm.MyRealm并使该对象在myRealm名称下可用，以供进一步参考和配置。</p>
-<p>如果实例化的对象实现了该org.apache.shiro.util.Nameable接口，则将Nameable.setName使用名称值在该对象上调用方法（myRealm在此示例中）。</p>
-<h4 id="设置对象属性"><a href="#设置对象属性" class="headerlink" title="设置对象属性"></a>设置对象属性</h4><p>原始值：<br>只需使用等号即可分配简单的原始属性：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">myRealm.connectionTimeout = 30000</span><br><span class="line">myRealm.username = jsmith</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-
-<p>这些配置行转换为方法调用：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">myRealm.setConnectionTimeout(30000);</span><br><span class="line">myRealm.setUsername(&quot;jsmith&quot;);</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-
-<p>在幕后，默认情况下，Shiro 在设置这些属性时使用Apache Commons BeanUtils进行所有繁重的工作。因此，尽管INI值是文本，但是BeanUtils知道如何将字符串值转换为适当的原始类型，然后调用相应的JavaBeans setter方法。</p>
-<h4 id="引用类型的值"><a href="#引用类型的值" class="headerlink" title="引用类型的值"></a>引用类型的值</h4><p>如果您需要设置的值不是原始类型，而是另一个对象，该怎么办？好了，您可以使用美元符号（$）来引用先前定义的实例。例如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">sha256Matcher = org.apache.shiro.authc.credential.Sha256CredentialsMatcher</span><br><span class="line">...</span><br><span class="line">myRealm.credentialsMatcher = $sha256Matcher</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-
-<p>这只是找到名称为sha256Matcher定义的对象，然后使用BeanUtils在myRealm实例上设置该对象（通过调用myRealm.setCredentialsMatcher(sha256Matcher)方法）。</p>
-<p>嵌套属性<br>使用INI线的等号左侧的虚线表示法，可以遍历对象图以到达要设置的最终对象/属性。例如，此配置行：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">securityManager.sessionManager.globalSessionTimeout = 1800000</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-
-<p>集合属性<br>可以像设置其他任何属性一样直接设置列表，集合和地图，也可以将其设置为嵌套属性。对于集和列表，只需指定一个以逗号分隔的值或对象引用集。</p>
-<p>例如，一些SessionListeners：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sessionListener1 = com.company.my.SessionListenerImplementation</span><br><span class="line">...</span><br><span class="line">sessionListener2 = com.company.my.other.SessionListenerImplementation</span><br><span class="line">...</span><br><span class="line">securityManager.sessionManager.sessionListeners = $sessionListener1, $sessionListener2</span><br></pre></td></tr></table></figure>
-
-<p>对于map，您可以指定键值对的逗号分隔列表，其中每个键值对均以冒号’：’分隔。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">object1 = com.company.some.Class</span><br><span class="line">object2 = com.company.another.Class</span><br><span class="line">...</span><br><span class="line">anObject = some.class.with.a.Map.property</span><br><span class="line"></span><br><span class="line">anObject.mapProperty = key1:$object1, key2:$object2</span><br></pre></td></tr></table></figure>
-
-<p>覆盖实例<br>任何对象都可以由稍后在配置中定义的新实例覆盖。因此，例如，第二个myRealm定义将覆盖第一个：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">myRealm = com.company.security.MyRealm</span><br><span class="line">...</span><br><span class="line">myRealm = com.company.security.DatabaseRealm</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-
-<p>这将导致myRealm成为一个com.company.security.DatabaseRealm实例，并且以前的实例将永远不会被使用（并收集垃圾）。</p>
-<h4 id="默认的SecurityManager"><a href="#默认的SecurityManager" class="headerlink" title="默认的SecurityManager"></a>默认的SecurityManager</h4><p>您可能已经在上面的完整示例中注意到，尚未定义SecurityManager实例的类，而我们直接跳到设置了一个嵌套属性：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">myRealm = ...</span><br><span class="line"></span><br><span class="line">securityManager.sessionManager.globalSessionTimeout = 1800000</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-
-<p>这是因为securityManager实例是一个特殊的实例-它已经为您实例化并且可以使用了，因此您无需知道SecurityManager要实例化的特定实现类。</p>
-<p>当然，如果您实际上要指定自己的实现，则可以按照上面“覆盖实例”部分中的定义定义实现：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">securityManager = com.company.security.shiro.MyCustomSecurityManager</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-
-<p>当然，这几乎是不需要的-Shiro的SecurityManager实现是非常可定制的，通常可以配置任何必要的东西。您可能想问问自己（或用户列表）是否真的需要这样做。</p>
-<h3 id="User"><a href="#User" class="headerlink" title="User"></a>User</h3><p>本[users]部分允许您定义一组静态的用户帐户。这在用户帐户数量很少或不需要在运行时动态创建用户帐户的环境中最有用。这是一个例子：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[users]</span><br><span class="line">admin = secret</span><br><span class="line">lonestarr = vespa, goodguy, schwartz</span><br><span class="line">darkhelmet = ludicrousspeed, badguy, schwartz</span><br></pre></td></tr></table></figure>
-
-<h4 id="行格式"><a href="#行格式" class="headerlink" title="行格式"></a>行格式</h4><p>[users]部分中的每一行都必须符合以下格式：<br>username= password，roleName1，roleName2，…，roleNameN</p>
-<ul>
-<li>等号左侧的值是用户名</li>
-<li>等号右边的第一个值是用户的密码。必须输入密码。</li>
-<li>密码后的任何逗号分隔值都是分配给该用户的角色的名称。角色名称是可选的。</li>
-</ul>
-<h4 id="加密密码"><a href="#加密密码" class="headerlink" title="加密密码"></a>加密密码</h4><p>如果您不希望[users]部分的密码为纯文本格式，则可以根据自己的喜好使用自己喜欢的哈希算法（MD5，Sha1，Sha256等）对它们进行加密，并将结果字符串用作密码值。默认情况下，密码字符串应为十六进制编码，但可以将其配置为Base64编码（请参见下文）。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">简易安全密码</span><br><span class="line">为了节省时间并使用最佳实践，您可能需要使用Shiro的Command Line Hasher，它将对密码以及任何其他类型的资源进行哈希处理。这对于加密INI [users]密码特别方便。</span><br></pre></td></tr></table></figure>
-
-<p>指定哈希文本密码值后，您必须告诉Shiro这些密码已加密。您可以通过配置iniRealm[main]部分中隐式创建的配置，以使用CredentialsMatcher与您指定的哈希算法相对应的适当实现来做到这一点：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[main]</span><br><span class="line">...</span><br><span class="line">sha256Matcher = org.apache.shiro.authc.credential.Sha256CredentialsMatcher</span><br><span class="line">...</span><br><span class="line">iniRealm.credentialsMatcher = $sha256Matcher</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">[users]</span><br><span class="line"># user1 = sha256-hashed-hex-encoded password, role1, role2, ...</span><br><span class="line">user1 = 2bb80d537b1da3e38bd30361aa855686bde0eacd7162fef6a25fe97bf527a25b, role1, role2, ...</span><br></pre></td></tr></table></figure>
-
-
-<p>您可以配置在任何属性CredentialsMatcher像任何其他对象，以反映你的散列策略，例如，指定是否使用或有多少哈希迭代执行腌制。请参阅org.apache.shiro.authc.credential.HashedCredentialsMatcherJavaDoc以更好地了解哈希策略以及它们是否对您有用。</p>
-<p>例如，如果用户的密码字符串是Base64编码的，而不是默认的十六进制，则可以指定：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[main]</span><br><span class="line">...</span><br><span class="line"># true = hex, false = base64:</span><br><span class="line">sha256Matcher.storedCredentialsHexEncoded = false</span><br></pre></td></tr></table></figure>
-
-<h3 id="roles"><a href="#roles" class="headerlink" title="roles"></a>roles</h3><p>本[roles]部分允许您将权限与[用户]部分中定义的角色相关联。同样，这在角色数量少的环境中或不需要在运行时动态创建角色的环境中很有用。这是一个例子：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[roles]</span><br><span class="line"># &apos;admin&apos; role has all permissions, indicated by the wildcard &apos;*&apos;</span><br><span class="line">admin = *</span><br><span class="line"># The &apos;schwartz&apos; role can do anything (*) with any lightsaber:</span><br><span class="line">schwartz = lightsaber:*</span><br><span class="line"># The &apos;goodguy&apos; role is allowed to &apos;drive&apos; (action) the winnebago (type) with</span><br><span class="line"># license plate &apos;eagle5&apos; (instance specific id)</span><br><span class="line">goodguy = winnebago:drive:eagle5</span><br></pre></td></tr></table></figure>
-
-<h4 id="行格式-1"><a href="#行格式-1" class="headerlink" title="行格式"></a>行格式</h4><p>[角色]部分中的每一行都必须使用以下格式定义角色到权限的键/值映射：<br>rolename= PermissionDefinition1，PermissionDefinition2，…，permissionDefinitionN<br>这里的PermissionDefinition是一个任意字符串，但是大多数人会希望使用符合格式的字符串，<br>以org.apache.shiro.authz.permission.WildcardPermission易于使用和灵活。有关权限以及如何从中受益的更多信息，请参见权限(<a href="https://shiro.apache.org/permissions.html)文档。" target="_blank" rel="noopener">https://shiro.apache.org/permissions.html)文档。</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> 内部逗号</span><br><span class="line">请注意，如果单个的PermissionDefinition需要在内部用逗号分隔（例如printer:5thFloor:print,info），则需要在该定义周围加上双引号（“），以避免解析错误：&quot;printer:5thFloor:print,info&quot;</span><br></pre></td></tr></table></figure>
-
-<h3 id="urls"><a href="#urls" class="headerlink" title="[urls]"></a>[urls]</h3><p>[urls]项允许你做一些在我们已经见过的任何 Web 框架都不存在的东西：在你的应用程序中定义自适应过滤器链来匹配URL 路径！</p>
-<p>这将更为灵活，功能更为强大，比你通常在 web.xml 中定义的过滤器链更为简洁：即使你从未使用任何 Shiro 提供的其他功能并仅仅使用了这个，但它即使是单独使用也是值得的。</p>
-<p>[urls]<br>在urls 项的每一行格式如下：<br>URL_Ant_Path_Expression = Path_Specific_Filter_Chain<br>举例：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">[urls]</span><br><span class="line"></span><br><span class="line">/index.html = anon</span><br><span class="line">/user/create = anon</span><br><span class="line">/user/** = authc</span><br><span class="line">/admin/** = authc, roles[administrator]</span><br><span class="line">/rest/** = authc, rest</span><br><span class="line">/remoting/rpc/** = authc, perms[&quot;remote:invoke&quot;]</span><br></pre></td></tr></table></figure>
-
-<p>接下来我们将讨论这些行的具体含义</p>
-<h4 id="URL-Path-Expressions"><a href="#URL-Path-Expressions" class="headerlink" title="URL Path Expressions"></a>URL Path Expressions</h4><p>等号左边是一个与Web 应用程序上下文根目录相关的 Ant 风格的路径表达式。<br>例如，假设你有如下的[urls]行：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/account/** = ssl, authc</span><br></pre></td></tr></table></figure>
-
-<p>此行表明，“任何对我应用程序的/accout 或任何它的子路径（/account/foo, account/bar/baz，等等）的请求都将触发’ssl, authc’过滤器链”。我们将在下面讨论过滤器链。</p>
-<p>请注意，所有的路径表达式都是相对于你的应用程序的上下文根目录而言的。这意味着如果某一天你在某个位置部署了你的应用程序，如 <a href="http://www.somehost.com/myapp" target="_blank" rel="noopener">www.somehost.com/myapp</a> ，然后又将它部署到了 <a href="http://www.anotherhost.com" target="_blank" rel="noopener">www.anotherhost.com</a> （没有’myapp’子目录），这样的匹配模式仍将继续工作。所有的路径都是相对于 HttpServletRequest.getContextPath() 的值来的。</p>
-<p>Order Matters! 秩序<br>URL 路径表达式按事先定义好的顺序判断传入的请求，并遵循 FIRST MATCH WINS 这一原则。例如，让我们假设有如下链的定义：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/account/** = ssl, authc</span><br><span class="line">/account/signup = anon</span><br></pre></td></tr></table></figure>
-
-<p>如果传入的请求旨在访问 /account/signup/index.html（所有 ‘anon’ymous 用户都能访问），那么它将永不会被处理！原因是因为/account/* 的模式第一个匹配了传入的请求，“短路”了其余的定义。 始终记住基于FIRST MATCH WINS 的原则定义你的过滤器链！*</p>
-<h4 id="Filter-Chain-Definitions-定义"><a href="#Filter-Chain-Definitions-定义" class="headerlink" title="Filter Chain Definitions 定义"></a>Filter Chain Definitions 定义</h4><p>等号右边是逗号隔开的过滤器列表，用来执行匹配该路径的请求。它必须符合以下格式：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">filter1[optional_config1], filter2[optional_config2], ..., filterN[optional_configN]</span><br></pre></td></tr></table></figure>
-
-<p>并且：</p>
-<ul>
-<li>filterN 是一个定义在[main]项中的 filter bean 的名字</li>
-<li>[optional_configN]是一个可选的括号内的对特定的路径，特定的过滤器有特定含义的字符串（每个过滤器，每个路径的具体配置！）。若果该过滤器对该 URL 路径并不需要特定的配置，你可以忽略括号，于是 filteNr[] 就变成了 filterN.</li>
-</ul>
-<p>因为过滤器标志符定义了链（又名列表），所以请记住顺序问题！请按顺序定义好你的逗号分隔的列表，这样请求就能够流通这个链。<br>最后，每个过滤器按照它期望的方式自由的处理请求，即使不具备必要的条件（例如，执行一个重定向，响应一个 HTTP 错误代码，直接渲染等）。否则，它有可能允许该请求继续通过这个过滤器链到达最终的视图。</p>
-<p>确保能够对路径的具体配置作出反应，即[optional_configN]一个过滤器标志符的一部分，是一个对所有Shiro 过滤器 适用的独有的功能。</p>
-<p>你也可以这样做，如果你想创建你自己的 javax.servlet.Filter 的实现的话，确保你的过滤器子类<br>(<a href="http://shiro.apache.org/static/1.4.1/apidocs/org/apache/shiro/web/filter/PathMatchingFilter.html" target="_blank" rel="noopener">http://shiro.apache.org/static/1.4.1/apidocs/org/apache/shiro/web/filter/PathMatchingFilter.html</a>)</p>
-<h4 id="Available-Filters-可用的过滤器"><a href="#Available-Filters-可用的过滤器" class="headerlink" title="Available Filters 可用的过滤器"></a>Available Filters 可用的过滤器</h4><p>在过滤器链中能够使用的过滤器“池”被定义在[main]项。在[main]项中指派给它们的名字就是在过滤器链定义中使 用的名字。例如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[main]</span><br><span class="line">...</span><br><span class="line">myFilter = com.company.web.some.FilterImplementation</span><br><span class="line">myFilter.property1 = value1</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">[urls]</span><br><span class="line">...</span><br><span class="line">/some/path/** = myFilter</span><br></pre></td></tr></table></figure>
-
-<h4 id="Default-Filters"><a href="#Default-Filters" class="headerlink" title="Default Filters"></a>Default Filters</h4><p>当运行一个 Web 应用程序时，Shiro 将会创建一些有用的默认 Filter 实例，并自动地在[main]项中将它们置为可用。</p>
-<p>你可以在 main 中配置它们，当作在你的链的定义中你是否有任何其他的bean 和 reference。例如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[main]</span><br><span class="line">...</span><br><span class="line"># Notice how we didn&apos;t define the class for the FormAuthenticationFilter (&apos;authc&apos;) - it is instantiated and available already:</span><br><span class="line">authc.loginUrl = /login.jsp</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">[urls]</span><br><span class="line">...</span><br><span class="line"># make sure the end-user is authenticated.  If not, redirect to the &apos;authc.loginUrl&apos; above,</span><br><span class="line"># and after successful authentication, redirect them back to the original account page they</span><br><span class="line"># were trying to view:</span><br><span class="line">/account/** = authc</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-
-<p>自动地可用的默认的Filter 实例是被 DefaultFilter 枚举定义的，枚举的名称字段是可供配置的名称。它们是：</p>
-<p>iframe id=”tmp_downloadhelper_iframe” style=”display: none;” /iframe</p>
-<p><img src="https://i.loli.net/2019/11/08/RPKzTFsi6vDruGy.png" alt="shiro13.PNG"></p>
-<table>
-<thead>
-<tr>
-<th>Filter Name</th>
-<th>Class</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>anon</td>
-<td>org.apache.shiro.web.filter.authc.AnonymousFilter</td>
-<td>匿名拦截器，即不需要登录即可访问；一般用于静态资源过滤；示例/static/**=anon</td>
-</tr>
-<tr>
-<td>authc</td>
-<td>org.apache.shiro.web.filter.authc.FormAuthenticationFilter</td>
-<td>基于表单的拦截器；如/**=authc，如果没有登录会跳到相应的登录页面登录</td>
-</tr>
-<tr>
-<td>authcBasic</td>
-<td>org.apache.shiro.web.filter.authc.BasicHttpAuthenticationFilter</td>
-<td>Basic HTTP身份验证拦截器</td>
-</tr>
-<tr>
-<td>logout</td>
-<td>org.apache.shiro.web.filter.authc.LogoutFilter</td>
-<td>退出拦截器，主要属性：redirectUrl：退出成功后重定向的地址（/），示例/logout=logout</td>
-</tr>
-<tr>
-<td>noSessionCreation</td>
-<td>org.apache.shiro.web.filter.session.NoSessionCreationFilter</td>
-<td>不创建会话拦截器，调用subject.getSession(false)不会有什么问题，但是如果subject.getSession(true)将抛出DisabledSessionException异常</td>
-</tr>
-<tr>
-<td>perms</td>
-<td>org.apache.shiro.web.filter.authz.PermissionsAuthorizationFilter</td>
-<td>权限授权拦截器，验证用户是否拥有所有权限；属性和roles一样；示例/user/**=perms[“user:create”]</td>
-</tr>
-<tr>
-<td>port</td>
-<td>org.apache.shiro.web.filter.authz.PortFilter</td>
-<td>端口拦截器，主要属性port(80)：可以通过的端口；示例/test= port[80]，如果用户访问该页面是非80，将自动将请求端口改为80并重定向到该80端口，其他路径/参数等都一样</td>
-</tr>
-<tr>
-<td>rest</td>
-<td>org.apache.shiro.web.filter.authz.HttpMethodPermissionFilter</td>
-<td>rest风格拦截器，自动根据请求方法构建权限字符串；示例/users=rest[user]，会自动拼出user:read,user:create,user:update,user:delete权限字符串进行权限匹配（所有都得匹配，isPermittedAll）</td>
-</tr>
-<tr>
-<td>roles</td>
-<td>org.apache.shiro.web.filter.authz.RolesAuthorizationFilter</td>
-<td>角色授权拦截器，验证用户是否拥有所有角色；示例/admin/**=roles[admin]</td>
-</tr>
-<tr>
-<td>ssl</td>
-<td>org.apache.shiro.web.filter.authz.SslFilter</td>
-<td>SSL拦截器，只有请求协议是https才能通过；否则自动跳转会https端口443；其他和port拦截器一样；</td>
-</tr>
-<tr>
-<td>user</td>
-<td>org.apache.shiro.web.filter.authc.UserFilter</td>
-<td>用户拦截器，用户已经身份验证/记住我登录的都可；示例/**=user</td>
-</tr>
-</tbody></table>
-<h4 id="启用和禁用过滤器启动，补充过滤器"><a href="#启用和禁用过滤器启动，补充过滤器" class="headerlink" title="启用和禁用过滤器启动，补充过滤器"></a>启用和禁用过滤器启动，补充过滤器</h4>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/04/Spring/%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0springboot%E4%B8%AD%E7%9A%84SpringApplication/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lancersaber">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lancersaber">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/04/Spring/%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0springboot%E4%B8%AD%E7%9A%84SpringApplication/" class="post-title-link" itemprop="url">深入学习Springboot中的SpringApplication</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2019-11-04 10:52:19 / Modified: 20:18:26" itemprop="dateCreated datePublished" datetime="2019-11-04T10:52:19+08:00">2019-11-04</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/spring/" itemprop="url" rel="index">
-                    <span itemprop="name">spring</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="深入学习Springboot中的SpringApplication"><a href="#深入学习Springboot中的SpringApplication" class="headerlink" title="深入学习Springboot中的SpringApplication"></a>深入学习Springboot中的SpringApplication</h1><hr>
-<p>在Spring Boot的入口类中，我们通常是通过调用SpringApplication的run方法来启动Spring Boot项目。这节我们来深入学习下SpringApplication的一些细节。</p>
-<h2 id="自定义Springboot-Application"><a href="#自定义Springboot-Application" class="headerlink" title="自定义Springboot Application"></a>自定义Springboot Application</h2><p>默认的我们都是直接通过SpringApplication的run方法来直接启动Spring Boot，其实我们可以通过一些API来调整某些行为。</p>
-<h3 id="通过SpringApplication-API调整"><a href="#通过SpringApplication-API调整" class="headerlink" title="通过SpringApplication API调整"></a>通过SpringApplication API调整</h3><p>我们新建一个SpringBoot项目，Spring Boot版本为2.1.0.RELEASE，artifactId为SpringApplication，并引入spring-boot-starter-web依赖。<br>我们将入口类的代码改为：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">SpringApplication application = new SpringApplication(DemoApplication.class);</span><br><span class="line">application.setBannerMode(Banner.Mode.OFF);</span><br><span class="line">application.setWebApplicationType(WebApplicationType.NONE);</span><br><span class="line">application.setAdditionalProfiles(&quot;dev&quot;);</span><br><span class="line">application.run(args);</span><br></pre></td></tr></table></figure>
-<p>通过调用SpringApplication的方法，我们关闭了Banner的打印，设置应用环境为非WEB应用，profiles指定为dev。除此之外，SpringApplication还包含了许多别的方法，具体可以查看源码或者官方文档：<br><img src="https://i.loli.net/2019/11/04/UXtg3GvHKd9a8Ar.png" alt="QQ截图20190223101959.png"></p>
-<h3 id="通过SpringApplicationBuilder-API调整"><a href="#通过SpringApplicationBuilder-API调整" class="headerlink" title="通过SpringApplicationBuilder API调整"></a>通过SpringApplicationBuilder API调整</h3><p>SpringApplicationBuilder提供了Fluent API，可以实现链式调用，下面的代码和上面的效果一致，但在编写上较为方便：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">new SpringApplicationBuilder(DemoApplication.class)</span><br><span class="line">        .bannerMode(Banner.Mode.OFF)</span><br><span class="line">        .web(WebApplicationType.NONE)</span><br><span class="line">        .profiles(&quot;dev&quot;)</span><br><span class="line">        .run(args);</span><br></pre></td></tr></table></figure>
-
-<h2 id="SpringApplication准备阶段"><a href="#SpringApplication准备阶段" class="headerlink" title="SpringApplication准备阶段"></a>SpringApplication准备阶段</h2><p>SpringApplication的生命周期阶段大致可以分为准备阶段和运行阶段。</p>
-<p>我们通过源码来查看SpringApplication的有参构造器：<br><img src="https://i.loli.net/2019/11/04/lnBQ2OJhU3Am5KN.png" alt="QQ截图20190223102806.png"><br>通过有参构造器里的代码我们可以将SpringApplication的准备阶段分为以下几个步骤：</p>
-<h3 id="配置源"><a href="#配置源" class="headerlink" title="配置源"></a>配置源</h3><p>构造器中this.primarySources = new LinkedHashSet&lt;&gt;(Arrays.asList(primarySources));这行代码用于加载我们配置的Spring Boot Bean源。。通常我们使用SpringApplication或者SpringApplicationBuilder的构造器来直接指定源。</p>
-<p>所谓的Spring Boot Bean源指的是某个被@SpringBootApplication注解标注的类，比如入口类：</p>
-<p><img src="https://i.loli.net/2019/11/04/alymOoqibSn1Dkj.png" alt="QQ截图20190223104742.png"></p>
-<p>我们也可以将上面的代码改为下面这种方式：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public class DemoApplication &#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        SpringApplication application = new SpringApplication(ApplicationResource.class);</span><br><span class="line">        application.run(args);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @SpringBootApplication</span><br><span class="line">    public static class ApplicationResource &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这样也是可行的。查看SpringApplication的单个参数构造器：<br><img src="https://i.loli.net/2019/11/04/XkeFJrHvYgV19DW.png" alt="QQ截图20190223105200.png"><br>说明我们除了配置单个源外，还可以配置多个源。</p>
-<h3 id="推断应用类型"><a href="#推断应用类型" class="headerlink" title="推断应用类型"></a>推断应用类型</h3><p>构造器中这行this.webApplicationType = WebApplicationType.deduceFromClasspath();代码用于推断当前Spring Boot应用类型。<br>Spring Boot 2.0后，应用可以分为下面三种类型：<br>1、WebApplicationType.NONE：非WEB类型；</p>
-<p>2、WebApplicationType.REACTIVE：Web Reactive类型；</p>
-<p>3、WebApplicationType.SERVLET：Web Servlet类型。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/04/Spring/%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0Spring%E7%BB%84%E4%BB%B6%E6%B3%A8%E5%86%8C/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lancersaber">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lancersaber">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/04/Spring/%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0Spring%E7%BB%84%E4%BB%B6%E6%B3%A8%E5%86%8C/" class="post-title-link" itemprop="url">深入学习Spring组件注册</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-11-04 09:58:12" itemprop="dateCreated datePublished" datetime="2019-11-04T09:58:12+08:00">2019-11-04</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-06 21:48:01" itemprop="dateModified" datetime="2019-11-06T21:48:01+08:00">2019-11-06</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/spring/" itemprop="url" rel="index">
-                    <span itemprop="name">spring</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="深入学习Spring组件注册"><a href="#深入学习Spring组件注册" class="headerlink" title="深入学习Spring组件注册"></a>深入学习Spring组件注册</h1><hr>
-<p>接触过Spring的同学肯定都听过IOC。在传统的Java编程中，当需要用到某个对象的时候，我们都是主动地显示创建一个对象实例（new）。使用Spring后就不需要这样做了，因为Spring会帮我们在需要用到某些对象的地方自动注入该对象，而无须我们自己去创建。这种模式俗称控制反转，即IOC（Inversion of Control）。那么Spring是从什么地方获取到我们所需要的对象呢？其实Spring给我们提供了一个IOC容器，里面管理着所有我们需要的对象，组件注册就是我们去告诉Spring哪些类需要交给IOC容器管理。</p>
-<p>这里主要记录组件注册的一些细节。</p>
-<h2 id="通过-Bean注册组件"><a href="#通过-Bean注册组件" class="headerlink" title="通过@Bean注册组件"></a>通过@Bean注册组件</h2><p>在较早版本的Spring中，我们都是通过XML的方式来往IOC容器中注册组件的，下面这段代码大家肯定不会陌生：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// 返回 IOC 容器，基于 XML配置，传入配置文件的位置</span><br><span class="line">ApplicationContext applicationContext = new ClassPathXmlApplicationContext(&quot;xxx.xml&quot;);</span><br><span class="line">User user = (User) applicationContext.getBean(&quot;user&quot;);</span><br></pre></td></tr></table></figure>
-
-<p>Spring 4后推荐我们使用Java Config的方式来注册组件。</p>
-<p>为了演示，我们通过<a href="http://start.spring.io/搭建一个简单Spring" target="_blank" rel="noopener">http://start.spring.io/搭建一个简单Spring</a> Boot应用，然后引入Lombok依赖（编辑器也需要安装Lombok插件）：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.projectlombok&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;lombok&lt;/artifactId&gt;</span><br><span class="line">    &lt;scope&gt;provided&lt;/scope&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
-
-<p>lombok注解解释</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@AllArgsConstructor:增加全参构造器</span><br><span class="line">@NoArgsConstructor ：增加无参构造器</span><br><span class="line"></span><br><span class="line">@ToString:增加toString方法</span><br><span class="line">@Getter：增加get方法</span><br><span class="line">@Setter：增加set方法</span><br><span class="line">@Data:@ToString,@EqualsAndHashCode,@Getter and @Setter的集合</span><br></pre></td></tr></table></figure>
-
-<p>然后创建一个User类：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@ToString</span><br><span class="line">@AllArgsConstructor</span><br><span class="line">@Data</span><br><span class="line">public class User &#123;</span><br><span class="line">    private String name;</span><br><span class="line">    private Integer age;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>接着创建一个配置类，在里面通过@Bean注解注册User类：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">public class WebConfig &#123;</span><br><span class="line">    @Bean()</span><br><span class="line">    public User user() &#123;</span><br><span class="line">        return new User(&quot;mrbird&quot;, 18);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>通过@Bean注解，我们向IOC容器注册了一个名称为user（Bean名称默认为方法名，我们也可以通过@Bean(“myUser”)方式来将组件名称指定为myUser）。<br>组件注册完毕后，我们测试一下从IOC容器中获取这个组件。在Spring Boot入口类中编写如下代码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@SpringBootApplication</span><br><span class="line">public class DemoApplication &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">    	SpringApplication.run(DemoApplication.class, args);</span><br><span class="line"></span><br><span class="line">        // 返回 IOC 容器，使用注解配置，传入配置类</span><br><span class="line">        ApplicationContext context = new AnnotationConfigApplicationContext(WebConfig.class);</span><br><span class="line">        User user = context.getBean(User.class);</span><br><span class="line">        System.out.println(user);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>因为我们是通过注解方式来注册组件的，所以需要使用AnnotationConfigApplicationContext来获取相应的IOC容器，入参为配置类。</p>
-<p>启动项目，看下控制台输出：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">User(name=mrbird, age=18)</span><br></pre></td></tr></table></figure>
-
-<h2 id="使用-ComponentScan扫描"><a href="#使用-ComponentScan扫描" class="headerlink" title="使用@ComponentScan扫描"></a>使用@ComponentScan扫描</h2><p>在使用XML配置组件扫描的时候，我们都是这样配置的：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;context:component-scan base-package=&quot;&quot;&gt;&lt;/context:component-scan&gt;</span><br></pre></td></tr></table></figure>
-
-<p>其中base-package指定了扫描的路径。路径下所有被@Controller、@Service、@Repository和@Component注解标注的类都会被纳入IOC容器中。</p>
-<p>现在我们脱离XML配置后，可以使用@ComponentScan注解来扫描组件并注册。</p>
-<p>在使用@ComponentScan扫描之前，我们先创建一个Controller，一个Service，一个Dao，并标注上相应的注解。</p>
-<p>然后修改配置类：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">@ComponentScan(&quot;cc.mrbird.demo&quot;)</span><br><span class="line">public class WebConfig &#123;</span><br><span class="line"></span><br><span class="line">    // @Bean(&quot;myUser&quot;)</span><br><span class="line">    // public User user() &#123;</span><br><span class="line">    //     return new User(&quot;mrbird&quot;, 18);</span><br><span class="line">    // &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在配置类中，我们通过@ComponentScan(“cc.mrbird.demo”)配置了扫描路径，并且将User组件注册注释掉了，取而代之的是在User类上加上@Component注解：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@ToString</span><br><span class="line">@AllArgsConstructor</span><br><span class="line">@NoArgsConstructor</span><br><span class="line">@Data</span><br><span class="line">@Component</span><br><span class="line">public class User &#123;</span><br><span class="line">    private String name;</span><br><span class="line">    private Integer age;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Tips:值得注意的是，我们不能将Spring Boot的入口类纳入扫描范围中，否则项目启动将出错。<br>接下来我们看下在基于注解的IOC容器中是否包含了这些组件：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@SpringBootApplication</span><br><span class="line">public class DemoApplication &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        SpringApplication.run(DemoApplication.class, args);</span><br><span class="line"></span><br><span class="line">        ApplicationContext context = new AnnotationConfigApplicationContext(WebConfig.class);</span><br><span class="line">        // 查看基于注解的 IOC容器中所有组件名称</span><br><span class="line">        String[] beanNames = context.getBeanDefinitionNames();</span><br><span class="line">        Arrays.stream(beanNames).forEach(System.out::println);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>启动项目，观察控制台：<br><img src="https://i.loli.net/2019/11/06/843mfaP5ljxdpbD.png" alt="QQ截图20181207164418.png"><br>可见，组件已经成功被扫描进去了，并且名称默认为类名首字母小写。</p>
-<p>这里，配置类WebConfig也被扫描并注册了，查看@Configuration源码就会发现原因：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@Target(ElementType.TYPE)</span><br><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">@Documented</span><br><span class="line">@Component</span><br><span class="line">public @interface Configuration &#123;</span><br><span class="line">    String value() default &quot;&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="指定扫描策略"><a href="#指定扫描策略" class="headerlink" title="指定扫描策略"></a>指定扫描策略</h3><p>@ComponentScan注解允许我们指定扫描策略，即指定哪些被扫描，哪些不被扫描，查看其源码可发现这两个属性</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Specifies which types are eligible for component scanning.</span><br><span class="line"> * &lt;p&gt;Further narrows the set of candidate components from everything in &#123;@link #basePackages&#125;</span><br><span class="line"> * to everything in the base packages that matches the given filter or filters.</span><br><span class="line"> * &lt;p&gt;Note that these filters will be applied in addition to the default filters, if specified.</span><br><span class="line"> * Any type under the specified base packages which matches a given filter will be included,</span><br><span class="line"> * even if it does not match the default filters (i.e. is not annotated with &#123;@code @Component&#125;).</span><br><span class="line"> * @see #resourcePattern()</span><br><span class="line"> * @see #useDefaultFilters()</span><br><span class="line"> */</span><br><span class="line">Filter[] includeFilters() default &#123;&#125;;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * Specifies which types are not eligible for component scanning.</span><br><span class="line"> * @see #resourcePattern</span><br><span class="line"> */</span><br><span class="line">Filter[] excludeFilters() default &#123;&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>其中Filter也是一个注解:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Declares the type filter to be used as an &#123;@linkplain ComponentScan#includeFilters</span><br><span class="line"> * include filter&#125; or &#123;@linkplain ComponentScan#excludeFilters exclude filter&#125;.</span><br><span class="line"> */</span><br><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">@Target(&#123;&#125;)</span><br><span class="line">@interface Filter &#123;</span><br><span class="line"></span><br><span class="line">    FilterType type() default FilterType.ANNOTATION;</span><br><span class="line"></span><br><span class="line">    @AliasFor(&quot;classes&quot;)</span><br><span class="line">    Class&lt;?&gt;[] value() default &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    @AliasFor(&quot;value&quot;)</span><br><span class="line">    Class&lt;?&gt;[] classes() default &#123;&#125;;</span><br><span class="line">    String[] pattern() default &#123;&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>接下来我们使用excludeFilters来排除一些组件的扫描：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">@ComponentScan(value = &quot;cc.mrbird.demo&quot;,</span><br><span class="line">        excludeFilters = &#123;</span><br><span class="line">                @Filter(type = FilterType.ANNOTATION,</span><br><span class="line">                        classes = &#123;Controller.class, Repository.class&#125;),</span><br><span class="line">                @Filter(type = FilterType.ASSIGNABLE_TYPE, classes = User.class)</span><br><span class="line">        &#125;)</span><br><span class="line">public class WebConfig &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>上面我们指定了两种排除扫描的规则：<br>1、根据注解来排除（type = FilterType.ANNOTATION）,这些注解的类型为classes = {Controller.class, Repository.class}。即Controller和Repository注解标注的类不再被纳入到IOC容器中。</p>
-<p>2、根据指定类型类排除（type = FilterType.ASSIGNABLE_TYPE），排除类型为User.class，其子类，实现类都会被排除。</p>
-<p>启动项目，观察控制台：<br><img src="https://i.loli.net/2019/11/06/tZnzrAiHm1Rj3dk.png" alt="QQ截图20190129103606.png"></p>
-<p>除了上面两种常用的规则外，我们还可以使用别的规则，查看FilterType源码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">public enum FilterType &#123;</span><br><span class="line">    /**</span><br><span class="line">     * Filter candidates marked with a given annotation.</span><br><span class="line">     *</span><br><span class="line">     * @see org.springframework.core.type.filter.AnnotationTypeFilter</span><br><span class="line">     */</span><br><span class="line">    ANNOTATION,</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * Filter candidates assignable to a given type.</span><br><span class="line">     *</span><br><span class="line">     * @see org.springframework.core.type.filter.AssignableTypeFilter</span><br><span class="line">     */</span><br><span class="line">    ASSIGNABLE_TYPE,</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * Filter candidates matching a given AspectJ type pattern expression.</span><br><span class="line">     *</span><br><span class="line">     * @see org.springframework.core.type.filter.AspectJTypeFilter</span><br><span class="line">     */</span><br><span class="line">    ASPECTJ,</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * Filter candidates matching a given regex pattern.</span><br><span class="line">     *</span><br><span class="line">     * @see org.springframework.core.type.filter.RegexPatternTypeFilter</span><br><span class="line">     */</span><br><span class="line">    REGEX,</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * Filter candidates using a given custom</span><br><span class="line">     * &#123;@link org.springframework.core.type.filter.TypeFilter&#125; implementation.</span><br><span class="line">     */</span><br><span class="line">    CUSTOM</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="多扫描策略配置"><a href="#多扫描策略配置" class="headerlink" title="多扫描策略配置"></a>多扫描策略配置</h3><p>在Java 8之前，我们可以使用@ComponentScans来配置多个@ComponentScan以实现多扫描规则配置：<br><img src="https://i.loli.net/2019/11/06/jLfierT5y86NqMS.png" alt="QQ截图20190129100809.png"><br>而在Java 8中，新增了@Repeatable注解，使用该注解修饰的注解可以重复使用，查看@ComponentScan源码会发现其已经被该注解标注：<br><img src="https://i.loli.net/2019/11/06/QkHAMz6gZPo8Rhb.png" alt="QQ截图20190129101050.png"><br>所以除了使用@ComponentScans来配置多扫描规则外，我们还可以通过多次使用@ComponentScan来指定多个不同的扫描规则。</p>
-<h3 id="自定义策略配置"><a href="#自定义策略配置" class="headerlink" title="自定义策略配置"></a>自定义策略配置</h3><h2 id="组件作用域-Scope"><a href="#组件作用域-Scope" class="headerlink" title="组件作用域@Scope"></a>组件作用域@Scope</h2><p>默认情况下，在Spring的IOC容器中每个组件都是单例的，即无论在任何地方注入多少次，这些对象都是同一个，我们来看下例子。</p>
-<p>首先将User对象中的@Component注解去除，然后在配置类中配置User Bean：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">public class WebConfig &#123;</span><br><span class="line">    @Bean</span><br><span class="line">    public User user() &#123;</span><br><span class="line">        return new User(&quot;mrbird&quot;, 18);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>接着多次从IOC容器中获取这个组件，看看是否为同一个：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 返回 IOC 容器，使用注解配置，传入配置类</span><br><span class="line">ApplicationContext context = new AnnotationConfigApplicationContext(WebConfig.class);</span><br><span class="line">Object user1 = context.getBean(&quot;user&quot;);</span><br><span class="line">Object user2 = context.getBean(&quot;user&quot;);</span><br><span class="line">System.out.println(user1 == user2);</span><br></pre></td></tr></table></figure>
-
-<p>启动项目，观察控制台输出:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">true</span><br></pre></td></tr></table></figure>
-
-<p>结果证实了上面的观点。</p>
-<p>在Spring中我们可以使用@Scope注解来改变组件的作用域：</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/04/Spring/%E6%B7%B1%E5%85%A5Spring%20boot%E8%87%AA%E5%8A%A8%E8%A3%85%E9%85%8D/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lancersaber">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lancersaber">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/04/Spring/%E6%B7%B1%E5%85%A5Spring%20boot%E8%87%AA%E5%8A%A8%E8%A3%85%E9%85%8D/" class="post-title-link" itemprop="url">深入Spring boot自动装配</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2019-11-04 08:33:38 / Modified: 11:08:19" itemprop="dateCreated datePublished" datetime="2019-11-04T08:33:38+08:00">2019-11-04</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/spring/" itemprop="url" rel="index">
-                    <span itemprop="name">spring</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="深入Spring-boot自动装配"><a href="#深入Spring-boot自动装配" class="headerlink" title="深入Spring boot自动装配"></a>深入Spring boot自动装配</h1><hr>
-<h2 id="模式注解"><a href="#模式注解" class="headerlink" title="模式注解"></a>模式注解</h2><p>Stereotype Annotation俗称为模式注解，Spring中常见的模式注解有@Service，@Repository，@Controller等，它们都“派生”自@Component注解。我们都知道，凡是被@Component标注的类都会被Spring扫描并纳入到IOC容器中，那么由@Component派生的注解所标注的类也会被扫描到IOC容器中。下面我们主要来通过自定义模式注解来了解@Component的“派生性”和“层次性”。</p>
-<h3 id="Component-“派生性”"><a href="#Component-“派生性”" class="headerlink" title="@Component “派生性”"></a>@Component “派生性”</h3><p>新建一个Spring Boot工程，Spring Boot版本为2.1.0.RELEASE，artifactId为autoconfig，并引入spring-boot-starter-web依赖<br>在com.example.demo下新建annotation包，然后创建一个FirstLevelService注解：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@Target(&#123;ElementType.TYPE&#125;)</span><br><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">@Documented</span><br><span class="line">@Service</span><br><span class="line">public @interface FirstLevelService &#123;</span><br><span class="line">    String value() default &quot;&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这个注解定义由@Service标注，查看@Service的源码会发现其被@Component注解标注，所以它们的层次关系为:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">└─@Component</span><br><span class="line">   └─@Service</span><br><span class="line">      └─@FirstLevelService</span><br></pre></td></tr></table></figure>
-
-<p>即@FirstLevelService为@Component派生出来的模式注解，我们来测试一下被它标注的类是否能够被扫描到IOC容器中：</p>
-<p>在com.example.demo下新建service包，然后创建一个TestService类：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@FirstLevelService</span><br><span class="line">public class TestService &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在com.example.demo下新建bootstrap包，然后创建一个ServiceBootStrap类，用于测试注册TestService并从IOC容器中获取它：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">@ComponentScan(&quot;com.example.demo.service&quot;)</span><br><span class="line">public class ServiceBootstrap &#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        ConfigurableApplicationContext context = new SpringApplicationBuilder(ServiceBootstrap.class)</span><br><span class="line">                .web(WebApplicationType.NONE)</span><br><span class="line">                .run(args);</span><br><span class="line">        TestService testService = context.getBean(&quot;testService&quot;, TestService.class);</span><br><span class="line">        System.out.println(&quot;TestService Bean: &quot; + testService);</span><br><span class="line">        context.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>运行该类的main方法，控制台输出如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TestService Bean: com.example.ceshi.service.TestService@5dd1c9f2</span><br></pre></td></tr></table></figure>
-
-<h3 id="Component-“层次性”"><a href="#Component-“层次性”" class="headerlink" title="@Component “层次性”"></a>@Component “层次性”</h3><p>我们在com.example.demo.annotation路径下再创建一个SecondLevelService注解定义，该注解由上面的@FirstLevelService标注：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@Target(&#123;ElementType.TYPE&#125;)</span><br><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">@Documented</span><br><span class="line">@FirstLevelService</span><br><span class="line">public @interface SecondLevelService &#123;</span><br><span class="line">    String value() default &quot;&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这时层次关系为</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">└─@Component</span><br><span class="line">   └─@Service</span><br><span class="line">      └─@FirstLevelService</span><br><span class="line">            └─@SecondLevelService</span><br></pre></td></tr></table></figure>
-
-<p>我们将TestService上的注解换成@SecondLevelService，然后再次运行ServiceBootStrap的main方法，输出如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TestService Bean: com.example.ceshi.service.TestService@134d26af</span><br></pre></td></tr></table></figure>
-<p>可见结果也是成功的。</p>
-<pre><code>这里有一点需要注意的是：@Component注解只包含一个value属性定义，所以其“派生”的注解也只能包含一个vlaue属性定义。</code></pre><h2 id="Enable模块驱动"><a href="#Enable模块驱动" class="headerlink" title="@Enable模块驱动"></a>@Enable模块驱动</h2><p>@Enable模块驱动在Spring Framework 3.1后开始支持。这里的模块通俗的来说就是一些为了实现某个功能的组件的集合。通过@Enable模块驱动，我们可以开启相应的模块功能。</p>
-<p>@Enable模块驱动可以分为“注解驱动”和“接口编程”两种实现方式，下面逐一进行演示：</p>
-<h3 id="注解驱动"><a href="#注解驱动" class="headerlink" title="注解驱动"></a>注解驱动</h3><p>Spring中，基于注解驱动的示例可以查看@EnableWebMvc源码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">@Target(&#123;ElementType.TYPE&#125;)</span><br><span class="line">@Documented</span><br><span class="line">@Import(&#123;DelegatingWebMvcConfiguration.class&#125;)</span><br><span class="line">public @interface EnableWebMvc &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>该注解通过@Import导入一个配置类DelegatingWebMvcConfiguration：<br><img src="https://i.loli.net/2019/11/04/upAFjtLqYCJhbeX.png" alt="QQ截图20190220170120.png"><br>该配置类又继承自WebMvcConfigurationSupport，里面定义了一些Bean的声明。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">所以，基于注解驱动的@Enable模块驱动其实就是通过@Import来导入一个配置类，以此实现相应模块的组件注册，当这些组件注册到IOC容器中，这个模块对应的功能也就可以使用了。</span><br></pre></td></tr></table></figure>
-
-<p>我们来定义一个基于注解驱动的@Enable模块驱动。<br>在com.example.demo下新建configuration包，然后创建一个HelloWorldConfiguration配置类：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//@Configuration</span><br><span class="line">public class HelloWorldConfiguration &#123;</span><br><span class="line"></span><br><span class="line">    @Bean</span><br><span class="line">    public String hello() &#123;</span><br><span class="line">        return &quot;hello world&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这个配置类里定义了一个名为hello的Bean，内容为hello world。<br>在com.example.demo.annotation下创建一个EnableHelloWorld注解定义：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@Target(&#123;ElementType.TYPE&#125;)</span><br><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">@Documented</span><br><span class="line">@Import(HelloWorldConfiguration.class)</span><br><span class="line">public @interface EnableHelloWorld &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>运行该类的main方法，控制台输出如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hello Bean: hello world</span><br></pre></td></tr></table></figure>
-<p>说明我们自定义的基于注解驱动的@EnableHelloWorld是可行的。</p>
-<p>注意：在HelloWorldConfiguration类不要加上@Configuration注解，否则@EnableHelloWorld注解不起作用</p>
-<h3 id="接口编程"><a href="#接口编程" class="headerlink" title="接口编程"></a>接口编程</h3><p>除了使用上面这个方式外，我们还可以通过接口编程的方式来实现@Enable模块驱动。Spring中，基于接口编程方式的有@EnableCaching注解，查看其源码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@Target(&#123;ElementType.TYPE&#125;)</span><br><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">@Documented</span><br><span class="line">@Import(&#123;CachingConfigurationSelector.class&#125;)</span><br><span class="line">public @interface EnableCaching &#123;</span><br><span class="line">    boolean proxyTargetClass() default false;</span><br><span class="line"></span><br><span class="line">    AdviceMode mode() default AdviceMode.PROXY;</span><br><span class="line"></span><br><span class="line">    int order() default 2147483647;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/11/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/13/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/page/11/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><a class="extend next" rel="next" href="/page/13/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1427,18 +1206,18 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">197</span>
+          <span class="site-state-item-count">202</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
-        <span class="site-state-item-count">45</span>
+        <span class="site-state-item-count">46</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-count">59</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

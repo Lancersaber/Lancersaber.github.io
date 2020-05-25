@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.2">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.2">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.2">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.2" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.2">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.4.2',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="百度地图 配置环境和权限12345678910111213141516171819202122232425&amp;lt;manifest xmlns:android=&quot;http:&#x2F;&#x2F;schemas.android.com&#x2F;apk&#x2F;res&#x2F;android&quot;    package=&quot;com.example.mybaidulcoate&quot;&amp;gt;    &amp;lt;!--         The ACCESS_CO">
+<meta property="og:type" content="article">
+<meta property="og:title" content="百度地图">
+<meta property="og:url" content="https:&#x2F;&#x2F;lancersaber.github.io&#x2F;2020&#x2F;05&#x2F;25&#x2F;Android&#x2F;zuoye&#x2F;index.html">
+<meta property="og:site_name" content="Lancersaber">
+<meta property="og:description" content="百度地图 配置环境和权限12345678910111213141516171819202122232425&amp;lt;manifest xmlns:android=&quot;http:&#x2F;&#x2F;schemas.android.com&#x2F;apk&#x2F;res&#x2F;android&quot;    package=&quot;com.example.mybaidulcoate&quot;&amp;gt;    &amp;lt;!--         The ACCESS_CO">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2020&#x2F;05&#x2F;25&#x2F;Lx4OUqK9Bzn2ZkX.jpg">
+<meta property="og:updated_time" content="2020-05-25T15:55:50.117Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2020&#x2F;05&#x2F;25&#x2F;Lx4OUqK9Bzn2ZkX.jpg">
+
+<link rel="canonical" href="https://lancersaber.github.io/2020/05/25/Android/zuoye/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>百度地图 | Lancersaber</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lancersaber</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2020/05/25/Android/zuoye/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          百度地图
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-05-25 23:27:45 / Modified: 23:55:50" itemprop="dateCreated datePublished" datetime="2020-05-25T23:27:45+08:00">2020-05-25</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="百度地图"><a href="#百度地图" class="headerlink" title="百度地图"></a>百度地图</h1><hr>
+<h2 id="配置环境和权限"><a href="#配置环境和权限" class="headerlink" title="配置环境和权限"></a>配置环境和权限</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&lt;manifest xmlns:android=<span class="string">"http://schemas.android.com/apk/res/android"</span></span><br><span class="line">    package=<span class="string">"com.example.mybaidulcoate"</span>&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!--</span><br><span class="line">         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use</span><br><span class="line">         Google Maps Android API v2, but you must specify either coarse or fine</span><br><span class="line">         location permissions <span class="keyword">for</span> the <span class="string">'MyLocation'</span> functionality.</span><br><span class="line">    --&gt;</span><br><span class="line">    &lt;!-- 这个权限用于进行网络定位--&gt;</span><br><span class="line">    &lt;uses-permission android:name=<span class="string">"android.permission.ACCESS_COARSE_LOCATION"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">uses-permission</span>&gt;</span></span></span><br><span class="line">    &lt;!-- 这个权限用于访问GPS定位--&gt;</span><br><span class="line">    &lt;uses-permission android:name=<span class="string">"android.permission.ACCESS_FINE_LOCATION"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">uses-permission</span>&gt;</span></span></span><br><span class="line">    &lt;!-- 用于访问wifi网络信息，wifi信息会用于进行网络定位--&gt;</span><br><span class="line">    &lt;uses-permission android:name=<span class="string">"android.permission.ACCESS_WIFI_STATE"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">uses-permission</span>&gt;</span></span></span><br><span class="line">    &lt;!-- 获取运营商信息，用于支持提供运营商信息相关的接口--&gt;</span><br><span class="line">    &lt;uses-permission android:name=<span class="string">"android.permission.ACCESS_NETWORK_STATE"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">uses-permission</span>&gt;</span></span></span><br><span class="line">    &lt;!-- 这个权限用于获取wifi的获取权限，wifi信息会用来进行网络定位--&gt;</span><br><span class="line">    &lt;uses-permission android:name=<span class="string">"android.permission.CHANGE_WIFI_STATE"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">uses-permission</span>&gt;</span></span></span><br><span class="line">    &lt;!-- 用于读取手机当前的状态--&gt;</span><br><span class="line">    &lt;uses-permission android:name=<span class="string">"android.permission.READ_PHONE_STATE"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">uses-permission</span>&gt;</span></span></span><br><span class="line">    &lt;!-- 写入扩展存储，向扩展卡写入数据，用于写入离线定位数据--&gt;</span><br><span class="line">    &lt;uses-permission android:name=<span class="string">"android.permission.WRITE_EXTERNAL_STORAGE"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">uses-permission</span>&gt;</span></span></span><br><span class="line">    &lt;!-- 访问网络，网络定位需要上网--&gt;</span><br><span class="line">    &lt;uses-permission android:name=<span class="string">"android.permission.INTERNET"</span> /&gt;</span><br><span class="line">    &lt;!-- SD卡读取权限，用户写入离线定位数据--&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//配置定位SDK参数</span></span><br><span class="line">    private <span class="keyword">void</span> initLocation() &#123;</span><br><span class="line">        LocationClientOption option = <span class="keyword">new</span> LocationClientOption();</span><br><span class="line">        option.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy</span><br><span class="line">        );<span class="comment">//可选，默认高精度，设置定位模式，高精度，低功耗，仅设备</span></span><br><span class="line">        option.setCoorType(<span class="string">"bd09ll"</span>);<span class="comment">//可选，默认gcj02，设置返回的定位结果坐标系</span></span><br><span class="line">        int span = <span class="number">1000</span>;</span><br><span class="line">        option.setScanSpan(span);<span class="comment">//可选，默认0，即仅定位一次，设置发起定位请求的间隔需要大于等于1000ms才是有效的</span></span><br><span class="line">        option.setIsNeedAddress(<span class="literal">true</span>);<span class="comment">//可选，设置是否需要地址信息，默认不需要</span></span><br><span class="line">        option.setOpenGps(<span class="literal">true</span>);<span class="comment">//可选，默认false,设置是否使用gps</span></span><br><span class="line">        option.setLocationNotify(<span class="literal">true</span>);<span class="comment">//可选，默认false，设置是否当GPS有效时按照1S/1次频率输出GPS结果</span></span><br><span class="line">        option.setIsNeedLocationDescribe(<span class="literal">true</span>);<span class="comment">//可选，默认false，设置是否需要位置语义化结果，可以在BDLocation</span></span><br><span class="line">        <span class="comment">// .getLocationDescribe里得到，结果类似于“在北京天安门附近”</span></span><br><span class="line">        option.setIsNeedLocationPoiList(<span class="literal">true</span>);<span class="comment">//可选，默认false，设置是否需要POI结果，可以在BDLocation.getPoiList里得到</span></span><br><span class="line">        option.setIgnoreKillProcess(<span class="literal">false</span>);</span><br><span class="line">        option.setOpenGps(<span class="literal">true</span>); <span class="comment">// 打开gps</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//可选，默认true，定位SDK内部是一个SERVICE，并放到了独立进程，设置是否在stop的时候杀死这个进程，默认不杀死</span></span><br><span class="line">        option.SetIgnoreCacheException(<span class="literal">false</span>);<span class="comment">//可选，默认false，设置是否收集CRASH信息，默认收集</span></span><br><span class="line">        option.setEnableSimulateGps(<span class="literal">false</span>);<span class="comment">//可选，默认false，设置是否需要过滤GPS仿真结果，默认需要</span></span><br><span class="line">        mLocationClient.setLocOption(option);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//实现BDLocationListener接口,BDLocationListener为结果监听接口，异步获取定位结果</span></span><br><span class="line">    public <span class="class"><span class="keyword">class</span> <span class="title">MyLocationListener</span> <span class="title">implements</span> <span class="title">BDLocationListener</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        @Override</span><br><span class="line">        public <span class="keyword">void</span> onReceiveLocation(BDLocation location) &#123;</span><br><span class="line">            latLng = <span class="keyword">new</span> LatLng(location.getLatitude(),location.getLongitude());</span><br><span class="line">            <span class="comment">// 构造定位数据</span></span><br><span class="line">            MyLocationData locData = <span class="keyword">new</span> MyLocationData.Builder()</span><br><span class="line">                    .accuracy(location.getRadius())</span><br><span class="line">                    <span class="comment">// 此处设置开发者获取到的方向信息，顺时针0-360</span></span><br><span class="line">                    .direction(<span class="number">100</span>).latitude(location.getLatitude())</span><br><span class="line">                    .longitude(location.getLongitude()).build();</span><br><span class="line">            <span class="comment">// 设置定位数据</span></span><br><span class="line">            mBaiduMap.setMyLocationData(locData);</span><br><span class="line">            <span class="comment">// 当不需要定位图层时关闭定位图层</span></span><br><span class="line">            <span class="comment">//mBaiduMap.setMyLocationEnabled(false);</span></span><br><span class="line">            <span class="keyword">if</span> (isFirstLoc) &#123;</span><br><span class="line">                isFirstLoc = <span class="literal">false</span>;</span><br><span class="line">                LatLng ll = <span class="keyword">new</span> LatLng(location.getLatitude(),</span><br><span class="line">                        location.getLongitude());</span><br><span class="line">                MapStatus.Builder builder = <span class="keyword">new</span> MapStatus.Builder();</span><br><span class="line">                builder.target(ll).zoom(<span class="number">18.0</span>f);</span><br><span class="line">                mBaiduMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> (location.getLocType() == BDLocation.TypeGpsLocation) &#123;</span><br><span class="line">                    <span class="comment">// GPS定位结果</span></span><br><span class="line">                    Toast.makeText(MainActivity.this, location.getAddrStr(), Toast.LENGTH_SHORT).show();</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (location.getLocType() == BDLocation.TypeNetWorkLocation) &#123;</span><br><span class="line">                    <span class="comment">// 网络定位结果</span></span><br><span class="line">                    Toast.makeText(MainActivity.this, location.getAddrStr(), Toast.LENGTH_SHORT).show();</span><br><span class="line"></span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (location.getLocType() == BDLocation.TypeOffLineLocation) &#123;</span><br><span class="line">                    <span class="comment">// 离线定位结果</span></span><br><span class="line">                    Toast.makeText(MainActivity.this, location.getAddrStr(), Toast.LENGTH_SHORT).show();</span><br><span class="line"></span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (location.getLocType() == BDLocation.TypeServerError) &#123;</span><br><span class="line">                    Toast.makeText(MainActivity.this, <span class="string">"服务器错误，请检查"</span>, Toast.LENGTH_SHORT).show();</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (location.getLocType() == BDLocation.TypeNetWorkException) &#123;</span><br><span class="line">                    Toast.makeText(MainActivity.this, <span class="string">"网络错误，请检查"</span>, Toast.LENGTH_SHORT).show();</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (location.getLocType() == BDLocation.TypeCriteriaException) &#123;</span><br><span class="line">                    Toast.makeText(MainActivity.this, <span class="string">"手机模式错误，请检查是否飞行"</span>, Toast.LENGTH_SHORT).show();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后修改build.gradle文件，类似于：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">apply plugin: <span class="string">'com.android.application'</span></span><br><span class="line"></span><br><span class="line">android &#123;</span><br><span class="line">    compileSdkVersion <span class="number">25</span></span><br><span class="line">    buildToolsVersion <span class="string">"25.0.0"</span></span><br><span class="line"></span><br><span class="line">    defaultConfig &#123;</span><br><span class="line">        applicationId <span class="string">"stark.a.is.zhang.maptest"</span></span><br><span class="line">        minSdkVersion <span class="number">16</span></span><br><span class="line">        targetSdkVersion <span class="number">25</span></span><br><span class="line">        versionCode <span class="number">1</span></span><br><span class="line">        versionName <span class="string">"1.0"</span></span><br><span class="line"></span><br><span class="line">        testInstrumentationRunner <span class="string">"android.support.test.runner.AndroidJUnitRunner"</span></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    buildTypes &#123;</span><br><span class="line">        release &#123;</span><br><span class="line">            minifyEnabled <span class="literal">false</span></span><br><span class="line">            proguardFiles getDefaultProguardFile(<span class="string">'proguard-android.txt'</span>), <span class="string">'proguard-rules.pro'</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//增加jniLibs的描述，这样APK才知道so库的路径</span></span><br><span class="line">    sourceSets &#123;</span><br><span class="line">        main &#123;</span><br><span class="line">            jniLibs.srcDirs = [<span class="string">'libs'</span>]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">dependencies &#123;</span><br><span class="line">    compile fileTree(include: [<span class="string">'*.jar'</span>], <span class="attr">dir</span>: <span class="string">'libs'</span>)</span><br><span class="line">    androidTestCompile(<span class="string">'com.android.support.test.espresso:espresso-core:2.2.2'</span>, &#123;</span><br><span class="line">        exclude group: <span class="string">'com.android.support'</span>, <span class="attr">module</span>: <span class="string">'support-annotations'</span></span><br><span class="line">    &#125;)</span><br><span class="line">    compile <span class="string">'com.android.support:appcompat-v7:25.1.0'</span></span><br><span class="line">    testCompile <span class="string">'junit:junit:4.12'</span></span><br><span class="line">    <span class="comment">//这个是自己为了方便，定义的库</span></span><br><span class="line">    compile project(<span class="string">':activityLib'</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">//主要是这里，需要添加百度SDK jar包路径</span></span><br><span class="line">    compile files(<span class="string">'libs/BaiduLBS_Android.jar'</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>5、视图及初始化</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=<span class="string">"1.0"</span> encoding=<span class="string">"utf-8"</span>?&gt;</span><br><span class="line">&lt;RelativeLayout</span><br><span class="line">    xmlns:android=<span class="string">"http://schemas.android.com/apk/res/android"</span></span><br><span class="line">    android:layout_width=<span class="string">"match_parent"</span></span><br><span class="line">    android:layout_height=<span class="string">"match_parent"</span>&gt;</span><br><span class="line"></span><br><span class="line">    &lt;LinearLayout</span><br><span class="line">        android:id=<span class="string">"@+id/linear_layout"</span></span><br><span class="line">        android:layout_width=<span class="string">"match_parent"</span></span><br><span class="line">        android:layout_height=<span class="string">"wrap_content"</span>&gt;</span><br><span class="line"></span><br><span class="line">        &lt;Button</span><br><span class="line">            android:id=<span class="string">"@+id/show_location"</span></span><br><span class="line">            android:layout_width=<span class="string">"wrap_content"</span></span><br><span class="line">            android:layout_height=<span class="string">"wrap_content"</span></span><br><span class="line">            android:layout_weight=<span class="string">"0.5"</span></span><br><span class="line">            android:text=<span class="string">"@string/show_location"</span></span><br><span class="line">            android:layout_marginLeft=<span class="string">"16dp"</span>/&gt;</span><br><span class="line"></span><br><span class="line">        &lt;Button</span><br><span class="line">            android:id=<span class="string">"@+id/clear_location"</span></span><br><span class="line">            android:layout_width=<span class="string">"wrap_content"</span></span><br><span class="line">            android:layout_height=<span class="string">"wrap_content"</span></span><br><span class="line">            android:layout_weight=<span class="string">"0.5"</span></span><br><span class="line">            android:text=<span class="string">"@string/clear_location"</span></span><br><span class="line">            android:layout_marginRight=<span class="string">"16dp"</span>/&gt;</span><br><span class="line">    &lt;<span class="regexp">/LinearLayout&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">    &lt;!--主要是这里，与使用自定义视图的方法类似 --&gt;</span></span><br><span class="line"><span class="regexp">    &lt;com.baidu.mapapi.map.MapView</span></span><br><span class="line"><span class="regexp">        android:id="@+id/</span>bmapView<span class="string">"</span></span><br><span class="line"><span class="string">        android:layout_width="</span>match_parent<span class="string">"</span></span><br><span class="line"><span class="string">        android:layout_height="</span>match_parent<span class="string">"</span></span><br><span class="line"><span class="string">        android:layout_below="</span>@id/linear_layout<span class="string">"</span></span><br><span class="line"><span class="string">        android:clickable="</span><span class="literal">true</span><span class="string">" /&gt;</span></span><br><span class="line"><span class="string">&lt;/RelativeLayout&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>6、基本接口的使用<br>6.1、视图显示和生命周期的管理<br>我们首先看看加载百度地图的视图及其生命周期管理相关的代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">MapTestFragment</span> <span class="keyword">extends</span> <span class="title">Fragment</span></span>&#123;</span><br><span class="line">    MapView mMapView = <span class="literal">null</span>;</span><br><span class="line">    BaiduMap mBaiduMap = <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">    ...................</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public View onCreateView(LayoutInflater inflater, ViewGroup container,</span><br><span class="line">            Bundle savedInstanceState) &#123;</span><br><span class="line">        View v = inflater.inflate(R.layout.fragment_map_test, container, <span class="literal">false</span>);</span><br><span class="line">        ...................</span><br><span class="line">        <span class="comment">//加载视图后，获取MapView</span></span><br><span class="line">        mMapView = (MapView) v.findViewById(R.id.bmapView);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//得到BaiduMap的实例</span></span><br><span class="line">        mBaiduMap = mMapView.getMap();</span><br><span class="line">        <span class="comment">//设置Baidu的地图类型，具有MAP_TYPE_NONE、MAP_TYPE_NORMAL和MAP_TYPE_SATELLITE</span></span><br><span class="line">        mBaiduMap.setMapType(BaiduMap.MAP_TYPE_NORMAL);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> v;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//MapView与Activity、Fragment的生命周期匹配</span></span><br><span class="line">    @Override</span><br><span class="line">    public <span class="keyword">void</span> onResume() &#123;</span><br><span class="line">        <span class="keyword">super</span>.onResume();</span><br><span class="line">        mMapView.onResume();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public <span class="keyword">void</span> onPause() &#123;</span><br><span class="line">        <span class="keyword">super</span>.onPause();</span><br><span class="line">        mMapView.onPause();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public <span class="keyword">void</span> onDestroy() &#123;</span><br><span class="line">        <span class="keyword">super</span>.onDestroy();</span><br><span class="line">        mMapView.onDestroy();</span><br><span class="line">    &#125;</span><br><span class="line">    ..................</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2020/05/25/Lx4OUqK9Bzn2ZkX.jpg" alt="20170301170901166.jpg"></p>
+<p>总结<br>实际上，最初自己是想以Google地图为例，记录一下地图的基本使用方法。<br>不过Google地图的一些功能依赖于Google Play相关的服务，不管怎么讲，翻墙多少还是有些麻烦的，<br>于是退而求其次，决定利用百度地图作为例子。</p>
+<p>自己主要是做Framework的，系统应用接触的比较多，还是初次在APK中使用地图。<br>从自己的使用感受来讲，不吹不黑，百度SDK做的还是很用心的，文档和demo写的都不错。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2020/05/23/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/shiro/Shiro%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90(2)-SessionManager/" rel="next" title="Shiro源码分析(2)-SessionManager">
+                  <i class="fa fa-chevron-left"></i> Shiro源码分析(2)-SessionManager
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#百度地图"><span class="nav-number">1.</span> <span class="nav-text">百度地图</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#配置环境和权限"><span class="nav-number">1.1.</span> <span class="nav-text">配置环境和权限</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="site-author-image" itemprop="image" alt="Lancersaber"
+    src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Lancersaber</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">202</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">46</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lancersaber</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.4.2
+  </div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.2"></script><script src="/js/motion.js?v=7.4.2"></script>
+<script src="/js/schemes/muse.js?v=7.4.2"></script>
+<script src="/js/next-boot.js?v=7.4.2"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

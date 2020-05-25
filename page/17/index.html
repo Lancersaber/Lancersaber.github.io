@@ -172,6 +172,548 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/10/29/Spring/%E7%BC%93%E5%AD%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/10/29/Spring/%E7%BC%93%E5%AD%98/" class="post-title-link" itemprop="url">缓存讲解</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2019-10-29 15:54:43 / Modified: 16:48:35" itemprop="dateCreated datePublished" datetime="2019-10-29T15:54:43+08:00">2019-10-29</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/spring/" itemprop="url" rel="index">
+                    <span itemprop="name">spring</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="缓存讲解"><a href="#缓存讲解" class="headerlink" title="缓存讲解"></a>缓存讲解</h1><hr>
+<h2 id="JSR107"><a href="#JSR107" class="headerlink" title="JSR107"></a>JSR107</h2><p>Java Caching定义了5个核心接口，分别是CachingProvider，CacheManager，Cache，Entry和Expiry</p>
+<ul>
+<li>CachingProvider定义了创建、配置、获取、管理和控制多个CachingManager，一个应用可以在运行时访问多个CachingProvider.</li>
+<li>CacheManager定义了创建，配置，获取，管理和控制多个唯一命名的Cache，这些Cache存在于运行期访问多个CachingProvider的上下文中。一个CacheManager仅被一个CachingProvider所拥有。</li>
+<li>Cache是一个类似Map的数据结构并临时存储以Key为索引的值，一个Cache仅被一个CacheManager所拥有。</li>
+<li>Entry是一个存储在Cache的key-value对</li>
+<li>Expiry每一个存储在Cache的条目有一个定义的有效期。一旦超过这个时间，条目为过期的状态。一旦过期，条目将不可访问、更新和删除。缓存有效期可以通过ExpiryPolicy设置。</li>
+</ul>
+<h2 id="Spring缓存抽象"><a href="#Spring缓存抽象" class="headerlink" title="Spring缓存抽象"></a>Spring缓存抽象</h2><p>Spring定义了org.springframework.cache.Cache和org.springframework.cache.CacheManager接口来统一不同的缓存技术；并支持使用JSR-107注解简化开发。</p>
+<h3 id="几个重要概念-amp-缓存注解"><a href="#几个重要概念-amp-缓存注解" class="headerlink" title="几个重要概念&amp;缓存注解"></a>几个重要概念&amp;缓存注解</h3><table>
+<thead>
+<tr>
+<th>name</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Cache</td>
+<td>缓存接口，定义缓存操作。实现有：RedisCache,EhCacheCache,ConcurrentMapCache</td>
+</tr>
+<tr>
+<td>CacheManager</td>
+<td>缓存管理器，管理各种缓存组件</td>
+</tr>
+<tr>
+<td>@Cacheable</td>
+<td>主要针对方法配置，能够根据方法的请求参数对结果进行缓存</td>
+</tr>
+<tr>
+<td>@CacheEvict</td>
+<td>清空缓存</td>
+</tr>
+<tr>
+<td>@CachePut</td>
+<td>保证方法被调用，又希望结果被缓存</td>
+</tr>
+<tr>
+<td>@EnableCaching</td>
+<td>开启基于缓存的注解</td>
+</tr>
+<tr>
+<td>keyGenerator</td>
+<td>缓存数据时key的生产策略</td>
+</tr>
+<tr>
+<td>serialize</td>
+<td>缓存数据时value的序列化策略</td>
+</tr>
+</tbody></table>
+<p>@Cacheable的几个属性</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cacheNames/value:指定缓存组件的名字</span><br><span class="line">key:缓存数据使用的key，可以用它来指定。默认使用的是方法参数的值，编写sqel表达式进行指定</span><br><span class="line">keyGenerator:key的生成器，可以自己指定key的生成器的组件id</span><br><span class="line">key/keyGenerator二选一</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/10/29/Docker/%E7%A7%91%E7%9B%AE%E4%B8%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/10/29/Docker/%E7%A7%91%E7%9B%AE%E4%B8%80/" class="post-title-link" itemprop="url">Docker/科目一</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2019-10-29 10:17:47 / Modified: 16:02:49" itemprop="dateCreated datePublished" datetime="2019-10-29T10:17:47+08:00">2019-10-29</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="科目一"><a href="#科目一" class="headerlink" title="科目一"></a>科目一</h1><hr>
+<h2 id="一些知识"><a href="#一些知识" class="headerlink" title="一些知识"></a>一些知识</h2><ul>
+<li>在路上只要没死人就是拘役，死人没逃3年以下，死人逃逸3-7年，人没死之前逃7年以上。</li>
+<li>白色实现不允许变道</li>
+<li>只要对面来车，就放弃超车</li>
+<li>在高速除了超过限制速度20%不超过50%，违法占用应急车道行驶的扣6分，其他掉头，逆行、倒车之类的都扣12分，值得注意的是长时间占用应急车道也是扣12分 </li>
+<li>转速表是单数，里程表是双数</li>
+<li>水温表上的C和H的英文分别是cool和hot</li>
+<li>燃油表上面表的是E和F，分别表示empty和full</li>
+<li>高速公路最低60公里每小时，三车道，左110中90右60，两车道左100右60，同向4车道从左到右依次110,90,90,60</li>
+<li>高速公路行车不允许掉头，不可倒车，错过出口，只能继续行驶，寻找下个路口</li>
+<li>车辆因故障在公路上停车后，应在车后方多少米外放故障警告？普通公路50-100米，高速公路150米</li>
+<li>驶入高速公路后再提速。       </li>
+<li>紧急制动，很容易翻车，连续制动，造成发热，制动力减小</li>
+<li>带箭头的线是弯曲的，表示前方有哪个方向的弯或向哪个方向合流。带箭头的线是直的，表示向前方哪个方向转弯。</li>
+<li>路面数字标记表示的是保持车距标记，白色表示最低限速，黄色表示最高限速</li>
+<li>双黄线、单黄线、单实线、一道直黄一道虚黄均为禁止标线</li>
+<li>马路沿上黄色实线表示禁止停车，黄色虚线表示禁止长时间停车</li>
+<li>黄色-警示，蓝色-指示指路，黑色-辅助，红色-禁令</li>
+<li>三角形的让是减速让行，八角形的是停车让行</li>
+<li>车速：白底红字最高，蓝底白字最低，黑色数字表示建议时速</li>
+<li>两道黄色虚线是潮汐车道</li>
+<li>雾灯的光是4条平行线还有一条贯穿平行线的斜线</li>
+<li>圆圈的P表示驻车制动器处于制动状态，里面！表示制动系统异常或故障，里面只有！的表示制动系统出现异常</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/10/28/Spring/springboot%E4%BD%BF%E7%94%A8redis%E5%81%9A%E7%BC%93%E5%AD%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/10/28/Spring/springboot%E4%BD%BF%E7%94%A8redis%E5%81%9A%E7%BC%93%E5%AD%98/" class="post-title-link" itemprop="url">Springboot使用redis做缓存</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-10-28 20:37:32" itemprop="dateCreated datePublished" datetime="2019-10-28T20:37:32+08:00">2019-10-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-10-29 16:02:49" itemprop="dateModified" datetime="2019-10-29T16:02:49+08:00">2019-10-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/spring/" itemprop="url" rel="index">
+                    <span itemprop="name">spring</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="使用redis做Springboot的缓存"><a href="#使用redis做Springboot的缓存" class="headerlink" title="使用redis做Springboot的缓存"></a>使用redis做Springboot的缓存</h1><hr>
+<p>在程序中可以使用缓存的技术来节省对数据库的开销。Spring Boot对缓存提供了很好的支持，我们几乎不用做过多的配置即可使用各种缓存实现。这里主要介绍平日里个人接触较多的Ehcache和Redis缓存实现。</p>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>可根据Spring-Boot中使用Mybatis.html搭建一个Spring Boot项目，然后yml中配置日志输出级别以观察SQL的执行情况：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">logging:</span><br><span class="line">  level:</span><br><span class="line">    com:</span><br><span class="line">      springboot:</span><br><span class="line">        mapper: debug</span><br></pre></td></tr></table></figure>
+<p>其中com.spring.mapper为MyBatis的Mapper接口路径。<br>然后编写如下测试方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">@RunWith(SpringJUnit4ClassRunner.class)</span><br><span class="line">@SpringBootTest(classes = Application.class)</span><br><span class="line">public class ApplicationTest &#123;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    private StudentService studentService;</span><br><span class="line">    </span><br><span class="line">    @Test</span><br><span class="line">    public void test() throws Exception &#123;</span><br><span class="line">        Student student1 = this.studentService.queryStudentBySno(&quot;001&quot;);</span><br><span class="line">        System.out.println(&quot;学号&quot; + student1.getSno() + &quot;的学生姓名为：&quot; + student1.getName());</span><br><span class="line">        </span><br><span class="line">        Student student2 = this.studentService.queryStudentBySno(&quot;001&quot;);</span><br><span class="line">        System.out.println(&quot;学号&quot; + student2.getSno() + &quot;的学生姓名为：&quot; + student2.getName());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">2017-11-17 16:34:26.535 DEBUG 9932 --- [main] c.s.m.StudentMapper.queryStudentBySno    : ==&gt;  Preparing: select * from student where sno=? </span><br><span class="line">2017-11-17 16:34:26.688 DEBUG 9932 --- [main] c.s.m.StudentMapper.queryStudentBySno    : ==&gt; Parameters: 001(String)</span><br><span class="line">2017-11-17 16:34:26.716 DEBUG 9932 --- [main] c.s.m.StudentMapper.queryStudentBySno    : &lt;==      Total: 1</span><br><span class="line">学号001的学生姓名为：KangKang</span><br><span class="line">2017-11-17 16:34:26.720 DEBUG 9932 --- [main] c.s.m.StudentMapper.queryStudentBySno    : ==&gt;  Preparing: select * from student where sno=? </span><br><span class="line">2017-11-17 16:34:26.720 DEBUG 9932 --- [main] c.s.m.StudentMapper.queryStudentBySno    : ==&gt; Parameters: 001(String)</span><br><span class="line">2017-11-17 16:34:26.721 DEBUG 9932 --- [main] c.s.m.StudentMapper.queryStudentBySno    : &lt;==      Total: 1</span><br><span class="line">学号001的学生姓名为：KangKang</span><br></pre></td></tr></table></figure>
+<p>可发现第二个查询虽然和第一个查询完全一样，但其还是对数据库进行了查询。接下来引入缓存来改善这个结果。</p>
+<h2 id="使用缓存"><a href="#使用缓存" class="headerlink" title="使用缓存"></a>使用缓存</h2><p>要开启Spring Boot的缓存功能，需要在pom中引入spring-boot-starter-cache：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-boot-starter-cache&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<p>接着在Spring Boot入口类中加入@EnableCaching注解开启缓存功能：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@SpringBootApplication</span><br><span class="line">@EnableCaching</span><br><span class="line">public class Application &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        SpringApplication.run(Application.class,args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在StudentService接口中加入缓存注解：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">@CacheConfig(cacheNames = &quot;student&quot;)</span><br><span class="line">@Repository</span><br><span class="line">public interface StudentService &#123;</span><br><span class="line">    @CachePut(key = &quot;#p0.sno&quot;)</span><br><span class="line">    Student update(Student student);</span><br><span class="line">    </span><br><span class="line">    @CacheEvict(key = &quot;#p0&quot;, allEntries = true)</span><br><span class="line">    void deleteStudentBySno(String sno);</span><br><span class="line">    </span><br><span class="line">    @Cacheable(key = &quot;#p0&quot;)</span><br><span class="line">    Student queryStudentBySno(String sno);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们在StudentService接口中加入了@CacheConfig注解，queryStudentBySno方法使用了注解@Cacheable(key=”#p0”)，即将id作为redis中的key值。当我们更新数据的时候，应该使用@CachePut(key=”#p0.sno”)进行缓存数据的更新，否则将查询到脏数据，因为该注解保存的是方法的返回值，所以这里应该返回Student。</p>
+<p>在Spring Boot中可使用的缓存注解有</p>
+<h3 id="缓存注解"><a href="#缓存注解" class="headerlink" title="缓存注解"></a>缓存注解</h3><ul>
+<li><p>@CacheConfig：主要用于配置该类中会用到的一些共用的缓存配置。在这里@CacheConfig(cacheNames = “student”)：配置了该数据访问对象中返回的内容将存储于名为student的缓存对象中，我们也可以不使用该注解，直接通过@Cacheable自己配置缓存集的名字来定义；</p>
+</li>
+<li><p>@Cacheable：配置了queryStudentBySno函数的返回值将被加入缓存。同时在查询时，会先从缓存中获取，若不存在才再发起对数据库的访问。该注解主要有下面几个参数：</p>
+</li>
+<li><p>value、cacheNames：两个等同的参数（cacheNames为Spring 4新增，作为value的别名），用于指定缓存存储的集合名。由于Spring 4中新增了@CacheConfig，因此在Spring 3中原本必须有的value属性，也成为非必需项了；</p>
+</li>
+<li><p>key：缓存对象存储在Map集合中的key值，非必需，缺省按照函数的所有参数组合作为key值，若自己配置需使用SpEL表达式，比如：@Cacheable(key = “#p0”)：使用函数第一个参数作为缓存的key值，</p>
+</li>
+<li><p>condition：缓存对象的条件，非必需，也需使用SpEL表达式，只有满足表达式条件的内容才会被缓存，比如：@Cacheable(key = “#p0”, condition = “#p0.length() &lt; 3”)，表示只有当第一个参数的长度小于3的时候才会被缓存；</p>
+</li>
+<li><p>unless：另外一个缓存条件参数，非必需，需使用SpEL表达式。它不同于condition参数的地方在于它的判断时机，该条件是在函数被调用之后才做判断的，所以它可以通过对result进行判断；</p>
+</li>
+<li><p>cacheManager：用于指定使用哪个缓存管理器，非必需。只有当有多个时才需要使用；</p>
+</li>
+<li><p>cacheResolver：用于指定使用那个缓存解析器，非必需。需通过org.springframework.cache.interceptor.CacheResolver接口来实现自己的缓存解析器，并用该参数指定；</p>
+</li>
+<li><p>@CachePut：配置于函数上，能够根据参数定义条件来进行缓存，其缓存的是方法的返回值，它与@Cacheable不同的是，它每次都会真实调用函数，所以主要用于数据新增和修改操作上。它的参数与@Cacheable类似，具体功能可参考上面对@Cacheable参数的解析；</p>
+</li>
+<li><p>@CacheEvict：配置于函数上，通常用在删除方法上，用来从缓存中移除相应数据。除了同@Cacheable一样的参数之外，它还有下面两个参数：</p>
+<ul>
+<li>allEntries：非必需，默认为false。当为true时，会移除所有数据；</li>
+<li>beforeInvocation：非必需，默认为false，会在调用方法之后移除数据。当为true时，会在调用方法之前移除数据。</li>
+</ul>
+</li>
+</ul>
+<h2 id="缓存实现"><a href="#缓存实现" class="headerlink" title="缓存实现"></a>缓存实现</h2><p>要使用上Spring Boot的缓存功能，还需要提供一个缓存的具体实现。Spring Boot根据下面的顺序去侦测缓存实现：</p>
+<ul>
+<li><p>Generic</p>
+</li>
+<li><p>JCache (JSR-107)</p>
+</li>
+<li><p>EhCache 2.x</p>
+</li>
+<li><p>Hazelcast</p>
+</li>
+<li><p>Infinispan</p>
+</li>
+<li><p>Redis</p>
+</li>
+<li><p>Guava</p>
+</li>
+<li><p>Simple<br>除了按顺序侦测外，我们也可以通过配置属性spring.cache.type来强制指定。<br>接下来主要介绍基于Redis和Ehcache的缓存实现。</p>
+</li>
+</ul>
+<h2 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h2><p>1、安装redis<br>2、准备工作做完后，接下来开始在Spring Boot项目里引入Redis：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- spring-boot redis --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-boot-starter-data-redis&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<p>在application.yml中配置Redis：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">spring:</span><br><span class="line">  redis:</span><br><span class="line">    # Redis数据库索引（默认为0）</span><br><span class="line">    database: 0</span><br><span class="line">    # Redis服务器地址</span><br><span class="line">    host: localhost</span><br><span class="line">    # Redis服务器连接端口</span><br><span class="line">    port: 6379</span><br><span class="line">    pool:</span><br><span class="line">      # 连接池最大连接数（使用负值表示没有限制）</span><br><span class="line">      max-active: 8</span><br><span class="line">      # 连接池最大阻塞等待时间（使用负值表示没有限制）</span><br><span class="line">      max-wait: -1</span><br><span class="line">      # 连接池中的最大空闲连接</span><br><span class="line">      max-idle: 8</span><br><span class="line">      # 连接池中的最小空闲连接</span><br><span class="line">      min-idle: 0</span><br><span class="line">    # 连接超时时间（毫秒）</span><br><span class="line">    timeout: 0</span><br></pre></td></tr></table></figure>
+<p>更多关于Spring Boot Redis配置可参考：<a href="https://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html#" target="_blank" rel="noopener">https://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html#</a> REDIS</p>
+<h3 id="缓存的原理"><a href="#缓存的原理" class="headerlink" title="缓存的原理"></a>缓存的原理</h3><ul>
+<li>CacheManager===&gt;(创建）Cache缓存组件 —用于实际地存储数据<br>1）引入Redis starter以后，容器中保存的是RedisCacheManager<br>2）RedisCacheManager 帮我们创建RedisCache来作为缓存组件，RedisCache通过操作Redis来缓存数据</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/10/28/JSON/JSON%E8%AF%AD%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/10/28/JSON/JSON%E8%AF%AD%E6%B3%95/" class="post-title-link" itemprop="url">JSON语法</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2019-10-28 20:11:35 / Modified: 20:23:25" itemprop="dateCreated datePublished" datetime="2019-10-28T20:11:35+08:00">2019-10-28</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JSON/" itemprop="url" rel="index">
+                    <span itemprop="name">JSON</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="JSON语法"><a href="#JSON语法" class="headerlink" title="JSON语法"></a>JSON语法</h1><hr>
+<h2 id="JSON-语法规则"><a href="#JSON-语法规则" class="headerlink" title="JSON 语法规则"></a>JSON 语法规则</h2><p>JSON 语法是 JavaScript 对象表示法语法的子集。</p>
+<ul>
+<li>数据在名称/值对中</li>
+<li>数据由逗号分隔</li>
+<li>花括号保存对象</li>
+<li>方括号保存数组</li>
+</ul>
+<h2 id="JSON-名称-值对"><a href="#JSON-名称-值对" class="headerlink" title="JSON 名称/值对"></a>JSON 名称/值对</h2><p>JSON 数据的书写格式是：名称/值对。</p>
+<p>名称/值对包括字段名称（在双引号中），后面写一个冒号，然后是值：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;firstName&quot; : &quot;John&quot;</span><br></pre></td></tr></table></figure>
+<p>这很容易理解，等价于这条 JavaScript 语句：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">firstName = &quot;John&quot;</span><br></pre></td></tr></table></figure>
+
+<h2 id="JSON-值"><a href="#JSON-值" class="headerlink" title="JSON 值"></a>JSON 值</h2><p>JSON 值可以是：</p>
+<ul>
+<li>数字（整数或浮点数）</li>
+<li>字符串（在双引号中）</li>
+<li>逻辑值（true 或 false）</li>
+<li>数组（在方括号中）</li>
+<li>对象（在花括号中）</li>
+<li>null</li>
+</ul>
+<h2 id="JSON-对象"><a href="#JSON-对象" class="headerlink" title="JSON 对象"></a>JSON 对象</h2><p>JSON 对象在花括号中书写：</p>
+<p>对象可以包含多个名称/值对：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123; &quot;firstName&quot;:&quot;John&quot; , &quot;lastName&quot;:&quot;Doe&quot; &#125;</span><br></pre></td></tr></table></figure>
+<p>这一点也容易理解，与这条 JavaScript 语句等价：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">firstName = &quot;John&quot;</span><br><span class="line">lastName = &quot;Doe&quot;</span><br></pre></td></tr></table></figure>
+
+<h2 id="JSON-数组"><a href="#JSON-数组" class="headerlink" title="JSON 数组"></a>JSON 数组</h2><p>JSON 数组在方括号中书写：</p>
+<p>数组可包含多个对象：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">&quot;employees&quot;: [</span><br><span class="line">&#123; &quot;firstName&quot;:&quot;John&quot; , &quot;lastName&quot;:&quot;Doe&quot; &#125;,</span><br><span class="line">&#123; &quot;firstName&quot;:&quot;Anna&quot; , &quot;lastName&quot;:&quot;Smith&quot; &#125;,</span><br><span class="line">&#123; &quot;firstName&quot;:&quot;Peter&quot; , &quot;lastName&quot;:&quot;Jones&quot; &#125;</span><br><span class="line">]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在上面的例子中，对象 “employees” 是包含三个对象的数组。每个对象代表一条关于某人（有姓和名）的记录。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/10/28/ElasticSearch/ElasticSearch%E8%81%9A%E5%90%88/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/10/28/ElasticSearch/ElasticSearch%E8%81%9A%E5%90%88/" class="post-title-link" itemprop="url">ElasticSearch聚合</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2019-10-28 19:34:55 / Modified: 19:41:16" itemprop="dateCreated datePublished" datetime="2019-10-28T19:34:55+08:00">2019-10-28</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ElasticSearch/" itemprop="url" rel="index">
+                    <span itemprop="name">ElasticSearch</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="ElasticSearch聚合"><a href="#ElasticSearch聚合" class="headerlink" title="ElasticSearch聚合"></a>ElasticSearch聚合</h1><hr>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>最后，我们还有一个需求需要完成：允许管理者在职员目录中进行一些分析。 Elasticsearch有一个功能叫做聚合(aggregations)，它允许你在数据上生成复杂的分析统计。它很像SQL中的GROUP BY但是功能更强大。</p>
+<p>举个例子，让我们找到所有职员中最大的共同点（兴趣爱好）是什么：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">GET /megacorp/employee/_search</span><br><span class="line">&#123;</span><br><span class="line">  &quot;aggs&quot;: &#123;</span><br><span class="line">    &quot;all_interests&quot;: &#123;</span><br><span class="line">      &quot;terms&quot;: &#123; &quot;field&quot;: &quot;interests&quot; &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>暂时先忽略语法只看查询结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">   ...</span><br><span class="line">   &quot;hits&quot;: &#123; ... &#125;,</span><br><span class="line">   &quot;aggregations&quot;: &#123;</span><br><span class="line">      &quot;all_interests&quot;: &#123;</span><br><span class="line">         &quot;buckets&quot;: [</span><br><span class="line">            &#123;</span><br><span class="line">               &quot;key&quot;:       &quot;music&quot;,</span><br><span class="line">               &quot;doc_count&quot;: 2</span><br><span class="line">            &#125;,</span><br><span class="line">            &#123;</span><br><span class="line">               &quot;key&quot;:       &quot;forestry&quot;,</span><br><span class="line">               &quot;doc_count&quot;: 1</span><br><span class="line">            &#125;,</span><br><span class="line">            &#123;</span><br><span class="line">               &quot;key&quot;:       &quot;sports&quot;,</span><br><span class="line">               &quot;doc_count&quot;: 1</span><br><span class="line">            &#125;</span><br><span class="line">         ]</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们可以看到两个职员对音乐有兴趣，一个喜欢林学，一个喜欢运动。这些数据并没有被预先计算好，它们是实时的从匹配查询语句的文档中动态计算生成的。如果我们想知道所有姓”Smith”的人最大的共同点（兴趣爱好），我们只需要增加合适的语句既可：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">GET /megacorp/employee/_search</span><br><span class="line">&#123;</span><br><span class="line">  &quot;query&quot;: &#123;</span><br><span class="line">    &quot;match&quot;: &#123;</span><br><span class="line">      &quot;last_name&quot;: &quot;smith&quot;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;aggs&quot;: &#123;</span><br><span class="line">    &quot;all_interests&quot;: &#123;</span><br><span class="line">      &quot;terms&quot;: &#123;</span><br><span class="line">        &quot;field&quot;: &quot;interests&quot;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>all_interests聚合已经变成只包含和查询语句相匹配的文档了：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">&quot;all_interests&quot;: &#123;</span><br><span class="line">   &quot;buckets&quot;: [</span><br><span class="line">      &#123;</span><br><span class="line">         &quot;key&quot;: &quot;music&quot;,</span><br><span class="line">         &quot;doc_count&quot;: 2</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">         &quot;key&quot;: &quot;sports&quot;,</span><br><span class="line">         &quot;doc_count&quot;: 1</span><br><span class="line">      &#125;</span><br><span class="line">   ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>聚合也允许分级汇总。例如，让我们统计每种兴趣下职员的平均年龄：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">GET /megacorp/employee/_search</span><br><span class="line">&#123;</span><br><span class="line">    &quot;aggs&quot; : &#123;</span><br><span class="line">        &quot;all_interests&quot; : &#123;</span><br><span class="line">            &quot;terms&quot; : &#123; &quot;field&quot; : &quot;interests&quot; &#125;,</span><br><span class="line">            &quot;aggs&quot; : &#123;</span><br><span class="line">                &quot;avg_age&quot; : &#123;</span><br><span class="line">                    &quot;avg&quot; : &#123; &quot;field&quot; : &quot;age&quot; &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>虽然这次返回的聚合结果有些复杂，但任然很容易理解：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"> &quot;all_interests&quot;: &#123;</span><br><span class="line">    &quot;buckets&quot;: [</span><br><span class="line">       &#123;</span><br><span class="line">          &quot;key&quot;: &quot;music&quot;,</span><br><span class="line">          &quot;doc_count&quot;: 2,</span><br><span class="line">          &quot;avg_age&quot;: &#123;</span><br><span class="line">             &quot;value&quot;: 28.5</span><br><span class="line">          &#125;</span><br><span class="line">       &#125;,</span><br><span class="line">       &#123;</span><br><span class="line">          &quot;key&quot;: &quot;forestry&quot;,</span><br><span class="line">          &quot;doc_count&quot;: 1,</span><br><span class="line">          &quot;avg_age&quot;: &#123;</span><br><span class="line">             &quot;value&quot;: 35</span><br><span class="line">          &#125;</span><br><span class="line">       &#125;,</span><br><span class="line">       &#123;</span><br><span class="line">          &quot;key&quot;: &quot;sports&quot;,</span><br><span class="line">          &quot;doc_count&quot;: 1,</span><br><span class="line">          &quot;avg_age&quot;: &#123;</span><br><span class="line">             &quot;value&quot;: 25</span><br><span class="line">          &#125;</span><br><span class="line">       &#125;</span><br><span class="line">    ]</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p>该聚合结果比之前的聚合结果要更加丰富。我们依然得到了兴趣以及数量（指具有该兴趣的员工人数）的列表，但是现在每个兴趣额外拥有avg_age字段来显示具有该兴趣员工的平均年龄。</p>
+<p>即使你还不理解语法，但你也可以大概感觉到通过这个特性可以完成相当复杂的聚合工作，你可以处理任何类型的数据。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
     <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/10/28/ElasticSearch/ElasticSearch%E6%90%9C%E7%B4%A2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -661,504 +1203,11 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/10/26/Spring/Spring%20AOP/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lancersaber">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lancersaber">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/10/26/Spring/Spring%20AOP/" class="post-title-link" itemprop="url">Spring aop</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-10-26 19:01:48" itemprop="dateCreated datePublished" datetime="2019-10-26T19:01:48+08:00">2019-10-26</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-30 22:08:11" itemprop="dateModified" datetime="2019-10-30T22:08:11+08:00">2019-10-30</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/spring/" itemprop="url" rel="index">
-                    <span itemprop="name">spring</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Spring-AOP"><a href="#Spring-AOP" class="headerlink" title="Spring AOP"></a>Spring AOP</h1><hr>
-<h2 id="AOP概念"><a href="#AOP概念" class="headerlink" title="AOP概念"></a>AOP概念</h2><h3 id="Aspect"><a href="#Aspect" class="headerlink" title="Aspect"></a>Aspect</h3><p>A modularization of a concern that cuts across multiple classes. Transaction management is a good example of a crosscutting concern in enterprise Java applications. In Spring AOP, aspects are implemented by using regular classes (the schema-based approach) or regular classes annotated with the @Aspect annotation (the @AspectJ style).<br>这段话讲解了切面的意义。在某个类上使用@Aspect注解表示这个类是一个切面类。</p>
-<h3 id="连接点-Join-point"><a href="#连接点-Join-point" class="headerlink" title="连接点(Join point)"></a>连接点(Join point)</h3><p>程序执行过程中某个特定的点，比如，调用方法或者处理异常。作用是指定在执行哪些方法时进行额外操作。</p>
-<h3 id="通知-Advice"><a href="#通知-Advice" class="headerlink" title="通知(Advice)"></a>通知(Advice)</h3><p>Action taken by an aspect at a particular join point. Different types of advice include “around”, “before” and “after” advice. (Advice types are discussed later.) Many AOP frameworks, including Spring, model an advice as an interceptor and maintain a chain of interceptors around the join point.<br>重点在第一句话–<em>Action taken by an aspect at a particular join point.</em>，指在切面的某个特定的连接点上执行的动作。Different types of advice include “around”, “before” and “after” advice.这句话表示Advice包含几种类型，环绕通知，前置通知和后置通知。</p>
-<h3 id="切入点-Pointcut"><a href="#切入点-Pointcut" class="headerlink" title="切入点(Pointcut)"></a>切入点(Pointcut)</h3><p>A predicate that matches join points. Advice is associated with a pointcut expression and runs at any join point matched by the pointcut (for example, the execution of a method with a certain name). The concept of join points as matched by pointcut expressions is central to AOP, and Spring uses the AspectJ pointcut expression language by default.<br><em>Advice is associated with a pointcut expression and runs at any join point matched by the pointcut</em>这句话表示Advice和一个切入点表达式是关联的，它会对所有符合这个切入点表达式的函数生效。Spring使用AspectJ 切入点表达式作为默认方式。</p>
-<h3 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h3><h3 id="Target-object"><a href="#Target-object" class="headerlink" title="Target object"></a>Target object</h3><h3 id="AOP-proxy"><a href="#AOP-proxy" class="headerlink" title="AOP proxy"></a>AOP proxy</h3><p> An object created by the AOP framework in order to implement the aspect contracts (advise method executions and so on). In the Spring Framework, an AOP proxy is a JDK dynamic proxy or a CGLIB proxy.<br> 由aop框架为我们创建的代理对象。在spring框架中，这个aop代理对象是一个jdk的动态代理对象或者一个CGLIB代理对象。</p>
-<h3 id="Weaving"><a href="#Weaving" class="headerlink" title="Weaving"></a>Weaving</h3><h2 id="SpringAop涉及到的注解"><a href="#SpringAop涉及到的注解" class="headerlink" title="SpringAop涉及到的注解"></a>SpringAop涉及到的注解</h2><table>
-<thead>
-<tr>
-<th align="center">注解名</th>
-<th align="center">功能</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">@Aspect</td>
-<td align="center">声明该类是一个切面类</td>
-</tr>
-<tr>
-<td align="center">@After</td>
-<td align="center">通知方法会在目标方法返回或抛出异常后调用</td>
-</tr>
-<tr>
-<td align="center">@AfterRetruening</td>
-<td align="center">通常方法会在目标方法返回后调用</td>
-</tr>
-<tr>
-<td align="center">@AfterThrowing</td>
-<td align="center">通知方法会在目标方法抛出异常后调用</td>
-</tr>
-<tr>
-<td align="center">@Around</td>
-<td align="center">通知方法将目标方法封装起来</td>
-</tr>
-<tr>
-<td align="center">@Before</td>
-<td align="center">通知方法会在目标方法执行之前执行</td>
-</tr>
-<tr>
-<td align="center">@Pointcut</td>
-<td align="center">注解声明一个通用的切点</td>
-</tr>
-</tbody></table>
-<h3 id="PointCut注解的表达式"><a href="#PointCut注解的表达式" class="headerlink" title="@PointCut注解的表达式"></a>@PointCut注解的表达式</h3><p>标准的Aspectj Aop的pointcut的表达式类型是很丰富的，但是Spring Aop只支持其中的9种，外加Spring Aop自己扩充的一种一共是10种类型的表达式，分别如下。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">execution：一般用于指定方法的执行，用的最多。</span><br><span class="line">within：指定某些类型的全部方法执行，也可用来指定一个包。</span><br><span class="line">this：Spring Aop是基于代理的，生成的bean也是一个代理对象，this就是这个代理对象，当这个对象可以转换为指定的类型时，对应的切入点就是它了，Spring Aop将生效。</span><br><span class="line">target：当被代理的对象可以转换为指定的类型时，对应的切入点就是它了，Spring Aop将生效。</span><br><span class="line">args：当执行的方法的参数是指定类型时生效。</span><br><span class="line">@target：当代理的目标对象上拥有指定的注解时生效。</span><br><span class="line">@args：当执行的方法参数类型上拥有指定的注解时生效。</span><br><span class="line">@within：与@target类似，看官方文档和网上的说法都是@within只需要目标对象的类或者父类上有指定的注解，则@within会生效，而@target则是必须是目标对象的类上有指定的注解。而根据笔者的测试这两者都是只要目标类或父类上有指定的注解即可。</span><br><span class="line">@annotation：当执行的方法上拥有指定的注解时生效。</span><br><span class="line">bean：当调用的方法是指定的bean的方法时生效。</span><br></pre></td></tr></table></figure>
-
-<h4 id="execution表达式"><a href="#execution表达式" class="headerlink" title="execution表达式"></a>execution表达式</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/10/26/Spring/SpringbootAop%E8%AE%B0%E5%BD%95%E7%94%A8%E6%88%B7%E6%93%8D%E4%BD%9C%E6%97%A5%E5%BF%97/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lancersaber">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lancersaber">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/10/26/Spring/SpringbootAop%E8%AE%B0%E5%BD%95%E7%94%A8%E6%88%B7%E6%93%8D%E4%BD%9C%E6%97%A5%E5%BF%97/" class="post-title-link" itemprop="url">Springboot aop记录用户操作日志</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2019-10-26 18:40:07 / Modified: 19:02:01" itemprop="dateCreated datePublished" datetime="2019-10-26T18:40:07+08:00">2019-10-26</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/spring/" itemprop="url" rel="index">
-                    <span itemprop="name">spring</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Springboot-aop记录用户操作日志"><a href="#Springboot-aop记录用户操作日志" class="headerlink" title="#Springboot aop记录用户操作日志"></a>#Springboot aop记录用户操作日志</h2><p>在Spring框架中，使用AOP配合自定义注解可以方便的实现用户操作的监控。首先搭建一个基本的Spring Boot Web环境开启Spring Boot，然后引入必要依赖：</p>
-<h2 id="自定义注解"><a href="#自定义注解" class="headerlink" title="自定义注解"></a>自定义注解</h2><p>定义一个方法级别的@Log注解，用于标注需要监控的方法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@Target(ElementType.METHOD)</span><br><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">public @interface Log &#123;</span><br><span class="line">    String value() default &quot;&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/10/25/Canvas/canvas%E7%9A%84%E4%B8%80%E4%BA%9B%E5%87%BD%E6%95%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lancersaber">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lancersaber">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/10/25/Canvas/canvas%E7%9A%84%E4%B8%80%E4%BA%9B%E5%87%BD%E6%95%B0/" class="post-title-link" itemprop="url">canvas的一些函数</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-10-25 16:22:10" itemprop="dateCreated datePublished" datetime="2019-10-25T16:22:10+08:00">2019-10-25</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-02 09:13:12" itemprop="dateModified" datetime="2019-11-02T09:13:12+08:00">2019-11-02</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/canvas/" itemprop="url" rel="index">
-                    <span itemprop="name">canvas</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="canvas的一些函数"><a href="#canvas的一些函数" class="headerlink" title="canvas的一些函数"></a>canvas的一些函数</h1><hr>
-<p>canvas元素并未提供很多api，实际上，它只提供了两个属性与三个方法。</p>
-<ul>
-<li>width: canvas元素绘图表面的宽度。在默认状况下，浏览器会将canvas元素的大小设定成与绘图表面大小一致。</li>
-<li>height: canvas元素绘图表面的高度</li>
-<li>getContext():返回与该canvas元素相关的绘图环境对象。每个canvas元素均有一个这样的环境对象，而且每个环境对象均与一个canvas元素相关联。</li>
-</ul>
-<h2 id="canvas状态的保存和恢复"><a href="#canvas状态的保存和恢复" class="headerlink" title="canvas状态的保存和恢复"></a>canvas状态的保存和恢复</h2><p>很多时候我们只是想临时性的改变某个canvas的绘图属性。</p>
-<ul>
-<li>save():保存当前canvas绘图环境的所有属性</li>
-<li>restore()：恢复当前canvas绘图环境的所有属性</li>
-</ul>
-<h2 id="canvas-原点-x-水平方向、原点-y-垂直方向，添加平移变换的方法。"><a href="#canvas-原点-x-水平方向、原点-y-垂直方向，添加平移变换的方法。" class="headerlink" title="canvas 原点 x 水平方向、原点 y 垂直方向，添加平移变换的方法。"></a>canvas 原点 x 水平方向、原点 y 垂直方向，添加平移变换的方法。</h2><p>void ctx.translate(x, y);<br>x：水平方向的移动距离。<br>y：垂直方向的移动距离。</p>
-<h2 id="绘制矩形"><a href="#绘制矩形" class="headerlink" title="绘制矩形"></a>绘制矩形</h2><p>与SVG不同，它canvas仅支持两种基本形状：矩形和路径（由线连接的点的列表）。所有其他形状必须通过组合一个或多个路径来创建。幸运的是，我们有各种各样的路径绘制功能，它们可以组成非常复杂的形状。</p>
-<p>首先让我们看一下矩形。可以在画布上绘制矩形的三个函数：</p>
-<p>fillRect(x, y, width, height)<br>绘制一个填充的矩形。<br>strokeRect(x, y, width, height)<br>绘制矩形轮廓。<br>clearRect(x, y, width, height)<br>清除指定的矩形区域，使其完全透明。<br>这三个函数中的每一个都具有相同的参数。x并y指定矩形左上角在画布上的位置（相对于原点）。width并height提供矩形的大小。</p>
-<h2 id="绘制路径"><a href="#绘制路径" class="headerlink" title="绘制路径"></a>绘制路径</h2><p>现在让我们看一下路径。路径是由线段连接的点的列表，这些线段可以具有不同的形状（弯曲或不弯曲），不同的宽度和不同的颜色。路径甚至子路径都可以关闭。为了使用路径制作形状，我们采取了一些额外的步骤：<br>1、 首先，创建路径。<br>2、 然后，您可以使用绘图命令来绘制路径。<br>3、 创建路径后，您可以描画或填充路径以进行渲染。</p>
-<p>以下是用于执行这些步骤的功能：</p>
-<ul>
-<li>beginPath()<br>创建一个新路径。创建之后，将来的绘图命令将直接进入路径并用于构建路径。</li>
-<li>路径方法<br>为对象设置不同路径的方法。</li>
-<li>closePath()<br>向路径添加一条直线，转到当前子路径的起点。</li>
-<li>stroke()<br>通过抚摸轮廓来绘制形状。</li>
-<li>fill()<br>通过填充路径的内容区域绘制实体形状。<br>创建路径的第一步是调用beginPath()。在内部，路径存储为一起形成形状的子路径（线，弧等）的列表。每次调用此方法时，列表都会重置，我们可以开始绘制新形状。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">注意：当当前路径为空时，例如在调用之后beginPath()，或在新创建的画布上moveTo()，无论实际是什么，第一个路径构造命令始终被视为a 。因此，您几乎总是希望在重置路径后专门设置起始位置。</span><br></pre></td></tr></table></figure>
-第二步是调用实际指定要绘制路径的方法。我们很快就会看到这些。</li>
-</ul>
-<p>第三步（也是可选步骤）是closePath()。此方法尝试通过绘制从当前点到起点的直线来闭合形状。如果形状已经关闭或列表中只有一个点，则此功能不执行任何操作。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">注意：调用时fill()，所有打开的形状都会自动关闭，因此您不必调用closePath()。这不，当你打电话的情况stroke()。</span><br></pre></td></tr></table></figure>
-
-<p>示例：画一个三角形</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">function draw() &#123;</span><br><span class="line">  var canvas = document.getElementById(&apos;canvas&apos;);</span><br><span class="line">  if (canvas.getContext) &#123;</span><br><span class="line">    var ctx = canvas.getContext(&apos;2d&apos;);</span><br><span class="line"></span><br><span class="line">    ctx.beginPath();</span><br><span class="line">    ctx.moveTo(75, 50);</span><br><span class="line">    ctx.lineTo(100, 75);</span><br><span class="line">    ctx.lineTo(100, 25);</span><br><span class="line">    ctx.fill();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="移动笔"><a href="#移动笔" class="headerlink" title="移动笔"></a>移动笔</h2><p>该功能是一个非常有用的功能，它实际上不会绘制任何内容，但会成为上述路径列表的一部分moveTo()。您可能最能想到的是将笔或铅笔从一张纸上的一个地方提起，然后放在另一张纸上。</p>
-<ul>
-<li>moveTo(x, y)<br>移动笔由指定的坐标x和y。</li>
-</ul>
-<p>初始化或beginPath()调用画布时，通常将需要使用该moveTo()函数将起点放置在其他位置。我们还可以moveTo()用来绘制未连接的路径。看看下面的笑脸。</p>
-<p>要自己尝试，可以使用下面的代码片段。只需将其粘贴到draw()我们之前看到的函数中即可。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">function draw() &#123;</span><br><span class="line">  var canvas = document.getElementById(&apos;canvas&apos;);</span><br><span class="line">  if (canvas.getContext) &#123;</span><br><span class="line">     var ctx = canvas.getContext(&apos;2d&apos;);</span><br><span class="line"></span><br><span class="line">    ctx.beginPath();</span><br><span class="line">    ctx.arc(75, 75, 50, 0, Math.PI * 2, true); // Outer circle</span><br><span class="line">    ctx.moveTo(110, 75);</span><br><span class="line">    ctx.arc(75, 75, 35, 0, Math.PI, false);  // Mouth (clockwise)</span><br><span class="line">    ctx.moveTo(65, 65);</span><br><span class="line">    ctx.arc(60, 65, 5, 0, Math.PI * 2, true);  // Left eye</span><br><span class="line">    ctx.moveTo(95, 65);</span><br><span class="line">    ctx.arc(90, 65, 5, 0, Math.PI * 2, true);  // Right eye</span><br><span class="line">    ctx.stroke();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="绘制直线"><a href="#绘制直线" class="headerlink" title="绘制直线"></a>绘制直线</h2><p>要绘制直线，请使用lineTo()方法。</p>
-<ul>
-<li>lineTo(x, y)<br>绘制一条从当前绘图位置到所指定的位置的线x和y。</li>
-</ul>
-<p>此方法有两个参数x和y，它们是直线终点的坐标。起点取决于先前绘制的路径，其中先前路径的终点是后续路径的起点，依此类推。也可以使用该moveTo()方法更改起点。</p>
-<p>下面的示例绘制两个三角形，一个三角形填充，一个轮廓绘制。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">function draw() &#123;</span><br><span class="line">  var canvas = document.getElementById(&apos;canvas&apos;);</span><br><span class="line">  if (canvas.getContext) &#123;</span><br><span class="line">    var ctx = canvas.getContext(&apos;2d&apos;);</span><br><span class="line"></span><br><span class="line">    // Filled triangle</span><br><span class="line">    ctx.beginPath();</span><br><span class="line">    ctx.moveTo(25, 25);</span><br><span class="line">    ctx.lineTo(105, 25);</span><br><span class="line">    ctx.lineTo(25, 105);</span><br><span class="line">    ctx.fill();</span><br><span class="line"></span><br><span class="line">    // Stroked triangle</span><br><span class="line">    ctx.beginPath();</span><br><span class="line">    ctx.moveTo(125, 125);</span><br><span class="line">    ctx.lineTo(125, 45);</span><br><span class="line">    ctx.lineTo(45, 125);</span><br><span class="line">    ctx.closePath();</span><br><span class="line">    ctx.stroke();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="绘制弧线"><a href="#绘制弧线" class="headerlink" title="绘制弧线"></a>绘制弧线</h2><p>要绘制圆弧或圆，我们使用arc()或arcTo()方法。</p>
-<ul>
-<li>arc(x, y, radius, startAngle, endAngle, anticlockwise)<br>绘制一个以（x，y）位置为中心的圆弧，其半径r从startAngle开始，到endAngle为止，沿逆时针指示的给定方向（默认为顺时针方向）移动。</li>
-<li>arcTo(x1, y1, x2, y2, radius)<br>用给定的控制点和半径绘制一条弧，并通过一条直线将其连接到上一个点。<br>让我们更详细地看一下该arc方法，该方法有六个参数：x和y是应在其上绘制圆弧的圆心的坐标。radius是不言自明的。的startAngle和endAngle以弧度为单位的参数定义弧的起点和终点，沿该圆的曲线。这些是从x轴测量的。所述anticlockwise参数是一个布尔值，当true，得出弧逆时针; 否则，将顺时针绘制圆弧。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">注意：arc功能中的角度以弧度而不是度为单位。要将度数转换为弧度，可以使用以下JavaScript表达式：radians = (Math.PI/180)*degrees。</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/10/25/Canvas/%E5%8A%A8%E7%94%BB%E4%B8%AD%E7%9A%84%E4%B8%89%E8%A7%92%E5%AD%A6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lancersaber">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lancersaber">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/10/25/Canvas/%E5%8A%A8%E7%94%BB%E4%B8%AD%E7%9A%84%E4%B8%89%E8%A7%92%E5%AD%A6/" class="post-title-link" itemprop="url">动画中的三角学</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2019-10-25 16:22:10 / Modified: 18:35:26" itemprop="dateCreated datePublished" datetime="2019-10-25T16:22:10+08:00">2019-10-25</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/canvas/" itemprop="url" rel="index">
-                    <span itemprop="name">canvas</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="动画中的三角学"><a href="#动画中的三角学" class="headerlink" title="动画中的三角学"></a>动画中的三角学</h1><p>三角学在动画技术中广泛使用。</p>
-<h2 id="角"><a href="#角" class="headerlink" title="角"></a>角</h2><h3 id="弧度和角度"><a href="#弧度和角度" class="headerlink" title="弧度和角度"></a>弧度和角度</h3><p>当你在canvas元素上旋转一副图像时，你会用到context.rotate(angle)方法，其中参数angle的大小由弧度表示。下面是弧度与角度的转换公式</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">radians=degrees*Math.PI/180;</span><br><span class="line">degrees=radians*180/Math.PI</span><br></pre></td></tr></table></figure>
-
-<h3 id="Canvas的坐标系"><a href="#Canvas的坐标系" class="headerlink" title="Canvas的坐标系"></a>Canvas的坐标系</h3><p>在大多数系统中，角度的测量是以逆时针为正值的，0°表示一条线沿着x轴正向沿伸。在canvas中，顺时针的角度才是正值，逆时针的角度反而成了负值。在这种情况下，需要适应这个系统在每次的计算中反转角度。</p>
-<h3 id="三角形的边"><a href="#三角形的边" class="headerlink" title="三角形的边"></a>三角形的边</h3><h3 id="三角函数"><a href="#三角函数" class="headerlink" title="三角函数"></a>三角函数</h3><h4 id="正弦"><a href="#正弦" class="headerlink" title="正弦"></a>正弦</h4><p>一个角的正弦表示与该角相对的直角边与斜边的比例。在Js中，可以使用Math.sin(angle)函数。</p>
-<h4 id="余弦"><a href="#余弦" class="headerlink" title="余弦"></a>余弦</h4><p>通过Math.cos(angle)函数在Js中实现余弦。<br>tips：Js换行时，因为要被html识别使用，不能用转移字符\n  ，要使用br标签，（”X”+”</br>“）;</p>
-<h4 id="正切"><a href="#正切" class="headerlink" title="正切"></a>正切</h4><p>通过Math.tan(angle)来表示。</p>
-<h2 id="旋转"><a href="#旋转" class="headerlink" title="旋转"></a>旋转</h2>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/10/24/Java%E5%9F%BA%E7%A1%80/Java%E4%B8%AD%E7%9A%84%E6%B3%A8%E8%A7%A3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lancersaber">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lancersaber">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/10/24/Java%E5%9F%BA%E7%A1%80/Java%E4%B8%AD%E7%9A%84%E6%B3%A8%E8%A7%A3/" class="post-title-link" itemprop="url">Java中的注解</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-10-24 23:15:15" itemprop="dateCreated datePublished" datetime="2019-10-24T23:15:15+08:00">2019-10-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-09 15:57:40" itemprop="dateModified" datetime="2019-11-09T15:57:40+08:00">2019-11-09</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Java中的基本注解"><a href="#Java中的基本注解" class="headerlink" title="Java中的基本注解"></a>Java中的基本注解</h1><hr>
-<p>&emsp;&emsp;注解(也称为元数据)为我们在代码中添加信息提供了一种形式化的方法，使我们可以在稍后某个时刻非常方便地使用这些数据。</p>
-<h2 id="Rentention注解类"><a href="#Rentention注解类" class="headerlink" title="Rentention注解类"></a>Rentention注解类</h2><p>注解的生命周期：Java源文件—》class文件—》内存中的字节码。编译或者运行时，都有可能会取消注解。Rentention的3种取值意味让注解保留到哪个阶段，RententionPolicy.SOURCE、RententionPolicy.CLASS(默认值)、RententionPolicy.RUNTIME。Rentention的值是枚举RententionPolicy的值，只有3个：SOURCE、CLASS、RUNTIME。</p>
-<ul>
-<li>source：源代码中，注解将被编译器丢弃</li>
-<li>class：类文件中，注解在class文件中可用</li>
-<li>runtime:运行时，VM将在运行期也保留注解，因此可以通过反射机制读取注解的信息</li>
-</ul>
-<h2 id="Target注解类"><a href="#Target注解类" class="headerlink" title="Target注解类"></a>Target注解类</h2><p>性质和Rentention一样，都是注解类的属性，表示注解类应该在什么位置，对那一块的数据有效。例如，@Target(ElementType.METHOD)<br>Target内部的值使用枚举ElementType表示，表示的主要位置有：注解、构造方法、属性、局部变量、函数、包、参数和类(默认值)。多个位置使用数组，例如，@Target({ElementType.METHOD,ElementType.TYPE})。</p>
-<h2 id="使用注解的例子"><a href="#使用注解的例子" class="headerlink" title="使用注解的例子"></a>使用注解的例子</h2><p>下面是一个简单的注解，我们可以用它来跟踪一个项目中的用例。如果一个方法或一组方法实现了某个用例的需求，那么程序员可以为此方法加上该注解。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@Target(ElementType.METHOD)</span><br><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">public @interface UseCase &#123;</span><br><span class="line">    public int id();</span><br><span class="line">    public String description() default &quot;no description&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>注意：id和description类似方法定义。编译器会对id和description进行类型检查。description元素有一个default值，如果在注解某个方法时没有给出description的值，则此注解的处理器就会使用元素的默认值。</p>
-<p>使用注解的类</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">public class PasswordUtils &#123;</span><br><span class="line">    </span><br><span class="line">    @UseCase(id=47,description = &quot;Passwords must contain ar least one numeric&quot;)</span><br><span class="line">    public boolean validatePassword(String password)&#123;</span><br><span class="line">        return (password.matches(&quot;\\w*\\d\\w*&quot;));</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    @UseCase(id=48)</span><br><span class="line">    public String encryptPassword(String password)&#123;</span><br><span class="line">        return new StringBuilder(password).reverse().toString();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    @UseCase(id=49,description = &quot;New passwords can&apos;t equal previously used ones&quot;)</span><br><span class="line">    public boolean checkForNewPassword(List&lt;String&gt; prevPasswords,String password)&#123;</span><br><span class="line">        return !prevPasswords.contains(password);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="编写注解处理器"><a href="#编写注解处理器" class="headerlink" title="编写注解处理器"></a>编写注解处理器</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">public class UseCaseTracker &#123;</span><br><span class="line"></span><br><span class="line">    public static void trackUseCases(List&lt;Integer&gt; useCases,Class&lt;?&gt; cl)&#123;</span><br><span class="line">        for (Method m: cl.getDeclaredMethods())&#123;</span><br><span class="line">            UseCase annotation = m.getAnnotation(UseCase.class);</span><br><span class="line"></span><br><span class="line">            if (annotation!=null)&#123;</span><br><span class="line">                System.out.println(&quot;Found Use Case:&quot;+annotation.id()+&quot; &quot;+annotation.description());</span><br><span class="line"></span><br><span class="line">                useCases.remove(new Integer(annotation.id()));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        for (int i:useCases)&#123;</span><br><span class="line">            System.out.println(&quot;Warning: Missing use case-&quot;+i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args)&#123;</span><br><span class="line">        List&lt;Integer&gt; useCases=new ArrayList&lt;&gt;();</span><br><span class="line">        Collections.addAll(useCases,47,48,49,50);</span><br><span class="line">        trackUseCases(useCases,PasswordUtils.class);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这里用到了两个反射的方法：getDeclaredMethods()和getAnnotation(),它们都属于AnnotatedElement接口(class,Method与Field等类都实现了该接口)。getAnnoation()方法返回指定类型的注解对象，在这里就是UseCase。如果被注解的方法上没有该类型的注解，则返回null值。</p>
-<h3 id="默认值限制"><a href="#默认值限制" class="headerlink" title="默认值限制"></a>默认值限制</h3><p>&emsp;&emsp;编译器对元素的默认值有些过分挑剔。首先，元素不能有不确定的值。也就是说，元素必须具有默认值，要么在使用注解时提供元素的值。<br>&emsp;&emsp;其次，对于非基本类型的元素，无论是在源代码中声明时，或是在注解接口定义默认值时，都不能以null为其值。为了绕开这个约束，我们可以定义一些特殊的值，例如空字符串或负数，以此表示某个元素不存在。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@Target(ElementType.METHOD)</span><br><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">public @interface SimulatingNull &#123;</span><br><span class="line">    public int id() default -1;</span><br><span class="line">    public String descption() default &quot;&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/16/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><span class="page-number current">17</span><a class="page-number" href="/page/18/">18</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/18/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/page/16/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><span class="page-number current">17</span><a class="page-number" href="/page/18/">18</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><a class="extend next" rel="next" href="/page/18/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1204,18 +1253,18 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">197</span>
+          <span class="site-state-item-count">202</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
-        <span class="site-state-item-count">45</span>
+        <span class="site-state-item-count">46</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-count">59</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

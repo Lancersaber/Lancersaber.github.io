@@ -172,6 +172,482 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/17/zookeeper/%E5%88%9D%E5%A7%8Bzookeeper/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/17/zookeeper/%E5%88%9D%E5%A7%8Bzookeeper/" class="post-title-link" itemprop="url">初始zookeeper</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-11-17 21:58:25" itemprop="dateCreated datePublished" datetime="2019-11-17T21:58:25+08:00">2019-11-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-11-18 13:48:56" itemprop="dateModified" datetime="2019-11-18T13:48:56+08:00">2019-11-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/zookeeper/" itemprop="url" rel="index">
+                    <span itemprop="name">zookeeper</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="初始zookeeper"><a href="#初始zookeeper" class="headerlink" title="初始zookeeper"></a>初始zookeeper</h1><hr>
+<h2 id="Zookeeper介绍"><a href="#Zookeeper介绍" class="headerlink" title="Zookeeper介绍"></a>Zookeeper介绍</h2><p>Zookeeper是一个开放源代码的分布式协调服务。Zookeeper的设计目标是将那些复杂且容易出错的分布式一致性服务封装起来，构成一个高效可靠的原语集，并以一系列简单易用的接口提供给用户使用。</p>
+<h3 id="Zookeeper是什么"><a href="#Zookeeper是什么" class="headerlink" title="Zookeeper是什么"></a>Zookeeper是什么</h3><p>Zookeeper是一个典型的分布式数据一致性的解决方案，分布式应用程序可以基于它实现诸如数据发布订阅、负载均衡，命名服务、分布式协调/通知、集群管理、Master选举、分布式锁和分布式队列等功能。Zookeeper可以保证如下分布式一致等特性</p>
+<ul>
+<li>顺序一致性</li>
+<li>原子性</li>
+<li>单一试图</li>
+<li>可靠性</li>
+<li>实时性</li>
+</ul>
+<h3 id="Zookeeper的设计目标"><a href="#Zookeeper的设计目标" class="headerlink" title="Zookeeper的设计目标"></a>Zookeeper的设计目标</h3><p>Zookeeper致力于提供一个高性能、高可用、且具有严格的顺序访问控制能力的分布式协调服务。下面我们来具体看一下Zookeeper的四个设计目标</p>
+<h4 id="目标一：简单的数据模型"><a href="#目标一：简单的数据模型" class="headerlink" title="目标一：简单的数据模型"></a>目标一：简单的数据模型</h4><h4 id="目标二：可以构建集群"><a href="#目标二：可以构建集群" class="headerlink" title="目标二：可以构建集群"></a>目标二：可以构建集群</h4><h4 id="目标三：顺序访问"><a href="#目标三：顺序访问" class="headerlink" title="目标三：顺序访问"></a>目标三：顺序访问</h4><h4 id="目标四：高性能"><a href="#目标四：高性能" class="headerlink" title="目标四：高性能"></a>目标四：高性能</h4><h3 id="Zookeeper的基本概念"><a href="#Zookeeper的基本概念" class="headerlink" title="Zookeeper的基本概念"></a>Zookeeper的基本概念</h3><p>下面介绍几个Zookeeper的核心概念</p>
+<h4 id="集群角色"><a href="#集群角色" class="headerlink" title="集群角色"></a>集群角色</h4><p>zookeeper中引用了Leader，Follower和Observer三种角色，Zookeeper集群中的所有机器通过一个Leader选举过程来选定一台被称为“Leader”的机器，Leader服务器为客户端提供读和写服务。Follower和Observer都能够提供读服务，唯一的区别在于，Observer机器不参与Leader的选举过程，也不参与写操作的“过半写成功”策略，因此Observer可以在不影响写性能的情况下提升集群的读性能。</p>
+<h4 id="会话-Session"><a href="#会话-Session" class="headerlink" title="会话(Session)"></a>会话(Session)</h4><p>Session是指客户端会话，在讲解会话之前，我们首先来了解一下客户端连接。在Zookeeper中，一个客户端连接是指客户端和服务器之间的一个TCP长连接。客户端启动的时候，首先会与服务器建立一个TCP连接，从第一次连接建立开始，客户端会话的生命周期也开始了，通过这个连接，客户端能够通过心跳检测与服务器保持有效的会话，也能够向Zookeeper服务器发送请求并接受响应，同时还能够通过该连接接收来自服务器的Watch事件通知。Session的session Timeout值用来设置一个客户端会话的超时时间。当由于服务器压力太大、网络故障或是客户端能够重新连接上集群中的任何一台服务器，那么之前场景的会话仍然有效。</p>
+<h4 id="数据节点-Znode"><a href="#数据节点-Znode" class="headerlink" title="数据节点(Znode)"></a>数据节点(Znode)</h4><h2 id="Zookeeper的ZAB协议"><a href="#Zookeeper的ZAB协议" class="headerlink" title="Zookeeper的ZAB协议"></a>Zookeeper的ZAB协议</h2><p>ZAB(Zookeeper Atmoic Brodercast,原子消息广播协议)协议是为分布式协调服务Zookeeper专门设计的一种支持崩溃恢复的原子广播协议.<br>ZBA协议的核心是定义了对于那些会改变Zookeeper服务器数据状态的事务请求的处理方式，即：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">所有事务请求必须由一个全局唯一的服务器来协调处理，这样的服务器被称为Leader服务器，而余下的其他服务器则成为Follower服务器。Leader服务器负责将一个客户端请求转换成一个事务Proposal(提议)，并将该Proposal分发给集群中所有的Follower服务器。之后Leader服务器需要等待所有Follower服务器的反馈，一旦超过半数的Follower服务器进行了正确的反馈后，那么Leaeder就会再次向所有的Follower服务器分发Commit消息，要求其将前一个Proposal进行提交。</span><br></pre></td></tr></table></figure>
+
+<h3 id="协议介绍"><a href="#协议介绍" class="headerlink" title="协议介绍"></a>协议介绍</h3><p>ZAB协议包括了两种基本的模式，分别是崩溃恢复和消息广播。</p>
+<h4 id="崩溃恢复"><a href="#崩溃恢复" class="headerlink" title="崩溃恢复"></a>崩溃恢复</h4><p>当整个服务框架在启动过程中，或是当Leader服务器出现网络中断、崩溃退出与重启等异常情况时，ZAB协议就会进入恢复模式并选举产生新的Leader服务器。当选举产生了新的Leader服务器，同时集群中已经有过半的机器与该Leader服务器完成了状态同步之后，ZAB协议就会退出恢复模式。其中，所谓的状态同步是指数据同步，用来保证集群中存在过半的机器能够和Leader服务器的数据状态保持一致。因此，ZAB协议需要一个高效且可靠的Leader选举算法，从而确保快速地选举新的Leader。同时，Leader选举算法不仅仅需要让Leader自己知道其自身已经被选举为新的Leader，同时还需要让集群中其他的所有机器也能够快速地感知到新选举的Leader服务器。</p>
+<h5 id="基本特性"><a href="#基本特性" class="headerlink" title="基本特性"></a>基本特性</h5><p>接下来我们看看在崩溃恢复过程中，可能会出现的两个数据不一致的隐患及针对这些情况ZAB协议所需要保证的特性。</p>
+<p><em>ZAB协议需要确保那些已经在Leader服务器上提交的事务最终被所有的服务器都提交</em><br>假设一个事务在Leader服务器上都提交了，并且已经得到过半Follower服务器的Ack反馈，但是在它将Commit消息发送给所有的Follower机器之前，Leader服务器就挂了</p>
+<p><em>ZAB协议需要保证丢弃那些只在Leader服务器上被提交的事务</em></p>
+<h4 id="消息广播"><a href="#消息广播" class="headerlink" title="消息广播"></a>消息广播</h4><p>当集群中已经有过半的Follower服务器完成了和Leader服务器的状态同步，那么整个服务器框架就可以进入消息广播模式。当一台同样遵守ZAB协议的服务器启动后加入到集群中，如果此时集群中已经存在一个Leader服务器在负责进行消息广播，那么新加入的服务器就会自觉地进入数据恢复模式：找到Leader所在的服务器，并与其进行数据同步，然后一起参与到消息广播流程中。如果集群中的其他机器接收到客户端的事务请求，那么这些非Leader服务器会首先将这个事务请求转发给Leader服务器。</p>
+<p> 在整个消息广播过程中，Leader服务器会为每个事务请求生成对应的Proposal来进行广播，并且在广播事务Proposal之前，Leader服务器会首先为这个Proposal分配一个全局单调递增的唯一ID，我们称之为事务ID(即ZXID)。由于ZAB协议需要保证每一个消息的严格的因果关系，因此必须将每一个事务Proposal按照其ZXID的先后顺序来进行排序与处理。</p>
+<p> 具体的，在消息广播过程中，Leader服务器会为每一个Follower服务器都各自分配一个单独的队列，然后将需要广播的事务Proposal依次放入这些队列中去，并且根据FIFO策略进行消息发送。每一个Follower服务器在接收到这个事务Proposal之后，都会首先将其以事务日志的形式写入到本地磁盘中去，并且在写入成功后反馈给Leader服务器一个Ack响应。当Leader服务器接收安东超过半数的Follower的Ack响应后，就会广播一个Commit消息给所有的Follower服务器以通知其进行事务提交，同时Leader自身也会完成对事务的提交，而每一个Follower服务器在接收到Commit消息后，也会完成对事务的提交。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/17/kafka/Kafka%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/17/kafka/Kafka%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5/" class="post-title-link" itemprop="url">kafka核心概念</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-11-17 12:31:18" itemprop="dateCreated datePublished" datetime="2019-11-17T12:31:18+08:00">2019-11-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-11-24 14:43:03" itemprop="dateModified" datetime="2019-11-24T14:43:03+08:00">2019-11-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Kafka/" itemprop="url" rel="index">
+                    <span itemprop="name">Kafka</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Kafka核心概念"><a href="#Kafka核心概念" class="headerlink" title="Kafka核心概念"></a>Kafka核心概念</h1><hr>
+<h2 id="1、消息"><a href="#1、消息" class="headerlink" title="1、消息"></a>1、消息</h2><p>消息是Kafka中最基本的数据单元。消息由一串字节构成，其中主要由key和value构成，key和value也都是byte数组。key的主要作用是根据一定的策略，将次消息路由到指定的分区中，这样就可以保证包含同一key的消息全部写入同一分区中，key可以是null。消息的真正有效负载是value部分的数据。为了提高网络和存储的利用率，生产者会批量发送消息到Kafka，并在发送之前对消息进行压缩。</p>
+<h2 id="2、Topic-amp-分区-amp-Log"><a href="#2、Topic-amp-分区-amp-Log" class="headerlink" title="2、Topic&amp;分区&amp;Log"></a>2、Topic&amp;分区&amp;Log</h2><p>&emsp;&emsp;Topic是用于存储消息的逻辑概念，可以看作一个消息集合。每个Topic可以有多个生产者向其中推送(push)消息，也可以有任意多个消费者消费其中的消息，入下图<br><img src="https://i.loli.net/2019/11/17/75lfDVbnQOTWq26.png" alt="2019011811321224.png"></p>
+<p>&emsp;&emsp;每个Topic可以划分成多个分区(每个Topic都至少有一个分区)，同一Topic下的不同分区包含的消息是不同的。每个消息在被添加到分区时，都会被分配一个offset，它是消息在此分区中的唯一编号，Kafka通过offset保证消息在分区内的顺序，offset的顺序性不跨分区，即Kafka只保证在同一个分区内的消息是有序的；同一Topic的多个分区内的消息，Kafka并不保证其顺序性<br><img src="https://i.loli.net/2019/11/17/imfGPgnpz1NlwOL.png" alt="2019011811343340.png"></p>
+<p>&emsp;&emsp;同一Topic的不同分区会分配到不同的Broke。分区是Kafka水平扩展性的基础，我们可以通过增加服务器并在其上分配Partition的方式来增加Kafka的并行处理能力。<br>&emsp;&emsp;分区在逻辑上对应着一个Log，当生产者将消息写入分区时，实际上是写入到了分区对应的Log中。Log是一个逻辑概念，可以对应到磁盘上的一个文件夹。Log由多个Segment组成，每个Segment对应一个日志文件和索引文件。在面对海量数据时，为避免出现超大文件，每个日志文件的大小是有限制的，当超出限制后则会创建新的Segment，继续对外提供服务。这里需要注意，因为Kafka采用顺序I/O，所以只向最新的Segment追加数据。</p>
+<h3 id="保留策略-Rentention-Policy-amp-日志压缩-Log-Compaction"><a href="#保留策略-Rentention-Policy-amp-日志压缩-Log-Compaction" class="headerlink" title="保留策略(Rentention Policy) &amp; 日志压缩(Log Compaction)"></a>保留策略(Rentention Policy) &amp; 日志压缩(Log Compaction)</h3><p>&emsp;&emsp;无论消费者是否已经消费了消息，Kafka都会一直保存这些消息，但不会像数据库那样长期保存。为了避免磁盘被占满，Kafka会配置相应的“保留策略(rentention policy”),以长期周期性地删除陈旧的消息。</p>
+<p>&emsp;&emsp;两种保留策略</p>
+<ul>
+<li>1.根据消息保留的时间，当消息在Kafka中保存的时间超过了指定的时间，就可以被删除</li>
+<li>2.根据Topic存储的数据大小，当Topic所占的日志文件大小大于一个阈值，则可以开始删除最旧的消息。<br>Kafka会启动一个后台线程，定期检查是否存在可以删除的消息。保留策略的配置非常灵活，可以有全局的配置，也可以针对Topic进行配置来覆盖全局配置。</li>
+</ul>
+<p>&emsp;&emsp;除此之外，Kafka还会进行“日志压缩”(Log Compaction).在很多场景中，消息的key与value的值之间的对应关系是不断变化的，就像数据库中的数据会不断修改一样，消费者只关心key对应的最新的value值。此时，可以开启Kafka的日志压缩功能，Kafka会在后台启动一个线程，定期将相同key的消息进行合并吗，只保留最新的value值。如下图：<br><img src="https://i.loli.net/2019/11/17/ZRqDsXc7YhokajF.png" alt="2019-11-17 16_35_26-未命名表单.drawio - draw.io.png"></p>
+<h2 id="3、Broker"><a href="#3、Broker" class="headerlink" title="3、Broker"></a>3、Broker</h2><p>一个单独的Kafka Server就是一个Broker。Broker的主要工作就是接收生产者发过来的消息，分配offset，之后保存到磁盘中，同时，接收消费者、其他Broker的请求，根据请求类型进行相应处理并返回响应。在一般的生产环境中，一个Broker独占一台物理服务器。</p>
+<h2 id="副本"><a href="#副本" class="headerlink" title="副本"></a>副本</h2><p>Kafka对消息进行了冗余备份，每个Partition可以有多个副本，每个副本中包含的消息是一样的。每个分区至少有一个副本，当分区中只有一个副本时，就只有Leader副本，没有Follower副本</p>
+<p>每个分区的副本集合中，都会选举出一个副本作为Leader副本，Kafka在不同的场景下会采用不同的选举策略。所有的读写请求都由选举出的Leader副本处理，其他都作为Follower副本，Follower副本仅仅是从Leader副本处把数据拉取到本地之后，同步更新到自己的Log中。下图展示了出来。<br><img src="https://i.loli.net/2019/11/17/GVoNhRkyfvSs3Z9.png" alt="2019-11-17 16_52_08-未命名表单.drawio - draw.io.png"></p>
+<p>一般情况下，同一分区的多个分区会被分配到不同的Broker上，这样，当Leader所在的Broker宕机后，可以重新选举新的Leader，继续对外提供服务。</p>
+<h2 id="ISR集合"><a href="#ISR集合" class="headerlink" title="ISR集合"></a>ISR集合</h2><h2 id="HW-amp-LEO"><a href="#HW-amp-LEO" class="headerlink" title="HW&amp;LEO"></a>HW&amp;LEO</h2><h2 id="Cluster-amp-Controller"><a href="#Cluster-amp-Controller" class="headerlink" title="Cluster&amp;Controller"></a>Cluster&amp;Controller</h2><h2 id="生产者"><a href="#生产者" class="headerlink" title="生产者"></a>生产者</h2><h2 id="消费者"><a href="#消费者" class="headerlink" title="消费者"></a>消费者</h2><h2 id="Consumer-Group"><a href="#Consumer-Group" class="headerlink" title="Consumer Group"></a>Consumer Group</h2><p>在Kafka中，多个Consumer可以组成一个Consumer Group，一个Consumer只能属于一个Consumer Group。Consumer Group保证其订阅的Topic的每个分区只能被分配给此Consumer Group中的一个消费者处理。如果不同的Consumer Group订阅了同一个Topic，Consumer Group彼此之间不会干扰。 </p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/17/kafka/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%A8%A1%E5%BC%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/17/kafka/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%A8%A1%E5%BC%8F/" class="post-title-link" itemprop="url">消息队列的两种模式</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-11-17 09:27:18" itemprop="dateCreated datePublished" datetime="2019-11-17T09:27:18+08:00">2019-11-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-11-18 13:48:56" itemprop="dateModified" datetime="2019-11-18T13:48:56+08:00">2019-11-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MQ/" itemprop="url" rel="index">
+                    <span itemprop="name">MQ</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="消息队列的两种模式"><a href="#消息队列的两种模式" class="headerlink" title="消息队列的两种模式"></a>消息队列的两种模式</h1><hr>
+<p>Java消息服务（Java Message Service，JMS）应用程序接口是一个Java平台中关于面向消息中间件（MOM）的API，用于在两个应用程序之间，或分布式系统中发送消息，进行异步通信。</p>
+<p>点对点与发布订阅最初是由JMS定义的。<em>这两种模式主要区别或解决的问题就是发送到队列的消息能否重复消费(多订阅)</em></p>
+<h2 id="1、定义"><a href="#1、定义" class="headerlink" title="1、定义"></a>1、定义</h2><p>JMS规范目前支持两种消息模型：点对点（point to point， queue）和发布/订阅（publish/subscribe，topic）</p>
+<h3 id="1-1-点对点：Queue，不可重复消费"><a href="#1-1-点对点：Queue，不可重复消费" class="headerlink" title="1.1 点对点：Queue，不可重复消费"></a>1.1 点对点：Queue，不可重复消费</h3><p>消息生产者生产消息发送到queue中，然后消息消费者从queue中取出并且消费消息。<br>消息被消费以后，queue中不再有存储，所以消息消费者不可能消费到已经被消费的消息。<strong>Queue支持存在多个消费者，但是对一个消息而言，只会有一个消费者可以消费。</strong></p>
+<p><img src="https://i.loli.net/2019/11/17/FQVeKHnMc97Ckmx.jpg" alt="20151201162724900.jpg"></p>
+<h3 id="1-2、发布-订阅：Topic，可以重复消费"><a href="#1-2、发布-订阅：Topic，可以重复消费" class="headerlink" title="1.2、发布/订阅：Topic，可以重复消费"></a>1.2、发布/订阅：Topic，可以重复消费</h3><p>消息生产者（发布）将消息发布到topic中，同时有多个消息消费者（订阅）消费该消息。和点对点方式不同，发布到topic的消息会被所有订阅者消费。<br><img src="https://i.loli.net/2019/11/17/hi6Vzy1tOvmw2Mx.jpg" alt="20151201162752176.jpg"></p>
+<p>支持订阅组的发布订阅模式：<br>发布订阅模式下，当发布者消息量很大时，显然单个订阅者的处理能力是不足的。实际上现实场景中是多个订阅者节点组成一个订阅组负载均衡消费topic消息即分组订阅，这样订阅者很容易实现消费能力线性扩展。可以看成是一个topic下有多个Queue，每个Queue是点对点的方式，Queue之间是发布订阅方式。<br><img src="https://i.loli.net/2019/11/17/EzLbiy3gwDZedXT.jpg" alt="20151201162825775.jpg"></p>
+<h2 id="2、区别"><a href="#2、区别" class="headerlink" title="2、区别"></a>2、区别</h2><h3 id="2-1、点对点模式"><a href="#2-1、点对点模式" class="headerlink" title="2.1、点对点模式"></a>2.1、点对点模式</h3><p>生产者发送一条消息到queue，一个queue可以有很多消费者，但是一个消息只能被一个消费者接受，当没有消费者可用时，这个消息会被保存直到有 一个可用的消费者，<em>所以Queue实现了一个可靠的负载均衡。</em></p>
+<h3 id="2-2、发布订阅模式"><a href="#2-2、发布订阅模式" class="headerlink" title="2.2、发布订阅模式"></a>2.2、发布订阅模式</h3><p>发布者发送到topic的消息，只有订阅了topic的订阅者才会收到消息。topic实现了发布和订阅，<strong>当你发布一个消息，所有订阅这个topic的服务都能得到这个消息，所以从1到N个订阅者都能得到这个消息的拷贝。</strong></p>
+<h2 id="3、流行模型比较"><a href="#3、流行模型比较" class="headerlink" title="3、流行模型比较"></a>3、流行模型比较</h2><p>传统企业型消息队列ActiveMQ遵循了JMS规范，实现了点对点和发布订阅模型，但其他流行的消息队列RabbitMQ、Kafka并没有遵循JMS规范。</p>
+<h3 id="3-1、RabbitMQ"><a href="#3-1、RabbitMQ" class="headerlink" title="3.1、RabbitMQ"></a>3.1、RabbitMQ</h3><h3 id="3-2、Kafka"><a href="#3-2、Kafka" class="headerlink" title="3.2、Kafka"></a>3.2、Kafka</h3><p>Kafka只支持消息持久化，消费端为拉模型，消费状态和订阅关系由客户端端负责维护，消息消费完后不会立即删除，会保留历史消息。因此支持多订阅时，消息只会存储一份就可以了。但是可能产生重复消费的情况。</p>
+<h4 id="（1）点对点-amp-多订阅"><a href="#（1）点对点-amp-多订阅" class="headerlink" title="（1）点对点&amp;多订阅"></a>（1）点对点&amp;多订阅</h4><p>发布者生产一条消息到topic中，不同订阅组消费此消息。<br><img src="https://i.loli.net/2019/11/17/lgKEapIT3d4hcyO.jpg" alt="20151201162920224.jpg"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/17/%E9%AB%98%E5%B9%B6%E5%8F%91%E6%9E%B6%E6%9E%84/%E6%B6%88%E6%81%AF%E4%B8%AD%E9%97%B4%E4%BB%B6/%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%9A%84%E9%AB%98%E5%8F%AF%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/17/%E9%AB%98%E5%B9%B6%E5%8F%91%E6%9E%B6%E6%9E%84/%E6%B6%88%E6%81%AF%E4%B8%AD%E9%97%B4%E4%BB%B6/%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%9A%84%E9%AB%98%E5%8F%AF%E7%94%A8/" class="post-title-link" itemprop="url">如何保证消息队列的高可用？</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-11-17 09:06:57" itemprop="dateCreated datePublished" datetime="2019-11-17T09:06:57+08:00">2019-11-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-11-20 18:34:37" itemprop="dateModified" datetime="2019-11-20T18:34:37+08:00">2019-11-20</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MQ/" itemprop="url" rel="index">
+                    <span itemprop="name">MQ</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="如何保证消息队列的高可用？"><a href="#如何保证消息队列的高可用？" class="headerlink" title="如何保证消息队列的高可用？"></a>如何保证消息队列的高可用？</h1><hr>
+<h2 id="面试题"><a href="#面试题" class="headerlink" title="面试题"></a>面试题</h2><p>如何保证消息队列的高可用？</p>
+<h2 id="面试官心理分析"><a href="#面试官心理分析" class="headerlink" title="面试官心理分析"></a>面试官心理分析</h2><p>如果有人问到你 MQ 的知识，高可用是必问的。上一讲提到，MQ 会导致系统可用性降低。所以只要你用了 MQ，接下来问的一些要点肯定就是围绕着 MQ 的那些缺点怎么来解决了。</p>
+<p>要是你傻乎乎的就干用了一个 MQ，各种问题从来没考虑过，那你就杯具了，面试官对你的感觉就是，只会简单使用一些技术，没任何思考，马上对你的印象就不太好了。这样的同学招进来要是做个 20k 薪资以内的普通小弟还凑合，要是做薪资 20k+ 的高工，那就惨了，让你设计个系统，里面肯定一堆坑，出了事故公司受损失，团队一起背锅。</p>
+<h2 id="面试题剖析"><a href="#面试题剖析" class="headerlink" title="面试题剖析"></a>面试题剖析</h2><p>这个问题这么问是很好的，因为不能问你 Kafka 的高可用性怎么保证？ActiveMQ 的高可用性怎么保证？一个面试官要是这么问就显得很没水平，人家可能用的就是 RabbitMQ，没用过 Kafka，你上来问人家 Kafka 干什么？这不是摆明了刁难人么。</p>
+<p>所以有水平的面试官，问的是 MQ 的高可用性怎么保证？这样就是你用过哪个 MQ，你就说说你对那个 MQ 的高可用性的理解。</p>
+<h3 id="Kafka-的高可用性"><a href="#Kafka-的高可用性" class="headerlink" title="Kafka 的高可用性"></a>Kafka 的高可用性</h3><p>Kafka 一个最基本的架构认识：由多个 broker 组成，每个 broker 是一个节点；你创建一个 topic，这个 topic 可以划分为多个 partition，每个 partition 可以存在于不同的 broker 上，每个 partition 就放一部分数据。</p>
+<p>这就是<strong>天然的分布式消息队列</strong>，就是说一个 topic 的数据，<strong>是分散放在多个机器上的，每个机器就放一部分数据。</strong><br>实际上 RabbmitMQ 之类的，并不是分布式消息队列，它就是传统的消息队列，只不过提供了一些集群、HA(High Availability, 高可用性) 的机制而已，因为无论怎么玩儿，RabbitMQ 一个 queue 的数据都是放在一个节点里的，镜像集群下，也是每个节点都放这个 queue 的完整数据。<br>Kafka 0.8 以前，是没有 HA 机制的，就是任何一个 broker 宕机了，那个 broker 上的 partition 就废了，没法写也没法读，没有什么高可用性可言。<br>比如说，我们假设创建了一个 topic，指定其 partition 数量是 3 个，分别在三台机器上。但是，如果第二台机器宕机了，会导致这个 topic 的 1/3 的数据就丢了，因此这个是做不到高可用的。</p>
+<p><img src="https://i.loli.net/2019/11/20/SU9NxZViW7qG53C.png" alt="kafka-before.png"></p>
+<p>Kafka 0.8 以后，提供了 HA 机制，就是 replica（复制品） 副本机制。每个 partition 的数据都会同步到其它机器上，形成自己的多个 replica 副本。所有 replica 会选举一个 leader 出来，那么生产和消费都跟这个 leader 打交道，然后其他 replica 就是 follower。写的时候，leader 会负责把数据同步到所有 follower 上去，读的时候就直接读 leader 上的数据即可。只能读写 leader？很简单，要是你可以随意读写每个 follower，那么就要 care 数据一致性的问题，系统复杂度太高，很容易出问题。Kafka 会均匀地将一个 partition 的所有 replica 分布在不同的机器上，这样才可以提高容错性。</p>
+<p><img src="https://i.loli.net/2019/11/20/4XjCtv9rO7fwdqc.png" alt="kafka-after.png"></p>
+<p>这么搞，就有所谓的高可用性了，因为如果某个 broker 宕机了，没事儿，那个 broker上面的 partition 在其他机器上都有副本的。如果这个宕机的 broker 上面有某个 partition 的 leader，那么此时会从 follower 中重新选举一个新的 leader 出来，大家继续读写那个新的 leader 即可。这就有所谓的高可用性了。</p>
+<p>写数据的时候，生产者就写 leader，然后 leader 将数据落地写本地磁盘，接着其他 follower 自己主动从 leader 来 pull 数据。一旦所有 follower 同步好数据了，就会发送 ack 给 leader，leader 收到所有 follower 的 ack 之后，就会返回写成功的消息给生产者。（当然，这只是其中一种模式，还可以适当调整这个行为）</p>
+<p>消费的时候，只会从 leader 去读，但是只有当一个消息已经被所有 follower 都同步成功返回 ack 的时候，这个消息才会被消费者读到。</p>
+<p>看到这里，相信你大致明白了 Kafka 是如何保证高可用机制的了，对吧？不至于一无所知，现场还能给面试官画画图。要是遇上面试官确实是 Kafka 高手，深挖了问，那你只能说不好意思，太深入的你没研究过。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/16/%E9%AB%98%E5%B9%B6%E5%8F%91%E6%9E%B6%E6%9E%84/%E7%BC%93%E5%AD%98/redis%E7%9A%84%E8%BF%87%E6%9C%9F%E7%AD%96%E7%95%A5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/16/%E9%AB%98%E5%B9%B6%E5%8F%91%E6%9E%B6%E6%9E%84/%E7%BC%93%E5%AD%98/redis%E7%9A%84%E8%BF%87%E6%9C%9F%E7%AD%96%E7%95%A5/" class="post-title-link" itemprop="url">redis的过期策略</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-11-16 21:38:28" itemprop="dateCreated datePublished" datetime="2019-11-16T21:38:28+08:00">2019-11-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-11-22 16:02:56" itemprop="dateModified" datetime="2019-11-22T16:02:56+08:00">2019-11-22</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/redis/" itemprop="url" rel="index">
+                    <span itemprop="name">redis</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="redis的过期策略"><a href="#redis的过期策略" class="headerlink" title="redis的过期策略"></a>redis的过期策略</h1><hr>
+<h2 id="面试题"><a href="#面试题" class="headerlink" title="面试题"></a>面试题</h2><p>redis 的过期策略都有哪些？内存淘汰机制都有哪些？手写一下 LRU 代码实现？</p>
+<h2 id="面试官心理分析"><a href="#面试官心理分析" class="headerlink" title="面试官心理分析"></a>面试官心理分析</h2><p>如果你连这个问题都不知道，上来就懵了，回答不出来，那线上你写代码的时候，想当然的认为写进 redis 的数据就一定会存在，后面导致系统各种 bug，谁来负责？</p>
+<p>常见的有两个问题：</p>
+<ul>
+<li>往 redis 写入的数据怎么没了？<br>可能有同学会遇到，在生产环境的 redis 经常会丢掉一些数据，写进去了，过一会儿可能就没了。我的天，同学，你问这个问题就说明 redis 你就没用对啊。redis 是缓存，你给当存储了是吧？</li>
+</ul>
+<p>啥叫缓存？用内存当缓存。内存是无限的吗，内存是很宝贵而且是有限的，磁盘是廉价而且是大量的。可能一台机器就几十个 G 的内存，但是可以有几个 T 的硬盘空间。redis 主要是基于内存来进行高性能、高并发的读写操作的。</p>
+<p>那既然内存是有限的，比如 redis 就只能用 10G，你要是往里面写了 20G 的数据，会咋办？当然会干掉 10G 的数据，然后就保留 10G 的数据了。那干掉哪些数据？保留哪些数据？当然是干掉不常用的数据，保留常用的数据了。</p>
+<ul>
+<li>数据明明过期了，怎么还占用着内存？<br>这是由 redis 的过期策略来决定。</li>
+</ul>
+<h2 id="面试题剖析"><a href="#面试题剖析" class="headerlink" title="面试题剖析"></a>面试题剖析</h2><h3 id="redis-过期策略"><a href="#redis-过期策略" class="headerlink" title="redis 过期策略"></a>redis 过期策略</h3><p>redis 过期策略是：定期删除+惰性删除。<br>所谓定期删除，指的是 redis 默认是每隔 100ms 就随机抽取一些设置了过期时间的 key，检查其是否过期，如果过期就删除。</p>
+<p>假设 redis 里放了 10w 个 key，都设置了过期时间，你每隔几百毫秒，就检查 10w 个 key，那 redis 基本上就死了，cpu 负载会很高的，消耗在你的检查过期 key 上了。注意，这里可不是每隔 100ms 就遍历所有的设置过期时间的 key，那样就是一场性能上的灾难。实际上 redis 是每隔 100ms 随机抽取一些 key 来检查和删除的。</p>
+<p>但是问题是，定期删除可能会导致很多过期 key 到了时间并没有被删除掉，那咋整呢？所以就是惰性删除了。这就是说，在你获取某个 key 的时候，redis 会检查一下 ，这个 key 如果设置了过期时间那么是否过期了？如果过期了此时就会删除，不会给你返回任何东西。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">获取 key 的时候，如果此时 key 已经过期，就删除，不会返回任何东西。</span><br></pre></td></tr></table></figure>
+
+<p>但是实际上这还是有问题的，如果定期删除漏掉了很多过期 key，然后你也没及时去查，也就没走惰性删除，此时会怎么样？如果大量过期 key 堆积在内存里，导致 redis 内存块耗尽了，咋整？</p>
+<p>答案是：走内存淘汰机制。</p>
+<h3 id="内存淘汰机制"><a href="#内存淘汰机制" class="headerlink" title="内存淘汰机制"></a>内存淘汰机制</h3><p>redis 内存淘汰机制有以下几个：</p>
+<ul>
+<li>noeviction: 当内存不足以容纳新写入数据时，新写入操作会报错，这个一般没人用吧，实在是太恶心了。</li>
+<li>allkeys-lru：当内存不足以容纳新写入数据时，在键空间中，移除最近最少使用的 key（这个是最常用的）。</li>
+<li>allkeys-random：当内存不足以容纳新写入数据时，在键空间中，随机移除某个 key，这个一般没人用吧，为啥要随机，肯定是把最近最少使用的 key 给干掉啊。</li>
+<li>volatile-lru：当内存不足以容纳新写入数据时，在设置了过期时间的键空间中，移除最近最少使用的 key（这个一般不太合适）。</li>
+<li>volatile-random：当内存不足以容纳新写入数据时，在设置了过期时间的键空间中，随机移除某个 key。</li>
+<li>volatile-ttl：当内存不足以容纳新写入数据时，在设置了过期时间的键空间中，有更早过期时间的 key 优先移除。</li>
+</ul>
+<h3 id="手写一个-LRU-算法"><a href="#手写一个-LRU-算法" class="headerlink" title="手写一个 LRU 算法"></a>手写一个 LRU 算法</h3><p>你可以现场手写最原始的 LRU 算法，那个代码量太大了，似乎不太现实。</p>
+<p>不求自己纯手工从底层开始打造出自己的 LRU，但是起码要知道如何利用已有的 JDK 数据结构实现一个 Java 版的 LRU。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">class LRUCache&lt;K, V&gt; extends LinkedHashMap&lt;K, V&gt; &#123;</span><br><span class="line">    private final int CACHE_SIZE;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 传递进来最多能缓存多少数据</span><br><span class="line">     *</span><br><span class="line">     * @param cacheSize 缓存大小</span><br><span class="line">     */</span><br><span class="line">    public LRUCache(int cacheSize) &#123;</span><br><span class="line">        // true 表示让 linkedHashMap 按照访问顺序来进行排序，最近访问的放在头部，最老访问的放在尾部。</span><br><span class="line">        super((int) Math.ceil(cacheSize / 0.75) + 1, 0.75f, true);</span><br><span class="line">        CACHE_SIZE = cacheSize;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected boolean removeEldestEntry(Map.Entry&lt;K, V&gt; eldest) &#123;</span><br><span class="line">        // 当 map中的数据量大于指定的缓存个数的时候，就自动删除最老的数据。</span><br><span class="line">        return size() &gt; CACHE_SIZE;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
     <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/16/%E9%AB%98%E5%B9%B6%E5%8F%91%E6%9E%B6%E6%9E%84/%E7%BC%93%E5%AD%98/redis%E7%9A%84%E5%87%A0%E7%A7%8D%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -607,7 +1083,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-05-23 12:17:20" itemprop="dateModified" datetime="2020-05-23T12:17:20+08:00">2020-05-23</time>
+                <time title="Modified: 2020-05-25 23:55:50" itemprop="dateModified" datetime="2020-05-25T23:55:50+08:00">2020-05-25</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -724,558 +1200,11 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/15/Java%E5%9F%BA%E7%A1%80/Java%E4%B8%AD%E7%9A%84%E6%B3%9B%E5%9E%8B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lancersaber">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lancersaber">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/15/Java%E5%9F%BA%E7%A1%80/Java%E4%B8%AD%E7%9A%84%E6%B3%9B%E5%9E%8B/" class="post-title-link" itemprop="url">Java中泛型</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2019-11-15 15:59:42 / Modified: 16:49:48" itemprop="dateCreated datePublished" datetime="2019-11-15T15:59:42+08:00">2019-11-15</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Java中泛型"><a href="#Java中泛型" class="headerlink" title="Java中泛型"></a>Java中泛型</h1><hr>
-<p>一般的类和方法，只能使用具体的类型，要么是基本类型，要么是自定义的类。如果要编写可以应用于多种类型的代码，这种刻板的限制对代码的束缚就会很大。</p>
-<h2 id="泛型类"><a href="#泛型类" class="headerlink" title="泛型类"></a>泛型类</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">package generics;//: generics/Holder3.java</span><br><span class="line"></span><br><span class="line">public class Holder3&lt;T&gt; &#123;</span><br><span class="line">  private T a;</span><br><span class="line">  public Holder3(T a) &#123; this.a = a; &#125;</span><br><span class="line">  public void set(T a) &#123; this.a = a; &#125;</span><br><span class="line">  public T get() &#123; return a; &#125;</span><br><span class="line">  public static void main(String[] args) &#123;</span><br><span class="line">    Holder3&lt;Automobile&gt; h3 =</span><br><span class="line">      new Holder3&lt;Automobile&gt;(new Automobile());</span><br><span class="line">    Automobile a = h3.get(); // No cast needed</span><br><span class="line">    // h3.set(&quot;Not an Automobile&quot;); // Error</span><br><span class="line">    // h3.set(1); // Error</span><br><span class="line">  &#125;</span><br><span class="line">&#125; ///:~</span><br></pre></td></tr></table></figure>
-<p>当你创建Holder3对象时，必须指明持有什么类型的对象，将其置于尖括号中。然后，你就只能在Holder3中存入该类型(或其子类，因为多态与泛型不冲突)。并且在你从Holder3中取出它持有的对象时，自动就是正确的类型。</p>
-<p>这就是Java泛型的核心概念：告诉编译器想使用什么类型，然后编译器帮你处理一切细节。</p>
-<h2 id="泛型接口"><a href="#泛型接口" class="headerlink" title="泛型接口"></a>泛型接口</h2><p>泛型也可以应用于接口。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public interface Generator&lt;T&gt;&#123; T next();&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="泛型方法"><a href="#泛型方法" class="headerlink" title="泛型方法"></a>泛型方法</h2><p>泛型同样可以使用于方法上。注意泛型方法所在的类可以是泛型类，也可以不是。也就是说，是否拥有泛型方法，与其所在的类是否是泛型没有关系。<br>对于static的方法，无法访问泛型类的类型参数，所以，如果static方法需要使用泛型能力，就必须使其成为泛型方法。</p>
-<p>要成为泛型方法，只需将泛型参数列表置于返回值之前</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public class GenericMethods&#123;</span><br><span class="line">	public &lt;T&gt; void f(T x)&#123;</span><br><span class="line">		System.out.println(x.getClass().getName());</span><br><span class="line">	&#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="泛型的擦除"><a href="#泛型的擦除" class="headerlink" title="泛型的擦除"></a>泛型的擦除</h2><p>我们可以声明ArrayList.class，但是不能声明ArrayList<Integer>.class.看下面的代码</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public class ErasedTypeEquivalence &#123;</span><br><span class="line">  public static void main(String[] args) &#123;</span><br><span class="line">    Class c1 = new ArrayList&lt;String&gt;().getClass();</span><br><span class="line">    Class c2 = new ArrayList&lt;Integer&gt;().getClass();</span><br><span class="line">    System.out.println(c1 == c2);</span><br><span class="line">  &#125;</span><br><span class="line">&#125; /* Output:</span><br><span class="line">true</span><br><span class="line">*///:~</span><br></pre></td></tr></table></figure>
-
-<p>在泛型代码内部，无法获得任何有关泛型参数类型的信息。<br>Java泛型是使用擦除来实现的，这意味着当你在使用泛型时，任何具体的类型信息都被擦除了，你唯一知道的就是你在使用一个对象。因为List<Integer>和List<String>在运行时事实上是相同的类型。这两种类型都i被擦除成它们的”原生类型”，即List</p>
-<h2 id="泛型的边界"><a href="#泛型的边界" class="headerlink" title="泛型的边界"></a>泛型的边界</h2><p>因为擦除了类型信息，所以在无界泛型参数调用的方法只是那些可以用Object调用的方法。但是，如果能够将这个参数限制为某个类型子集，那么你就可以用这些子集来调用方法。为了执行这种限制，Java泛型重用了extends关键子。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">interface HasColor &#123; java.awt.Color getColor(); &#125;</span><br><span class="line"></span><br><span class="line">class Colored&lt;T extends HasColor&gt; &#123;</span><br><span class="line">  T item;</span><br><span class="line">  Colored(T item) &#123; this.item = item; &#125;</span><br><span class="line">  T getItem() &#123; return item; &#125;</span><br><span class="line">  // The bound allows you to call a method:</span><br><span class="line">  java.awt.Color color() &#123; return item.getColor(); &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/14/Java%E5%9F%BA%E7%A1%80/Java%E4%B8%AD%E7%9A%84%E4%BD%8D%E8%BF%90%E7%AE%97/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lancersaber">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lancersaber">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/14/Java%E5%9F%BA%E7%A1%80/Java%E4%B8%AD%E7%9A%84%E4%BD%8D%E8%BF%90%E7%AE%97/" class="post-title-link" itemprop="url">Java中的位运算</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-11-14 20:12:44" itemprop="dateCreated datePublished" datetime="2019-11-14T20:12:44+08:00">2019-11-14</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-05-18 13:07:04" itemprop="dateModified" datetime="2020-05-18T13:07:04+08:00">2020-05-18</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Java中的位运算"><a href="#Java中的位运算" class="headerlink" title="Java中的位运算"></a>Java中的位运算</h1><hr>
-<p>Java提供的位运算符有：左移( &lt;&lt; )、右移( &gt;&gt; ) 、无符号右移( &gt;&gt;&gt; ) 、位与( &amp; ) 、位或( | )、位非( ~ )、位异或( ^ )，除了位非( ~ )是一元操作符外，其它的都是二元操作符。</p>
-<h2 id="1、左移-lt-lt"><a href="#1、左移-lt-lt" class="headerlink" title="1、左移( &lt;&lt; )"></a>1、左移( &lt;&lt; )</h2><p>Test1、将5左移2位：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">package com.xcy;</span><br><span class="line"> </span><br><span class="line">public class Test &#123;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		System.out.println(5&lt;&lt;2);//运行结果是20</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>运行结果是20，但是程序是怎样执行的呢？<br>首先会将5转为2进制表示形式(java中，整数默认就是int类型,也就是32位):</p>
-<p>0000 0000 0000 0000 0000 0000 0000 0101           然后左移2位后，低位补0：</p>
-<p>0000 0000 0000 0000 0000 0000 0001 0100           换算成10进制为20</p>
-<h2 id="2、右移-gt-gt-，右移同理，只是方向不一样罢了-感觉和没说一样"><a href="#2、右移-gt-gt-，右移同理，只是方向不一样罢了-感觉和没说一样" class="headerlink" title="2、右移( &gt;&gt; ) ，右移同理，只是方向不一样罢了(感觉和没说一样)"></a>2、右移( &gt;&gt; ) ，右移同理，只是方向不一样罢了(感觉和没说一样)</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(5&gt;&gt;2);//运行结果是1</span><br></pre></td></tr></table></figure>
-
-<p>还是先将5转为2进制表示形式：<br>0000 0000 0000 0000 0000 0000 0000 0101 然后右移2位，高位补0：</p>
-<p>0000 0000 0000 0000 0000 0000 0000 0001</p>
-<h2 id="3、无符号右移-gt-gt-gt"><a href="#3、无符号右移-gt-gt-gt" class="headerlink" title="3、无符号右移( &gt;&gt;&gt; )"></a>3、无符号右移( &gt;&gt;&gt; )</h2><p>我们知道在Java中int类型占32位，可以表示一个正数，也可以表示一个负数。正数换算成二进制后的最高位为0，负数的二进制最高为为1</p>
-<p>例如  -5换算成二进制后为：</p>
-<p>1111 1111 1111 1111 1111 1111 1111 1011   (刚开始接触二进制时，不知道最高位是用来表示正负之分的，当时就总想不通。。明明算起来得到的就是一个正数)</p>
-<p>我们分别对5进行右移3位、 -5进行右移3位和无符号右移3位：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">package com.xcy;</span><br><span class="line"> </span><br><span class="line">public class Test &#123;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		System.out.println(5&gt;&gt;3);//结果是0</span><br><span class="line">		System.out.println(-5&gt;&gt;3);//结果是-1</span><br><span class="line">		System.out.println(-5&gt;&gt;&gt;3);//结果是536870911</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="4、位与-amp"><a href="#4、位与-amp" class="headerlink" title="4、位与( &amp; )"></a>4、位与( &amp; )</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">package com.xcy;</span><br><span class="line"> </span><br><span class="line">public class Test &#123;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		System.out.println(5 &amp; 3);//结果为1</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>还是老套路，将2个操作数和结果都转换为二进制进行比较：<br>5转换为二进制：0000 0000 0000 0000 0000 0000 0000 0101</p>
-<p>3转换为二进制：0000 0000 0000 0000 0000 0000 0000 0011</p>
-<hr>
-<p>1转换为二进制：0000 0000 0000 0000 0000 0000 0000 0001</p>
-<p>位与：第一个操作数的的第n位于第二个操作数的第n位如果都是1，那么结果的第n为也为1，否则为0</p>
-<h2 id="5、位或"><a href="#5、位或" class="headerlink" title="5、位或( | )"></a>5、位或( | )</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">package com.xcy;</span><br><span class="line"> </span><br><span class="line">public class Test &#123;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		System.out.println(5 | 3);//结果为7</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>5转换为二进制：0000 0000 0000 0000 0000 0000 0000 0101</p>
-<p>3转换为二进制：0000 0000 0000 0000 0000 0000 0000 0011</p>
-<hr>
-<p>7转换为二进制：0000 0000 0000 0000 0000 0000 0000 0111<br>位或操作：第一个操作数的的第n位于第二个操作数的第n位 只要有一个是1，那么结果的第n为也为1，否则为0</p>
-<h2 id="6、位异或"><a href="#6、位异或" class="headerlink" title="6、位异或( ^ )"></a>6、位异或( ^ )</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">package com.xcy;</span><br><span class="line"> </span><br><span class="line">public class Test &#123;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		System.out.println(5 ^ 3);//结果为6</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>5转换为二进制：0000 0000 0000 0000 0000 0000 0000 0101</p>
-<p>3转换为二进制：0000 0000 0000 0000 0000 0000 0000 0011</p>
-<hr>
-<p>6转换为二进制：0000 0000 0000 0000 0000 0000 0000 0110<br>位异或：第一个操作数的的第n位于第二个操作数的第n位 相反，那么结果的第n为也为1，否则为0</p>
-<h2 id="7、位非-位非是一元操作符"><a href="#7、位非-位非是一元操作符" class="headerlink" title="7、位非( ~ )           位非是一元操作符"></a>7、位非( ~ )           位非是一元操作符</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">package com.xcy;</span><br><span class="line"> </span><br><span class="line">public class Test &#123;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		System.out.println(~5);//结果为-6</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="5转换为二进制：0000-0000-0000-0000-0000-0000-0000-0101"><a href="#5转换为二进制：0000-0000-0000-0000-0000-0000-0000-0101" class="headerlink" title="5转换为二进制：0000 0000 0000 0000 0000 0000 0000 0101"></a>5转换为二进制：0000 0000 0000 0000 0000 0000 0000 0101</h2><p>-6转换为二进制：1111 1111 1111 1111 1111 1111 1111 1010</p>
-<p>位非：操作数的第n位为1，那么结果的第n位为0，反之。</p>
-<p>由位运算操作符衍生而来的有：</p>
-<p>&amp;= 按位与赋值</p>
-<p>|=  按位或赋值</p>
-<p>^= 按位非赋值</p>
-<blockquote>
-<blockquote>
-<p>= 右移赋值</p>
-</blockquote>
-</blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>= 无符号右移赋值</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<p>&lt;&lt;= 赋值左移</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/14/Unknown/%E5%A4%A7%E5%9E%8B%E7%BD%91%E7%AB%99%E7%B3%BB%E7%BB%9F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lancersaber">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lancersaber">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/14/Unknown/%E5%A4%A7%E5%9E%8B%E7%BD%91%E7%AB%99%E7%B3%BB%E7%BB%9F/" class="post-title-link" itemprop="url">大型网站系统架构的演进</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-11-14 18:31:13" itemprop="dateCreated datePublished" datetime="2019-11-14T18:31:13+08:00">2019-11-14</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-15 15:53:06" itemprop="dateModified" datetime="2019-11-15T15:53:06+08:00">2019-11-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/unknow/" itemprop="url" rel="index">
-                    <span itemprop="name">unknow</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="大型网站系统架构的演进"><a href="#大型网站系统架构的演进" class="headerlink" title="大型网站系统架构的演进"></a>大型网站系统架构的演进</h1><hr>
-<p>为了更好的说明网站从小到大的演进过程，我们下面举个交易网站的例子。<br>作为一个交易网站，需要具备的最基本的三个功能有三部分：</p>
-<ul>
-<li>用户<ul>
-<li>用户注册</li>
-<li>用户管理</li>
-<li>信息维护</li>
-</ul>
-</li>
-<li>商品<ul>
-<li>商品展示</li>
-<li>商品管理</li>
-</ul>
-</li>
-<li>交易<ul>
-<li>创建交易</li>
-<li>交易管理</li>
-</ul>
-</li>
-</ul>
-<p>基于Java技术的网站大概是这样的<br><img src="https://i.loli.net/2019/11/14/D71oEpYGk5z2uCa.png" alt="web架构.PNG"></p>
-<p>这里需要注意两个地方</p>
-<ul>
-<li>各个功能模块之间是通过JVM内部的方法来进行交互的</li>
-<li>应用和数据库之间是通过JDBC进行访问的</li>
-</ul>
-<h2 id="单机负载告警，数据库与应用分离"><a href="#单机负载告警，数据库与应用分离" class="headerlink" title="单机负载告警，数据库与应用分离"></a>单机负载告警，数据库与应用分离</h2><p>当网站的访问量不断增大时，服务器的负载持续升高，必须采取一些方法来应对。首先我们可以做的是把数据库与应用从一台机器分别分到两台机器，那么我们的网站架构会变成这样<br><img src="https://i.loli.net/2019/11/14/OirqLbdHMukm9pz.png" alt="web.PNG"><br>我们只是在在应用的配置中把数据库的地址从本机改到了另外一台机器上而已。</p>
-<h2 id="应用服务器负载告警，如何让应用服务器走向集群"><a href="#应用服务器负载告警，如何让应用服务器走向集群" class="headerlink" title="应用服务器负载告警，如何让应用服务器走向集群"></a>应用服务器负载告警，如何让应用服务器走向集群</h2><p>应用服务器压力变大时，根据对应用的监测结果，可以有针对性地进行优化。<br>首先来看一下这个变化<br><img src="https://i.loli.net/2019/11/14/Nt2MzC1jA8dar3h.png" alt="web2.PNG"><br>应用服务器从一台变为两台。这两个服务器之间没有直接的交互，都是依赖数据库对外提供服务。但这样有两个问题需要解决：</p>
-<ol>
-<li>最终用户对两个应用服务器的选择问题</li>
-<li>Session的问题</li>
-</ol>
-<h3 id="引入负载均衡设备"><a href="#引入负载均衡设备" class="headerlink" title="引入负载均衡设备"></a>引入负载均衡设备</h3><p>采用了负载均衡设备后，系统的结构看起来如下：<br><img src="https://i.loli.net/2019/11/14/6rhQBkCKTW4e72s.png" alt="web3.PNG"></p>
-<h2 id="数据库压力变大，读写分离吧"><a href="#数据库压力变大，读写分离吧" class="headerlink" title="数据库压力变大，读写分离吧"></a>数据库压力变大，读写分离吧</h2><h3 id="采用数据库作为读库"><a href="#采用数据库作为读库" class="headerlink" title="采用数据库作为读库"></a>采用数据库作为读库</h3><p>随着业务的发展，数据量和访问量都在增长，对于大型网站来说，有不少业务是读多写少的，这个状况也会直接反应到数据库上。对于这种情况，我们可以考虑使用读写分离的方式。<br><img src="https://i.loli.net/2019/11/14/LAhKITyUusSHGFX.png" alt="web4.PNG"></p>
-<p>这个结构的变化会带来两个问题</p>
-<ul>
-<li>数据复制问题</li>
-<li>应用对于数据源的选择问题</li>
-</ul>
-<h3 id="加速数据读取的利器–缓存"><a href="#加速数据读取的利器–缓存" class="headerlink" title="加速数据读取的利器–缓存"></a>加速数据读取的利器–缓存</h3><p>在大型网站中，有许多地方都会用到缓存机制<br>1、 数据缓存<br>大型系统中的数据缓存主要用于分担数据库的读的压力。缓存系统一般是用来保存和查询键值对(Key-Value)对的。一般我们在缓存中放的是“热”数据而不是全部数据。</p>
-<p>2、页面缓存</p>
-<h3 id="弥补关系型数据库的不足，引入分布式存储系统"><a href="#弥补关系型数据库的不足，引入分布式存储系统" class="headerlink" title="弥补关系型数据库的不足，引入分布式存储系统"></a>弥补关系型数据库的不足，引入分布式存储系统</h3><h3 id="读写分离后，数据库又遇到瓶颈"><a href="#读写分离后，数据库又遇到瓶颈" class="headerlink" title="读写分离后，数据库又遇到瓶颈"></a>读写分离后，数据库又遇到瓶颈</h3><h4 id="专库专用，数据垂直拆分"><a href="#专库专用，数据垂直拆分" class="headerlink" title="专库专用，数据垂直拆分"></a>专库专用，数据垂直拆分</h4><h4 id="垂直拆分后的单机遇到瓶颈，数据水平拆分"><a href="#垂直拆分后的单机遇到瓶颈，数据水平拆分" class="headerlink" title="垂直拆分后的单机遇到瓶颈，数据水平拆分"></a>垂直拆分后的单机遇到瓶颈，数据水平拆分</h4><h2 id="数据库问题解决后，应用面对的新挑战"><a href="#数据库问题解决后，应用面对的新挑战" class="headerlink" title="数据库问题解决后，应用面对的新挑战"></a>数据库问题解决后，应用面对的新挑战</h2><h3 id="拆分应用"><a href="#拆分应用" class="headerlink" title="拆分应用"></a>拆分应用</h3>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/14/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/HashMap/HashMap%E4%B8%AD%E7%9A%84%E5%B1%9E%E6%80%A7%E5%92%8C%E7%B1%BB/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lancersaber">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lancersaber">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/14/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/HashMap/HashMap%E4%B8%AD%E7%9A%84%E5%B1%9E%E6%80%A7%E5%92%8C%E7%B1%BB/" class="post-title-link" itemprop="url">HashMap源码阅读</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-11-14 13:53:12" itemprop="dateCreated datePublished" datetime="2019-11-14T13:53:12+08:00">2019-11-14</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-16 14:20:29" itemprop="dateModified" datetime="2019-11-16T14:20:29+08:00">2019-11-16</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/sourceread/" itemprop="url" rel="index">
-                    <span itemprop="name">sourceread</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="HashMap源码阅读"><a href="#HashMap源码阅读" class="headerlink" title="HashMap源码阅读"></a>HashMap源码阅读</h1><hr>
-<p>在阅读源码前我们应该知道Hashmap的基本数据结构是数组加链表，可以使用下面的图解表示<br><img src="https://i.loli.net/2019/11/15/fGaU7TZo4vNhi1C.png" alt="2019-11-15 09_00_53-未命名表单.drawio - draw.io.png"><br>所以我们可以预测在Hashmap中应该定义了一个数组，</p>
-<h2 id="HashMap中的属性值"><a href="#HashMap中的属性值" class="headerlink" title="HashMap中的属性值"></a>HashMap中的属性值</h2><ul>
-<li>DEFAULT_INITIAL_CAPACITY：默认的容量大小</li>
-<li>MAXIMUM_CAPACITY：最大的容量大小，为2的30次方</li>
-<li>DEFAULT_LOAD_FACTOR：默认的加载因子，大小为0.75</li>
-<li>threshold(临界值)：哈希表内元素数量的阈值，当哈希表内元素数量超过阈值时，会发生扩容resize()。</li>
-<li>transient Node&lt;K,V&gt;[] table：哈希桶，存放链表。 长度是2的N次方，或者初始化时为0.</li>
-<li>TREEIFY_THRESHOLD:当每个节点挂载数超过了该变量时，就将链表这种数据结构该为使用红黑树</li>
-<li>UNTREEIFY_THRESHOLD：当每个节点挂载数少于该数时，就改为使用链表的形式进行存储</li>
-</ul>
-<h2 id="链表节点Node"><a href="#链表节点Node" class="headerlink" title="链表节点Node"></a>链表节点Node</h2><p>在开始之前，我们先看一下挂载在哈希表上的元素，链表的结构：<br>Map.Entry是在Map接口中内部定义的Entry接口</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">static class Node&lt;K,V&gt; implements Map.Entry&lt;K,V&gt; &#123;</span><br><span class="line">    final int hash;//哈希值</span><br><span class="line">    final K key;//key</span><br><span class="line">    V value;//value</span><br><span class="line">    Node&lt;K,V&gt; next;//链表后置节点</span><br><span class="line"></span><br><span class="line">    Node(int hash, K key, V value, Node&lt;K,V&gt; next) &#123;</span><br><span class="line">        this.hash = hash;</span><br><span class="line">        this.key = key;</span><br><span class="line">        this.value = value;</span><br><span class="line">        this.next = next;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public final K getKey()        &#123; return key; &#125;</span><br><span class="line">    public final V getValue()      &#123; return value; &#125;</span><br><span class="line">    public final String toString() &#123; return key + &quot;=&quot; + value; &#125;</span><br><span class="line"></span><br><span class="line">    //每一个节点的hash值，是将key的hashCode 和 value的hashCode 亦或得到的。</span><br><span class="line">    public final int hashCode() &#123;</span><br><span class="line">        return Objects.hashCode(key) ^ Objects.hashCode(value);</span><br><span class="line">    &#125;</span><br><span class="line">    //设置新的value 同时返回旧value</span><br><span class="line">    public final V setValue(V newValue) &#123;</span><br><span class="line">        V oldValue = value;</span><br><span class="line">        value = newValue;</span><br><span class="line">        return oldValue;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public final boolean equals(Object o) &#123;</span><br><span class="line">        if (o == this)</span><br><span class="line">            return true;</span><br><span class="line">        if (o instanceof Map.Entry) &#123;</span><br><span class="line">            Map.Entry&lt;?,?&gt; e = (Map.Entry&lt;?,?&gt;)o;</span><br><span class="line">            if (Objects.equals(key, e.getKey()) &amp;&amp;</span><br><span class="line">                Objects.equals(value, e.getValue()))</span><br><span class="line">                return true;</span><br><span class="line">        &#125;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="从头开始"><a href="#从头开始" class="headerlink" title="从头开始"></a>从头开始</h2><p>我们先写一个简单的使用hashmap的例子</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;String,String&gt; map=new HashMap&lt;&gt;();</span><br><span class="line">        map.put(&quot;s1&quot;,&quot;v1&quot;);</span><br><span class="line">        map.put(null,null);</span><br><span class="line">        map.put(&quot;name&quot;,&quot;mike&quot;);</span><br><span class="line">        System.out.println(map);</span><br></pre></td></tr></table></figure>
-
-<p>将断点设置第一行，进行debug，看看内部创建map对象的过程<br><img src="https://i.loli.net/2019/11/15/h81AraY6MbiB5dO.png" alt="2019-11-15 12_12_49-HashMapRead _D__垃圾_HashMapRead_ - C__Program Files_Java_jdk1.8.0_144_src.zip!_ja.png"><br>可以看到调用了一个无参构造器，设置了负载因子为默认定义的负载因子</p>
-<p>接下来进入put函数</p>
-<p>首先会进入下面这个函数<br><img src="https://i.loli.net/2019/11/15/fGkD4HpxwCSqVaY.png" alt="2019-11-15 12_22_30-HashMapRead _D__垃圾_HashMapRead_ - C__Program Files_Java_jdk1.8.0_144_src.zip!_ja.png"></p>
-<p>这个函数调用了另外的一个函数putVal<br>我们先来看这个函数的前几行<br><img src="https://i.loli.net/2019/11/15/5Umz8bHY7ygAC4Q.png" alt="2019-11-15 12_27_04-HashMapRead _D__垃圾_HashMapRead_ - C__Program Files_Java_jdk1.8.0_144_src.zip!_ja.png"></p>
-<p>可以看到，tab是用于接收table的临时变量，变量n是用来记录tab的长度的<br>由于刚开始table为null，所以需要进入resize()函数。可以确定，resize()函数中有初始化table数组的功能。</p>
-<p>下面进入resize()函数中看看<br><img src="https://i.loli.net/2019/11/15/KbgLeQZF3GE7HC1.png" alt="2019-11-15 12_42_18-HashMapRead _D__垃圾_HashMapRead_ - C__Program Files_Java_jdk1.8.0_144_src.zip!_ja.png"></p>
-<p>定义了下面三个变量</p>
-<ul>
-<li>oldTab：接收原来的table</li>
-<li>oldCap:原来table的容量大小,指数组的大小</li>
-<li>oldThr：原来table的阈值</li>
-</ul>
-<p>根据这几个判断条件我们可以总结出以下三种情况</p>
-<ol>
-<li>oldCap大于0</li>
-<li>oldCap=0但是oldThr大于0</li>
-<li>oldCap和oldThr都等于0<br>显然我们处于第三种情况，此时容量和阈值都使用了默认值。<br>在5号标记中对数组进行初始化，注意这里使用的是newCap，在6中将其赋值给table。这就完成了初始化操作。</li>
-</ol>
-<p>继续putVal()函数中查看<br><img src="https://i.loli.net/2019/11/15/wgVuxsjk7Yb8NZ9.png" alt="2019-11-15 13_17_54-HashMapRead _D__垃圾_HashMapRead_ - C__Program Files_Java_jdk1.8.0_144_src.zip!_ja.png"></p>
-<p>使用p来接收table[(n-1)&amp;hash]<br>现在我们来研究一下(n-1)&amp;hash的值<br>n默认为16，n-1为15，转换为二进制的话为0000 0000 0000 0000 0000 0000 0000 1111<br>&amp;操作是对应位置都为1结果才为1，所以前28位必定为0，所得结果值在0-15之间，正好符合数组下标的范围。</p>
-<p>这个判断表面可能有两种情况</p>
-<ol>
-<li>根据hash值得到的下标没有值</li>
-<li>根据hash值得到的下标有值</li>
-</ol>
-<p>第一种情况直接将传入的结点放入即可。<br>第二种情况又需要分以下几种情况</p>
-<ol>
-<li>table[(n-1)&amp;hash]有值且该值的hash值和要插入的结点hash值相同</li>
-<li>table[(n-1)&amp;hash]值是树的结点，表明待插入的结点需要作为树结点插入</li>
-<li>待插入结点以链表形式插入</li>
-</ol>
-<p>分别对应2，3，4 框中的代码</p>
-<p>现在来看后几行代码<br><img src="https://i.loli.net/2019/11/15/KhFMqYaT2n6OQVD.png" alt="2019-11-15 15_08_56-HashMapRead _D__垃圾_HashMapRead_ - C__Program Files_Java_jdk1.8.0_144_src.zip!_ja.png"></p>
-<p>if(e!=null)说明插入的位置原本是有值，现在只不过是将值进行了替换，，onlyIfAbsent这个参数的作用在于,如果我们传入的key已存在我们是否去替换，true:不替换，false：替换。<br>每对hashmap进行修改都会增加modcount的值，每插入一个值size都加1，判断hashmap中值的个数是否到达阈值，如果超过阈值则进行扩容。<br>至于高亮的那两行代码，并没有具体实现，<br><img src="https://i.loli.net/2019/11/15/YoxwaZ613umkUB4.png" alt="2019-11-15 15_20_48-HashMapRead _D__垃圾_HashMapRead_ - C__Program Files_Java_jdk1.8.0_144_src.zip!_ja.png"></p>
-<p>putVal()函数就算看完了，下面我们来研究resize()函数剩下的部分<br><img src="https://i.loli.net/2019/11/15/Sbgoj4WqhXid9CY.png" alt="2019-11-15 15_25_57-HashMapRead _D__垃圾_HashMapRead_ - C__Program Files_Java_jdk1.8.0_144_src.zip!_ja.png"></p>
-<p>如果oldTab不为null，那么我们就必须将oldTab中的Node都转移到新的newTab中，使用for循环来遍历oldTab数组，下面的1，2，3分别代表三种情况，（前提是e不为null，也就是table[j]!=null)</p>
-<ol>
-<li>该table[j]就只有一个值，它后面不挂着其它结点</li>
-<li>该table[j]后面有结点，且挂的结点是以红黑树的形式存在</li>
-<li>该table[j]后面有结点，且挂的结点是以链表的形式存在</li>
-</ol>
-<p>我们重点来看第三种形式<br>将table分为两部分，大小都为原本oldTab的大小，循环遍历该table[j]后面挂的结点，判断该结点是放在前0-oldCap-1的位置还是oldCap-newCap-1的位置。<br>判断的方式是(e.hash &amp; oldCap) == 0<br>以oldCap为16为例<br>16的二进制表示为0000 0000 0000 0000 0000 0000 0001 0000<br>只要e.hash值的二进制表示的第五位大于16，表示它一定处于oldCap-newCap-1的位置，因为处于0-oldCap-1位置的hash值第五位的值一定是0</p>
-<p>说明一下lohead和loTail的作用，lohead表示链表的头部，从代码中也可以看到，刚开始head和tail都指向e，后面由于tail!=null，所以不会修改head，最后设置tail.next=null也符合链表的形式。</p>
-<p>至此，HashMap的resize()和putVal()函数就分析完了。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/13/MQ/%E6%B6%88%E6%81%AF%E4%B8%AD%E9%97%B4%E4%BB%B6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lancersaber">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lancersaber">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/13/MQ/%E6%B6%88%E6%81%AF%E4%B8%AD%E9%97%B4%E4%BB%B6/" class="post-title-link" itemprop="url">消息中间件</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-11-13 15:57:54" itemprop="dateCreated datePublished" datetime="2019-11-13T15:57:54+08:00">2019-11-13</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-15 15:53:06" itemprop="dateModified" datetime="2019-11-15T15:53:06+08:00">2019-11-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/middleware/" itemprop="url" rel="index">
-                    <span itemprop="name">middleware</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="消息中间件"><a href="#消息中间件" class="headerlink" title="消息中间件"></a>消息中间件</h1><hr>
-<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>“Message-oriented middleware(MOM)” is software infrastructure focused on sending and receiving messages between distributed systems.</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1321,18 +1250,18 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">197</span>
+          <span class="site-state-item-count">202</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
-        <span class="site-state-item-count">45</span>
+        <span class="site-state-item-count">46</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-count">59</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
