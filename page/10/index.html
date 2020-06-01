@@ -172,6 +172,134 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/09/Spring2/Spring%20REST%20Error%20Handling%20Example/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/09/Spring2/Spring%20REST%20Error%20Handling%20Example/" class="post-title-link" itemprop="url">Spring REST Error Handling Example</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-11-09 12:10:21" itemprop="dateCreated datePublished" datetime="2019-11-09T12:10:21+08:00">2019-11-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-11-10 14:22:33" itemprop="dateModified" datetime="2019-11-10T14:22:33+08:00">2019-11-10</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/spring/" itemprop="url" rel="index">
+                    <span itemprop="name">spring</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Spring-REST-Error-Handling-Example"><a href="#Spring-REST-Error-Handling-Example" class="headerlink" title="Spring REST Error Handling Example"></a>Spring REST Error Handling Example</h1><hr>
+<p>In this article, we will show you error handling in Spring Boot REST application.</p>
+<h2 id="1-error"><a href="#1-error" class="headerlink" title="1. /error"></a>1. /error</h2><p>1.1 By default, Spring Boot provides a BasicErrorController controller for /error mapping that handles all errors, and getErrorAttributes to produce a JSON response with details of the error, the HTTP status, and the exception message.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;	</span><br><span class="line">	&quot;timestamp&quot;:&quot;2019-02-27T04:03:52.398+0000&quot;,</span><br><span class="line">	&quot;status&quot;:500,</span><br><span class="line">	&quot;error&quot;:&quot;Internal Server Error&quot;,</span><br><span class="line">	&quot;message&quot;:&quot;...&quot;,</span><br><span class="line">	&quot;path&quot;:&quot;/path&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>BasicErrorController.java</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">package org.springframework.boot.autoconfigure.web.servlet.error;</span><br><span class="line"></span><br><span class="line">//...</span><br><span class="line"></span><br><span class="line">@Controller</span><br><span class="line">@RequestMapping(&quot;$&#123;server.error.path:$&#123;error.path:/error&#125;&#125;&quot;)</span><br><span class="line">public class BasicErrorController extends AbstractErrorController &#123;</span><br><span class="line"></span><br><span class="line">	//...</span><br><span class="line"></span><br><span class="line">	@RequestMapping</span><br><span class="line">	public ResponseEntity&lt;Map&lt;String, Object&gt;&gt; error(HttpServletRequest request) &#123;</span><br><span class="line">		Map&lt;String, Object&gt; body = getErrorAttributes(request,</span><br><span class="line">				isIncludeStackTrace(request, MediaType.ALL));</span><br><span class="line">		HttpStatus status = getStatus(request);</span><br><span class="line">		return new ResponseEntity&lt;&gt;(body, status);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<p>In the IDE, puts a breakpoint in this method, you will understand how Spring Boot generates the default JSON error response.</p>
+<h2 id="2-Custom-Exception"><a href="#2-Custom-Exception" class="headerlink" title="2. Custom Exception"></a>2. Custom Exception</h2><p>In Spring Boot, we can use @ControllerAdvice to handle custom exceptions.</p>
+<p>2.1 A custom exception.</p>
+<p>BookNotFoundException.java</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">package com.mkyong.error;</span><br><span class="line"></span><br><span class="line">public class BookNotFoundException extends RuntimeException &#123;</span><br><span class="line"></span><br><span class="line">    public BookNotFoundException(Long id) &#123;</span><br><span class="line">        super(&quot;Book id not found : &quot; + id);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>A controller, if a book id is not found, throws the above BookNotFoundException</p>
+<p>BookController.java</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">package com.mkyong;</span><br><span class="line"></span><br><span class="line">//...</span><br><span class="line"></span><br><span class="line">@RestController</span><br><span class="line">public class BookController &#123;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    private BookRepository repository;</span><br><span class="line">	</span><br><span class="line">    // Find</span><br><span class="line">    @GetMapping(&quot;/books/&#123;id&#125;&quot;)</span><br><span class="line">    Book findOne(@PathVariable Long id) &#123;</span><br><span class="line">        return repository.findById(id)</span><br><span class="line">                .orElseThrow(() -&gt; new BookNotFoundException(id));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">	//...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>By default, Spring Boot generates the following JSON error response, http 500 error.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">curl localhost:8080/books/5</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">	&quot;timestamp&quot;:&quot;2019-02-27T04:03:52.398+0000&quot;,</span><br><span class="line">	&quot;status&quot;:500,</span><br><span class="line">	&quot;error&quot;:&quot;Internal Server Error&quot;,</span><br><span class="line">	&quot;message&quot;:&quot;Book id not found : 5&quot;,</span><br><span class="line">	&quot;path&quot;:&quot;/books/5&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 2.2 If a book id not found, it should return a 404 error instead of 500, we can override the status code like this :</p>
+<p> CustomGlobalExceptionHandler.java</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">package com.mkyong.error;</span><br><span class="line"></span><br><span class="line">import org.springframework.http.HttpHeaders;</span><br><span class="line">import org.springframework.http.HttpStatus;</span><br><span class="line">import org.springframework.http.ResponseEntity;</span><br><span class="line">import org.springframework.web.bind.MethodArgumentNotValidException;</span><br><span class="line">import org.springframework.web.bind.annotation.ControllerAdvice;</span><br><span class="line">import org.springframework.web.bind.annotation.ExceptionHandler;</span><br><span class="line">import org.springframework.web.bind.annotation.RestControllerAdvice;</span><br><span class="line">import org.springframework.web.context.request.WebRequest;</span><br><span class="line">import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;</span><br><span class="line"></span><br><span class="line">import javax.servlet.http.HttpServletResponse;</span><br><span class="line">import javax.validation.ConstraintViolationException;</span><br><span class="line">import java.io.IOException;</span><br><span class="line">import java.util.Date;</span><br><span class="line">import java.util.LinkedHashMap;</span><br><span class="line">import java.util.List;</span><br><span class="line">import java.util.Map;</span><br><span class="line">import java.util.stream.Collectors;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@ControllerAdvice</span><br><span class="line">public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler &#123;</span><br><span class="line"></span><br><span class="line">    // Let Spring BasicErrorController handle the exception, we just override the status code</span><br><span class="line">    @ExceptionHandler(BookNotFoundException.class)</span><br><span class="line">    public void springHandleNotFound(HttpServletResponse response) throws IOException &#123;</span><br><span class="line">        response.sendError(HttpStatus.NOT_FOUND.value());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">	//...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>2.3 It returns a 404 now.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">curl localhost:8080/books/5</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">	&quot;timestamp&quot;:&quot;2019-02-27T04:21:17.740+0000&quot;,</span><br><span class="line">	&quot;status&quot;:404,</span><br><span class="line">	&quot;error&quot;:&quot;Not Found&quot;,</span><br><span class="line">	&quot;message&quot;:&quot;Book id not found : 5&quot;,</span><br><span class="line">	&quot;path&quot;:&quot;/books/5&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>2.4 Furthermore, we can customize the entire JSON error response :</p>
+<p>CustomErrorResponse.java</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">package com.mkyong.error;</span><br><span class="line"></span><br><span class="line">import com.fasterxml.jackson.annotation.JsonFormat;</span><br><span class="line"></span><br><span class="line">import java.time.LocalDateTime;</span><br><span class="line"></span><br><span class="line">public class CustomErrorResponse &#123;</span><br><span class="line"></span><br><span class="line">    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = &quot;yyyy-MM-dd hh:mm:ss&quot;)</span><br><span class="line">    private LocalDateTime timestamp;</span><br><span class="line">    private int status;</span><br><span class="line">    private String error;</span><br><span class="line"></span><br><span class="line">    //...getters setters</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">package com.example.demo.exceptionHandler;</span><br><span class="line"></span><br><span class="line">import com.example.demo.errorresponse.CustomErrorResponse;</span><br><span class="line">import com.example.demo.exception.BookNotFoundException;</span><br><span class="line">import org.springframework.http.HttpStatus;</span><br><span class="line">import org.springframework.http.ResponseEntity;</span><br><span class="line">import org.springframework.web.bind.annotation.ControllerAdvice;</span><br><span class="line">import org.springframework.web.bind.annotation.ExceptionHandler;</span><br><span class="line">import org.springframework.web.context.request.WebRequest;</span><br><span class="line">import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;</span><br><span class="line"></span><br><span class="line">import javax.servlet.http.HttpServletResponse;</span><br><span class="line">import java.io.IOException;</span><br><span class="line">import java.time.LocalDateTime;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * @author: Lancer</span><br><span class="line"> * @date: 2019/11/9</span><br><span class="line"> */</span><br><span class="line">@ControllerAdvice</span><br><span class="line">public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler &#123;</span><br><span class="line"></span><br><span class="line">    // Let Spring BasicErrorController handle the exception, we just override the status code</span><br><span class="line">//    @ExceptionHandler(BookNotFoundException.class)</span><br><span class="line">    public void springHandleNotFound(HttpServletResponse response) throws IOException &#123;</span><br><span class="line">        System.out.println(&quot;hello&quot;);</span><br><span class="line">        response.sendError(HttpStatus.NOT_FOUND.value());</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //...</span><br><span class="line">    @ExceptionHandler(BookNotFoundException.class)</span><br><span class="line">    public ResponseEntity&lt;CustomErrorResponse&gt; customHandleNotFound(Exception ex, WebRequest request) &#123;</span><br><span class="line"></span><br><span class="line">        CustomErrorResponse errors = new CustomErrorResponse();</span><br><span class="line"></span><br><span class="line">        errors.setTimestamp(LocalDateTime.now());</span><br><span class="line">        errors.setError(ex.getMessage());</span><br><span class="line">        errors.setStatus(HttpStatus.NOT_FOUND.value());</span><br><span class="line"></span><br><span class="line">        return new ResponseEntity&lt;&gt;(errors, HttpStatus.NOT_FOUND);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>terminal</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">curl localhost:8080/books/5</span><br><span class="line">&#123;</span><br><span class="line">	&quot;timestamp&quot;:&quot;2019-02-27 12:40:45&quot;,</span><br><span class="line">	&quot;status&quot;:404,</span><br><span class="line">	&quot;error&quot;:&quot;Book id not found : 5&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-JSR-303-Validation-error"><a href="#3-JSR-303-Validation-error" class="headerlink" title="3. JSR 303 Validation error"></a>3. JSR 303 Validation error</h2><p>3.1 For Spring @valid validation errors, it will throw handleMethodArgumentNotValid</p>
+<p>CustomGlobalExceptionHandler.java</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">package com.mkyong.error;</span><br><span class="line"></span><br><span class="line">import org.springframework.http.HttpHeaders;</span><br><span class="line">import org.springframework.http.HttpStatus;</span><br><span class="line">import org.springframework.http.ResponseEntity;</span><br><span class="line">import org.springframework.web.bind.MethodArgumentNotValidException;</span><br><span class="line">import org.springframework.web.bind.annotation.ControllerAdvice;</span><br><span class="line">import org.springframework.web.bind.annotation.ExceptionHandler;</span><br><span class="line">import org.springframework.web.context.request.WebRequest;</span><br><span class="line">import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;</span><br><span class="line"></span><br><span class="line">import javax.servlet.http.HttpServletResponse;</span><br><span class="line">import javax.validation.ConstraintViolationException;</span><br><span class="line">import java.io.IOException;</span><br><span class="line">import java.util.Date;</span><br><span class="line">import java.util.LinkedHashMap;</span><br><span class="line">import java.util.List;</span><br><span class="line">import java.util.Map;</span><br><span class="line">import java.util.stream.Collectors;</span><br><span class="line"></span><br><span class="line">@ControllerAdvice</span><br><span class="line">public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler &#123;</span><br><span class="line"></span><br><span class="line">    //...</span><br><span class="line"></span><br><span class="line">    // @Validate For Validating Path Variables and Request Parameters</span><br><span class="line">    @ExceptionHandler(ConstraintViolationException.class)</span><br><span class="line">    public void constraintViolationException(HttpServletResponse response) throws IOException &#123;</span><br><span class="line">        response.sendError(HttpStatus.BAD_REQUEST.value());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // error handle for @Valid</span><br><span class="line">    @Override</span><br><span class="line">    protected ResponseEntity&lt;Object&gt;</span><br><span class="line">    handleMethodArgumentNotValid(MethodArgumentNotValidException ex,</span><br><span class="line">                                 HttpHeaders headers,</span><br><span class="line">                                 HttpStatus status, WebRequest request) &#123;</span><br><span class="line"></span><br><span class="line">        Map&lt;String, Object&gt; body = new LinkedHashMap&lt;&gt;();</span><br><span class="line">        body.put(&quot;timestamp&quot;, new Date());</span><br><span class="line">        body.put(&quot;status&quot;, status.value());</span><br><span class="line"></span><br><span class="line">        //Get all fields errors</span><br><span class="line">        List&lt;String&gt; errors = ex.getBindingResult()</span><br><span class="line">                .getFieldErrors()</span><br><span class="line">                .stream()</span><br><span class="line">                .map(x -&gt; x.getDefaultMessage())</span><br><span class="line">                .collect(Collectors.toList());</span><br><span class="line"></span><br><span class="line">        body.put(&quot;errors&quot;, errors);</span><br><span class="line"></span><br><span class="line">        return new ResponseEntity&lt;&gt;(body, headers, status);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="4-ResponseEntityExceptionHandler"><a href="#4-ResponseEntityExceptionHandler" class="headerlink" title="4. ResponseEntityExceptionHandler"></a>4. ResponseEntityExceptionHandler</h2><p>4.1 If we are not sure, what exception was thrown by the Spring Boot, puts a breakpoint in this method for debugging.</p>
+<p>ResponseEntityExceptionHandler.java</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">package org.springframework.web.servlet.mvc.method.annotation;</span><br><span class="line"></span><br><span class="line">//...</span><br><span class="line">public abstract class ResponseEntityExceptionHandler &#123;</span><br><span class="line"></span><br><span class="line">	@ExceptionHandler(&#123;</span><br><span class="line">			HttpRequestMethodNotSupportedException.class,</span><br><span class="line">			HttpMediaTypeNotSupportedException.class,</span><br><span class="line">			HttpMediaTypeNotAcceptableException.class,</span><br><span class="line">			MissingPathVariableException.class,</span><br><span class="line">			MissingServletRequestParameterException.class,</span><br><span class="line">			ServletRequestBindingException.class,</span><br><span class="line">			ConversionNotSupportedException.class,</span><br><span class="line">			TypeMismatchException.class,</span><br><span class="line">			HttpMessageNotReadableException.class,</span><br><span class="line">			HttpMessageNotWritableException.class,</span><br><span class="line">			MethodArgumentNotValidException.class,</span><br><span class="line">			MissingServletRequestPartException.class,</span><br><span class="line">			BindException.class,</span><br><span class="line">			NoHandlerFoundException.class,</span><br><span class="line">			AsyncRequestTimeoutException.class</span><br><span class="line">		&#125;)</span><br><span class="line">	@Nullable</span><br><span class="line">	public final ResponseEntity&lt;Object&gt; handleException(Exception ex, WebRequest request) throws Exception &#123;</span><br><span class="line">		HttpHeaders headers = new HttpHeaders();</span><br><span class="line"></span><br><span class="line">		if (ex instanceof HttpRequestMethodNotSupportedException) &#123;</span><br><span class="line">			HttpStatus status = HttpStatus.METHOD_NOT_ALLOWED;</span><br><span class="line">			return handleHttpRequestMethodNotSupported((HttpRequestMethodNotSupportedException) ex, headers, status, request);</span><br><span class="line">		&#125;</span><br><span class="line">		else if (ex instanceof HttpMediaTypeNotSupportedException) &#123;</span><br><span class="line">			HttpStatus status = HttpStatus.UNSUPPORTED_MEDIA_TYPE;</span><br><span class="line">			return handleHttpMediaTypeNotSupported((HttpMediaTypeNotSupportedException) ex, headers, status, request);</span><br><span class="line">		&#125;</span><br><span class="line">		//...</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	//...</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-DefaultErrorAttributes"><a href="#5-DefaultErrorAttributes" class="headerlink" title="5. DefaultErrorAttributes"></a>5. DefaultErrorAttributes</h2><p>5.1 To override the default JSON error response for all exceptions, create a bean and extends DefaultErrorAttributes</p>
+<p>CustomErrorAttributes.java</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">package com.mkyong.error;</span><br><span class="line"></span><br><span class="line">import org.springframework.boot.web.servlet.error.DefaultErrorAttributes;</span><br><span class="line">import org.springframework.stereotype.Component;</span><br><span class="line">import org.springframework.web.context.request.WebRequest;</span><br><span class="line"></span><br><span class="line">import java.text.DateFormat;</span><br><span class="line">import java.text.SimpleDateFormat;</span><br><span class="line">import java.util.Date;</span><br><span class="line">import java.util.Map;</span><br><span class="line"></span><br><span class="line">@Component</span><br><span class="line">public class CustomErrorAttributes extends DefaultErrorAttributes &#123;</span><br><span class="line"></span><br><span class="line">    private static final DateFormat dateFormat = new SimpleDateFormat(&quot;yyyy/MM/dd HH:mm:ss&quot;);</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public Map&lt;String, Object&gt; getErrorAttributes(WebRequest webRequest, boolean includeStackTrace) &#123;</span><br><span class="line"></span><br><span class="line">        // Let Spring handle the error first, we will modify later :)</span><br><span class="line">        Map&lt;String, Object&gt; errorAttributes = super.getErrorAttributes(webRequest, includeStackTrace);</span><br><span class="line"></span><br><span class="line">        // format &amp; update timestamp</span><br><span class="line">        Object timestamp = errorAttributes.get(&quot;timestamp&quot;);</span><br><span class="line">        if (timestamp == null) &#123;</span><br><span class="line">            errorAttributes.put(&quot;timestamp&quot;, dateFormat.format(new Date()));</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            errorAttributes.put(&quot;timestamp&quot;, dateFormat.format((Date) timestamp));</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // insert a new key</span><br><span class="line">        errorAttributes.put(&quot;version&quot;, &quot;1.2&quot;);</span><br><span class="line"></span><br><span class="line">        return errorAttributes;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Now, the date time is formatted and a new field – version is added to the JSON error response.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">curl localhost:8080/books/5</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">	&quot;timestamp&quot;:&quot;2019/02/27 13:34:24&quot;,</span><br><span class="line">	&quot;status&quot;:404,</span><br><span class="line">	&quot;error&quot;:&quot;Not Found&quot;,</span><br><span class="line">	&quot;message&quot;:&quot;Book id not found : 5&quot;,</span><br><span class="line">	&quot;path&quot;:&quot;/books/5&quot;,</span><br><span class="line">	&quot;version&quot;:&quot;1.2&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">curl localhost:8080/abc</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">	&quot;timestamp&quot;:&quot;2019/02/27 13:35:10&quot;,</span><br><span class="line">	&quot;status&quot;:404,</span><br><span class="line">	&quot;error&quot;:&quot;Not Found&quot;,</span><br><span class="line">	&quot;message&quot;:&quot;No message available&quot;,</span><br><span class="line">	&quot;path&quot;:&quot;/abc&quot;,</span><br><span class="line">	&quot;version&quot;:&quot;1.2&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
     <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/08/Spring2/%E8%AF%A6%E8%A7%A3WebMvcConfigurer%E6%8E%A5%E5%8F%A3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1007,88 +1135,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/07/JavaWeb/Servlet%E8%A1%A8%E5%8D%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lancersaber">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lancersaber">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/07/JavaWeb/Servlet%E8%A1%A8%E5%8D%95/" class="post-title-link" itemprop="url">Servlet表单数据</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2019-11-07 15:49:48 / Modified: 17:02:46" itemprop="dateCreated datePublished" datetime="2019-11-07T15:49:48+08:00">2019-11-07</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Servlet/" itemprop="url" rel="index">
-                    <span itemprop="name">Servlet</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Servlet表单数据"><a href="#Servlet表单数据" class="headerlink" title="Servlet表单数据"></a>Servlet表单数据</h1><hr>
-<p>很多情况下，需要传递一些信息，从浏览器到 Web 服务器，最终到后台程序。浏览器使用两种方法可将这些信息传递到 Web 服务器，分别为 GET 方法和 POST 方法。</p>
-<h2 id="GET-方法"><a href="#GET-方法" class="headerlink" title="GET 方法"></a>GET 方法</h2><p>GET 方法向页面请求发送已编码的用户信息。页面和已编码的信息中间用 ? 字符分隔，如下所示：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://www.test.com/hello?key1=value1&amp;key2=value2</span><br></pre></td></tr></table></figure>
-
-<p>GET 方法是默认的从浏览器向 Web 服务器传递信息的方法，它会产生一个很长的字符串，出现在浏览器的地址栏中。如果您要向服务器传递的是密码或其他的敏感信息，请不要使用 GET 方法。GET 方法有大小限制：请求字符串中最多只能有 1024 个字符。<br>这些信息使用 QUERY_STRING 头传递，并可以通过 QUERY_STRING 环境变量访问，Servlet 使用 doGet() 方法处理这种类型的请求。</p>
-<h2 id="POST-方法"><a href="#POST-方法" class="headerlink" title="POST 方法"></a>POST 方法</h2><p>另一个向后台程序传递信息的比较可靠的方法是 POST 方法。POST 方法打包信息的方式与 GET 方法基本相同，但是 POST 方法不是把信息作为 URL 中 ? 字符后的文本字符串进行发送，而是把这些信息作为一个单独的消息。消息以标准输出的形式传到后台程序，您可以解析和使用这些标准输出。Servlet 使用 doPost() 方法处理这种类型的请求。</p>
-<h2 id="使用-Servlet-读取表单数据"><a href="#使用-Servlet-读取表单数据" class="headerlink" title="使用 Servlet 读取表单数据"></a>使用 Servlet 读取表单数据</h2><p>Servlet 处理表单数据，这些数据会根据不同的情况使用不同的方法自动解析：</p>
-<ul>
-<li>getParameter()：您可以调用 request.getParameter() 方法来获取表单参数的值。</li>
-<li>getParameterValues()：如果参数出现一次以上，则调用该方法，并返回多个值，例如复选框。</li>
-<li>getParameterNames()：如果您想要得到当前请求中的所有参数的完整列表，则调用该方法。</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1139,7 +1185,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">202</span>
+          <span class="site-state-item-count">203</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

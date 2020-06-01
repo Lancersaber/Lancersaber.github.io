@@ -172,6 +172,91 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/06/shiro/AuthenticationInfo/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/06/shiro/AuthenticationInfo/" class="post-title-link" itemprop="url">AuthenticationInfo</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2019-11-06 19:23:14 / Modified: 19:29:41" itemprop="dateCreated datePublished" datetime="2019-11-06T19:23:14+08:00">2019-11-06</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/shiro/" itemprop="url" rel="index">
+                    <span itemprop="name">shiro</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="AuthenticationInfo"><a href="#AuthenticationInfo" class="headerlink" title="AuthenticationInfo"></a>AuthenticationInfo</h1><hr>
+<p>AuthenticationInfo对象中存储的是主体（Subject）的身份认证信息。Shiro会调用CredentialsMatcher对象的doCredentialsMatch方法对AuthenticationInfo对象和AuthenticationToken进行匹配。匹配成功则表示主体（Subject）认证成功，否则表示认证失败。</p>
+<p><img src="https://i.loli.net/2019/11/06/ECzpZuIYTc3iBwv.png" alt="shiro3.PNG"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">public interface AuthenticationInfo extends Serializable &#123;</span><br><span class="line">    // 获取用户身份信息</span><br><span class="line">    //每个Realm反回一个AuthenticationInfo ，</span><br><span class="line">    //所有AuthenticationInfo 中的PrincipalCollection 会根据指定规则进行合并</span><br><span class="line">    PrincipalCollection getPrincipals();</span><br><span class="line"></span><br><span class="line">    // 获取用户的 凭证信息（credentials），当有多个Realm返回多个AuthenticationInfo 时</span><br><span class="line">    //  凭证信息 也会根据指定的规则进行合并</span><br><span class="line">    // Shiro会使用 凭证信息（credentials） 验证用户身份的合法性。</span><br><span class="line">    Object getCredentials();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public interface MergableAuthenticationInfo extends AuthenticationInfo &#123;</span><br><span class="line">    // 用于合并多个Realm返回的AuthenticationInfo </span><br><span class="line">    void merge(AuthenticationInfo info);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public interface Account extends AuthenticationInfo, AuthorizationInfo &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public interface SaltedAuthenticationInfo extends AuthenticationInfo &#123;</span><br><span class="line">    ByteSource getCredentialsSalt();// 获取凭证 信息的 盐</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>1、MergableAuthenticationInfo 用于提供在多 Realm 时合并 AuthenticationInfo 的功能，主要合并 Principal、如果是其他的如 credentialsSalt，会用后边的信息覆盖前边的。</p>
+<p>2、SaltedAuthenticationInfo 用于对 凭证 信息加盐。比如 HashedCredentialsMatcher，在验证时会判断AuthenticationInfo 是否是SaltedAuthenticationInfo 子类，来获取盐信息。</p>
+<p>3、Account 不仅继承了AuthenticationInfo，继承了AuthorizationInfo，也就是说它不仅包含主体的身份认证信息，还包含了主体的授权信息（角色、权限）。SimpleAccount 是Account的一个实现。在 IniRealm、PropertiesRealm这种静态创建帐号信息的场景中使用，这些 Realm 直接继承了 SimpleAccountRealm，而SimpleAccountRealm 提供了相关的 API 来动态维护 SimpleAccount；即可以通过这些 API来动态增删改查 SimpleAccount；动态增删改查角色/权限信息。如果您的帐号不是特别多，可以使用这种方式。</p>
+<p>4、其他情况一般返回 SimpleAuthenticationInfo 即可。</p>
+<p>因为我们可以在 Shiro 中同时配置多个 Realm，所以呢身份信息可能就有多个；因此其提供了 PrincipalCollection 用于聚合这些身份信息。<br><img src="https://i.loli.net/2019/11/06/zwbWCY4a7kUyHjP.png" alt="shiro5.PNG"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public interface PrincipalCollection extends Iterable, Serializable &#123;</span><br><span class="line">    Object getPrimaryPrincipal(); //得到主要的身份</span><br><span class="line">    &lt;T&gt; T oneByType(Class&lt;T&gt; type); //根据身份类型获取第一个</span><br><span class="line">    &lt;T&gt; Collection&lt;T&gt; byType(Class&lt;T&gt; type); //根据身份类型获取一组</span><br><span class="line">    List asList(); //转换为 List</span><br><span class="line">    Set asSet(); //转换为 Set</span><br><span class="line">    Collection fromRealm(String realmName); //根据 Realm 名字获取</span><br><span class="line">    Set&lt;String&gt; getRealmNames(); //获取所有身份验证通过的 Realm 名字</span><br><span class="line">    boolean isEmpty(); //判断是否为空</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>MutablePrincipalCollection 是一个可变的 PrincipalCollection 接口，即提供了如下可变方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public interface MutablePrincipalCollection extends PrincipalCollection &#123;</span><br><span class="line">    void add(Object principal, String realmName); //添加 Realm-Principal 的关联</span><br><span class="line">    void addAll(Collection principals, String realmName); //添加一组 Realm-Principal 的关联</span><br><span class="line">    void addAll(PrincipalCollection principals);//添加 PrincipalCollection</span><br><span class="line">    void clear();//清空</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>目前 Shiro只提供了MutablePrincipalCollection的一个实现 SimplePrincipalCollection，在多 Realm 时 SimpleAuthenticationInfo 会合并多个 Principal为一个 PrincipalCollection</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
     <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/06/shiro/Shiro%20%E4%B8%AD%E7%9A%84%20AuthenticationToken/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1061,101 +1146,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/04/Java%E5%9F%BA%E7%A1%80/Java%E7%B1%BB%E5%9E%8B%E4%BF%A1%E6%81%AF/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lancersaber">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lancersaber">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/04/Java%E5%9F%BA%E7%A1%80/Java%E7%B1%BB%E5%9E%8B%E4%BF%A1%E6%81%AF/" class="post-title-link" itemprop="url">Java类型信息</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-11-04 19:49:31" itemprop="dateCreated datePublished" datetime="2019-11-04T19:49:31+08:00">2019-11-04</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-09 15:57:41" itemprop="dateModified" datetime="2019-11-09T15:57:41+08:00">2019-11-09</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Java类型信息"><a href="#Java类型信息" class="headerlink" title="Java类型信息"></a>Java类型信息</h1><hr>
-<p>运行时类型信息使得你可以在程序运行时发现和使用类型信息。<br>现在我们来讨论如何让我们在运行时识别对象和类的信息的。主要有两种方式：</p>
-<ul>
-<li>传统的RTTI,它假定我们在编译时就已经知道了所有的类型</li>
-<li>反射机制，它允许我们在运行时发现和使用类的信息。</li>
-</ul>
-<h2 id="为什么需要RTTI-Run-Time-Type-Identification"><a href="#为什么需要RTTI-Run-Time-Type-Identification" class="headerlink" title="为什么需要RTTI(Run-Time Type Identification)"></a>为什么需要RTTI(Run-Time Type Identification)</h2><p>RTTI:在运行时，识别一个对象的类型。</p>
-<p>面向对象编程中的基本目的是：让代码只操作对基类的引用。这样，如果要添加一个新类来扩展程序，就不会影响到原来的代码。下面举个例子：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">class Shape&#123;</span><br><span class="line">	//draw函数</span><br><span class="line">	draw();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Circle extends Shape;</span><br><span class="line">class Square extends Shape;</span><br><span class="line">calss Triangle extends Shape;</span><br><span class="line"></span><br><span class="line">test(Shape shape)&#123;</span><br><span class="line">	shape.draw();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>三个类都继承自Shape，复写各自的drwa()函数，在test函数中，传入不同的子类可以触发各自的draw函数，实现这个功能就需要RTTI的支持。</p>
-<h2 id="Class对象"><a href="#Class对象" class="headerlink" title="Class对象"></a>Class对象</h2><p>&emsp;&emsp;要理解RTTI在Java中的工作原理，首先必须知道类型信息在运行时是如何表示的。这项工作是由称为Class对象的特殊对象完成的，它包含了与类相关的信息。事实上，Class对象就是用来创建类的所有的“常规”对象的。Java使用Class对象来执行其RTTI。<br>&emsp;&emsp;类是程序的一部分，每个类都有一个Class对象。换言之，每当编写并且编译了一个新类，就会产生一个Class对象(更恰当的说，是被保存在一个同名的.class文件中)。为了生成这个类的对象，运行这个程序的Java虚拟机将使用被称为“类加载器”的子系统。所有的类都是在对其第一次使用时，动态加载到JVM中的。<br>&emsp;&emsp;无论何时，只要你想在运行时使用类型信息，就必须首先获得对恰当的Class对象的引用。Class.forName()就是实现此功能的便捷途径，它是用一个包含目标类的文本名的String作输入参数，返回的一个Class对象的引用。你不需要为了获得Class引用而持有该类型的对象。<em>但是，如果你已经拥有了一个感兴趣的类型的对象，那就可以通过调用getClass()方法来获取Class引用了，这个方法属于Object，表示将返回该对象的实际类型的Class引用</em>。</p>
-<p>使用Class对象可以获得一些关于这个Class定义的基本信息，包括包名、注释、父类、接口等等，使用Class的newInstance()方法可以创建一个实例，注意，使用newInstance()创建的类，必须带有默认的构造器。</p>
-<h2 id="类字面常量"><a href="#类字面常量" class="headerlink" title="类字面常量"></a>类字面常量</h2><p>Java还提供了另一种方法来生成对Class对象的引用，即使用类字面常量。即类名.class,这样做不仅更简单，而且更安全，因为它在编译时就会受到检查(因此不需要置于try语句块中)。</p>
-<h2 id="泛化的Class引用"><a href="#泛化的Class引用" class="headerlink" title="泛化的Class引用"></a>泛化的Class引用</h2><p>&emsp;&emsp;Class引用总是指向某个Class对象，Class表示的就是它所指向的对象的确切类型，而该对象便是Class类的一个对象。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">class GenericClassReferences&#123;</span><br><span class="line">    public static void main(String[] args)&#123;</span><br><span class="line">        Class intClass=int.class;</span><br><span class="line">        Class&lt;Integer&gt; genericIntClass=int.class;</span><br><span class="line">        genericIntClass=intClass;// Same thing</span><br><span class="line">        intClass=double.class;//No problem</span><br><span class="line">//        genericIntClass=double.class;//Illegal</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>普通的类引用不会产生警告信息，你可以看到，尽管泛型类引用只能赋值为指向其声明的类型，但是普通的类引用可以重新赋值为指向任何其他的Class对象。<br>&emsp;&emsp;为了在使用泛型化的Class引用时放松限制，可以使用通配符，通配符就是”?”,表示任何事物。因此，我们可以在上例的普通Class引用中添加通配符，并产生相同的结果。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public class WildcardClassReferences&#123;</span><br><span class="line">	  public static void main(String[] args)&#123;</span><br><span class="line">        Class&lt;?&gt; intClass=int.class;</span><br><span class="line">        intClass=double.class;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>在Java中，Class<?>优于Class，即使它们等价，Class<?>的好处是它表示你并非是碰巧或者是由于疏忽，而使用了一个非具体的类引用，你就是选择了非具体的版本。</p>
-<h2 id="InstanceOf"><a href="#InstanceOf" class="headerlink" title="InstanceOf"></a>InstanceOf</h2><p>关键字instanceof,它返回一个布尔值，告诉我们对象是不是某个特定类型的实例。<br>对instanceof有比较严格的限制，只可以将其与命名类型进行比较，而不能与Class对象做比较。</p>
-<h2 id="反射：运行时的类信息"><a href="#反射：运行时的类信息" class="headerlink" title="反射：运行时的类信息"></a>反射：运行时的类信息</h2><p>&emsp;&emsp;Class类与java.lang.reflect类库一起对反射的概念进行了支持，该类库包含了Field,Method以及Constructor类(每个都实现了Member接口)。这些类型的对象是由JVM在运行时创建的，用以表示未知类里对应的成员。<em>这样你就可以使用Constructor创建新的对象，用get()和set()方法读取和修改与Field对象关联的字段，用invoke()方法调用与Method对象关联的方法。另外，还可以调用getFields(),getMethods()和getConstructors()等便利的方法，以返回表示字段，方法以及构造器的对象的数组。</em>这样，匿名对象的类信息就能在运行时被完全确定下来，而在编译时不需要知道任何信息。<br>&emsp;&emsp;在使用反射时，必须获得目标类的.class文件，要么在本地文件，要么通过网络获取，所以RTTI和反射之间真正的区别在于，对RTTI来说，编译器在编译时打开和检查.class文件。而对于反射机制来说，.class文件在编译时是不可获取的，所以是在运行时打开和检查.class文件。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1206,7 +1196,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">202</span>
+          <span class="site-state-item-count">203</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

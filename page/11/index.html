@@ -172,6 +172,88 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/07/JavaWeb/Servlet%E8%A1%A8%E5%8D%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/07/JavaWeb/Servlet%E8%A1%A8%E5%8D%95/" class="post-title-link" itemprop="url">Servlet表单数据</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2019-11-07 15:49:48 / Modified: 17:02:46" itemprop="dateCreated datePublished" datetime="2019-11-07T15:49:48+08:00">2019-11-07</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Servlet/" itemprop="url" rel="index">
+                    <span itemprop="name">Servlet</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Servlet表单数据"><a href="#Servlet表单数据" class="headerlink" title="Servlet表单数据"></a>Servlet表单数据</h1><hr>
+<p>很多情况下，需要传递一些信息，从浏览器到 Web 服务器，最终到后台程序。浏览器使用两种方法可将这些信息传递到 Web 服务器，分别为 GET 方法和 POST 方法。</p>
+<h2 id="GET-方法"><a href="#GET-方法" class="headerlink" title="GET 方法"></a>GET 方法</h2><p>GET 方法向页面请求发送已编码的用户信息。页面和已编码的信息中间用 ? 字符分隔，如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://www.test.com/hello?key1=value1&amp;key2=value2</span><br></pre></td></tr></table></figure>
+
+<p>GET 方法是默认的从浏览器向 Web 服务器传递信息的方法，它会产生一个很长的字符串，出现在浏览器的地址栏中。如果您要向服务器传递的是密码或其他的敏感信息，请不要使用 GET 方法。GET 方法有大小限制：请求字符串中最多只能有 1024 个字符。<br>这些信息使用 QUERY_STRING 头传递，并可以通过 QUERY_STRING 环境变量访问，Servlet 使用 doGet() 方法处理这种类型的请求。</p>
+<h2 id="POST-方法"><a href="#POST-方法" class="headerlink" title="POST 方法"></a>POST 方法</h2><p>另一个向后台程序传递信息的比较可靠的方法是 POST 方法。POST 方法打包信息的方式与 GET 方法基本相同，但是 POST 方法不是把信息作为 URL 中 ? 字符后的文本字符串进行发送，而是把这些信息作为一个单独的消息。消息以标准输出的形式传到后台程序，您可以解析和使用这些标准输出。Servlet 使用 doPost() 方法处理这种类型的请求。</p>
+<h2 id="使用-Servlet-读取表单数据"><a href="#使用-Servlet-读取表单数据" class="headerlink" title="使用 Servlet 读取表单数据"></a>使用 Servlet 读取表单数据</h2><p>Servlet 处理表单数据，这些数据会根据不同的情况使用不同的方法自动解析：</p>
+<ul>
+<li>getParameter()：您可以调用 request.getParameter() 方法来获取表单参数的值。</li>
+<li>getParameterValues()：如果参数出现一次以上，则调用该方法，并返回多个值，例如复选框。</li>
+<li>getParameterNames()：如果您想要得到当前请求中的所有参数的完整列表，则调用该方法。</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
     <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/07/JavaWeb/Servlet%E7%AE%80%E4%BB%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1047,91 +1129,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/06/shiro/AuthenticationInfo/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lancersaber">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lancersaber">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/06/shiro/AuthenticationInfo/" class="post-title-link" itemprop="url">AuthenticationInfo</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2019-11-06 19:23:14 / Modified: 19:29:41" itemprop="dateCreated datePublished" datetime="2019-11-06T19:23:14+08:00">2019-11-06</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/shiro/" itemprop="url" rel="index">
-                    <span itemprop="name">shiro</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="AuthenticationInfo"><a href="#AuthenticationInfo" class="headerlink" title="AuthenticationInfo"></a>AuthenticationInfo</h1><hr>
-<p>AuthenticationInfo对象中存储的是主体（Subject）的身份认证信息。Shiro会调用CredentialsMatcher对象的doCredentialsMatch方法对AuthenticationInfo对象和AuthenticationToken进行匹配。匹配成功则表示主体（Subject）认证成功，否则表示认证失败。</p>
-<p><img src="https://i.loli.net/2019/11/06/ECzpZuIYTc3iBwv.png" alt="shiro3.PNG"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">public interface AuthenticationInfo extends Serializable &#123;</span><br><span class="line">    // 获取用户身份信息</span><br><span class="line">    //每个Realm反回一个AuthenticationInfo ，</span><br><span class="line">    //所有AuthenticationInfo 中的PrincipalCollection 会根据指定规则进行合并</span><br><span class="line">    PrincipalCollection getPrincipals();</span><br><span class="line"></span><br><span class="line">    // 获取用户的 凭证信息（credentials），当有多个Realm返回多个AuthenticationInfo 时</span><br><span class="line">    //  凭证信息 也会根据指定的规则进行合并</span><br><span class="line">    // Shiro会使用 凭证信息（credentials） 验证用户身份的合法性。</span><br><span class="line">    Object getCredentials();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public interface MergableAuthenticationInfo extends AuthenticationInfo &#123;</span><br><span class="line">    // 用于合并多个Realm返回的AuthenticationInfo </span><br><span class="line">    void merge(AuthenticationInfo info);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public interface Account extends AuthenticationInfo, AuthorizationInfo &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public interface SaltedAuthenticationInfo extends AuthenticationInfo &#123;</span><br><span class="line">    ByteSource getCredentialsSalt();// 获取凭证 信息的 盐</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>1、MergableAuthenticationInfo 用于提供在多 Realm 时合并 AuthenticationInfo 的功能，主要合并 Principal、如果是其他的如 credentialsSalt，会用后边的信息覆盖前边的。</p>
-<p>2、SaltedAuthenticationInfo 用于对 凭证 信息加盐。比如 HashedCredentialsMatcher，在验证时会判断AuthenticationInfo 是否是SaltedAuthenticationInfo 子类，来获取盐信息。</p>
-<p>3、Account 不仅继承了AuthenticationInfo，继承了AuthorizationInfo，也就是说它不仅包含主体的身份认证信息，还包含了主体的授权信息（角色、权限）。SimpleAccount 是Account的一个实现。在 IniRealm、PropertiesRealm这种静态创建帐号信息的场景中使用，这些 Realm 直接继承了 SimpleAccountRealm，而SimpleAccountRealm 提供了相关的 API 来动态维护 SimpleAccount；即可以通过这些 API来动态增删改查 SimpleAccount；动态增删改查角色/权限信息。如果您的帐号不是特别多，可以使用这种方式。</p>
-<p>4、其他情况一般返回 SimpleAuthenticationInfo 即可。</p>
-<p>因为我们可以在 Shiro 中同时配置多个 Realm，所以呢身份信息可能就有多个；因此其提供了 PrincipalCollection 用于聚合这些身份信息。<br><img src="https://i.loli.net/2019/11/06/zwbWCY4a7kUyHjP.png" alt="shiro5.PNG"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public interface PrincipalCollection extends Iterable, Serializable &#123;</span><br><span class="line">    Object getPrimaryPrincipal(); //得到主要的身份</span><br><span class="line">    &lt;T&gt; T oneByType(Class&lt;T&gt; type); //根据身份类型获取第一个</span><br><span class="line">    &lt;T&gt; Collection&lt;T&gt; byType(Class&lt;T&gt; type); //根据身份类型获取一组</span><br><span class="line">    List asList(); //转换为 List</span><br><span class="line">    Set asSet(); //转换为 Set</span><br><span class="line">    Collection fromRealm(String realmName); //根据 Realm 名字获取</span><br><span class="line">    Set&lt;String&gt; getRealmNames(); //获取所有身份验证通过的 Realm 名字</span><br><span class="line">    boolean isEmpty(); //判断是否为空</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>MutablePrincipalCollection 是一个可变的 PrincipalCollection 接口，即提供了如下可变方法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public interface MutablePrincipalCollection extends PrincipalCollection &#123;</span><br><span class="line">    void add(Object principal, String realmName); //添加 Realm-Principal 的关联</span><br><span class="line">    void addAll(Collection principals, String realmName); //添加一组 Realm-Principal 的关联</span><br><span class="line">    void addAll(PrincipalCollection principals);//添加 PrincipalCollection</span><br><span class="line">    void clear();//清空</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>目前 Shiro只提供了MutablePrincipalCollection的一个实现 SimplePrincipalCollection，在多 Realm 时 SimpleAuthenticationInfo 会合并多个 Principal为一个 PrincipalCollection</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1182,7 +1179,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">202</span>
+          <span class="site-state-item-count">203</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

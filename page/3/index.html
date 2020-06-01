@@ -172,6 +172,84 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/12/01/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/springmvc/DispatcherServlet%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/12/01/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/springmvc/DispatcherServlet%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B/" class="post-title-link" itemprop="url">DispatcherServlet工作流程</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2019-12-01 16:20:10 / Modified: 16:43:50" itemprop="dateCreated datePublished" datetime="2019-12-01T16:20:10+08:00">2019-12-01</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/springmvc/" itemprop="url" rel="index">
+                    <span itemprop="name">springmvc</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="DispatcherServlet工作流程"><a href="#DispatcherServlet工作流程" class="headerlink" title="DispatcherServlet工作流程"></a>DispatcherServlet工作流程</h1><hr>
+<p><img src="https://i.loli.net/2019/12/01/zdQGOuWAxaHUp9M.jpg" alt="dqtheoa4.2ai.jpg"></p>
+<ol>
+<li>当DispatcherServlet接到请求时，他先回查找适当的处理程序来处理请求。DispatcherServlet通过一个或者多个处理程序映射，将每个请求映射到处理程序中。处理程序映射配置在web应用程序的上下文中，是实现了HandlerMapping接口的Bean。它负责为请求返回一个适当的处理程序（也就是Controller）。处理程序映射通常根据请求的URL将请求映射到处理程序（Controller）。 </li>
+<li>一旦DispatcherServlet选择了适当的控制器，它就会调用这个控制器来处理请求。 </li>
+<li>控制器处理完请求后，会将模型和视图名（有时候是视图对象）返回给DispatcherServlet。模型包含了控制器要传递给视图进行显示的属性。如果返回的是视图名称，它会被解析成视图对象再进行呈现。绑定模型和视图的基本类是ModelAndView</li>
+<li>当DispatcherServlet接收到模型和视图名称时，它会将逻辑视图名称解析成视图对象再进行呈现。DispatcherServlet从一个或者多个视图解析器中解析视图。视图解析器配置在Web应用程序上下文中，是实现了ViewResolver接口的Bean。它的任务是根据逻辑视图名称返回试图对象。</li>
+<li>一旦DispatcherServlet将视图名称解析称为试图对象，它就会呈现视图对象，并传递控制器返回的模型。视图的任务是将模型属性展示给用户。</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
     <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/12/01/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/springmvc/HandlerInterceptor%E8%A7%A3%E6%9E%90/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -810,70 +888,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/27/Java%E5%9F%BA%E7%A1%80/%E7%94%A8%E4%B8%80%E8%A1%8C%E4%BB%A3%E7%A0%81%E5%88%9D%E5%A7%8B%E5%8C%96ArrayList/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lancersaber">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lancersaber">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/27/Java%E5%9F%BA%E7%A1%80/%E7%94%A8%E4%B8%80%E8%A1%8C%E4%BB%A3%E7%A0%81%E5%88%9D%E5%A7%8B%E5%8C%96ArrayList/" class="post-title-link" itemprop="url">Java基础/用一行代码初始化ArrayList</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-11-27 15:43:38" itemprop="dateCreated datePublished" datetime="2019-11-27T15:43:38+08:00">2019-11-27</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-30 12:06:36" itemprop="dateModified" datetime="2019-11-30T12:06:36+08:00">2019-11-30</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -924,7 +938,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">202</span>
+          <span class="site-state-item-count">203</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

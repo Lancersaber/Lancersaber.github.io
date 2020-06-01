@@ -172,6 +172,158 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/16/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/jdk/TreeMap/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/16/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/jdk/TreeMap/" class="post-title-link" itemprop="url">TreeMap</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-11-16 13:47:13" itemprop="dateCreated datePublished" datetime="2019-11-16T13:47:13+08:00">2019-11-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-05-25 23:55:50" itemprop="dateModified" datetime="2020-05-25T23:55:50+08:00">2020-05-25</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sourceread/" itemprop="url" rel="index">
+                    <span itemprop="name">sourceread</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="TreeMap"><a href="#TreeMap" class="headerlink" title="TreeMap"></a>TreeMap</h1><hr>
+<h2 id="TreeMap简介"><a href="#TreeMap简介" class="headerlink" title="TreeMap简介"></a>TreeMap简介</h2><p>TreeMap是一个有序的key-value集合，基于红黑树（Red-Black tree）的 NavigableMap实现。该映射根据其键的自然顺序进行排序，或者根据创建映射时提供的 Comparator进行排序，具体取决于使用的构造方法。</p>
+<h2 id="TreeMap中的属性"><a href="#TreeMap中的属性" class="headerlink" title="TreeMap中的属性"></a>TreeMap中的属性</h2><ul>
+<li>private transient Entry&lt;K,V&gt; root:一个Treemap的根节点</li>
+<li>private final Comparator&lt;? super K&gt; comparator;比较器，由于treemap是有序的，所以需要有一个比较的规则</li>
+<li>private transient int size = 0;记录treemap中有多少个结点</li>
+<li>private transient int modCount = 0;记录treemap经过多少次修改</li>
+<li>private static final boolean RED   = false;treemap是基于红黑树这种数据结构的，定义这两个变量用于区分结点是红结点还是黑结点</li>
+<li>private static final boolean BLACK = true;</li>
+</ul>
+<h2 id="TreeMap中比较重要的点"><a href="#TreeMap中比较重要的点" class="headerlink" title="TreeMap中比较重要的点"></a>TreeMap中比较重要的点</h2><h3 id="1、Entry-lt-K-V-gt"><a href="#1、Entry-lt-K-V-gt" class="headerlink" title="1、Entry&lt;K,V&gt;"></a>1、Entry&lt;K,V&gt;</h3><p>TreeMap中传入key和value后，内部会将key，value封装为一个Entry,然后将该Entry放入到合适的位置</p>
+<p><img src="https://i.loli.net/2019/11/16/1GupYB8kfUQMPX4.png" alt="2019-11-16 14_01_13-HashMapRead _D__垃圾_HashMapRead_ - C__Program Files_Java_jdk1.8.0_144_src.zip!_ja.png"></p>
+<p>可以看到，在Entry中定义了上面几个属性，</p>
+<ul>
+<li>key:存储key值</li>
+<li>value：存储value值</li>
+<li>left：该结点的左结点</li>
+<li>right：该结点的右结点</li>
+<li>parent：该结点的父节点</li>
+<li>color：标识该结点是红结点还是黑结点，默认是黑结点</li>
+</ul>
+<p><img src="https://i.loli.net/2019/11/16/r61Dx8Y4iVfkuy9.png" alt="2019-11-16 14_08_10-HashMapRead _D__垃圾_HashMapRead_ - C__Program Files_Java_jdk1.8.0_144_src.zip!_ja.png"></p>
+<p>Entry中需要注意的是它的构造函数，它传入了parent结点，标识当前结点的parent结点，其他的函数没什么。</p>
+<h3 id="2、使用一个小程序进行debug"><a href="#2、使用一个小程序进行debug" class="headerlink" title="2、使用一个小程序进行debug"></a>2、使用一个小程序进行debug</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;Integer,String&gt; treemap=new TreeMap&lt;&gt;();</span><br><span class="line">        treemap.put(1,&quot;Mike&quot;);</span><br><span class="line">        treemap.put(2,&quot;Jack&quot;);</span><br><span class="line">        treemap.put(-99,&quot;hike&quot;);</span><br><span class="line">        System.out.println(treemap);</span><br></pre></td></tr></table></figure>
+
+<p>在第一行打上断点，进行调试<br><img src="https://i.loli.net/2019/11/16/xH3sIW16RXiVnDy.png" alt="2019-11-16 14_23_07-HashMapRead _D__垃圾_HashMapRead_ - C__Program Files_Java_jdk1.8.0_144_src.zip!_ja.png"></p>
+<p>可以看到初始化了比较器为null。其余的操作都未进行。下面一张图表示了treemap各个属性的初始值情况<br><img src="https://i.loli.net/2019/11/16/LFPdWT5VfUtGlD6.png" alt="2019-11-16 14_37_05-HashMapRead _D__垃圾_HashMapRead_ - C__Program Files_Java_jdk1.8.0_144_src.zip!_ja.png"></p>
+<p>继续往下看，进入put方法，在进入put方法之前，我们可以先预测几种情况</p>
+<ol>
+<li>treemap中root为null，这是第一个插入的值</li>
+<li>treemap中root不为null，那么需要从root开始根据比较器中的规则进行比较，根据比较结果是否大于0，等于0，小于0来判断该结点的走向<ul>
+<li>大于0，前往右边</li>
+<li>小于0，去往左边‘</li>
+<li>等于0，说明这是替换操作<br>下面我们来验证一下<br><img src="https://i.loli.net/2019/11/16/GFejvIiQh1roLtU.png" alt="2019-11-16 14_30_40-HashMapRead _D__垃圾_HashMapRead_ - C__Program Files_Java_jdk1.8.0_144_src.zip!_ja.png"></li>
+</ul>
+</li>
+</ol>
+<p>使用t来接收root值，防止更改root值造成混乱。可以看到，如果是第一次插入值，root为null，那么这个值就是root的初始值，注意高亮的部分调用了一个compare方法</p>
+<p><img src="https://i.loli.net/2019/11/16/3f8wIQLJz5XNHKu.png" alt="2019-11-16 14_38_27-HashMapRead _D__垃圾_HashMapRead_ - C__Program Files_Java_jdk1.8.0_144_src.zip!_ja.png"></p>
+<p>注意看画线的部分，是将传入的key转化为Comparable类型然后调用compareTo()方法，这表明如果没有传入可用的Comparator，那么传入的key值就必须实现了Comparable接口。否则会报下面的错误</p>
+<p><img src="https://i.loli.net/2019/11/16/7I1MOcjhPUmxrt4.png" alt="2019-11-16 14_42_43-HashMapRead _D__垃圾_HashMapRead_ - ..._src_com_lancer_package1_Test.java _HashMap.png"></p>
+<p>好，到现在我们已经验证了第一种情况，下面我们继续看put函数中后面的代码</p>
+<p><img src="https://i.loli.net/2019/11/16/RPX82WSwVZsQyzU.png" alt="2019-11-16 14_51_27-HashMapRead _D__垃圾_HashMapRead_ - C__Program Files_Java_jdk1.8.0_144_src.zip!_ja.png"></p>
+<p>如果root不为null，那么执行这段代码，首先定义了三个值，</p>
+<ol>
+<li>cmp：用于保存比较的结果</li>
+<li>parent：用于保存父节点</li>
+<li>cpr：用于保存比较器</li>
+</ol>
+<p>后面根据比较器是否使用默认的分为两种情况，如果使用自定义的比较器，则进入块1，使用默认的比较器就进入块2，显然我们没有显示地传入构造器，因此进入else块中。<br>首先判断key值是否为null，这也表明key不能为null。将key转成Comparable类型赋值给cpr，根据比较结果选择进入左子树遍历还是右子树遍历，一通循环后，退出循环时待插入的结点的父节点就是parent结点。</p>
+<p>来看最后的一点代码<br><img src="https://i.loli.net/2019/11/16/siRpFocXGfqC2Ij.png" alt="2019-11-16 15_03_15-HashMapRead _D__垃圾_HashMapRead_ - C__Program Files_Java_jdk1.8.0_144_src.zip!_ja.png"></p>
+<p>将待插入结点转换为一个Entry结点，与parent的key值进行比较，判断是插入到parent的左边还是右边。修改size和modCount的值，在这里面调用了fixAfterInsertion()函数，这个函数就是将修改后的tree转换化一棵红黑树，搞懂了这个函数，对treemap源码可以说就理解2/3了。</p>
+<h3 id="红黑树"><a href="#红黑树" class="headerlink" title="红黑树"></a>红黑树</h3><p>除了二叉树的基本要求外，红黑树必须满足以下几点性质。</p>
+<ul>
+<li>节点必须是红色或者黑色。</li>
+<li>根节点必须是黑色。</li>
+<li>叶节点(NIL)是黑色的。（NIL节点无数据，是空节点）</li>
+<li>红色节点必须有两个黑色儿子节点。</li>
+<li>从任一节点出发到其每个叶子节点的路径，黑色节点的数量是相等的。</li>
+</ul>
+<p>我们先来看一下平衡二叉树的旋转</p>
+<h4 id="平衡二叉树的旋转"><a href="#平衡二叉树的旋转" class="headerlink" title="平衡二叉树的旋转"></a>平衡二叉树的旋转</h4><p><img src="https://i.loli.net/2019/11/16/wZYeTvSs8PWIpEa.png" alt="20170429150914755.png"><br><img src="https://i.loli.net/2019/11/16/k1Iai9rnNyzuYcM.png" alt="20170429151109740.png"><br>注意在treemap中，第二种情况会先化为第一种情况<br><img src="https://i.loli.net/2019/11/16/YQTbPX4dSKHv1GB.png" alt="2019-11-16 16_40_58-未命名表单.drawio - draw.io.png"><br>然后再使用第一种情况来进行旋转</p>
+<p>我们来看一下再treemap中右旋转的代码<br><img src="https://i.loli.net/2019/11/16/HhgOPRkQVKE5CDl.png" alt="2019-11-16 16_43_35-HashMapRead _D__垃圾_HashMapRead_ - C__Program Files_Java_jdk1.8.0_144_src.zip!_ja.png"></p>
+<p>这个代码可以分为四部分<br>其中传入的参数为最上面的结点p(parent)，也就是上面40那个结点。</p>
+<ul>
+<li><p>第一部分获得传入结点的左子结点l(left)。</p>
+</li>
+<li><p>第二部分将r的右子结点赋予给p，作为p的左子结点，这是因为r最终的右子结点是p，这会导致原来的右子节点丢失，所以必须将它们转移至p的左子结点，因为它们只有小于p才会位于左侧。</p>
+</li>
+<li><p>第三部分设置r的parent为p的parent，并判断r是p.praent的左子结点还是右子结点。这个判断对应得模型为下面三种模型<br><img src="https://i.loli.net/2019/11/16/QF3TYaEqXZdzmny.png" alt="2019-11-16 16_58_16-未命名表单.drawio - draw.io.png"><br><img src="https://i.loli.net/2019/11/16/AIt4oev6bMdUqsK.png" alt="2019-11-16 17_01_35-未命名表单.drawio - draw.io.png"><br><img src="https://i.loli.net/2019/11/16/y9lACvc6tkbGo3U.png" alt="2019-11-16 18_30_50-未命名表单.drawio - draw.io.png"></p>
+</li>
+<li><p>第四部分将p设为r的右子结点，r设为p的父节点</p>
+</li>
+</ul>
+<p>左旋转代码类似</p>
+<p>回到fixAfterInsertinon()函数<br><img src="https://i.loli.net/2019/11/16/L9nY28csilbtM5a.png" alt="2019-11-16 18_41_28-HashMapRead _D__垃圾_HashMapRead_ - C__Program Files_Java_jdk1.8.0_144_src.zip!_ja.png"></p>
+<p>之所以先设置每个节点颜色的初始值为red，还是因为需要保证从根节点到每个叶子节点经过的黑节点数目必须相等，因此增加红色节点不影响，还有就是旋转时将x的parent设置为black，给x的parent的parent设置为red是为了到达旋转后黑节点下面挂着两个红节点，这样也不会破坏条件。后半部分代码类似，只不过是针对x的parent位于右子节点时的情况。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
     <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/15/Java%E5%9F%BA%E7%A1%80/Java%E4%B8%AD%E7%9A%84%E6%B3%9B%E5%9E%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1041,91 +1193,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/12/JavaWeb/%E6%B5%85%E8%B0%88Session%E4%B8%8ECookie%E7%9A%84%E5%8C%BA%E5%88%AB%E4%B8%8E%E8%81%94%E7%B3%BB/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lancersaber">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lancersaber">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/12/JavaWeb/%E6%B5%85%E8%B0%88Session%E4%B8%8ECookie%E7%9A%84%E5%8C%BA%E5%88%AB%E4%B8%8E%E8%81%94%E7%B3%BB/" class="post-title-link" itemprop="url">浅谈Session与Cookie的区别与联系</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2019-11-12 20:17:09 / Modified: 20:33:38" itemprop="dateCreated datePublished" datetime="2019-11-12T20:17:09+08:00">2019-11-12</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java-Web/" itemprop="url" rel="index">
-                    <span itemprop="name">Java Web</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="浅谈Session与Cookie的区别与联系"><a href="#浅谈Session与Cookie的区别与联系" class="headerlink" title="浅谈Session与Cookie的区别与联系"></a>浅谈Session与Cookie的区别与联系</h1><hr>
-<h2 id="Session的概念"><a href="#Session的概念" class="headerlink" title="Session的概念"></a>Session的概念</h2><p>Session 是存放在服务器端的，类似于Session结构来存放用户数据，当浏览器 第一次发送请求时，服务器自动生成了一个Session和一个Session ID用来唯一标识这个Session，并将其通过响应发送到浏览器。当浏览器第二次发送请求，会将前一次服务器响应中的Session ID放在请求中一并发送到服务器上，服务器从请求中提取出Session ID，并和保存的所有Session ID进行对比，找到这个用户对应的Session。</p>
-<p>一般情况下，服务器会在一定时间内（默认30分钟）保存这个 Session，过了时间限制，就会销毁这个Session。在销毁之前，程序员可以将用户的一些数据以Key和Value的形式暂时存放在这个 Session中。当然，也有使用数据库将这个Session序列化后保存起来的，这样的好处是没了时间的限制，坏处是随着时间的增加，这个数据 库会急速膨胀，特别是访问量增加的时候。一般还是采取前一种方式，以减轻服务器压力。</p>
-<h2 id="Session的客户端实现形式（即Session-ID的保存方法）"><a href="#Session的客户端实现形式（即Session-ID的保存方法）" class="headerlink" title="Session的客户端实现形式（即Session ID的保存方法）"></a>Session的客户端实现形式（即Session ID的保存方法）</h2><p>[1] 一般浏览器提供了两种方式来保存，还有一种是程序员使用html隐藏域的方式自定义实现：<br>使用Cookie来保存，这是最常见的方法，本文“记住我的登录状态”功能的实现正式基于这种方式的。服务器通过设置Cookie的方式将Session ID发送到浏览器。如果我们不设置这个过期时间，那么这个Cookie将不存放在硬盘上，当浏览器关闭的时候，Cookie就消失了，这个Session ID就丢失了。如果我们设置这个时间为若干天之后，那么这个Cookie会保存在客户端硬盘中，即使浏览器关闭，这个值仍然存在，下次访问相应网站时，同 样会发送到服务器上。<br>[2] 使用URL附加信息的方式，也就是像我们经常看到JSP网站会有aaa.jsp?JSESSIONID=*一样的。这种方式和第一种方式里面不设置Cookie过期时间是一样的。</p>
-<p>[3] 第三种方式是在页面表单里面增加隐藏域，这种方式实际上和第二种方式一样，只不过前者通过GET方式发送数据，后者使用POST方式发送数据。但是明显后者比较麻烦。</p>
-<p>cookie与session的区别：<br>cookie数据保存在客户端，session数据保存在服务器端。<br>简 单的说，当你登录一个网站的时候，如果web服务器端使用的是session,那么所有的数据都保存在服务器上面，客户端每次请求服务器的时候会发送 当前会话的sessionid，服务器根据当前sessionid判断相应的用户数据标志，以确定用户是否登录，或具有某种权限。由于数据是存储在服务器 上面，所以你不能伪造，但是如果你能够获取某个登录用户的sessionid，用特殊的浏览器伪造该用户的请求也是能够成功的。sessionid是服务 器和客户端链接时候随机分配的，一般来说是不会有重复，但如果有大量的并发请求，也不是没有重复的可能性，我曾经就遇到过一次。登录某个网站，开始显示的 是自己的信息，等一段时间超时了，一刷新，居然显示了别人的信息。</p>
-<p>如果浏览器使用的是 cookie，那么所有的数据都保存在浏览器端，比如你登录以后，服务器设置了 cookie用户名(username),那么，当你再次请求服务器的时候，浏览器会将username一块发送给服务器，这些变量有一定的特殊标记。服 务器会解释为 cookie变量。所以只要不关闭浏览器，那么 cookie变量便一直是有效的，所以能够保证长时间不掉线。<br>如果你能够截获某个用户的 cookie变量，然后伪造一个数据包发送过去，那么服务器还是认为你是合法的。所以，使用 cookie被攻击的可能性比较大。如果设置了的有效时间，那么它会将 cookie保存在客户端的硬盘上，下次再访问该网站的时候，浏览器先检查有没有 cookie，如果有的话，就读取该 cookie，然后发送给服务器。如果你在机器上面保存了某个论坛 cookie，有效期是一年，如果有人入侵你的机器，将你的 cookie拷走，然后放在他的浏览器的目录下面，那么他登录该网站的时候就是用你的的身份登录的。所以 cookie是可以伪造的。当然，伪造的时候需要主意，直接copy cookie文件到 cookie目录，浏览器是不认的，他有一个index.dat文件，存储了 cookie文件的建立时间，以及是否有修改，所以你必须先要有该网站的 cookie文件，并且要从保证时间上骗过浏览器，曾经在学校的vbb论坛上面做过试验，copy别人的 cookie登录，冒用了别人的名义发帖子，完全没有问题。<br>Session是由应用服务器维持的一个服务器端的存储空间，用户在连接服务器时，会由服务器生成一个唯一的SessionID,用该SessionID 为标识符来存取服务器端的Session存储空间。而SessionID这一数据则是保存到客户端，用Cookie保存的，用户提交页面时，会将这一 SessionID提交到服务器端，来存取Session数据。这一过程，是不用开发人员干预的。所以一旦客户端禁用Cookie，那么Session也会失效。</p>
-<p>服务器也可以通过URL重写的方式来传递SessionID的值，因此不是完全依赖Cookie。如果客户端Cookie禁用，则服务器可以自动通过重写URL的方式来保存Session的值，并且这个过程对程序员透明。</p>
-<p>可以试一下，即使不写Cookie，在使用request.getCookies();取出的Cookie数组的长度也是1，而这个Cookie的名字就是JSESSIONID，还有一个很长的二进制的字符串，是SessionID的值。</p>
-<h2 id="Session与Cookie区别和联系："><a href="#Session与Cookie区别和联系：" class="headerlink" title="Session与Cookie区别和联系："></a>Session与Cookie区别和联系：</h2><p>Cookies是属于Session对象的一种。但有不同，Cookies不会占服务器资源，是存在客服端内存或者一个cookie的文本文件中；而“Session”则会占用服务器资源。所以，尽量不要使用Session，而使用Cookies。但是我们一般认为cookie是不可靠的，session是可靠地，但是目前很多著名的站点也都以来cookie。有时候为了解决禁用cookie后的页面处理，通常采用url重写技术，调用session中大量有用的方法从session中获取数据后置入页面。</p>
-<p>Cookies与Session的应用场景：<br>Cookies的安全性能一直是倍受争议的。虽然Cookies是保存在本机上的，但是其信息的完全可见性且易于本地编辑性，往往可以引起很多的安全问题。所以Cookies到底该不该用，到底该怎样用，就有了一个需要给定的底线。<br>先来看看，网站的敏感数据有哪些。</p>
-<p>登陆验证信息。一般采用Session(“Logon”)＝true or false的形式。<br>用户的各种私人信息，比如姓名等，某种情况下，需要保存在Session里<br>需要在页面间传递的内容信息，比如调查工作需要分好几步。每一步的信息都保存在Session里，最后在统一更新到数据库。</p>
-<h2 id="cookie最典型的应用是："><a href="#cookie最典型的应用是：" class="headerlink" title="cookie最典型的应用是："></a>cookie最典型的应用是：</h2><ol>
-<li>判断用户是否登陆过网站，以便下次登录时能够直接登录。如果我们删除cookie，则每次登录必须从新填写登录的相关信息。</li>
-<li>另一个重要的应用是“购物车”中类的处理和设计。用户可能在一段时间内在同一家网站的不同页面选择不同的商品，可以将这些信息都写入cookie，在最后付款时从cookie中提取这些信息，当然这里面有了安全和性能问题需要我们考虑了。</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1176,7 +1243,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">202</span>
+          <span class="site-state-item-count">203</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

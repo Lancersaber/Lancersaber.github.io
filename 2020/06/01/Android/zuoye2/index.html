@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.2">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.2">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.2">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.2" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.2">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.4.2',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="Android实现蓝牙聊天功能 src&#x2F;main&#x2F;AndroidManifest.xml 中插入mainfest标签下 12345678&amp;lt;uses-permission android:name=&amp;quot;android.permission.BLUETOOTH&amp;quot; &#x2F;&amp;gt;    &amp;lt;uses-permission android:name=&amp;quot;android.pe">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android实现蓝牙聊天功能">
+<meta property="og:url" content="https:&#x2F;&#x2F;lancersaber.github.io&#x2F;2020&#x2F;06&#x2F;01&#x2F;Android&#x2F;zuoye2&#x2F;index.html">
+<meta property="og:site_name" content="Lancersaber">
+<meta property="og:description" content="Android实现蓝牙聊天功能 src&#x2F;main&#x2F;AndroidManifest.xml 中插入mainfest标签下 12345678&amp;lt;uses-permission android:name=&amp;quot;android.permission.BLUETOOTH&amp;quot; &#x2F;&amp;gt;    &amp;lt;uses-permission android:name=&amp;quot;android.pe">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-06-01T14:31:33.367Z">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://lancersaber.github.io/2020/06/01/Android/zuoye2/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Android实现蓝牙聊天功能 | Lancersaber</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lancersaber</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2020/06/01/Android/zuoye2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Android实现蓝牙聊天功能
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-06-01 22:26:02 / Modified: 22:31:33" itemprop="dateCreated datePublished" datetime="2020-06-01T22:26:02+08:00">2020-06-01</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Android实现蓝牙聊天功能"><a href="#Android实现蓝牙聊天功能" class="headerlink" title="Android实现蓝牙聊天功能"></a>Android实现蓝牙聊天功能</h1><hr>
+<p>src/main/AndroidManifest.xml 中插入mainfest标签下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;uses-permission android:name=&quot;android.permission.BLUETOOTH&quot; /&gt;</span><br><span class="line">    &lt;uses-permission android:name=&quot;android.permission.BLUETOOTH_ADMIN&quot; /&gt;</span><br><span class="line">    &lt;uses-permission android:name=&quot;android.permission.BLUETOOTH_PRIVILEGED&quot; /&gt;</span><br><span class="line">    &lt;uses-permission android:name=&quot;android.permission.ACCESS_COARSE_LOCATION&quot; /&gt;</span><br><span class="line"></span><br><span class="line">    &lt;uses-permission android:name=&quot;android.permission.WRITE_EXTERNAL_STORAGE&quot;/&gt;</span><br><span class="line">    &lt;uses-permission android:name=&quot;android.permission.READ_EXTERNAL_STORAGE&quot;/&gt;</span><br><span class="line">    &lt;uses-permission android:name=&quot;android.permission.SYSTEM_ALERT_WINDOW&quot;/&gt;</span><br></pre></td></tr></table></figure>
+
+<p>然后就是src/main/java/cn/com/lenew/bluetooth/activity/MainActivity.java<br>没有别的，主要还是一个对各个类的调用，控制显示之类的<br>仅附上部分代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line">public void onClick(View view)&#123;</span><br><span class="line">        showToast(&quot;开始扫描&quot;);</span><br><span class="line">        list.clear();</span><br><span class="line">        list.addAll(BluetoothUtils.getInstance(mContext).getAvailableDevices());</span><br><span class="line">        adapter.notifyDataSetChanged();</span><br><span class="line">        BluetoothUtils.getInstance(this).scanDevices();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private void initReceiver() &#123;</span><br><span class="line">        IntentFilter filter = new IntentFilter();</span><br><span class="line">        filter.addAction(BluetoothDevice.ACTION_FOUND);</span><br><span class="line">        filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_STARTED);</span><br><span class="line">        filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_FINISHED);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        filter.addAction(BluetoothMessage.ACTION_INIT_COMPLETE);</span><br><span class="line">        filter.addAction(BluetoothMessage.ACTION_CONNECTED_SERVER);</span><br><span class="line">        filter.addAction(BluetoothMessage.ACTION_CONNECT_ERROR);</span><br><span class="line">        registerReceiver(receiver, filter);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    BroadcastReceiver receiver = new BroadcastReceiver() &#123;</span><br><span class="line">        @Override</span><br><span class="line">        public void onReceive(Context context, Intent intent) &#123;</span><br><span class="line">            switch (intent.getAction())&#123;</span><br><span class="line">                case BluetoothDevice.ACTION_FOUND:</span><br><span class="line">                    BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);</span><br><span class="line">                    for(int i=0;i&lt;list.size();i++)&#123;</span><br><span class="line">                        if(device.getAddress()==null || device.getAddress().equals(list.get(i).getAddress()))&#123;</span><br><span class="line">                            return;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                    list.add(device);</span><br><span class="line">                    adapter.notifyDataSetChanged();</span><br><span class="line">                    break;</span><br><span class="line">                case BluetoothAdapter.ACTION_DISCOVERY_STARTED:</span><br><span class="line">//                    showToast(&quot;开始扫描&quot;);</span><br><span class="line">                    break;</span><br><span class="line">                case BluetoothAdapter.ACTION_DISCOVERY_FINISHED:</span><br><span class="line">//                    showToast(&quot;扫描完成&quot;);</span><br><span class="line">                    break;</span><br><span class="line">                case BluetoothMessage.ACTION_INIT_COMPLETE:</span><br><span class="line">                    ProgressUtils.dismissProgress();</span><br><span class="line">                    break;</span><br><span class="line">                case BluetoothMessage.ACTION_CONNECTED_SERVER:</span><br><span class="line">                    ProgressUtils.dismissProgress();</span><br><span class="line">                    String remoteAddress = intent.getStringExtra(BluetoothUtils.EXTRA_REMOTE_ADDRESS);</span><br><span class="line">                    openChatRoom(remoteAddress);</span><br><span class="line">                    break;</span><br><span class="line">                case BluetoothMessage.ACTION_CONNECT_ERROR:</span><br><span class="line">                    ProgressUtils.dismissProgress();</span><br><span class="line">                    showToast(intent.getStringExtra(BluetoothUtils.EXTRA_ERROR_MSG));</span><br><span class="line">                    break;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    private void openChatRoom(String remoteAddress) &#123;</span><br><span class="line">        Intent intent = new Intent(mContext,ChatActivity.class);</span><br><span class="line">        intent.putExtra(&quot;remoteAddress&quot;,remoteAddress);</span><br><span class="line">        startActivity(intent);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>随后就是蓝牙通信的协议问题，这个相对来说就比较复杂了<br>这里说一下 ，我使用的是BluetoothSocket和BluetoothServerSocket<br>src/main/java/cn/com/lenew/bluetooth/utils/BluetoothUtils.java</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Created by xuhuan 0007.</span><br><span class="line"> */</span><br><span class="line">public class BluetoothUtils &#123;</span><br><span class="line"></span><br><span class="line">    private static final String PROTOCOL_SCHEME_RFCOMM = &quot;server_name&quot;;</span><br><span class="line">    private static final String UUIDString = &quot;00001101-0000-1000-8000-00805F9B34FB&quot;;</span><br><span class="line">    public static final String EXTRA_REMOTE_ADDRESS = &quot;remoteAddress&quot;;</span><br><span class="line">    public static final String EXTRA_ERROR_MSG = &quot;error_msg&quot;;</span><br><span class="line">    private static BluetoothUtils instance;</span><br><span class="line"></span><br><span class="line">    /** 已连接到服务器 */</span><br><span class="line">    private static final int CONNECTED_SERVER = 1;</span><br><span class="line">    /** 连接服务器出错 */</span><br><span class="line">    private static final int CONNECT_SERVER_ERROR = CONNECTED_SERVER + 1;</span><br><span class="line">    /** 正在连接服务器 */</span><br><span class="line">    private static final int IS_CONNECTING_SERVER = CONNECT_SERVER_ERROR + 1;</span><br><span class="line">    /** 等待客户端连接 */</span><br><span class="line">    private static final int WAITING_FOR_CLIENT = IS_CONNECTING_SERVER + 1;</span><br><span class="line">    /** 已连接客户端 */</span><br><span class="line">    private static final int CONNECTED_CLIENT = WAITING_FOR_CLIENT + 1;</span><br><span class="line">    /** 连接客户端出错 */</span><br><span class="line">    private static final int CONNECT_CLIENT_ERROR = CONNECTED_CLIENT + 1;</span><br><span class="line"></span><br><span class="line">    private BluetoothAdapter bluetoothAdapter;</span><br><span class="line">    private Context mContext;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * socket集合</span><br><span class="line">     */</span><br><span class="line">    private HashMap&lt;String, BluetoothSocket&gt; socketMap = new HashMap&lt;&gt;();</span><br><span class="line">    /**</span><br><span class="line">     * 远程设备集合</span><br><span class="line">     */</span><br><span class="line">//    private HashMap&lt;String, BluetoothDevice&gt; remoteDeviceMap = new HashMap&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    private HashMap&lt;String,ReadThread&gt; readThreadMap = new HashMap&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    private BluetoothServerSocket mServerSocket;</span><br><span class="line"></span><br><span class="line">    private Handler linkDetectedHandler = new Handler() &#123;</span><br><span class="line">        @Override</span><br><span class="line">        public void handleMessage(Message msg) &#123;</span><br><span class="line"></span><br><span class="line">            if(msg.obj instanceof BluetoothMessage)&#123;</span><br><span class="line">                BluetoothMessage message = (BluetoothMessage) msg.obj;</span><br><span class="line">                Intent intent = new Intent();</span><br><span class="line">                intent.setAction(BluetoothMessage.ACTION_RECEIVED_NEW_MSG);</span><br><span class="line">                intent.putExtra(&quot;msg&quot;, message);</span><br><span class="line">                mContext.sendOrderedBroadcast(intent, null);</span><br><span class="line"></span><br><span class="line">                DBManager.save(message);</span><br><span class="line">//                mContext.sendBroadcast(intent);</span><br><span class="line">            &#125;else &#123;</span><br><span class="line">                Intent intent = new Intent();</span><br><span class="line">                switch (msg.what)&#123;</span><br><span class="line">                    case WAITING_FOR_CLIENT:</span><br><span class="line">                        //初始化服务器完成</span><br><span class="line">                        intent.setAction(BluetoothMessage.ACTION_INIT_COMPLETE);</span><br><span class="line">                        break;</span><br><span class="line">                    case IS_CONNECTING_SERVER:</span><br><span class="line">                        //正在连接服务器</span><br><span class="line"></span><br><span class="line">                        break;</span><br><span class="line">                    case CONNECTED_CLIENT:</span><br><span class="line">                        //有客户端连接到自己</span><br><span class="line"></span><br><span class="line">                        break;</span><br><span class="line">                    case CONNECT_CLIENT_ERROR:</span><br><span class="line">                        //连接客户端出错</span><br><span class="line"></span><br><span class="line">                        break;</span><br><span class="line">                    case CONNECT_SERVER_ERROR:</span><br><span class="line">                        //连接服务器出错</span><br><span class="line">                        intent.putExtra(EXTRA_ERROR_MSG,(String)msg.obj);</span><br><span class="line">                        intent.setAction(BluetoothMessage.ACTION_CONNECT_ERROR);</span><br><span class="line">                        break;</span><br><span class="line">                    case CONNECTED_SERVER:</span><br><span class="line">                        intent.putExtra(EXTRA_REMOTE_ADDRESS,(String)msg.obj);</span><br><span class="line">                        intent.setAction(BluetoothMessage.ACTION_CONNECTED_SERVER);</span><br><span class="line">                        break;</span><br><span class="line"></span><br><span class="line">                &#125;</span><br><span class="line">                mContext.sendBroadcast(intent);</span><br><span class="line">//                String msgContent = (String) msg.obj;</span><br><span class="line">//                Toast.makeText(mContext, msgContent, Toast.LENGTH_SHORT).show();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    private BluetoothUtils(Context context) &#123;</span><br><span class="line">        mContext = context;</span><br><span class="line">        if (context == null) &#123;</span><br><span class="line">            throw new RuntimeException(&quot;Parameter context can not be null !&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">        bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static BluetoothUtils getInstance(Context context) &#123;</span><br><span class="line">        if (instance == null) &#123;</span><br><span class="line">            instance = new BluetoothUtils(context);</span><br><span class="line">        &#125;</span><br><span class="line">        return instance;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void enableBluetooth() &#123;</span><br><span class="line">        if (!bluetoothAdapter.isEnabled()) &#123;</span><br><span class="line">//            Intent intent = new Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);</span><br><span class="line">//            intent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 300);</span><br><span class="line">//            mContext.startActivity(intent);</span><br><span class="line">            bluetoothAdapter.enable();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void scanDevices() &#123;</span><br><span class="line">        if (!bluetoothAdapter.isEnabled()) &#123;</span><br><span class="line">            enableBluetooth();</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        bluetoothAdapter.startDiscovery();</span><br><span class="line">        startService();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private void startService() &#123;</span><br><span class="line">        Intent serverIntent = new Intent(mContext, ServerService.class);</span><br><span class="line">        mContext.startService(serverIntent);</span><br><span class="line"></span><br><span class="line">        Intent clientIntent = new Intent(mContext, MessageService.class);</span><br><span class="line">        mContext.startService(clientIntent);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public boolean isEnabled() &#123;</span><br><span class="line">        return bluetoothAdapter.isEnabled();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public ArrayList&lt;BluetoothDevice&gt; getAvailableDevices() &#123;</span><br><span class="line">        Set&lt;BluetoothDevice&gt; availableDevices = bluetoothAdapter.getBondedDevices();</span><br><span class="line">        ArrayList availableList = new ArrayList();</span><br><span class="line">        for (Iterator&lt;BluetoothDevice&gt; iterator = availableDevices.iterator(); iterator.hasNext(); ) &#123;</span><br><span class="line">            availableList.add(iterator.next());</span><br><span class="line">        &#125;</span><br><span class="line">        return availableList;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public boolean isBonded(BluetoothDevice device) &#123;</span><br><span class="line">        Set&lt;BluetoothDevice&gt; availableDevices = bluetoothAdapter.getBondedDevices();</span><br><span class="line">        for (Iterator&lt;BluetoothDevice&gt; iterator = availableDevices.iterator(); iterator.hasNext(); ) &#123;</span><br><span class="line">            if (device.getAddress().equals(iterator.next().getAddress())) &#123;</span><br><span class="line">                return true;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public boolean isDiscoverying() &#123;</span><br><span class="line">        return bluetoothAdapter.isDiscovering();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void cancelScan() &#123;</span><br><span class="line">        bluetoothAdapter.cancelDiscovery();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    //开启客户端</span><br><span class="line">    private class ClientThread extends Thread &#123;</span><br><span class="line"></span><br><span class="line">        private String remoteAddress;</span><br><span class="line"></span><br><span class="line">        public ClientThread(String remoteAddress) &#123;</span><br><span class="line">            this.remoteAddress = remoteAddress;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        @Override</span><br><span class="line">        public void run() &#123;</span><br><span class="line">            try &#123;</span><br><span class="line">                //创建一个Socket连接：只需要服务器在注册时的UUID号</span><br><span class="line">                // socket = device.createRfcommSocketToServiceRecord(BluetoothProtocols.OBEX_OBJECT_PUSH_PROTOCOL_UUID);</span><br><span class="line">                BluetoothDevice device = bluetoothAdapter.getRemoteDevice(remoteAddress);</span><br><span class="line">                BluetoothSocket socket = device.createRfcommSocketToServiceRecord(UUID.fromString(UUIDString));</span><br><span class="line">//                socketMap.put(remoteAddress, socket);</span><br><span class="line">                //连接</span><br><span class="line">                Message msg2 = new Message();</span><br><span class="line">                msg2.obj = &quot;请稍候，正在连接服务器:&quot; + remoteAddress;</span><br><span class="line">                msg2.what = IS_CONNECTING_SERVER;</span><br><span class="line">                linkDetectedHandler.sendMessage(msg2);</span><br><span class="line"></span><br><span class="line">                socket.connect();</span><br><span class="line"></span><br><span class="line">//                socketMap.put(BluetoothMessage.bluetoothAddress, socket);</span><br><span class="line">                socketMap.put(remoteAddress, socket);</span><br><span class="line"></span><br><span class="line">                Message msg = new Message();</span><br><span class="line">//                msg.obj = &quot;已经连接上服务端！可以发送信息。&quot;;</span><br><span class="line">                msg.obj = remoteAddress;</span><br><span class="line">                msg.what = CONNECTED_SERVER;</span><br><span class="line">                linkDetectedHandler.sendMessage(msg);</span><br><span class="line">                //启动接受数据</span><br><span class="line">                ReadThread mreadThread = new ReadThread(remoteAddress);</span><br><span class="line">                readThreadMap.put(remoteAddress,mreadThread);</span><br><span class="line">                mreadThread.start();</span><br><span class="line">            &#125; catch (IOException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">                socketMap.remove(remoteAddress);</span><br><span class="line">                Log.e(&quot;connect&quot;, e.getMessage(), e);</span><br><span class="line">                Message msg = new Message();</span><br><span class="line">                msg.obj = &quot;连接服务端异常！断开连接重新试一试。&quot;+e.getMessage();</span><br><span class="line">                msg.what = CONNECT_SERVER_ERROR;</span><br><span class="line">                linkDetectedHandler.sendMessage(msg);</span><br><span class="line"></span><br><span class="line">//                remoteDeviceMap.remove(remoteAddress);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    //开启服务器</span><br><span class="line">    private class ServerThread extends Thread &#123;</span><br><span class="line">        @Override</span><br><span class="line">        public void run() &#123;</span><br><span class="line"></span><br><span class="line">            try &#123;</span><br><span class="line">                    /* 创建一个蓝牙服务器</span><br><span class="line">                     * 参数分别：服务器名称、UUID   */</span><br><span class="line">                mServerSocket = bluetoothAdapter.listenUsingRfcommWithServiceRecord(PROTOCOL_SCHEME_RFCOMM, UUID.fromString(UUIDString));</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">                while (true)&#123;</span><br><span class="line">                    Log.d(&quot;server&quot;, &quot;wait cilent connect...&quot;);</span><br><span class="line"></span><br><span class="line">                    Message msg = new Message();</span><br><span class="line">                    msg.obj = &quot;请稍候，正在等待客户端的连接...&quot;;</span><br><span class="line">                    msg.what = WAITING_FOR_CLIENT;</span><br><span class="line">                    linkDetectedHandler.sendMessage(msg);</span><br><span class="line"></span><br><span class="line">                    /* 接受客户端的连接请求 */</span><br><span class="line">                    BluetoothSocket socket = mServerSocket.accept();</span><br><span class="line">                    socketMap.put(socket.getRemoteDevice().getAddress(), socket);</span><br><span class="line">//                    remoteDeviceMap.put(socket.getRemoteDevice().getAddress(),socket.getRemoteDevice());</span><br><span class="line">                    Log.d(&quot;server&quot;, &quot;accept success !&quot;);</span><br><span class="line"></span><br><span class="line">                    Message msg2 = new Message();</span><br><span class="line">                    String info = &quot;客户端已经连接上！可以发送信息。&quot;;</span><br><span class="line">                    msg2.obj = info;</span><br><span class="line">                    msg.what = CONNECTED_CLIENT;</span><br><span class="line">                    linkDetectedHandler.sendMessage(msg2);</span><br><span class="line">                    //启动接受数据</span><br><span class="line">                    ReadThread mreadThread = new ReadThread(socket.getRemoteDevice().getAddress());</span><br><span class="line">                    readThreadMap.put(socket.getRemoteDevice().getAddress(),mreadThread);</span><br><span class="line">                    mreadThread.start();</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">            &#125; catch (IOException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /* 停止服务器 */</span><br><span class="line">//略</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    /* 停止客户端连接 */</span><br><span class="line">//略</span><br><span class="line">    //发送数据</span><br><span class="line">//略</span><br><span class="line"></span><br><span class="line">    //读取数据</span><br><span class="line">//略</span><br></pre></td></tr></table></figure>
+<p>接下来是通信服务：<br>src/main/java/cn/com/lenew/bluetooth/service/MessageService.java：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Created by xuhuan  0010.</span><br><span class="line"> */</span><br><span class="line">public class MessageService extends Service&#123;</span><br><span class="line">    private Context mContext;</span><br><span class="line">    private NotificationManager notificationManager;</span><br><span class="line"></span><br><span class="line">    @Nullable</span><br><span class="line">    @Override</span><br><span class="line">    public IBinder onBind(Intent intent) &#123;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onCreate() &#123;</span><br><span class="line">        super.onCreate();</span><br><span class="line">        mContext = this;</span><br><span class="line">        notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);</span><br><span class="line">        IntentFilter intentFilter = new IntentFilter(BluetoothMessage.ACTION_RECEIVED_NEW_MSG);</span><br><span class="line">        intentFilter.setPriority(990);</span><br><span class="line">        registerReceiver(msgReceiver, intentFilter);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onDestroy() &#123;</span><br><span class="line">        super.onDestroy();</span><br><span class="line">        unregisterReceiver(msgReceiver);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public int onStartCommand(Intent intent, int flags, int startId) &#123;</span><br><span class="line">        return Service.START_STICKY;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public void sendNotification(String content,String remoteAddress,BluetoothMessage message)&#123;</span><br><span class="line"></span><br><span class="line">        Intent chatIntent = new Intent(mContext, ChatActivity.class);</span><br><span class="line">        chatIntent.putExtra(&quot;remoteAddress&quot;,remoteAddress);</span><br><span class="line">        chatIntent.putExtra(&quot;lastmsg&quot;,message);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        PendingIntent pendingIntent = PendingIntent.getActivity(mContext, 0, chatIntent, PendingIntent.FLAG_UPDATE_CURRENT);</span><br><span class="line">        Notification notification = new Notification.Builder(mContext)</span><br><span class="line">                .setContentText(content)</span><br><span class="line">                .setContentIntent(pendingIntent)</span><br><span class="line">                .setSmallIcon(R.mipmap.icon_logo)</span><br><span class="line">                .setAutoCancel(true)</span><br><span class="line">                .setContentTitle(&quot;您有一条新消息&quot;)</span><br><span class="line">                .build();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        notification.defaults = Notification.DEFAULT_SOUND;</span><br><span class="line">        notificationManager.notify(1,notification);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    BroadcastReceiver msgReceiver = new BroadcastReceiver() &#123;</span><br><span class="line">        @Override</span><br><span class="line">        public void onReceive(Context context, Intent intent) &#123;</span><br><span class="line">            BluetoothMessage bluetoothMessage = (BluetoothMessage) intent.getSerializableExtra(&quot;msg&quot;);</span><br><span class="line">            bluetoothMessage.setIsMe(0);</span><br><span class="line"></span><br><span class="line">            String remoteAddress = bluetoothMessage.getSender();</span><br><span class="line"></span><br><span class="line">            String msgContent;</span><br><span class="line">            if(bluetoothMessage.getContent().length()&gt;10)&#123;</span><br><span class="line">                msgContent = bluetoothMessage.getContent().substring(0,10);</span><br><span class="line">            &#125;else &#123;</span><br><span class="line">                msgContent = bluetoothMessage.getContent();</span><br><span class="line">            &#125;</span><br><span class="line">            String msg = bluetoothMessage.getSenderNick()+&quot;:&quot;+msgContent;</span><br><span class="line"></span><br><span class="line">            sendNotification(msg,remoteAddress,bluetoothMessage);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>数据服务</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Created by xuhuan .</span><br><span class="line"> */</span><br><span class="line">public class DBManager &#123;</span><br><span class="line"></span><br><span class="line">    private static DbManager.DaoConfig daoConfig;</span><br><span class="line"></span><br><span class="line">    public static DbManager.DaoConfig getDaoConfig()&#123;</span><br><span class="line">        if(daoConfig==null)&#123;</span><br><span class="line">            daoConfig = new DbManager.DaoConfig();</span><br><span class="line">            daoConfig.setDbVersion(2);</span><br><span class="line">        &#125;</span><br><span class="line">        return daoConfig;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public static void save(Object obj)&#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            x.getDb(DBManager.getDaoConfig()).save(obj);</span><br><span class="line">        &#125; catch (DbException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public static List&lt;BluetoothMessage&gt; findAll(String remoteAddress) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line"></span><br><span class="line">            Selector&lt;BluetoothMessage&gt; selector = x.getDb(getDaoConfig()).selector(BluetoothMessage.class);</span><br><span class="line">            selector.where(&quot;sender&quot;,&quot;=&quot;,remoteAddress);</span><br><span class="line">            selector.or(&quot;receiver&quot;,&quot;=&quot;,remoteAddress);</span><br><span class="line">            return selector.findAll();</span><br><span class="line">        &#125; catch (DbException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以上就是项目的大致代码了。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2020/05/25/Android/zuoye/" rel="next" title="百度地图">
+                  <i class="fa fa-chevron-left"></i> 百度地图
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Android实现蓝牙聊天功能"><span class="nav-number">1.</span> <span class="nav-text">Android实现蓝牙聊天功能</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="site-author-image" itemprop="image" alt="Lancersaber"
+    src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Lancersaber</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">203</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">46</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lancersaber</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.4.2
+  </div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.2"></script><script src="/js/motion.js?v=7.4.2"></script>
+<script src="/js/schemes/muse.js?v=7.4.2"></script>
+<script src="/js/next-boot.js?v=7.4.2"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

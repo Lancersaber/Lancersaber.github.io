@@ -172,6 +172,102 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/02/Mysql/Mysql%E5%87%A0%E5%A4%A7%E7%BA%A6%E6%9D%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/02/Mysql/Mysql%E5%87%A0%E5%A4%A7%E7%BA%A6%E6%9D%9F/" class="post-title-link" itemprop="url">Mysql几大约束</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-11-02 22:50:29" itemprop="dateCreated datePublished" datetime="2019-11-02T22:50:29+08:00">2019-11-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-11-08 14:39:19" itemprop="dateModified" datetime="2019-11-08T14:39:19+08:00">2019-11-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mysql/" itemprop="url" rel="index">
+                    <span itemprop="name">Mysql</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Mysql几大约束"><a href="#Mysql几大约束" class="headerlink" title="Mysql几大约束"></a>Mysql几大约束</h1><hr>
+<h2 id="1、主键约束"><a href="#1、主键约束" class="headerlink" title="1、主键约束"></a>1、主键约束</h2><p>&emsp;&emsp;Mysql单个字段设为主键很简单，怎么设置两个及以上字段为主键呢？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">create table test </span><br><span class="line">( </span><br><span class="line">   name varchar(19), </span><br><span class="line">   id number, </span><br><span class="line">   value varchar(10), </span><br><span class="line">   primary key (name,id) </span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>这样设置的主键称为复合主键，也就由一个以上的字段构成的主键。</p>
+<h2 id="2、外键约束"><a href="#2、外键约束" class="headerlink" title="2、外键约束"></a>2、外键约束</h2><p>&emsp;&emsp;外键用来在两个表的数据之间建立链接，它可以是一列或者多列。一个表可以有一个或多个外键。外键对应的是参照完整性，一个表的外键可以是空值，若不为空值，则每个外键值必须等于另一个表中主键的某个值。<br>&emsp;&emsp;外键：外键的主要作用是保证数据引用的完整性，定义外键后，不允许删除在另一个表中的具有关联关系的行。</p>
+<ul>
+<li>主表(父表)：相关联字段中主键所在的表</li>
+<li>从表(子表)：相关联字段中外键所在的表<br>语法：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">创建外键：</span><br><span class="line">[constraint &lt;外键名&gt;] foreign key 字段名1[,字段名2,...] references &lt;主表名&gt; 主键列1【，主键列2,...]</span><br><span class="line"></span><br><span class="line">删除外键</span><br><span class="line">alter table tableName drop foreign key foreignKeyName;</span><br></pre></td></tr></table></figure>
+示例<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE sockerteam(</span><br><span class="line">id INT PRIMARY KEY AUTO_INCREMENT,</span><br><span class="line">team_name VARCHAR(25)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">CREATE TABLE sockerplayer</span><br><span class="line">(</span><br><span class="line">id INT PRIMARY KEY auto_increment,</span><br><span class="line">`name` VARCHAR(25) NOT NULL, </span><br><span class="line">teamId INT,</span><br><span class="line">CONSTRAINT team_player FOREIGN KEY (teamId) REFERENCES sockerteam(id)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="3、非空约束"><a href="#3、非空约束" class="headerlink" title="3、非空约束"></a>3、非空约束</h2><h2 id="4、唯一性约束"><a href="#4、唯一性约束" class="headerlink" title="4、唯一性约束"></a>4、唯一性约束</h2><p>&emsp;&emsp;唯一性约束(Unique Constraint)要求该列唯一，允许为空，但只能出现一个空值。<br>语法规则如下：<br>1、在定义完列之后直接指定唯一约束，语法如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">字段名 数据类型 UNIQUE</span><br></pre></td></tr></table></figure>
+
+<p>2、在定义完所有列之后指定唯一约束</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[constraint &lt;约束名&gt;] UNIQUE (&lt;字段名&gt;)</span><br></pre></td></tr></table></figure>
+<h2 id="5、默认约束"><a href="#5、默认约束" class="headerlink" title="5、默认约束"></a>5、默认约束</h2><p>默认约束指定某列的默认值。<br>语法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">字段名数据类型 default 默认值</span><br></pre></td></tr></table></figure>
+
+<h2 id="6、设置表的属性值自动增加"><a href="#6、设置表的属性值自动增加" class="headerlink" title="6、设置表的属性值自动增加"></a>6、设置表的属性值自动增加</h2><p>默认的，在Mysql中AUTO_INCREMENT的初始值是1，每新增一条记录，字段值自动加1。一个表只能有一个字段使用AUTO_INCREMENT约束，且该字段必须为主键的一部分。<br>语法规则如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">字段名 数据类型 AUTO_INCREMENT</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
     <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/02/Activiti/Activiti%20API/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1119,103 +1215,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/02/Spring/Springboot%E9%80%9A%E7%94%A8Mapper%E5%92%8CPageHelper/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lancersaber">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lancersaber">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/02/Spring/Springboot%E9%80%9A%E7%94%A8Mapper%E5%92%8CPageHelper/" class="post-title-link" itemprop="url">Springboot通用Mapper和PageHelper</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2019-11-02 10:17:04 / Modified: 10:59:28" itemprop="dateCreated datePublished" datetime="2019-11-02T10:17:04+08:00">2019-11-02</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/spring/" itemprop="url" rel="index">
-                    <span itemprop="name">spring</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Springboot通用Mapper和PageHelper"><a href="#Springboot通用Mapper和PageHelper" class="headerlink" title="Springboot通用Mapper和PageHelper"></a>Springboot通用Mapper和PageHelper</h1><hr>
-<p>如果项目中使用到了MyBatis框架，那么使用通用Mapper和PageHelper分页插件将极大的简化我们的操作。通用Mapper可以简化对单表的CRUD操作，PageHelper分页插件可以帮我们自动拼接分页SQL，并且可以使用MyBatis Geneator来自动生成实体类，Mapper接口和Mapper xml代码，非常的方便。插件地址及作者链接<a href="https://gitee.com/free。" target="_blank" rel="noopener">https://gitee.com/free。</a></p>
-<h2 id="引入依赖"><a href="#引入依赖" class="headerlink" title="引入依赖"></a>引入依赖</h2><p>这里使用Spring Boot来构建，可参考Spring-Boot中使用Mybatis.html搭建一个Spring boot + MyBatis的框架，然后在pom中引入：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- mybatis --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.mybatis.spring.boot&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;mybatis-spring-boot-starter&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.3.1&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;!-- 通用mapper --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;tk.mybatis&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;mapper-spring-boot-starter&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.1.5&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;!-- pagehelper 分页插件 --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;com.github.pagehelper&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;pagehelper-spring-boot-starter&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.2.3&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
-<p>接着在pom中配置MyBatis Geneator：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">&lt;build&gt;</span><br><span class="line">    &lt;plugins&gt;</span><br><span class="line">        &lt;plugin&gt;</span><br><span class="line">            &lt;groupId&gt;org.mybatis.generator&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;mybatis-generator-maven-plugin&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;1.3.5&lt;/version&gt;</span><br><span class="line">            &lt;dependencies&gt;</span><br><span class="line">                &lt;dependency&gt;</span><br><span class="line">                    &lt;!-- 数据库连接驱动 --&gt;</span><br><span class="line">                    &lt;groupId&gt;com.oracle&lt;/groupId&gt;</span><br><span class="line">                    &lt;artifactId&gt;ojdbc6&lt;/artifactId&gt;</span><br><span class="line">                    &lt;version&gt;6.0&lt;/version&gt;</span><br><span class="line">                &lt;/dependency&gt;</span><br><span class="line">                &lt;dependency&gt;</span><br><span class="line">                    &lt;groupId&gt;tk.mybatis&lt;/groupId&gt;</span><br><span class="line">                    &lt;artifactId&gt;mapper&lt;/artifactId&gt;</span><br><span class="line">                    &lt;version&gt;3.4.0&lt;/version&gt;</span><br><span class="line">                &lt;/dependency&gt;</span><br><span class="line">            &lt;/dependencies&gt;</span><br><span class="line">            &lt;executions&gt;</span><br><span class="line">                &lt;execution&gt;</span><br><span class="line">                    &lt;id&gt;Generate MyBatis Artifacts&lt;/id&gt;</span><br><span class="line">                    &lt;phase&gt;package&lt;/phase&gt;</span><br><span class="line">                    &lt;goals&gt;</span><br><span class="line">                        &lt;goal&gt;generate&lt;/goal&gt;</span><br><span class="line">                    &lt;/goals&gt;</span><br><span class="line">                &lt;/execution&gt;</span><br><span class="line">            &lt;/executions&gt;</span><br><span class="line">            &lt;configuration&gt;</span><br><span class="line">                &lt;!--允许移动生成的文件 --&gt;</span><br><span class="line">                &lt;verbose&gt;true&lt;/verbose&gt;</span><br><span class="line">                &lt;!-- 是否覆盖 --&gt;</span><br><span class="line">                &lt;overwrite&gt;true&lt;/overwrite&gt;</span><br><span class="line">                &lt;!-- 自动生成的配置 --&gt;</span><br><span class="line">                &lt;configurationFile&gt;src/main/resources/mybatis-generator.xml&lt;/configurationFile&gt;</span><br><span class="line">            &lt;/configuration&gt;</span><br><span class="line">        &lt;/plugin&gt;</span><br><span class="line">    &lt;/plugins&gt;</span><br><span class="line">&lt;/build&gt;</span><br></pre></td></tr></table></figure>
-<p>src/main/resources/mybatis-generator.xml为生成器的配置，下文会介绍到。</p>
-<h2 id="配置插件"><a href="#配置插件" class="headerlink" title="配置插件"></a>配置插件</h2><p>在Spring Boot配置文件application.yml中配置MyBatis：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mybatis:</span><br><span class="line">  # type-aliases扫描路径</span><br><span class="line">  type-aliases-package: com.springboot.bean</span><br><span class="line">  # mapper xml实现扫描路径</span><br><span class="line">  mapper-locations: classpath:mapper/*.xml</span><br><span class="line">  property:</span><br><span class="line">    order: BEFORE</span><br></pre></td></tr></table></figure>
-
-<p>接下来开始配置插件。</p>
-<h3 id="配置通用Mapper"><a href="#配置通用Mapper" class="headerlink" title="配置通用Mapper"></a>配置通用Mapper</h3><p>在Spring Boot配置文件application.yml中配置通用Mapper：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#mappers 多个接口时逗号隔开</span><br><span class="line">mapper:</span><br><span class="line">  mappers: com.springboot.config.MyMapper</span><br><span class="line">  not-empty: false</span><br><span class="line">  identity: oracle</span><br></pre></td></tr></table></figure>
-
-<p>关于参数的说明，参考<a href="https://gitee.com/free/Mapper/blob/master/wiki/mapper3/2.Integration.md中的可配参数介绍。" target="_blank" rel="noopener">https://gitee.com/free/Mapper/blob/master/wiki/mapper3/2.Integration.md中的可配参数介绍。</a></p>
-<p>除此之外，我们需要定义一个MyMapper接口：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">import tk.mybatis.mapper.common.Mapper;</span><br><span class="line">import tk.mybatis.mapper.common.MySqlMapper;</span><br><span class="line"></span><br><span class="line">public interface MyMapper&lt;T&gt; extends Mapper&lt;T&gt;, MySqlMapper&lt;T&gt; &#123;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>值得注意的是，该接口不能被扫描到，应该和自己定义的Mapper分开。自己定义的Mapper都需要继承这个接口。</p>
-<h3 id="配置PageHelper"><a href="#配置PageHelper" class="headerlink" title="配置PageHelper"></a>配置PageHelper</h3><p>在Spring Boot配置文件application.yml中配置通用配置PageHelper：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#pagehelper</span><br><span class="line">pagehelper: </span><br><span class="line">  helperDialect: oracle</span><br><span class="line">  reasonable: true</span><br><span class="line">  supportMethodsArguments: true</span><br><span class="line">  params: count=countSql</span><br></pre></td></tr></table></figure>
-
-<p>参数相关说明参考<a href="https://github.com/pagehelper/Mybatis-PageHelper/blob/master/wikis/zh/HowToUse.md中的分页插件参数介绍" target="_blank" rel="noopener">https://github.com/pagehelper/Mybatis-PageHelper/blob/master/wikis/zh/HowToUse.md中的分页插件参数介绍</a></p>
-<h3 id="配置Geneator"><a href="#配置Geneator" class="headerlink" title="配置Geneator*"></a>配置Geneator*</h3><p>在路径src/main/resources/下新建mybatis-generator.xml：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;!DOCTYPE generatorConfiguration</span><br><span class="line">    PUBLIC &quot;-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN&quot;</span><br><span class="line">    &quot;http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd&quot;&gt;</span><br><span class="line">&lt;generatorConfiguration&gt;</span><br><span class="line">    &lt;context id=&quot;oracle&quot; targetRuntime=&quot;MyBatis3Simple&quot; defaultModelType=&quot;flat&quot;&gt;</span><br><span class="line"></span><br><span class="line">        &lt;plugin type=&quot;tk.mybatis.mapper.generator.MapperPlugin&quot;&gt;</span><br><span class="line">            &lt;!-- 该配置会使生产的Mapper自动继承MyMapper --&gt;</span><br><span class="line">            &lt;property name=&quot;mappers&quot; value=&quot;com.springboot.config.MyMapper&quot; /&gt;</span><br><span class="line">            &lt;!-- caseSensitive默认false，当数据库表名区分大小写时，可以将该属性设置为true --&gt;</span><br><span class="line">            &lt;property name=&quot;caseSensitive&quot; value=&quot;false&quot;/&gt;</span><br><span class="line">        &lt;/plugin&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!-- 阻止生成自动注释 --&gt;</span><br><span class="line">        &lt;commentGenerator&gt;</span><br><span class="line">            &lt;property name=&quot;javaFileEncoding&quot; value=&quot;UTF-8&quot;/&gt;</span><br><span class="line">            &lt;property name=&quot;suppressDate&quot; value=&quot;true&quot;/&gt;</span><br><span class="line">            &lt;property name=&quot;suppressAllComments&quot; value=&quot;true&quot;/&gt;</span><br><span class="line">        &lt;/commentGenerator&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!-- 数据库链接地址账号密码 --&gt;</span><br><span class="line">        &lt;jdbcConnection </span><br><span class="line">            driverClass=&quot;oracle.jdbc.driver.OracleDriver&quot;</span><br><span class="line">            connectionURL=&quot;jdbc:oracle:thin:@localhost:1521:ORCL&quot;</span><br><span class="line">            userId=&quot;scott&quot;</span><br><span class="line">            password=&quot;6742530&quot;&gt;</span><br><span class="line">        &lt;/jdbcConnection&gt;</span><br><span class="line"></span><br><span class="line">        &lt;javaTypeResolver&gt;</span><br><span class="line">            &lt;property name=&quot;forceBigDecimals&quot; value=&quot;false&quot;/&gt;</span><br><span class="line">        &lt;/javaTypeResolver&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!-- 生成Model类存放位置 --&gt;</span><br><span class="line">        &lt;javaModelGenerator targetPackage=&quot;com.springboot.bean&quot; targetProject=&quot;src/main/java&quot;&gt;</span><br><span class="line">            &lt;property name=&quot;enableSubPackages&quot; value=&quot;true&quot;/&gt;</span><br><span class="line">            &lt;property name=&quot;trimStrings&quot; value=&quot;true&quot;/&gt;</span><br><span class="line">        &lt;/javaModelGenerator&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!-- 生成映射文件存放位置 --&gt;</span><br><span class="line">        &lt;sqlMapGenerator targetPackage=&quot;mapper&quot; targetProject=&quot;src/main/resources&quot;&gt;</span><br><span class="line">            &lt;property name=&quot;enableSubPackages&quot; value=&quot;true&quot;/&gt;</span><br><span class="line">        &lt;/sqlMapGenerator&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!-- 生成Dao类存放位置 --&gt;</span><br><span class="line">        &lt;!-- 客户端代码，生成易于使用的针对Model对象和XML配置文件的代码</span><br><span class="line">            type=&quot;ANNOTATEDMAPPER&quot;,生成Java Model 和基于注解的Mapper对象</span><br><span class="line">            type=&quot;XMLMAPPER&quot;,生成SQLMap XML文件和独立的Mapper接口 --&gt;</span><br><span class="line">        &lt;javaClientGenerator type=&quot;XMLMAPPER&quot; targetPackage=&quot;com.springboot.mapper&quot; targetProject=&quot;src/main/java&quot;&gt;</span><br><span class="line">            &lt;property name=&quot;enableSubPackages&quot; value=&quot;true&quot;/&gt;</span><br><span class="line">        &lt;/javaClientGenerator&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!-- 配置需要生成的表 --&gt;</span><br><span class="line">        &lt;table tableName=&quot;T_USER&quot; domainObjectName=&quot;User&quot; enableCountByExample=&quot;false&quot; enableUpdateByExample=&quot;false&quot; enableDeleteByExample=&quot;false&quot; enableSelectByExample=&quot;false&quot; selectByExampleQueryId=&quot;false&quot;&gt;</span><br><span class="line">            &lt;generatedKey column=&quot;id&quot; sqlStatement=&quot;oralce&quot; identity=&quot;true&quot;/&gt;</span><br><span class="line">        &lt;/table&gt;</span><br><span class="line">    &lt;/context&gt;</span><br><span class="line">&lt;/generatorConfiguration&gt;</span><br></pre></td></tr></table></figure>
-
-<p>更详细的说明可参考链接：<a href="http://blog.csdn.net/isea533/article/details/42102297。" target="_blank" rel="noopener">http://blog.csdn.net/isea533/article/details/42102297。</a></p>
-<h2 id="代码生成"><a href="#代码生成" class="headerlink" title="代码生成"></a>代码生成</h2><p>配置好MyBatis Geneator后，在eclipse中运行命令mybatis-generator:generate：</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1266,7 +1265,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">202</span>
+          <span class="site-state-item-count">203</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

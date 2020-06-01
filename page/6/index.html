@@ -172,6 +172,131 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/18/Redis/Redis%E4%BA%8B%E5%8A%A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lancersaber">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lancersaber">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/18/Redis/Redis%E4%BA%8B%E5%8A%A1/" class="post-title-link" itemprop="url">Redis的事务</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2019-11-18 15:25:39 / Modified: 15:41:51" itemprop="dateCreated datePublished" datetime="2019-11-18T15:25:39+08:00">2019-11-18</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/redis/" itemprop="url" rel="index">
+                    <span itemprop="name">redis</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Redis的事务"><a href="#Redis的事务" class="headerlink" title="Redis的事务"></a>Redis的事务</h1><hr>
+<p>MULTI 、 EXEC 、 DISCARD 和 WATCH 是 Redis 事务相关的命令。事务可以一次执行多个命令， 并且带有以下两个重要的保证：</p>
+<ul>
+<li>事务是一个单独的隔离操作：事务中的所有命令都会序列化、按顺序地执行。事务在执行的过程中，不会被其他客户端发送来的命令请求所打断。</li>
+<li>事务是一个原子操作：事务中的命令要么全部被执行，要么全部都不执行。</li>
+</ul>
+<p>EXEC 命令负责触发并执行事务中的所有命令：</p>
+<ul>
+<li>如果客户端在使用 MULTI 开启了一个事务之后，却因为断线而没有成功执行 EXEC ，那么事务中的所有命令都不会被执行。</li>
+<li>另一方面，如果客户端成功在开启事务之后执行 EXEC ，那么事务中的所有命令都会被执行。</li>
+</ul>
+<h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><p>MULTI 命令用于开启一个事务，它总是返回 OK 。 MULTI 执行之后， 客户端可以继续向服务器发送任意多条命令， 这些命令不会立即被执行， 而是被放到一个队列中， 当 EXEC命令被调用时， 所有队列中的命令才会被执行。</p>
+<p>另一方面， 通过调用 DISCARD ， 客户端可以清空事务队列， 并放弃执行事务。<br>以下是一个事务例子， 它原子地增加了 foo 和 bar 两个键的值：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt; MULTI</span><br><span class="line">OK</span><br><span class="line">&gt; INCR foo</span><br><span class="line">QUEUED</span><br><span class="line">&gt; INCR bar</span><br><span class="line">QUEUED</span><br><span class="line">&gt; EXEC</span><br><span class="line">1) (integer) 1</span><br><span class="line">2) (integer) 1</span><br></pre></td></tr></table></figure>
+
+<p>EXEC 命令的回复是一个数组， 数组中的每个元素都是执行事务中的命令所产生的回复。 其中， 回复元素的先后顺序和命令发送的先后顺序一致。<br>当客户端处于事务状态时， 所有传入的命令都会返回一个内容为 QUEUED 的状态回复（status reply）， 这些被入队的命令将在 EXEC 命令被调用时执行。</p>
+<h2 id="事务中的错误"><a href="#事务中的错误" class="headerlink" title="事务中的错误"></a>事务中的错误</h2><p>使用事务时可能会遇上以下两种错误：</p>
+<ul>
+<li>事务在执行 EXEC 之前，入队的命令可能会出错。比如说，命令可能会产生语法错误（参数数量错误，参数名错误，等等），或者其他更严重的错误，比如内存不足（如果服务器使用 maxmemory 设置了最大内存限制的话）。</li>
+<li>命令可能在 EXEC 调用之后失败。举个例子，事务中的命令可能处理了错误类型的键，比如将列表命令用在了字符串键上面，诸如此类。</li>
+</ul>
+<p>对于发生在 EXEC 执行之前的错误，客户端以前的做法是检查命令入队所得的返回值：如果命令入队时返回 QUEUED ，那么入队成功；否则，就是入队失败。如果有命令在入队时失败，那么大部分客户端都会停止并取消这个事务。<br>不过，从 Redis 2.6.5 开始，服务器会对命令入队失败的情况进行记录，并在客户端调用 EXEC 命令时，拒绝执行并自动放弃这个事务。<br>在 Redis 2.6.5 以前， Redis 只执行事务中那些入队成功的命令，而忽略那些入队失败的命令。 而新的处理方式则使得在流水线（pipeline）中包含事务变得简单，因为发送事务和读取事务的回复都只需要和服务器进行一次通讯。<br>至于那些在 EXEC 命令执行之后所产生的错误， 并没有对它们进行特别处理： 即使事务中有某个/某些命令在执行时产生了错误， 事务中的其他命令仍然会继续执行。</p>
+<p>从协议的角度来看这个问题，会更容易理解一些。 以下例子中， LPOP 命令的执行将出错， 尽管调用它的语法是正确的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Trying 127.0.0.1...</span><br><span class="line">Connected to localhost.</span><br><span class="line">Escape character is &apos;^]&apos;.</span><br><span class="line">MULTI</span><br><span class="line">+OK</span><br><span class="line">SET a 3</span><br><span class="line">abc</span><br><span class="line">+QUEUED</span><br><span class="line">LPOP a</span><br><span class="line">+QUEUED</span><br><span class="line">EXEC</span><br><span class="line">*2</span><br><span class="line">+OK</span><br><span class="line">-ERR Operation against a key holding the wrong kind of value</span><br></pre></td></tr></table></figure>
+
+<p>EXEC 返回两条bulk-string-reply： 第一条是 OK ，而第二条是 -ERR 。 至于怎样用合适的方法来表示事务中的错误， 则是由客户端自己决定的。</p>
+<p>最重要的是记住这样一条， 即使事务中有某条/某些命令执行失败了， 事务队列中的其他命令仍然会继续执行 —— Redis 不会停止执行事务中的命令。</p>
+<p>以下例子展示的是另一种情况， 当命令在入队时产生错误， 错误会立即被返回给客户端：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">MULTI</span><br><span class="line">+OK</span><br><span class="line">INCR a b c</span><br><span class="line">-ERR wrong number of arguments for &apos;incr&apos; command</span><br></pre></td></tr></table></figure>
+
+<p>因为调用 INCR 命令的参数格式不正确， 所以这个 INCR 命令入队失败。</p>
+<h2 id="为什么-Redis-不支持回滚（roll-back）"><a href="#为什么-Redis-不支持回滚（roll-back）" class="headerlink" title="为什么 Redis 不支持回滚（roll back）"></a>为什么 Redis 不支持回滚（roll back）</h2><p>如果你有使用关系式数据库的经验， 那么 “Redis 在事务失败时不进行回滚，而是继续执行余下的命令”这种做法可能会让你觉得有点奇怪。<br>以下是这种做法的优点：</p>
+<ul>
+<li><p>Redis 命令只会因为错误的语法而失败（并且这些问题不能在入队时发现），或是命令用在了错误类型的键上面：这也就是说，从实用性的角度来说，失败的命令是由编程错误造成的，而这些错误应该在开发的过程中被发现，而不应该出现在生产环境中。</p>
+</li>
+<li><p>因为不需要对回滚进行支持，所以 Redis 的内部可以保持简单且快速。</p>
+</li>
+</ul>
+<h2 id="放弃事务"><a href="#放弃事务" class="headerlink" title="放弃事务"></a>放弃事务</h2><p>当执行 DISCARD 命令时， 事务会被放弃， 事务队列会被清空， 并且客户端会从事务状态中退出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&gt; SET foo 1</span><br><span class="line">OK</span><br><span class="line">&gt; MULTI</span><br><span class="line">OK</span><br><span class="line">&gt; INCR foo</span><br><span class="line">QUEUED</span><br><span class="line">&gt; DISCARD</span><br><span class="line">OK</span><br><span class="line">&gt; GET foo</span><br><span class="line">&quot;1&quot;</span><br></pre></td></tr></table></figure>
+
+<h2 id="使用-check-and-set-操作实现乐观锁"><a href="#使用-check-and-set-操作实现乐观锁" class="headerlink" title="使用 check-and-set 操作实现乐观锁"></a>使用 check-and-set 操作实现乐观锁</h2><p>WATCH 命令可以为 Redis 事务提供 check-and-set （CAS）行为。</p>
+<p>被 WATCH 的键会被监视，并会发觉这些键是否被改动过了。 如果有至少一个被监视的键在 EXEC 执行之前被修改了， 那么整个事务都会被取消， EXEC 返回nil-reply来表示事务已经失败。<br>举个例子， 假设我们需要原子性地为某个值进行增 1 操作（假设 INCR 不存在）。<br>首先我们可能会这样做：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">val = GET mykey</span><br><span class="line">val = val + 1</span><br><span class="line">SET mykey $val</span><br></pre></td></tr></table></figure>
+
+<p>上面的这个实现在只有一个客户端的时候可以执行得很好。 但是， 当多个客户端同时对同一个键进行这样的操作时， 就会产生竞争条件。举个例子， 如果客户端 A 和 B 都读取了键原来的值， 比如 10 ， 那么两个客户端都会将键的值设为 11 ， 但正确的结果应该是 12 才对。<br>有了 WATCH ， 我们就可以轻松地解决这类问题了：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">WATCH mykey</span><br><span class="line">val = GET mykey</span><br><span class="line">val = val + 1</span><br><span class="line">MULTI</span><br><span class="line">SET mykey $val</span><br><span class="line">EXEC</span><br></pre></td></tr></table></figure>
+
+<p>使用上面的代码， 如果在 WATCH 执行之后， EXEC 执行之前， 有其他客户端修改了 mykey 的值， 那么当前客户端的事务就会失败。 程序需要做的， 就是不断重试这个操作， 直到没有发生碰撞为止。<br>这种形式的锁被称作乐观锁， 它是一种非常强大的锁机制。 并且因为大多数情况下， 不同的客户端会访问不同的键， 碰撞的情况一般都很少， 所以通常并不需要进行重试。</p>
+<h2 id="了解-WATCH"><a href="#了解-WATCH" class="headerlink" title="了解 WATCH"></a>了解 WATCH</h2><p>WATCH 使得 EXEC 命令需要有条件地执行： 事务只能在所有被监视键都没有被修改的前提下执行， 如果这个前提不能满足的话，事务就不会被执行。 了解更多-&gt;</p>
+<p>WATCH 命令可以被调用多次。 对键的监视从 WATCH 执行之后开始生效， 直到调用 EXEC 为止。</p>
+<p>用户还可以在单个 WATCH 命令中监视任意多个键， 就像这样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">redis&gt; WATCH key1 key2 key3</span><br><span class="line">OK</span><br></pre></td></tr></table></figure>
+
+<p>当 EXEC 被调用时， 不管事务是否成功执行， 对所有键的监视都会被取消。</p>
+<p>另外， 当客户端断开连接时， 该客户端对键的监视也会被取消。<br>使用无参数的 UNWATCH 命令可以手动取消对所有键的监视。 对于一些需要改动多个键的事务， 有时候程序需要同时对多个键进行加锁， 然后检查这些键的当前值是否符合程序的要求。 当值达不到要求时， 就可以使用 UNWATCH 命令来取消目前对键的监视， 中途放弃这个事务， 并等待事务的下次尝试。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
     <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/17/zookeeper/%E5%88%9D%E5%A7%8Bzookeeper/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1048,158 +1173,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lancersaber.github.io/2019/11/16/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/jdk/TreeMap/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lancersaber">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lancersaber">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/16/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/jdk/TreeMap/" class="post-title-link" itemprop="url">TreeMap</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-11-16 13:47:13" itemprop="dateCreated datePublished" datetime="2019-11-16T13:47:13+08:00">2019-11-16</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-05-25 23:55:50" itemprop="dateModified" datetime="2020-05-25T23:55:50+08:00">2020-05-25</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/sourceread/" itemprop="url" rel="index">
-                    <span itemprop="name">sourceread</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="TreeMap"><a href="#TreeMap" class="headerlink" title="TreeMap"></a>TreeMap</h1><hr>
-<h2 id="TreeMap简介"><a href="#TreeMap简介" class="headerlink" title="TreeMap简介"></a>TreeMap简介</h2><p>TreeMap是一个有序的key-value集合，基于红黑树（Red-Black tree）的 NavigableMap实现。该映射根据其键的自然顺序进行排序，或者根据创建映射时提供的 Comparator进行排序，具体取决于使用的构造方法。</p>
-<h2 id="TreeMap中的属性"><a href="#TreeMap中的属性" class="headerlink" title="TreeMap中的属性"></a>TreeMap中的属性</h2><ul>
-<li>private transient Entry&lt;K,V&gt; root:一个Treemap的根节点</li>
-<li>private final Comparator&lt;? super K&gt; comparator;比较器，由于treemap是有序的，所以需要有一个比较的规则</li>
-<li>private transient int size = 0;记录treemap中有多少个结点</li>
-<li>private transient int modCount = 0;记录treemap经过多少次修改</li>
-<li>private static final boolean RED   = false;treemap是基于红黑树这种数据结构的，定义这两个变量用于区分结点是红结点还是黑结点</li>
-<li>private static final boolean BLACK = true;</li>
-</ul>
-<h2 id="TreeMap中比较重要的点"><a href="#TreeMap中比较重要的点" class="headerlink" title="TreeMap中比较重要的点"></a>TreeMap中比较重要的点</h2><h3 id="1、Entry-lt-K-V-gt"><a href="#1、Entry-lt-K-V-gt" class="headerlink" title="1、Entry&lt;K,V&gt;"></a>1、Entry&lt;K,V&gt;</h3><p>TreeMap中传入key和value后，内部会将key，value封装为一个Entry,然后将该Entry放入到合适的位置</p>
-<p><img src="https://i.loli.net/2019/11/16/1GupYB8kfUQMPX4.png" alt="2019-11-16 14_01_13-HashMapRead _D__垃圾_HashMapRead_ - C__Program Files_Java_jdk1.8.0_144_src.zip!_ja.png"></p>
-<p>可以看到，在Entry中定义了上面几个属性，</p>
-<ul>
-<li>key:存储key值</li>
-<li>value：存储value值</li>
-<li>left：该结点的左结点</li>
-<li>right：该结点的右结点</li>
-<li>parent：该结点的父节点</li>
-<li>color：标识该结点是红结点还是黑结点，默认是黑结点</li>
-</ul>
-<p><img src="https://i.loli.net/2019/11/16/r61Dx8Y4iVfkuy9.png" alt="2019-11-16 14_08_10-HashMapRead _D__垃圾_HashMapRead_ - C__Program Files_Java_jdk1.8.0_144_src.zip!_ja.png"></p>
-<p>Entry中需要注意的是它的构造函数，它传入了parent结点，标识当前结点的parent结点，其他的函数没什么。</p>
-<h3 id="2、使用一个小程序进行debug"><a href="#2、使用一个小程序进行debug" class="headerlink" title="2、使用一个小程序进行debug"></a>2、使用一个小程序进行debug</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;Integer,String&gt; treemap=new TreeMap&lt;&gt;();</span><br><span class="line">        treemap.put(1,&quot;Mike&quot;);</span><br><span class="line">        treemap.put(2,&quot;Jack&quot;);</span><br><span class="line">        treemap.put(-99,&quot;hike&quot;);</span><br><span class="line">        System.out.println(treemap);</span><br></pre></td></tr></table></figure>
-
-<p>在第一行打上断点，进行调试<br><img src="https://i.loli.net/2019/11/16/xH3sIW16RXiVnDy.png" alt="2019-11-16 14_23_07-HashMapRead _D__垃圾_HashMapRead_ - C__Program Files_Java_jdk1.8.0_144_src.zip!_ja.png"></p>
-<p>可以看到初始化了比较器为null。其余的操作都未进行。下面一张图表示了treemap各个属性的初始值情况<br><img src="https://i.loli.net/2019/11/16/LFPdWT5VfUtGlD6.png" alt="2019-11-16 14_37_05-HashMapRead _D__垃圾_HashMapRead_ - C__Program Files_Java_jdk1.8.0_144_src.zip!_ja.png"></p>
-<p>继续往下看，进入put方法，在进入put方法之前，我们可以先预测几种情况</p>
-<ol>
-<li>treemap中root为null，这是第一个插入的值</li>
-<li>treemap中root不为null，那么需要从root开始根据比较器中的规则进行比较，根据比较结果是否大于0，等于0，小于0来判断该结点的走向<ul>
-<li>大于0，前往右边</li>
-<li>小于0，去往左边‘</li>
-<li>等于0，说明这是替换操作<br>下面我们来验证一下<br><img src="https://i.loli.net/2019/11/16/GFejvIiQh1roLtU.png" alt="2019-11-16 14_30_40-HashMapRead _D__垃圾_HashMapRead_ - C__Program Files_Java_jdk1.8.0_144_src.zip!_ja.png"></li>
-</ul>
-</li>
-</ol>
-<p>使用t来接收root值，防止更改root值造成混乱。可以看到，如果是第一次插入值，root为null，那么这个值就是root的初始值，注意高亮的部分调用了一个compare方法</p>
-<p><img src="https://i.loli.net/2019/11/16/3f8wIQLJz5XNHKu.png" alt="2019-11-16 14_38_27-HashMapRead _D__垃圾_HashMapRead_ - C__Program Files_Java_jdk1.8.0_144_src.zip!_ja.png"></p>
-<p>注意看画线的部分，是将传入的key转化为Comparable类型然后调用compareTo()方法，这表明如果没有传入可用的Comparator，那么传入的key值就必须实现了Comparable接口。否则会报下面的错误</p>
-<p><img src="https://i.loli.net/2019/11/16/7I1MOcjhPUmxrt4.png" alt="2019-11-16 14_42_43-HashMapRead _D__垃圾_HashMapRead_ - ..._src_com_lancer_package1_Test.java _HashMap.png"></p>
-<p>好，到现在我们已经验证了第一种情况，下面我们继续看put函数中后面的代码</p>
-<p><img src="https://i.loli.net/2019/11/16/RPX82WSwVZsQyzU.png" alt="2019-11-16 14_51_27-HashMapRead _D__垃圾_HashMapRead_ - C__Program Files_Java_jdk1.8.0_144_src.zip!_ja.png"></p>
-<p>如果root不为null，那么执行这段代码，首先定义了三个值，</p>
-<ol>
-<li>cmp：用于保存比较的结果</li>
-<li>parent：用于保存父节点</li>
-<li>cpr：用于保存比较器</li>
-</ol>
-<p>后面根据比较器是否使用默认的分为两种情况，如果使用自定义的比较器，则进入块1，使用默认的比较器就进入块2，显然我们没有显示地传入构造器，因此进入else块中。<br>首先判断key值是否为null，这也表明key不能为null。将key转成Comparable类型赋值给cpr，根据比较结果选择进入左子树遍历还是右子树遍历，一通循环后，退出循环时待插入的结点的父节点就是parent结点。</p>
-<p>来看最后的一点代码<br><img src="https://i.loli.net/2019/11/16/siRpFocXGfqC2Ij.png" alt="2019-11-16 15_03_15-HashMapRead _D__垃圾_HashMapRead_ - C__Program Files_Java_jdk1.8.0_144_src.zip!_ja.png"></p>
-<p>将待插入结点转换为一个Entry结点，与parent的key值进行比较，判断是插入到parent的左边还是右边。修改size和modCount的值，在这里面调用了fixAfterInsertion()函数，这个函数就是将修改后的tree转换化一棵红黑树，搞懂了这个函数，对treemap源码可以说就理解2/3了。</p>
-<h3 id="红黑树"><a href="#红黑树" class="headerlink" title="红黑树"></a>红黑树</h3><p>除了二叉树的基本要求外，红黑树必须满足以下几点性质。</p>
-<ul>
-<li>节点必须是红色或者黑色。</li>
-<li>根节点必须是黑色。</li>
-<li>叶节点(NIL)是黑色的。（NIL节点无数据，是空节点）</li>
-<li>红色节点必须有两个黑色儿子节点。</li>
-<li>从任一节点出发到其每个叶子节点的路径，黑色节点的数量是相等的。</li>
-</ul>
-<p>我们先来看一下平衡二叉树的旋转</p>
-<h4 id="平衡二叉树的旋转"><a href="#平衡二叉树的旋转" class="headerlink" title="平衡二叉树的旋转"></a>平衡二叉树的旋转</h4><p><img src="https://i.loli.net/2019/11/16/wZYeTvSs8PWIpEa.png" alt="20170429150914755.png"><br><img src="https://i.loli.net/2019/11/16/k1Iai9rnNyzuYcM.png" alt="20170429151109740.png"><br>注意在treemap中，第二种情况会先化为第一种情况<br><img src="https://i.loli.net/2019/11/16/YQTbPX4dSKHv1GB.png" alt="2019-11-16 16_40_58-未命名表单.drawio - draw.io.png"><br>然后再使用第一种情况来进行旋转</p>
-<p>我们来看一下再treemap中右旋转的代码<br><img src="https://i.loli.net/2019/11/16/HhgOPRkQVKE5CDl.png" alt="2019-11-16 16_43_35-HashMapRead _D__垃圾_HashMapRead_ - C__Program Files_Java_jdk1.8.0_144_src.zip!_ja.png"></p>
-<p>这个代码可以分为四部分<br>其中传入的参数为最上面的结点p(parent)，也就是上面40那个结点。</p>
-<ul>
-<li><p>第一部分获得传入结点的左子结点l(left)。</p>
-</li>
-<li><p>第二部分将r的右子结点赋予给p，作为p的左子结点，这是因为r最终的右子结点是p，这会导致原来的右子节点丢失，所以必须将它们转移至p的左子结点，因为它们只有小于p才会位于左侧。</p>
-</li>
-<li><p>第三部分设置r的parent为p的parent，并判断r是p.praent的左子结点还是右子结点。这个判断对应得模型为下面三种模型<br><img src="https://i.loli.net/2019/11/16/QF3TYaEqXZdzmny.png" alt="2019-11-16 16_58_16-未命名表单.drawio - draw.io.png"><br><img src="https://i.loli.net/2019/11/16/AIt4oev6bMdUqsK.png" alt="2019-11-16 17_01_35-未命名表单.drawio - draw.io.png"><br><img src="https://i.loli.net/2019/11/16/y9lACvc6tkbGo3U.png" alt="2019-11-16 18_30_50-未命名表单.drawio - draw.io.png"></p>
-</li>
-<li><p>第四部分将p设为r的右子结点，r设为p的父节点</p>
-</li>
-</ul>
-<p>左旋转代码类似</p>
-<p>回到fixAfterInsertinon()函数<br><img src="https://i.loli.net/2019/11/16/L9nY28csilbtM5a.png" alt="2019-11-16 18_41_28-HashMapRead _D__垃圾_HashMapRead_ - C__Program Files_Java_jdk1.8.0_144_src.zip!_ja.png"></p>
-<p>之所以先设置每个节点颜色的初始值为red，还是因为需要保证从根节点到每个叶子节点经过的黑节点数目必须相等，因此增加红色节点不影响，还有就是旋转时将x的parent设置为black，给x的parent的parent设置为red是为了到达旋转后黑节点下面挂着两个红节点，这样也不会破坏条件。后半部分代码类似，只不过是针对x的parent位于右子节点时的情况。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1250,7 +1223,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">202</span>
+          <span class="site-state-item-count">203</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
